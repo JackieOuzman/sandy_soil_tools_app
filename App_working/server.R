@@ -314,7 +314,7 @@ reactive_filter_extra_sc2 <- reactive({
 
   output$rainfall <- renderValueBox({
     valueBox(
-      value = paste0(round(reactive_df_info()[1,4]),2), 
+      value = paste0(round((reactive_df_info()[1,4]),0)), 
       subtitle = "Mean Annual rainfall",
       icon = icon("cloud"), # not working??
       color = "blue"
