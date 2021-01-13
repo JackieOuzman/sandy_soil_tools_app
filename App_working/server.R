@@ -454,7 +454,42 @@ observeEvent(input$extra, {
 })
 
 output$test <- renderPrint(reactive_df_info()) 
+############################################################################################################################################################
+############################                    the map                      ###############################################################################
+############################################################################################################################################################
 
+#display the map with popup and labels on multiple lines 
 
+output$map <- renderLeaflet({
+  leaflet() %>%
+    addProviderTiles(providers$Stamen.TonerLite, #This is spot to change the base map
+                     options = providerTileOptions(noWrap = TRUE)
+    ) %>%
+    addMarkers(data = site_info, popup=site_info$label, layerId = site_info$site )
 })
+
+
+output$tim <- renderTable({
+  click <- input$map_marker_click
+  if (is.null(click))
+    return()
+  temp <- site_info %>% filter(longitude == click$lng) %>% 
+    
+    select( "site",
+            "latitude" ,
+            "longitude",
+            "Region"  ,
+            "trial.type",
+            "non.wetting",
+            "acidic" ,
+            "physical" ,
+            "met_station_number" ,
+            "average_annual_rainfall")
+  
+  print(temp)
+})
+
+
+
+}) # this was in the app before the map info was added
   
