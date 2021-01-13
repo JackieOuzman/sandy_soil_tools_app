@@ -48,9 +48,10 @@ ui <- fluidPage(
 
 
 # table 
- tableOutput("table"))
+ tableOutput("table"),
 
-
+# table 
+tableOutput("table2"))
 
 
 
@@ -68,14 +69,13 @@ server <- function(input, output, session) {
   
   
   
-  observeEvent(input$button, {
-    
-  })
+  # observeEvent(input$button, {
+  #   
+  # })
   
   
   df <- eventReactive(input$button, {
-    #head(site_info, input$x)
-    filter(site_info, site == input$x) %>% 
+      filter(site_info, site == input$x) %>% 
              select( "site",
                     "latitude" ,
                     "longitude",
@@ -88,12 +88,24 @@ server <- function(input, output, session) {
                     "average_annual_rainfall")
   })
   
+  ### mess about with this one
+  df2 <- eventReactive(input$button, {
+      #print(input$x)
+       print(input$mymap_shape_click)
+    
+  })
+ 
   
+   
   output$table <- renderTable({
     df()
   }) 
   
- 
+  
+  ### mess about with this one
+  output$table2 <- renderTable({
+    df2()
+  }) 
   
 }
 
