@@ -1,6 +1,9 @@
 require(shiny)
 require(rhandsontable)
 require(shinydashboard)
+require(htmltools)
+
+
 ######################################################################################################
 #####                       bring in the data the app will use       #################################
 ######################################################################################################
@@ -21,6 +24,33 @@ extra_table <- read_excel("C:/Users/ouz001/working_from_home/ripper/2020/malcom_
    pivot_wider(names_from = year, values_from = value) %>% 
    relocate(c(comments,`data source`), .after = last_col()) 
 
+   
+   ######################################################################################################
+   #####                       bring in the data the app will use - for the map   #######################
+   ######################################################################################################
+   
+   ## bring in the data and do formatting
+   site_info <- read.csv(file = paste0("X:/Therese_Jackie/Sandy_soils/App_development2021/sandy_soil_tools_app/", "site_location_plus_info.csv"))
+   #remove sites with no coods
+   site_info <- 
+     filter(site_info, latitude != "NA")
+   site_info <- site_info %>% 
+     rename(site = "ï..Site" )
+   
+   names(site_info)
+   
+   
+   site_info <- site_info %>% 
+     mutate( site_label = paste0("Site = ", site),
+             non.wetting_label = paste0("non wetting score = ", non.wetting),
+             acidic_label = paste0("acidic score = ", acidic),
+             physical_label = paste0("physical score = ", physical))
+   
+   site_info <- site_info %>% 
+     mutate( label = paste(sep = "<br/>",site_label, non.wetting_label,acidic_label, physical_label ))
+   
+   
+   #######################################################################################################################################################
 
 ######################################################################################################
 #########################                       server               #################################
