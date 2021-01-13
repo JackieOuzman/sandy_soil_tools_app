@@ -36,17 +36,6 @@ ui <- fluidPage(
   # display the map
   leafletOutput("map"),
   
-#  # display a widget to click test out observed events
-#  selectInput("x", label = h3("Select box"), 
-#                           choices = list("Karoonda" = "Karoonda", "Waikerie" = "Waikerie", "	Bute" = 	"Bute"), 
-#                           #choices = list("Choice 1" = 1, "Choice 2" = 2, "Choice 3" = 3), 
-#                           selected = "Karoonda"),
-#    br(),
-#    actionButton("button", "Show"),
-# 
-# 
-# # table 
-#  tableOutput("table"),
 
 # table 
 tableOutput('tim')
@@ -70,26 +59,7 @@ server <- function(input, output, session) {
   
   
  
-  # df <- eventReactive(input$button, {
-  #     filter(site_info, site == input$x) %>% 
-  #            select( "site",
-  #                   "latitude" ,
-  #                   "longitude",
-  #                   "Region"  ,
-  #                   "trial.type",
-  #                   "non.wetting",
-  #                   "acidic" ,
-  #                   "physical" ,
-  #                   "met_station_number" ,
-  #                   "average_annual_rainfall")
-  # })
-  # 
-  # 
-  # 
-  #  
-  # output$table <- renderTable({
-  #   df()
-  # }) 
+ 
   
   
   output$tim <- renderTable({
