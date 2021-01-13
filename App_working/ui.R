@@ -43,9 +43,9 @@ fluidRow(
 ),#fluid row 1
 
 #temp
-fluidRow(
-  verbatimTextOutput(outputId = "test")
-),#fluid row 2
+# fluidRow(
+#   verbatimTextOutput(outputId = "test")
+# ),#fluid row 2
 
   
 fluidRow(
@@ -82,10 +82,10 @@ fluidRow(
 
 ## Extra table
 fluidRow(
-  column(width=6,h2("Extra cost or benefits Scenario 1")),
+  column(width=4,h2("Extra cost or benefits Scenario 1")),
   column(width=2,useShinyalert(),  # Set up shinyalert
          actionButton("extra", "More information on yield")), 
-  column(width=6,h2("Extra cost or benefits Scenario 2"))
+  column(width=4,h2("Extra cost or benefits Scenario 2"))
 ),#fluid row bracket 6
 fluidRow(
   column(width=6,rHandsontableOutput("extra_sc1")),

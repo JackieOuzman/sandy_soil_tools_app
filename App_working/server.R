@@ -320,34 +320,51 @@ reactive_filter_extra_sc2 <- reactive({
       color = "blue"
     )
   })
-
   
+#http://jrowen.github.io/rhandsontable/
   
 ### cost tables
 output$cost_sc1 <- renderRHandsontable({
-    rhandsontable(reactive_filter_cost_sc1()) #converts the R dataframe to rhandsontable object
+    rhandsontable(reactive_filter_cost_sc1(), rowHeaders = NULL )%>%
+                    hot_col("price", format = "0")
+                   #converts the R dataframe to rhandsontable object and sets format
   })
 output$cost_sc2 <- renderRHandsontable({
-    rhandsontable(reactive_filter_cost_sc2()) #converts the R dataframe to rhandsontable object
+    rhandsontable(reactive_filter_cost_sc2(), rowHeaders = NULL) %>%
+    hot_col("price", format = "0")#converts the R dataframe to rhandsontable object
   })
  
 
 ### yld tables
 output$yld_sc1 <- renderRHandsontable({
-  rhandsontable(reactive_filter_yld_sc1()) 
+  rhandsontable(reactive_filter_yld_sc1(), rowHeaders = NULL) %>%
+    hot_col("year", format = "0")%>% 
+    hot_col("price", format = "0")
 })
 output$yld_sc2 <- renderRHandsontable({
-  rhandsontable(reactive_filter_yld_sc2()) 
+  rhandsontable(reactive_filter_yld_sc2(), rowHeaders = NULL) %>%
+    hot_col("year", format = "0") %>% 
+    hot_col("price", format = "0")
 })
 
 
 
 ### extra tables
 output$extra_sc1 <- renderRHandsontable({
-  rhandsontable(reactive_filter_extra_sc1()) 
+  rhandsontable(reactive_filter_extra_sc1(), rowHeaders = NULL) %>%
+    hot_col("year 1", format = "1") %>% 
+    hot_col("year 2", format = "1") %>%
+    hot_col("year 3", format = "1") %>%
+    hot_col("year 4", format = "1") %>%
+    hot_col("year 5", format = "1") 
 })
 output$extra_sc2 <- renderRHandsontable({
-  rhandsontable(reactive_filter_extra_sc2()) 
+  rhandsontable(reactive_filter_extra_sc2(), rowHeaders = NULL) %>%
+    hot_col("year 1", format = "1") %>% 
+    hot_col("year 2", format = "1") %>%
+    hot_col("year 3", format = "1") %>%
+    hot_col("year 4", format = "1") %>%
+    hot_col("year 5", format = "1") 
 }) 
 
 output$plot1 <- renderPlot({
