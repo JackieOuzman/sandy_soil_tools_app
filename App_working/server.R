@@ -1,6 +1,6 @@
 require(shiny)
 require(rhandsontable)
-require(shinydashboard)
+#require(shinydashboard)
 require(htmltools)
 require(leaflet)
 
@@ -317,13 +317,17 @@ server <- shinyServer(function(input, output, session) {
   }
   
   
+  
+  
+  
+  
   #############################################################################################
   ####################                  outputs        #####################################
   ############################################################################################# 
   
   
   output$non_wetting <- renderInfoBox({
-    valueBox(value = tags$p("non-wetting", style = "font-size: 50%;"),
+    shinydashboard::valueBox(value = tags$p("non-wetting", style = "font-size: 50%;"),
              subtitle = "",
              icon = NULL,
              color = paste0(reactive_df_info()[1,1]))

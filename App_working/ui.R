@@ -24,6 +24,11 @@ library(leaflet)
  
   
    ui <- (navbarPage(title = '', collapsible = TRUE,
+                    
+                     
+                      header = tagList(    
+                      useShinydashboard()
+                     ) ,   ## these two lines get the value box to display without using shinydashboards        
 
                     
 #########################################################################################################
@@ -32,7 +37,6 @@ library(leaflet)
                     
                     
                      tabPanel("map of sites", #tab title pageleafletOutput("map"),
-                              
                               leafletOutput("map"),
                              
                              # table 
