@@ -500,11 +500,11 @@ server <- shinyServer(function(input, output, session) {
   ############################################################################################################################################################
 
   
-  # output$slickr <- renderSlickR({
-  #   imgs <- list.files("X:/Therese_Jackie/Sandy_soils/App_development2021/sandy_soil_tools_app/app_modification/www", pattern=".jpg", full.names = TRUE)
-  #   slickR(imgs)
-  # })
-  # 
+   output$slickr <- renderSlickR({
+     imgs <- list.files("X:/Therese_Jackie/Sandy_soils/App_development2021/sandy_soil_tools_app/app_modification/www", pattern=".jpg", full.names = TRUE)
+     slickR(imgs)
+   })
+   
   
   
 }) 
