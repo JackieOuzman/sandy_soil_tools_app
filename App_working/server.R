@@ -3,6 +3,7 @@ require(rhandsontable)
 #require(shinydashboard)
 require(htmltools)
 require(leaflet)
+require(slickR)
 
 
 ######################################################################################################
@@ -494,9 +495,19 @@ server <- shinyServer(function(input, output, session) {
     print(temp)
   })
 
+  ############################################################################################################################################################
+  ############################                    the landing page                      ###############################################################################
+  ############################################################################################################################################################
 
   
-}) # this was in the app before the map info was added
+   output$slickr <- renderSlickR({
+     imgs <- list.files("X:/Therese_Jackie/Sandy_soils/App_development2021/sandy_soil_tools_app/app_modification/www", pattern=".jpg", full.names = TRUE)
+     slickR(imgs)
+   })
+   
+  
+  
+}) 
 
   
 

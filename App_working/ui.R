@@ -9,6 +9,10 @@ library(shinyalert)
 library(shinydashboard)
 library(htmltools)
 library(leaflet)
+library(slickR)
+
+library(shinyWidgets)
+
 
 
 
@@ -27,9 +31,32 @@ library(leaflet)
                     
                      
                       header = tagList(    
-                      useShinydashboard()
+                        useShinydashboard()
                      ) ,   ## these two lines get the value box to display without using shinydashboards        
-
+#########################################################################################################
+###############                       landing page                     #################################
+#########################################################################################################                 
+                     
+                     
+                     tabPanel("landing page", #tab title pageleafletOutput("map"),
+                              h6("Welcome"),
+                              
+                              slickROutput("slickr",
+                                           height = 100,
+                                           width="95%" 
+                                           )
+                               
+                             
+                              
+                              
+                              #tags$img(src = "LRQHE5309.jpg", height = 50, width =50)
+                              
+                              
+                              
+                     ), #tabPanel landing page bracket
+                     
+                     
+                     #########################################################################################################
                     
 #########################################################################################################
 ###############                       tab 1                           #################################
