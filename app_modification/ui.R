@@ -42,10 +42,26 @@ library(shinyWidgets)
                               h6("Welcome"),
                               
                               slickROutput("slickr",
-                                           width = 'auto',
-                                           #width='100%' #,
-                                           #height='100px'
+                                           height = 100,
+                                           width="95%" 
                                            )
+                               
+                              # slickROutput("slickr", 
+                              #                #obj =  imgs,
+                              #                #padding = 5,
+                              #                #this controls the white space - but I am not sure its doing anything
+                              #                height = 100,
+                              #                width = "95%"
+                              #              ) +
+                              #                settings(
+                              #                  slidesToShow = 1,
+                              #                  centerMode = TRUE,
+                              #                  dots = TRUE,
+                              #                  slidesToScroll = 5,
+                              #                  focusOnSelect = TRUE
+                              #                )
+                                           
+                              
                               
                               #tags$img(src = "LRQHE5309.jpg", height = 50, width =50)
                               
