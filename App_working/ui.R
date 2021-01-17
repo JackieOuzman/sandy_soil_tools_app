@@ -39,17 +39,16 @@ library(shinyWidgets)
                      
                      
                      tabPanel("landing page", #tab title pageleafletOutput("map"),
-                              h6("Welcome"),
+                              h6("Welcome") ,      
                               
-                              slickROutput("slickr",
-                                           height = 100,
-                                           width="95%" 
-                                           )
+                               slickROutput("slickr",
+                                            height = 100,
+                                            width="95%" 
+                                            )
                                
-                             
+                              #I think I need to resize my images first and then try and load thme in
                               
-                              
-                              #tags$img(src = "LRQHE5309.jpg", height = 50, width =50)
+                              #tags$img(src = "LRQHE5309.jpg", height = 50, width =50) # this is old code with one image loaded
                               
                               
                               

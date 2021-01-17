@@ -50,6 +50,38 @@ extra_table <- extra_table %>%
   mutate(year = paste0("year ", year)) %>% 
   pivot_wider(names_from = year, values_from = value) %>% 
   relocate(c(comments,`data source`), .after = last_col()) 
+####################################################################################################
+######################         create some extra row for labels              ######################
+####################################################################################################
+
+df_info <- df_info %>% 
+  mutate(
+    non_wetting_label =  case_when(
+      `non-wetting`  == "green"   ~    "No issue",
+      `non-wetting`  == "orange"  ~    "Moderate issue",
+      `non-wetting`  == "red"     ~    "Severe issue",
+      TRUE                      ~    "other"
+    ))
+
+
+df_info <- df_info %>% 
+  mutate(
+    acidic_label =  case_when(
+      acidic  == "green"   ~    "No issue",
+      acidic  == "orange"  ~    "Moderate issue",
+      acidic  == "red"     ~    "Severe issue",
+      TRUE                      ~    "other"
+    ))
+
+df_info <- df_info %>% 
+  mutate(
+    physical_label =  case_when(
+      physical  == "green"   ~    "No issue",
+      physical  == "orange"  ~    "Moderate issue",
+      physical  == "red"     ~    "Severe issue",
+      TRUE                      ~    "other"
+    ))
+
 
 
 ######################################################################################################
@@ -126,7 +158,8 @@ server <- shinyServer(function(input, output, session) {
   reactive_df_info <- reactive({
     filter(df_info, 
            site == input$data2)    %>% 
-      select("non-wetting", "acidic", "physical", "rainfall_mean_annual") %>% 
+      select("non-wetting", "acidic", "physical", "rainfall_mean_annual",
+             "non_wetting_label","acidic_label",  "physical_label") %>% 
       unique()
     
   })
@@ -329,19 +362,19 @@ server <- shinyServer(function(input, output, session) {
   
   output$non_wetting <- renderInfoBox({
     shinydashboard::valueBox(value = tags$p("non-wetting", style = "font-size: 50%;"),
-             subtitle = "",
+             subtitle = paste0(reactive_df_info()[1,5]),
              icon = NULL,
              color = paste0(reactive_df_info()[1,1]))
   })
   output$acidic <- renderInfoBox({
     valueBox(value = tags$p("acidic", style = "font-size: 50%;"),
-             subtitle = "",
+             subtitle = paste0(reactive_df_info()[1,6]),
              icon = NULL,
              color = paste0(reactive_df_info()[1,2]))
   })
   output$physical <- renderInfoBox({
     valueBox(value = tags$p("physical", style = "font-size: 50%;"),
-             subtitle = "",
+             subtitle = paste0(reactive_df_info()[1,7]),
              icon = NULL,
              color = paste0(reactive_df_info()[1,3]))
   })
@@ -501,7 +534,9 @@ server <- shinyServer(function(input, output, session) {
 
   
    output$slickr <- renderSlickR({
-     imgs <- list.files("X:/Therese_Jackie/Sandy_soils/App_development2021/sandy_soil_tools_app/app_modification/www", pattern=".jpg", full.names = TRUE)
+     imgs <- list.files("X:/Therese_Jackie/Sandy_soils/App_development2021/sandy_soil_tools_app/app_modification/www", pattern=".jpg", full.names = TRUE)  
+     
+     
      slickR(imgs)
    })
    
