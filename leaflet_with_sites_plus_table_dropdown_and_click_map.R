@@ -57,11 +57,6 @@ server <- function(input, output, session) {
   })
   
   
-  
- 
- 
-  
-  
   output$tim <- renderTable({
     click <- input$map_marker_click
     if (is.null(click))

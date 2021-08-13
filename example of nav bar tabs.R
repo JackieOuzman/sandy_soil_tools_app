@@ -30,8 +30,7 @@ site_info <- site_info %>%
 
 #######################################################################################################################################################
 
-ui <- (navbarPage(#title = "App name: sandy soils",
-                   title = '', collapsible=TRUE,
+ui <- (navbarPage( title = '', collapsible=TRUE,
                    tabPanel("map of sites", #tab title page
                             
                             leafletOutput("map"),

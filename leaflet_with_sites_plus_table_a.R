@@ -2,7 +2,7 @@ library(shiny)
 library(dplyr)
 library(htmltools)
 
-
+#######################################################################################################################################################
 
 ## bring in the data and do formatting
 site_info <- read.csv(file = paste0("X:/Therese_Jackie/Sandy_soils/App_development2021/sandy_soil_tools_app/", "site_location_plus_info.csv"))
@@ -25,7 +25,8 @@ site_info <- site_info %>%
   mutate( label = paste(sep = "<br/>",site_label, non.wetting_label,acidic_label, physical_label ))
 
 
-#https://rstudio.github.io/leaflet/shiny.html
+#######################################################################################################################################################
+
 
 r_colors <- rgb(t(col2rgb(colors()) / 255))
 names(r_colors) <- colors()
@@ -33,7 +34,7 @@ names(r_colors) <- colors()
 ui <- fluidPage(
   
   # display the map
-  leafletOutput("mymap"),
+  leafletOutput("map"),
   
  # display a widget to click test out observed events
  selectInput("x", label = h3("Select box"), 
@@ -44,14 +45,13 @@ ui <- fluidPage(
    actionButton("button", "Show"),
 
 
-
-
-
 # table 
  tableOutput("table"),
 
 # table 
-tableOutput("table2"))
+tableOutput('tim')
+
+)
 
 
 
@@ -59,7 +59,7 @@ server <- function(input, output, session) {
 
 #display the map with popup and labels on multiple lines 
   
-  output$mymap <- renderLeaflet({
+  output$map <- renderLeaflet({
     leaflet() %>%
       addProviderTiles(providers$Stamen.TonerLite, #This is spot to change the base map
                        options = providerTileOptions(noWrap = TRUE)
@@ -69,11 +69,7 @@ server <- function(input, output, session) {
   
   
   
-  # observeEvent(input$button, {
-  #   
-  # })
-  
-  
+ 
   df <- eventReactive(input$button, {
       filter(site_info, site == input$x) %>% 
              select( "site",
@@ -88,12 +84,6 @@ server <- function(input, output, session) {
                     "average_annual_rainfall")
   })
   
-  ### mess about with this one
-  df2 <- eventReactive(input$button, {
-      #print(input$x)
-       print(input$mymap_shape_click)
-    
-  })
  
   
    
@@ -102,10 +92,21 @@ server <- function(input, output, session) {
   }) 
   
   
-  ### mess about with this one
-  output$table2 <- renderTable({
-    df2()
-  }) 
+  output$tim <- renderTable({
+    temp <- site_info %>% filter(longitude == input$map_marker_click$lng) %>% 
+      select( "site",
+              "latitude" ,
+              "longitude",
+              "Region"  ,
+              "trial.type",
+              "non.wetting",
+              "acidic" ,
+              "physical" ,
+              "met_station_number" ,
+              "average_annual_rainfall")
+    
+    print(temp)
+  })
   
 }
 

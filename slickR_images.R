@@ -140,7 +140,7 @@ slickR(obj = nba_player_logo$uri,height = 100, width = "95%") +
   settings(#dots = TRUE,
     autoplay = TRUE)
 
-
+#######################################################################################################
 
 imgs <- c('https://static.pexels.com/photos/45201/kitty-cat-kitten-pet-45201.jpeg',
           'http://i0.kym-cdn.com/photos/images/original/000/068/576/kittycat.jpg')
@@ -154,7 +154,7 @@ slickR(obj =  imgs,slideId = 'ex1',
           dots = TRUE)
 
 
-
+## this is not working - but this is xample code from the net.
 slickR::slickR(
   obj =  imgs,
   slideId = 'ex1',
@@ -165,4 +165,25 @@ slickR::slickR(
     dots = TRUE
   ), height=400, width=600
 )
+
+
+
+
+imgs_jaxs <- c("X:/Therese_Jackie/Sandy_soils/App_development2021/sandy_soil_tools_app/app_modification/www/Spading.jpg",
+               "X:/Therese_Jackie/Sandy_soils/App_development2021/sandy_soil_tools_app/app_modification/www/IMG_2279.jpg",
+               "X:/Therese_Jackie/Sandy_soils/App_development2021/sandy_soil_tools_app/app_modification/www/IMG_E2350.jpg",
+               "X:/Therese_Jackie/Sandy_soils/App_development2021/sandy_soil_tools_app/app_modification/www/LRQHE5309.jpg",
+               "X:/Therese_Jackie/Sandy_soils/App_development2021/sandy_soil_tools_app/app_modification/www/Picture3.jpg")
+
+slickR(obj =  imgs_jaxs,
+       padding = 5, #this controls the white space - but I am not sure its doing anything
+       height=100, 
+       width = "95%") +
+  settings(slidesToShow=1,
+           centerMode = TRUE,
+           dots = TRUE,
+           slidesToScroll = 5,
+           focusOnSelect = TRUE)
+
+
 
