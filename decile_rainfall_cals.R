@@ -11,8 +11,8 @@ library(stringr)
 ### Lynne would like the rainfall expressed as decile and the yield trial reuslts to have a matching decile.
 # to do this I need to download the daily historial rainfall for all the sites and run some cals.
 
+#"\\FSSA2-ADL\clw-share1\mallee_mod\Therese_Jackie\Sandy_soils\Sands weather\met_file\25006.csv"
 "\\FSSA2-ADL\clw-share1\mallee_mod\Therese_Jackie\Sandy_soils\Sands weather\met_file\25006.csv"
-
 # Read in the daily cilmate data.
 #met_station_numb <- "Karoonda_25006"
 #met_station_numb <- "Waikerie_24018"
