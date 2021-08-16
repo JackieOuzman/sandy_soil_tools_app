@@ -8,72 +8,70 @@ library(lubridate)
 library(data.table)
 library(stringr)
 
-### Lynne would like the rainfall expressed as decile and the yield trial reuslts to have a matching decile.
-# to do this I need to download the daily historial rainfall for all the sites and run some cals.
+###########################################################################################
+###          Background   ####
+### Rainfall expressed as decile and the yield trial reuslts to have a matching decile.
+#https://www.longpaddock.qld.gov.au/silo/point-data/
 
-#"\\FSSA2-ADL\clw-share1\mallee_mod\Therese_Jackie\Sandy_soils\Sands weather\met_file\25006.csv"
-#"\\FSSA2-ADL\clw-share1\mallee_mod\Therese_Jackie\Sandy_soils\Sands weather\met_file2021\18014.txt"
+# Station point datasets
+# Station point datasets are a time series of data at a station location, consisting of station records which have been supplemented by interpolated estimates when observed data are missing. 
+# Station point datasets are available at approximately 8,000 station locations around Australia. These datasets were formerly known as SILO Patched Point datasets.
+# Grid point datasets
+# Grid point datasets are a time series of data at a grid point location consisting entirely of interpolated estimates. The data are taken from our gridded datasets and are available at any grid point over the land area of Australia (including some islands). The nominal grid location (where the interpolated surface is evaluated) is the centre of the corresponding grid cell. These datasets were formerly known as SILO Data Drill datasets.
+# The data are taken from our gridded datasets and are available at any grid point over the land area of Australia (including some islands). 
+# The nominal grid location (where the interpolated surface is evaluated) is the centre of the corresponding grid cell. These datasets were formerly known as SILO Data Drill datasets.
+# "How are gridded rainfall datasets created?
+#  "
+# Daily rainfall gridded datasets are derived from interpolated monthly rainfall by partitioning the monthly total onto individual days. Partitioning requires estimation of the daily distribution throughout the month. 
+# The distribution is obtained by direct interpolation of daily rainfall data throughout the month. At the end of the month, the interpolated monthly rainfall is then partitioned onto individual days according to the computed distribution.
 
-# Read in the daily cilmate data.
-#met_station_numb <- "Karoonda_25006"
-#met_station_numb <- "Waikerie_24018"
-#met_station_numb <- "Bute_21012"
 
-# file_name <- "check_Cleve_18014"
-# getwd()
+## This script will automate the calulation of decile year ##
+## point it to the folder the point data set has been downloaded
+## I have selected a APSIM format starting with 1/1/1960 and saved as a .csv file
 
+
+########################################################################################
 # identify the folders for the met files
 current.folder <- "X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2021/station_download/"
 
 # find the files that you want
- list.of.files <- list.files(current.folder, ".csv",full.names=T) #the trick is getting the full name
- list.of.files #with path
+list.of.files <- list.files(current.folder, ".csv",full.names=T) #the trick is getting the full name
+list.of.files #with path
+########################################################################################
 
+########################################################################################
+## decile years for rainfal ##
+########################################################################################
 
-file_list <- list.files("X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2021/station_download/")
-file_list #just names
-
-
-
-
-#for (file_list in file_list){
 for (list.of.files in list.of.files){
 
 # day the met file was downloaded
 
-# download_date <- read_csv(paste0("X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2021/", file_name ), 
-#                           col_names = FALSE, skip = 7)
+
 download_date <- read_csv(list.of.files, 
                           col_names = FALSE, skip = 7)
 download_date <-download_date[1,1] #just the row with the download date
 download_date <-stringr::str_extract(download_date, "[[:digit:]]+") #just the numbers
 download_date <- as.Date(as.character(download_date),format="%Y%m%d")
-#download_date <- as.Date(download_date) -1
+
 #minus one day from download
 download_date <- lubridate::ymd(download_date) - days(1)
 
 ## station number
-# station_number <- read_csv(paste0("X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2021/", file_name), 
-#                           col_names = FALSE, skip = 1)
 station_number <- read_csv(list.of.files,
                            col_names = FALSE, skip = 1)
 station_number <-station_number[1,1] #just the row with the download date
 station_number <-stringr::str_extract(station_number, "[[:digit:]]+") #just the numbers
-station_number
+
 ## station name
-# station_name <- read_csv(paste0("X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2021/", file_name), 
-#                            col_names = FALSE, skip = 2)
 station_name <- read_csv(list.of.files, 
                          col_names = FALSE, skip = 2)
 station_name <-station_name[1,1]
 station_name <- station_name %>% stringr::str_replace("!station name =", "")
 station_name<-str_trim(station_name) #remove the white spaces
-station_name
 
-
-
-# Cliamte <- read.table(paste0("X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2021/", file_name),
-#                              skip = 21, header = TRUE, sep ="")
+### Download all of the cliamte data
 Cliamte <- read.table(list.of.files, 
                       skip = 21, header = TRUE, sep ="")
 Cliamte <- Cliamte [-1,]
@@ -196,47 +194,58 @@ rm(decile_table, gs_rain_with_summer)
 
 }
 
+
+####################################################################################
+## end of function bring all the df into one ###
+
 #List of files that have summer rain
 sites_for_binding <- ls(pattern="summer")
-sites_for_binding
-all_sites <- rbind(CLEVE_018014gs_rain_with_summer)
-
+# sites_for_binding
+#  all_sites <- rbind(CLEVE_018014gs_rain_with_summer)
+ 
 write.csv(all_sites, "X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2021/met_station_decile_year_impact_sites.csv")
-                   names(all_sites)
+                    names(all_sites)
 
                    
 
                    
 #############################################################################################                   
-                   
-                   
-##### put all the decile data into one file and save
-
-decile_2020 <- rbind(decile_station_numb_Bute_21012, 
-                     decile_station_numb_Karoonda_25006,
-                     decile_station_numb_Waikerie_24018)
-
-
-write.csv(decile_2020, "X:/Therese_Jackie/Sandy_soils/Sands weather/met_file_2020/decile_2020.csv")
-
-
-
+     
 ################################################################################################################################
-#### annual rain ####
-met_station_numb <- "Waikerie_24018"
-#met_station_numb <- "Bute_21012"
-#met_station_numb <- "Karoonda_25006"
+########################################################################################
+## annual rainfal ##
+########################################################################################
+list.of.files                   
 
-# day the met file was downloaded
-download_date <-  as.Date(today()-2)
-
-
-Cliamte <- read.table(paste0("X:/Therese_Jackie/Sandy_soils/Sands weather/met_file_2020/", met_station_numb, ".csv"), skip = 21, header = TRUE, sep ="",)
-
-
+for (list.of.files in list.of.files){
+  
+download_date <- read_csv(list.of.files, 
+                            col_names = FALSE, skip = 7)
+download_date <-download_date[1,1] #just the row with the download date
+download_date <-stringr::str_extract(download_date, "[[:digit:]]+") #just the numbers
+download_date <- as.Date(as.character(download_date),format="%Y%m%d")
+  
+  #minus one day from download
+download_date <- lubridate::ymd(download_date) - days(1)
+  
+  ## station number
+station_number <- read_csv(list.of.files,
+                             col_names = FALSE, skip = 1)
+station_number <-station_number[1,1] #just the row with the download date
+station_number <-stringr::str_extract(station_number, "[[:digit:]]+") #just the numbers
+  
+  ## station name
+station_name <- read_csv(list.of.files, 
+                           col_names = FALSE, skip = 2)
+station_name <-station_name[1,1]
+station_name <- station_name %>% stringr::str_replace("!station name =", "")
+station_name<-str_trim(station_name) #remove the white spaces
+  
+  ### Download all of the cliamte data
+Cliamte <- read.table(list.of.files, 
+                        skip = 21, header = TRUE, sep ="")
 Cliamte <- Cliamte [-1,]
-
-
+  
 
 ### need to make a clm that has all the dates not just day of year and year
 str(Cliamte)
@@ -252,7 +261,7 @@ Cliamte <- Cliamte %>%
          month =month(date),
          day = day(date),
          month_name = lubridate::month(date, label = TRUE),
-         site = met_station_numb)
+         site = paste0(station_name,"_", station_number))
 str(Cliamte)
 
 sum_month_rain_yr <- Cliamte %>% 
@@ -270,22 +279,22 @@ sum_year_rain <- sum_month_rain_yr %>%
   summarise(sum_rain_year = sum(sum_rain_month))
 
 
-## aveage annual rain 
+## average annual rain 
 annual_rain <- sum_year_rain %>% 
   group_by(site) %>% 
   summarise(annual_rain = mean(sum_rain_year))
 
-name <- paste0("annual_rain_", met_station_numb) 
+name_annual_rain <- paste0(station_name,"_", station_number, "annual_rain")
 
-assign(name,annual_rain)
+assign(name_annual_rain,annual_rain)
 
-
-
-
-annual_rain_2020 <- rbind(annual_rain_Bute_21012,
-                     annual_rain_Karoonda_25006,
-                     annual_rain_Waikerie_24018)
-                     
+}
 
 
-write.csv(annual_rain_2020, "X:/Therese_Jackie/Sandy_soils/Sands weather/met_file_2020/annual_rain_2020.csv")
+# annual_rain_2020 <- rbind(annual_rain_Bute_21012,
+#                      annual_rain_Karoonda_25006,
+#                      annual_rain_Waikerie_24018)
+#                      
+# 
+# 
+# write.csv(annual_rain_2020, "X:/Therese_Jackie/Sandy_soils/Sands weather/met_file_2020/annual_rain_2020.csv")
