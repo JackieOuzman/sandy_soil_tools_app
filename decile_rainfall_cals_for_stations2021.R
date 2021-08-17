@@ -198,13 +198,52 @@ rm(decile_table, gs_rain_with_summer)
 ####################################################################################
 ## end of function bring all the df into one ###
 
-#List of files that have summer rain
+#List of files that have summer rain - this should be better!
+
 sites_for_binding <- ls(pattern="summer")
-# sites_for_binding
-#  all_sites <- rbind(CLEVE_018014gs_rain_with_summer)
- 
-write.csv(all_sites, "X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2021/met_station_decile_year_impact_sites.csv")
-                    names(all_sites)
+print(sites_for_binding)
+head()
+GS_rain_deciles <- rbind(
+  `BALRANALD (RSL)_049002gs_rain_with_summer`,
+  `CLARE POST OFFICE_021014gs_rain_with_summer`,
+  `COOMANDOOK (MALINONG)_025508gs_rain_with_summer`,
+  `CUMMINS_018023gs_rain_with_summer`,
+  `HILLSTON AIRPORT_075032gs_rain_with_summer`,
+  `KAROONDA_025006gs_rain_with_summer`,
+  `KEITH_025507gs_rain_with_summer`,
+  `KIMBA_018040gs_rain_with_summer`,
+  `MINNIPA AGRICULTURAL CENTRE_018052gs_rain_with_summer`,
+  `NUROM (RIVERSIDE FARM)_021102gs_rain_with_summer`,
+  `OUYEN (POST OFFICE)_076047gs_rain_with_summer`,
+  `SERVICETON_078034gs_rain_with_summer`,
+  `YEELANNA_018099gs_rain_with_summer`
+)
+names(GS_rain_deciles)
+GS_rain_deciles <- GS_rain_deciles %>% 
+  rename( met_name_number = site )
+unique(GS_rain_deciles$met_name_number)
+
+GS_rain_deciles <- GS_rain_deciles %>% 
+  mutate(site = case_when(
+    met_name_number == "BALRANALD (RSL)_049002" ~ "Kooloonong",
+    met_name_number == "KIMBA_018040" ~ "Buckleboo",
+    met_name_number == "CUMMINS_018023" ~ "Cummins",
+    met_name_number == "YEELANNA_018099" ~ "Karkoo",
+    met_name_number == "CLARE POST OFFICE_021014" ~ "Kybunga",
+    met_name_number == "COOMANDOOK (MALINONG)_025508" ~ "Malinong",
+    met_name_number == "HILLSTON AIRPORT_075032" ~ "Monia_Gap",
+    met_name_number == "MINNIPA AGRICULTURAL CENTRE_018052" ~ "Mt_Damper",
+    met_name_number == "KEITH_025507" ~ "Sherwood",
+    met_name_number == "SERVICETON_078034" ~ "Telopea_Downs",
+    met_name_number == "OUYEN (POST OFFICE)_076047" ~ "Tempy",
+    met_name_number == "NUROM (RIVERSIDE FARM)_021102" ~ "Warnertown",
+    met_name_number == "KAROONDA_025006" ~ "Wynarka",
+    TRUE ~ as.character("check")
+  ))
+
+
+write.csv(GS_rain_deciles, "X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2021/GS_rain_deciles_impact_sites.csv")
+                    
 
                    
 
