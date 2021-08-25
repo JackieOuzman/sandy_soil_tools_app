@@ -11,12 +11,13 @@ require(slickR)
 ######################################################################################################
 
 ## bring in the data and do formatting
-site_info <- read.csv(file = paste0("X:/Therese_Jackie/Sandy_soils/App_development2021/sandy_soil_tools_app/", "site_location_plus_info.csv"))
+#site_info <- read.csv(file = paste0("X:/Therese_Jackie/Sandy_soils/App_development2021/sandy_soil_tools_app/", "site_location_plus_info.csv"))
+site_info <- read.csv(file = paste0("X:/Therese_Jackie/Sandy_soils/App_development2021/sandy_soil_tools_app/App_working/data/","site_location_plus_info.csv"))
 #remove sites with no coods
 site_info <- 
   filter(site_info, latitude != "NA")
-site_info <- site_info %>% 
-  rename(site = "ï..Site" )
+# site_info <- site_info %>% 
+#   rename(site = "ï..Site" )
 
 names(site_info)
 
