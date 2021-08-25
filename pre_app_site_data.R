@@ -269,6 +269,7 @@ write.csv(primary_2019_2020_imapct,"X:/Therese_Jackie/Sandy_soils/App_developmen
 ## site information that will be used for location map pop ups
 ## I need to modify this but at the moment the app is looking for these clms
 names(primary_2019_2020_imapct)
+
 primary_site_data <- primary_2019_2020_imapct %>% 
   dplyr::select(site, 
                 latitude = Latitude,
@@ -276,17 +277,40 @@ primary_site_data <- primary_2019_2020_imapct %>%
                 'non-wetting' = Repellence,
                 acidic = Acidity,
                 physical = Physical,
-                met_station_number = met_name_number)
+                met_station_number = met_name_number,
+                Descriptors,
+                Amelioration_Year)
+
+step1_trials_info <- primary_2019_2020_imapct %>% 
+  distinct(site, Descriptors)
+
+
+trial_info <- step1_trials_info %>%
+  group_by(site) %>%
+  mutate(all_trial = paste(Descriptors, collapse = " & "))
+## add to the primary site data
+primary_site_data <- left_join(primary_site_data, trial_info) 
+
+
+# primary_site_data <- primary_2019_2020_imapct %>% 
+#   dplyr::select(site, 
+#                 latitude = Latitude,
+#                 longitude = Longitude,
+#                 'non-wetting' = Repellence,
+#                 acidic = Acidity,
+#                 physical = Physical,
+#                 met_station_number = met_name_number)
 ## add add in some place holders the shiny file is expecting - I will change this later.
 
-primary_site_data <-primary_site_data %>% 
-  mutate(Region = NA,
-         `trial type` = NA,
-         average_annual_rainfall = NA)
+# primary_site_data <-primary_site_data %>% 
+#   mutate(Region = NA,
+#          `trial type` = NA,
+#          average_annual_rainfall = NA)
 #remove the duplication
 primary_site_data <- primary_site_data %>% 
-  distinct(site, .keep_all = TRUE)
-
+  distinct(site, .keep_all = TRUE) %>% 
+  dplyr::select(-Descriptors)
+names(primary_site_data)
 write.csv(primary_site_data,
           "X:/Therese_Jackie/Sandy_soils/App_development2021/sandy_soil_tools_app/App_working/data/site_location_plus_info.csv",
           row.names = FALSE)
