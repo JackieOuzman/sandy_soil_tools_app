@@ -51,7 +51,8 @@ primary_2019_2020_imapct <- primary_2019_2020_imapct %>%
     
     organic  == "none"  &  fertiliser == "none"   &    other_ameliorant ==  "none"    ~      "none",
     organic  == "none"  &  fertiliser == "none"   &    other_ameliorant ==  "gypsum"    ~    paste0("gypsum",".", placement_jax),
-    organic  == "none"  &  fertiliser == "none"   &    other_ameliorant ==  "clay"    ~      paste0("clay",".", placement_jax),
+    #organic  == "none"  &  fertiliser == "none"   &    other_ameliorant ==  "clay"    ~      paste0("clay",".", placement_jax), # this was wrong
+    organic  == "none"  &  fertiliser == "none"   &    other_ameliorant ==  "clay"    ~      paste0("clay"),
     
     organic  == "none"  &  fertiliser != "none"   &    other_ameliorant ==  "none"    ~      paste0("Fert",".", placement_jax),
     organic  == "none"  &  fertiliser != "none"   &    other_ameliorant ==  "gypsum"    ~    paste0("Fert.gypsum",".", placement_jax),
@@ -79,6 +80,16 @@ primary_2019_2020_imapct <- primary_2019_2020_imapct %>%
     
   ) )
 
+str(primary_2019_2020_imapct)
+
+primary_2019_2020_imapct <- primary_2019_2020_imapct %>% 
+  mutate(Descriptors = case_when(
+    site == "Telopea_Downs" & 
+      other_ameliorant == "clay" &
+      rip  == "none"  & 
+      mix == "spade"  ~ paste0("Spade.30", "_", amendment, "@", other_rate), 
+    TRUE ~ Descriptors))
+      
 ###################################################################################################################
 ####  End of  Create the descriptors #####
 ###################################################################################################################
