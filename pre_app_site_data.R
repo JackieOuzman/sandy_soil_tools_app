@@ -9,10 +9,15 @@ library(readxl)
 library(tidyverse)
 #################################################################################################################
 ####   Get the data #####
+input_data_file <- "Jackie_working/2020 Impacts_Master data_template_20210222_jaxs_v21_09.xlsx"
 
-primary_2019_imapct <- read_excel("C:/Users/ouz001/CSIRO/GRDC_CSP00203 - Jackie_working/2020 Impacts_Master data_template_20210222_jaxs_v23_08.xlsx", 
+input_data_file_rain <- "X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2021/GS_rain_deciles_impact_sites.csv"
+
+
+
+primary_2019_imapct <- read_excel(paste0("C:/Users/ouz001/CSIRO/GRDC_CSP00203 - ", input_data_file), 
                                                                       sheet = "Primary_data_2019", skip=1)
-primary_2020_imapct <- read_excel("C:/Users/ouz001/CSIRO/GRDC_CSP00203 - Jackie_working/2020 Impacts_Master data_template_20210222_jaxs_v23_08.xlsx", 
+primary_2020_imapct <- read_excel(paste0("C:/Users/ouz001/CSIRO/GRDC_CSP00203 - ", input_data_file),  
                                   sheet = "Primary_data_2020", skip = 1)
 #append the two datasets
 
@@ -101,7 +106,7 @@ primary_2019_2020_imapct <- primary_2019_2020_imapct %>%
 # metadata_imapct <- read_excel("C:/Users/ouz001/CSIRO/GRDC_CSP00203 - Jackie_working/2020 Impacts_Master data_template_20210222_jaxs_v23_08.xlsx", 
 #                                   sheet = "Site_metadata")
 
-metadata_imapct <-read_excel("C:/Users/ouz001/CSIRO/GRDC_CSP00203 - Jackie_working/2020 Impacts_Master data_template_20210222_jaxs_v23_08.xlsx", 
+metadata_imapct <-read_excel(paste0("C:/Users/ouz001/CSIRO/GRDC_CSP00203 - ", input_data_file), 
            sheet = "Site_metadata", col_types = c("text", 
                                                   "skip", "skip", "skip", "skip", "skip", 
                                                   "skip", "skip", "skip", "skip", "numeric", 
@@ -238,7 +243,7 @@ primary_2019_2020_imapct <- primary_2019_2020_imapct %>%
 #X:\Therese_Jackie\Sandy_soils\App_development2021\sandy_soil_tools_app\decile_rainfall_cals.R
 # the script produces a csv file that I will use here
 
-GS_rain_deciles_impact_sites <- read_csv("X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2021/GS_rain_deciles_impact_sites.csv", 
+GS_rain_deciles_impact_sites <- read_csv(input_data_file_rain, 
                                          col_types = cols(X1 = col_skip()))
 unique(GS_rain_deciles_impact_sites$site)
 #Kooloonong is listed as Kooloonong_lupins, Kooloonong_chickpea, Kooloonong_lentil
@@ -325,3 +330,15 @@ names(primary_site_data)
 write.csv(primary_site_data,
           "X:/Therese_Jackie/Sandy_soils/App_development2021/sandy_soil_tools_app/App_working/data/site_location_plus_info.csv",
           row.names = FALSE)
+
+
+
+
+#########################################################################################
+################## this script writes out two data file #################################
+
+## these files are used in the app one is mainly for trial data
+#"X:/Therese_Jackie/Sandy_soils/App_development2021/sandy_soil_tools_app/App_working/data/primary_data.csv
+
+## one is for the map of trial sites
+#X:/Therese_Jackie/Sandy_soils/App_development2021/sandy_soil_tools_app/App_working/data/site_location_plus_info.csv
