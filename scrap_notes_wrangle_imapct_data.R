@@ -199,3 +199,8 @@ temp <- trial_results %>%
     rainfall_mean_annual,
     site_numb
   )
+
+
+#### how to assign cost to fit the model I have
+
+unique(temp$grouping)
