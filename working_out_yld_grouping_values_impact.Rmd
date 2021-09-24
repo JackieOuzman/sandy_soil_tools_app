@@ -1,0 +1,387 @@
+---
+title: "Impact_site_yld"
+author: "Jackie Ouzman"
+date: "24/09/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+
+
+library(ggplot2)
+library(readxl)
+library(tidyverse)
+
+```
+
+# Impact sites yield data.
+
+This document is aimed to help work out how to group the trials for the impact site.
+
+How to populate the economic analysis.
+
+For example what yield values should I put in for year 1 to year 5 (we don't normally have this much data).
+
+What are the likely costs and how will these change over time years 1 - 5.
+
+
+## Multiple steps 
+
+Data is sourced from what is on teams page and I am using the impact primary data here
+
+
+
+```{r pre processing, include=FALSE}
+
+trial_results <- read_csv("X:/Therese_Jackie/Sandy_soils/App_development2021/sandy_soil_tools_app/App_working/data/primary_data.csv")
+
+
+
+```
+
+## Plots of yield data for following sites
+
+   
+Tempy        
+Wynarka      
+Monia_Gap          
+Malinong  
+Sherwood  
+Cummins    
+Karkoo           
+Buckleboo      
+Mt_Damper          
+Kybunga    
+Warnertown      
+Telopea_Downs  
+Kooloonong_chickpea
+Kooloonong_lentil  
+Kooloonong_lupin
+
+```{r Tempy working, include=FALSE}
+
+site_selection <- "Tempy"
+site <- trial_results %>% 
+  filter(site == site_selection)
+
+str(site)
+
+
+### arrange the data so the order reflect level of intervension
+unique(as.character(site$Descriptors))
+unique(as.character(site$grouping))
+
+order <- c("Control",
+           "Rip.50_none",
+           "Rip.50_Cl.deep", 
+           "Rip.50IncRip_none", 
+           "Rip.50IncRip_Cl.mix")
+
+site$Descriptors <- factor(site$Descriptors, 
+                            levels = order)
+order_grouping <- c("control",
+           "deep ripping no amendment",
+           "deep riping amendment", 
+           "inclusion ripping no amendment", 
+           "inclusion ripping amendment")
+
+
+
+site_name = unique(site$site)
+year_amelioration = unique(site$Amelioration_Year)
+
+decile_year0_temp <-filter(site, yr_post_amelioration == 0 ) %>% 
+  select(decile)
+decile_year1_temp <-filter(site, yr_post_amelioration == 1 ) %>% 
+  select(decile)  
+
+decile_year0 = as.character(unique(decile_year0_temp$decile))
+decile_year1 = as.character(unique(decile_year1_temp$decile))
+
+
+##########################################################################################################
+#####################################     graph with   Descriptors   ##################################################
+
+## I would like to highlight the control but I am having trouble getting this to work
+
+# Add a column indicating whether the category should be highlighted
+site <- site %>% mutate(Control = ifelse( Descriptors == "Control", "yes", NA ) )
+
+
+
+site_plot_descriptors <- ggplot (site, aes(x = Descriptors)) +
+  geom_bar(
+    #aes(y = yield, fill = as.factor(yr_post_amelioration), color = Control), #this works but I can't remove the leg
+    aes(y = yield, fill = as.factor(yr_post_amelioration)),
+    stat = "summary",
+    fun.y = "mean",
+    position = position_dodge(0.8),
+    width = 0.7,
+    show.legend = TRUE
+  ) +
+ 
+  guides(fill = guide_legend(title = "Years post amelioration")) +
+  scale_fill_grey() +
+  theme_bw()+
+  theme(axis.text.x = element_text(angle = 90, hjust=1))+
+  labs(title= paste0("Site: ", site_name, ", Year amelioration: ", year_amelioration),
+       subtitle = paste0("Deciles: year 0 = " , decile_year0, " , year 1 = ", decile_year1),
+       x ="Trial", y = "yield t/ha")
+
+
+##########################################################################################################
+#####################################     tables   with   Descriptors  ##################################################
+## pull out some values to chcek graph and use to fill out the 5 years
+Descriptors_table_site <- site %>% group_by(as.factor(yr_post_amelioration), Descriptors) %>% 
+  summarise(yield_av = mean(yield , na.rm = TRUE)) %>% 
+  rename(yr_post_amelioration= `as.factor(yr_post_amelioration)`)
+
+Descriptors_table_site
+
+Descriptors_table_site_display <- pivot_wider(Descriptors_table_site,
+            names_from = yr_post_amelioration,
+            values_from = yield_av)
+
+Descriptors_table_site_display <-Descriptors_table_site_display %>%
+  slice(match(order, Descriptors))
+Descriptors_table_site_display
+
+
+##########################################################################################################
+#####################################     graph with   Descriptors   ##################################################
+
+## I would like to highlight the control but I am having trouble getting this to work
+
+# Add a column indicating whether the category should be highlighted
+site <- site %>% mutate(Control = ifelse( Descriptors == "Control", "yes", NA ) )
+
+
+
+site_plot_grouping <- ggplot (site, aes(x = grouping)) +
+  geom_bar(
+    #aes(y = yield, fill = as.factor(yr_post_amelioration), color = Control), #this works but I can't remove the leg
+    aes(y = yield, fill = as.factor(yr_post_amelioration)),
+    stat = "summary",
+    fun.y = "mean",
+    position = position_dodge(0.8),
+    width = 0.7,
+    show.legend = TRUE
+  ) +
+  
+  guides(fill = guide_legend(title = "Years post amelioration")) +
+  scale_fill_grey() +
+  theme_bw()+
+  theme(axis.text.x = element_text(angle = 90, hjust=1))+
+  labs(title= paste0("Site: ", site_name, ", Year amelioration: ", year_amelioration),
+       subtitle = paste0("Deciles: year 0 = " , decile_year0, " , year 1 = ", decile_year1),
+       x ="Trial", y = "yield t/ha")
+
+site_plot_grouping
+
+##########################################################################################################
+#####################################     tables   with   grouping  ##################################################
+## pull out some values to chcek graph and use to fill out the 5 years
+grouping_table_site <- site %>% group_by(as.factor(yr_post_amelioration), grouping) %>% 
+  summarise(yield_av = mean(yield , na.rm = TRUE)) %>% 
+  rename(yr_post_amelioration= `as.factor(yr_post_amelioration)`)
+
+grouping_table_site
+
+grouping_table_site_display <- pivot_wider(grouping_table_site,
+                                              names_from = yr_post_amelioration,
+                                              values_from = yield_av)
+
+grouping_table_site_display <-grouping_table_site_display %>%
+  slice(match(order_grouping, grouping))
+grouping_table_site_display
+
+
+
+
+```
+
+# Tempy plots and tables of yield data using *descriptors* to describe treatments
+
+```{r Tempy descriptors , echo=FALSE}
+Descriptors_table_site_display
+site_plot_descriptors
+
+
+
+```
+
+### Tempy plots and tables of yield data using *aggregated* descriptors to describe treatments
+
+```{r Tempy grouping , echo=FALSE}
+
+
+grouping_table_site_display
+site_plot_grouping
+
+```
+
+
+# Wynarka plots and tables of yield data using *descriptors* to describe treatments
+
+```{r Wynarka working, include=FALSE}
+
+site_selection <- "Wynarka"
+site <- trial_results %>% 
+  filter(site == site_selection)
+
+str(site)
+
+
+### arrange the data so the order reflect level of intervension
+unique(as.character(site$Descriptors))
+unique(as.character(site$grouping))
+
+order <- c("Control",
+           "Rip.30_none",
+           "Rip.60_none",
+           "Rip.60IncRip_none",
+           "Rip.60IncRip+Spade.30_none",
+           "Spade.30_none" ,              
+           "Rip.60Spade.30_none")
+
+site$Descriptors <- factor(site$Descriptors, 
+                           levels = order)
+order_grouping <- c("control" 
+                    "deep ripping no amendment"
+                    "inclusion ripping no amendment" 
+                    "inclusion ripping + spading no amendment"
+                    "rotary spading no amendment")
+
+
+site_name = unique(site$site)
+year_amelioration = unique(site$Amelioration_Year)
+
+decile_year0_temp <-filter(site, yr_post_amelioration == 0 ) %>% 
+  select(decile)
+decile_year1_temp <-filter(site, yr_post_amelioration == 1 ) %>% 
+  select(decile)  
+
+decile_year0 = as.character(unique(decile_year0_temp$decile))
+decile_year1 = as.character(unique(decile_year1_temp$decile))
+
+
+##########################################################################################################
+#####################################     graph with   Descriptors   ##################################################
+
+## I would like to highlight the control but I am having trouble getting this to work
+
+# Add a column indicating whether the category should be highlighted
+site <- site %>% mutate(Control = ifelse( Descriptors == "Control", "yes", NA ) )
+
+
+
+site_plot_descriptors <- ggplot (site, aes(x = Descriptors)) +
+  geom_bar(
+    #aes(y = yield, fill = as.factor(yr_post_amelioration), color = Control), #this works but I can't remove the leg
+    aes(y = yield, fill = as.factor(yr_post_amelioration)),
+    stat = "summary",
+    fun.y = "mean",
+    position = position_dodge(0.8),
+    width = 0.7,
+    show.legend = TRUE
+  ) +
+ 
+  guides(fill = guide_legend(title = "Years post amelioration")) +
+  scale_fill_grey() +
+  theme_bw()+
+  theme(axis.text.x = element_text(angle = 90, hjust=1))+
+  labs(title= paste0("Site: ", site_name, ", Year amelioration: ", year_amelioration),
+       subtitle = paste0("Deciles: year 0 = " , decile_year0, " , year 1 = ", decile_year1),
+       x ="Trial", y = "yield t/ha")
+
+
+##########################################################################################################
+#####################################     tables   with   Descriptors  ##################################################
+## pull out some values to chcek graph and use to fill out the 5 years
+Descriptors_table_site <- site %>% group_by(as.factor(yr_post_amelioration), Descriptors) %>% 
+  summarise(yield_av = mean(yield , na.rm = TRUE)) %>% 
+  rename(yr_post_amelioration= `as.factor(yr_post_amelioration)`)
+
+Descriptors_table_site
+
+Descriptors_table_site_display <- pivot_wider(Descriptors_table_site,
+            names_from = yr_post_amelioration,
+            values_from = yield_av)
+
+Descriptors_table_site_display <-Descriptors_table_site_display %>%
+  slice(match(order, Descriptors))
+Descriptors_table_site_display
+
+
+##########################################################################################################
+#####################################     graph with   Descriptors   ##################################################
+
+## I would like to highlight the control but I am having trouble getting this to work
+
+# Add a column indicating whether the category should be highlighted
+site <- site %>% mutate(Control = ifelse( Descriptors == "Control", "yes", NA ) )
+
+
+
+site_plot_grouping <- ggplot (site, aes(x = grouping)) +
+  geom_bar(
+    #aes(y = yield, fill = as.factor(yr_post_amelioration), color = Control), #this works but I can't remove the leg
+    aes(y = yield, fill = as.factor(yr_post_amelioration)),
+    stat = "summary",
+    fun.y = "mean",
+    position = position_dodge(0.8),
+    width = 0.7,
+    show.legend = TRUE
+  ) +
+  
+  guides(fill = guide_legend(title = "Years post amelioration")) +
+  scale_fill_grey() +
+  theme_bw()+
+  theme(axis.text.x = element_text(angle = 90, hjust=1))+
+  labs(title= paste0("Site: ", site_name, ", Year amelioration: ", year_amelioration),
+       subtitle = paste0("Deciles: year 0 = " , decile_year0, " , year 1 = ", decile_year1),
+       x ="Trial", y = "yield t/ha")
+
+site_plot_grouping
+
+##########################################################################################################
+#####################################     tables   with   grouping  ##################################################
+## pull out some values to chcek graph and use to fill out the 5 years
+grouping_table_site <- site %>% group_by(as.factor(yr_post_amelioration), grouping) %>% 
+  summarise(yield_av = mean(yield , na.rm = TRUE)) %>% 
+  rename(yr_post_amelioration= `as.factor(yr_post_amelioration)`)
+
+grouping_table_site
+
+grouping_table_site_display <- pivot_wider(grouping_table_site,
+                                              names_from = yr_post_amelioration,
+                                              values_from = yield_av)
+
+grouping_table_site_display <-grouping_table_site_display %>%
+  slice(match(order_grouping, grouping))
+grouping_table_site_display
+
+
+
+
+```
+
+
+
+```{r Wynarka descriptors , echo=FALSE}
+Descriptors_table_site_display
+site_plot_descriptors
+
+
+
+```
+
+Wynarka plots and tables of yield data using *aggregated* descriptors to describe treatments
+
+```{r Wynarka grouping , echo=FALSE}
+
+
+grouping_table_site_display
+site_plot_grouping
+
+```
