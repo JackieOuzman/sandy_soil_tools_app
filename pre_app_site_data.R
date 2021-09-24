@@ -363,13 +363,13 @@ site_info <-
   filter(site_info, latitude != "NA")
 names(site_info)
 
-site_info <- site_info %>% 
-  mutate( site_label = paste0("Site = ", site),
-          non.wetting_label = paste0("non wetting score = ", "non-wetting"),
-          acidic_label = paste0("acidic score = ", acidic),
-          physical_label = paste0("physical score = ", physical))
+# site_info <- site_info %>% 
+#   mutate( site_label = paste0("Site = ", site),
+#           non.wetting_label = paste0("non wetting score = ", "non-wetting"),
+#           acidic_label = paste0("acidic score = ", acidic),
+#           physical_label = paste0("physical score = ", physical))
 
-
+ 
 
 ##############################################################################################################
 ################## trial results ################################################################################
@@ -490,6 +490,30 @@ trial_results <- trial_results %>%
   mutate(physical = case_when(Physical == 0 ~ "green",
                               Physical == 1 ~ "red",
                               TRUE ~ "check"))
+### for the site info df
+names(site_info)
+site_info <- site_info %>% 
+  rename(Repellence = "non-wetting",
+         Acidity = acidic,
+         Physical =physical)
+
+
+site_info$Repellence <- as.double(site_info$Repellence)
+site_info$Acidity <- as.double(site_info$Acidity)
+site_info$Physical <- as.double(site_info$Physical)
+
+site_info <- site_info %>%
+  mutate(non_wetting = case_when(Repellence == 0 ~ "green",
+                                 Repellence == 1 ~ "red"))
+site_info <- site_info %>%
+  mutate(acidic = case_when(Acidity == 0 ~ "green",
+                            Acidity == 1 ~ "red",
+                            TRUE ~ "check"))
+site_info <- site_info %>%
+  mutate(physical = case_when(Physical == 0 ~ "green",
+                              Physical == 1 ~ "red",
+                              TRUE ~ "check"))
+
 
 ######## mean annual rainfall ####### 
 #using station number in the analogue years cals
