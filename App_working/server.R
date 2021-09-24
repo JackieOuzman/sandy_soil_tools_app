@@ -23,12 +23,12 @@ names(site_info)
 
 site_info <- site_info %>% 
   mutate( site_label = paste0("Site = ", site),
-          non.wetting_label = paste0("non wetting score = ", non.wetting),
+          non_wetting_label = paste0("non wetting score = ", non_wetting),
           acidic_label = paste0("acidic score = ", acidic),
           physical_label = paste0("physical score = ", physical))
 
 site_info <- site_info %>% 
-  mutate( label = paste(sep = "<br/>",site_label, non.wetting_label,acidic_label, physical_label ))
+  mutate( label = paste(sep = "<br/>",site_label, non_wetting_label,acidic_label, physical_label ))
 
 
 ######################################################################################################
