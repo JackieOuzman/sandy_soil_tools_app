@@ -77,9 +77,9 @@ trial_results <- trial_results %>%
     
     
     #Rip of soil deep and amendment applied 
-    Descriptors == "Rip.30_Fert.surface" ~     "deeping rip amendment",
-    Descriptors == "Rip.50_Cl.surface" ~       "deeping rip amendment",
-    Descriptors == "Rip.50_Cl.deep" ~          "deeping rip amendment",
+    Descriptors == "Rip.30_Fert.surface" ~     "deep riping amendment",
+    Descriptors == "Rip.50_Cl.surface" ~       "deep riping amendment",
+    Descriptors == "Rip.50_Cl.deep" ~          "deep riping amendment",
     
     
     Descriptors == "Rip.30IncRip_gypsum.mix" ~       "inclusion ripping amendment",
@@ -114,7 +114,7 @@ trial_results <- trial_results %>%
   mutate(modification = case_when(
     grouping == "amendment only" ~ "no modification",
     grouping == "deep ripping no amendment" ~ "deep ripping",
-    grouping == "deeping rip amendment" ~ "deep ripping",
+    grouping == "deep ripping amendment" ~ "deep ripping",
     grouping == "inclusion ripping no amendment" ~ "inclusion ripping",
     grouping == "inclusion ripping amendment" ~ "inclusion ripping",
     grouping == "inclusion ripping + spading no amendment" ~ "inclusion ripping + spading",

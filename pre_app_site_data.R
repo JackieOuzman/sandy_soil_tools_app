@@ -555,6 +555,12 @@ unique(temp$grouping)
 rm(list=ls()[! ls() %in% c("trial_results","site_info")])
 
 
+## remove the _ in decile
+
+trial_results <- trial_results %>% 
+  dplyr::mutate(decile = str_replace_all(decile, "_", " "))
+
+
 ## these files are used in the app one is mainly for trial data
 #"X:/Therese_Jackie/Sandy_soils/App_development2021/sandy_soil_tools_app/App_working/data/primary_data.csv
 
