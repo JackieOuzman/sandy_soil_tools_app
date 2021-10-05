@@ -696,3 +696,48 @@ extra_table <- extra_table %>%
 
 write.csv(extra_table,"X:/Therese_Jackie/Sandy_soils/App_development2021/sandy_soil_tools_app/App_working/data/extra_table.csv")
 
+
+
+####################################################################################################################################
+### yield table csv file ###########################################################################################################
+#names(trial_results)
+yield_table <- trial_results %>% 
+  dplyr::select(grouping,
+                modification,
+                Descriptors,
+                site,
+               # plot,#not everything has a plot
+                rep_block,  
+                year,
+                yr_post_amelioration,
+                yield,
+                non_wetting,
+                acidic,
+                physical,
+                rainfall_mean_annual,
+                site_numb) 
+## for every site and year and descriptor what is the average yld?
+str(yield_table)
+yield_table$yield <- as.double(yield_table$yield)
+
+yield_table_av_control <- yield_table %>% 
+  filter(Descriptors == "Control") %>% 
+  group_by(site, year, Descriptors, grouping, modification, yr_post_amelioration) %>% 
+  summarise(`yield  (un modified)` = mean(yield, na.rm = TRUE))
+
+yield_table_av_other <- yield_table %>% 
+  filter(Descriptors != "Control") %>% 
+  group_by(site, year, Descriptors, grouping, modification, yr_post_amelioration) %>% 
+  summarise(`yield (modified)` = mean(yield, na.rm = TRUE))
+
+
+## add 5 years of yield data 0 to 4 years post amelrioation
+## first add the missing years so that all sites have 0 and 1 years post
+
+unique(yield_table_av_control$site) # Telopea_Downs only has year 0
+add_row_Telopea_Downs <- yield_table_av_control %>% 
+  filter(site == "Telopea_Downs" & yr_post_amelioration ==0)
+add_row_Telopea_Downs <- add_row_Telopea_Downs %>% mutate(yr_post_amelioration = 1) 
+
+yield_table_av_other <- rbind(yield_table_av_other, add_row_Telopea_Downs)
+yield_table_av_control <- rbind(yield_table_av_control, add_row_Telopea_Downs)
