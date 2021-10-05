@@ -34,31 +34,18 @@ site_info <- site_info %>%
 ######################################################################################################
 ##### bring in the data the app will use  for the economics page     #################################
 ######################################################################################################
-
+#old working dataset
 df <- read_excel("C:/Users/ouz001/working_from_home/ripper/2020/malcom_framework.xlsx", 
                  sheet = "DT_selection")
-# df_1 <- read.csv(file = paste0("X:/Therese_Jackie/Sandy_soils/App_development2021/sandy_soil_tools_app/App_working/data/",
-#                                "primary_data.csv"))
-# df <- df_1 %>% 
-#   dplyr::select(grouping,
-#                 modification,
-#                 site,
-#                 non_wetting,
-#                 acidic,
-#                 physical,
-#                 rainfall_mean_annual,
-#                 site_numb) %>% 
-#   distinct(site, grouping, .keep_all = TRUE)
-
-# df_info <- df
 
 df_info <- read_excel("C:/Users/ouz001/working_from_home/ripper/2020/malcom_framework.xlsx", 
                       sheet = "DT_selection")
+
+
+
 cost_table <- read_excel("C:/Users/ouz001/working_from_home/ripper/2020/malcom_framework.xlsx", 
                          sheet = "DT_cost")
 
-#This version will need to be reformatted
-#cost_table <- read.csv("X:/Therese_Jackie/Sandy_soils/App_development2021/sandy_soil_tools_app/App_working/data/primary_data_cost.csv")
 
 yld_table <- read_excel("C:/Users/ouz001/working_from_home/ripper/2020/malcom_framework.xlsx", 
                         sheet = "DT_yld")
@@ -73,6 +60,44 @@ extra_table <- extra_table %>%
   mutate(year = paste0("year ", year)) %>% 
   pivot_wider(names_from = year, values_from = value) %>% 
   relocate(c(comments,`data source`), .after = last_col()) 
+
+
+#New working dataset
+# df <- read.csv(file = paste0("X:/Therese_Jackie/Sandy_soils/App_development2021/sandy_soil_tools_app/App_working/data/",
+#                                "primary_data.csv"))
+# df <- df %>% 
+#   dplyr::select(grouping,
+#                 modification,
+#                 site,
+#                 non_wetting,
+#                 acidic,
+#                 physical,
+#                 rainfall_mean_annual,
+#                 site_numb) %>% 
+#   distinct(site, grouping, .keep_all = TRUE)
+#df <- df %>% 
+#  filter(modification == "deep ripping")
+
+
+# df_info <- df
+
+
+#cost_table <- read.csv("X:/Therese_Jackie/Sandy_soils/App_development2021/sandy_soil_tools_app/App_working/data/primary_data_cost.csv")
+
+
+# extra_table <- read.csv("X:/Therese_Jackie/Sandy_soils/App_development2021/sandy_soil_tools_app/App_working/data/extra_table.csv")
+# names(extra_table)
+# 
+# extra_table <- extra_table %>% 
+#   mutate(year = paste0("year ", year)) %>% 
+#   pivot_wider(names_from = year, 
+#               values_from = value,
+#               values_fill = list(value = 0)) %>% 
+#   relocate(c(comments,`data.source`), .after = last_col()) 
+
+
+#yld_table
+
 ####################################################################################################
 ######################         create some extra row for labels              ######################
 ####################################################################################################

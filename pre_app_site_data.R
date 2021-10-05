@@ -457,7 +457,7 @@ trial_results <- trial_results %>%
   mutate(modification = case_when(
     grouping == "amendment only" ~ "no modification",
     grouping == "deep ripping no amendment" ~ "deep ripping",
-    grouping == "deep ripping amendment" ~ "deep ripping",
+    grouping == "deep riping amendment" ~ "deep ripping",
     grouping == "inclusion ripping no amendment" ~ "inclusion ripping",
     grouping == "inclusion ripping amendment" ~ "inclusion ripping",
     grouping == "inclusion ripping + spading no amendment" ~ "inclusion ripping + spading",
@@ -598,3 +598,101 @@ write.csv(site_info,
 #   Write out files to be used in app.
 #   all of the data
 write.csv(trial_results,"X:/Therese_Jackie/Sandy_soils/App_development2021/sandy_soil_tools_app/App_working/data/primary_data.csv")
+
+
+
+####################################################################################################################################
+### cost csv file #################################################################################################################
+
+cost_table <- trial_results %>% 
+  dplyr::select(grouping,
+                modification,
+                site,
+                non_wetting,
+                acidic,
+                physical,
+                rainfall_mean_annual,
+                site_numb) %>% 
+  distinct(site, grouping, .keep_all = TRUE)
+
+
+
+
+## make some new clms for the cost csv file, these values will need to be changed
+cost_table <- cost_table %>%
+  dplyr::mutate(
+    "operating ($/ha)" = 	72,
+    "machinery($/ha)"	= 18,
+    "labour ($/ha)"	= 16,
+    "additional options ($/ha)"	= 10,
+    "data source"	= "guess",
+    "comments" = NA
+  )
+cost_table <- cost_table %>%
+  dplyr::mutate(
+    `additional options ($/ha)`= case_when(
+     grouping == "deep riping amendment" ~ 15,
+     TRUE                      ~ `additional options ($/ha)`))
+
+### only keep the deep ripping sites
+unique(cost_table$grouping)
+unique(cost_table$modification)
+cost_table <- cost_table %>% 
+  filter(modification == "deep ripping")
+
+write.csv(cost_table,"X:/Therese_Jackie/Sandy_soils/App_development2021/sandy_soil_tools_app/App_working/data/cost_table.csv")
+
+
+
+####################################################################################################################################
+### extra table csv file #################################################################################################################
+
+
+extra_table <- trial_results %>% 
+  dplyr::select(grouping,
+                modification,
+                site,
+                non_wetting,
+                acidic,
+                physical,
+                rainfall_mean_annual,
+                site_numb) %>% 
+  distinct(site, grouping, .keep_all = TRUE)
+
+
+#add some extra clms ther must be a better way!
+extra_table_1 <- extra_table %>% 
+     dplyr::mutate(activity  = "additional costs ($/ha)")
+extra_table_2 <- extra_table %>% 
+  dplyr::mutate(activity  = "additional savings ($/ha)")
+extra_table_3 <- extra_table %>% 
+  dplyr::mutate(activity  = "cost harvesting and handling extra grain $/t")
+
+extra_table<- rbind(extra_table_1, extra_table_2, extra_table_3)
+
+extra_table_1 <- extra_table %>% 
+  dplyr::mutate(year  = 1)
+extra_table_2 <- extra_table %>% 
+  dplyr::mutate(year  = 2)
+extra_table_3 <- extra_table %>% 
+  dplyr::mutate(year  = 3)
+extra_table_4 <- extra_table %>% 
+  dplyr::mutate(year  = 4)
+extra_table_5 <- extra_table %>% 
+  dplyr::mutate(year  = 5)
+extra_table<- rbind(extra_table_1, extra_table_2, extra_table_3, extra_table_4, extra_table_5)
+
+
+extra_table <- extra_table %>%
+  dplyr::mutate(value = 0,
+                comments = "nil",
+                "data source" = "source")
+
+### only keep the deep ripping sites
+unique(extra_table$grouping)
+unique(extra_table$modification)
+extra_table <- extra_table %>% 
+  filter(modification == "deep ripping")
+
+write.csv(extra_table,"X:/Therese_Jackie/Sandy_soils/App_development2021/sandy_soil_tools_app/App_working/data/extra_table.csv")
+
