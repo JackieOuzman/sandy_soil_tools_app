@@ -420,9 +420,9 @@ trial_results <- trial_results %>%
     
     
     #Rip of soil deep and amendment applied 
-    Descriptors == "Rip.30_Fert.surface" ~     "deep riping amendment",
-    Descriptors == "Rip.50_Cl.surface" ~       "deep riping amendment",
-    Descriptors == "Rip.50_Cl.deep" ~          "deep riping amendment",
+    Descriptors == "Rip.30_Fert.surface" ~     "deep ripping amendment",
+    Descriptors == "Rip.50_Cl.surface" ~       "deep ripping amendment",
+    Descriptors == "Rip.50_Cl.deep" ~          "deep ripping amendment",
     
     
     Descriptors == "Rip.30IncRip_gypsum.mix" ~       "inclusion ripping amendment",
@@ -457,7 +457,7 @@ trial_results <- trial_results %>%
   mutate(modification = case_when(
     grouping == "amendment only" ~ "no modification",
     grouping == "deep ripping no amendment" ~ "deep ripping",
-    grouping == "deep riping amendment" ~ "deep ripping",
+    grouping == "deep ripping amendment" ~ "deep ripping",
     grouping == "inclusion ripping no amendment" ~ "inclusion ripping",
     grouping == "inclusion ripping amendment" ~ "inclusion ripping",
     grouping == "inclusion ripping + spading no amendment" ~ "inclusion ripping + spading",
@@ -640,7 +640,7 @@ cost_table <- cost_table %>%
 cost_table <- cost_table %>%
   dplyr::mutate(
     `additional options ($/ha)`= case_when(
-     grouping == "deep riping amendment" ~ 15,
+     grouping == "deep ripping amendment" ~ 15,
      TRUE                      ~ `additional options ($/ha)`))
 
 ### only keep the deep ripping sites
@@ -881,14 +881,17 @@ rm(yield_table,yield_table_av_control,
 
 ## lets just keep the ripping data
 
+yield_table_av_all <- yield_table_av 
+
 yield_table_av <- yield_table_av %>% 
   filter(modification == "deep ripping")
 
+## just the deep ripping data
 
 ## we have a problem with what to average?
 #average the yield results per grouping for each site year post amelioration 
 str(yield_table_av)
-yield_table_av <- yield_table_av %>%
+yield_table_av_t <- yield_table_av %>%
   group_by(site,
            year,
            crop,
@@ -907,6 +910,27 @@ yield_table_av <- yield_table_av %>%
 yield_table_av$`yield (modified)`[is.nan(yield_table_av$`yield (modified)`)] <- 0
 yield_table_av$`yield  (un modified)`[is.nan(yield_table_av$`yield  (un modified)`)] <- 0
 
+## all of the data
+
+str(yield_table_av_all)
+yield_table_av_all <- yield_table_av_all %>%
+  group_by(site,
+           year,
+           crop,
+           grouping,
+           modification,
+           yr_post_amelioration,
+           `data source`,
+           price) %>%
+  summarise(
+    `yield (modified)` =     mean(`yield (modified)`,     na.rm = TRUE),
+    `yield  (un modified)` = mean(`yield  (un modified)`, na.rm = TRUE)
+  )
+
+
+
+yield_table_av_all$`yield (modified)`[is.nan(yield_table_av_all$`yield (modified)`)] <- 0
+yield_table_av_all$`yield  (un modified)`[is.nan(yield_table_av_all$`yield  (un modified)`)] <- 0
 
 write.csv(yield_table_av,"X:/Therese_Jackie/Sandy_soils/App_development2021/sandy_soil_tools_app/App_working/data/yield_table_av.csv", row.names = FALSE)
-
+write.csv(yield_table_av_all,"X:/Therese_Jackie/Sandy_soils/App_development2021/sandy_soil_tools_app/App_working/data/yield_table_av_all.csv", row.names = FALSE)
