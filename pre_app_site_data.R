@@ -794,21 +794,21 @@ yield_table_av_control_yr2 <- yield_table_av_control %>%
   mutate(yr_post_amelioration = 2,
          year = NA,
          crop = NA,
-         `yield  (un modified)` = NA)  
+         `yield  (un modified)` = 0)  
   
 yield_table_av_control_yr3 <- yield_table_av_control %>%
   filter(yr_post_amelioration == 0) %>%
   mutate(yr_post_amelioration = 3,
          year = NA,
          crop = NA,
-         `yield  (un modified)` = NA) 
+         `yield  (un modified)` = 0) 
 
 yield_table_av_control_yr4 <- yield_table_av_control %>%
   filter(yr_post_amelioration == 0) %>%
   mutate(yr_post_amelioration = 4,
          year = NA,
          crop = NA,
-         `yield  (un modified)` = NA) 
+         `yield  (un modified)` = 0) 
 
 yield_table_av_control <- rbind(yield_table_av_control,
               yield_table_av_control_yr2, 
@@ -823,21 +823,21 @@ yield_table_av_other_yr2 <- yield_table_av_other %>%
   mutate(yr_post_amelioration = 2,
          year = NA,
          crop = NA,
-         `yield (modified)` = NA)  
+         `yield (modified)` = 0)  
 
 yield_table_av_other_yr3 <- yield_table_av_other %>%
   filter(yr_post_amelioration == 0) %>%
   mutate(yr_post_amelioration = 3,
          year = NA,
          crop = NA,
-         `yield (modified)` = NA) 
+         `yield (modified)` = 0) 
 
 yield_table_av_other_yr4 <- yield_table_av_other %>%
   filter(yr_post_amelioration == 0) %>%
   mutate(yr_post_amelioration = 4,
          year = NA,
          crop = NA,
-         `yield (modified)` = NA) 
+         `yield (modified)` = 0) 
 
 yield_table_av_other <- rbind(yield_table_av_other,
                                 yield_table_av_other_yr2, 
@@ -866,7 +866,8 @@ yield_table_av <- yield_table_av %>%
                    crop == "lentil" ~ 580,
                    crop == "lupin" ~ 260,
                    crop == "beans" ~ 440, # Faba beans
-                   crop == NA ~ 0))
+                   TRUE ~ 0)
+                   )
 #tidy up the mess!
 rm(yield_table,yield_table_av_control, 
    yield_table_av_control_yr2, 
@@ -903,8 +904,9 @@ yield_table_av <- yield_table_av %>%
 
 
  
-yield_table_av$`yield (modified)`[is.nan(yield_table_av$`yield (modified)`)] <- NA
-yield_table_av$`yield  (un modified)`[is.nan(yield_table_av$`yield  (un modified)`)] <- NA
+yield_table_av$`yield (modified)`[is.nan(yield_table_av$`yield (modified)`)] <- 0
+yield_table_av$`yield  (un modified)`[is.nan(yield_table_av$`yield  (un modified)`)] <- 0
 
 
 write.csv(yield_table_av,"X:/Therese_Jackie/Sandy_soils/App_development2021/sandy_soil_tools_app/App_working/data/yield_table_av.csv", row.names = FALSE)
+

@@ -281,14 +281,14 @@ server <- shinyServer(function(input, output, session) {
     filter(yld_table, 
            grouping == input$data1_scen1  &
              site == input$data2)   %>% 
-      select(year, crop, "yield_unmodified", "yield_modified",price, `data source` )
+      select(year, crop, yield_unmodified, yield_modified,price, `data source` )
   })
   
   reactive_filter_yld_sc2 <- reactive({
     filter(yld_table, 
            grouping == input$data1_scen2  &
              site == input$data2)   %>% 
-      select(year, crop, "yield_unmodified", "yield_modified", price, `data source`)
+      select(year, crop, yield_unmodified, yield_modified, price, `data source`)
   })
   
   ########   extra table sc1 and sc2   ########
@@ -362,7 +362,7 @@ server <- shinyServer(function(input, output, session) {
     
     #value of yield
     yld_sc_x <- yld_sc_x %>%
-      mutate(yld_gain_value = ("yield_modified" - "yield_unmodified") * price) %>%
+      mutate(yld_gain_value = (yield_modified - yield_unmodified) * price) %>%
       mutate(scenario = paste0("scenario ", sc_x)) %>%
       select(scenario, year, yld_gain_value )
     
