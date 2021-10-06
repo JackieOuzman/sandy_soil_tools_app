@@ -597,8 +597,17 @@ write.csv(site_info,
 
 #   Write out files to be used in app.
 #   all of the data
-write.csv(trial_results,"X:/Therese_Jackie/Sandy_soils/App_development2021/sandy_soil_tools_app/App_working/data/primary_data.csv")
+write.csv(trial_results,"X:/Therese_Jackie/Sandy_soils/App_development2021/sandy_soil_tools_app/App_working/data/primary_data_all.csv",row.names = FALSE)
 
+#   subset of the data
+names(trial_results)
+unique(trial_results$modification)
+trial_results_subset <- trial_results %>% 
+  filter(modification == "deep ripping")
+
+
+
+write.csv(trial_results_subset,"X:/Therese_Jackie/Sandy_soils/App_development2021/sandy_soil_tools_app/App_working/data/primary_data.csv", row.names = FALSE)
 
 
 ####################################################################################################################################
@@ -664,7 +673,7 @@ cost_table <- cost_table %>%
                 "comments" ,
                 "data source")
 
-write.csv(cost_table,"X:/Therese_Jackie/Sandy_soils/App_development2021/sandy_soil_tools_app/App_working/data/cost_table.csv")
+write.csv(cost_table,"X:/Therese_Jackie/Sandy_soils/App_development2021/sandy_soil_tools_app/App_working/data/cost_table.csv", row.names = FALSE)
 
 
 
@@ -718,7 +727,7 @@ unique(extra_table$modification)
 extra_table <- extra_table %>% 
   filter(modification == "deep ripping")
 
-write.csv(extra_table,"X:/Therese_Jackie/Sandy_soils/App_development2021/sandy_soil_tools_app/App_working/data/extra_table.csv")
+write.csv(extra_table,"X:/Therese_Jackie/Sandy_soils/App_development2021/sandy_soil_tools_app/App_working/data/extra_table.csv", row.names = FALSE)
 
 rm(extra_table_1,
    extra_table_2,
@@ -898,4 +907,4 @@ yield_table_av$`yield (modified)`[is.nan(yield_table_av$`yield (modified)`)] <- 
 yield_table_av$`yield  (un modified)`[is.nan(yield_table_av$`yield  (un modified)`)] <- NA
 
 
-write.csv(yield_table_av,"X:/Therese_Jackie/Sandy_soils/App_development2021/sandy_soil_tools_app/App_working/data/yield_table_av.csv")
+write.csv(yield_table_av,"X:/Therese_Jackie/Sandy_soils/App_development2021/sandy_soil_tools_app/App_working/data/yield_table_av.csv", row.names = FALSE)

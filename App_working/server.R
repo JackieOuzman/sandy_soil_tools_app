@@ -77,14 +77,23 @@ df <- df %>%
    distinct(site, grouping, .keep_all = TRUE)
 df <- df %>%
   filter(modification == "deep ripping")
-
+df$grouping <- as.character(df$grouping)
+df$modification <- as.character(df$modification)
+df$site <- as.character(df$site)
+df$non_wetting <- as.character(df$non_wetting)
+df$acidic <- as.character(df$acidic)
+df$physical <- as.character(df$physical)
 
 df_info <- df
 
 
 cost_table <- read.csv("X:/Therese_Jackie/Sandy_soils/App_development2021/sandy_soil_tools_app/App_working/data/cost_table.csv")
 cost_table <- cost_table %>% rename(`data source` = "data.source")
-
+cost_table$grouping <- as.character(cost_table$grouping)
+cost_table$modification <- as.character(cost_table$modification)
+cost_table$site <- as.character(cost_table$site)
+cost_table$activity <- as.character(cost_table$activity)
+cost_table$`data source` <- as.character(cost_table$`data source`)
 
 extra_table <- read.csv("X:/Therese_Jackie/Sandy_soils/App_development2021/sandy_soil_tools_app/App_working/data/extra_table.csv")
 #names(extra_table)
@@ -97,6 +106,15 @@ extra_table <- extra_table %>%
               values_fill = list(value = 0)) %>%
   relocate(c(comments,`data source`), .after = last_col())
 
+extra_table$grouping <- as.character(extra_table$grouping)
+extra_table$modification <- as.character(extra_table$modification)
+extra_table$site <- as.character(extra_table$site)
+extra_table$non_wetting <- as.character(extra_table$non_wetting)
+extra_table$acidic <- as.character(extra_table$acidic)
+extra_table$physical <- as.character(extra_table$physical)
+extra_table$activity <- as.character(extra_table$activity)
+extra_table$comments <- as.character(extra_table$comments)
+extra_table$`data source` <- as.character(extra_table$`data source`)
 
 #yld_table
 yld_table <- read.csv("X:/Therese_Jackie/Sandy_soils/App_development2021/sandy_soil_tools_app/App_working/data/yield_table_av.csv")
@@ -121,6 +139,13 @@ yld_table <- ungroup(yld_table)
 
   yld_table <- yld_table %>% 
   mutate(year = year +1)
+  
+  yld_table$grouping <- as.character(yld_table$grouping)
+  yld_table$modification <- as.character(yld_table$modification)
+  yld_table$site <- as.character(yld_table$site)
+  yld_table$crop  <- as.character(yld_table$crop )
+  yld_table$`data source` <- as.character(yld_table$`data source`)
+  
 ####################################################################################################
 ######################         create some extra row for labels              ######################
 ####################################################################################################
@@ -168,21 +193,21 @@ server <- shinyServer(function(input, output, session) {
   ######## sc1   #######################################################################################
   
   output$data1_scen1 <- renderUI({
-    selectInput("data1_scen1", "modification for scenario 1",
-                choices = c(unique(df$modification)),
+    selectInput("data1_scen1", "grouping for scenario 1",
+                choices = c(unique(df$grouping)),
                 selected = "deep ripping")
   })
   
   output$data1_scen2 <- renderUI({
-    selectInput("data1_scen2", "modification for scenario 2",
-                choices = c(unique(df$modification)),
+    selectInput("data1_scen2", "grouping for scenario 2",
+                choices = c(unique(df$grouping)),
                 selected = "deep ripping")
   })
   ## input dependant on the choices in `data1`
   output$data2 <- renderUI({
     selectInput("data2", "select",
                 choices = c(unique(df$site
-                                   [df$modification == input$data1_scen1])),
+                                   [df$grouping == input$data1_scen1])),
                 selected = "Cummins")
   })
   
@@ -191,7 +216,7 @@ server <- shinyServer(function(input, output, session) {
   ######################################################################################################
   
   output$tb_chosen3 <- renderTable(subset(df,
-                                          df$modification==input$data1_scen1 & df$modification==input$data2 &
+                                          df$grouping==input$data1_scen1 & df$grouping==input$data2 &
                                             df$site==input$data2
   ),
   rownames=TRUE)
@@ -239,14 +264,14 @@ server <- shinyServer(function(input, output, session) {
   ######## cost table sc1 and sc2 ########
   reactive_filter_cost_sc1 <- reactive({
     filter(cost_table, 
-           modification == input$data1_scen1  &
+           grouping == input$data1_scen1  &
              site == input$data2)   %>% 
       select(activity , price, comments, `data source`)
   })
   
   reactive_filter_cost_sc2 <- reactive({
     filter(cost_table, 
-           modification == input$data1_scen2  &
+           grouping == input$data1_scen2  &
              site == input$data2)   %>% 
       select(activity , price, comments, `data source`)
   })
@@ -254,14 +279,14 @@ server <- shinyServer(function(input, output, session) {
   ########   yld table sc1 and sc2   ########
   reactive_filter_yld_sc1 <- reactive({
     filter(yld_table, 
-           modification == input$data1_scen1  &
+           grouping == input$data1_scen1  &
              site == input$data2)   %>% 
       select(year, crop, "yield_unmodified", "yield_modified",price, `data source` )
   })
   
   reactive_filter_yld_sc2 <- reactive({
     filter(yld_table, 
-           modification == input$data1_scen2  &
+           grouping == input$data1_scen2  &
              site == input$data2)   %>% 
       select(year, crop, "yield_unmodified", "yield_modified", price, `data source`)
   })
@@ -269,7 +294,7 @@ server <- shinyServer(function(input, output, session) {
   ########   extra table sc1 and sc2   ########
   reactive_filter_extra_sc1 <- reactive({
     filter(extra_table, 
-           modification == input$data1_scen1  &
+           grouping == input$data1_scen1  &
              site == input$data2)   %>% 
       #select(activity ,year, value, `data source`)
       select(activity ,`year 1`, `year 2`,`year 3`,`year 4`,`year 5`, `data source`)
@@ -277,7 +302,7 @@ server <- shinyServer(function(input, output, session) {
   
   reactive_filter_extra_sc2 <- reactive({
     filter(extra_table, 
-           modification == input$data1_scen2  &
+           grouping == input$data1_scen2  &
              site == input$data2)   %>% 
       select(activity ,`year 1`, `year 2`,`year 3`,`year 4`,`year 5`, `data source`)
     #select(activity ,year, value, `data source`)
@@ -414,7 +439,7 @@ server <- shinyServer(function(input, output, session) {
       theme_bw()+
       scale_x_continuous(limits = c(x_min, x_max), breaks = seq(0, 5, by = 1))+
       scale_y_continuous(limits = c(y_min[[1]], y_max[[1]]))+
-      xlab("Years after modification") + ylab("$/ha") +
+      xlab("Years after grouping") + ylab("$/ha") +
       ggtitle("Undiscounted cash flow")
     
     
@@ -514,7 +539,7 @@ server <- shinyServer(function(input, output, session) {
       theme_bw()+
       #scale_x_continuous(limits = c(x_min, x_max), breaks = seq(0, 5, by = 1))+
       #scale_y_continuous(limits = c(y_min[[1]], y_max[[1]]))+
-      xlab("Years after modification") + ylab("$/ha") +
+      xlab("Years after grouping") + ylab("$/ha") +
       ggtitle("Undiscounted cash flow")
   })
   
