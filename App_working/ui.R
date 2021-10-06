@@ -92,7 +92,8 @@ library(shinyWidgets)
                                  ),
                                  selected = "Tempy"
                                ),
-                               plotOutput("trial_plot")
+                               plotOutput("trial_plot"),
+                               tableOutput("trial_table")
                              )),
                              
                              

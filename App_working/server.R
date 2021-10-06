@@ -85,6 +85,11 @@ trial_results$Descriptors <- factor(trial_results$Descriptors,
                                     levels = order)
 
 
+######## trial data #####
+trial_results_table <- read_csv("X:/Therese_Jackie/Sandy_soils/App_development2021/sandy_soil_tools_app/App_working/data/yield_table_av_all.csv")
+
+
+
 ######################################################################################################
 ##### bring in the data the app will use  for the economics page     #################################
 ######################################################################################################
@@ -270,7 +275,20 @@ server <- shinyServer(function(input, output, session) {
    site_plot_descriptors
    
   })   
+ 
   
+########     function for filtering the data - and creating a table of grouped data  ##################### 
+  
+  #table trial data  
+  output$trial_table <- renderTable({
+    
+    
+    trial_results_table_1 <-filter(trial_results_table, 
+                                   site == input$site_selection ) %>% 
+      dplyr::select(-price, -`data source`) %>% 
+      dplyr::filter(!is.na(crop))
+    trial_results_table_1
+  })
   
     
   ######################################################################################################
