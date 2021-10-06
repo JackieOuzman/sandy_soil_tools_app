@@ -91,8 +91,12 @@ library(shinyWidgets)
                                    "Telopea_Downs"
                                  ),
                                  selected = "Tempy"
-                               )
+                               ),
+                               plotOutput("trial_plot")
                              )),
+                             
+                             
+                             
                     ), #tabPanel1 bracket
  
 

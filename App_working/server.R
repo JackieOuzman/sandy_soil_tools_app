@@ -213,7 +213,66 @@ df_info <- df_info %>%
 #########################                       server               #################################
 ######################################################################################################
 server <- shinyServer(function(input, output, session) {
+
+######################################################################################################
+################     function for filtering the data - and creating a plot  ##########################
+###################################################################################################### 
+  output$trial_plot <- renderPlot({
   
+    ## text that appears on the plot 
+  ## what is the decile year for our trial results?
+   decile_year0_temp <-filter(trial_results, 
+                              site == input$site_selection & yr_post_amelioration == 0 ) %>% 
+     select(decile) %>% 
+     distinct(decile)
+   decile_year1_temp <-filter(trial_results, 
+                              site == input$site_selection & yr_post_amelioration == 1 ) %>% 
+     select(decile) %>% 
+     distinct(decile)
+   
+   decile_year0 = as.character(unique(decile_year0_temp$decile))
+   decile_year1 = as.character(unique(decile_year1_temp$decile))
+   
+   ## text that appears on the plot 
+   ## what is the year of amerolaition for the site / trial ?
+   
+   year_amelioration <- trial_results %>% 
+     filter(site == input$site_selection) %>% 
+     dplyr::select(Amelioration_Year) %>% 
+     distinct(Amelioration_Year)
+   
+   year_amelioration = as.character(unique(year_amelioration$Amelioration_Year))
+   
+   ## the plot 
+   site_plot_descriptors <- 
+     trial_results %>% filter(site == input$site_selection) %>% 
+     dplyr::select(site, Descriptors, yr_post_amelioration, yield) %>% 
+     ggplot ( aes(x = Descriptors)) +
+     geom_bar(
+       #aes(y = yield, fill = as.factor(yr_post_amelioration), color = Control), #this works but I can't remove the leg
+       aes(y = yield, fill = as.factor(yr_post_amelioration)),
+       stat = "summary",
+       fun.y = "mean",
+       position = position_dodge(0.8),
+       width = 0.7,
+       show.legend = TRUE
+     ) +
+     
+     guides(fill = guide_legend(title = "Years post amelioration")) +
+     scale_fill_grey() +
+     theme_bw()+
+     theme(axis.text.x = element_text(angle = 90, hjust=1))+
+     labs(title= paste0("Site: ", input$site_selection, ", Year amelioration: ", year_amelioration),
+          subtitle = paste0("Deciles: year 0 = " , decile_year0, " , year 1 = ", decile_year1),
+          x ="Trial", y = "yield t/ha")
+  
+   
+   site_plot_descriptors
+   
+  })   
+  
+  
+    
   ######################################################################################################
   ##################         function for filtering the data - drop down      ##########################
   ######################################################################################################
