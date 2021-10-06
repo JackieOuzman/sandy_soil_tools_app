@@ -35,69 +35,92 @@ site_info <- site_info %>%
 ##### bring in the data the app will use  for the economics page     #################################
 ######################################################################################################
 #old working dataset
-df <- read_excel("C:/Users/ouz001/working_from_home/ripper/2020/malcom_framework.xlsx", 
-                 sheet = "DT_selection")
-
-df_info <- read_excel("C:/Users/ouz001/working_from_home/ripper/2020/malcom_framework.xlsx", 
-                      sheet = "DT_selection")
-
-
-
-cost_table <- read_excel("C:/Users/ouz001/working_from_home/ripper/2020/malcom_framework.xlsx", 
-                         sheet = "DT_cost")
+ # df <- read_excel("C:/Users/ouz001/working_from_home/ripper/2020/malcom_framework.xlsx", 
+ #                  sheet = "DT_selection")
+ 
+ #df_info <- read_excel("C:/Users/ouz001/working_from_home/ripper/2020/malcom_framework.xlsx", 
+ #                      sheet = "DT_selection")
 
 
-yld_table <- read_excel("C:/Users/ouz001/working_from_home/ripper/2020/malcom_framework.xlsx", 
-                        sheet = "DT_yld")
 
-
-extra_table <- read_excel("C:/Users/ouz001/working_from_home/ripper/2020/malcom_framework.xlsx", 
-                          sheet = "DT_extra_cost_benefits")
-# This will need to be refomatted
-#extra_table <- read.csv("X:/Therese_Jackie/Sandy_soils/App_development2021/sandy_soil_tools_app/App_working/data/DT_extra_cost_benefits_primary_data_impact.csv")
-
-extra_table <- extra_table %>% 
-  mutate(year = paste0("year ", year)) %>% 
-  pivot_wider(names_from = year, values_from = value) %>% 
-  relocate(c(comments,`data source`), .after = last_col()) 
+ # cost_table <- read_excel("C:/Users/ouz001/working_from_home/ripper/2020/malcom_framework.xlsx", 
+ #                          sheet = "DT_cost")
+ # 
+ # 
+ # yld_table <- read_excel("C:/Users/ouz001/working_from_home/ripper/2020/malcom_framework.xlsx", 
+ #                         sheet = "DT_yld")
+ # 
+ # 
+ # extra_table <- read_excel("C:/Users/ouz001/working_from_home/ripper/2020/malcom_framework.xlsx", 
+ #                           sheet = "DT_extra_cost_benefits")
+ # 
+ # 
+ # extra_table <- extra_table %>% 
+ #   mutate(year = paste0("year ", year)) %>% 
+ #   pivot_wider(names_from = year, values_from = value) %>% 
+ #   relocate(c(comments,`data source`), .after = last_col()) 
 
 
 #New working dataset
-# df <- read.csv(file = paste0("X:/Therese_Jackie/Sandy_soils/App_development2021/sandy_soil_tools_app/App_working/data/",
-#                                "primary_data.csv"))
-# df <- df %>% 
-#   dplyr::select(grouping,
-#                 modification,
-#                 site,
-#                 non_wetting,
-#                 acidic,
-#                 physical,
-#                 rainfall_mean_annual,
-#                 site_numb) %>% 
-#   distinct(site, grouping, .keep_all = TRUE)
-#df <- df %>% 
-#  filter(modification == "deep ripping")
+
+df <- read.csv(file = paste0("X:/Therese_Jackie/Sandy_soils/App_development2021/sandy_soil_tools_app/App_working/data/",
+                               "primary_data.csv"))
+df <- df %>%
+  dplyr::select(grouping,
+                modification,
+                site,
+                non_wetting,
+                acidic,
+                physical,
+                rainfall_mean_annual,
+                site_numb) %>%
+   distinct(site, grouping, .keep_all = TRUE)
+df <- df %>%
+  filter(modification == "deep ripping")
 
 
-# df_info <- df
+df_info <- df
 
 
-#cost_table <- read.csv("X:/Therese_Jackie/Sandy_soils/App_development2021/sandy_soil_tools_app/App_working/data/primary_data_cost.csv")
+cost_table <- read.csv("X:/Therese_Jackie/Sandy_soils/App_development2021/sandy_soil_tools_app/App_working/data/cost_table.csv")
+cost_table <- cost_table %>% rename(`data source` = "data.source")
 
 
-# extra_table <- read.csv("X:/Therese_Jackie/Sandy_soils/App_development2021/sandy_soil_tools_app/App_working/data/extra_table.csv")
-# names(extra_table)
-# 
-# extra_table <- extra_table %>% 
-#   mutate(year = paste0("year ", year)) %>% 
-#   pivot_wider(names_from = year, 
-#               values_from = value,
-#               values_fill = list(value = 0)) %>% 
-#   relocate(c(comments,`data.source`), .after = last_col()) 
+extra_table <- read.csv("X:/Therese_Jackie/Sandy_soils/App_development2021/sandy_soil_tools_app/App_working/data/extra_table.csv")
+#names(extra_table)
+extra_table <- extra_table %>% rename(`data source` = "data.source")
+
+extra_table <- extra_table %>%
+  mutate(year = paste0("year ", year)) %>%
+  pivot_wider(names_from = year,
+              values_from = value,
+              values_fill = list(value = 0)) %>%
+  relocate(c(comments,`data source`), .after = last_col())
 
 
 #yld_table
+yld_table <- read.csv("X:/Therese_Jackie/Sandy_soils/App_development2021/sandy_soil_tools_app/App_working/data/yield_table_av.csv")
 
+yld_table <- yld_table %>% rename(
+  "yield_unmodified" = 'yield...un.modified.',
+  "yield_modified" =    'yield..modified.')
+
+yld_table <- yld_table %>%
+  dplyr::select(grouping,
+                modification,
+                site,
+                year = yr_post_amelioration,
+                crop, 
+                "yield_unmodified",
+                "yield_modified",
+                price,
+                "data source" = data.source,
+  )
+
+yld_table <- ungroup(yld_table) 
+
+  yld_table <- yld_table %>% 
+  mutate(year = year +1)
 ####################################################################################################
 ######################         create some extra row for labels              ######################
 ####################################################################################################
@@ -105,9 +128,9 @@ extra_table <- extra_table %>%
 df_info <- df_info %>% 
   mutate(
     non_wetting_label =  case_when(
-      `non-wetting`  == "green"   ~    "No issue",
-      `non-wetting`  == "orange"  ~    "Moderate issue",
-      `non-wetting`  == "red"     ~    "Severe issue",
+      `non_wetting`  == "green"   ~    "No issue",
+      `non_wetting`  == "orange"  ~    "Moderate issue",
+      `non_wetting`  == "red"     ~    "Severe issue",
       TRUE                      ~    "other"
     ))
 
@@ -147,20 +170,20 @@ server <- shinyServer(function(input, output, session) {
   output$data1_scen1 <- renderUI({
     selectInput("data1_scen1", "modification for scenario 1",
                 choices = c(unique(df$modification)),
-                selected = "Ploughing")
+                selected = "deep ripping")
   })
   
   output$data1_scen2 <- renderUI({
     selectInput("data1_scen2", "modification for scenario 2",
                 choices = c(unique(df$modification)),
-                selected = "Ploughing")
+                selected = "deep ripping")
   })
   ## input dependant on the choices in `data1`
   output$data2 <- renderUI({
     selectInput("data2", "select",
                 choices = c(unique(df$site
                                    [df$modification == input$data1_scen1])),
-                selected = "Cadgee")
+                selected = "Cummins")
   })
   
   ######################################################################################################
@@ -206,7 +229,7 @@ server <- shinyServer(function(input, output, session) {
   reactive_df_info <- reactive({
     filter(df_info, 
            site == input$data2)    %>% 
-      select("non-wetting", "acidic", "physical", "rainfall_mean_annual",
+      select("non_wetting", "acidic", "physical", "rainfall_mean_annual",
              "non_wetting_label","acidic_label",  "physical_label") %>% 
       unique()
     
@@ -233,14 +256,14 @@ server <- shinyServer(function(input, output, session) {
     filter(yld_table, 
            modification == input$data1_scen1  &
              site == input$data2)   %>% 
-      select(year, crop, `yield  (un modified)`, `yield (modified)`,price, `data source` )
+      select(year, crop, "yield_unmodified", "yield_modified",price, `data source` )
   })
   
   reactive_filter_yld_sc2 <- reactive({
     filter(yld_table, 
            modification == input$data1_scen2  &
              site == input$data2)   %>% 
-      select(year, crop, `yield  (un modified)`, `yield (modified)`, price, `data source`)
+      select(year, crop, "yield_unmodified", "yield_modified", price, `data source`)
   })
   
   ########   extra table sc1 and sc2   ########
@@ -314,7 +337,7 @@ server <- shinyServer(function(input, output, session) {
     
     #value of yield
     yld_sc_x <- yld_sc_x %>%
-      mutate(yld_gain_value = (`yield (modified)` - `yield  (un modified)`) * price) %>%
+      mutate(yld_gain_value = ("yield_modified" - "yield_unmodified") * price) %>%
       mutate(scenario = paste0("scenario ", sc_x)) %>%
       select(scenario, year, yld_gain_value )
     
@@ -409,7 +432,7 @@ server <- shinyServer(function(input, output, session) {
   
   
   output$non_wetting <- renderInfoBox({
-    shinydashboard::valueBox(value = tags$p("non-wetting", style = "font-size: 50%;"),
+    shinydashboard::valueBox(value = tags$p("non_wetting", style = "font-size: 50%;"),
              subtitle = paste0(reactive_df_info()[1,5]),
              icon = NULL,
              color = paste0(reactive_df_info()[1,1]))

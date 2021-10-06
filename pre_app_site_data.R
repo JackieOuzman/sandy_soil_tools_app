@@ -640,6 +640,30 @@ unique(cost_table$modification)
 cost_table <- cost_table %>% 
   filter(modification == "deep ripping")
 
+### arrange this a bit better to match template
+cost_table <- cost_table %>% 
+  dplyr::select("grouping", "modification", "site",
+                "operating ($/ha)" ,        
+                "machinery($/ha)",
+                "labour ($/ha)" ,
+                "additional options ($/ha)",
+                "comments" ,
+                "data source")
+
+
+cost_table <- cost_table %>% 
+  pivot_longer(cols = c("operating ($/ha)", "machinery($/ha)", "labour ($/ha)" ,  "additional options ($/ha)"),
+               names_to = "activity",
+               values_to = "price")
+
+
+cost_table <- cost_table %>% 
+  dplyr::select("grouping", "modification", "site",
+                "activity",
+                "price",
+                "comments" ,
+                "data source")
+
 write.csv(cost_table,"X:/Therese_Jackie/Sandy_soils/App_development2021/sandy_soil_tools_app/App_working/data/cost_table.csv")
 
 
@@ -696,11 +720,15 @@ extra_table <- extra_table %>%
 
 write.csv(extra_table,"X:/Therese_Jackie/Sandy_soils/App_development2021/sandy_soil_tools_app/App_working/data/extra_table.csv")
 
-
+rm(extra_table_1,
+   extra_table_2,
+   extra_table_3,
+   extra_table_4,
+   extra_table_5)
 
 ####################################################################################################################################
 ### yield table csv file ###########################################################################################################
-#names(trial_results)
+names(trial_results)
 yield_table <- trial_results %>% 
   dplyr::select(grouping,
                 modification,
@@ -711,6 +739,7 @@ yield_table <- trial_results %>%
                 year,
                 yr_post_amelioration,
                 yield,
+                crop,
                 non_wetting,
                 acidic,
                 physical,
@@ -720,14 +749,15 @@ yield_table <- trial_results %>%
 str(yield_table)
 yield_table$yield <- as.double(yield_table$yield)
 
+#average the yield results per rep for each site Descriptors, and year 
 yield_table_av_control <- yield_table %>% 
   filter(Descriptors == "Control") %>% 
-  group_by(site, year, Descriptors, grouping, modification, yr_post_amelioration) %>% 
+  group_by(site, year, crop, Descriptors, grouping, modification, yr_post_amelioration) %>% 
   summarise(`yield  (un modified)` = mean(yield, na.rm = TRUE))
 
 yield_table_av_other <- yield_table %>% 
   filter(Descriptors != "Control") %>% 
-  group_by(site, year, Descriptors, grouping, modification, yr_post_amelioration) %>% 
+  group_by(site, year, crop, Descriptors, grouping, modification, yr_post_amelioration) %>% 
   summarise(`yield (modified)` = mean(yield, na.rm = TRUE))
 
 
@@ -741,3 +771,131 @@ add_row_Telopea_Downs <- add_row_Telopea_Downs %>% mutate(yr_post_amelioration =
 
 yield_table_av_other <- rbind(yield_table_av_other, add_row_Telopea_Downs)
 yield_table_av_control <- rbind(yield_table_av_control, add_row_Telopea_Downs)
+
+yield_table_av_other <- ungroup(yield_table_av_other) 
+yield_table_av_control <- ungroup(yield_table_av_control)
+
+## drop the extra clm I pick up -oops
+yield_table_av_other <- dplyr::select(yield_table_av_other, -`yield  (un modified)`)
+
+## add empty row for the years post amelriation 2,3,4 for the control
+str(yield_table_av_control)
+yield_table_av_control_yr2 <- yield_table_av_control %>%
+  filter(yr_post_amelioration == 0) %>%
+  mutate(yr_post_amelioration = 2,
+         year = NA,
+         crop = NA,
+         `yield  (un modified)` = NA)  
+  
+yield_table_av_control_yr3 <- yield_table_av_control %>%
+  filter(yr_post_amelioration == 0) %>%
+  mutate(yr_post_amelioration = 3,
+         year = NA,
+         crop = NA,
+         `yield  (un modified)` = NA) 
+
+yield_table_av_control_yr4 <- yield_table_av_control %>%
+  filter(yr_post_amelioration == 0) %>%
+  mutate(yr_post_amelioration = 4,
+         year = NA,
+         crop = NA,
+         `yield  (un modified)` = NA) 
+
+yield_table_av_control <- rbind(yield_table_av_control,
+              yield_table_av_control_yr2, 
+              yield_table_av_control_yr3, 
+              yield_table_av_control_yr4)
+
+
+## add empty row for the years post amelriation 2,3,4 for the treatments
+str(yield_table_av_other)
+yield_table_av_other_yr2 <- yield_table_av_other %>%
+  filter(yr_post_amelioration == 0) %>%
+  mutate(yr_post_amelioration = 2,
+         year = NA,
+         crop = NA,
+         `yield (modified)` = NA)  
+
+yield_table_av_other_yr3 <- yield_table_av_other %>%
+  filter(yr_post_amelioration == 0) %>%
+  mutate(yr_post_amelioration = 3,
+         year = NA,
+         crop = NA,
+         `yield (modified)` = NA) 
+
+yield_table_av_other_yr4 <- yield_table_av_other %>%
+  filter(yr_post_amelioration == 0) %>%
+  mutate(yr_post_amelioration = 4,
+         year = NA,
+         crop = NA,
+         `yield (modified)` = NA) 
+
+yield_table_av_other <- rbind(yield_table_av_other,
+                                yield_table_av_other_yr2, 
+                                yield_table_av_other_yr3, 
+                                yield_table_av_other_yr4)
+
+#### now I can join the unmodified and modfied yield togther
+str(yield_table_av_other)
+str(yield_table_av_control)
+#drop a few clms 
+yield_table_av_control <- yield_table_av_control %>% 
+  dplyr::select(site, yr_post_amelioration, `yield  (un modified)`)
+  
+yield_table_av <- left_join(yield_table_av_other, yield_table_av_control, 
+                  by = c("site", "yr_post_amelioration"))
+
+## add in the price and data source clms # i have got these numbers from pinion decile 5 price
+unique(yield_table_av$crop)
+yield_table_av <- yield_table_av %>% 
+  dplyr:: mutate(`data source` = "trial data",
+                 price = case_when(
+                   crop == "wheat" ~ 283,
+                   crop == "barley" ~ 223,
+                   crop == "canola" ~ 545,
+                   crop == "chickpea" ~ 1020,
+                   crop == "lentil" ~ 580,
+                   crop == "lupin" ~ 260,
+                   crop == "beans" ~ 440, # Faba beans
+                   crop == NA ~ 0))
+#tidy up the mess!
+rm(yield_table,yield_table_av_control, 
+   yield_table_av_control_yr2, 
+   yield_table_av_control_yr3, 
+   yield_table_av_control_yr4,
+   yield_table_av_other,
+   yield_table_av_other_yr2,
+   yield_table_av_other_yr3,
+   yield_table_av_other_yr4,
+   add_row_Telopea_Downs)
+
+## lets just keep the ripping data
+
+yield_table_av <- yield_table_av %>% 
+  filter(modification == "deep ripping")
+
+
+## we have a problem with what to average?
+#average the yield results per grouping for each site year post amelioration 
+str(yield_table_av)
+yield_table_av <- yield_table_av %>%
+  group_by(site,
+           year,
+           crop,
+           grouping,
+           modification,
+           yr_post_amelioration,
+           `data source`,
+           price) %>%
+  summarise(
+    `yield (modified)` =     mean(`yield (modified)`,     na.rm = TRUE),
+    `yield  (un modified)` = mean(`yield  (un modified)`, na.rm = TRUE)
+  )
+
+
+ 
+yield_table_av$`yield (modified)`[is.nan(yield_table_av$`yield (modified)`)] <- NA
+yield_table_av$`yield  (un modified)`[is.nan(yield_table_av$`yield  (un modified)`)] <- NA
+
+
+write.csv(yield_table_av,"X:/Therese_Jackie/Sandy_soils/App_development2021/sandy_soil_tools_app/App_working/data/yield_table_av.csv")
