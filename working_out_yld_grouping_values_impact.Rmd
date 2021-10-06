@@ -33,7 +33,7 @@ Data is sourced from what is on teams page and I am using the impact primary dat
 
 ```{r pre processing, include=FALSE}
 
-trial_results <- read_csv("X:/Therese_Jackie/Sandy_soils/App_development2021/sandy_soil_tools_app/App_working/data/primary_data.csv")
+trial_results <- read_csv("X:/Therese_Jackie/Sandy_soils/App_development2021/sandy_soil_tools_app/App_working/data/primary_data_all.csv")
 
 
 

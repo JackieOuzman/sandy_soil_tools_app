@@ -32,33 +32,62 @@ site_info <- site_info %>%
 
 
 ######################################################################################################
+#####       bring in the data the app will use - for the trial results plots   #######################
+######################################################################################################
+trial_results <- read_csv("X:/Therese_Jackie/Sandy_soils/App_development2021/sandy_soil_tools_app/App_working/data/primary_data_all.csv")
+### arrange the data so the order reflect level of intervension
+
+
+order <- c(
+  "Control" ,
+  "Unmodified_Cl.surface" ,
+  "Rip.30_none",
+  "Rip.30_Fert.surface",
+  "Rip.30IncRip_none" ,
+  "Rip.30IncRip_gypsum.mix",
+  
+  "Rip.35_none",
+  
+  "Rip.40_none"  ,
+  "Rip.40IncRip_none"    ,
+  "Rip.40IncRip_Lc.mix"  ,
+  
+  "Rip.45_none" ,
+  "Rip.45IncRip_none"   ,
+  "Rip.45IncRip_Fert.deep",
+  "Rip.45IncRip+Spade.30_none",
+  "Rip.45IncRip_Fert.mix" ,
+  
+  "Rip.50_none",
+  "Rip.50_Cl.surface" ,
+  "Rip.50_Cl.deep",
+  "Rip.50IncRip_none" ,
+  "Rip.50IncRip_Cl.mix"  ,
+  
+  "Rip.60_none" ,
+  "Rip.60IncRip_none" ,
+  "Rip.60IncRip+Spade.30_none",
+  "Rip.60Spade.30_none" ,
+  
+  "Spade.30_none"   ,
+  "Spade.30_gypsum.mix" ,
+  "Spade.30_Cl.mix"  ,
+  "Spade.30_Cl.gypsum.mix" ,
+  "Spade.30_Fert.mix" ,
+  "Spade.30_clay@250"   ,
+  "Spade.30_clay@500",
+  
+  "DiscInv.30_none"    
+  
+)
+
+trial_results$Descriptors <- factor(trial_results$Descriptors, 
+                                    levels = order)
+
+
+######################################################################################################
 ##### bring in the data the app will use  for the economics page     #################################
 ######################################################################################################
-#old working dataset
- # df <- read_excel("C:/Users/ouz001/working_from_home/ripper/2020/malcom_framework.xlsx", 
- #                  sheet = "DT_selection")
- 
- #df_info <- read_excel("C:/Users/ouz001/working_from_home/ripper/2020/malcom_framework.xlsx", 
- #                      sheet = "DT_selection")
-
-
-
- # cost_table <- read_excel("C:/Users/ouz001/working_from_home/ripper/2020/malcom_framework.xlsx", 
- #                          sheet = "DT_cost")
- # 
- # 
- # yld_table <- read_excel("C:/Users/ouz001/working_from_home/ripper/2020/malcom_framework.xlsx", 
- #                         sheet = "DT_yld")
- # 
- # 
- # extra_table <- read_excel("C:/Users/ouz001/working_from_home/ripper/2020/malcom_framework.xlsx", 
- #                           sheet = "DT_extra_cost_benefits")
- # 
- # 
- # extra_table <- extra_table %>% 
- #   mutate(year = paste0("year ", year)) %>% 
- #   pivot_wider(names_from = year, values_from = value) %>% 
- #   relocate(c(comments,`data source`), .after = last_col()) 
 
 
 #New working dataset

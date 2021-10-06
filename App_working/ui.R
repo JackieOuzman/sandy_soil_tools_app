@@ -66,16 +66,41 @@ library(shinyWidgets)
                               leafletOutput("map"),
                              
                              # table 
-                             tableOutput('tim')
+                             tableOutput('tim'),
                              
+                             fluidRow(column(
+                               width = 6,
+                               selectInput(
+                                 "site_selection",
+                                 label = h3("select site:"),
+                                 choices = list(
+                                   "Kooloonong_chickpea",
+                                   "Kooloonong_lentil" ,
+                                   "Kooloonong_lupin"  ,
+                                   "Tempy"     ,
+                                   "Wynarka"    ,
+                                   "Monia_Gap"  ,
+                                   "Malinong" ,
+                                   "Sherwood"  ,
+                                   "Cummins"  ,
+                                   "Karkoo" ,
+                                   "Buckleboo"   ,
+                                   "Mt_Damper" ,
+                                   "Kybunga"  ,
+                                   "Warnertown"  ,
+                                   "Telopea_Downs"
+                                 ),
+                                 selected = "Tempy"
+                               )
+                             )),
                     ), #tabPanel1 bracket
-
+ 
 
 #########################################################################################################
 ###############                       tab 2                           #################################
 #########################################################################################################                 
 tabPanel("comparision with trial", #tab title page
-         
+             
          
   
 ############################################################################################################
