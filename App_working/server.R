@@ -710,20 +710,20 @@ server <- shinyServer(function(input, output, session) {
    })
 
 
-  output$tim <- renderTable({
-    click <- input$map_marker_click
-    if (is.null(click))
-      return()
-    temp <- site_info %>% filter(longitude == click$lng) %>%
-
-      select( "site",
-              `Trial run` = "all_trial",
-              `Year implemented` ="Amelioration_Year" ,
-              `Met station details` ="met_station_number" ) 
-    
-
-    print(temp)
-  })
+  # output$tim <- renderTable({
+  #   click <- input$map_marker_click
+  #   if (is.null(click))
+  #     return()
+  #   temp <- site_info %>% filter(longitude == click$lng) %>%
+  # 
+  #     select( "site",
+  #             `Trial run` = "all_trial",
+  #             `Year implemented` ="Amelioration_Year" ,
+  #             `Met station details` ="met_station_number" ) 
+  #   
+  # 
+  #   print(temp)
+  # })
 
   ############################################################################################################################################################
   ############################                    the landing page                      ###############################################################################

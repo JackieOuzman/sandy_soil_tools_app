@@ -66,7 +66,7 @@ library(shinyWidgets)
                               leafletOutput("map"),
                              
                              # table 
-                             tableOutput('tim'),
+                             #tableOutput('tim'),
                              
                              fluidRow(column(
                                width = 6,
