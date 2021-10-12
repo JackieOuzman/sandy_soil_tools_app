@@ -294,7 +294,9 @@ server <- shinyServer(function(input, output, session) {
 
     
     
-    DT::datatable(  trial_results_table_1_test) %>% 
+    DT::datatable(  trial_results_table_1_test, 
+                    options = list(dom = 't'),#removes the search bar
+                    caption = 'Table 1: Yield response t/ha.') %>% 
       formatRound(c(6:8), 2)
     
   })
