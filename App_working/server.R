@@ -4,6 +4,7 @@ require(rhandsontable)
 require(htmltools)
 require(leaflet)
 require(slickR)
+library(DT)
 
 
 ######################################################################################################
@@ -220,7 +221,7 @@ df_info <- df_info %>%
 server <- shinyServer(function(input, output, session) {
 
 ######################################################################################################
-################     function for filtering the data - and creating a plot  ##########################
+########    function for filtering the data - and creating a plot on the map page     ################
 ###################################################################################################### 
   output$trial_plot <- renderPlot({
   
@@ -280,8 +281,8 @@ server <- shinyServer(function(input, output, session) {
 ########     function for filtering the data - and creating a table of grouped data  ##################### 
   
   #table trial data  
-  output$trial_table <- renderTable({
-    
+  #output$trial_table <- renderTable({
+    output$trial_table <- DT::renderDataTable({
     
     trial_results_table_1 <-filter(trial_results_table, 
                                    site == input$site_selection ) %>% 
@@ -709,7 +710,7 @@ server <- shinyServer(function(input, output, session) {
        addMarkers(data = site_info, popup=site_info$label, layerId = site_info$site )
    })
 
-
+  #this was a table that I had which was on map page its now removed (only hashed out)
   # output$tim <- renderTable({
   #   click <- input$map_marker_click
   #   if (is.null(click))

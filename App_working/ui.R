@@ -66,7 +66,7 @@ library(shinyWidgets)
                               leafletOutput("map"),
                              
                              # table 
-                             #tableOutput('tim'),
+                             #tableOutput('tim'), #this was a table that I had which was on map page its now removed (only hashed out)
                              
                              fluidRow(column(
                                width = 6,
@@ -93,7 +93,8 @@ library(shinyWidgets)
                                  selected = "Tempy"
                                ),
                                plotOutput("trial_plot"),
-                               tableOutput("trial_table")
+                               DT::dataTableOutput("trial_table")
+                               #tableOutput("trial_table")
                              )),
                              
                              
