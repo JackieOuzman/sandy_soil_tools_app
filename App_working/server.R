@@ -283,23 +283,19 @@ server <- shinyServer(function(input, output, session) {
   #table trial data  
     output$trial_table <- DT::renderDataTable({
     
-    # trial_results_table_1 <-filter(trial_results_table, 
-    #                                site == input$site_selection ) %>% 
-    #   dplyr::select(-price, -`data source`) %>% 
-    #   dplyr::filter(!is.na(crop))
-    # trial_results_table_1
-    # 
+    
     trial_results_table_1_test <-filter(trial_results_table_test,
                                         site == input$site_selection ) %>%
                                         dplyr::select(-price, -`data source`, -modification) %>%
       dplyr::rename(`aggregated trial` = grouping,
                     `yr post amelioration` = yr_post_amelioration) %>%
-      dplyr::filter(!is.na(crop))
+      dplyr::filter(!is.na(crop))%>% 
+      dplyr::mutate(`yield gain` = `yield (modified)` - `yield  (un modified)`)
 
     
     
     DT::datatable(  trial_results_table_1_test) %>% 
-      formatRound(c(6:7), 2)
+      formatRound(c(6:8), 2)
     
   })
   
