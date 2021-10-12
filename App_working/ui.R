@@ -94,8 +94,7 @@ library(shinyWidgets)
                                ),
                                plotOutput("trial_plot"),
                                DT::dataTableOutput("trial_table")
-                               #tableOutput("trial_table")
-                             )),
+                               )),
                              
                              
                              
