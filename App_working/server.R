@@ -347,9 +347,9 @@ server <- shinyServer(function(input, output, session) {
   
   
   shinyalert(
-    title = "What the name of your farm / analysis?", 
+    title = "This app is under development", 
     type = "input",
-    #text = "This ia draft app",
+    text = "What the name of your farm / analysis?",
     size = "s", 
     closeOnEsc = TRUE,
     closeOnClickOutside = FALSE,

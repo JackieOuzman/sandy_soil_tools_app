@@ -39,7 +39,7 @@ library(shinyWidgets)
                      
                      
                      tabPanel("landing page", #tab title pageleafletOutput("map"),
-                              h6("Welcome") ,      
+                              #h6("Welcome") ,      
                               
                                 slickROutput("slickr", # this scroll throughs multiple images
                                              height = 100,
