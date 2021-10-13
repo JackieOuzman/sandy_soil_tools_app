@@ -30,6 +30,8 @@ site_info <- site_info %>%
 
 site_info <- site_info %>% 
   mutate( label = paste(sep = "<br/>",site_label, non_wetting_label,acidic_label, physical_label ))
+# this label is what is displyed in the popup on the map br mean that there is a new line between each label.
+# this is a bit tricky so prior the the label on the popup is the label for each soil property (eg non_wetting_label)
 
 
 ######################################################################################################
@@ -736,6 +738,15 @@ server <- shinyServer(function(input, output, session) {
   #   print(temp)
   # })
 
+  observeEvent(input$codes, {
+    # Show a modal when the button is pressed
+    shinyalert("ummm", 
+               HTML("This is the first line. 
+      This should be the second.
+       Third line
+       etc..."))
+  })
+  
   ############################################################################################################################################################
   ############################                    the landing page                      ###############################################################################
   ############################################################################################################################################################

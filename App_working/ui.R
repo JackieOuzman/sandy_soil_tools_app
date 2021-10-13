@@ -93,7 +93,9 @@ library(shinyWidgets)
                                  selected = "Tempy"
                                ),
                                plotOutput("trial_plot"),
-                               DT::dataTableOutput("trial_table")
+                               DT::dataTableOutput("trial_table"),
+                               actionButton("codes", "More information on trial names"),
+                               #actionButton("codes", "More information on trial names"))
                                )),
                              
                              
