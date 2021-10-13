@@ -14,6 +14,9 @@ library(DT)
 ## bring in the data and do formatting
 
 directory <- "C:/Users/ouz001/working_from_home/app_development2021/sandy_soil_tools_app/App_working/"
+
+
+
 site_info <- read.csv(file = paste0(directory, "data/site_location_plus_info.csv"))
 
 #remove sites with no coods
@@ -98,7 +101,7 @@ trial_results$Descriptors <- factor(trial_results$Descriptors,
 file = 
 trial_results_table <- read_csv(paste0(directory, "data/yield_table_av_all.csv"))
 
-#trial_results_table <- read_csv("X:/Therese_Jackie/Sandy_soils/App_development2021/sandy_soil_tools_app/App_working/data/yield_table_av_all.csv")
+
 
 ######################################################################################################
 ##### bring in the data the app will use  for the economics page     #################################
@@ -108,8 +111,7 @@ trial_results_table <- read_csv(paste0(directory, "data/yield_table_av_all.csv")
 #New working dataset
 
 df <- read.csv(file = paste0(directory, "data/", "primary_data.csv"))
-# df <- read.csv(file = paste0("X:/Therese_Jackie/Sandy_soils/App_development2021/sandy_soil_tools_app/App_working/data/",
-#                                "primary_data.csv"))
+
 df <- df %>%
   dplyr::select(grouping,
                 modification,
@@ -133,7 +135,7 @@ df_info <- df
 
 
 cost_table <- read.csv(paste0(directory, "data/cost_table.csv"))
-#cost_table <- read.csv("X:/Therese_Jackie/Sandy_soils/App_development2021/sandy_soil_tools_app/App_working/data/cost_table.csv")
+
 cost_table <- cost_table %>% rename(`data source` = "data.source")
 cost_table$grouping <- as.character(cost_table$grouping)
 cost_table$modification <- as.character(cost_table$modification)
@@ -142,7 +144,7 @@ cost_table$activity <- as.character(cost_table$activity)
 cost_table$`data source` <- as.character(cost_table$`data source`)
 
 extra_table <- read.csv(paste0(directory, "data/extra_table.csv"))
-#extra_table <- read.csv("X:/Therese_Jackie/Sandy_soils/App_development2021/sandy_soil_tools_app/App_working/data/extra_table.csv")
+
 #names(extra_table)
 extra_table <- extra_table %>% rename(`data source` = "data.source")
 
@@ -166,7 +168,7 @@ extra_table$`data source` <- as.character(extra_table$`data source`)
 #yld_table
 
 yld_table <- read.csv(paste0(directory, "data/yield_table_av.csv"))
-#yld_table <- read.csv("X:/Therese_Jackie/Sandy_soils/App_development2021/sandy_soil_tools_app/App_working/data/yield_table_av.csv")
+
 
 yld_table <- yld_table %>% rename(
   "yield_unmodified" = 'yield...un.modified.',
