@@ -414,8 +414,8 @@ trial_results <- trial_results %>%
     
     
     Descriptors == "Rip.45IncRip+Spade.30_none" ~ "inclusion ripping + spading no amendment",
-    Descriptors == "Rip.50Spade.30_none" ~        "inclusion ripping + spading no amendment",
-    Descriptors == "Rip.60Spade.30_none" ~        "inclusion ripping + spading no amendment",
+    Descriptors == "Rip.50Spade.30_none" ~        "deep ripping + spading no amendment",
+    Descriptors == "Rip.60Spade.30_none" ~        "deep ripping + spading no amendment",
     Descriptors == "Rip.60IncRip+Spade.30_none" ~        "inclusion ripping + spading no amendment",
     
     

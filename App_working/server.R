@@ -286,7 +286,7 @@ server <- shinyServer(function(input, output, session) {
     output$trial_table <- DT::renderDataTable({
     
     
-    trial_results_table_1_test <-filter(trial_results_table_test,
+    trial_results_table_1 <-filter(trial_results_table,
                                         site == input$site_selection ) %>%
                                         dplyr::select(-price, -`data source`, -modification) %>%
       dplyr::rename(`aggregated trial` = grouping,
@@ -296,7 +296,7 @@ server <- shinyServer(function(input, output, session) {
 
     
     
-    DT::datatable(  trial_results_table_1_test, 
+    DT::datatable(  trial_results_table_1, 
                     options = list(dom = 't'),#removes the search bar
                     caption = 'Table 1: Yield response t/ha.') %>% 
       formatRound(c(6:8), 2)
@@ -738,14 +738,7 @@ server <- shinyServer(function(input, output, session) {
   #   print(temp)
   # })
 
-  observeEvent(input$codes, {
-    # Show a modal when the button is pressed
-    shinyalert("ummm", 
-               HTML("This is the first line. 
-      This should be the second.
-       Third line
-       etc..."))
-  })
+ 
   
   ############################################################################################################################################################
   ############################                    the landing page                      ###############################################################################

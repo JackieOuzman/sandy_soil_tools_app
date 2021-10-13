@@ -94,8 +94,9 @@ library(shinyWidgets)
                                ),
                                plotOutput("trial_plot"),
                                DT::dataTableOutput("trial_table"),
-                               actionButton("codes", "More information on trial names"),
-                               #actionButton("codes", "More information on trial names"))
+                               tags$a(href="shorthand trial name.pdf", ## this documnet need to sit inside the app directory in a folder called www
+                                      "click here for more info on trail names" 
+                               ),
                                )),
                              
                              
