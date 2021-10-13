@@ -670,9 +670,25 @@ server <- shinyServer(function(input, output, session) {
   
   
   
-  observeEvent(input$saveBtn, write.csv(hot_to_r(input$cost),
-                                        file = "test.csv",
-                                        row.names = FALSE))
+  
+  
+  # Reactive value for GM dataset download----## something wrong with this code its not selecting the correct df
+  datasetInput_jackie <- reactive({
+    as.data.frame(reactive_economics())
+    #site_info
+
+  })
+  
+  # Downloadable csv of GM dataset dowload----
+  output$downloadData <- downloadHandler(
+    filename = function() {
+      paste(input$dataset, ".csv", sep = "")
+    },
+    content = function(file) {
+      #write.csv(datasetInput_jackie(), file, row.names = FALSE)
+      write.csv(reactive_economics(), file, row.names = FALSE)
+    }
+  )
   
   
   #this is the plot 
@@ -746,12 +762,12 @@ server <- shinyServer(function(input, output, session) {
 
   
    output$slickr <- renderSlickR({
-     imgs <- list.files("X:/Therese_Jackie/Sandy_soils/App_development2021/sandy_soil_tools_app/app_modification/www", pattern=".jpg", full.names = TRUE)  
-     
+     imgs <- list.files("X:/Therese_Jackie/Sandy_soils/App_development2021/sandy_soil_tools_app/App_working/www", pattern=".jpg", full.names = TRUE)
+
      
      slickR(imgs)
    })
-   
+
   
   
 }) 

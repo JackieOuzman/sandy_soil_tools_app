@@ -41,14 +41,16 @@ library(shinyWidgets)
                      tabPanel("landing page", #tab title pageleafletOutput("map"),
                               h6("Welcome") ,      
                               
-                               slickROutput("slickr",
-                                            height = 100,
-                                            width="95%" 
-                                            )
+                                slickROutput("slickr", # this scroll throughs multiple images
+                                             height = 100,
+                                             width="95%" 
+                                             )
                                
                               #I think I need to resize my images first and then try and load thme in
                               
-                              #tags$img(src = "LRQHE5309.jpg", height = 50, width =50) # this is old code with one image loaded
+                              # tags$img(src = "flow_chart_soil_constraints.jpg", 
+                              #          #height = 50, width =50
+                              #          #) # this is old code with one image loaded
                               
                               
                               
@@ -209,13 +211,10 @@ tabPanel("comparision with trial", #tab title page
     ),#fluid row bracket 11
     
     ############################################################################################################
-    ##############################            action buttons         ###########################################
+    ##############################            save data buttons         ###########################################
     ############################################################################################################
-    
-    
-    fluidRow(
-      column(width=6,actionButton("saveBtn", "Save")) 
-    )#fluid row bracket 12
+      fluidRow(downloadButton("download GM",
+                        label = "Download GM table"))#fluid row bracket 12
     
     ############################################################################################################
     ##############################            end of UI              ###########################################
