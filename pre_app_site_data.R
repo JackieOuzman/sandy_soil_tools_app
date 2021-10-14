@@ -398,38 +398,38 @@ trial_results <- trial_results %>%
     
     #Rip of soil deep and no amendment 
     
-    Descriptors == "Rip.30_none" ~        "deep ripping no amendment",
-    Descriptors == "Rip.35_none" ~        "deep ripping no amendment",
-    Descriptors == "Rip.40_none" ~        "deep ripping no amendment",
-    Descriptors == "Rip.45_none" ~         "deep ripping no amendment",
-    Descriptors == "Rip.50_none" ~        "deep ripping no amendment",
-    Descriptors == "Rip.60_none" ~        "deep ripping no amendment",
+    Descriptors == "Rip.30_none" ~        "deep ripping < 40cm no amendment",
+    Descriptors == "Rip.35_none" ~        "deep ripping < 40cm no amendment",
+    Descriptors == "Rip.40_none" ~        "deep ripping < 40cm no amendment",
+    Descriptors == "Rip.45_none" ~         "deep ripping > 40cm no amendment",
+    Descriptors == "Rip.50_none" ~        "deep ripping > 40cm no amendment",
+    Descriptors == "Rip.60_none" ~        "deep ripping > 40cm no amendment",
     
     
-    Descriptors == "Rip.30IncRip_none" ~    "inclusion ripping no amendment",
-    Descriptors == "Rip.40IncRip_none" ~     "inclusion ripping no amendment",
-    Descriptors == "Rip.45IncRip_none" ~    "inclusion ripping no amendment",
-    Descriptors == "Rip.50IncRip_none" ~    "inclusion ripping no amendment",
-    Descriptors == "Rip.60IncRip_none" ~    "inclusion ripping no amendment",
+    Descriptors == "Rip.30IncRip_none" ~    "inclusion ripping < 40cm no amendment",
+    Descriptors == "Rip.40IncRip_none" ~     "inclusion ripping < 40cm no amendment",
+    Descriptors == "Rip.45IncRip_none" ~    "inclusion ripping > 40cm no amendment",
+    Descriptors == "Rip.50IncRip_none" ~    "inclusion ripping > 40cm no amendment",
+    Descriptors == "Rip.60IncRip_none" ~    "inclusion ripping > 40cm no amendment",
     
     
-    Descriptors == "Rip.45IncRip+Spade.30_none" ~ "inclusion ripping + spading no amendment",
-    Descriptors == "Rip.50Spade.30_none" ~        "deep ripping + spading no amendment",
-    Descriptors == "Rip.60Spade.30_none" ~        "deep ripping + spading no amendment",
-    Descriptors == "Rip.60IncRip+Spade.30_none" ~        "inclusion ripping + spading no amendment",
+    Descriptors == "Rip.45IncRip+Spade.30_none" ~ "inclusion ripping + spading > 40cm no amendment",
+    Descriptors == "Rip.50Spade.30_none" ~        "deep ripping + spading > 40cm no amendment",
+    Descriptors == "Rip.60Spade.30_none" ~        "deep ripping + spading > 40cm no amendment",
+    Descriptors == "Rip.60IncRip+Spade.30_none" ~        "inclusion ripping + spading > 40cm no amendment",
     
     
     #Rip of soil deep and amendment applied 
-    Descriptors == "Rip.30_Fert.surface" ~     "deep ripping amendment",
-    Descriptors == "Rip.50_Cl.surface" ~       "deep ripping amendment",
-    Descriptors == "Rip.50_Cl.deep" ~          "deep ripping amendment",
+    Descriptors == "Rip.30_Fert.surface" ~     "deep ripping < 40cm amendment",
+    Descriptors == "Rip.50_Cl.surface" ~       "deep ripping > 40cm amendment",
+    Descriptors == "Rip.50_Cl.deep" ~          "deep ripping > 40cm amendment",
     
     
-    Descriptors == "Rip.30IncRip_gypsum.mix" ~       "inclusion ripping amendment",
-    Descriptors == "Rip.40IncRip_Lc.mix" ~           "inclusion ripping amendment",
-    Descriptors == "Rip.45IncRip_Fert.deep" ~        "inclusion ripping amendment",
-    Descriptors == "Rip.45IncRip_Fert.mix" ~         "inclusion ripping amendment",
-    Descriptors == "Rip.50IncRip_Cl.mix" ~           "inclusion ripping amendment",
+    Descriptors == "Rip.30IncRip_gypsum.mix" ~       "inclusion ripping > 40cm amendment",
+    Descriptors == "Rip.40IncRip_Lc.mix" ~           "inclusion ripping > 40cm amendment",
+    Descriptors == "Rip.45IncRip_Fert.deep" ~        "inclusion ripping < 40cm amendment",
+    Descriptors == "Rip.45IncRip_Fert.mix" ~         "inclusion ripping < 40cm amendment",
+    Descriptors == "Rip.50IncRip_Cl.mix" ~           "inclusion ripping < 40cm amendment",
     
     
     #Spade of soil  and no amendment 
@@ -456,11 +456,17 @@ unique(trial_results$grouping)
 trial_results <- trial_results %>% 
   mutate(modification = case_when(
     grouping == "amendment only" ~ "no modification",
-    grouping == "deep ripping no amendment" ~ "deep ripping",
-    grouping == "deep ripping amendment" ~ "deep ripping",
-    grouping == "inclusion ripping no amendment" ~ "inclusion ripping",
-    grouping == "inclusion ripping amendment" ~ "inclusion ripping",
-    grouping == "inclusion ripping + spading no amendment" ~ "inclusion ripping + spading",
+    grouping == "deep ripping < 40cm no amendment" ~ "deep ripping",
+    
+    grouping == "deep ripping > 40cm no amendment" ~ "deep ripping",
+    grouping == "deep ripping > 40cm amendment" ~ "deep ripping",
+    grouping == "inclusion ripping > 40cm no amendment"   ~ "inclusion ripping",
+    grouping ==  "inclusion ripping < 40cm amendment"   ~ "inclusion ripping",
+    grouping ==  "inclusion ripping < 40cm no amendment"     ~ "inclusion ripping",
+    grouping ==  "inclusion ripping > 40cm amendment"  ~ "inclusion ripping",
+   
+    grouping == "inclusion ripping < 40cm amendment" ~ "inclusion ripping",
+    grouping == "inclusion ripping + spading > 40cm no amendment" ~ "inclusion ripping + spading",
     grouping == "rotary spading no amendment" ~ "rotary spading",
     grouping == "rotary spading amendment" ~ "rotary spading",
     grouping == "disc inversion no amendment" ~ "disc inversion",  
@@ -468,6 +474,9 @@ trial_results <- trial_results %>%
     
     TRUE ~ "check")
   ) 
+
+   
+
 
 
 ######## class of constraint #######              
@@ -630,18 +639,46 @@ cost_table <- trial_results %>%
 ## make some new clms for the cost csv file, these values will need to be changed
 cost_table <- cost_table %>%
   dplyr::mutate(
-    "operating ($/ha)" = 	72,
+    "operating ($/ha)" = 	100,
     "machinery($/ha)"	= 18,
     "labour ($/ha)"	= 16,
-    "additional options ($/ha)"	= 10,
+    "additional options ($/ha)"	= 30,
+    "amendment cost ($/ha)" = 180,
     "data source"	= "guess",
     "comments" = NA
   )
+
+unique(cost_table$grouping)
+
+cost_table <- cost_table %>%
+  dplyr::mutate(
+    `operating ($/ha)`= case_when(
+     grouping == "deep ripping > 40cm no amendment" ~ 100,
+     grouping == "deep ripping < 40cm no amendment" ~ 72,
+     
+     grouping == "deep ripping > 40cm amendment" ~ 100,
+     grouping == "deep ripping < 40cm amendment" ~ 100,
+     TRUE                      ~ `operating ($/ha)`))
+
 cost_table <- cost_table %>%
   dplyr::mutate(
     `additional options ($/ha)`= case_when(
-     grouping == "deep ripping amendment" ~ 15,
-     TRUE                      ~ `additional options ($/ha)`))
+      grouping == "deep ripping > 40cm no amendment" ~ 30,
+      grouping == "deep ripping < 40cm no amendment" ~ 15,
+      
+      grouping == "deep ripping > 40cm amendment" ~ 30,
+      grouping == "deep ripping < 40cm amendment" ~ 15,
+      TRUE                      ~ `additional options ($/ha)`))
+
+cost_table <- cost_table %>%
+  dplyr::mutate(
+    `amendment cost ($/ha)`= case_when(
+      grouping == "deep ripping > 40cm no amendment" ~ 0,
+      grouping == "deep ripping < 40cm no amendment" ~ 0,
+      
+      grouping == "deep ripping > 40cm amendment" ~ 180,
+      grouping == "deep ripping < 40cm amendment" ~ 180,
+      TRUE                      ~ `amendment cost ($/ha)`))
 
 ### only keep the deep ripping sites
 unique(cost_table$grouping)
@@ -656,12 +693,13 @@ cost_table <- cost_table %>%
                 "machinery($/ha)",
                 "labour ($/ha)" ,
                 "additional options ($/ha)",
+                "amendment cost ($/ha)",
                 "comments" ,
                 "data source")
 
 
 cost_table <- cost_table %>% 
-  pivot_longer(cols = c("operating ($/ha)", "machinery($/ha)", "labour ($/ha)" ,  "additional options ($/ha)"),
+  pivot_longer(cols = c("operating ($/ha)", "machinery($/ha)", "labour ($/ha)" ,  "additional options ($/ha)","amendment cost ($/ha)"),
                names_to = "activity",
                values_to = "price")
 
@@ -934,3 +972,4 @@ yield_table_av_all$`yield  (un modified)`[is.nan(yield_table_av_all$`yield  (un 
 
 write.csv(yield_table_av,"X:/Therese_Jackie/Sandy_soils/App_development2021/sandy_soil_tools_app/App_working/data/yield_table_av.csv", row.names = FALSE)
 write.csv(yield_table_av_all,"X:/Therese_Jackie/Sandy_soils/App_development2021/sandy_soil_tools_app/App_working/data/yield_table_av_all.csv", row.names = FALSE)
+
