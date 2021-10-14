@@ -775,12 +775,12 @@ server <- shinyServer(function(input, output, session) {
   ############################################################################################################################################################
 
   
-   output$slickr <- renderSlickR({
-     imgs <- list.files("X:/Therese_Jackie/Sandy_soils/App_development2021/sandy_soil_tools_app/App_working/www", pattern=".jpg", full.names = TRUE)
-
-     
-     slickR(imgs)
-   })
+   # output$slickr <- renderSlickR({
+   #   imgs <- list.files("X:/Therese_Jackie/Sandy_soils/App_development2021/sandy_soil_tools_app/App_working/www", pattern=".jpg", full.names = TRUE)
+   # 
+   #   
+   #   slickR(imgs)
+   # })
 
   
   

@@ -39,23 +39,48 @@ library(shinyWidgets)
                      
                      
                      tabPanel("landing page", #tab title pageleafletOutput("map"),
-                              #h6("Welcome") ,      
+                              fluidPage( 
+                              fluidRow(
+                                box(
+                                  title = "Water repellency", width = 2, solidHeader = TRUE, status = "primary",
+                                  
+                                  tags$a(href="Water_repllency.jpg", ## this documnet need to sit inside the app directory in a folder called www
+                                         "1click here for more info on water repllency" )
+                                ), #box water repellency
+                                
+                                
+                                box(
+                                  title = "Waterlogging", width = 2, solidHeader = TRUE, status = "primary",
+                                  tags$a(href="Waterlogging.jpg", ## this documnet need to sit inside the app directory in a folder called www
+                                         "click here for more info on waterlogging" )
+                                ), #box Waterlogging
+                                box(
+                                  title = "Acid", width = 2, solidHeader = TRUE, status = "primary",
+                                  tags$a(href="acidity.jpg", ## this documnet need to sit inside the app directory in a folder called www
+                                         "click here for more info on acidity" )
+                                ), #box acid
+                                box(
+                                  title = "Hard setting", width = 2, solidHeader = TRUE, status = "primary",
+                                  tags$a(href="hard etting.jpg", ## this documnet need to sit inside the app directory in a folder called www
+                                         "click here for more info on hard setting" )
+                                ) #box acid
                               
-                                slickROutput("slickr", # this scroll throughs multiple images
-                                             height = 100,
-                                             width="95%" 
-                                             )
+                                ), #fluid row     
+                              
+                              hr(),
+                                
+                             
+                                
+                               tags$img(src = "flow_chart_soil_constraints.jpg") 
+                                        #height = 50, width =50
+                                        #) # this is old code with one image loaded
+                              
                                
-                              #I think I need to resize my images first and then try and load thme in
-                              
-                              # tags$img(src = "flow_chart_soil_constraints.jpg", 
-                              #          #height = 50, width =50
-                              #          #) # this is old code with one image loaded
                               
                               
                               
                      ), #tabPanel landing page bracket
-                     
+                     ) , #fluid page
                      
                      #########################################################################################################
                     
