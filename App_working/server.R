@@ -13,11 +13,10 @@ library(DT)
 
 ## bring in the data and do formatting
 
-directory <- "C:/Users/ouz001/working_from_home/app_development2021/sandy_soil_tools_app/App_working/"
 
 
 
-site_info <- read.csv(file = paste0(directory, "data/site_location_plus_info.csv"))
+site_info <- read.csv(file = "site_location_plus_info.csv")
 
 #remove sites with no coods
 site_info <- 
@@ -44,7 +43,7 @@ site_info <- site_info %>%
 ######################################################################################################
 
 
-trial_results <- read_csv(paste0(directory, "data/primary_data_all.csv"))
+trial_results <- read_csv("primary_data_all.csv")
 
 ### arrange the data so the order reflect level of intervension
 
@@ -99,7 +98,7 @@ trial_results$Descriptors <- factor(trial_results$Descriptors,
 ######## trial data #####
 
 file = 
-trial_results_table <- read_csv(paste0(directory, "data/yield_table_av_all.csv"))
+trial_results_table <- read_csv("yield_table_av_all.csv")
 
 
 
@@ -110,7 +109,7 @@ trial_results_table <- read_csv(paste0(directory, "data/yield_table_av_all.csv")
 
 #New working dataset
 
-df <- read.csv(file = paste0(directory, "data/", "primary_data.csv"))
+df <- read.csv(file = "primary_data.csv")
 
 df <- df %>%
   dplyr::select(grouping,
@@ -134,7 +133,7 @@ df$physical <- as.character(df$physical)
 df_info <- df
 
 
-cost_table <- read.csv(paste0(directory, "data/cost_table.csv"))
+cost_table <- read.csv("cost_table.csv")
 
 cost_table <- cost_table %>% rename(`data source` = "data.source")
 cost_table$grouping <- as.character(cost_table$grouping)
@@ -143,7 +142,7 @@ cost_table$site <- as.character(cost_table$site)
 cost_table$activity <- as.character(cost_table$activity)
 cost_table$`data source` <- as.character(cost_table$`data source`)
 
-extra_table <- read.csv(paste0(directory, "data/extra_table.csv"))
+extra_table <- read.csv("extra_table.csv")
 
 #names(extra_table)
 extra_table <- extra_table %>% rename(`data source` = "data.source")
@@ -167,7 +166,7 @@ extra_table$`data source` <- as.character(extra_table$`data source`)
 
 #yld_table
 
-yld_table <- read.csv(paste0(directory, "data/yield_table_av.csv"))
+yld_table <- read.csv("yield_table_av.csv")
 
 
 yld_table <- yld_table %>% rename(
@@ -752,21 +751,7 @@ server <- shinyServer(function(input, output, session) {
        addMarkers(data = site_info, popup=site_info$label, layerId = site_info$site )
    })
 
-  #this was a table that I had which was on map page its now removed (only hashed out)
-  # output$tim <- renderTable({
-  #   click <- input$map_marker_click
-  #   if (is.null(click))
-  #     return()
-  #   temp <- site_info %>% filter(longitude == click$lng) %>%
-  # 
-  #     select( "site",
-  #             `Trial run` = "all_trial",
-  #             `Year implemented` ="Amelioration_Year" ,
-  #             `Met station details` ="met_station_number" ) 
-  #   
-  # 
-  #   print(temp)
-  # })
+ 
 
  
   
@@ -775,13 +760,7 @@ server <- shinyServer(function(input, output, session) {
   ############################################################################################################################################################
 
   
-   # output$slickr <- renderSlickR({
-   #   imgs <- list.files("X:/Therese_Jackie/Sandy_soils/App_development2021/sandy_soil_tools_app/App_working/www", pattern=".jpg", full.names = TRUE)
-   # 
-   #   
-   #   slickR(imgs)
-   # })
-
+  
   
   
 }) 
