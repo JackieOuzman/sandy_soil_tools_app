@@ -42,26 +42,26 @@ library(shinyWidgets)
                               fluidPage( 
                               fluidRow(
                                 box(
-                                  title = "Water repellency", width = 2, solidHeader = TRUE, status = "primary",
+                                  title = "Water repellence", width = 2, solidHeader = TRUE, status = "primary",
                                   
-                                  tags$a(href="Water_repllency.jpg", ## this documnet need to sit inside the app directory in a folder called www
-                                         "1click here for more info on water repllency" )
+                                  tags$a(href="Water repellence.pdf", ## this documnet need to sit inside the app directory in a folder called www
+                                         "click here for more info on water repllency" )
                                 ), #box water repellency
                                 
                                 
                                 box(
                                   title = "Waterlogging", width = 2, solidHeader = TRUE, status = "primary",
-                                  tags$a(href="Waterlogging.jpg", ## this documnet need to sit inside the app directory in a folder called www
+                                  tags$a(href="Waterlogging.pdf", ## this documnet need to sit inside the app directory in a folder called www
                                          "click here for more info on waterlogging" )
                                 ), #box Waterlogging
                                 box(
                                   title = "Acid", width = 2, solidHeader = TRUE, status = "primary",
-                                  tags$a(href="acidity.jpg", ## this documnet need to sit inside the app directory in a folder called www
+                                  tags$a(href="acidity.pdf", ## this documnet need to sit inside the app directory in a folder called www
                                          "click here for more info on acidity" )
                                 ), #box acid
                                 box(
                                   title = "Hard setting", width = 2, solidHeader = TRUE, status = "primary",
-                                  tags$a(href="hard etting.jpg", ## this documnet need to sit inside the app directory in a folder called www
+                                  tags$a(href="hard setting.pdf", ## this documnet need to sit inside the app directory in a folder called www
                                          "click here for more info on hard setting" )
                                 ) #box acid
                               
