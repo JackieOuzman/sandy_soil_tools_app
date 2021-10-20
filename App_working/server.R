@@ -168,6 +168,9 @@ cost_table$site <- as.character(cost_table$site)
 cost_table$activity <- as.character(cost_table$activity)
 cost_table$`data source` <- as.character(cost_table$`data source`)
 
+cost_table <- cost_table %>%
+  dplyr::select(- comments) 
+
 extra_table <- read.csv("extra_table.csv")
 
 #names(extra_table)
@@ -351,13 +354,13 @@ server <- shinyServer(function(input, output, session) {
   ######## sc1   #######################################################################################
   
   output$data1_scen1 <- renderUI({
-    selectInput("data1_scen1", "grouping for scenario 1",
+    selectInput("data1_scen1", "Treatment for scenario 1",
                 choices = c(unique(df$grouping)),
                 selected = "deep ripping")
   })
   
   output$data1_scen2 <- renderUI({
-    selectInput("data1_scen2", "grouping for scenario 2",
+    selectInput("data1_scen2", "Treatment for scenario 2",
                 choices = c(unique(df$grouping)),
                 selected = "deep ripping")
   })
@@ -424,14 +427,16 @@ server <- shinyServer(function(input, output, session) {
     filter(cost_table, 
            grouping == input$data1_scen1  &
              site == input$data2)   %>% 
-      select(activity , price, comments, `data source`)
+      select(activity , price,  `data source`) 
+     
   })
   
   reactive_filter_cost_sc2 <- reactive({
     filter(cost_table, 
            grouping == input$data1_scen2  &
              site == input$data2)   %>% 
-      select(activity , price, comments, `data source`)
+      select(activity , price,  `data source`) 
+      
   })
   
   ########   yld table sc1 and sc2   ########
