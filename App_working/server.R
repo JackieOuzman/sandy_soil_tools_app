@@ -747,11 +747,10 @@ server <- shinyServer(function(input, output, session) {
   
   observeEvent(input$use_page, {
     # Show a modal when the button is pressed
-    shinyalert("Inital costs include", 
-               HTML("This is the first line. 
-      This should be the second.
-       Third line
-       etc..."))
+    shinyalert("How to use this page", 
+               HTML("Select site and modification that is most relevant. 
+      The tables are prefilled, 
+       but you can edit them with values that are locally relevant."))
   })
   
   observeEvent(input$yield, {
