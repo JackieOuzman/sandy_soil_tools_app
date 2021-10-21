@@ -148,7 +148,10 @@ tabPanel("comparision with trial", #tab title page
       box(
         title = "Site", width = 4, solidHeader = TRUE, status = "primary",
         
-        uiOutput("data2")
+        uiOutput("data2"),
+        
+        useShinyalert(),actionButton("use_page", "How to use this page"),
+        tags$a(href="Undiscounted cash flow.pdf", "More information on model"),
       ), #box sites
       
       
@@ -163,11 +166,7 @@ tabPanel("comparision with trial", #tab title page
       ) #box Constraint
     ),#fluid row 1
     
-fluidRow(
-  column(width=2, tags$a(href="Undiscounted cash flow.pdf", "More information on model")),
-  column(width=2,useShinyalert(),  # Set up shinyalert
-          actionButton("use_page", "How to use this page")),
-),#fluid row bracket 2
+
     
     
     fluidRow(
@@ -238,8 +237,8 @@ fluidRow(
     ############################################################################################################
     ##############################            save data buttons         ###########################################
     ############################################################################################################
-      fluidRow(downloadButton("download GM",
-                        label = "Download GM table"))#fluid row bracket 12
+      fluidRow(downloadButton("download data table",
+                        label = "Download data table"))#fluid row bracket 12
     
     ############################################################################################################
     ##############################            end of UI              ###########################################
