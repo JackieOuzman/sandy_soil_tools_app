@@ -609,7 +609,7 @@ server <- shinyServer(function(input, output, session) {
       theme_bw()+
       scale_x_continuous(limits = c(x_min, x_max), breaks = seq(0, 5, by = 1))+
       scale_y_continuous(limits = c(y_min[[1]], y_max[[1]]))+
-      xlab("Years after grouping") + ylab("$/ha") +
+      xlab("Years") + ylab("$/ha") +
       ggtitle("Undiscounted cash flow")
     
     
@@ -702,14 +702,15 @@ server <- shinyServer(function(input, output, session) {
   
   output$plot1 <- renderPlot({
     
-    ggplot(data= reactive_economics(), aes(x= year, y = undiscounted_cash_flow, colour = scenario))+
+      ggplot(data= reactive_economics(), aes(x= year, y = undiscounted_cash_flow, colour = scenario))+
       geom_line()+
       geom_hline(yintercept=0, linetype="dashed",
                  color = "black", size=0.5)+
       theme_bw()+
-      #scale_x_continuous(limits = c(x_min, x_max), breaks = seq(0, 5, by = 1))+
+      # scale_x_continuous(limits = c(min_x, 
+      #                               max_x), breaks = seq(0, 5, by = 1))+
       #scale_y_continuous(limits = c(y_min[[1]], y_max[[1]]))+
-      xlab("Years after grouping") + ylab("$/ha") +
+      xlab("Years") + ylab("$/ha") +
       ggtitle("Undiscounted cash flow")
   })
   
@@ -753,15 +754,6 @@ server <- shinyServer(function(input, output, session) {
        but you can edit them with values that are locally relevant."))
   })
   
-  # observeEvent(input$more_info, {
-  #   # Show a modal when the button is pressed
-  #   shinyalert("More info", 
-  #     #          HTML("This is the first line. 
-  #     # This should be the second.
-  #     #  Third line
-  #     #  etc...")
-  #              tags$img(src = "flow_chart_soil_constraints.jpg") )
-  # })
   
   
   
