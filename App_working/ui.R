@@ -178,7 +178,7 @@ tabPanel("comparision with trial", #tab title page
     fluidRow(
       column(width=4,h2("Cost of modification Scenario 1")),
       column(width=2,useShinyalert(),  # Set up shinyalert
-             actionButton("cost", "More information on costs")), 
+             actionButton("use_page", "How to use this page")), 
       column(width=4,h2("Cost of modification Scenario 2"))
     ),#fluid row bracket 2
     fluidRow(

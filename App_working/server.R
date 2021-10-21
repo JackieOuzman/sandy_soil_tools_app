@@ -745,7 +745,7 @@ server <- shinyServer(function(input, output, session) {
   #this is the plot 
   output$plot2 <- renderPrint({reactive_plot2()})
   
-  observeEvent(input$cost, {
+  observeEvent(input$use_page, {
     # Show a modal when the button is pressed
     shinyalert("Inital costs include", 
                HTML("This is the first line. 
