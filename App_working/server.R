@@ -224,6 +224,13 @@ yld_table <- ungroup(yld_table)
   yld_table$site <- as.character(yld_table$site)
   yld_table$crop  <- as.character(yld_table$crop )
   yld_table$`data source` <- as.character(yld_table$`data source`)
+
+  #code no trial data as such 
+yld_table <- yld_table %>% 
+    dplyr::mutate(`data source` = case_when(
+      is.na(crop) ~ "no trial data",
+      TRUE   ~ `data source`
+    ))
   
 ####################################################################################################
 ######################         create some extra row for labels              ######################
@@ -354,13 +361,13 @@ server <- shinyServer(function(input, output, session) {
   ######## sc1   #######################################################################################
   
   output$data1_scen1 <- renderUI({
-    selectInput("data1_scen1", "Treatment for scenario 1",
+    selectInput("data1_scen1", "Modification for scenario 1",
                 choices = c(unique(df$grouping)),
                 selected = "deep ripping")
   })
   
   output$data1_scen2 <- renderUI({
-    selectInput("data1_scen2", "Treatment for scenario 2",
+    selectInput("data1_scen2", "Modification for scenario 2",
                 choices = c(unique(df$grouping)),
                 selected = "deep ripping")
   })
