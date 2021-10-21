@@ -189,8 +189,7 @@ tabPanel("comparision with trial", #tab title page
     ## Yield table
     fluidRow(
       column(width=4,h2("Yield t/ha Scenario 1")),
-      column(width=2,useShinyalert(),  # Set up shinyalert
-             actionButton("yield", "More information on yield")), 
+      column(width=2, tags$a(href="Undiscounted cash flow.pdf", "More information on model")),
       column(width=4,h2("Yield t/ha Scenario 2"))
     ),#fluid row bracket 4
     fluidRow(
@@ -202,7 +201,7 @@ tabPanel("comparision with trial", #tab title page
     fluidRow(
       column(width=4,h2("Extra cost or benefits Scenario 1")),
       column(width=2,useShinyalert(),  # Set up shinyalert
-             actionButton("extra", "More information on yield")), 
+             actionButton("extra", "More information on yield")),
       column(width=4,h2("Extra cost or benefits Scenario 2"))
     ),#fluid row bracket 6
     fluidRow(

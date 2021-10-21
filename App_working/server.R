@@ -753,23 +753,17 @@ server <- shinyServer(function(input, output, session) {
        but you can edit them with values that are locally relevant."))
   })
   
-  observeEvent(input$yield, {
-    # Show a modal when the button is pressed
-    shinyalert("Inital costs include", 
-               HTML("This is the first line. 
-      This should be the second.
-       Third line
-       etc..."))
-  })
+  # observeEvent(input$more_info, {
+  #   # Show a modal when the button is pressed
+  #   shinyalert("More info", 
+  #     #          HTML("This is the first line. 
+  #     # This should be the second.
+  #     #  Third line
+  #     #  etc...")
+  #              tags$img(src = "flow_chart_soil_constraints.jpg") )
+  # })
   
-  observeEvent(input$extra, {
-    # Show a modal when the button is pressed
-    shinyalert("Inital costs include", 
-               HTML("This is the first line. 
-      This should be the second.
-       Third line
-       etc..."))
-  })
+  
   
   output$test <- renderPrint(reactive_df_info()) 
 
