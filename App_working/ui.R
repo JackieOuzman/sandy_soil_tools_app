@@ -163,7 +163,11 @@ tabPanel("comparision with trial", #tab title page
       ) #box Constraint
     ),#fluid row 1
     
-    
+fluidRow(
+  column(width=2, tags$a(href="Undiscounted cash flow.pdf", "More information on model")),
+  column(width=2,useShinyalert(),  # Set up shinyalert
+          actionButton("use_page", "How to use this page")),
+),#fluid row bracket 2
     
     
     fluidRow(
@@ -176,10 +180,10 @@ tabPanel("comparision with trial", #tab title page
     ############################################################################################################
     ## Cost table
     fluidRow(
-      column(width=4,h2("Cost of modification Scenario 1")),
-      column(width=2,useShinyalert(),  # Set up shinyalert
-             actionButton("use_page", "How to use this page")), 
-      column(width=4,h2("Cost of modification Scenario 2"))
+      column(width=6,h2("Cost of modification Scenario 1")),
+      # column(width=2,useShinyalert(),  # Set up shinyalert
+      #        actionButton("use_page", "How to use this page")), 
+      column(width=6,h2("Cost of modification Scenario 2"))
     ),#fluid row bracket 2
     fluidRow(
       column(width=6,rHandsontableOutput("cost_sc1")),
@@ -188,9 +192,8 @@ tabPanel("comparision with trial", #tab title page
     
     ## Yield table
     fluidRow(
-      column(width=4,h2("Yield t/ha Scenario 1")),
-      column(width=2, tags$a(href="Undiscounted cash flow.pdf", "More information on model")),
-      column(width=4,h2("Yield t/ha Scenario 2"))
+      column(width=6,h2("Yield t/ha Scenario 1")),
+      column(width=6,h2("Yield t/ha Scenario 2"))
     ),#fluid row bracket 4
     fluidRow(
       column(width=6,rHandsontableOutput("yld_sc1")),
@@ -199,10 +202,8 @@ tabPanel("comparision with trial", #tab title page
     
     ## Extra table
     fluidRow(
-      column(width=4,h2("Extra cost or benefits Scenario 1")),
-      column(width=2,useShinyalert(),  # Set up shinyalert
-             actionButton("extra", "More information on yield")),
-      column(width=4,h2("Extra cost or benefits Scenario 2"))
+      column(width=6,h2("Extra cost or benefits Scenario 1")),
+      column(width=6,h2("Extra cost or benefits Scenario 2"))
     ),#fluid row bracket 6
     fluidRow(
       column(width=6,rHandsontableOutput("extra_sc1")),
