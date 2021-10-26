@@ -329,7 +329,7 @@ server <- shinyServer(function(input, output, session) {
   })   
  
   
-########     function for filtering the data - and creating a table of grouped data  ##################### 
+########     function for filtering the data - and creating a table of grouped data on map page ##################### 
   
   #table trial data  
     output$trial_table <- DT::renderDataTable({
@@ -363,13 +363,13 @@ server <- shinyServer(function(input, output, session) {
   output$data1_scen1 <- renderUI({
     selectInput("data1_scen1", "Modification for scenario 1",
                 choices = c(unique(df$grouping)),
-                selected = "deep ripping")
+                selected = "deep ripping < 40cm no amendment")
   })
   
   output$data1_scen2 <- renderUI({
     selectInput("data1_scen2", "Modification for scenario 2",
                 choices = c(unique(df$grouping)),
-                selected = "deep ripping")
+                selected = "deep ripping < 40cm no amendment")
   })
   ## input dependant on the choices in `data1`
   output$data2 <- renderUI({

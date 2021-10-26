@@ -425,11 +425,11 @@ trial_results <- trial_results %>%
     Descriptors == "Rip.50_Cl.deep" ~          "deep ripping > 40cm amendment",
     
     
-    Descriptors == "Rip.30IncRip_gypsum.mix" ~       "inclusion ripping > 40cm amendment",
-    Descriptors == "Rip.40IncRip_Lc.mix" ~           "inclusion ripping > 40cm amendment",
-    Descriptors == "Rip.45IncRip_Fert.deep" ~        "inclusion ripping < 40cm amendment",
-    Descriptors == "Rip.45IncRip_Fert.mix" ~         "inclusion ripping < 40cm amendment",
-    Descriptors == "Rip.50IncRip_Cl.mix" ~           "inclusion ripping < 40cm amendment",
+    Descriptors == "Rip.30IncRip_gypsum.mix" ~       "inclusion ripping < 40cm amendment",
+    Descriptors == "Rip.40IncRip_Lc.mix" ~           "inclusion ripping < 40cm amendment",
+    Descriptors == "Rip.45IncRip_Fert.deep" ~        "inclusion ripping > 40cm amendment",
+    Descriptors == "Rip.45IncRip_Fert.mix" ~         "inclusion ripping > 40cm amendment",
+    Descriptors == "Rip.50IncRip_Cl.mix" ~           "inclusion ripping > 40cm amendment",
     
     
     #Spade of soil  and no amendment 
@@ -457,6 +457,7 @@ trial_results <- trial_results %>%
   mutate(modification = case_when(
     grouping == "amendment only" ~ "no modification",
     grouping == "deep ripping < 40cm no amendment" ~ "deep ripping",
+    grouping == "deep ripping < 40cm  amendment" ~ "deep ripping",
     
     grouping == "deep ripping > 40cm no amendment" ~ "deep ripping",
     grouping == "deep ripping > 40cm amendment" ~ "deep ripping",
