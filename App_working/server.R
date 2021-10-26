@@ -23,22 +23,23 @@ site_info <-
   filter(site_info, latitude != "NA")
 
 
-names(site_info)
+
 
 
 site_info <- site_info %>% 
   mutate(
-    non_wetting_name =  case_when(
+    non_wetting_label =  case_when(
       non_wetting  == "green"   ~    "No issue",
       non_wetting  == "orange"  ~    "Moderate issue",
       non_wetting  == "red"     ~    "Severe issue",
       TRUE                      ~    "other"
     ))
 
+
 site_info <- site_info %>% 
   mutate(
-    acidic_name =  case_when(
-      acidic  == "green"   ~    "No issue",
+    acidic_label =  case_when(
+      acidic  == "green"  ~    "No issue",
       acidic  == "orange"  ~    "Moderate issue",
       acidic  == "red"     ~    "Severe issue",
       TRUE                      ~    "other"
@@ -46,17 +47,18 @@ site_info <- site_info %>%
 
 site_info <- site_info %>% 
   mutate(
-    physical_name =  case_when(
+    physical_label =  case_when(
       physical  == "green"   ~    "No issue",
       physical  == "orange"  ~    "Moderate issue",
       physical  == "red"     ~    "Severe issue",
       TRUE                      ~    "other"
     ))
+
 site_info <- site_info %>%  
   mutate( site_label = paste0("Site = ", site),
-          non_wetting_label = paste0("non wetting score = ", non_wetting_name),
-          acidic_label = paste0("acidic score = ", acidic_name),
-          physical_label = paste0("physical score = ", physical_name))
+          non_wetting_label = paste0("non wetting score = ", non_wetting_label),
+          acidic_label = paste0("acidic score = ", acidic_label),
+          physical_label = paste0("physical score = ", physical_label))
 
 site_info <- site_info %>% 
   mutate( label = paste(sep = "<br/>",site_label, non_wetting_label,acidic_label, physical_label ))

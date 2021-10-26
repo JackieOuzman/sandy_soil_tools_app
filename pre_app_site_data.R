@@ -491,14 +491,17 @@ trial_results$Physical <- as.double(trial_results$Physical)
 
 trial_results <- trial_results %>%
   mutate(non_wetting = case_when(Repellence == 0 ~ "green",
-                                 Repellence == 1 ~ "red"))
+                                 Repellence == 1 ~ "orange",
+                                 Repellence == 2 ~ "red"))
 trial_results <- trial_results %>%
   mutate(acidic = case_when(Acidity == 0 ~ "green",
-                            Acidity == 1 ~ "red",
+                            Acidity == 1 ~ "orange",
+                            Acidity == 2 ~ "red",
                             TRUE ~ "check"))
 trial_results <- trial_results %>%
   mutate(physical = case_when(Physical == 0 ~ "green",
-                              Physical == 1 ~ "red",
+                              Physical == 1 ~ "orange",
+                              Physical == 2 ~ "red",
                               TRUE ~ "check"))
 ### for the site info df
 names(site_info)
@@ -514,14 +517,17 @@ site_info$Physical <- as.double(site_info$Physical)
 
 site_info <- site_info %>%
   mutate(non_wetting = case_when(Repellence == 0 ~ "green",
-                                 Repellence == 1 ~ "red"))
+                                 Repellence == 1 ~ "orange",
+                                 Repellence == 2 ~ "red"))
 site_info <- site_info %>%
   mutate(acidic = case_when(Acidity == 0 ~ "green",
-                            Acidity == 1 ~ "red",
+                            Acidity == 1 ~ "orange",
+                            Acidity == 2 ~ "red",
                             TRUE ~ "check"))
 site_info <- site_info %>%
   mutate(physical = case_when(Physical == 0 ~ "green",
-                              Physical == 1 ~ "red",
+                              Physical == 1 ~ "orange",
+                              Physical == 2 ~ "red",
                               TRUE ~ "check"))
 
 
