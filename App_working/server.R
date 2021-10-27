@@ -593,35 +593,7 @@ server <- shinyServer(function(input, output, session) {
   }
   
   
-  #### function for the graph  
-  #function_graph_cashflow <- function(reactive_economics ){
-    
-    # x_max <- max(reactive_economics()$year) 
-    # x_min <- 1 
-    # y_max <- filter(reactive_economics(), year != 0) %>% 
-    #   summarise(max = max(reactive_economics()))
-    # y_min <- filter(reactive_economics(), year != 0) %>% 
-    #   summarise(min = min(reactive_economics()))
-    
-    
-  #   Undiscounted_cash_flow <- 
-  #     ggplot(data= reactive_economics(), aes(x= year, y = undiscounted_cash_flow, colour = scenario))+
-  #     geom_line()+
-  #     geom_hline(yintercept=0, linetype="dashed", 
-  #                color = "black", size=0.5)+
-  #     theme_bw()+
-  #     scale_x_continuous(limits = c(x_min, x_max), breaks = seq(0, 5, by = 1))+
-  #     scale_y_continuous(limits = c(y_min[[1]], y_max[[1]]))+
-  #     xlab("Years") + ylab("$/ha") +
-  #     ggtitle("Undiscounted cash flow")
-  #   
-  #   
-  #   return(Undiscounted_cash_flow)
-  # }
   
-  
-  
- # output$plot1 <- renderPlot({function_graph_cashflow()}) #This needs to be the function
   
   
   #############################################################################################
@@ -732,11 +704,23 @@ server <- shinyServer(function(input, output, session) {
   
   
   
-  output$economic_tb1 <- renderPrint({   #this is just a check
-    reactive_economics() #this has my filtering reactive object
+  # output$economic_tb1 <- renderPrint({   #this is just a check
+  #   reactive_economics() #this has my filtering reactive object
+  # })
+  
+  output$economic_tb1 <- DT::renderDataTable({   #this is just a check
+    #dummy data
+    reactive_economics()%>% 
+      dplyr::rename(`total cost` = "total_cost"  ,
+                    `total benefit` = "total_benefit" ,
+                    `undiscounted cash flow` = "undiscounted_cash_flow" )
+    
+    DT::datatable(  reactive_economics(), 
+                    options = list(dom = 't'),#removes the search bar
+                    caption = 'Table 2: Undiscounted cash flow.') %>% 
+      formatRound(c(4:5), 2)
+    
   })
-  
-  
   
   
   

@@ -231,7 +231,8 @@ tabPanel("comparision with trial", #tab title page
     ),#fluid row bracket 10
     
     fluidRow(
-      column(width=6,verbatimTextOutput("economic_tb1")) #this is just a check
+      #column(width=6,verbatimTextOutput("economic_tb1")) #this is just a check
+      column(width=6,DT::dataTableOutput("economic_tb1")) #this is just a check
     ),#fluid row bracket 11
     
     ############################################################################################################
