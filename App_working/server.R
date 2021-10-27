@@ -706,12 +706,12 @@ server <- shinyServer(function(input, output, session) {
   output$plot1 <- renderPlot({
     
      x_max <- max(reactive_economics()$year)
-     #x_max <- 3
      x_min <- 0 
-     # y_max <- filter(reactive_economics(), year != 0) %>% 
-     #   summarise(max = max(reactive_economics()))
-     # y_min <- filter(reactive_economics(), year != 0) %>% 
-     #   summarise(min = min(reactive_economics()))
+      y_max <- filter(reactive_economics(), year != 0) %>% 
+        summarise(max = max(undiscounted_cash_flow))
+        
+      y_min <- filter(reactive_economics(), year != 0) %>% 
+        summarise(min = min(undiscounted_cash_flow))
     
     
 
@@ -722,7 +722,7 @@ server <- shinyServer(function(input, output, session) {
       theme_bw()+
        scale_x_continuous(limits = c(x_min,
                                      x_max), breaks = seq(0, 5, by = 1))+
-      #scale_y_continuous(limits = c(y_min[[1]], y_max[[1]]))+
+      scale_y_continuous(limits = c(y_min[[1]], y_max[[1]]))+
       xlab("Years") + ylab("$/ha") +
       ggtitle("Undiscounted cash flow")
   })
