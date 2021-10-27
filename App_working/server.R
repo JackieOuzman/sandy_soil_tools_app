@@ -501,6 +501,7 @@ server <- shinyServer(function(input, output, session) {
     function_graph_cashflow(reactive_economics()) 
   })
   
+ 
   
   
   #############################################################################################
@@ -593,34 +594,34 @@ server <- shinyServer(function(input, output, session) {
   
   
   #### function for the graph  
-  function_graph_cashflow <- function(economics_tbl_sc1_sc2 ){
+  #function_graph_cashflow <- function(reactive_economics ){
     
-    x_max <- max(economics_tbl_sc1_sc2$year) 
-    x_min <- 1 
-    y_max <- filter(economics_tbl_sc1_sc2, year != 0) %>% 
-      summarise(max = max(undiscounted_cash_flow))
-    y_min <- filter(economics_tbl_sc1_sc2, year != 0) %>% 
-      summarise(min = min(undiscounted_cash_flow))
-    
-    
-    Undiscounted_cash_flow <- 
-      ggplot(data= economics_tbl_sc1_sc2, aes(x= year, y = undiscounted_cash_flow, colour = scenario))+
-      geom_line()+
-      geom_hline(yintercept=0, linetype="dashed", 
-                 color = "black", size=0.5)+
-      theme_bw()+
-      scale_x_continuous(limits = c(x_min, x_max), breaks = seq(0, 5, by = 1))+
-      scale_y_continuous(limits = c(y_min[[1]], y_max[[1]]))+
-      xlab("Years") + ylab("$/ha") +
-      ggtitle("Undiscounted cash flow")
+    # x_max <- max(reactive_economics()$year) 
+    # x_min <- 1 
+    # y_max <- filter(reactive_economics(), year != 0) %>% 
+    #   summarise(max = max(reactive_economics()))
+    # y_min <- filter(reactive_economics(), year != 0) %>% 
+    #   summarise(min = min(reactive_economics()))
     
     
-    return(Undiscounted_cash_flow)
-  }
+  #   Undiscounted_cash_flow <- 
+  #     ggplot(data= reactive_economics(), aes(x= year, y = undiscounted_cash_flow, colour = scenario))+
+  #     geom_line()+
+  #     geom_hline(yintercept=0, linetype="dashed", 
+  #                color = "black", size=0.5)+
+  #     theme_bw()+
+  #     scale_x_continuous(limits = c(x_min, x_max), breaks = seq(0, 5, by = 1))+
+  #     scale_y_continuous(limits = c(y_min[[1]], y_max[[1]]))+
+  #     xlab("Years") + ylab("$/ha") +
+  #     ggtitle("Undiscounted cash flow")
+  #   
+  #   
+  #   return(Undiscounted_cash_flow)
+  # }
   
   
   
-  
+ # output$plot1 <- renderPlot({function_graph_cashflow()}) #This needs to be the function
   
   
   #############################################################################################
@@ -704,17 +705,30 @@ server <- shinyServer(function(input, output, session) {
   
   output$plot1 <- renderPlot({
     
+     x_max <- max(reactive_economics()$year)
+     #x_max <- 3
+     x_min <- 0 
+     # y_max <- filter(reactive_economics(), year != 0) %>% 
+     #   summarise(max = max(reactive_economics()))
+     # y_min <- filter(reactive_economics(), year != 0) %>% 
+     #   summarise(min = min(reactive_economics()))
+    
+    
+
       ggplot(data= reactive_economics(), aes(x= year, y = undiscounted_cash_flow, colour = scenario))+
       geom_line()+
       geom_hline(yintercept=0, linetype="dashed",
                  color = "black", size=0.5)+
       theme_bw()+
-      # scale_x_continuous(limits = c(min_x, 
-      #                               max_x), breaks = seq(0, 5, by = 1))+
+       scale_x_continuous(limits = c(x_min,
+                                     x_max), breaks = seq(0, 5, by = 1))+
       #scale_y_continuous(limits = c(y_min[[1]], y_max[[1]]))+
       xlab("Years") + ylab("$/ha") +
       ggtitle("Undiscounted cash flow")
   })
+  
+  
+  
   
   
   
