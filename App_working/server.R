@@ -704,9 +704,7 @@ server <- shinyServer(function(input, output, session) {
   
   
   
-  # output$economic_tb1 <- renderPrint({   #this is just a check
-  #   reactive_economics() #this has my filtering reactive object
-  # })
+ 
   
   output$economic_tb1 <- DT::renderDataTable({   #this is just a check
     #dummy data
@@ -718,7 +716,7 @@ server <- shinyServer(function(input, output, session) {
     DT::datatable(  reactive_economics(), 
                     options = list(dom = 't'),#removes the search bar
                     caption = 'Table 2: Undiscounted cash flow.') %>% 
-      formatRound(c(4:5), 2)
+      formatRound(c(4:5), 2) #note the index is not counted in clms
     
   })
   
