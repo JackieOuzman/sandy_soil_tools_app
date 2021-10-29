@@ -723,22 +723,16 @@ server <- shinyServer(function(input, output, session) {
   
   
   # Reactive value for GM dataset download----## something wrong with this code its not selecting the correct df
-  datasetInput_jackie <- reactive({
-    as.data.frame(reactive_economics())
-    #site_info
-
-  })
+  output$download <-  downloadHandler(
+      filename = function() {
+        paste0(input$data2, ".csv") # change scenario to something else
+      },
+      content = function(file) {
+        vroom::vroom_write(reactive_economics(), file) # this is the output of the economics
+      }
+    )
   
-  # Downloadable csv of GM dataset dowload----
-  output$downloadData <- downloadHandler(
-    filename = function() {
-      paste(input$dataset, ".csv", sep = "")
-    },
-    content = function(file) {
-      #write.csv(datasetInput_jackie(), file, row.names = FALSE)
-      write.csv(reactive_economics(), file, row.names = FALSE)
-    }
-  )
+ 
   
   
   #this is the plot 

@@ -19,8 +19,7 @@ library(shinyWidgets)
 
 # Define UI 
 
-#ui <-dashboardPage(
-#  dashboardHeader(title = ""),
+
   
 #########################################################################################################
 ###############                       navbartitle                          #################################
@@ -180,13 +179,12 @@ tabPanel("comparision with trial", #tab title page
     ## Cost table
     fluidRow(
       column(width=6,h2("Cost of modification Scenario 1")),
-      # column(width=2,useShinyalert(),  # Set up shinyalert
-      #        actionButton("use_page", "How to use this page")), 
+      
       column(width=6,h2("Cost of modification Scenario 2"))
     ),#fluid row bracket 2
     fluidRow(
       column(width=6,rHandsontableOutput("cost_sc1")),
-      column(width=6,rHandsontableOutput("cost_sc2")) #can't output the exact same tabel
+      column(width=6,rHandsontableOutput("cost_sc2")) 
     ),#fluid row bracket 3
     
     ## Yield table
@@ -237,7 +235,7 @@ tabPanel("comparision with trial", #tab title page
     ############################################################################################################
     ##############################            save data buttons         ###########################################
     ############################################################################################################
-      fluidRow(downloadButton("download data table",
+      fluidRow(downloadButton("download",
                         label = "Download data table"))#fluid row bracket 12
     
     ############################################################################################################
