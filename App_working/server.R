@@ -5,6 +5,7 @@ require(htmltools)
 require(leaflet)
 require(slickR)
 library(DT)
+library(vroom)
 
 
 ######################################################################################################
@@ -714,6 +715,9 @@ server <- shinyServer(function(input, output, session) {
                     `undiscounted cash flow` = "undiscounted_cash_flow" )
     
     DT::datatable(  reactive_economics(), 
+                    rownames = FALSE, #removed the row ID
+                    colnames = c('Scenario', 'Year', 'Total cost $/ha', 
+                                 'Total benefit $/ha', 'Undiscounted cash flow $/ha'), #names of clm headings in table
                     options = list(dom = 't'),#removes the search bar
                     caption = 'Table 2: Undiscounted cash flow.') %>% 
       formatRound(c(4:5), 2) #note the index is not counted in clms
