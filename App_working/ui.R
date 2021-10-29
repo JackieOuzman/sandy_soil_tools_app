@@ -90,12 +90,11 @@ library(shinyWidgets)
                     
                      tabPanel("map of sites", #tab title pageleafletOutput("map"),
                               leafletOutput("map"),
-                             
-                             # table 
-                             #tableOutput('tim'), #this was a table that I had which was on map page its now removed (only hashed out)
-                             
-                             fluidRow(column(
-                               width = 6,
+                     
+                              
+                      fluidRow(
+                                     
+                             column(width = 6,
                                selectInput(
                                  "site_selection",
                                  label = h3("select site:"),
@@ -114,20 +113,25 @@ library(shinyWidgets)
                                    "Telopea_Downs",
                                    "Tempy"     ,
                                    "Warnertown"  ,
-                                   "Wynarka"   
-                                 ),
-                                 selected = "Tempy"
-                               ),
-                               plotOutput("trial_plot"),
-                               DT::dataTableOutput("trial_table"),
-                               tags$a(href="shorthand trial name.pdf", ## this documnet need to sit inside the app directory in a folder called www
-                                      "click here for more info on trial names" 
-                               ),
-                               )),
+                                   "Wynarka"   ),
+                                  selected = "Tempy"),
+                             ),#bracket for select input
+                             ),#fluid row bracket #1
                              
+                             fluidRow(width = 6,
+                             tags$a(href="shorthand trial name.pdf", ## this documnet need to sit inside the app directory in a folder called www
+                                    "click here for more info on trial names" )
+                             ),#fluid row bracket #2
+                                
+                              fluidRow(
+                               column(width=6,   DT::dataTableOutput("trial_table")),
+                               column(width = 6,  plotOutput("trial_plot")) 
+                               
+                                ),#fluid row bracket #3 
+                                
+                                
                              
-                             
-                    ), #tabPanel1 bracket
+                             ), #tabPanel1 bracket
  
 
 #########################################################################################################
