@@ -726,7 +726,7 @@ server <- shinyServer(function(input, output, session) {
   # Reactive value for GM dataset download----## something wrong with this code its not selecting the correct df
   output$download <-  downloadHandler(
       filename = function() {
-        paste0(paste0("Site_",input$data2, "_modification_",input$data1_scen1), ".csv") # change scenario to something else
+        paste0(paste0(input$shinyalert,"Site_",input$data2, "_modification_",input$data1_scen1), ".csv") # change scenario to something else
       },
       content = function(file) {
         vroom::vroom_write(reactive_economics(), file) # this is the output of the economics
