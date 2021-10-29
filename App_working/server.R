@@ -317,7 +317,6 @@ server <- shinyServer(function(input, output, session) {
      dplyr::select(site, Descriptors, yr_post_amelioration, yield) %>% 
      ggplot ( aes(x = Descriptors)) +
      geom_bar(
-       #aes(y = yield, fill = as.factor(yr_post_amelioration), color = Control), #this works but I can't remove the leg
        aes(y = yield, fill = as.factor(yr_post_amelioration)),
        stat = "summary",
        fun.y = "mean",
@@ -329,10 +328,18 @@ server <- shinyServer(function(input, output, session) {
      guides(fill = guide_legend(title = "Years post amelioration")) +
      scale_fill_grey() +
      theme_bw()+
-     theme(axis.text.x = element_text(angle = 90, hjust=1))+
+     theme(plot.title = element_text(size = 20),
+           plot.subtitle = element_text(size = 18),
+           
+           axis.title.y = element_text(size = 18),
+           axis.title.x = element_text(size = 18),
+           
+           axis.text.x = element_text(angle = 90, hjust=1,size = 14),
+           axis.text.y = element_text(size = 14))+
+    
      labs(title= paste0("Site: ", input$site_selection, ", Year amelioration: ", year_amelioration),
           subtitle = paste0("Deciles: year 0 = " , decile_year0, " , year 1 = ", decile_year1),
-          x ="Trial", y = "yield t/ha")
+          x ="Trial", y = "Yield t/ha")
   
    
    site_plot_descriptors
@@ -611,7 +618,7 @@ server <- shinyServer(function(input, output, session) {
   
   
   output$non_wetting <- renderInfoBox({
-    shinydashboard::valueBox(value = tags$p("non_wetting", style = "font-size: 50%;"),
+    shinydashboard::valueBox(value = tags$p("non wetting", style = "font-size: 50%;"),
              subtitle = paste0(reactive_df_info()[1,5]),
              icon = NULL,
              color = paste0(reactive_df_info()[1,1]))
@@ -700,12 +707,23 @@ server <- shinyServer(function(input, output, session) {
       geom_line()+
       geom_hline(yintercept=0, linetype="dashed",
                  color = "black", size=0.5)+
-      theme_bw()+
-       scale_x_continuous(limits = c(x_min,
+        theme_bw()+
+        theme(plot.title = element_text(size = 20),
+              
+              axis.title.y = element_text(size = 18),
+              axis.title.x = element_text(size = 18),
+              
+              axis.text.x = element_text(size = 14),
+              axis.text.y = element_text(size = 14))+
+        
+        
+      scale_x_continuous(limits = c(x_min,
                                      x_max), breaks = seq(0, 5, by = 1))+
       scale_y_continuous(limits = c(y_min[[1]], y_max[[1]]))+
-      xlab("Years") + ylab("$/ha") +
-      ggtitle("Undiscounted cash flow")
+      
+        xlab("Years") + ylab("$/ha") +
+      
+        ggtitle("Undiscounted cash flow")
   })
   
   
