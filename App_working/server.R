@@ -122,13 +122,15 @@ order <- c(
 
 trial_results$Descriptors <- factor(trial_results$Descriptors, 
                                     levels = order)
-
+trial_results <- trial_results %>% 
+  arrange(site)
 
 ######## trial data #####
 
 file = 
 trial_results_table <- read_csv("yield_table_av_all.csv")
-
+trial_results_table <- trial_results_table %>% 
+  arrange(site)
 
 
 ######################################################################################################
@@ -158,6 +160,9 @@ df$site <- as.character(df$site)
 df$non_wetting <- as.character(df$non_wetting)
 df$acidic <- as.character(df$acidic)
 df$physical <- as.character(df$physical)
+
+df <- df %>% 
+  arrange(site)
 
 df_info <- df
 
@@ -267,6 +272,9 @@ df_info <- df_info %>%
       TRUE                      ~    "other"
     ))
 
+
+df_info <- df_info %>% 
+  arrange(site)
 
 
 ######################################################################################################
