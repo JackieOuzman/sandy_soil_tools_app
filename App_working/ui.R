@@ -118,9 +118,13 @@ library(shinyWidgets)
                              ),#bracket for select input
                              ),#fluid row bracket #1
                              
-                             fluidRow(width = 6,
-                             tags$a(href="shorthand trial name.pdf", ## this documnet need to sit inside the app directory in a folder called www
+                             fluidRow(
+                               column(8, 
+                                      #align = "center", 
+                                      offset =.5,
+                                      tags$a(href="shorthand trial name.pdf", ## this documnet need to sit inside the app directory in a folder called www
                                     "click here for more info on trial names" )
+                               )#clm bracket
                              ),#fluid row bracket #2
                                 
                               fluidRow(
@@ -144,8 +148,7 @@ tabPanel("comparision with trial", #tab title page
 ############################################################################################################
 #################                  options to filter the data       ########################################
 ############################################################################################################
-  # dashboardSidebar(disable = TRUE),
-  # dashboardBody(
+  
     
     fluidRow(
       box(
