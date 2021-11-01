@@ -417,7 +417,7 @@ server <- shinyServer(function(input, output, session) {
     title = "This app is under development", 
     type = "input",
     text = "What the name of your farm / analysis?",
-    size = "s", 
+    #size = "s", 
     closeOnEsc = TRUE,
     closeOnClickOutside = FALSE,
     html = FALSE,
