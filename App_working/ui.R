@@ -12,7 +12,12 @@ library(leaflet)
 library(slickR) #new install on land and water linex
 
 library(shinyWidgets)
+<<<<<<< HEAD
 library(vroom) #new install on land and water linex
+=======
+library(vroom)
+
+>>>>>>> 0dbe439d3804fcdc2e6ec38b331eb00ce780bf38
 
 
 
