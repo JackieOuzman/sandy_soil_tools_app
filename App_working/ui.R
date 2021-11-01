@@ -12,6 +12,7 @@ library(leaflet)
 library(slickR)
 
 library(shinyWidgets)
+library(vroom)
 
 
 
