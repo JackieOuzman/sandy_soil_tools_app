@@ -15,12 +15,6 @@ library(shinyWidgets)
 
 library(vroom) #new install on land and water linex
 
-<<<<<<< HEAD
-=======
-
->>>>>>> 268b173a4c90542309839647de108591adb67498
-
-
 
 
 
