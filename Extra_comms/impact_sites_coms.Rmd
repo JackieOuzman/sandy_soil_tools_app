@@ -1,0 +1,106 @@
+---
+title: "Impact sites coms"
+author: "Jackie Ouzman"
+date: "01/11/2021"
+output: html_document
+params:
+  site: "Buckleboo"
+---
+
+
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r load packages, include=FALSE}
+library(tidyverse)
+library(plotly)
+library(DT)
+```
+
+```{r load data, include=FALSE}
+
+### use the param in the header to select the site
+
+#Load the impact data metdata
+path <- "X:/Therese_Jackie/Sandy_soils/App_development2021/sandy_soil_tools_app/App_working/"
+
+
+trial_results <- read_csv(file = paste0(path,"primary_data_all.csv"))
+
+```
+
+
+# Rainfall for the site:
+
+```{r look a rain long term, echo=FALSE}
+trial_results_rain_all <- select(
+  trial_results,
+  "site",
+  #"year",
+  "met_name_number",
+  "Annual_BOM",
+  "GS_BOM",
+  
+  #"rainfall_mean_annual",
+  #"rain",
+  #"decile"
+)
+
+
+trial_results_rain_all <- trial_results_rain_all %>% 
+filter (site == params$site)%>% 
+  distinct(site, .keep_all = TRUE)
+
+
+
+
+trial_results_rain_all %>% datatable(
+rownames = FALSE, #removed the row ID
+                    colnames = c('Site', "Met file details", 'Annual BOM', 
+                                 'GS BOM'), #names of clm headings in table
+                    options = list(dom = 't'),#removes the search bar
+                    caption = 'Long term rainfall')
+
+```
+
+How is the decile years calulated
+
+```{r look a rainfall for the year of trials, echo=FALSE}
+
+trial_rain_yr <- select(
+  trial_results,
+  "site",
+  "year",
+  "decile"
+)
+
+
+trial_rain_yr <- trial_rain_yr %>% 
+filter (site == params$site)%>% 
+  distinct(year, .keep_all = TRUE)
+
+
+
+
+trial_rain_yr %>% datatable(
+rownames = FALSE, #removed the row ID
+                    colnames = c('Site', 'Year', 'Decile'),  #names of clm headings in table
+                    options = list(dom = 't'),#removes the search bar
+                    caption = 'Rainfall for year of trials')
+
+```
+
+
+# Soil constraints for the site:
+
+
+
+# Trial results for running stats on.
+
+# Run stats
+# present this for feedback
+
+# how does this fit in with other trials?
