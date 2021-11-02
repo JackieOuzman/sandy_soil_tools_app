@@ -1,10 +1,10 @@
 require(shiny)
-#require(rhandsontable)
-#require(shinydashboard)
-#require(htmltools)
-#require(leaflet)
-#require(slickR)
-#library(DT)
+require(rhandsontable)
+require(shinydashboard)
+require(htmltools)
+require(leaflet)
+require(slickR)
+library(DT)
 
 
 
