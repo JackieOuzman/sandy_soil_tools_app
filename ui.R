@@ -1,15 +1,15 @@
 
 #bring in the library that I will be working with
 library(shiny)
-library(ggplot2)
-library(readxl)
-library(tidyverse)
-library(rhandsontable)
-library(shinyalert)
-library(shinydashboard)
-library(htmltools)
-library(leaflet)
-library(slickR) #new install on land and water linex
+# library(ggplot2)
+# library(readxl)
+# library(tidyverse)
+# library(rhandsontable)
+# library(shinyalert)
+# library(shinydashboard)
+# library(htmltools)
+# library(leaflet)
+# library(slickR) #new install on land and water linex
 
 library(shinyWidgets)
 
