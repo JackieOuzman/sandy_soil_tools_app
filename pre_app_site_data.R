@@ -899,18 +899,18 @@ yield_table_av_control <- yield_table_av_control %>%
 yield_table_av <- left_join(yield_table_av_other, yield_table_av_control, 
                   by = c("site", "yr_post_amelioration"))
 
-## add in the price and data source clms # i have got these numbers from pinion decile 5 price
+## add in the price and data source clms # PIRSA ($/t) 5-year average
 unique(yield_table_av$crop)
 yield_table_av <- yield_table_av %>% 
   dplyr:: mutate(`data source` = "trial data",
                  price = case_when(
-                   crop == "wheat" ~ 283,
-                   crop == "barley" ~ 223,
-                   crop == "canola" ~ 545,
-                   crop == "chickpea" ~ 1020,
-                   crop == "lentil" ~ 580,
-                   crop == "lupin" ~ 260,
-                   crop == "beans" ~ 440, # Faba beans
+                   crop == "wheat" ~ 292,#(APW Wheat)
+                   crop == "barley" ~ 241, #(Feed Barley)
+                   crop == "canola" ~ 546,
+                   crop == "chickpea" ~ 846,
+                   crop == "lentil" ~ 586,
+                   crop == "lupin" ~ 360,
+                   crop == "beans" ~ 484, # Faba beans
                    TRUE ~ 0)
                    )
 #tidy up the mess!
