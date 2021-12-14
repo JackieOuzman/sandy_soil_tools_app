@@ -22,9 +22,11 @@ Ouyen_drill <- Ouyen %>% dplyr::select("site":"comments"   )
 Ouyen_spade <- read_excel("X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/Ouyen.xlsm", 
                           sheet = "Database_format_drill", skip = 1)
 names(Ouyen)
-Ouyen_spade <- Ouyen %>% dplyr::select("site":"comments"   )
+
 
 Ouyen <- rbind(Ouyen_drill, Ouyen_spade)
+
+Ouyen <- Ouyen %>% dplyr::select("site":"comments"   )
 
 rm(Ouyen_drill,Ouyen_spade)
 
@@ -69,4 +71,16 @@ Carwarp_metadata <- read_excel("X:/Therese_Jackie/Sandy_soils/Development_databa
                                 sheet = "Site_metadata")
 
 #############################################################################################################################################
+########################                Merge the data                                          ########################################
+############################################################################################################################################
 
+
+Murryays_sites <- rbind(Carwarp, Waikerie, Lowalide, Ouyen)
+
+
+rm(Carwarp,Waikerie,Lowalide, Ouyen )
+Murrays_sites_metadata <- rbind(Ouyen_metadata, Carwarp_metadata, Waikerie_metadata, Lowalide_metadata)
+
+
+#### write out these file and then start with climate data and descriptors
+  
