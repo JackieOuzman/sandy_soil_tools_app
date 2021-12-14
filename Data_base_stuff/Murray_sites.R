@@ -71,7 +71,7 @@ Carwarp_metadata <- read_excel("X:/Therese_Jackie/Sandy_soils/Development_databa
                                 sheet = "Site_metadata")
 
 #############################################################################################################################################
-########################                Merge the data                                          ########################################
+########################      Merge the results data   and the metadata                            ########################################
 ############################################################################################################################################
 
 
@@ -81,6 +81,28 @@ Murryays_sites <- rbind(Carwarp, Waikerie, Lowalide, Ouyen)
 rm(Carwarp,Waikerie,Lowalide, Ouyen )
 Murrays_sites_metadata <- rbind(Ouyen_metadata, Carwarp_metadata, Waikerie_metadata, Lowalide_metadata)
 
+rm(Carwarp_metadata,Waikerie_metadata,Lowalide_metadata, Ouyen_metadata )
 
 #### write out these file and then start with climate data and descriptors
   
+write.csv(Murrays_sites_metadata,"X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/Murrays_sites_metadata.csv" ,row.names = FALSE)
+write.csv(Murryays_sites,"X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/Murrays_sites.csv" , row.names = FALSE)
+
+#############################################################################################################################################
+########################      soil constraints                                        ########################################
+############################################################################################################################################
+
+Ouyen_soils_constraints <- read_excel("X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/Ouyen.xlsm", 
+                    sheet = "site_table")
+Lowalide_soils_constraints <- read_excel("X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/Lowaldie.xlsx",
+                       sheet = "site_table")
+Waikerie_soils_constraints <- read_excel("X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/Waikerie.xlsx",
+                       sheet = "site_table")
+Carwarp_soils_constraints <- read_excel("X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/CarwarpAmelioration.xlsx",
+                      sheet = "site_table")
+
+Murrays_sites_soil_constraints <- rbind(Ouyen_soils_constraints, Lowalide_soils_constraints, 
+                                        Waikerie_soils_constraints, Carwarp_soils_constraints)
+write.csv(Murrays_sites_soil_constraints,
+          "X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/Murrays_sites_soil_constraints.csv" ,
+          row.names = FALSE)
