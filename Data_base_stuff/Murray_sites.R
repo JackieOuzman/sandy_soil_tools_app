@@ -32,3 +32,41 @@ rm(Ouyen_drill,Ouyen_spade)
 
 Ouyen_metadata <- read_excel("X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/Ouyen.xlsm", 
                           sheet = "Site_metadata")
+
+
+### Lowalide 
+Lowalide <- read_excel("X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/Lowaldie.xlsx",
+                          sheet = "Database format", skip = 1)
+names(Lowalide)
+Lowalide <- Lowalide %>% dplyr::select("site":"comments"   )
+
+### Lowalide metadata
+
+Lowalide_metadata <- read_excel("X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/Lowaldie.xlsx", 
+                             sheet = "Site_metadata")
+
+
+### Waikerie 
+Waikerie <- read_excel("X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/Waikerie.xlsx",
+                       sheet = "Database_format", skip = 1)
+names(Waikerie)
+Waikerie <- Waikerie %>% dplyr::select("site":"comments"   )
+
+### Waikerie metadata
+
+Waikerie_metadata <- read_excel("X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/Waikerie.xlsx", 
+                                sheet = "Site_metadata")
+
+### Carwarp 
+Carwarp <- read_excel("X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/CarwarpAmelioration.xlsx",
+                       sheet = "Database_format", skip = 1)
+names(Carwarp)
+Carwarp <- Carwarp %>% dplyr::select("site":"comments"   )
+
+### Carwarp metadata
+
+Carwarp_metadata <- read_excel("X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/CarwarpAmelioration.xlsx", 
+                                sheet = "Site_metadata")
+
+#############################################################################################################################################
+
