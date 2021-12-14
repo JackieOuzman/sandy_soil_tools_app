@@ -203,46 +203,72 @@ rm(decile_table, gs_rain_with_summer)
 sites_for_binding <- ls(pattern="summer")
 print(sites_for_binding)
 head()
+# GS_rain_deciles <- rbind(
+#   `BALRANALD (RSL)_049002gs_rain_with_summer`,
+#   `CLARE POST OFFICE_021014gs_rain_with_summer`,
+#   `COOMANDOOK (MALINONG)_025508gs_rain_with_summer`,
+#   `CUMMINS_018023gs_rain_with_summer`,
+#   `HILLSTON AIRPORT_075032gs_rain_with_summer`,
+#   `KAROONDA_025006gs_rain_with_summer`,
+#   `KEITH_025507gs_rain_with_summer`,
+#   `KIMBA_018040gs_rain_with_summer`,
+#   `MINNIPA AGRICULTURAL CENTRE_018052gs_rain_with_summer`,
+#   `NUROM (RIVERSIDE FARM)_021102gs_rain_with_summer`,
+#   `OUYEN (POST OFFICE)_076047gs_rain_with_summer`,
+#   `SERVICETON_078034gs_rain_with_summer`,
+#   `YEELANNA_018099gs_rain_with_summer`
+# )
+
+#############################################################################################################
+############### These are Murrays site ######################################################################
+#############################################################################################################
+# `OUYEN (POST OFFICE)_076047gs_rain_with_summer`
+# `LOWALDIE_025039gs_rain_with_summer
+# `WAIKERIE (EREMOPHILA PARK)_024029gs_rain_with_summer`
+# `RED CLIFFS (POST OFFICE)_076052gs_rain_with_summer`
+
 GS_rain_deciles <- rbind(
-  `BALRANALD (RSL)_049002gs_rain_with_summer`,
-  `CLARE POST OFFICE_021014gs_rain_with_summer`,
-  `COOMANDOOK (MALINONG)_025508gs_rain_with_summer`,
-  `CUMMINS_018023gs_rain_with_summer`,
-  `HILLSTON AIRPORT_075032gs_rain_with_summer`,
-  `KAROONDA_025006gs_rain_with_summer`,
-  `KEITH_025507gs_rain_with_summer`,
-  `KIMBA_018040gs_rain_with_summer`,
-  `MINNIPA AGRICULTURAL CENTRE_018052gs_rain_with_summer`,
-  `NUROM (RIVERSIDE FARM)_021102gs_rain_with_summer`,
   `OUYEN (POST OFFICE)_076047gs_rain_with_summer`,
-  `SERVICETON_078034gs_rain_with_summer`,
-  `YEELANNA_018099gs_rain_with_summer`
+  `LOWALDIE_025039gs_rain_with_summer`,
+  `WAIKERIE (EREMOPHILA PARK)_024029gs_rain_with_summer`,
+  `RED CLIFFS (POST OFFICE)_076052gs_rain_with_summer`
 )
+
 names(GS_rain_deciles)
 GS_rain_deciles <- GS_rain_deciles %>% 
   rename( met_name_number = site )
 unique(GS_rain_deciles$met_name_number)
 
+# GS_rain_deciles <- GS_rain_deciles %>% 
+#   mutate(site = case_when(
+#     met_name_number == "BALRANALD (RSL)_049002" ~ "Kooloonong",
+#     met_name_number == "KIMBA_018040" ~ "Buckleboo",
+#     met_name_number == "CUMMINS_018023" ~ "Cummins",
+#     met_name_number == "YEELANNA_018099" ~ "Karkoo",
+#     met_name_number == "CLARE POST OFFICE_021014" ~ "Kybunga",
+#     met_name_number == "COOMANDOOK (MALINONG)_025508" ~ "Malinong",
+#     met_name_number == "HILLSTON AIRPORT_075032" ~ "Monia_Gap",
+#     met_name_number == "MINNIPA AGRICULTURAL CENTRE_018052" ~ "Mt_Damper",
+#     met_name_number == "KEITH_025507" ~ "Sherwood",
+#     met_name_number == "SERVICETON_078034" ~ "Telopea_Downs",
+#     met_name_number == "OUYEN (POST OFFICE)_076047" ~ "Tempy",
+#     met_name_number == "NUROM (RIVERSIDE FARM)_021102" ~ "Warnertown",
+#     met_name_number == "KAROONDA_025006" ~ "Wynarka",
+#     TRUE ~ as.character("check")
+#   ))
+
 GS_rain_deciles <- GS_rain_deciles %>% 
   mutate(site = case_when(
-    met_name_number == "BALRANALD (RSL)_049002" ~ "Kooloonong",
-    met_name_number == "KIMBA_018040" ~ "Buckleboo",
-    met_name_number == "CUMMINS_018023" ~ "Cummins",
-    met_name_number == "YEELANNA_018099" ~ "Karkoo",
-    met_name_number == "CLARE POST OFFICE_021014" ~ "Kybunga",
-    met_name_number == "COOMANDOOK (MALINONG)_025508" ~ "Malinong",
-    met_name_number == "HILLSTON AIRPORT_075032" ~ "Monia_Gap",
-    met_name_number == "MINNIPA AGRICULTURAL CENTRE_018052" ~ "Mt_Damper",
-    met_name_number == "KEITH_025507" ~ "Sherwood",
-    met_name_number == "SERVICETON_078034" ~ "Telopea_Downs",
-    met_name_number == "OUYEN (POST OFFICE)_076047" ~ "Tempy",
-    met_name_number == "NUROM (RIVERSIDE FARM)_021102" ~ "Warnertown",
-    met_name_number == "KAROONDA_025006" ~ "Wynarka",
+    met_name_number == "OUYEN (POST OFFICE)_076047" ~ "Ouyen",
+    met_name_number == "LOWALDIE_025039" ~ "Lowaldie",
+    met_name_number == "WAIKERIE (EREMOPHILA PARK)_024029" ~ "Waikerie",
+    met_name_number == "RED CLIFFS (POST OFFICE)_076052" ~ "Carwap",
     TRUE ~ as.character("check")
   ))
 
 
-write.csv(GS_rain_deciles, "X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2021/GS_rain_deciles_impact_sites.csv")
+
+write.csv(GS_rain_deciles, "X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2021/GS_rain_deciles_Murray_sites.csv")
                     
 
                    
@@ -255,6 +281,11 @@ write.csv(GS_rain_deciles, "X:/Therese_Jackie/Sandy_soils/Sands weather/met_file
 ## annual rainfal ##
 ########################################################################################
 list.of.files                   
+
+# find the files that you want
+list.of.files <- list.files(current.folder, ".csv",full.names=T) #the trick is getting the full name
+list.of.files #with path
+
 
 for (list.of.files in list.of.files){
   
@@ -330,10 +361,13 @@ assign(name_annual_rain,annual_rain)
 }
 
 
-# annual_rain_2020 <- rbind(annual_rain_Bute_21012,
-#                      annual_rain_Karoonda_25006,
-#                      annual_rain_Waikerie_24018)
-#                      
-# 
-# 
-# write.csv(annual_rain_2020, "X:/Therese_Jackie/Sandy_soils/Sands weather/met_file_2020/annual_rain_2020.csv")
+
+
+ annual_rain_2020 <- rbind(`OUYEN (POST OFFICE)_076047annual_rain`,
+                           `LOWALDIE_025039annual_rain`,
+                           `WAIKERIE (EREMOPHILA PARK)_024029annual_rain`,
+                           `RED CLIFFS (POST OFFICE)_076052annual_rain`)
+
+
+
+ write.csv(annual_rain_2020, "X:/Therese_Jackie/Sandy_soils/Sands weather/met_file_2020/annual_rain_2020_Muarry_sites.csv")
