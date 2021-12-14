@@ -370,4 +370,5 @@ assign(name_annual_rain,annual_rain)
 
 
 
- write.csv(annual_rain_2020, "X:/Therese_Jackie/Sandy_soils/Sands weather/met_file_2020/annual_rain_2020_Muarry_sites.csv")
+ write.csv(annual_rain_2020, "X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2021/annual_rain_2021_Muarry_sites.csv")
+ #"X:\Therese_Jackie\Sandy_soils\Sands weather\met_file2021"
