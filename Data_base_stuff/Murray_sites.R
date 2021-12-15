@@ -106,3 +106,5 @@ Murrays_sites_soil_constraints <- rbind(Ouyen_soils_constraints, Lowalide_soils_
 write.csv(Murrays_sites_soil_constraints,
           "X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/Murrays_sites_soil_constraints.csv" ,
           row.names = FALSE)
+rm(Ouyen_soils_constraints, Lowalide_soils_constraints, 
+   Waikerie_soils_constraints, Carwarp_soils_constraints)
