@@ -27,7 +27,7 @@ Ouyen_spade <- Ouyen_spade %>% dplyr::select("ID":"comments"   )
 
 Ouyen_drill<- Ouyen_drill %>% 
   mutate(site_sub = "Ouyen_drill")
-Ouyen_spade<- Ouyen_drill %>% 
+Ouyen_spade<- Ouyen_spade %>% 
   mutate(site_sub = "Ouyen_spade")
 
 Ouyen <- rbind(Ouyen_drill, Ouyen_spade)

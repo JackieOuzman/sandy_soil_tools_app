@@ -55,6 +55,7 @@ primary_murray<- primary_murray %>%
 primary_murray<- primary_murray %>% 
   mutate(placement = case_when(
     placement == "300 & 600" ~ "60&30",
+    placement == "80" ~ "8",
     placement == "300" ~ "30",
     placement == "800" ~ "80",
     placement == "600" ~ "60",
@@ -428,6 +429,7 @@ primary_murray_neat <- primary_murray_join_2 %>%
                 rep_block,
                 crop ,
                 rip,rip_depth,
+                timing,
                 Descriptors,
                 establishment:dry_biomass,
                 Latitude, Longitude,
@@ -450,6 +452,7 @@ primary_murray_control <- primary_murray_join_2 %>%
                 plot,
                 rep_block,
                 rip,rip_depth,
+                timing,
                 Descriptors,
                 establishment:dry_biomass,
                 Latitude, Longitude,
@@ -504,3 +507,4 @@ primary_murray_with_control <- primary_murray_with_control %>%
 write.csv(primary_murray_with_control,
           "X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/Murrays_sites_step1_2_control.csv" ,
           row.names = FALSE) 
+
