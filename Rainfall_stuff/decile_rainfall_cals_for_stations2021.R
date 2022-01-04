@@ -227,13 +227,21 @@ head()
 # `WAIKERIE (EREMOPHILA PARK)_024029gs_rain_with_summer`
 # `RED CLIFFS (POST OFFICE)_076052gs_rain_with_summer`
 
-GS_rain_deciles <- rbind(
-  `OUYEN (POST OFFICE)_076047gs_rain_with_summer`,
-  `LOWALDIE_025039gs_rain_with_summer`,
-  `WAIKERIE (EREMOPHILA PARK)_024029gs_rain_with_summer`,
-  `RED CLIFFS (POST OFFICE)_076052gs_rain_with_summer`
-)
+# GS_rain_deciles <- rbind(
+#   `OUYEN (POST OFFICE)_076047gs_rain_with_summer`,
+#   `LOWALDIE_025039gs_rain_with_summer`,
+#   `WAIKERIE (EREMOPHILA PARK)_024029gs_rain_with_summer`,
+#   `RED CLIFFS (POST OFFICE)_076052gs_rain_with_summer`
+# )
 
+#############################################################################################################
+############### These are Mels / Nigel  site ######################################################################
+#############################################################################################################
+GS_rain_deciles <- rbind(
+  YEELANNA_018099gs_rain_with_summer,
+  `MURDINGA (MUNGALA)_018164gs_rain_with_summer`
+)
+#################################################################################################################
 names(GS_rain_deciles)
 GS_rain_deciles <- GS_rain_deciles %>% 
   rename( met_name_number = site )
@@ -257,18 +265,23 @@ unique(GS_rain_deciles$met_name_number)
 #     TRUE ~ as.character("check")
 #   ))
 
+# GS_rain_deciles <- GS_rain_deciles %>% 
+#   mutate(site = case_when(
+#     met_name_number == "OUYEN (POST OFFICE)_076047" ~ "Ouyen",
+#     met_name_number == "LOWALDIE_025039" ~ "Lowaldie",
+#     met_name_number == "WAIKERIE (EREMOPHILA PARK)_024029" ~ "Waikerie",
+#     met_name_number == "RED CLIFFS (POST OFFICE)_076052" ~ "Carwap",
+#     TRUE ~ as.character("check")
+#   ))
+
 GS_rain_deciles <- GS_rain_deciles %>% 
   mutate(site = case_when(
-    met_name_number == "OUYEN (POST OFFICE)_076047" ~ "Ouyen",
-    met_name_number == "LOWALDIE_025039" ~ "Lowaldie",
-    met_name_number == "WAIKERIE (EREMOPHILA PARK)_024029" ~ "Waikerie",
-    met_name_number == "RED CLIFFS (POST OFFICE)_076052" ~ "Carwap",
+    met_name_number == "YEELANNA_018099" ~ "Brooker",
+    met_name_number == "MURDINGA (MUNGALA)_018164" ~ "Murlong",
     TRUE ~ as.character("check")
   ))
 
-
-
-write.csv(GS_rain_deciles, "X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2021/GS_rain_deciles_Murray_sites.csv")
+write.csv(GS_rain_deciles, "X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2021/GS_rain_deciles_Nigel_sites.csv")
                     
 
                    
@@ -363,12 +376,15 @@ assign(name_annual_rain,annual_rain)
 
 
 
- annual_rain_2020 <- rbind(`OUYEN (POST OFFICE)_076047annual_rain`,
-                           `LOWALDIE_025039annual_rain`,
-                           `WAIKERIE (EREMOPHILA PARK)_024029annual_rain`,
-                           `RED CLIFFS (POST OFFICE)_076052annual_rain`)
+ # annual_rain_2020 <- rbind(`OUYEN (POST OFFICE)_076047annual_rain`,
+ #                           `LOWALDIE_025039annual_rain`,
+ #                           `WAIKERIE (EREMOPHILA PARK)_024029annual_rain`,
+ #                           `RED CLIFFS (POST OFFICE)_076052annual_rain`)
+
+annual_rain_2020 <- rbind(YEELANNA_018099annual_rain,
+                          `MURDINGA (MUNGALA)_018164annual_rain`)
 
 
 
- write.csv(annual_rain_2020, "X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2021/annual_rain_2021_Muarry_sites.csv")
+ write.csv(annual_rain_2020, "X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2021/annual_rain_2021_Nigel_sites.csv")
  #"X:\Therese_Jackie\Sandy_soils\Sands weather\met_file2021"
