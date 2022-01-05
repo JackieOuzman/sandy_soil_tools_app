@@ -237,10 +237,19 @@ head()
 #############################################################################################################
 ############### These are Mels / Nigel  site ######################################################################
 #############################################################################################################
+# GS_rain_deciles <- rbind(
+#   YEELANNA_018099gs_rain_with_summer,
+#   `MURDINGA (MUNGALA)_018164gs_rain_with_summer`
+# )
+
+#############################################################################################################
+############### This are Racheal  site ######################################################################
+#############################################################################################################
 GS_rain_deciles <- rbind(
-  YEELANNA_018099gs_rain_with_summer,
-  `MURDINGA (MUNGALA)_018164gs_rain_with_summer`
+  `YENDA (HENRY STREET)_075079gs_rain_with_summer`
 )
+
+
 #################################################################################################################
 names(GS_rain_deciles)
 GS_rain_deciles <- GS_rain_deciles %>% 
@@ -274,14 +283,20 @@ unique(GS_rain_deciles$met_name_number)
 #     TRUE ~ as.character("check")
 #   ))
 
+# GS_rain_deciles <- GS_rain_deciles %>% 
+#   mutate(site = case_when(
+#     met_name_number == "YEELANNA_018099" ~ "Brooker",
+#     met_name_number == "MURDINGA (MUNGALA)_018164" ~ "Murlong",
+#     TRUE ~ as.character("check")
+#   ))
+
 GS_rain_deciles <- GS_rain_deciles %>% 
   mutate(site = case_when(
-    met_name_number == "YEELANNA_018099" ~ "Brooker",
-    met_name_number == "MURDINGA (MUNGALA)_018164" ~ "Murlong",
-    TRUE ~ as.character("check")
+    met_name_number == "YENDA (HENRY STREET)_075079" ~ "Yenda",
+      TRUE ~ as.character("check")
   ))
 
-write.csv(GS_rain_deciles, "X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2021/GS_rain_deciles_Nigel_sites.csv")
+write.csv(GS_rain_deciles, "X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2021/GS_rain_deciles_Racheal_sites.csv")
                     
 
                    
@@ -381,10 +396,10 @@ assign(name_annual_rain,annual_rain)
  #                           `WAIKERIE (EREMOPHILA PARK)_024029annual_rain`,
  #                           `RED CLIFFS (POST OFFICE)_076052annual_rain`)
 
-annual_rain_2020 <- rbind(YEELANNA_018099annual_rain,
-                          `MURDINGA (MUNGALA)_018164annual_rain`)
+# annual_rain_2020 <- rbind(YEELANNA_018099annual_rain,
+#                           `MURDINGA (MUNGALA)_018164annual_rain`)
 
+annual_rain_2020 <- rbind(`YENDA (HENRY STREET)_075079annual_rain`)
 
-
- write.csv(annual_rain_2020, "X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2021/annual_rain_2021_Nigel_sites.csv")
+ write.csv(annual_rain_2020, "X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2021/annual_rain_2021_Racheal_sites.csv")
  #"X:\Therese_Jackie\Sandy_soils\Sands weather\met_file2021"
