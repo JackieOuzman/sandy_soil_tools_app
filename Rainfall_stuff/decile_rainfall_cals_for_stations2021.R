@@ -38,6 +38,7 @@ current.folder <- "X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2021/stat
 # find the files that you want
 list.of.files <- list.files(current.folder, ".csv",full.names=T) #the trick is getting the full name
 list.of.files #with path
+#list.of.files <- "X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2021/station_download/Bute_21012.csv"           
 ########################################################################################
 
 ########################################################################################
@@ -245,11 +246,16 @@ head()
 #############################################################################################################
 ############### This are Racheal  site ######################################################################
 #############################################################################################################
+# GS_rain_deciles <- rbind(
+#   `YENDA (HENRY STREET)_075079gs_rain_with_summer`
+# )
+
+#############################################################################################################
+############### This are Sam  site ######################################################################
+#############################################################################################################
 GS_rain_deciles <- rbind(
-  `YENDA (HENRY STREET)_075079gs_rain_with_summer`
+  `BUTE_021012gs_rain_with_summer`
 )
-
-
 #################################################################################################################
 names(GS_rain_deciles)
 GS_rain_deciles <- GS_rain_deciles %>% 
@@ -290,13 +296,21 @@ unique(GS_rain_deciles$met_name_number)
 #     TRUE ~ as.character("check")
 #   ))
 
+# GS_rain_deciles <- GS_rain_deciles %>% 
+#   mutate(site = case_when(
+#     met_name_number == "YENDA (HENRY STREET)_075079" ~ "Yenda",
+#       TRUE ~ as.character("check")
+#   ))
+
 GS_rain_deciles <- GS_rain_deciles %>% 
   mutate(site = case_when(
-    met_name_number == "YENDA (HENRY STREET)_075079" ~ "Yenda",
-      TRUE ~ as.character("check")
+    met_name_number == "BUTE_021012" ~ "Bute",
+    TRUE ~ as.character("check")
   ))
 
-write.csv(GS_rain_deciles, "X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2021/GS_rain_deciles_Racheal_sites.csv")
+
+
+write.csv(GS_rain_deciles, "X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2021/GS_rain_deciles_Sam_sites.csv")
                     
 
                    
@@ -314,6 +328,8 @@ list.of.files
 list.of.files <- list.files(current.folder, ".csv",full.names=T) #the trick is getting the full name
 list.of.files #with path
 
+
+#list.of.files <-"X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2021/station_download/Bute_21012.csv"  
 
 for (list.of.files in list.of.files){
   
@@ -399,7 +415,10 @@ assign(name_annual_rain,annual_rain)
 # annual_rain_2020 <- rbind(YEELANNA_018099annual_rain,
 #                           `MURDINGA (MUNGALA)_018164annual_rain`)
 
-annual_rain_2020 <- rbind(`YENDA (HENRY STREET)_075079annual_rain`)
+#annual_rain_2020 <- rbind(`YENDA (HENRY STREET)_075079annual_rain`)
 
- write.csv(annual_rain_2020, "X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2021/annual_rain_2021_Racheal_sites.csv")
+annual_rain_2020 <- rbind(BUTE_021012annual_rain)
+
+# write.csv(annual_rain_2020, "X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2021/annual_rain_2021_Racheal_sites.csv")
+ write.csv(annual_rain_2020, "X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2021/annual_rain_2021_Sam_sites.csv")
  #"X:\Therese_Jackie\Sandy_soils\Sands weather\met_file2021"
