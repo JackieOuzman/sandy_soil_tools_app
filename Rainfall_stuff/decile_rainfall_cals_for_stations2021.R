@@ -38,7 +38,15 @@ current.folder <- "X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2021/stat
 # find the files that you want
 list.of.files <- list.files(current.folder, ".csv",full.names=T) #the trick is getting the full name
 list.of.files #with path
+
 #list.of.files <- "X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2021/station_download/Bute_21012.csv"           
+
+list.of.files <- c(
+"X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2021/station_download/Yeelanna_18099.csv" ,
+"X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2021/station_download/Naracoorte_Lochaber_26015.csv",
+"X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2021/station_download/Karoonda_25006.csv"
+)
+
 ########################################################################################
 
 ########################################################################################
@@ -253,9 +261,19 @@ head()
 #############################################################################################################
 ############### This are Sam  site ######################################################################
 #############################################################################################################
+# GS_rain_deciles <- rbind(
+#   `BUTE_021012gs_rain_with_summer`
+# )
+
+#############################################################################################################
+############### This is New Horizons sites Mel ######################################################################
+#############################################################################################################
 GS_rain_deciles <- rbind(
-  `BUTE_021012gs_rain_with_summer`
+  KAROONDA_025006gs_rain_with_summer,
+  `NARACOORTE (LOCHABER)_026015gs_rain_with_summer`,
+  YEELANNA_018099gs_rain_with_summer
 )
+
 #################################################################################################################
 names(GS_rain_deciles)
 GS_rain_deciles <- GS_rain_deciles %>% 
@@ -302,15 +320,22 @@ unique(GS_rain_deciles$met_name_number)
 #       TRUE ~ as.character("check")
 #   ))
 
+# GS_rain_deciles <- GS_rain_deciles %>% 
+#   mutate(site = case_when(
+#     met_name_number == "BUTE_021012" ~ "Bute",
+#     TRUE ~ as.character("check")
+#   ))
+
 GS_rain_deciles <- GS_rain_deciles %>% 
   mutate(site = case_when(
-    met_name_number == "BUTE_021012" ~ "Bute",
+    met_name_number == "KAROONDA_025006" ~ "Karoonda",
+    met_name_number == "NARACOORTE (LOCHABER)_026015" ~ "Cadgee",
+    met_name_number == "YEELANNA_018099" ~ "Brimpton_Lake",
+    
     TRUE ~ as.character("check")
   ))
 
-
-
-write.csv(GS_rain_deciles, "X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2021/GS_rain_deciles_Sam_sites.csv")
+write.csv(GS_rain_deciles, "X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2021/GS_rain_deciles_New_Horizons_sites.csv")
                     
 
                    
@@ -330,6 +355,12 @@ list.of.files #with path
 
 
 #list.of.files <-"X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2021/station_download/Bute_21012.csv"  
+
+# list.of.files <- c(
+#   "X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2021/station_download/Yeelanna_18099.csv" ,
+#   "X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2021/station_download/Naracoorte_Lochaber_26015.csv",
+#   "X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2021/station_download/Karoonda_25006.csv"
+# )
 
 for (list.of.files in list.of.files){
   
@@ -417,8 +448,18 @@ assign(name_annual_rain,annual_rain)
 
 #annual_rain_2020 <- rbind(`YENDA (HENRY STREET)_075079annual_rain`)
 
-annual_rain_2020 <- rbind(BUTE_021012annual_rain)
+#annual_rain_2020 <- rbind(BUTE_021012annual_rain)
+
+annual_rain_2020 <- rbind(YEELANNA_018099annual_rain,
+                          `NARACOORTE (LOCHABER)_026015annual_rain`,
+                          KAROONDA_025006annual_rain
+                          )
+
+
 
 # write.csv(annual_rain_2020, "X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2021/annual_rain_2021_Racheal_sites.csv")
- write.csv(annual_rain_2020, "X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2021/annual_rain_2021_Sam_sites.csv")
+# write.csv(annual_rain_2020, "X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2021/annual_rain_2021_Sam_sites.csv")
+write.csv(annual_rain_2020, "X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2021/annual_rain_2021_New_Horizons_sites.csv")
+
+ 
  #"X:\Therese_Jackie\Sandy_soils\Sands weather\met_file2021"
