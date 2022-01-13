@@ -41,12 +41,15 @@ list.of.files #with path
 
 #list.of.files <- "X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2021/station_download/Bute_21012.csv"           
 
-list.of.files <- c(
-"X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2021/station_download/Yeelanna_18099.csv" ,
-"X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2021/station_download/Naracoorte_Lochaber_26015.csv",
-"X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2021/station_download/Karoonda_25006.csv"
-)
+# list.of.files <- c(
+# "X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2021/station_download/Yeelanna_18099.csv" ,
+# "X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2021/station_download/Naracoorte_Lochaber_26015.csv",
+# "X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2021/station_download/Karoonda_25006.csv"
+# )
 
+list.of.files <- "X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2021/station_download/Karoonda_25006.csv" 
+
+#list.of.files <- "X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2021/station_download/Mannum_Council_Depot_24517.csv" 
 ########################################################################################
 
 ########################################################################################
