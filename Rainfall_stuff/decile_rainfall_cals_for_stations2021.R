@@ -47,9 +47,9 @@ list.of.files #with path
 # "X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2021/station_download/Karoonda_25006.csv"
 # )
 
-list.of.files <- "X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2021/station_download/Karoonda_25006.csv" 
+#list.of.files <- "X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2021/station_download/Karoonda_25006.csv" 
 
-#list.of.files <- "X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2021/station_download/Mannum_Council_Depot_24517.csv" 
+list.of.files <- "X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2021/station_download/Mannum_Council_Depot_24517.csv" 
 ########################################################################################
 
 ########################################################################################
@@ -277,6 +277,14 @@ GS_rain_deciles <- rbind(
   YEELANNA_018099gs_rain_with_summer
 )
 
+
+#############################################################################################################
+############### This is New Horizons sites Younghusband Jack? ######################################################################
+#############################################################################################################
+GS_rain_deciles <- rbind(
+  `MANNUM COUNCIL DEPOT_024517gs_rain_with_summer`
+)
+
 #################################################################################################################
 names(GS_rain_deciles)
 GS_rain_deciles <- GS_rain_deciles %>% 
@@ -329,16 +337,24 @@ unique(GS_rain_deciles$met_name_number)
 #     TRUE ~ as.character("check")
 #   ))
 
+# GS_rain_deciles <- GS_rain_deciles %>% 
+#   mutate(site = case_when(
+#     met_name_number == "KAROONDA_025006" ~ "Karoonda",
+#     met_name_number == "NARACOORTE (LOCHABER)_026015" ~ "Cadgee",
+#     met_name_number == "YEELANNA_018099" ~ "Brimpton_Lake",
+#     
+#     TRUE ~ as.character("check")
+#   ))
+
 GS_rain_deciles <- GS_rain_deciles %>% 
   mutate(site = case_when(
-    met_name_number == "KAROONDA_025006" ~ "Karoonda",
-    met_name_number == "NARACOORTE (LOCHABER)_026015" ~ "Cadgee",
-    met_name_number == "YEELANNA_018099" ~ "Brimpton_Lake",
+    met_name_number == "MANNUM COUNCIL DEPOT_024517" ~ "Younghusband",
     
     TRUE ~ as.character("check")
   ))
 
-write.csv(GS_rain_deciles, "X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2021/GS_rain_deciles_New_Horizons_sites.csv")
+
+write.csv(GS_rain_deciles, "X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2021/GS_rain_deciles_Younghusband_sites.csv")
                     
 
                    
@@ -364,6 +380,9 @@ list.of.files #with path
 #   "X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2021/station_download/Naracoorte_Lochaber_26015.csv",
 #   "X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2021/station_download/Karoonda_25006.csv"
 # )
+
+list.of.files <-"X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2021/station_download/Mannum_Council_Depot_24517.csv"  
+
 
 for (list.of.files in list.of.files){
   
@@ -458,11 +477,12 @@ annual_rain_2020 <- rbind(YEELANNA_018099annual_rain,
                           KAROONDA_025006annual_rain
                           )
 
-
+annual_rain_2020 <- rbind(`MANNUM COUNCIL DEPOT_024517annual_rain`
+)
 
 # write.csv(annual_rain_2020, "X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2021/annual_rain_2021_Racheal_sites.csv")
 # write.csv(annual_rain_2020, "X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2021/annual_rain_2021_Sam_sites.csv")
-write.csv(annual_rain_2020, "X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2021/annual_rain_2021_New_Horizons_sites.csv")
+write.csv(annual_rain_2020, "X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2021/annual_rain_2021_Younghusband_sites.csv")
 
  
  #"X:\Therese_Jackie\Sandy_soils\Sands weather\met_file2021"
