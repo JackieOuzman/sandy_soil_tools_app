@@ -269,7 +269,7 @@ primary <- primary %>%
     
   ) )
 
-#step 2b make a clm with what disturbance was performed
+#step 2b make a clm with what disturbance was performed...
 str(primary)
 
 primary <- primary %>% 
