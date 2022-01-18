@@ -81,18 +81,24 @@ unique(primary$placement_organic)
 
 primary<- primary %>% 
   mutate(placement_organic = case_when(
-    placement_organic == "300 & 600" ~ "60&30",
-    placement_organic == "80" ~ "8",
-    placement_organic == "300" ~ "30",
-    placement_organic == "800" ~ "80",
-    placement_organic == "600" ~ "60",
-    placement_organic == "75" ~ "7.5",
-    placement_organic == "200" ~ "20",
+    # placement_organic == "300 & 600" ~ "60&30",
+    # placement_organic == "80" ~ "8",
+    # placement_organic == "300" ~ "30",
+    # placement_organic == "800" ~ "80",
+    # placement_organic == "600" ~ "60",
+    # placement_organic == "75" ~ "7.5",
+    # placement_organic == "200" ~ "20",
     
-    placement_organic == "incorperated" ~ "incorperated_check_depth",
-    placement_organic == "50 cm" ~        "incorperated_check_50", #could be placed or incorperated
-    placement_organic == "30 cm" ~        "incorperated_check_30", #could be placed or incorperated
-    placement_organic == "surface" ~       "surface", 
+    placement_organic == "incorperated to 8 cm" ~         "incorp_8",
+    placement_organic == "incorperated to 50 cm" ~        "incorp_50", 
+    placement_organic == "incorporated to 50 cm" ~        "incorp_50", 
+    
+    placement_organic == "banded at 50 cm" ~              "band_50", 
+    placement_organic == "banded at 30 cm" ~              "band_30", 
+    
+    placement_organic == "surface" ~                      "surface", 
+    
+    
     
     TRUE ~ placement_organic
   ))
@@ -101,18 +107,22 @@ unique(primary$placement_fertiliser)
 
 primary<- primary %>% 
   mutate(placement_fertiliser = case_when(
-    placement_fertiliser == "300 & 600" ~ "60&30",
-    placement_fertiliser == "80" ~ "8",
-    placement_fertiliser == "300" ~ "30",
-    placement_fertiliser == "800" ~ "80",
-    placement_fertiliser == "600" ~ "60",
-    placement_fertiliser == "75" ~ "7.5",
-    placement_fertiliser == "200" ~ "20",
+    # placement_fertiliser == "300 & 600" ~ "60&30",
+    # placement_fertiliser == "80" ~ "8",
+    # placement_fertiliser == "300" ~ "30",
+    # placement_fertiliser == "800" ~ "80",
+    # placement_fertiliser == "600" ~ "60",
+    # placement_fertiliser == "75" ~ "7.5",
+    # placement_fertiliser == "200" ~ "20",
     
-    placement_fertiliser == "incorperated" ~ "incorperated_check_depth",
-    placement_fertiliser == "50 cm" ~        "incorperated_check_50", #could be placed or incorperated
-    placement_fertiliser == "30 cm" ~        "incorperated_check_30", #could be placed or incorperated
-    placement_fertiliser == "surface" ~       "surface", 
+    placement_fertiliser == "incorperated to 8 cm" ~         "incorp_8",
+    placement_fertiliser == "incorperated to 50 cm" ~        "incorp_50", 
+    placement_fertiliser == "incorporated to 50 cm" ~        "incorp_50", 
+    
+    placement_fertiliser == "banded at 50 cm" ~              "band_50", 
+    placement_fertiliser == "banded at 30 cm" ~              "band_30", 
+    
+    placement_fertiliser == "surface" ~                      "surface", 
     
     TRUE ~ placement_fertiliser
   ))
@@ -122,18 +132,22 @@ unique(primary$placement_other)
 
 primary<- primary %>% 
   mutate(placement_other = case_when(
-    placement_other == "300 & 600" ~ "60&30",
-    placement_other == "80" ~ "8",
-    placement_other == "300" ~ "30",
-    placement_other == "800" ~ "80",
-    placement_other == "600" ~ "60",
-    placement_other == "75" ~ "7.5",
-    placement_other == "200" ~ "20",
+    # placement_other == "300 & 600" ~ "60&30",
+    # placement_other == "80" ~ "8",
+    # placement_other == "300" ~ "30",
+    # placement_other == "800" ~ "80",
+    # placement_other == "600" ~ "60",
+    # placement_other == "75" ~ "7.5",
+    # placement_other == "200" ~ "20",
     
-    placement_other == "incorperated" ~ "incorperated_check_depth",
-    placement_other == "50 cm" ~        "incorperated_check_50", #could be placed or incorperated
-    placement_other == "30 cm" ~        "incorperated_check_30", #could be placed or incorperated
-    placement_other == "surface" ~       "surface", 
+    placement_other == "incorperated to 8 cm" ~         "incorp_8",
+    placement_other == "incorperated to 50 cm" ~        "incorp_50", 
+    placement_other == "incorporated to 50 cm" ~        "incorp_50", 
+    
+    placement_other == "banded at 50 cm" ~              "band_50", 
+    placement_other == "banded at 30 cm" ~              "band_30", 
+    
+    placement_other == "surface" ~                      "surface", 
     
     TRUE ~ placement_other
   ))
@@ -141,40 +155,34 @@ primary<- primary %>%
 #######################################################################################################################
 
 #######################################################################################################################
-# step 1 what depth was amendment applied? - I think I can use what is specified above
 
-# primary <- primary %>% 
-#   mutate(placement_jax = case_when(
-#     placement  == "surface"  ~           "surface",
-#     placement  == "incorporated"  ~      "mix",
-#     placement  == "deep"  ~              "deep",
-#     TRUE                  ~            placement)
-#     )
 
-#unique(primary$other_ameliorant)
 
-#step 2a make a clm with what ameliorant was added if any
+#make a clm with what ameliorant was added if any
 
 unique(primary$organic)
+unique(primary$fertiliser)
+unique(primary$other_ameliorant)
 
 primary <- primary %>% 
   mutate(amendment = case_when(
     
     ## cl.with.depth - chicken litter
     organic  == "chicken_compost" | organic  ==  "chicken_manure" | organic  ==  "chicken litter"| organic  ==  "chicken liitter"|organic  == "chicken_litter"
-    
+    &  fertiliser ==        "none"  
     &  other_ameliorant ==  "none"    ~        
     paste0("Cl",".", placement_organic),
     
     
     
     organic  == "chicken_compost" | organic  ==  "chicken_manure" | organic  ==  "chicken litter"| organic  ==  "chicken liitter"
+    &  fertiliser ==        "none"  
     &  other_ameliorant ==  "gypsum"       ~   
-    paste0("Cl.gypsum",".", placement_organic),
     paste0("Cl",".", placement_organic,".","gypsum" ,".", placement_other),
     
     
     organic  == "chicken_compost" | organic  ==  "chicken_manure" | organic  ==  "chicken litter"| organic  ==  "chicken liitter" 
+    &  fertiliser ==        "none"  
     &  other_ameliorant ==  "clay"       ~     
     paste0("Cl",".", placement_organic,".","clay" ,".", placement_other),
     
@@ -185,82 +193,85 @@ primary <- primary %>%
     paste0("Com",".", placement_organic),
     
     ## Lc.with.depth - lucerne
-    organic  == "lucerne"  
+    organic  ==            "lucerne" 
+    &  fertiliser ==        "none" 
     &  other_ameliorant ==  "none"    ~           
     paste0("Lc",".", placement_organic),
     
     
     
-    organic  == "lucerne"  
+    organic  ==            "lucerne"  
+    &  fertiliser ==        "none" 
     &  other_ameliorant ==  "gypsum"       ~      
     paste0("Lc",".", placement_organic,".", "gypsum", placement_other),
     
     
-    organic  == "lucerne"  
+    organic  == "lucerne" 
+    &  fertiliser ==        "none" 
     &  other_ameliorant ==  "clay"       ~        
     paste0("Lc",".", placement_organic, ,".","clay", ".",  placement_other),
     
     # This is from Murray - lucerne
-    organic  == "pelleted lucerne"  
+    organic  == "pelleted lucerne" 
+    &  fertiliser ==        "none" 
     &  other_ameliorant ==  "none"    ~   
     paste0("Lc",".", placement_organic),
     
     #no amendment
-    organic  == "none"  
-    &  fertiliser == "none"   
+    organic  ==           "none"  
+    &  fertiliser ==      "none"   
     &    other_ameliorant ==  "none"    
     ~      "none",
     
     #other amendment
-    organic  == "none"  
-    &  fertiliser == "none"   
-    &    other_ameliorant ==  "gypsum"    ~    
-    paste0("gypsum",".", placement_other),
+    organic  ==                "none"  
+    &  fertiliser ==           "none"   
+    & other_ameliorant ==      "gypsum"   
+    ~ paste0("gypsum",".", placement_other),
     
     
-    organic  == "none"  
-    &  fertiliser == "none"   
-    &    other_ameliorant ==  "clay"    ~      
-    paste0("clay"),
-    paste0("clay",".", placement_other),
+    organic  ==                "none"  
+    &  fertiliser ==           "none"   
+    &    other_ameliorant ==   "clay"    
+    ~ paste0("clay",".", placement_other),
     
     # This is from Murray - other amendment
-    organic  == "none"  
-    &  fertiliser == "none"   
-    &    other_ameliorant ==  "cereal"    ~    
-    paste0("cereal",".", placement_organic),
+    organic  ==           " cereal"  
+    & fertiliser ==        "none"   
+    & other_ameliorant ==  "none"    
+    ~ paste0("cereal",".", placement_organic),
     
     
-    organic  == "none"  
-    &  fertiliser == "none"   
-    &    other_ameliorant ==  "vetch"    ~     
-    paste0("vetch",".", placement_other),  ## this is wrong vetch should be in organic clm - what data looks like this?
+    organic  ==             "vetch"  
+    &  fertiliser ==         "none"   
+    &  other_ameliorant ==  "none"    
+    ~  paste0("vetch",".", placement_organic),  
     
     
-    organic  == "none"  
-    &  fertiliser == "none"   
-    &    other_ameliorant ==  "vetch - cereal"    ~     
-    paste0("vet_cer",".", placement_other),  ## this is wrong vetch should be in organic clm - what data looks like this?
+    organic  ==               "vetch - cereal"  
+    &  fertiliser ==          "none"   
+    &    other_ameliorant ==  "none"    
+    ~  paste0("vet_cer",".", placement_organic),  
     
-    organic  == "none"  
-    &  fertiliser == "none"   
-    &    other_ameliorant ==  "vetch - cereal - innoculant"    ~     
-    paste0("vet_cer_in",".", placement_other),  ## this is wrong vetch should be in organic clm - what data looks like this?
+    organic  ==                 "vetch - cereal - innoculant"  
+    &  fertiliser ==             "none"   
+    &    other_ameliorant ==    "none"   
+    ~ paste0("vet_cer_in",".", placement_organic),  
     
     #fertiliser amendment
-    organic  == "none"  
-    &  fertiliser != "none"   
-    &    other_ameliorant ==  "none"    ~      
+    organic  ==                 "none"  
+    &  fertiliser ==            "MAP; Urea" |   fertiliser == "MAP"
+    &    other_ameliorant ==    "none"    ~      
     paste0("Fert",".", placement_fertiliser),
     
-    organic  == "none"  
-    &  fertiliser != "none"   
-    &    other_ameliorant ==  "gypsum"    ~    
+    organic  ==                 "none"  
+    &  fertiliser ==            "MAP; Urea" |   fertiliser == "MAP"  
+    &    other_ameliorant ==    "gypsum"    ~    
     paste0("Fert",".", placement_fertiliser,".",gypsum",".", placement_other),
     
-    organic  == "none"  
-    &  fertiliser != "none"   
-    &    other_ameliorant ==  "clay"    ~      
+    organic  ==                 "none"  
+    &  fertiliser ==            "MAP; Urea" |   fertiliser == "MAP"   
+    &    other_ameliorant ==    "clay"    ~      
     paste0("Fert",".", placement_fertiliser,".",clay",".", placement_other),
     
     
