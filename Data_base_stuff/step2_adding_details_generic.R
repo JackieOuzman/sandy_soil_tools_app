@@ -174,11 +174,11 @@ primary <- primary %>%
     paste0("Cl",".", placement_organic),
     
     
-    
     organic  == "chicken_compost" | organic  ==  "chicken_manure" | organic  ==  "chicken litter"| organic  ==  "chicken liitter"
     &  fertiliser ==        "none"  
     &  other_ameliorant ==  "gypsum"       ~   
     paste0("Cl",".", placement_organic,".","gypsum" ,".", placement_other),
+    
     
     
     organic  == "chicken_compost" | organic  ==  "chicken_manure" | organic  ==  "chicken litter"| organic  ==  "chicken liitter" 
@@ -191,6 +191,7 @@ primary <- primary %>%
     organic  == "compost"   
     &  other_ameliorant ==  "none"       ~     
     paste0("Com",".", placement_organic),
+    
     
     ## Lc.with.depth - lucerne
     organic  ==            "lucerne" 
@@ -206,10 +207,13 @@ primary <- primary %>%
     paste0("Lc",".", placement_organic,".", "gypsum", placement_other),
     
     
-    organic  == "lucerne" 
+    
+    organic  ==            "lucerne" 
     &  fertiliser ==        "none" 
     &  other_ameliorant ==  "clay"       ~        
-    paste0("Lc",".", placement_organic, ,".","clay", ".",  placement_other),
+    paste0("Lc",".", placement_organic, ".","clay", ".",  placement_other),
+    
+  
     
     # This is from Murray - lucerne
     organic  == "pelleted lucerne" 
@@ -217,11 +221,14 @@ primary <- primary %>%
     &  other_ameliorant ==  "none"    ~   
     paste0("Lc",".", placement_organic),
     
+    
+    
     #no amendment
     organic  ==           "none"  
     &  fertiliser ==      "none"   
     &    other_ameliorant ==  "none"    
     ~      "none",
+    
     
     #other amendment
     organic  ==                "none"  
@@ -230,10 +237,13 @@ primary <- primary %>%
     ~ paste0("gypsum",".", placement_other),
     
     
+
     organic  ==                "none"  
     &  fertiliser ==           "none"   
     &    other_ameliorant ==   "clay"    
     ~ paste0("clay",".", placement_other),
+    
+    
     
     # This is from Murray - other amendment
     organic  ==           " cereal"  
@@ -248,15 +258,20 @@ primary <- primary %>%
     ~  paste0("vetch",".", placement_organic),  
     
     
+    
     organic  ==               "vetch - cereal"  
     &  fertiliser ==          "none"   
     &    other_ameliorant ==  "none"    
     ~  paste0("vet_cer",".", placement_organic),  
     
+    
+    
     organic  ==                 "vetch - cereal - innoculant"  
     &  fertiliser ==             "none"   
     &    other_ameliorant ==    "none"   
     ~ paste0("vet_cer_in",".", placement_organic),  
+    
+    
     
     #fertiliser amendment
     organic  ==                 "none"  
@@ -264,31 +279,41 @@ primary <- primary %>%
     &    other_ameliorant ==    "none"    ~      
     paste0("Fert",".", placement_fertiliser),
     
+    
+    
     organic  ==                 "none"  
     &  fertiliser ==            "MAP; Urea" |   fertiliser == "MAP"  
     &    other_ameliorant ==    "gypsum"    ~    
-    paste0("Fert",".", placement_fertiliser,".",gypsum",".", placement_other),
+    paste0("Fert",".", placement_fertiliser,".","gypsum",".", placement_other),
     
+    
+  
     organic  ==                 "none"  
     &  fertiliser ==            "MAP; Urea" |   fertiliser == "MAP"   
     &    other_ameliorant ==    "clay"    ~      
-    paste0("Fert",".", placement_fertiliser,".",clay",".", placement_other),
-    
-    
+    paste0("Fert",".", placement_fertiliser,".","clay",".", placement_other),
     
     TRUE ~ as.character("check")
     
-  ) )
+  ) )  
+    
+   
 
 #step 2b make a clm with what disturbance was performed...
 str(primary)
+unique(primary$rip)
+unique(primary$Rip_depth_jax)
+
+unique(primary$mix)
+
 
 primary <- primary %>% 
   mutate(disturbance  = case_when(
     rip  == "none"      &      mix == "none"           ~      "Unmodified",
     rip  == "none"      &      mix == "spade"          ~       paste0("Spade.30" ),
     rip  == "none"      &      mix == "Plozza"         ~       paste0("DiscInv.30" ),
-    rip  == "none"      &      mix == "pre-drill"      ~       paste0("pre_drill.", drill_depth ),
+    rip  == "none"      &      mix == "pre-drill"      ~       paste0("Pre_drill.", drill_depth ),
+    rip  == "none"      &      mix == "inclusion"      ~       paste0("Inclusion.50", drill_depth ),#check that this is always 50cm
     
     
     rip  == "rip"       &      mix == "none"           ~    paste0("Rip.", Rip_depth_jax ),
