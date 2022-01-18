@@ -11,18 +11,37 @@ list.of.files <- list.files(current.folder, ".csv",full.names=T) #the trick is g
 #list.of.files <- list.files(current.folder, full.names=T) #the trick is getting the full name - all the files
 list.of.files
 
+#####################################################################################################################
+#### Get results and metadata file path
+
+#1 and 2 Bute
+
+# input_data_file <- "X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/step1_collating_files/Butes_results.csv"
+# input_data_file_metadata <- "X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/step1_collating_files/Butes_sites_metadata.csv"
+# 
+# 
+# list.files("X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2021/", ".csv",full.names=T)
+# 
+# input_data_file_rain <- "X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2021/GS_rain_deciles_Sam_sites.csv"
 
 
+# 3. Yenda
+input_data_file <- "X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/step1_collating_files/Yenda_results.csv"
+input_data_file_metadata <- "X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/step1_collating_files/Yenda_site_metadata.csv"
 
-input_data_file <- "X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/step1_collating_files/Butes_results.csv"
-input_data_file_metadata <- "X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/step1_collating_files/Butes_sites_metadata.csv"
-
+#####################################################################################################################
+#### Get rainfall / climate data file path
 
 list.files("X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2021/", ".csv",full.names=T)
 
-input_data_file_rain <- "X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2021/GS_rain_deciles_Sam_sites.csv"
+#1 and 2 Bute
+#input_data_file_rain <- "X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2021/GS_rain_deciles_Sam_sites.csv"
 
+#3 Yenda
+input_data_file_rain <- "X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2021/GS_rain_deciles_Racheal_sites.csv"
 
+##################################################################################################################
+## download the data using the specified file path above
 
 primary <- read_csv(input_data_file)
 
@@ -37,7 +56,9 @@ primary <- read_csv(input_data_file,
 
 str(primary)
 unique(primary$rip_depth)
-
+str(primary$rip_depth)
+## some sites are a character so now I need to make everything character?
+primary$rip_depth <- as.character(primary$rip_depth)
 
 primary<- primary %>% 
   mutate(Rip_depth_jax = case_when(
@@ -90,8 +111,10 @@ primary<- primary %>%
     # placement_organic == "200" ~ "20",
     
     placement_organic == "incorperated to 8 cm" ~         "incorp_8",
+    placement_organic == "incorporated to 8 cm" ~         "incorp_8",
     placement_organic == "incorperated to 50 cm" ~        "incorp_50", 
-    placement_organic == "incorporated to 50 cm" ~        "incorp_50", 
+    placement_organic == "incorporated to 50 cm" ~        "incorp_50",
+    placement_organic == "incorporated to 30 cm" ~        "incorp_30", 
     
     placement_organic == "banded at 50 cm" ~              "band_50", 
     placement_organic == "banded at 30 cm" ~              "band_30", 
@@ -116,6 +139,7 @@ primary<- primary %>%
     # placement_fertiliser == "200" ~ "20",
     
     placement_fertiliser == "incorperated to 8 cm" ~         "incorp_8",
+    placement_fertiliser == "incorporated to 8 cm" ~         "incorp_8",
     placement_fertiliser == "incorperated to 50 cm" ~        "incorp_50", 
     placement_fertiliser == "incorporated to 50 cm" ~        "incorp_50", 
     
@@ -123,6 +147,7 @@ primary<- primary %>%
     placement_fertiliser == "banded at 30 cm" ~              "band_30", 
     
     placement_fertiliser == "surface" ~                      "surface", 
+    placement_fertiliser == "foliar" ~                       "foliar", 
     
     TRUE ~ placement_fertiliser
   ))
@@ -142,7 +167,11 @@ primary<- primary %>%
     
     placement_other == "incorperated to 8 cm" ~         "incorp_8",
     placement_other == "incorperated to 50 cm" ~        "incorp_50", 
+    
+    
+    placement_other == "incorporated to 8 cm" ~         "incorp_8",
     placement_other == "incorporated to 50 cm" ~        "incorp_50", 
+    placement_other == "incorporated to 30 cm" ~        "incorp_30",
     
     placement_other == "banded at 50 cm" ~              "band_50", 
     placement_other == "banded at 30 cm" ~              "band_30", 
@@ -275,23 +304,34 @@ primary <- primary %>%
     
     #fertiliser amendment
     organic  ==                 "none"  
-    &  fertiliser ==            "MAP; Urea" |   fertiliser == "MAP"
+    &  fertiliser ==            "MAP; Urea" |   fertiliser == "MAP" |fertiliser == "Urea"|fertiliser == "Tes"
     &    other_ameliorant ==    "none"    ~      
     paste0("Fert",".", placement_fertiliser),
     
     
     
     organic  ==                 "none"  
-    &  fertiliser ==            "MAP; Urea" |   fertiliser == "MAP"  
+    &  fertiliser ==            "MAP; Urea" |   fertiliser == "MAP" |fertiliser == "Urea"|fertiliser == "Tes"
     &    other_ameliorant ==    "gypsum"    ~    
     paste0("Fert",".", placement_fertiliser,".","gypsum",".", placement_other),
     
     
   
     organic  ==                 "none"  
-    &  fertiliser ==            "MAP; Urea" |   fertiliser == "MAP"   
+    &  fertiliser ==            "MAP; Urea" |   fertiliser == "MAP" |fertiliser == "Urea"|fertiliser == "Tes"  
     &    other_ameliorant ==    "clay"    ~      
     paste0("Fert",".", placement_fertiliser,".","clay",".", placement_other),
+    
+    
+    organic  == "chicken_compost" | organic  ==  "chicken_manure" | organic  ==  "chicken litter"| organic  ==  "chicken liitter"|organic  == "chicken_litter"
+    &  fertiliser ==            "none"  
+    &    other_ameliorant ==    "lime"    ~      
+    paste0("Lc",".", placement_organic, ".","clay", ".",  placement_other),
+    
+    organic  ==                "none"  
+    &  fertiliser ==           "none"   
+    &    other_ameliorant ==   "lime"    
+    ~ paste0("lime",".", placement_other),
     
     TRUE ~ as.character("check")
     
@@ -314,7 +354,7 @@ primary <- primary %>%
     rip  == "none"      &      mix == "Plozza"         ~       paste0("DiscInv.30" ),
     rip  == "none"      &      mix == "pre-drill"      ~       paste0("Pre_drill.", drill_depth ),
     rip  == "none"      &      mix == "inclusion"      ~       paste0("Inclusion.50", drill_depth ),#check that this is always 50cm
-    
+    rip  == "none"      &      mix == "sweep"      ~           paste0("Sweep.30"),
     
     rip  == "rip"       &      mix == "none"           ~    paste0("Rip.", Rip_depth_jax ),
     rip  == "rip"       &      mix == "inclusion"      ~    paste0("Rip.", Rip_depth_jax, "IncRip" ),
@@ -361,6 +401,14 @@ primary <- primary %>%
 primary_metadata <- read_csv(input_data_file_metadata, 
                                  col_types = cols(Amelioration_Date = col_date(format = "%Y-%m-%d"), 
                                                   CropType_Prior = col_character(), 
+                                                  CropType_Crop_01 = col_character(), 
+                                                  CropType_Crop_02 = col_character(), 
+                                                  CropType_Crop_03 = col_character(), 
+                                                  CropType_Crop_04 = col_character(), 
+                                                  CropType_Crop_05 = col_character(),
+                                                  CropType_Crop_06 = col_character(),
+                                                  CropType_Crop_07 = col_character(),
+                                                  
                                                   Harvest_Date_01 = col_date(format = "%Y-%m-%d"), 
                                                   Harvest_Date_02 = col_date(format = "%Y-%m-%d"), 
                                                   Harvest_Date_03 = col_date(format = "%Y-%m-%d"), 
@@ -422,7 +470,8 @@ primary_metadata <- primary_metadata %>%
       site == "Lowalide" ~       -35.0459,
       site == "Ouyen" ~          -35.0681,
       site == "Bute_Trengrove" ~  -33.8612,
-      site == "Bute_CSIRO" ~      -33.8612
+      site == "Bute_CSIRO" ~      -33.8612,
+      site == "Yenda" ~           -34.2502
     )
   )
 primary_metadata <- primary_metadata %>%
@@ -433,7 +482,8 @@ primary_metadata <- primary_metadata %>%
       site == "Lowalide" ~        139.9791 ,
       site == "Ouyen" ~           142.3125,
       site == "Bute_Trengrove" ~  138.0114,
-      site == "Bute_CSIRO" ~      138.0114
+      site == "Bute_CSIRO" ~      138.0114,
+      site == "Yenda"~            146.1897
     )
   )
 
@@ -516,6 +566,7 @@ primary_join <- primary_join %>%
   ))
 
 ### get the previous crop
+
 primary_join <- primary_join %>%
   mutate (previous_crop = case_when(
     yr_post_amelioration == 0 ~ CropType_Prior,
@@ -622,6 +673,7 @@ GS_rain_deciles <- GS_rain_deciles %>%
 # 
 # GS_rain_deciles_impact_sites <- rbind(GS_rain_deciles_impact_sites,Kooloonong_GS_rain)
 # rm(Kooloonong_GS_rain)
+GS_rain_deciles
 
 GS_rain_deciles <- GS_rain_deciles %>% 
   mutate(site_year =paste0(site,"_", year))
@@ -630,8 +682,8 @@ str(GS_rain_deciles)
 
 ## join to primary data based on year and site
 str(primary_join_1)
-primary_join_1 <- primary_join_1 %>% 
-  mutate(site = "Bute")
+# primary_join_1 <- primary_join_1 %>% 
+#   mutate(site = "Bute")
 
 primary_join_1 <- primary_join_1 %>% 
   mutate(site_year = paste0(site,"_", year)) 
@@ -654,8 +706,12 @@ check <- anti_join(primary_join_1, GS_rain_deciles)#? not sure if I am expecting
 ############                      Write out file                 ##########################
 #############################################################################################
 
+# write.csv(primary_join_2,
+#           "X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/step2/Bute_sites_step1_2.csv" ,
+#           row.names = FALSE)
+
 write.csv(primary_join_2,
-          "X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/step2/Bute_sites_step1_2.csv" ,
+          "X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/step2/Yenda_sites_step1_2.csv" ,
           row.names = FALSE)
 
 names(primary_join_2)
@@ -675,11 +731,13 @@ primary_neat <- primary_join_2 %>%
                 decile)
  
 #View(primary_neat)               
+# write.csv(primary_neat,
+#           "X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/step2/Bute_sites_step1_2_neat.csv" ,
+#           row.names = FALSE)               
+
 write.csv(primary_neat,
-          "X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/step2/Bute_sites_step1_2_neat.csv" ,
-          row.names = FALSE)               
-
-
+          "X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/step2/Yenda_sites_step1_2_neat.csv" ,
+          row.names = FALSE)  
 #############################################################################################
 ############                     control results only               ##########################
 #############################################################################################
@@ -741,7 +799,9 @@ primary_with_control <- primary_with_control %>%
   filter(Descriptors != "Control")
 
 
+# write.csv(primary_with_control,
+#           "X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/step2/Bute_sites_step1_2_control.csv" ,
+#           row.names = FALSE) 
 write.csv(primary_with_control,
-          "X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/step2/Bute_sites_step1_2_control.csv" ,
+          "X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/step2/Yenda_sites_step1_2_control.csv" ,
           row.names = FALSE) 
-
