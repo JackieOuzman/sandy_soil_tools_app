@@ -15,7 +15,7 @@ list.of.files
 
 
 input_data_file <- "X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/step1_collating_files/Butes_results.csv"
-input_data_file_metadata <- "X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/step1_collating_files/Butes_sites_soil_constraints.csv"
+input_data_file_metadata <- "X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/step1_collating_files/Butes_sites_metadata.csv"
 
 
 list.files("X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2021/", ".csv",full.names=T)
@@ -355,7 +355,43 @@ primary <- primary %>%
 ###################################################################################################################
 ####  metadata  #####
 
-primary_metadata <- read_csv(input_data_file_metadata)
+
+
+
+primary_metadata <- read_csv(input_data_file_metadata, 
+                                 col_types = cols(Amelioration_Date = col_date(format = "%Y-%m-%d"), 
+                                                  CropType_Prior = col_character(), 
+                                                  Harvest_Date_01 = col_date(format = "%Y-%m-%d"), 
+                                                  Harvest_Date_02 = col_date(format = "%Y-%m-%d"), 
+                                                  Harvest_Date_03 = col_date(format = "%Y-%m-%d"), 
+                                                  Harvest_Date_04 = col_date(format = "%Y-%m-%d"), 
+                                                  Harvest_Date_05 = col_date(format = "%Y-%m-%d"), 
+                                                  Harvest_Date_06 = col_date(format = "%Y-%m-%d"), 
+                                                  Harvest_Date_07 = col_date(format = "%Y-%m-%d"), 
+                                                  Longitude = col_double(), PaddockName = col_skip(), 
+                                                  `Site identifiers_Grower Name` = col_skip(), 
+                                                  `Site identifiers_Region` = col_skip(), 
+                                                  `Site identifiers_SS_#` = col_skip(), 
+                                                  SowingDate_01 = col_date(format = "%Y-%m-%d"), 
+                                                  SowingDate_02 = col_date(format = "%Y-%m-%d"), 
+                                                  SowingDate_03 = col_date(format = "%Y-%m-%d"), 
+                                                  SowingDate_04 = col_date(format = "%Y-%m-%d"), 
+                                                  SowingDate_05 = col_date(format = "%Y-%m-%d"), 
+                                                  SowingDate_06 = col_date(format = "%Y-%m-%d"), 
+                                                  SowingDate_07 = col_date(format = "%Y-%m-%d"), 
+                                                  other = col_character()))
+
+
+
+
+names(primary_metadata)
+# primary_metadata <- primary_metadata %>% 
+#   dplyr::select(`Site Name`,Repellence:other, 
+#                 `Trial Years_Year_01`:`Trial Years_Year_07`,
+#                 
+#                 
+#                 Amelioration_Year)
+
 
 primary_metadata <- primary_metadata %>% 
   rename(site  = `Site Name`)
@@ -384,16 +420,20 @@ primary_metadata <- primary_metadata %>%
       site == "Carwarp Amelioration" ~        -34.3075, #Red Cliffs is the closest met station
       site == "Waikerie" ~       -34.2159,
       site == "Lowalide" ~       -35.0459,
-      site == "Ouyen" ~          -35.0681 
+      site == "Ouyen" ~          -35.0681,
+      site == "Bute_Trengrove" ~  -33.8612,
+      site == "Bute_CSIRO" ~      -33.8612
     )
   )
 primary_metadata <- primary_metadata %>%
   mutate(
     Longitude = case_when(
       site == "Carwarp Amelioration" ~        142.1882, #Red Cliffs is the closest met station
-      site == "Waikerie" ~       140.1860,
-      site == "Lowalide" ~       139.9791 ,
-      site == "Ouyen" ~          142.3125
+      site == "Waikerie" ~        140.1860,
+      site == "Lowalide" ~        139.9791 ,
+      site == "Ouyen" ~           142.3125,
+      site == "Bute_Trengrove" ~  138.0114,
+      site == "Bute_CSIRO" ~      138.0114
     )
   )
 
@@ -401,7 +441,10 @@ unique(primary_metadata$site)
 primary_metadata <- primary_metadata %>% 
   mutate(site = case_when(
     site == "Carwarp Amelioration" ~  "Carwarp",
-    site == "Lowalide" ~  "Lowaldie",
+    site == "Lowalide" ~              "Lowaldie",
+    # site == "Bute_Trengrove" ~        "Bute", #not sure if this is what I want to do ? ie call both Bute sites Bute 
+    # site == "Bute_CSIRO" ~            "Bute",
+    
     TRUE ~ site))
 
 unique(primary$site)
@@ -455,6 +498,9 @@ primary_join <- primary_join %>%
     yr_post_amelioration == 1 ~ SowingDate_02,
     yr_post_amelioration == 2 ~ SowingDate_03,
     yr_post_amelioration == 3 ~ SowingDate_04,
+    yr_post_amelioration == 4 ~ SowingDate_05,
+    yr_post_amelioration == 5 ~ SowingDate_06,
+    yr_post_amelioration == 6 ~ SowingDate_07,
   ))
 
 ### get the harvest date
@@ -464,6 +510,9 @@ primary_join <- primary_join %>%
     yr_post_amelioration == 1 ~ Harvest_Date_02,
     yr_post_amelioration == 2 ~ Harvest_Date_03,
     yr_post_amelioration == 3 ~ Harvest_Date_04,
+    yr_post_amelioration == 5 ~ Harvest_Date_05,
+    yr_post_amelioration == 6 ~ Harvest_Date_06,
+    yr_post_amelioration == 7 ~ Harvest_Date_07,
   ))
 
 ### get the previous crop
@@ -473,10 +522,14 @@ primary_join <- primary_join %>%
     yr_post_amelioration == 1 ~ CropType_Crop_01,
     yr_post_amelioration == 2 ~ CropType_Crop_02,
     yr_post_amelioration == 3 ~ CropType_Crop_03,
+    yr_post_amelioration == 4 ~ CropType_Crop_04,
+    yr_post_amelioration == 5 ~ CropType_Crop_05,
+    yr_post_amelioration == 6 ~ CropType_Crop_06,
+    yr_post_amelioration == 7 ~ CropType_Crop_07,
   ))
 
 ## drop the clm that were used for crop harvest and sowing cals
-names(primary_join_1)
+names(primary_join)
 primary_join_1 <- primary_join %>%
   dplyr::select(
     -"CropType_Prior",
@@ -505,15 +558,17 @@ primary_join_1 <- primary_join %>%
     -"Harvest_Date_06",
     -"Harvest_Date_07",
   
-     -"Site identifiers_SS_#",
-     -"Site identifiers_Region",
-     -"Site identifiers_Grower Name",
-     -"PaddockName" ,
+     # -"Site identifiers_SS_#",
+     # -"Site identifiers_Region",
+     # -"Site identifiers_Grower Name",
+     # -"PaddockName" ,
 
     -"Amelioration_Year_value",
 
     -"Rip_depth_jax" ,
-    -"placement_jax" ,
+    -"placement_organic",
+    -"placement_fertiliser",
+    -"placement_other" ,
     - "amendment" ,
     - "disturbance"  ,
  
@@ -538,12 +593,12 @@ names(primary_join_1)    # #
 #X:\Therese_Jackie\Sandy_soils\App_development2021\sandy_soil_tools_app\decile_rainfall_cals.R
 # the script produces a csv file that I will use here
 
-GS_rain_deciles_murray_sites <- read_csv(input_data_file_rain)
-GS_rain_deciles_murray_sites <- dplyr::select(GS_rain_deciles_murray_sites, -'X1')
+GS_rain_deciles <- read_csv(input_data_file_rain)
+GS_rain_deciles <- dplyr::select(GS_rain_deciles, -'X1')
 
-unique(GS_rain_deciles_murray_sites$site)
+unique(GS_rain_deciles$site)
 ## I Carwarp is splet wrong
-GS_rain_deciles_murray_sites <- GS_rain_deciles_murray_sites %>% 
+GS_rain_deciles <- GS_rain_deciles %>% 
   mutate(site = case_when(
     site == "Carwap" ~ "Carwarp",
     TRUE ~site
@@ -568,17 +623,20 @@ GS_rain_deciles_murray_sites <- GS_rain_deciles_murray_sites %>%
 # GS_rain_deciles_impact_sites <- rbind(GS_rain_deciles_impact_sites,Kooloonong_GS_rain)
 # rm(Kooloonong_GS_rain)
 
-GS_rain_deciles_murray_sites <- GS_rain_deciles_murray_sites %>% 
+GS_rain_deciles <- GS_rain_deciles %>% 
   mutate(site_year =paste0(site,"_", year))
-str(GS_rain_deciles_murray_sites)
+str(GS_rain_deciles)
 
 
 ## join to primary data based on year and site
 str(primary_join_1)
 primary_join_1 <- primary_join_1 %>% 
+  mutate(site = "Bute")
+
+primary_join_1 <- primary_join_1 %>% 
   mutate(site_year = paste0(site,"_", year)) 
-primary_join_2<-left_join(primary_join_1, GS_rain_deciles_murray_sites)
-#check <- anti_join(primary_join_1, GS_rain_deciles_murray_sites)
+primary_join_2<-left_join(primary_join_1, GS_rain_deciles)
+check <- anti_join(primary_join_1, GS_rain_deciles)#? not sure if I am expecting this to be I think zero
 
 
 
@@ -597,7 +655,7 @@ primary_join_2<-left_join(primary_join_1, GS_rain_deciles_murray_sites)
 #############################################################################################
 
 write.csv(primary_join_2,
-          "X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/Murrays_sites_step1_2.csv" ,
+          "X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/step2/Bute_sites_step1_2.csv" ,
           row.names = FALSE)
 
 names(primary_join_2)
@@ -618,7 +676,7 @@ primary_neat <- primary_join_2 %>%
  
 #View(primary_neat)               
 write.csv(primary_neat,
-          "X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/Murrays_sites_step1_2_neat.csv" ,
+          "X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/step2/Bute_sites_step1_2_neat.csv" ,
           row.names = FALSE)               
 
 
@@ -648,7 +706,7 @@ primary_control <- primary_control %>%
 
 
 ## Looks like I want to match up the control with the site year and rep_block
-## But be careful at Ouyen the site need to use site_sub
+## But be careful at Ouyen the site need to use site_sub and same for Bute
 
 #a) make the dataset for control as small as possible and rename the yield biomass and established headings
 str(primary_control)
@@ -684,6 +742,6 @@ primary_with_control <- primary_with_control %>%
 
 
 write.csv(primary_with_control,
-          "X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/Murrays_sites_step1_2_control.csv" ,
+          "X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/step2/Bute_sites_step1_2_control.csv" ,
           row.names = FALSE) 
 
