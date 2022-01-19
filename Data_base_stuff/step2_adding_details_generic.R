@@ -616,7 +616,6 @@ primary_join_1 <- primary_join %>%
 
     -"Amelioration_Year_value",
 
-    -"Rip_depth_jax" ,
     -"placement_organic",
     -"placement_fertiliser",
     -"placement_other" ,
@@ -716,19 +715,24 @@ write.csv(primary_join_2,
 
 names(primary_join_2)
 primary_neat <- primary_join_2 %>% 
-  dplyr::select(ID:year, 
-                site_sub,
-                plot,
-                rep_block,
-                crop ,
-                rip,rip_depth,
-                timing,
+  dplyr::select(ID,
                 Descriptors,
+                site,
+                site_sub,
+                year, 
+                crop ,
+                rip,
+                Rip_depth_jax,
                 establishment:dry_biomass,
                 Latitude, Longitude,
                 Amelioration_Year,yr_post_amelioration,
                 sowing_date,harvest_date,previous_crop,
-                decile)
+                decile,
+                plot,
+                rep_block,
+                timing,
+                comments
+                )
  
 #View(primary_neat)               
 # write.csv(primary_neat,
