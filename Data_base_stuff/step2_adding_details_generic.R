@@ -206,14 +206,14 @@ primary <- primary %>%
     organic  == "chicken_compost" | organic  ==  "chicken_manure" | organic  ==  "chicken litter"| organic  ==  "chicken liitter"
     &  fertiliser ==        "none"  
     &  other_ameliorant ==  "gypsum"       ~   
-    paste0("Cl",".", placement_organic,".","gypsum" ,".", placement_other),
+    paste0("Cl",".", placement_organic,".","Gypsum" ,".", placement_other),
     
     
     
     organic  == "chicken_compost" | organic  ==  "chicken_manure" | organic  ==  "chicken litter"| organic  ==  "chicken liitter" 
     &  fertiliser ==        "none"  
     &  other_ameliorant ==  "clay"       ~     
-    paste0("Cl",".", placement_organic,".","clay" ,".", placement_other),
+    paste0("Cl",".", placement_organic,".","Clay" ,".", placement_other),
     
     
     # This is from Murray - compost
@@ -233,14 +233,14 @@ primary <- primary %>%
     organic  ==            "lucerne"  
     &  fertiliser ==        "none" 
     &  other_ameliorant ==  "gypsum"       ~      
-    paste0("Lc",".", placement_organic,".", "gypsum", placement_other),
+    paste0("Lc",".", placement_organic,".", "Gypsum", placement_other),
     
     
     
     organic  ==            "lucerne" 
     &  fertiliser ==        "none" 
     &  other_ameliorant ==  "clay"       ~        
-    paste0("Lc",".", placement_organic, ".","clay", ".",  placement_other),
+    paste0("Lc",".", placement_organic, ".","Clay", ".",  placement_other),
     
   
     
@@ -263,14 +263,14 @@ primary <- primary %>%
     organic  ==                "none"  
     &  fertiliser ==           "none"   
     & other_ameliorant ==      "gypsum"   
-    ~ paste0("gypsum",".", placement_other),
+    ~ paste0("Gypsum",".", placement_other),
     
     
 
     organic  ==                "none"  
     &  fertiliser ==           "none"   
     &    other_ameliorant ==   "clay"    
-    ~ paste0("clay",".", placement_other),
+    ~ paste0("Clay",".", placement_other),
     
     
     
@@ -278,27 +278,27 @@ primary <- primary %>%
     organic  ==           " cereal"  
     & fertiliser ==        "none"   
     & other_ameliorant ==  "none"    
-    ~ paste0("cereal",".", placement_organic),
+    ~ paste0("Cereal",".", placement_organic),
     
     
-    organic  ==             "vetch"  
+    organic  ==             "etch"  
     &  fertiliser ==         "none"   
     &  other_ameliorant ==  "none"    
-    ~  paste0("vetch",".", placement_organic),  
+    ~  paste0("Vetch",".", placement_organic),  
     
     
     
     organic  ==               "vetch - cereal"  
     &  fertiliser ==          "none"   
     &    other_ameliorant ==  "none"    
-    ~  paste0("vet_cer",".", placement_organic),  
+    ~  paste0("Vet_Cer",".", placement_organic),  
     
     
     
     organic  ==                 "vetch - cereal - innoculant"  
     &  fertiliser ==             "none"   
     &    other_ameliorant ==    "none"   
-    ~ paste0("vet_cer_in",".", placement_organic),  
+    ~ paste0("Vet_Cer_In",".", placement_organic),  
     
     
     
@@ -326,12 +326,12 @@ primary <- primary %>%
     organic  == "chicken_compost" | organic  ==  "chicken_manure" | organic  ==  "chicken litter"| organic  ==  "chicken liitter"|organic  == "chicken_litter"
     &  fertiliser ==            "none"  
     &    other_ameliorant ==    "lime"    ~      
-    paste0("Lc",".", placement_organic, ".","clay", ".",  placement_other),
+    paste0("Cl",".", placement_organic, ".","Clay", ".",  placement_other),
     
     organic  ==                "none"  
     &  fertiliser ==           "none"   
     &    other_ameliorant ==   "lime"    
-    ~ paste0("lime",".", placement_other),
+    ~ paste0("Lime",".", placement_other),
     
     TRUE ~ as.character("check")
     
@@ -809,3 +809,4 @@ primary_with_control <- primary_with_control %>%
 write.csv(primary_with_control,
           "X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/step2/Yenda_sites_step1_2_control.csv" ,
           row.names = FALSE) 
+
