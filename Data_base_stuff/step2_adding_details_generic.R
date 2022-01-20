@@ -14,20 +14,23 @@ list.of.files
 #####################################################################################################################
 #### Get results and metadata file path
 
+#Specify the site
+site_name <- "Bute"
+
 #1 and 2 Bute
 
-# input_data_file <- "X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/step1_collating_files/Butes_results.csv"
-# input_data_file_metadata <- "X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/step1_collating_files/Butes_sites_metadata.csv"
-# 
-# 
-# list.files("X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2021/", ".csv",full.names=T)
-# 
-# input_data_file_rain <- "X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2021/GS_rain_deciles_Sam_sites.csv"
+input_data_file <- "X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/step1_collating_files/Butes_results.csv"
+input_data_file_metadata <- "X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/step1_collating_files/Butes_sites_metadata.csv"
+
+
+list.files("X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2021/", ".csv",full.names=T)
+
+input_data_file_rain <- "X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2021/GS_rain_deciles_Sam_sites.csv"
 
 
 # 3. Yenda
-input_data_file <- "X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/step1_collating_files/Yenda_results.csv"
-input_data_file_metadata <- "X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/step1_collating_files/Yenda_site_metadata.csv"
+ # input_data_file <- "X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/step1_collating_files/Yenda_results.csv"
+ # input_data_file_metadata <- "X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/step1_collating_files/Yenda_site_metadata.csv"
 
 #####################################################################################################################
 #### Get rainfall / climate data file path
@@ -35,10 +38,10 @@ input_data_file_metadata <- "X:/Therese_Jackie/Sandy_soils/Development_database/
 list.files("X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2021/", ".csv",full.names=T)
 
 #1 and 2 Bute
-#input_data_file_rain <- "X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2021/GS_rain_deciles_Sam_sites.csv"
+input_data_file_rain <- "X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2021/GS_rain_deciles_Sam_sites.csv"
 
 #3 Yenda
-input_data_file_rain <- "X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2021/GS_rain_deciles_Racheal_sites.csv"
+#input_data_file_rain <- "X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2021/GS_rain_deciles_Racheal_sites.csv"
 
 ##################################################################################################################
 ## download the data using the specified file path above
@@ -48,7 +51,7 @@ primary <- read_csv(input_data_file)
 primary <- read_csv(input_data_file, 
                           col_types = cols(drill_depth = col_double(), 
                                            dry_biomass = col_double(), timing = col_character()))
-
+names(primary)
 #################################################################################################################
 ####   Create the descriptors #####
 
@@ -353,7 +356,7 @@ primary <- primary %>%
     rip  == "none"      &      mix == "spade"          ~       paste0("Spade.30" ),
     rip  == "none"      &      mix == "Plozza"         ~       paste0("DiscInv.30" ),
     rip  == "none"      &      mix == "pre-drill"      ~       paste0("Pre_drill.", drill_depth ),
-    rip  == "none"      &      mix == "inclusion"      ~       paste0("Inclusion.50", drill_depth ),#check that this is always 50cm
+    rip  == "none"      &      mix == "inclusion"      ~       paste0("Inc.50" ),#check that this is always 50cm
     rip  == "none"      &      mix == "sweep"      ~           paste0("Sweep.30"),
     
     rip  == "rip"       &      mix == "none"           ~    paste0("Rip.", Rip_depth_jax ),
@@ -681,8 +684,8 @@ str(GS_rain_deciles)
 
 ## join to primary data based on year and site
 str(primary_join_1)
-# primary_join_1 <- primary_join_1 %>% 
-#   mutate(site = "Bute")
+primary_join_1 <- primary_join_1 %>%
+  mutate(site = "Bute")
 
 primary_join_1 <- primary_join_1 %>% 
   mutate(site_year = paste0(site,"_", year)) 
@@ -705,13 +708,13 @@ check <- anti_join(primary_join_1, GS_rain_deciles)#? not sure if I am expecting
 ############                      Write out file                 ##########################
 #############################################################################################
 
-# write.csv(primary_join_2,
-#           "X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/step2/Bute_sites_step1_2.csv" ,
-#           row.names = FALSE)
-
 write.csv(primary_join_2,
-          "X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/step2/Yenda_sites_step1_2.csv" ,
+          "X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/step2/Bute_sites_step1_2.csv" ,
           row.names = FALSE)
+
+# write.csv(primary_join_2,
+#           "X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/step2/Yenda_sites_step1_2.csv" ,
+#           row.names = FALSE)
 
 names(primary_join_2)
 primary_neat <- primary_join_2 %>% 
@@ -735,13 +738,13 @@ primary_neat <- primary_join_2 %>%
                 )
  
 #View(primary_neat)               
-# write.csv(primary_neat,
-#           "X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/step2/Bute_sites_step1_2_neat.csv" ,
-#           row.names = FALSE)               
-
 write.csv(primary_neat,
-          "X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/step2/Yenda_sites_step1_2_neat.csv" ,
-          row.names = FALSE)  
+          "X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/step2/Bute_sites_step1_2_neat.csv" ,
+          row.names = FALSE)
+
+# write.csv(primary_neat,
+#           "X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/step2/Yenda_sites_step1_2_neat.csv" ,
+#           row.names = FALSE)  
 #############################################################################################
 ############                     control results only               ##########################
 #############################################################################################
@@ -803,10 +806,10 @@ primary_with_control <- primary_with_control %>%
   filter(Descriptors != "Control")
 
 
-# write.csv(primary_with_control,
-#           "X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/step2/Bute_sites_step1_2_control.csv" ,
-#           row.names = FALSE) 
 write.csv(primary_with_control,
-          "X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/step2/Yenda_sites_step1_2_control.csv" ,
-          row.names = FALSE) 
+          "X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/step2/Bute_sites_step1_2_control.csv" ,
+          row.names = FALSE)
+# write.csv(primary_with_control,
+#           "X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/step2/Yenda_sites_step1_2_control.csv" ,
+#           row.names = FALSE) 
 
