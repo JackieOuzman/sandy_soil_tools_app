@@ -15,19 +15,21 @@ list.of.files
 #### Get results and metadata file path
 
 #Specify the site
-#site_name <- "Ouyen_spade"
-site_name <- "Bute"
+site_name <- "Ouyen_spade"
+#site_name <- "Bute"
+
+#
+
+
+list.files("X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2021/", ".csv",full.names=T)
+
+#input_data_file_rain <- "X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2021/GS_rain_deciles_Sam_sites.csv"
+
 
 #1 and 2 Bute
 
 # input_data_file <- "X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/step1_collating_files/Butes_results.csv"
 # input_data_file_metadata <- "X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/step1_collating_files/Butes_sites_metadata.csv"
-
-
-list.files("X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2021/", ".csv",full.names=T)
-
-input_data_file_rain <- "X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2021/GS_rain_deciles_Sam_sites.csv"
-
 
 # 3. Yenda
  # input_data_file <- "X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/step1_collating_files/Yenda_results.csv"
@@ -35,11 +37,11 @@ input_data_file_rain <- "X:/Therese_Jackie/Sandy_soils/Sands weather/met_file202
 
 #4. Ouyen_spade
 
-# input_data_file <- paste0("X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/step1_collating_files/",
-# site_name, "_results.csv")
-# 
-# input_data_file_metadata <- paste0("X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/step1_collating_files/",
-# site_name, "_sites_metadata.csv")
+input_data_file <- paste0("X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/step1_collating_files/",
+site_name, "_results.csv")
+
+input_data_file_metadata <- paste0("X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/step1_collating_files/",
+site_name, "_sites_metadata.csv")
 
 
 #####################################################################################################################
@@ -292,7 +294,7 @@ primary <- primary %>%
     
     
     # This is from Murray - other amendment
-    organic  ==           " cereal"  
+    organic  ==           " cereal"  | organic  ==           "cereal" 
     & fertiliser ==        "none"   
     & other_ameliorant ==  "none"    
     ~ paste0("Cereal",".", placement_organic),
@@ -840,3 +842,4 @@ primary_with_control <- primary_with_control %>%
 write.csv(primary_with_control,
           paste0("X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/step2/",site_name, "_sites_step1_2_control.csv") ,
           row.names = FALSE)
+
