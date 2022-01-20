@@ -284,7 +284,7 @@ primary <- primary %>%
     ~ paste0("Cereal",".", placement_organic),
     
     
-    organic  ==             "etch"  
+    organic  ==             "vetch"  
     &  fertiliser ==         "none"   
     &  other_ameliorant ==  "none"    
     ~  paste0("Vetch",".", placement_organic),  
@@ -316,14 +316,14 @@ primary <- primary %>%
     organic  ==                 "none"  
     &  fertiliser ==            "MAP; Urea" |   fertiliser == "MAP" |fertiliser == "Urea"|fertiliser == "Tes"
     &    other_ameliorant ==    "gypsum"    ~    
-    paste0("Fert",".", placement_fertiliser,".","gypsum",".", placement_other),
+    paste0("Fert",".", placement_fertiliser,".","Gypsum",".", placement_other),
     
     
   
     organic  ==                 "none"  
     &  fertiliser ==            "MAP; Urea" |   fertiliser == "MAP" |fertiliser == "Urea"|fertiliser == "Tes"  
     &    other_ameliorant ==    "clay"    ~      
-    paste0("Fert",".", placement_fertiliser,".","clay",".", placement_other),
+    paste0("Fert",".", placement_fertiliser,".","Clay",".", placement_other),
     
     
     organic  == "chicken_compost" | organic  ==  "chicken_manure" | organic  ==  "chicken litter"| organic  ==  "chicken liitter"|organic  == "chicken_litter"
