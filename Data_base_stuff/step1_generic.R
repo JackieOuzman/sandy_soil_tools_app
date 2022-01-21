@@ -14,10 +14,12 @@ library(stringr)
 #3. Yenda
 #4. Ouyen spade
 #5. Lowaldie
+#6. Brooker
 
 #name_site <- "Ouyen_spade"
 #name_site <- "Bute"
-name_site <- "Lowaldie"
+#name_site <- "Lowaldie"
+name_site <- "Brooker"
 
 current.folder <- "X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/"
 
@@ -148,30 +150,56 @@ list.of.files
 #5. Lowalide
 
 
-# site <- read_excel(paste0("X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/", name_site, ".xlsx"),
-#                            sheet = "Database format", skip = 1)
-# #  names(site)
-# site <- site %>% dplyr::select("ID":"comments"   )
-# # #
-# # ### a metadata
-# # #
-# metadata <- read_excel(paste0("X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/", name_site, ".xlsx"),
-#                                   sheet = "Site_metadata", col_types = c("text",
-#                                                                          "numeric", "numeric", "numeric",
-#                                                                          "numeric", "numeric", "numeric",
-#                                                                          "numeric", "numeric", "numeric",
-#                                                                          "numeric", "numeric", "numeric",
-#                                                                          "numeric", "numeric", "numeric",
-#                                                                          "numeric", "numeric", "numeric",
-#                                                                          "date", "numeric", "text", "text",
-#                                                                          "text", "text", "text", "text", "text",
-#                                                                          "text",
-#                                                                          "date", "date", "date",
-#                                                                          "date", "date", "date",
-#                                                                          "date",
-#                                                                          "date", "date", "date",
-#                                                                          "date", "date", "date",
-#                                                                          "date"))
+site <- read_excel(paste0("X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/", name_site, ".xlsx"),
+                           sheet = "Database format", skip = 1)
+#  names(site)
+site <- site %>% dplyr::select("ID":"comments"   )
+# #
+# ### a metadata
+# #
+metadata <- read_excel(paste0("X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/", name_site, ".xlsx"),
+                                  sheet = "Site_metadata", col_types = c("text",
+                                                                         "numeric", "numeric", "numeric",
+                                                                         "numeric", "numeric", "numeric",
+                                                                         "numeric", "numeric", "numeric",
+                                                                         "numeric", "numeric", "numeric",
+                                                                         "numeric", "numeric", "numeric",
+                                                                         "numeric", "numeric", "numeric",
+                                                                         "date", "numeric", "text", "text",
+                                                                         "text", "text", "text", "text", "text",
+                                                                         "text",
+                                                                         "date", "date", "date",
+                                                                         "date", "date", "date",
+                                                                         "date",
+                                                                         "date", "date", "date",
+                                                                         "date", "date", "date",
+                                                                         "date"))
+
+
+site <- read_excel(paste0("X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/", "Murlong_Brooker_v2", ".xlsx"),
+                   sheet = "Database format brooker", skip = 1)
+#  names(site)
+site <- site %>% dplyr::select("ID":"comments"   )
+# #
+# ### a metadata
+# #
+metadata <- read_excel(paste0("X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/", "Murlong_Brooker_v2", ".xlsx"),
+                       sheet = "Site_metadata", col_types = c("text",
+                                                              "numeric", "numeric", "numeric",
+                                                              "numeric", "numeric", "numeric",
+                                                              "numeric", "numeric", "numeric",
+                                                              "numeric", "numeric", "numeric",
+                                                              "numeric", "numeric", "numeric",
+                                                              "numeric", "numeric", "numeric",
+                                                              "date", "numeric", "text", "text",
+                                                              "text", "text", "text", "text", "text",
+                                                              "text",
+                                                              "date", "date", "date",
+                                                              "date", "date", "date",
+                                                              "date",
+                                                              "date", "date", "date",
+                                                              "date", "date", "date",
+                                                              "date"))
 
 
 #############################################################################################################################################
