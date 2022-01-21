@@ -15,10 +15,10 @@ list.of.files
 #### Get results and metadata file path
 
 #Specify the site
-site_name <- "Ouyen_spade"
+#site_name <- "Ouyen_spade"
 #site_name <- "Bute"
+site_name <- "Lowaldie"
 
-#
 
 
 list.files("X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2021/", ".csv",full.names=T)
@@ -35,7 +35,7 @@ list.files("X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2021/", ".csv",f
  # input_data_file <- "X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/step1_collating_files/Yenda_results.csv"
  # input_data_file_metadata <- "X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/step1_collating_files/Yenda_site_metadata.csv"
 
-#4. Ouyen_spade
+#4. Ouyen_spade and using site name
 
 input_data_file <- paste0("X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/step1_collating_files/",
 site_name, "_results.csv")
@@ -55,7 +55,7 @@ list.files("X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2021/", ".csv",f
 #3 Yenda
 #input_data_file_rain <- "X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2021/GS_rain_deciles_Racheal_sites.csv"
 
-#3 Ouyen Spade
+#3 Ouyen Spade and all of Murrays
 #input_data_file_rain <- "X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2021/GS_rain_deciles_Murray_sites.csv"
 
 ##################################################################################################################
@@ -96,7 +96,7 @@ primary<- primary %>%
     
     TRUE ~ rip_depth
   ))
-
+unique(primary$Rip_depth_jax)
 
 unique(primary$drill_depth)
 
@@ -144,6 +144,8 @@ primary<- primary %>%
     TRUE ~ placement_organic
   ))
 
+
+primary$placement_fertiliser <- as.character(primary$placement_fertiliser)
 unique(primary$placement_fertiliser)
 
 primary<- primary %>% 
@@ -397,6 +399,11 @@ primary <- primary %>%
     TRUE ~ as.character(Descriptors)
     
   ) )
+
+## check what Descriptors were made
+unique(primary$Descriptors)
+
+
 ### something for Mel data
 # primary_2019_2020_imapct <- primary_2019_2020_imapct %>% 
 #   mutate(Descriptors = case_when(
