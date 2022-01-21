@@ -17,8 +17,8 @@ list.of.files
 #Specify the site
 #site_name <- "Ouyen_spade"
 #site_name <- "Bute"
-site_name <- "Lowaldie"
-
+#site_name <- "Lowaldie"
+site_name <- "Brooker"
 
 
 list.files("X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2021/", ".csv",full.names=T)
@@ -58,6 +58,10 @@ list.files("X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2021/", ".csv",f
 #3 Ouyen Spade and all of Murrays
 #input_data_file_rain <- "X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2021/GS_rain_deciles_Murray_sites.csv"
 
+#4 Brooker and Murlong Spade and all of Murrays
+input_data_file_rain <- "X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2021/GS_rain_deciles_Nigel_sites.csv"
+
+
 ##################################################################################################################
 ## download the data using the specified file path above
 
@@ -67,6 +71,10 @@ primary <- read_csv(input_data_file,
                           col_types = cols(drill_depth = col_double(), 
                                            dry_biomass = col_double(), timing = col_character()))
 names(primary)
+# change the site name
+# primary <- primary %>% 
+#   mutate(site = "Lowaldie")
+
 #################################################################################################################
 ####   Create the descriptors #####
 
@@ -263,7 +271,15 @@ primary <- primary %>%
     &  other_ameliorant ==  "clay"       ~        
     paste0("Lc",".", placement_organic, ".","Clay", ".",  placement_other),
     
-  
+    organic  ==            "lucerne" 
+    &  fertiliser ==        "none" 
+    &  other_ameliorant ==  "Muriate of Potash"       ~        
+      paste0("Lc",".", placement_organic, ".","K_added", ".",  placement_other),
+    
+    organic  ==            "none" 
+    &  fertiliser ==        "none" 
+    &  other_ameliorant ==  "Muriate of Potash"       ~        
+      paste0("K_added", ".",  placement_other),
     
     # This is from Murray - lucerne
     organic  == "pelleted lucerne" 
@@ -325,24 +341,29 @@ primary <- primary %>%
     
     #fertiliser amendment
     organic  ==                 "none"  
-    &  fertiliser ==            "MAP; Urea" |   fertiliser == "MAP" |fertiliser == "Urea"|fertiliser == "Tes"
+    &  fertiliser ==            "MAP; Urea" |   fertiliser == "MAP" |fertiliser == "Urea"|fertiliser == "Tes"|fertiliser == "Urea" |fertiliser == "DAP, Urea, SOA and Muriate of Potash"
     &    other_ameliorant ==    "none"    ~      
     paste0("Fert",".", placement_fertiliser),
     
     
     
     organic  ==                 "none"  
-    &  fertiliser ==            "MAP; Urea" |   fertiliser == "MAP" |fertiliser == "Urea"|fertiliser == "Tes"
+    &  fertiliser ==            "MAP; Urea" |   fertiliser == "MAP" |fertiliser == "Urea"|fertiliser == "Tes"|fertiliser == "Urea" |fertiliser == "DAP, Urea, SOA and Muriate of Potash"
     &    other_ameliorant ==    "gypsum"    ~    
     paste0("Fert",".", placement_fertiliser,".","Gypsum",".", placement_other),
     
     
   
     organic  ==                 "none"  
-    &  fertiliser ==            "MAP; Urea" |   fertiliser == "MAP" |fertiliser == "Urea"|fertiliser == "Tes"  
+    &  fertiliser ==            "MAP; Urea" |   fertiliser == "MAP" |fertiliser == "Urea"|fertiliser == "Tes"|fertiliser == "Urea" |fertiliser == "DAP, Urea, SOA and Muriate of Potash"
     &    other_ameliorant ==    "clay"    ~      
     paste0("Fert",".", placement_fertiliser,".","Clay",".", placement_other),
     
+    
+    organic  ==                 "none"  
+    &  fertiliser ==            "MAP; Urea" |   fertiliser == "MAP" |fertiliser == "Urea"|fertiliser == "Tes"|fertiliser == "Urea" |fertiliser == "DAP, Urea, SOA and Muriate of Potash"
+    &    other_ameliorant ==    "Muriate of Potash"    ~      
+      paste0("Fert",".", placement_fertiliser,".","K_added",".", placement_other),
     
     organic  == "chicken_compost" | organic  ==  "chicken_manure" | organic  ==  "chicken litter"| organic  ==  "chicken liitter"|organic  == "chicken_litter"
     &  fertiliser ==            "none"  
@@ -372,6 +393,7 @@ primary <- primary %>%
   mutate(disturbance  = case_when(
     rip  == "none"      &      mix == "none"           ~      "Unmodified",
     rip  == "none"      &      mix == "spade"          ~       paste0("Spade.30" ),
+    rip  == "none"      &      mix == "sapde"          ~       paste0("Spade.30" ),
     rip  == "none"      &      mix == "Plozza"         ~       paste0("DiscInv.30" ),
     rip  == "none"      &      mix == "pre-drill"      ~       paste0("Pre_drill.", drill_depth ),
     rip  == "none"      &      mix == "inclusion"      ~       paste0("Inc.50" ),#check that this is always 50cm
@@ -497,7 +519,8 @@ primary_metadata <- primary_metadata %>%
       site == "Ouyen" ~          -35.0681,
       site == "Bute_Trengrove" ~  -33.8612,
       site == "Bute_CSIRO" ~      -33.8612,
-      site == "Yenda" ~           -34.2502
+      site == "Yenda" ~           -34.2502,
+      site == "Brooker" ~         -34.1317
     )
   )
 primary_metadata <- primary_metadata %>%
@@ -509,7 +532,8 @@ primary_metadata <- primary_metadata %>%
       site == "Ouyen" ~           142.3125,
       site == "Bute_Trengrove" ~  138.0114,
       site == "Bute_CSIRO" ~      138.0114,
-      site == "Yenda"~            146.1897
+      site == "Yenda"~            146.1897,
+      site == "Brooker" ~         135.7301
     )
   )
 
