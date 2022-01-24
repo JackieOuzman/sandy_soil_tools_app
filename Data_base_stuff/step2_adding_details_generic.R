@@ -217,7 +217,7 @@ primary<- primary %>%
 
 
 #make a clm with what ameliorant was added if any
-
+str(primary)
 unique(primary$organic)
 unique(primary$fertiliser)
 unique(primary$other_ameliorant)
@@ -231,13 +231,13 @@ primary <- primary %>%
     &  other_ameliorant ==  "none"    ~        
     paste0("Cl",".", placement_organic),
     
-    
+     
     organic  == "chicken_compost" | organic  ==  "chicken_manure" | organic  ==  "chicken litter"| organic  ==  "chicken liitter"
     &  fertiliser ==        "none"  
     &  other_ameliorant ==  "gypsum"       ~   
     paste0("Cl",".", placement_organic,".","Gypsum" ,".", placement_other),
     
-    
+      
     
     organic  == "chicken_compost" | organic  ==  "chicken_manure" | organic  ==  "chicken litter"| organic  ==  "chicken liitter" 
     &  fertiliser ==        "none"  
@@ -250,13 +250,23 @@ primary <- primary %>%
     &  other_ameliorant ==  "none"       ~     
     paste0("Com",".", placement_organic),
     
+     
     
-    ## Lc.with.depth - lucerne
+    # ## Lc.with.depth - lucerne
+     organic  ==            "lucerne" 
+     &  fertiliser ==        "none" 
+     &  other_ameliorant ==  "none"   
+     & site != "Brooker" ~
+     paste0("Lc",".", placement_organic),
+    
+    
+    
+    ## Lc.with.depth - lucerne and rate for Brooker
     organic  ==            "lucerne" 
     &  fertiliser ==        "none" 
-    &  other_ameliorant ==  "none"    ~           
-    paste0("Lc",".", placement_organic),
-    
+    &  other_ameliorant ==  "none"              
+    & site == "Brooker" ~        
+      paste0("Lc","@", organic_rate, ".", placement_organic),
     
     
     organic  ==            "lucerne"  
@@ -271,15 +281,31 @@ primary <- primary %>%
     &  other_ameliorant ==  "clay"       ~        
     paste0("Lc",".", placement_organic, ".","Clay", ".",  placement_other),
     
+    
+    organic  ==            "lucerne"
+    &  fertiliser ==        "none"
+    &  other_ameliorant ==  "Muriate of Potash"
+    & site != "Brooker"~
+      paste0("Lc",".", placement_organic, ".","K_added", ".",  placement_other),
+    
+    ## Lc.with.depth and K added- lucerne and rate for Brooker
     organic  ==            "lucerne" 
     &  fertiliser ==        "none" 
-    &  other_ameliorant ==  "Muriate of Potash"       ~        
-      paste0("Lc",".", placement_organic, ".","K_added", ".",  placement_other),
+    &  other_ameliorant ==  "Muriate of Potash"  
+    & site == "Brooker" ~        
+      paste0("Lc","@", organic_rate, ".", placement_organic, ".","K_added", ".",  placement_other),
+      
+    
     
     organic  ==            "none" 
     &  fertiliser ==        "none" 
     &  other_ameliorant ==  "Muriate of Potash"       ~        
       paste0("K_added", ".",  placement_other),
+    
+    
+    
+    
+    
     
     # This is from Murray - lucerne
     organic  == "pelleted lucerne" 
@@ -377,7 +403,7 @@ primary <- primary %>%
     
     TRUE ~ as.character("check")
     
-  ) )  
+  ) )      
     
    
 
