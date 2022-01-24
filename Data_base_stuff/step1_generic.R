@@ -18,12 +18,14 @@ library(stringr)
 #5. Lowaldie
 #6. Brooker
 #7. YoungHusband
+#8. Waikerie
 
 #name_site <- "Ouyen_spade"
 #name_site <- "Bute"
 #name_site <- "Lowaldie"
 #name_site <- "Brooker"
-name_site <- "YoungHusband"
+#name_site <- "YoungHusband"
+name_site <- "Waikerie"
 
 current.folder <- "X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/"
 
@@ -208,12 +210,40 @@ list.of.files
 
 
 
-# YoungHusband 2020 only!!!
+# # YoungHusband 2020 only!!!
+# # 
+#  site <- read_excel(paste0("X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/", "YoungHusband Sands Impact-SAGIT Data 2020-21_jaxs", ".xlsx"),
+#                     sheet = "Database format Young Husband20", skip = 1)
+#   names(site)
+#  site <- site %>% dplyr::select("ID":"comments"   )
+# # #
+# # ### a metadata
+# # #
+# metadata <- read_excel(paste0("X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/", "YoungHusband Sands Impact-SAGIT Data 2020-21_jaxs", ".xlsx"),
+#                        sheet = "Site_metadata", col_types = c("text",
+#                                                               "numeric", "numeric", "numeric",
+#                                                               "numeric", "numeric", "numeric",
+#                                                               "numeric", "numeric", "numeric",
+#                                                               "numeric", "numeric", "numeric",
+#                                                               "numeric", "numeric", "numeric",
+#                                                               "numeric", "numeric", "numeric",
+#                                                               "date", "numeric", "text", "text",
+#                                                               "text", "text", "text", "text", "text",
+#                                                               "text",
+#                                                               "date", "date", "date",
+#                                                               "date", "date", "date",
+#                                                               "date",
+#                                                               "date", "date", "date",
+#                                                               "date", "date", "date",
+#                                                               "date"))
 # 
- site <- read_excel(paste0("X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/", "YoungHusband Sands Impact-SAGIT Data 2020-21_jaxs", ".xlsx"),
-                    sheet = "Database format Young Husband20", skip = 1)
-  names(site)
- site <- site %>% dplyr::select("ID":"comments"   )
+
+# Waikerie
+# 
+site <- read_excel(paste0("X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/", "Waikerie", ".xlsx"),
+                   sheet = "Database_format", skip = 1)
+names(site)
+site <- site %>% dplyr::select("ID":"comments"   )
 # #
 # ### a metadata
 # #
@@ -234,9 +264,6 @@ metadata <- read_excel(paste0("X:/Therese_Jackie/Sandy_soils/Development_databas
                                                               "date", "date", "date",
                                                               "date", "date", "date",
                                                               "date"))
-
-
-
 
 #############################################################################################################################################
 ########################      Merge the results data   and the metadata                            ########################################
