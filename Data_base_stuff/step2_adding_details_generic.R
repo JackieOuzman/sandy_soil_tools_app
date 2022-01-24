@@ -18,7 +18,8 @@ list.of.files
 #site_name <- "Ouyen_spade"
 #site_name <- "Bute"
 #site_name <- "Lowaldie"
-site_name <- "Brooker"
+#site_name <- "Brooker"
+site_name <- "YoungHusband"
 
 
 list.files("X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2021/", ".csv",full.names=T)
@@ -59,8 +60,10 @@ list.files("X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2021/", ".csv",f
 #input_data_file_rain <- "X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2021/GS_rain_deciles_Murray_sites.csv"
 
 #4 Brooker and Murlong Spade and all of Murrays
-input_data_file_rain <- "X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2021/GS_rain_deciles_Nigel_sites.csv"
+#input_data_file_rain <- "X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2021/GS_rain_deciles_Nigel_sites.csv"
 
+#4 Younghusband a
+input_data_file_rain <- "X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2021/GS_rain_deciles_Younghusband_sites.csv"
 
 ##################################################################################################################
 ## download the data using the specified file path above
@@ -202,8 +205,11 @@ primary<- primary %>%
     placement_other == "incorporated to 50 cm" ~        "incorp_50", 
     placement_other == "incorporated to 30 cm" ~        "incorp_30",
     
+    placement_other == "band at 8 cm" ~                 "band_8", 
     placement_other == "banded at 50 cm" ~              "band_50", 
-    placement_other == "banded at 30 cm" ~              "band_30", 
+    placement_other == "banded at 30 cm" ~              "band_30",
+    
+    placement_other == "surface + band at 8 cm" ~       "surface+band_8", 
     
     placement_other == "surface" ~                      "surface", 
     
@@ -401,6 +407,18 @@ primary <- primary %>%
     &    other_ameliorant ==   "lime"    
     ~ paste0("Lime",".", placement_other),
     
+    
+    organic  ==                "none"  
+    &  fertiliser ==           "none"   
+    &    other_ameliorant ==   "Bi-Agra"    
+    ~ paste0("Bi-Agra",".", placement_other),
+    
+    organic  ==                "none"  
+    &  fertiliser ==           "none"   
+    &    other_ameliorant ==   "SE14"    
+    ~ paste0("SE14",".", placement_other),
+    
+    
     TRUE ~ as.character("check")
     
   ) )      
@@ -424,6 +442,7 @@ primary <- primary %>%
     rip  == "none"      &      mix == "pre-drill"      ~       paste0("Pre_drill.", drill_depth ),
     rip  == "none"      &      mix == "inclusion"      ~       paste0("Inc.50" ),#check that this is always 50cm
     rip  == "none"      &      mix == "sweep"      ~           paste0("Sweep.30"),
+    rip  == "none"      &      mix == "delving"      ~         paste0("Delving.18"),#check that this is always 18cm it was supplied as a range I used the upper value
     
     rip  == "rip"       &      mix == "none"           ~    paste0("Rip.", Rip_depth_jax ),
     rip  == "rip"       &      mix == "inclusion"      ~    paste0("Rip.", Rip_depth_jax, "IncRip" ),
@@ -546,7 +565,8 @@ primary_metadata <- primary_metadata %>%
       site == "Bute_Trengrove" ~  -33.8612,
       site == "Bute_CSIRO" ~      -33.8612,
       site == "Yenda" ~           -34.2502,
-      site == "Brooker" ~         -34.1317
+      site == "Brooker" ~         -34.1317,
+      site == "Younghusband" ~    -34.9145
     )
   )
 primary_metadata <- primary_metadata %>%
@@ -559,7 +579,8 @@ primary_metadata <- primary_metadata %>%
       site == "Bute_Trengrove" ~  138.0114,
       site == "Bute_CSIRO" ~      138.0114,
       site == "Yenda"~            146.1897,
-      site == "Brooker" ~         135.7301
+      site == "Brooker" ~         135.7301,
+      site == "Younghusband" ~    139.3010
     )
   )
 
