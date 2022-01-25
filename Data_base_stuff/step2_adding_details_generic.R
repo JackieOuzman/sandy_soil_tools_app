@@ -19,8 +19,8 @@ list.of.files
 #site_name <- "Bute"
 #site_name <- "Lowaldie"
 #site_name <- "Brooker"
-site_name <- "YoungHusband"
-
+#site_name <- "YoungHusband"
+site_name <- "Waikerie"
 
 list.files("X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2021/", ".csv",full.names=T)
 
@@ -56,14 +56,14 @@ list.files("X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2021/", ".csv",f
 #3 Yenda
 #input_data_file_rain <- "X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2021/GS_rain_deciles_Racheal_sites.csv"
 
-#3 Ouyen Spade and all of Murrays
-#input_data_file_rain <- "X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2021/GS_rain_deciles_Murray_sites.csv"
+#3 Ouyen Spade and all of Murrays and Waikerie
+input_data_file_rain <- "X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2021/GS_rain_deciles_Murray_sites.csv"
 
 #4 Brooker and Murlong Spade and all of Murrays
 #input_data_file_rain <- "X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2021/GS_rain_deciles_Nigel_sites.csv"
 
 #4 Younghusband a
-input_data_file_rain <- "X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2021/GS_rain_deciles_Younghusband_sites.csv"
+#input_data_file_rain <- "X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2021/GS_rain_deciles_Younghusband_sites.csv"
 
 ##################################################################################################################
 ## download the data using the specified file path above
@@ -146,7 +146,8 @@ primary<- primary %>%
     placement_organic == "incorporated to 30 cm" ~        "incorp_30", 
     
     placement_organic == "banded at 50 cm" ~              "band_50", 
-    placement_organic == "banded at 30 cm" ~              "band_30", 
+    placement_organic == "banded at 30 cm" ~              "band_30",
+    placement_organic == "banded at 60 cm" ~              "band_60",
     
     placement_organic == "surface" ~                      "surface", 
     
@@ -154,7 +155,7 @@ primary<- primary %>%
     
     TRUE ~ placement_organic
   ))
-
+unique(primary$placement_organic)
 
 primary$placement_fertiliser <- as.character(primary$placement_fertiliser)
 unique(primary$placement_fertiliser)
@@ -175,14 +176,17 @@ primary<- primary %>%
     placement_fertiliser == "incorporated to 50 cm" ~        "incorp_50", 
     placement_fertiliser == "incorporated to 30 cm" ~        "incorp_30",  
     
+    placement_fertiliser == "banded at 8 cm" ~               "band_8", 
     placement_fertiliser == "banded at 50 cm" ~              "band_50", 
     placement_fertiliser == "banded at 30 cm" ~              "band_30", 
+    placement_fertiliser == "banded at 60 cm" ~              "band_60",
     
     placement_fertiliser == "surface" ~                      "surface", 
     placement_fertiliser == "foliar" ~                       "foliar", 
     
     TRUE ~ placement_fertiliser
   ))
+unique(primary$placement_fertiliser)
 
 primary$placement_other <- as.character(primary$placement_other)
 unique(primary$placement_other)
@@ -227,12 +231,15 @@ str(primary)
 unique(primary$organic)
 unique(primary$fertiliser)
 unique(primary$other_ameliorant)
+unique(primary$placement_organic)
 
+
+##########
 primary <- primary %>% 
   mutate(amendment = case_when(
     
     ## cl.with.depth - chicken litter
-    organic  == "chicken_compost" | organic  ==  "chicken_manure" | organic  ==  "chicken litter"| organic  ==  "chicken liitter"|organic  == "chicken_litter"
+    organic  == "chicken_compost" | organic  ==  "chicken_manure" | organic  ==  "chicken litter"| organic  ==  "chicken liitter"|organic  == "chicken_litter" 
     &  fertiliser ==        "none"  
     &  other_ameliorant ==  "none"    ~        
     paste0("Cl",".", placement_organic),
@@ -418,12 +425,17 @@ primary <- primary %>%
     &    other_ameliorant ==   "SE14"    
     ~ paste0("SE14",".", placement_other),
     
+    organic  ==                "none"  
+    &  fertiliser ==           "Urea and MAP"   
+    &    other_ameliorant ==   "none"    
+    ~ paste0("Fert",".", placement_fertiliser),
+    
     
     TRUE ~ as.character("check")
     
   ) )      
     
-   
+unique(primary$amendment)
 
 #step 2b make a clm with what disturbance was performed...
 str(primary)
@@ -487,7 +499,6 @@ unique(primary$Descriptors)
 
 ###################################################################################################################
 ####  metadata  #####
-
 
 
 
