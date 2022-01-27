@@ -22,7 +22,8 @@ list.of.files
 #site_name <- "YoungHusband"
 # site_name <- "Waikerie"
 #site_name <- "Brimpton Lake"
-site_name <- "Cadgee"
+#site_name <- "Cadgee"
+site_name <- "Karoonda"
 
 list.files("X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2021/", ".csv",full.names=T)
 
@@ -627,7 +628,8 @@ primary_metadata <- primary_metadata %>%
       site == "Brooker" ~         -34.1317,
       site == "Younghusband" ~    -34.9145,
       site == "Brimpton Lake" ~   -34.0586,
-      site == "Cadgee" ~          -36.8297
+      site == "Cadgee" ~          -36.8297,
+      site == "Karoonda" ~        -35.0900
     )
   )
 primary_metadata <- primary_metadata %>%
@@ -643,7 +645,8 @@ primary_metadata <- primary_metadata %>%
       site == "Brooker" ~         135.7301,
       site == "Younghusband" ~    139.3010,
       site == "Brimpton Lake" ~   135.5038,
-      site == "Cadgee" ~          140.5328
+      site == "Cadgee" ~          140.5328,
+      site == "Karoonda" ~        139.8972
     )
   )
 

@@ -28,7 +28,8 @@ library(stringr)
 #name_site <- "YoungHusband"
 #name_site <- "Waikerie"
 #name_site <- "Brimpton Lake"
-name_site <- "Cadgee"
+#name_site <- "Cadgee"
+name_site <- "Karoonda"
 
 current.folder <- "X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/"
 
