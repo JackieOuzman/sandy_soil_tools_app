@@ -23,7 +23,8 @@ list.of.files
 # site_name <- "Waikerie"
 #site_name <- "Brimpton Lake"
 #site_name <- "Cadgee"
-site_name <- "Karoonda"
+#site_name <- "Karoonda"
+site_name <- "Murlong"
 
 list.files("X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2021/", ".csv",full.names=T)
 
@@ -39,7 +40,7 @@ list.files("X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2021/", ".csv",f
  # input_data_file <- "X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/step1_collating_files/Yenda_results.csv"
  # input_data_file_metadata <- "X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/step1_collating_files/Yenda_site_metadata.csv"
 
-#4. Ouyen_spade and using site name
+#4. using site name
 
 input_data_file <- paste0("X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/step1_collating_files/",
 site_name, "_results.csv")
@@ -63,13 +64,13 @@ list.files("X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2021/", ".csv",f
 #input_data_file_rain <- "X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2021/GS_rain_deciles_Murray_sites.csv"
 
 #4 Brooker and Murlong Spade and all of Murrays
-#input_data_file_rain <- "X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2021/GS_rain_deciles_Nigel_sites.csv"
+input_data_file_rain <- "X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2021/GS_rain_deciles_Nigel_sites.csv"
 
 #5 Younghusband a
 #input_data_file_rain <- "X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2021/GS_rain_deciles_Younghusband_sites.csv"
 
 #6 New Horizons
-input_data_file_rain <- "X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2021/GS_rain_deciles_New_Horizons_sites.csv"
+#input_data_file_rain <- "X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2021/GS_rain_deciles_New_Horizons_sites.csv"
 
 ##################################################################################################################
 ## download the data using the specified file path above
@@ -148,6 +149,7 @@ primary<- primary %>%
     placement_organic == "incorperated to 8 cm" ~         "incorp_8",
     placement_organic == "incorporated to 8 cm" ~         "incorp_8",
     placement_organic == "incorperated to 50 cm" ~        "incorp_50", 
+    placement_organic == "incorporated to 41 cm" ~        "incorp_41",
     placement_organic == "incorporated to 50 cm" ~        "incorp_50",
     placement_organic == "incorporated to 30 cm" ~        "incorp_30", 
     
@@ -178,6 +180,7 @@ primary<- primary %>%
     
     placement_fertiliser == "incorperated to 8 cm" ~         "incorp_8",
     placement_fertiliser == "incorporated to 8 cm" ~         "incorp_8",
+    placement_fertiliser == "incorporated to 41 cm" ~        "incorp_41",
     placement_fertiliser == "incorperated to 50 cm" ~        "incorp_50", 
     placement_fertiliser == "incorporated to 50 cm" ~        "incorp_50", 
     placement_fertiliser == "incorporated to 30 cm" ~        "incorp_30",  
@@ -629,7 +632,8 @@ primary_metadata <- primary_metadata %>%
       site == "Younghusband" ~    -34.9145,
       site == "Brimpton Lake" ~   -34.0586,
       site == "Cadgee" ~          -36.8297,
-      site == "Karoonda" ~        -35.0900
+      site == "Karoonda" ~        -35.0900,
+      site == "Murlong" ~         -33.6993
     )
   )
 primary_metadata <- primary_metadata %>%
@@ -646,7 +650,8 @@ primary_metadata <- primary_metadata %>%
       site == "Younghusband" ~    139.3010,
       site == "Brimpton Lake" ~   135.5038,
       site == "Cadgee" ~          140.5328,
-      site == "Karoonda" ~        139.8972
+      site == "Karoonda" ~        139.8972,
+      site == "Murlong" ~         135.9238
     )
   )
 
