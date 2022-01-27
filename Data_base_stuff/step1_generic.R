@@ -19,13 +19,16 @@ library(stringr)
 #6. Brooker
 #7. YoungHusband
 #8. Waikerie
+#9. New horizons sites Brimpton Lake, Cadgee, Karoonda
 
 #name_site <- "Ouyen_spade"
 #name_site <- "Bute"
 #name_site <- "Lowaldie"
 #name_site <- "Brooker"
 #name_site <- "YoungHusband"
-name_site <- "Waikerie"
+#name_site <- "Waikerie"
+#name_site <- "Brimpton Lake"
+name_site <- "Cadgee"
 
 current.folder <- "X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/"
 
@@ -240,8 +243,41 @@ list.of.files
 
 # Waikerie
 # 
-site <- read_excel(paste0("X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/", "Waikerie", ".xlsx"),
-                   sheet = "Database_format", skip = 1)
+# site <- read_excel(paste0("X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/", "Waikerie", ".xlsx"),
+#                    sheet = "Database_format", skip = 1)
+# names(site)
+# site <- site %>% dplyr::select("ID":"comments"   )
+# 
+# 
+# 
+# 
+# # #
+# # ### a metadata
+# # #
+# metadata <- read_excel(paste0("X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/", "Waikerie", ".xlsx"),
+#                        sheet = "Site_metadata", col_types = c("text",
+#                                                               "numeric", "numeric", "numeric",
+#                                                               "numeric", "numeric", "numeric",
+#                                                               "numeric", "numeric", "numeric",
+#                                                               "numeric", "numeric", "numeric",
+#                                                               "numeric", "numeric", "numeric",
+#                                                               "numeric", "numeric", "numeric",
+#                                                               "date", "numeric", "text", "text",
+#                                                               "text", "text", "text", "text", "text",
+#                                                               "text",
+#                                                               "date", "date", "date",
+#                                                               "date", "date", "date",
+#                                                               "date",
+#                                                               "date", "date", "date",
+#                                                               "date", "date", "date",
+#                                                               "date"))
+
+
+
+#PIRSA_New Horizons
+
+site <- read_excel(paste0("X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/", "PIRSA_New Horizons_Fraser_2014-2018_jax", ".xlsx"),
+                   sheet = "Database format", skip = 0)
 names(site)
 site <- site %>% dplyr::select("ID":"comments"   )
 
@@ -251,7 +287,7 @@ site <- site %>% dplyr::select("ID":"comments"   )
 # #
 # ### a metadata
 # #
-metadata <- read_excel(paste0("X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/", "Waikerie", ".xlsx"),
+metadata <- read_excel(paste0("X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/", "PIRSA_New Horizons_Fraser_2014-2018_jax", ".xlsx"),
                        sheet = "Site_metadata", col_types = c("text",
                                                               "numeric", "numeric", "numeric",
                                                               "numeric", "numeric", "numeric",
@@ -268,6 +304,8 @@ metadata <- read_excel(paste0("X:/Therese_Jackie/Sandy_soils/Development_databas
                                                               "date", "date", "date",
                                                               "date", "date", "date",
                                                               "date"))
+
+
 
 #############################################################################################################################################
 ########################      Merge the results data   and the metadata                            ########################################
@@ -295,6 +333,16 @@ site <- site %>%
 
 ### writing out files using name of site define at top of script
 
+
+
+#filter on site name
+unique(metadata$`Site Name`)
+unique(site$site)
+
+metadata <- metadata %>% 
+  filter(`Site Name`== name_site)
+site <- site %>% 
+  filter(site== name_site)
 
 write.csv(metadata,
           paste0("X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/step1_collating_files/", name_site, "_sites_metadata.csv") ,row.names = FALSE)

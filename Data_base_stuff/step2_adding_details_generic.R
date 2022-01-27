@@ -20,7 +20,9 @@ list.of.files
 #site_name <- "Lowaldie"
 #site_name <- "Brooker"
 #site_name <- "YoungHusband"
-site_name <- "Waikerie"
+# site_name <- "Waikerie"
+#site_name <- "Brimpton Lake"
+site_name <- "Cadgee"
 
 list.files("X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2021/", ".csv",full.names=T)
 
@@ -57,13 +59,16 @@ list.files("X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2021/", ".csv",f
 #input_data_file_rain <- "X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2021/GS_rain_deciles_Racheal_sites.csv"
 
 #3 Ouyen Spade and all of Murrays and Waikerie
-input_data_file_rain <- "X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2021/GS_rain_deciles_Murray_sites.csv"
+#input_data_file_rain <- "X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2021/GS_rain_deciles_Murray_sites.csv"
 
 #4 Brooker and Murlong Spade and all of Murrays
 #input_data_file_rain <- "X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2021/GS_rain_deciles_Nigel_sites.csv"
 
-#4 Younghusband a
+#5 Younghusband a
 #input_data_file_rain <- "X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2021/GS_rain_deciles_Younghusband_sites.csv"
+
+#6 New Horizons
+input_data_file_rain <- "X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2021/GS_rain_deciles_New_Horizons_sites.csv"
 
 ##################################################################################################################
 ## download the data using the specified file path above
@@ -206,6 +211,7 @@ primary<- primary %>%
     
     
     placement_other == "incorporated to 8 cm" ~         "incorp_8",
+    placement_other == "incorporated to 10 cm" ~         "incorp_10",
     placement_other == "incorporated to 50 cm" ~        "incorp_50", 
     placement_other == "incorporated to 30 cm" ~        "incorp_30",
     
@@ -219,7 +225,7 @@ primary<- primary %>%
     
     TRUE ~ placement_other
   ))
-
+unique(primary$placement_other)
 #######################################################################################################################
 
 #######################################################################################################################
@@ -266,13 +272,23 @@ primary <- primary %>%
      
     
     # ## Lc.with.depth - lucerne
-     organic  ==            "lucerne" 
+     
+    
+    organic  ==            "lucerne" 
      &  fertiliser ==        "none" 
      &  other_ameliorant ==  "none"   
      & site != "Brooker" ~
      paste0("Lc",".", placement_organic),
     
+    organic  ==            "lucerne" 
+    &  fertiliser ==        "NuPak" 
+    &  other_ameliorant ==  "none"   ~
+    paste0("Lc",".", placement_organic,".", "Fert",".",placement_fertiliser),
     
+    organic  ==            "lucerne" 
+    &  fertiliser ==        "NuPak" 
+    &  other_ameliorant ==  "clay"   ~
+      paste0("Lc",".", placement_organic,".", "Fert",".",placement_fertiliser, ".", "Clay",".",placement_other),
     
     ## Lc.with.depth - lucerne and rate for Brooker
     organic  ==            "lucerne" 
@@ -395,6 +411,7 @@ primary <- primary %>%
   
     organic  ==                 "none"  
     &  fertiliser ==            "MAP; Urea" |   fertiliser == "MAP" |fertiliser == "Urea"|fertiliser == "Tes"|fertiliser == "Urea" |fertiliser == "DAP, Urea, SOA and Muriate of Potash"
+    | fertiliser == "NuPak"  
     &    other_ameliorant ==    "clay"    ~      
     paste0("Fert",".", placement_fertiliser,".","Clay",".", placement_other),
     
@@ -426,16 +443,23 @@ primary <- primary %>%
     ~ paste0("SE14",".", placement_other),
     
     organic  ==                "none"  
-    &  fertiliser ==           "Urea and MAP"   
+    &  fertiliser ==           "Urea and MAP" | fertiliser == "NuPak"  
     &    other_ameliorant ==   "none"    
     ~ paste0("Fert",".", placement_fertiliser),
+    
+    
+    
+    
     
     
     TRUE ~ as.character("check")
     
   ) )      
-    
-unique(primary$amendment)
+ 
+primary %>% 
+  distinct(amendment) %>% 
+  arrange(desc(amendment))
+
 
 #step 2b make a clm with what disturbance was performed...
 str(primary)
@@ -480,7 +504,9 @@ primary <- primary %>%
   ) )
 
 ## check what Descriptors were made
-unique(primary$Descriptors)
+primary %>% 
+  distinct(Descriptors) %>% 
+  arrange(desc(Descriptors))
 
 
 ## something extra for Waikerie. There is a treatment which has..
@@ -491,13 +517,19 @@ unique(primary$Descriptors)
 
 str(primary)
 unique(primary$placement_fertiliser)
+# primary <- primary %>% 
+#     filter(placement_fertiliser== "band_8"|
+#             placement_fertiliser== "band_30"|
+#             placement_fertiliser== "band_60" |
+#              is.na(placement_fertiliser))
+
+
+
+
+
+# New horizons Cadgee also has one to be excluded 2014 plot 10 rep 1
 primary <- primary %>% 
-    filter(placement_fertiliser== "band_8"|
-            placement_fertiliser== "band_30"|
-            placement_fertiliser== "band_60" |
-             is.na(placement_fertiliser))
-
-
+     filter(Descriptors != "Unmodified_Clay.NA")
 
 ### something for Mel data
 # primary_2019_2020_imapct <- primary_2019_2020_imapct %>% 
@@ -593,7 +625,9 @@ primary_metadata <- primary_metadata %>%
       site == "Bute_CSIRO" ~      -33.8612,
       site == "Yenda" ~           -34.2502,
       site == "Brooker" ~         -34.1317,
-      site == "Younghusband" ~    -34.9145
+      site == "Younghusband" ~    -34.9145,
+      site == "Brimpton Lake" ~   -34.0586,
+      site == "Cadgee" ~          -36.8297
     )
   )
 primary_metadata <- primary_metadata %>%
@@ -607,7 +641,9 @@ primary_metadata <- primary_metadata %>%
       site == "Bute_CSIRO" ~      138.0114,
       site == "Yenda"~            146.1897,
       site == "Brooker" ~         135.7301,
-      site == "Younghusband" ~    139.3010
+      site == "Younghusband" ~    139.3010,
+      site == "Brimpton Lake" ~   135.5038,
+      site == "Cadgee" ~          140.5328
     )
   )
 
