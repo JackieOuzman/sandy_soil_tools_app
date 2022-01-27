@@ -244,6 +244,10 @@ site <- read_excel(paste0("X:/Therese_Jackie/Sandy_soils/Development_database/ot
                    sheet = "Database_format", skip = 1)
 names(site)
 site <- site %>% dplyr::select("ID":"comments"   )
+
+
+
+
 # #
 # ### a metadata
 # #

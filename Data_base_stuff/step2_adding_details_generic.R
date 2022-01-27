@@ -483,6 +483,22 @@ primary <- primary %>%
 unique(primary$Descriptors)
 
 
+## something extra for Waikerie. There is a treatment which has..
+#Rip_30_none_surface 
+#(it i.e. was ripped to 30cm and nothing was added – because the fertiliser was not a treatment, but in the data that I got from Murray it says the ‘placement was at surface’.
+#                     I don’t get how you can apply nothing but apply at the surface).
+# anyway TB email 27/1/22 suggested not to use this so I will exclude it here.
+
+str(primary)
+unique(primary$placement_fertiliser)
+primary <- primary %>% 
+    filter(placement_fertiliser== "band_8"|
+            placement_fertiliser== "band_30"|
+            placement_fertiliser== "band_60" |
+             is.na(placement_fertiliser))
+
+
+
 ### something for Mel data
 # primary_2019_2020_imapct <- primary_2019_2020_imapct %>% 
 #   mutate(Descriptors = case_when(
