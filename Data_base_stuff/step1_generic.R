@@ -20,6 +20,7 @@ library(stringr)
 #7. YoungHusband
 #8. Waikerie
 #9. New horizons sites Brimpton Lake, Cadgee, Karoonda
+#10. Murlong
 
 #name_site <- "Ouyen_spade"
 #name_site <- "Bute"
@@ -29,7 +30,8 @@ library(stringr)
 #name_site <- "Waikerie"
 #name_site <- "Brimpton Lake"
 #name_site <- "Cadgee"
-name_site <- "Karoonda"
+#name_site <- "Karoonda"
+name_site <- "Murlong"
 
 current.folder <- "X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/"
 
@@ -277,10 +279,10 @@ list.of.files
 
 #PIRSA_New Horizons
 
-site <- read_excel(paste0("X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/", "PIRSA_New Horizons_Fraser_2014-2018_jax", ".xlsx"),
-                   sheet = "Database format", skip = 0)
-names(site)
-site <- site %>% dplyr::select("ID":"comments"   )
+# site <- read_excel(paste0("X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/", "PIRSA_New Horizons_Fraser_2014-2018_jax", ".xlsx"),
+#                    sheet = "Database format", skip = 0)
+# names(site)
+# site <- site %>% dplyr::select("ID":"comments"   )
 
 
 
@@ -288,7 +290,34 @@ site <- site %>% dplyr::select("ID":"comments"   )
 # #
 # ### a metadata
 # #
-metadata <- read_excel(paste0("X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/", "PIRSA_New Horizons_Fraser_2014-2018_jax", ".xlsx"),
+# metadata <- read_excel(paste0("X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/", "PIRSA_New Horizons_Fraser_2014-2018_jax", ".xlsx"),
+#                        sheet = "Site_metadata", col_types = c("text",
+#                                                               "numeric", "numeric", "numeric",
+#                                                               "numeric", "numeric", "numeric",
+#                                                               "numeric", "numeric", "numeric",
+#                                                               "numeric", "numeric", "numeric",
+#                                                               "numeric", "numeric", "numeric",
+#                                                               "numeric", "numeric", "numeric",
+#                                                               "date", "numeric", "text", "text",
+#                                                               "text", "text", "text", "text", "text",
+#                                                               "text",
+#                                                               "date", "date", "date",
+#                                                               "date", "date", "date",
+#                                                               "date",
+#                                                               "date", "date", "date",
+#                                                               "date", "date", "date",
+#                                                               "date"))
+
+#Murlong
+
+site <- read_excel(paste0("X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/", "Murlong_Brooker_v2", ".xlsx"),
+                   sheet = "Database format Murlong", skip = 1)
+#  names(site)
+site <- site %>% dplyr::select("ID":"comments"   )
+# #
+# ### a metadata
+# #
+metadata <- read_excel(paste0("X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/", "Murlong_Brooker_v2", ".xlsx"),
                        sheet = "Site_metadata", col_types = c("text",
                                                               "numeric", "numeric", "numeric",
                                                               "numeric", "numeric", "numeric",
