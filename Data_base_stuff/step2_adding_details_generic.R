@@ -24,7 +24,8 @@ list.of.files
 #site_name <- "Brimpton Lake"
 #site_name <- "Cadgee"
 #site_name <- "Karoonda"
-site_name <- "Murlong"
+# site_name <- "Murlong"
+site_name <- "Carwarp"
 
 list.files("X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2021/", ".csv",full.names=T)
 
@@ -60,11 +61,11 @@ list.files("X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2021/", ".csv",f
 #3 Yenda
 #input_data_file_rain <- "X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2021/GS_rain_deciles_Racheal_sites.csv"
 
-#3 Ouyen Spade and all of Murrays and Waikerie
-#input_data_file_rain <- "X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2021/GS_rain_deciles_Murray_sites.csv"
+#3 Ouyen Spade and all of Murrays and Waikerie and Carwarp
+input_data_file_rain <- "X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2021/GS_rain_deciles_Murray_sites.csv"
 
 #4 Brooker and Murlong Spade and all of Murrays
-input_data_file_rain <- "X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2021/GS_rain_deciles_Nigel_sites.csv"
+#input_data_file_rain <- "X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2021/GS_rain_deciles_Nigel_sites.csv"
 
 #5 Younghusband a
 #input_data_file_rain <- "X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2021/GS_rain_deciles_Younghusband_sites.csv"
@@ -151,11 +152,14 @@ primary<- primary %>%
     placement_organic == "incorperated to 50 cm" ~        "incorp_50", 
     placement_organic == "incorporated to 41 cm" ~        "incorp_41",
     placement_organic == "incorporated to 50 cm" ~        "incorp_50",
-    placement_organic == "incorporated to 30 cm" ~        "incorp_30", 
+    placement_organic == "incorporated to 30 cm" ~        "incorp_30",
+    placement_organic == "incorporated to 60 cm" ~        "incorp_60",
     
     placement_organic == "banded at 50 cm" ~              "band_50", 
     placement_organic == "banded at 30 cm" ~              "band_30",
     placement_organic == "banded at 60 cm" ~              "band_60",
+    placement_organic == "banded to 30+60 cm" ~           "band_30+60",
+    
     
     placement_organic == "surface" ~                      "surface", 
     
@@ -621,7 +625,7 @@ unique(primary_metadata$site)
 primary_metadata <- primary_metadata %>%
   mutate(
     Latitude = case_when(
-      site == "Carwarp Amelioration" ~        -34.3075, #Red Cliffs is the closest met station
+      site == "Carwarp" ~        -34.3075, #Red Cliffs is the closest met station Carwarp Amelioration
       site == "Waikerie" ~       -34.2159,
       site == "Lowalide" ~       -35.0459,
       site == "Ouyen" ~          -35.0681,
@@ -639,7 +643,7 @@ primary_metadata <- primary_metadata %>%
 primary_metadata <- primary_metadata %>%
   mutate(
     Longitude = case_when(
-      site == "Carwarp Amelioration" ~        142.1882, #Red Cliffs is the closest met station
+      site == "Carwarp" ~        142.1882, #Red Cliffs is the closest met station
       site == "Waikerie" ~        140.1860,
       site == "Lowalide" ~        139.9791 ,
       site == "Ouyen" ~           142.3125,

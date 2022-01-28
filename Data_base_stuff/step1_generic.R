@@ -31,7 +31,8 @@ library(stringr)
 #name_site <- "Brimpton Lake"
 #name_site <- "Cadgee"
 #name_site <- "Karoonda"
-name_site <- "Murlong"
+#name_site <- "Murlong"
+name_site <- "Carwarp" #CarwarpAmelioration
 
 current.folder <- "X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/"
 
@@ -308,16 +309,43 @@ list.of.files
 #                                                               "date", "date", "date",
 #                                                               "date"))
 
-#Murlong
+# #Murlong
+# 
+# site <- read_excel(paste0("X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/", "Murlong_Brooker_v2", ".xlsx"),
+#                    sheet = "Database format Murlong", skip = 1)
+# #  names(site)
+# site <- site %>% dplyr::select("ID":"comments"   )
+# # #
+# # ### a metadata
+# # #
+# metadata <- read_excel(paste0("X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/", "Murlong_Brooker_v2", ".xlsx"),
+#                        sheet = "Site_metadata", col_types = c("text",
+#                                                               "numeric", "numeric", "numeric",
+#                                                               "numeric", "numeric", "numeric",
+#                                                               "numeric", "numeric", "numeric",
+#                                                               "numeric", "numeric", "numeric",
+#                                                               "numeric", "numeric", "numeric",
+#                                                               "numeric", "numeric", "numeric",
+#                                                               "date", "numeric", "text", "text",
+#                                                               "text", "text", "text", "text", "text",
+#                                                               "text",
+#                                                               "date", "date", "date",
+#                                                               "date", "date", "date",
+#                                                               "date",
+#                                                               "date", "date", "date",
+#                                                               "date", "date", "date",
+#                                                               "date"))
 
-site <- read_excel(paste0("X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/", "Murlong_Brooker_v2", ".xlsx"),
-                   sheet = "Database format Murlong", skip = 1)
+#CarwarpAmelioration
+
+site <- read_excel(paste0("X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/", "CarwarpAmelioration", ".xlsx"),
+                   sheet = "Database_format", skip = 1)
 #  names(site)
 site <- site %>% dplyr::select("ID":"comments"   )
 # #
 # ### a metadata
 # #
-metadata <- read_excel(paste0("X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/", "Murlong_Brooker_v2", ".xlsx"),
+metadata <- read_excel(paste0("X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/", "CarwarpAmelioration", ".xlsx"),
                        sheet = "Site_metadata", col_types = c("text",
                                                               "numeric", "numeric", "numeric",
                                                               "numeric", "numeric", "numeric",
@@ -335,8 +363,6 @@ metadata <- read_excel(paste0("X:/Therese_Jackie/Sandy_soils/Development_databas
                                                               "date", "date", "date",
                                                               "date"))
 
-
-
 #############################################################################################################################################
 ########################      Merge the results data   and the metadata                            ########################################
 ############################################################################################################################################
@@ -344,7 +370,8 @@ str(site)
 
 #site <- rbind(Bute_Sam, Bute_CSIRO)
 site <- site %>%
-  mutate(site_sub = site)
+  #mutate(site_sub = site)
+  mutate(site_sub = "CarwarpAmelioration")
   #mutate(site_sub = "Ouyen_spade")
 
 #rm(Bute_Sam,Bute_CSIRO )
