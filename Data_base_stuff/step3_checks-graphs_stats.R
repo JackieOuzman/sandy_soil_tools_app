@@ -1,34 +1,10 @@
+#install.packages("multcompView")
+
 library(ggplot2)
 library(readxl)
 library(tidyverse)
-#################################################################################################################
-####   Get the data #####
+library(multcompView)
 
-current.folder <- "X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/step2"
-
-# find the files that you want
-list.of.files <- list.files(current.folder, ".csv",full.names=T) #the trick is getting the full name - just the excel files
-#list.of.files <- list.files(current.folder, full.names=T) #the trick is getting the full name - all the files
-list.of.files
-
-#####################################################################################################################
-#### Get summary data 
-
-
-
-# 3. Yenda
-data_file <- "X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/step2/Yenda_sites_step1_2_neat.csv"
-control_data_file_metadata <- "X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/step2/Yenda_sites_step1_2_control.csv"
-
-
-
-##################################################################################################################
-## download the data using the specified file path above
-
-summary_data <- read_csv(data_file)
-
-str(summary_data$Descriptors)
-unique(summary_data$Descriptors)
 
 ############################################################################################################
 ##### order the Descriptors
@@ -46,89 +22,110 @@ summary_data <-summary_data %>%
                                   "Rip.60_none"
                                 ))) 
   
-############################################################################################################  
-##### plots by year using the stats option in ggplot
-
-ggplot(summary_data, aes(x=name, y=yield)) +
-  geom_bar(stat="identity", position=position_dodge())+
-  facet_wrap(.~ year)+
-  labs(
-    x = "",
-    y = "Yield t/ha")+
-   theme(axis.text.x=element_text(angle=45,hjust=1)) 
-
-############################################################################################################  
-##### Cal mean and error bars (SE) outside the orginal dataset.
-str(summary_data)
-
-
-### all the data
-summary_data_v1 <- summary_data %>%
-  group_by(name) %>%
-  summarise(
-    yield_mean = mean(yield, na.rm = TRUE),
-    yield_SD = sd(yield,  na.rm = TRUE),
-    yield_SE=yield_SD/sqrt(n()),
-    
-    est_mean = mean(establishment, na.rm = TRUE),
-    est_SD = sd(establishment,  na.rm = TRUE),
-    est_SE=est_SD/sqrt(n()),
-    
-    biomass_mean = mean(dry_biomass, na.rm = TRUE),
-    biomass_SD = sd(dry_biomass,  na.rm = TRUE),
-    biomass_SE=biomass_SD/sqrt(n()),
-  )
-
-summary_data_v1
-
-### Yield plot
-summary_data_v1 %>%
-  ggplot(aes(x = name , y = yield_mean)) +
-  geom_col()+
-  theme_classic() +
-  geom_errorbar(position=position_dodge(.9), width=.25, aes(ymin=yield_mean-yield_SE, ymax=yield_mean+yield_SE)) +
-  labs(
-    x = "",
-    y = "Yield t/ha")+
-  theme(axis.text.x=element_text(angle=45,hjust=1))
 
 
 
-### by year the data
-summary_data_v2 <- summary_data %>%
-  group_by(name, year) %>%
-  summarise(
-    yield_mean = mean(yield, na.rm = TRUE),
-    yield_SD = sd(yield,  na.rm = TRUE),
-    yield_SE=yield_SD/sqrt(n()),
-    
-    est_mean = mean(establishment, na.rm = TRUE),
-    est_SD = sd(establishment,  na.rm = TRUE),
-    est_SE=est_SD/sqrt(n()),
-    
-    biomass_mean = mean(dry_biomass, na.rm = TRUE),
-    biomass_SD = sd(dry_biomass,  na.rm = TRUE),
-    biomass_SE=biomass_SD/sqrt(n()),
-  )
-summary_data_v2
-
-summary_data_v2 %>%
-  ggplot(aes(x = name , y = yield_mean)) +
-  geom_col()+
-  theme_classic() +
-  facet_wrap(.~ year)+
-  geom_errorbar(position=position_dodge(.9), width=.25, aes(ymin=yield_mean-yield_SE, ymax=yield_mean+yield_SE)) +
-  labs(
-    x = "",
-    y = "Yield t/ha")+
-  theme(axis.text.x=element_text(angle=45,hjust=1))
+#################################################################################################################
+####   Get the data #####
 
 
-### Run some stats #too many comparisions
 
-summary_data
+#####################################################################################################################
+
+data_file <- "X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/stats_working/sites_merged.csv"
+##################################################################################################################
+## download the data using the specified file path above
+
+summary_data_all <- read_csv(data_file)
+
+str(summary_data_all)
+summary_data_all %>% distinct(site)
+
+
+
+####################################################################################################################################
+####################################################################################################################################
+###https://statdoe.com/two-way-anova-in-r/
+####################################################################################################################################
+####################################################################################################################################
+
+site_name <- "Yenda"
+## for what years
+summary_data_all %>% filter(site == site_name) %>% 
+  distinct(year)
+
+year_selected <- 2021
+
 # Compute the analysis of variance
-res.aov <- aov(yield ~ Descriptors, data = summary_data)
-# Summary of the analysis
-summary(res.aov)
+summary_data <- summary_data_all %>%
+  filter(site == site_name) %>% 
+  filter(year==year_selected)
 
+anova <- aov(yield ~ Descriptors, data = summary_data)
+# Summary of the analysis
+summary(anova)
+
+str(summary_data)
+data_summary <- summary_data %>% 
+  group_by(Descriptors, Descriptors_order) %>%
+  summarise(mean=mean(yield), 
+            sd=sd(yield)) %>%
+  arrange(desc(mean))
+print(data_summary)
+
+
+tukey <- TukeyHSD(anova)
+print(tukey)
+
+
+tukey.cld <- multcompLetters4(anova, tukey) # default is threshold = 0.05
+print(tukey.cld)
+
+
+#adding the compact letter display to the table with means and sd
+cld <- as.data.frame.list(tukey.cld$Descriptors)
+data_summary$Tukey <- cld$Letters
+print(data_summary)
+
+## add in some details 
+data_summary <- data_summary %>% 
+  mutate(site = site_name,
+         year = year_selected)
+
+data_summary <- data_summary %>% 
+  arrange(Descriptors_order)
+
+data_summary
+
+
+output_folder <- "X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/stats_working/"
+
+write.csv(data_summary, paste0(output_folder,site_name,".csv"))
+
+###############################################################################################################
+
+#https://statdoe.com/barplot-for-two-factors-in-r/
+
+output_folder <- "X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/stats_working/"
+site_name <- "Yenda"
+### Run some stats 
+year_selected <- 2021
+
+
+data_summary <- read_csv(paste0(output_folder,site_name,".csv"))
+print(data_summary)
+
+
+
+# barplot with letters
+data_summary %>%  arrange(Descriptors_order) %>% 
+ggplot( aes(x = factor(Descriptors), y = mean)) + 
+  geom_bar(stat = "identity",  alpha = 0.5)  +
+  geom_errorbar(aes(ymin=mean-sd, ymax=mean+sd), width = 0.25) +
+  labs(x="", y="yield t/ha", title = paste(site_name," Year = ", year_selected)) +
+  theme_bw() + 
+  theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank()) +
+  theme(legend.position = c(0.1, 0.75)) +
+  geom_text(aes(label=Tukey), position = position_dodge(0.90), size = 3, 
+            vjust=-0.8, hjust=-0.5, colour = "gray25")+
+  theme(axis.text.x=element_text(angle=45,hjust=1))
