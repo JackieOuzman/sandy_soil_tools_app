@@ -32,7 +32,8 @@ library(stringr)
 #name_site <- "Cadgee"
 #name_site <- "Karoonda"
 #name_site <- "Murlong"
-name_site <- "Carwarp" #CarwarpAmelioration
+#name_site <- "Carwarp" #CarwarpAmelioration
+name_site <- "Yenda" 
 
 current.folder <- "X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/"
 
@@ -105,30 +106,30 @@ list.of.files
 
 
 
-# site <- read_excel("X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/SNSW Yenda Data Sheet 2021_jax.xlsx",
-#                          sheet = "Database format Yenda 2017-2021", skip = 0)
-# names(site)
-# site <- site %>% dplyr::select("ID":"comments"   )
-# 
-# ### Yenda metadata
-# 
-# metadata <- read_excel("X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/SNSW Yenda Data Sheet 2021_jax.xlsx",
-#                                   sheet = "Site_metadata", col_types = c("text", 
-#                                                                          "numeric", "numeric", "numeric", 
-#                                                                          "numeric", "numeric", "numeric", 
-#                                                                          "numeric", "numeric", "numeric", 
-#                                                                          "numeric", "numeric", "numeric", 
-#                                                                          "numeric", "numeric", "numeric", 
-#                                                                          "numeric", "numeric", "numeric", 
-#                                                                          "date", "numeric", "text", "text", 
-#                                                                          "text", "text", "text", "text", "text", 
-#                                                                          "text", 
-#                                                                          "date", "date", "date", 
-#                                                                          "date", "date", "date", 
-#                                                                          "date",
-#                                                                          "date", "date", "date", 
-#                                                                          "date", "date", "date", 
-#                                                                          "date"))
+ site <- read_excel("X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/SNSW Yenda Data Sheet 2021_jax.xlsx",
+                          sheet = "Database format Yenda 2017-2021", skip = 0)
+ names(site)
+ site <- site %>% dplyr::select("ID":"comments"   )
+ 
+ ### Yenda metadata
+ 
+ metadata <- read_excel("X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/SNSW Yenda Data Sheet 2021_jax.xlsx",
+                                  sheet = "Site_metadata", col_types = c("text",
+                                                                         "numeric", "numeric", "numeric",
+                                                                         "numeric", "numeric", "numeric",
+                                                                         "numeric", "numeric", "numeric",
+                                                                         "numeric", "numeric", "numeric",
+                                                                         "numeric", "numeric", "numeric",
+                                                                         "numeric", "numeric", "numeric",
+                                                                         "date", "numeric", "text", "text",
+                                                                         "text", "text", "text", "text", "text",
+                                                                         "text",
+                                                                         "date", "date", "date",
+                                                                         "date", "date", "date",
+                                                                         "date",
+                                                                         "date", "date", "date",
+                                                                         "date", "date", "date",
+                                                                         "date"))
 
 
 #4. Oyen Spade
@@ -338,30 +339,30 @@ list.of.files
 
 #CarwarpAmelioration
 
-site <- read_excel(paste0("X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/", "CarwarpAmelioration", ".xlsx"),
-                   sheet = "Database_format", skip = 1)
-#  names(site)
-site <- site %>% dplyr::select("ID":"comments"   )
-# #
-# ### a metadata
-# #
-metadata <- read_excel(paste0("X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/", "CarwarpAmelioration", ".xlsx"),
-                       sheet = "Site_metadata", col_types = c("text",
-                                                              "numeric", "numeric", "numeric",
-                                                              "numeric", "numeric", "numeric",
-                                                              "numeric", "numeric", "numeric",
-                                                              "numeric", "numeric", "numeric",
-                                                              "numeric", "numeric", "numeric",
-                                                              "numeric", "numeric", "numeric",
-                                                              "date", "numeric", "text", "text",
-                                                              "text", "text", "text", "text", "text",
-                                                              "text",
-                                                              "date", "date", "date",
-                                                              "date", "date", "date",
-                                                              "date",
-                                                              "date", "date", "date",
-                                                              "date", "date", "date",
-                                                              "date"))
+# site <- read_excel(paste0("X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/", "CarwarpAmelioration", ".xlsx"),
+#                    sheet = "Database_format", skip = 1)
+# #  names(site)
+# site <- site %>% dplyr::select("ID":"comments"   )
+# # #
+# # ### a metadata
+# # #
+# metadata <- read_excel(paste0("X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/", "CarwarpAmelioration", ".xlsx"),
+#                        sheet = "Site_metadata", col_types = c("text",
+#                                                               "numeric", "numeric", "numeric",
+#                                                               "numeric", "numeric", "numeric",
+#                                                               "numeric", "numeric", "numeric",
+#                                                               "numeric", "numeric", "numeric",
+#                                                               "numeric", "numeric", "numeric",
+#                                                               "numeric", "numeric", "numeric",
+#                                                               "date", "numeric", "text", "text",
+#                                                               "text", "text", "text", "text", "text",
+#                                                               "text",
+#                                                               "date", "date", "date",
+#                                                               "date", "date", "date",
+#                                                               "date",
+#                                                               "date", "date", "date",
+#                                                               "date", "date", "date",
+#                                                               "date"))
 
 #############################################################################################################################################
 ########################      Merge the results data   and the metadata                            ########################################
@@ -370,8 +371,8 @@ str(site)
 
 #site <- rbind(Bute_Sam, Bute_CSIRO)
 site <- site %>%
-  #mutate(site_sub = site)
-  mutate(site_sub = "CarwarpAmelioration")
+  mutate(site_sub = site)
+  #mutate(site_sub = "CarwarpAmelioration")
   #mutate(site_sub = "Ouyen_spade")
 
 #rm(Bute_Sam,Bute_CSIRO )

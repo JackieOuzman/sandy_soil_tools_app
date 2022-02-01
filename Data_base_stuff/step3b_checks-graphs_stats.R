@@ -111,6 +111,7 @@ order <- c("Control" ,
 "Sweep.30_Cl.incorp_30" ,
 "Sweep.30_Cl@3.incorp_30",
 "Sweep.30_Cl@6.incorp_30",
+"Sweep.30_Cl@6.incorp_30.Yrs17,18,19",
 "Sweep.30_Cl@9.incorp_30",             
              
 "Sweep.30_Cl@3.incorp_30.Lime.incorp_8",
@@ -149,11 +150,11 @@ summary_data_all %>% filter(site == site_name) %>%
 ##################################################################################################################################
 rm(anova, cld, data_summary, plot, summary_data, tukey, tukey.cld, year_selected)
 
-year_selected <- 2021
+#year_selected <- 2021
 #year_selected <- 2020
 #year_selected <- 2019
 #year_selected <- 2018
-#year_selected <- 2017
+year_selected <- 2017
 
 # Compute the analysis of variance
 summary_data <- summary_data_all %>%
@@ -245,3 +246,14 @@ ggsave(plot,
       dpi=600
        )
 
+ggsave(plot,
+       device = "pdf",
+       filename = paste0("Plot_yield", site_name,"_", year_selected, ".pdf"),
+       path= output_folder,
+       width=8.62,
+       height = 6.28,
+       dpi=600
+)
+
+
+###############################################################################################################################

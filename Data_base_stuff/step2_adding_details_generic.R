@@ -247,6 +247,7 @@ unique(primary$organic)
 unique(primary$fertiliser)
 unique(primary$other_ameliorant)
 unique(primary$placement_organic)
+unique(primary$timing)
 
 
 ##########
@@ -256,15 +257,26 @@ primary <- primary %>%
     ## cl.with.depth - chicken litter
     organic  == "chicken_compost" | organic  ==  "chicken_manure" | organic  ==  "chicken litter"| organic  ==  "chicken liitter"|organic  == "chicken_litter" 
     &  fertiliser ==        "none"  
-    &  other_ameliorant ==  "none"    
-    & site != "Yenda" ~             
+    &  other_ameliorant ==  "none" 
+    & site != "Yenda" 
+    & timing == "NA" ~             
     paste0("Cl",".", placement_organic),
     
-    organic  == "chicken_compost" | organic  ==  "chicken_manure" | organic  ==  "chicken litter"| organic  ==  "chicken liitter"|organic  == "chicken_litter" 
-    &  fertiliser ==        "none"  
-    &  other_ameliorant ==  "none"  
-    & site == "Yenda" ~         
+    organic  == "chicken_compost" | organic  ==  "chicken_manure" | organic  ==  "chicken litter"| organic  ==  "chicken liitter"|organic  == "chicken_litter"
+    &  fertiliser ==        "none"
+    &  other_ameliorant ==  "none"
+    & site == "Yenda"
+    & is.na(timing) ~
     paste0("Cl","@", organic_rate,".", placement_organic),
+    
+    
+    
+     organic  == "chicken_compost" | organic  ==  "chicken_manure" | organic  ==  "chicken litter"| organic  ==  "chicken liitter"|organic  == "chicken_litter" 
+     &  fertiliser ==        "none"  
+     &  other_ameliorant ==  "none" 
+     & site == "Yenda" 
+     & !is.na(timing) ~      
+       paste0("Cl","@", organic_rate,".", placement_organic,".", timing),
            
     
      
