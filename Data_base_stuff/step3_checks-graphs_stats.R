@@ -6,24 +6,6 @@ library(tidyverse)
 library(multcompView)
 
 
-############################################################################################################
-##### order the Descriptors
-
-summary_data <-summary_data %>%
-  mutate(name = factor(Descriptors, 
-                       levels=c("Control", 
-                                   "Unmodified_Fert.foliar" ,
-                                   "Unmodified_Fert.incorp_8" ,
-                                   "Unmodified_Cl.incorp_8" ,
-                                   "Sweep.30_none" ,
-                                   "Sweep.30_Lime.incorp_30" ,
-                                   "Sweep.30_Cl.incorp_30",
-                                   "Sweep.30_Cl.incorp_30.Clay.incorp_8" ,
-                                  "Rip.60_none"
-                                ))) 
-  
-
-
 
 #################################################################################################################
 ####   Get the data #####
@@ -33,10 +15,101 @@ summary_data <-summary_data %>%
 #####################################################################################################################
 
 data_file <- "X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/stats_working/sites_merged.csv"
-##################################################################################################################
+
 ## download the data using the specified file path above
 
 summary_data_all <- read_csv(data_file)
+
+
+##### order the Descriptors
+order <- c("Control" ,
+"Unmodified_SE14.band_8" ,
+"Unmodified_Bi-Agra.surface+band_8" ,
+"Unmodified_Lc.surface" ,
+"Unmodified_Cl.surface" ,
+"Unmodified_Cl.incorp_8" ,
+"Unmodified_Fert.surface" ,
+"Unmodified_Fert.foliar" ,
+"Unmodified_Fert.incorp_8" ,
+"Unmodified_Fert.band_8" ,
+"Unmodified_Fert.band_30" ,
+"Unmodified_Clay.incorp_10" ,
+"Unmodified_Clay.incorp_8" ,
+"Unmodified_K_added.surface" ,
+"Unmodified_Fert.band_30.Clay.incorp_10" ,
+"Spade.30_Lc@1.incorp_30" ,
+"Spade.30_Lc@2.incorp_30" ,
+"Spade.30_Lc@4.incorp_30" ,
+"Spade.30_Lc@6.incorp_30" ,
+"Spade.30_Lc@8.incorp_30" ,
+"Spade.30_Lc@10.incorp_30" ,
+"Spade.30_Lc@15.incorp_30" ,
+"Spade.30_Lc@20.incorp_30" ,
+"Spade.30_Lc@1.incorp_30.K_added.surface" ,
+"Spade.30_Lc@2.incorp_30.K_added.surface" ,
+"Spade.30_Lc@4.incorp_30.K_added.surface" ,
+"Spade.30_Lc@6.incorp_30.K_added.surface", 
+"Spade.30_Lc@8.incorp_30.K_added.surface" ,
+"Spade.30_Lc@10.incorp_30.K_added.surface", 
+"Spade.30_Lc@15.incorp_30.K_added.surface", 
+"Spade.30_Lc@20.incorp_30.K_added.surface" ,
+"Spade.30_none" ,
+"Spade.30_Lc.incorp_30", 
+"Spade.30_Cl.incorp_30" ,
+"Spade.30_Com.incorp_30" ,
+"Spade.30_Cereal.incorp_30", 
+"Spade.30_K_added.surface" ,
+"Spade.30_Fert.incorp_30.K_added.incorp_30", 
+"Spade.30_Fert.incorp_30" ,
+"Spade.30_Fert.incorp_30.Clay.incorp_30", 
+"Spade.30_Clay.incorp_30" ,
+"Spade.30_Lc.incorp_30.Clay.incorp_30" ,
+"Spade.30_Lc.incorp_30.Fert.incorp_30" ,
+"Spade.30_Lc.incorp_30.Fert.incorp_30.Clay.incorp_30" ,
+"Spade.30_Vetch.incorp_30" ,
+"Spade.30_Vet_Cer_In.incorp_30" ,
+"Spade.30_Vet_Cer.incorp_30" ,
+"Rip.30_none" ,
+"Rip.30_Cl.surface" ,
+"Rip.30_Cl.band_30" ,
+"Rip.30_Fert.band_8" ,
+"Rip.30_Fert.band_30" ,
+"Rip.30_Fert.incorp_30" ,
+"Rip.30_Lc.incorp_30" ,
+"Rip.40_none" ,
+"Rip.41_none" ,
+"Rip.41_Lc.incorp_41" ,
+"Rip.41_Fert.incorp_41" ,
+"Rip.60_none" ,
+"Rip.60_Lc.incorp_60" ,
+"Rip.60_Fert.band_8" ,
+"Rip.60_Cl.surface" ,
+"Rip.60_Cl.band_60" ,
+"Rip.60_Fert.band_60" ,
+"Rip.30+60_none" ,
+"Rip.60Spade.30_none" ,
+"Rip.60Spade.30_Lc.band_30+60", 
+"Rip.30+60_Lc.band_30+60" ,
+"Rip.50_none" ,
+"Rip.50_Cl.surface" ,
+"Rip.50_Cl.incorp_50" ,
+"Rip.50_Cl.band_50" ,
+"Rip.50_Fert.surface" ,
+"Rip.50_Clay.incorp_50", 
+"Inc.50_none" ,
+"Inc.50_Cl.incorp_50" ,
+"Rip.50IncRip_none" ,
+"Delving.18_none" ,
+"Delving.18_SE14.band_8" ,
+"Sweep.30_none" ,
+"Sweep.30_Cl.incorp_30" ,
+"Sweep.30_Lime.incorp_30" ,
+"Sweep.30_Cl.incorp_30.Clay.incorp_8" )
+
+
+summary_data_all$Descriptors <- factor(summary_data_all$Descriptors,
+                                       levels = order)
+
 
 str(summary_data_all)
 summary_data_all %>% distinct(site)
@@ -69,7 +142,10 @@ str(summary_data)
 data_summary <- summary_data %>% 
   group_by(Descriptors, Descriptors_order) %>%
   summarise(mean=mean(yield), 
-            sd=sd(yield)) %>%
+            sd=sd(yield),
+            count = n(),
+            std_error = sd/(sqrt(count))
+            ) %>%
   arrange(desc(mean))
 print(data_summary)
 
@@ -100,9 +176,11 @@ data_summary
 
 output_folder <- "X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/stats_working/"
 
-write.csv(data_summary, paste0(output_folder,site_name,".csv"))
+write.csv(data_summary, paste0(output_folder,site_name,year_selected,".csv"))
 
 ###############################################################################################################
+### Now for the plots ###
+
 
 #https://statdoe.com/barplot-for-two-factors-in-r/
 
@@ -115,17 +193,30 @@ year_selected <- 2021
 data_summary <- read_csv(paste0(output_folder,site_name,".csv"))
 print(data_summary)
 
-
+data_summary$Descriptors <- factor(data_summary$Descriptors,
+                                       levels = order)
 
 # barplot with letters
-data_summary %>%  arrange(Descriptors_order) %>% 
+plot <- data_summary %>%  arrange(Descriptors_order) %>% 
 ggplot( aes(x = factor(Descriptors), y = mean)) + 
   geom_bar(stat = "identity",  alpha = 0.5)  +
-  geom_errorbar(aes(ymin=mean-sd, ymax=mean+sd), width = 0.25) +
-  labs(x="", y="yield t/ha", title = paste(site_name," Year = ", year_selected)) +
+  geom_errorbar(aes(ymin=mean-std_error, ymax=mean+std_error), width = 0.1) +
+  labs(x="", y="Yield t/ha", title = paste(site_name,": ", year_selected),
+       subtitle = "ANOVA with Tukey, threshold 0.05") +
   theme_bw() + 
   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank()) +
   theme(legend.position = c(0.1, 0.75)) +
-  geom_text(aes(label=Tukey), position = position_dodge(0.90), size = 3, 
-            vjust=-0.8, hjust=-0.5, colour = "gray25")+
+  geom_text(aes(label=Tukey), position = position_dodge(0.80), size = 4, 
+            vjust=-0.5, hjust=-0.5, colour = "gray25")+
   theme(axis.text.x=element_text(angle=45,hjust=1))
+
+
+plot
+ggsave(plot,
+       device = "png",
+       filename = paste0("Plot_yield_2", site_name,"_", year_selected, ".png"),
+       path= output_folder,
+       width=8.62,
+       height = 6.28,
+      dpi=600
+       )
