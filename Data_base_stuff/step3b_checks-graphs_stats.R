@@ -127,7 +127,20 @@ site_name <- "Yenda"
 summary_data_all %>% filter(site == site_name) %>% 
   distinct(year)
 
-year_selected <- 2021
+
+##################################################################################################################################
+
+##################################################################################################################################
+
+
+##################################################################################################################################
+rm(anova, cld, data_summary, plot, summary_data, tukey, tukey.cld, year_selected)
+
+#year_selected <- 2021
+#year_selected <- 2020
+#year_selected <- 2019
+#year_selected <- 2018
+year_selected <- 2017
 
 # Compute the analysis of variance
 summary_data <- summary_data_all %>%
@@ -176,7 +189,7 @@ data_summary
 
 output_folder <- "X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/stats_working/"
 
-write.csv(data_summary, paste0(output_folder,site_name,year_selected,".csv"))
+write.csv(data_summary, paste0(output_folder,"Yield_",site_name,year_selected,".csv"))
 
 ###############################################################################################################
 ### Now for the plots ###
@@ -185,9 +198,7 @@ write.csv(data_summary, paste0(output_folder,site_name,year_selected,".csv"))
 #https://statdoe.com/barplot-for-two-factors-in-r/
 
 output_folder <- "X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/stats_working/"
-site_name <- "Yenda"
-### Run some stats 
-year_selected <- 2021
+
 
 
 data_summary <- read_csv(paste0(output_folder,site_name,".csv"))
@@ -214,9 +225,10 @@ ggplot( aes(x = factor(Descriptors), y = mean)) +
 plot
 ggsave(plot,
        device = "png",
-       filename = paste0("Plot_yield_2", site_name,"_", year_selected, ".png"),
+       filename = paste0("Plot_yield", site_name,"_", year_selected, ".png"),
        path= output_folder,
        width=8.62,
        height = 6.28,
       dpi=600
        )
+
