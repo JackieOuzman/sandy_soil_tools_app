@@ -21,6 +21,11 @@ data_file <- "X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_wor
 summary_data_all <- read_csv(data_file)
 
 
+list_of_descriptors<- summary_data_all %>% 
+  filter(site == site_name) %>% 
+  distinct(Descriptors) %>% 
+  arrange(desc(Descriptors))
+
 ##### order the Descriptors
 order <- c("Control" ,
 "Unmodified_SE14.band_8" ,
@@ -28,9 +33,10 @@ order <- c("Control" ,
 "Unmodified_Lc.surface" ,
 "Unmodified_Cl.surface" ,
 "Unmodified_Cl.incorp_8" ,
+"Unmodified_Cl@3.incorp_8" ,#Unmodified_Cl@3.incorp_8
 "Unmodified_Fert.surface" ,
-"Unmodified_Fert.foliar" ,
-"Unmodified_Fert.incorp_8" ,
+"Unmodified_Fert.foliar" ,#Unmodified_Fert.foliar  
+"Unmodified_Fert.incorp_8" ,#Unmodified_Fert.incorp_8  
 "Unmodified_Fert.band_8" ,
 "Unmodified_Fert.band_30" ,
 "Unmodified_Clay.incorp_10" ,
@@ -101,11 +107,18 @@ order <- c("Control" ,
 "Rip.50IncRip_none" ,
 "Delving.18_none" ,
 "Delving.18_SE14.band_8" ,
-"Sweep.30_none" ,
+"Sweep.30_none" ,#Sweep.30_none
 "Sweep.30_Cl.incorp_30" ,
+"Sweep.30_Cl@3.incorp_30",
+"Sweep.30_Cl@6.incorp_30",
+"Sweep.30_Cl@9.incorp_30",             
+             
+"Sweep.30_Cl@3.incorp_30.Lime.incorp_8",
 "Sweep.30_Lime.incorp_30" ,
 "Sweep.30_Cl.incorp_30.Clay.incorp_8" )
 
+
+      
 
 summary_data_all$Descriptors <- factor(summary_data_all$Descriptors,
                                        levels = order)
@@ -136,11 +149,11 @@ summary_data_all %>% filter(site == site_name) %>%
 ##################################################################################################################################
 rm(anova, cld, data_summary, plot, summary_data, tukey, tukey.cld, year_selected)
 
-#year_selected <- 2021
+year_selected <- 2021
 #year_selected <- 2020
 #year_selected <- 2019
 #year_selected <- 2018
-year_selected <- 2017
+#year_selected <- 2017
 
 # Compute the analysis of variance
 summary_data <- summary_data_all %>%
@@ -153,7 +166,7 @@ summary(anova)
 
 str(summary_data)
 data_summary <- summary_data %>% 
-  group_by(Descriptors, Descriptors_order) %>%
+  group_by(Descriptors) %>%
   summarise(mean=mean(yield), 
             sd=sd(yield),
             count = n(),
@@ -182,7 +195,7 @@ data_summary <- data_summary %>%
          year = year_selected)
 
 data_summary <- data_summary %>% 
-  arrange(Descriptors_order)
+  arrange(Descriptors)
 
 data_summary
 
@@ -201,14 +214,14 @@ output_folder <- "X:/Therese_Jackie/Sandy_soils/Development_database/other_sites
 
 
 
-data_summary <- read_csv(paste0(output_folder,site_name,".csv"))
+data_summary <- read_csv(paste0(output_folder,"Yield_",site_name,year_selected,".csv"))
 print(data_summary)
 
 data_summary$Descriptors <- factor(data_summary$Descriptors,
                                        levels = order)
 
 # barplot with letters
-plot <- data_summary %>%  arrange(Descriptors_order) %>% 
+plot <- data_summary %>%  
 ggplot( aes(x = factor(Descriptors), y = mean)) + 
   geom_bar(stat = "identity",  alpha = 0.5)  +
   geom_errorbar(aes(ymin=mean-std_error, ymax=mean+std_error), width = 0.1) +

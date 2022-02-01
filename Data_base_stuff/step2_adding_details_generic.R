@@ -25,7 +25,8 @@ list.of.files
 #site_name <- "Cadgee"
 #site_name <- "Karoonda"
 # site_name <- "Murlong"
-site_name <- "Carwarp"
+#site_name <- "Carwarp"
+site_name <- "Yenda"
 
 list.files("X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2021/", ".csv",full.names=T)
 
@@ -38,16 +39,16 @@ list.files("X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2021/", ".csv",f
 # input_data_file_metadata <- "X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/step1_collating_files/Butes_sites_metadata.csv"
 
 # 3. Yenda
- # input_data_file <- "X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/step1_collating_files/Yenda_results.csv"
- # input_data_file_metadata <- "X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/step1_collating_files/Yenda_site_metadata.csv"
+  input_data_file <- "X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/step1_collating_files/Yenda_results.csv"
+  input_data_file_metadata <- "X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/step1_collating_files/Yenda_site_metadata.csv"
 
 #4. using site name
 
-input_data_file <- paste0("X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/step1_collating_files/",
-site_name, "_results.csv")
-
-input_data_file_metadata <- paste0("X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/step1_collating_files/",
-site_name, "_sites_metadata.csv")
+# input_data_file <- paste0("X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/step1_collating_files/",
+# site_name, "_results.csv")
+# 
+# input_data_file_metadata <- paste0("X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/step1_collating_files/",
+# site_name, "_sites_metadata.csv")
 
 
 #####################################################################################################################
@@ -59,10 +60,10 @@ list.files("X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2021/", ".csv",f
 #input_data_file_rain <- "X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2021/GS_rain_deciles_Sam_sites.csv"
 
 #3 Yenda
-#input_data_file_rain <- "X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2021/GS_rain_deciles_Racheal_sites.csv"
+input_data_file_rain <- "X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2021/GS_rain_deciles_Racheal_sites.csv"
 
 #3 Ouyen Spade and all of Murrays and Waikerie and Carwarp
-input_data_file_rain <- "X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2021/GS_rain_deciles_Murray_sites.csv"
+#input_data_file_rain <- "X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2021/GS_rain_deciles_Murray_sites.csv"
 
 #4 Brooker and Murlong Spade and all of Murrays
 #input_data_file_rain <- "X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2021/GS_rain_deciles_Nigel_sites.csv"
@@ -255,8 +256,16 @@ primary <- primary %>%
     ## cl.with.depth - chicken litter
     organic  == "chicken_compost" | organic  ==  "chicken_manure" | organic  ==  "chicken litter"| organic  ==  "chicken liitter"|organic  == "chicken_litter" 
     &  fertiliser ==        "none"  
-    &  other_ameliorant ==  "none"    ~        
+    &  other_ameliorant ==  "none"    
+    & site != "Yenda" ~             
     paste0("Cl",".", placement_organic),
+    
+    organic  == "chicken_compost" | organic  ==  "chicken_manure" | organic  ==  "chicken litter"| organic  ==  "chicken liitter"|organic  == "chicken_litter" 
+    &  fertiliser ==        "none"  
+    &  other_ameliorant ==  "none"  
+    & site == "Yenda" ~         
+    paste0("Cl","@", organic_rate,".", placement_organic),
+           
     
      
     organic  == "chicken_compost" | organic  ==  "chicken_manure" | organic  ==  "chicken litter"| organic  ==  "chicken liitter"
@@ -268,9 +277,10 @@ primary <- primary %>%
     
     organic  == "chicken_compost" | organic  ==  "chicken_manure" | organic  ==  "chicken litter"| organic  ==  "chicken liitter" 
     &  fertiliser ==        "none"  
-    &  other_ameliorant ==  "clay"       ~     
+    &  other_ameliorant ==  "clay" ~      
     paste0("Cl",".", placement_organic,".","Clay" ,".", placement_other),
     
+    # 
     
     # This is from Murray - compost
     organic  == "compost"   
@@ -429,12 +439,33 @@ primary <- primary %>%
     &    other_ameliorant ==    "Muriate of Potash"    ~      
       paste0("Fert",".", placement_fertiliser,".","K_added",".", placement_other),
     
+    
+    
+    organic  == "chicken_compost" | organic  ==  "chicken_manure" | organic  ==  "chicken litter"| organic  ==  "chicken liitter"|organic  == "chicken_litter"
+    &  fertiliser ==            "none"  
+    &    other_ameliorant ==    "lime"    
+    & site != "Yenda" ~  
+    paste0("Cl",".", placement_organic, ".","Lime", ".",  placement_other),
+    
+   
+    organic  == "chicken_compost" | organic  ==  "chicken_manure" | organic  ==  "chicken litter"| organic  ==  "chicken liitter"|organic  == "chicken_litter"
+    &  fertiliser ==            "none"  
+    &    other_ameliorant ==    "lime"    
+    & site == "Yenda" ~  
+      paste0("Cl","@", organic_rate,".",placement_organic, ".","Lime", ".",  placement_other),
+    
+    
+    
+    
+    
     organic  == "chicken_compost" | organic  ==  "chicken_manure" | organic  ==  "chicken litter"| organic  ==  "chicken liitter"|organic  == "chicken_litter"
     &  fertiliser ==            "none"  
     &    other_ameliorant ==    "lime"    ~      
-    paste0("Cl",".", placement_organic, ".","Clay", ".",  placement_other),
+      paste0("Cl",".", placement_organic, ".","Lime", ".",  placement_other),
     
-    organic  ==                "none"  
+    
+    
+     organic  ==                "none"  
     &  fertiliser ==           "none"   
     &    other_ameliorant ==   "lime"    
     ~ paste0("Lime",".", placement_other),
