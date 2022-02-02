@@ -127,7 +127,7 @@ summary_data_all$Descriptors <- factor(summary_data_all$Descriptors,
 
 str(summary_data_all)
 summary_data_all %>% distinct(site)
-
+summary_data_all %>% distinct(site_sub)
 
 
 ####################################################################################################################################
@@ -136,11 +136,13 @@ summary_data_all %>% distinct(site)
 ####################################################################################################################################
 ####################################################################################################################################
 
-site_name <- "Yenda"
+#site_name <- "Yenda"
+site_name <- "Bute_Trengrove"
 ## for what years
-summary_data_all %>% filter(site == site_name) %>% 
+# summary_data_all %>% filter(site == site_name) %>% 
+#   distinct(year)
+summary_data_all %>% filter(site_sub == site_name) %>% 
   distinct(year)
-
 
 ##################################################################################################################################
 
@@ -150,15 +152,18 @@ summary_data_all %>% filter(site == site_name) %>%
 ##################################################################################################################################
 rm(anova, cld, data_summary, plot, summary_data, tukey, tukey.cld, year_selected)
 
-#year_selected <- 2021
+year_selected <- 2021
 #year_selected <- 2020
 #year_selected <- 2019
 #year_selected <- 2018
-year_selected <- 2017
+#year_selected <- 2017
+#year_selected <- 2016
+#year_selected <- 2015
 
 # Compute the analysis of variance
 summary_data <- summary_data_all %>%
-  filter(site == site_name) %>% 
+  #filter(site == site_name) %>% 
+  filter(site_sub == site_name) %>%
   filter(year==year_selected)
 
 anova <- aov(yield ~ Descriptors, data = summary_data)
@@ -168,8 +173,8 @@ summary(anova)
 str(summary_data)
 data_summary <- summary_data %>% 
   group_by(Descriptors) %>%
-  summarise(mean=mean(yield), 
-            sd=sd(yield),
+  summarise(mean=mean(yield, na.rm = TRUE), 
+            sd=sd(yield, na.rm = TRUE),
             count = n(),
             std_error = sd/(sqrt(count))
             ) %>%
@@ -246,14 +251,7 @@ ggsave(plot,
       dpi=600
        )
 
-ggsave(plot,
-       device = "pdf",
-       filename = paste0("Plot_yield", site_name,"_", year_selected, ".pdf"),
-       path= output_folder,
-       width=8.62,
-       height = 6.28,
-       dpi=600
-)
+
 
 
 ###############################################################################################################################

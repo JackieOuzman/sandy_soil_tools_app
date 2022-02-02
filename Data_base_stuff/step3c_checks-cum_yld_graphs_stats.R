@@ -111,11 +111,12 @@ str(summary_data_all)
 unique(summary_data_all$year)
 unique(summary_data_all$site)
 
-site_name <- "Yenda"
+#site_name <- "Yenda"
+site_name <- "Bute_Trengrove"
 
 
 yld_site <- summary_data_all %>%
-  filter(site == site_name)
+  filter(site_sub == site_name)
 
 #subset the data
 cumulative_yld <- yld_site %>% 
