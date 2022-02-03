@@ -265,12 +265,13 @@ primary <- primary %>%
                   & organic          %in% c( "chicken_compost","chicken_manure","chicken litter","chicken liitter",
                                               "chicken_litter","chicken litter"),    
                   paste0("Cl","@", organic_rate,".", placement_organic ), 
-                  
+             
             
+           
             ## chicken litter with NO rate
                   ifelse(site_sub    %in% c("Brooker","Cadgee","Ouyen_spade", "CarwarpAmelioration", 
                                       "Karoonda", "Lowaldie_Crest","Lowaldie_Deep sand", "Murlong", "Ouyen_spade",
-                                      "Waikerie", "Younghusband")  #site list 2
+                                      "Waikerie", "Younghusband")  #site list 3
                   & organic          %in% c( "chicken_compost","chicken_manure","chicken litter","chicken liitter",
                                               "chicken_litter","chicken litter"),  
                  paste0("Cl",".", placement_organic),
@@ -330,9 +331,43 @@ primary <- primary %>%
                          )))))))))#bracket for the number of ifelse statements
   )# bracket for mutate function
 
+### at Bute CSIRO we have another clm to use the annual application
+
+primary <- primary %>% 
+  
+  mutate(amendment_organic = 
+           ifelse(site_sub            %in% c("Brooker","Cadgee","Ouyen_spade", "CarwarpAmelioration",
+                                           "Karoonda", "Lowaldie_Crest","Lowaldie_Deep sand", "Murlong", "Ouyen_spade",
+                                           "Waikerie", "Younghusband", "Yenda","Bute_Trengrove")  #all the sites but not Bute CSIRO
+                 &   is.na(timing) ,
+                paste0(amendment_organic),
+           
+           ifelse(
+             site_sub                %in% c("Bute_CSIRO")   #site list 1
+              &      is.na(timing) ,
+             paste0(amendment_organic),  
+           
+           ## annual
+           ifelse(
+             site_sub                %in% c("Bute_CSIRO")   #site list 1
+              &    timing  == "annual",    
+                  paste0(amendment_organic, "_Yr18,19,20"), 
+                 
+             
+                  "check"
+                   
+            )))#bracket for the number of ifelse statements
+)# bracket for mutate function
+
+
 primary %>% 
   distinct(amendment_organic) %>% 
   arrange(desc(amendment_organic))
+
+
+
+
+
 
 ## Temp clm one for the fert + placement  
 
