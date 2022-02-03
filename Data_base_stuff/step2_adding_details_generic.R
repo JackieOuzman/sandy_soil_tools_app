@@ -261,14 +261,14 @@ primary <- primary %>%
   mutate(amendment_organic = 
            
            ## chicken litter with rate
-           ifelse(site_sub           %in% c("Yenda","Bute_Trengrove")   #site list 1
+           ifelse(site_sub           %in% c("Yenda","Bute_Trengrove","Bute_CSIRO")   #site list 1
                   & organic          %in% c( "chicken_compost","chicken_manure","chicken litter","chicken liitter",
                                               "chicken_litter","chicken litter"),    
                   paste0("Cl","@", organic_rate,".", placement_organic ), 
                   
             
             ## chicken litter with NO rate
-                  ifelse(site_sub    %in% c("Brooker","Bute_CSIRO","Cadgee","Ouyen_spade", "CarwarpAmelioration", 
+                  ifelse(site_sub    %in% c("Brooker","Cadgee","Ouyen_spade", "CarwarpAmelioration", 
                                       "Karoonda", "Lowaldie_Crest","Lowaldie_Deep sand", "Murlong", "Ouyen_spade",
                                       "Waikerie", "Younghusband")  #site list 2
                   & organic          %in% c( "chicken_compost","chicken_manure","chicken litter","chicken liitter",
@@ -868,6 +868,34 @@ check <- anti_join(primary_join_1, GS_rain_deciles)#? not sure if I am expecting
 # write.csv(primary_join_2,
 #           "X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/step2/Yenda_sites_step1_2.csv" ,
 #           row.names = FALSE)
+
+
+
+#Bute CSIRO remove the buffer demo and blockRep = 0
+
+names(primary_join_2)
+
+Bute_CSIRO_rep_block <- primary_join_2 %>% 
+  filter(site == "Bute_CSIRO") %>% 
+  distinct(rep_block) %>% 
+  arrange(rep_block)
+
+Bute_CSIRO_rep_block
+
+primary_join_2 <-primary_join_2 %>% 
+  filter(rep_block %in% c("1", "2","3","4"))
+
+Bute_CSIRO_plots <- primary_join_2 %>% 
+  filter(site == "Bute_CSIRO") %>% 
+  distinct(plot) %>% 
+  arrange(plot)
+Bute_CSIRO_plots
+
+primary_join_2 <-primary_join_2 %>% 
+  filter(plot != "B10") %>% 
+  filter(plot != "B5" ) %>% 
+  filter(plot != "B6" ) %>% 
+  filter(plot != "B9" ) 
 
 write.csv(primary_join_2,
           paste0("X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/step2/",site_name, "_sites_step1_2.csv") ,
