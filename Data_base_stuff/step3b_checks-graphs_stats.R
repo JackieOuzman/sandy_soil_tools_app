@@ -23,8 +23,8 @@ data_file <- "X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_wor
 summary_data_all <- read_csv(data_file)
 unique(summary_data_all$site_sub)
 
-site_name <- "Bute_Trengrove" #"Bute_CSIRO"
-
+#site_name <- "Bute_Trengrove" #"Bute_CSIRO"
+site_name <- "Bute_CSIRO"
 
 list_of_descriptors<- summary_data_all %>% 
   filter(site == site_name) %>% 
@@ -42,10 +42,14 @@ order <- c("Control" ,
 
 "Unmodified_Cl.incorp_8" ,
 
+"Unmodified_Cl@2.5.surface",
+
 "Unmodified_Cl@5.incorp_8",
-"Unmodified_Cl@5.incorp_8.Fert.surface",
+"Unmodified_Cl@5.incorp_8.Fert.surface",#10
 "Unmodified_Cl@5.incorp_8.Clay.incorp_8",
-"Unmodified_Cl@5.incorp_8.Fert.surface.Clay.incorp_8", #10
+"Unmodified_Cl@5.incorp_8.Fert.surface.Clay.incorp_8", 
+
+"Unmodified_Cl@7.5.surface",
 
 "Unmodified_Cl@20.incorp_8",
 "Unmodified_Cl@20.incorp_8.Fert.surface",
@@ -101,6 +105,8 @@ order <- c("Control" ,
 "Spade.30_Vet_Cer.incorp_30" ,
 "Rip.30_none" ,
 "Rip.30_Cl.surface" ,
+"Rip.30_Cl@7.5.surface",    
+"Rip.30_Cl@7.5.band_30",
 "Rip.30_Cl.band_30" ,#60
 "Rip.30_Fert.band_8" ,
 "Rip.30_Fert.band_30" ,
@@ -112,6 +118,10 @@ order <- c("Control" ,
 "Rip.41_Fert.incorp_41" ,
 
 "Rip.50_none",
+"Rip.50_Cl@2.5.surface ",
+"Rip.50_Cl@7.5.surface",
+"Rip.50_Cl@7.5.band_50",
+
 "Rip.50_Cl@5.incorp_50",#70
 "Rip.50_Cl@20.incorp_50",
 "Rip.50_Fert.surface",
@@ -141,6 +151,7 @@ order <- c("Control" ,
  
 "Inc.50_none" ,
 "Inc.50_Cl.incorp_50" ,
+"Inc.50_Cl@7.5.incorp_50",
 "Rip.50IncRip_none" ,
 "Delving.18_none" ,
 "Delving.18_SE14.band_8" ,
@@ -177,7 +188,8 @@ summary_data_all %>% distinct(site_sub)
 ####################################################################################################################################
 
 #site_name <- "Yenda"
-site_name <- "Bute_Trengrove"
+#site_name <- "Bute_Trengrove"
+site_name <- "Bute_CSIRO"
 ## for what years
 # summary_data_all %>% filter(site == site_name) %>% 
 #   distinct(year)
@@ -195,10 +207,11 @@ rm(anova, cld, data_summary, plot, summary_data, tukey, tukey.cld, year_selected
 #year_selected <- 2021
 #year_selected <- 2020
 #year_selected <- 2019
-#year_selected <- 2018
+year_selected <- 2018
+
 #year_selected <- 2017
 #year_selected <- 2016
-year_selected <- 2015
+#year_selected <- 2015
 
 # Compute the analysis of variance
 summary_data <- summary_data_all %>%
