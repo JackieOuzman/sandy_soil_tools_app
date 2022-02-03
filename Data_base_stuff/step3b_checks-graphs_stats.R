@@ -50,6 +50,7 @@ order <- c("Control" ,
 "Unmodified_Cl@5.incorp_8.Fert.surface.Clay.incorp_8", 
 
 "Unmodified_Cl@7.5.surface",
+"Unmodified_Cl@2.5.surface_Yr18,19,20",
 
 "Unmodified_Cl@20.incorp_8",
 "Unmodified_Cl@20.incorp_8.Fert.surface",
@@ -119,6 +120,7 @@ order <- c("Control" ,
 
 "Rip.50_none",
 "Rip.50_Cl@2.5.surface ",
+"Rip.50_Cl@2.5.surface_Yr18,19,20",
 "Rip.50_Cl@7.5.surface",
 "Rip.50_Cl@7.5.band_50",
 
@@ -204,10 +206,10 @@ summary_data_all %>% filter(site_sub == site_name) %>%
 ##################################################################################################################################
 rm(anova, cld, data_summary, plot, summary_data, tukey, tukey.cld, year_selected)
 
-#year_selected <- 2021
+year_selected <- 2021
 #year_selected <- 2020
 #year_selected <- 2019
-year_selected <- 2018
+#year_selected <- 2018
 
 #year_selected <- 2017
 #year_selected <- 2016
