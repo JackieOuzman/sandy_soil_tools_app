@@ -19,7 +19,7 @@ data_file <- "X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_wor
 ## download the data using the specified file path above
 
 summary_data_all <- read_csv(data_file)
-
+unique(summary_data_all$site_sub)
 
 list_of_descriptors<- summary_data_all %>% 
   filter(site == site_name) %>% 

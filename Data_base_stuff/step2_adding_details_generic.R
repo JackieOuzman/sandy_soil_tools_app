@@ -37,8 +37,8 @@ list.files("X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2021/", ".csv",f
 
 #1 and 2 Bute
 
- input_data_file <- "X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/step1_collating_files/Butes_results.csv"
- input_data_file_metadata <- "X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/step1_collating_files/Butes_sites_metadata.csv"
+ input_data_file <- "X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/step1_collating_files/Bute_results.csv"
+ input_data_file_metadata <- "X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/step1_collating_files/Bute_sites_metadata.csv"
 
 # 3. Yenda
 # input_data_file <- "X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/step1_collating_files/Yenda_results.csv"
@@ -253,266 +253,201 @@ unique(primary$timing)
 unique(primary$site)
 
 ##########
-primary <- primary %>% 
-  mutate(amendment = case_when(
-    
-    ## cl.with.depth - chicken litter
-    organic  == "chicken_compost" | organic  ==  "chicken_manure" | organic  ==  "chicken litter"| organic  ==  "chicken liitter"|organic  == "chicken_litter" 
-    &  fertiliser ==        "none"  
-    &  other_ameliorant ==  "none" 
-    & site == "Ouyen_spade" |site == "Bute_Trengrove"|site == "Bute_CSIRO"|site == "Lowaldie"|site ==  "Brooker"|site ==  "YoungHusband"|site ==  "Waikerie"|site ==  "Brimpton Lake"
-    |site ==  "Cadgee"|site == "Karoonda"|site == "Murlong"|site ==  "Carwarp" # but not |site ==  "Yenda" 
-    & timing == "NA" ~             
-    paste0("Cl",".", placement_organic),
-    
-    organic  == "chicken_compost" | organic  ==  "chicken_manure" | organic  ==  "chicken litter"| organic  ==  "chicken liitter"|organic  == "chicken_litter"
-    &  fertiliser ==        "none"
-    &  other_ameliorant ==  "none"
-    & site == "Yenda"
-    & is.na(timing) ~
-    paste0("Cl","@", organic_rate,".", placement_organic),
-    
-    
-    
-     organic  == "chicken_compost" | organic  ==  "chicken_manure" | organic  ==  "chicken litter"| organic  ==  "chicken liitter"|organic  == "chicken_litter" 
-     &  fertiliser ==        "none"  
-     &  other_ameliorant ==  "none" 
-     #& site == "Yenda" | site == "Bute_Trengrove"
-     &  site == "Bute_Trengrove"
-     & !is.na(timing) ~      
-       paste0("Cl","@", organic_rate,".", placement_organic,".", timing),
-           
-    
-     
-    organic  == "chicken_compost" | organic  ==  "chicken_manure" | organic  ==  "chicken litter"| organic  ==  "chicken liitter"
-    &  fertiliser ==        "none"  
-    &  other_ameliorant ==  "gypsum"       ~   
-    paste0("Cl",".", placement_organic,".","Gypsum" ,".", placement_other),
-    
-      
-    
-    organic  == "chicken_compost" | organic  ==  "chicken_manure" | organic  ==  "chicken litter"| organic  ==  "chicken liitter" 
-    &  fertiliser ==        "none"  
-    &  other_ameliorant ==  "clay" ~      
-    paste0("Cl",".", placement_organic,".","Clay" ,".", placement_other),
-    
-    
-    
-     
-    
-    # This is from Murray - compost
-    organic  == "compost"   
-    &  other_ameliorant ==  "none"       ~     
-    paste0("Com",".", placement_organic),
-    
-     
-    
-    # ## Lc.with.depth - lucerne
-     
-    
-    organic  ==            "lucerne" 
-     &  fertiliser ==        "none" 
-     &  other_ameliorant ==  "none"   
-     & site != "Brooker" ~
-     paste0("Lc",".", placement_organic),
-    
-    organic  ==            "lucerne" 
-    &  fertiliser ==        "NuPak" 
-    &  other_ameliorant ==  "none"   ~
-    paste0("Lc",".", placement_organic,".", "Fert",".",placement_fertiliser),
-    
-    organic  ==            "lucerne" 
-    &  fertiliser ==        "NuPak" 
-    &  other_ameliorant ==  "clay"   ~
-      paste0("Lc",".", placement_organic,".", "Fert",".",placement_fertiliser, ".", "Clay",".",placement_other),
-    
-    ## Lc.with.depth - lucerne and rate for Brooker
-    organic  ==            "lucerne" 
-    &  fertiliser ==        "none" 
-    &  other_ameliorant ==  "none"              
-    & site == "Brooker" ~        
-      paste0("Lc","@", organic_rate, ".", placement_organic),
-    
-    
-    organic  ==            "lucerne"  
-    &  fertiliser ==        "none" 
-    &  other_ameliorant ==  "gypsum"       ~      
-    paste0("Lc",".", placement_organic,".", "Gypsum", placement_other),
-    
-    
-    
-    organic  ==            "lucerne" 
-    &  fertiliser ==        "none" 
-    &  other_ameliorant ==  "clay"       ~        
-    paste0("Lc",".", placement_organic, ".","Clay", ".",  placement_other),
-    
-    
-    organic  ==            "lucerne"
-    &  fertiliser ==        "none"
-    &  other_ameliorant ==  "Muriate of Potash"
-    & site != "Brooker"~
-      paste0("Lc",".", placement_organic, ".","K_added", ".",  placement_other),
-    
-    ## Lc.with.depth and K added- lucerne and rate for Brooker
-    organic  ==            "lucerne" 
-    &  fertiliser ==        "none" 
-    &  other_ameliorant ==  "Muriate of Potash"  
-    & site == "Brooker" ~        
-      paste0("Lc","@", organic_rate, ".", placement_organic, ".","K_added", ".",  placement_other),
-      
-    
-    
-    organic  ==            "none" 
-    &  fertiliser ==        "none" 
-    &  other_ameliorant ==  "Muriate of Potash"       ~        
-      paste0("K_added", ".",  placement_other),
-    
-    
-    
-    
-    
-    
-    # This is from Murray - lucerne
-    organic  == "pelleted lucerne" 
-    &  fertiliser ==        "none" 
-    &  other_ameliorant ==  "none"    ~   
-    paste0("Lc",".", placement_organic),
-    
-    
-    
-    #no amendment
-    organic  ==           "none"  
-    &  fertiliser ==      "none"   
-    &    other_ameliorant ==  "none"    
-    ~      "none",
-    
-    
-    #other amendment
-    organic  ==                "none"  
-    &  fertiliser ==           "none"   
-    & other_ameliorant ==      "gypsum"   
-    ~ paste0("Gypsum",".", placement_other),
-    
-    
 
-    organic  ==                "none"  
-    &  fertiliser ==           "none"   
-    &    other_ameliorant ==   "clay"    
-    ~ paste0("Clay",".", placement_other),
-    
-    
-    
-    # This is from Murray - other amendment
-    organic  ==           " cereal"  | organic  ==           "cereal" 
-    & fertiliser ==        "none"   
-    & other_ameliorant ==  "none"    
-    ~ paste0("Cereal",".", placement_organic),
-    
-    
-    organic  ==             "vetch"  
-    &  fertiliser ==         "none"   
-    &  other_ameliorant ==  "none"    
-    ~  paste0("Vetch",".", placement_organic),  
-    
-    
-    
-    organic  ==               "vetch - cereal"  
-    &  fertiliser ==          "none"   
-    &    other_ameliorant ==  "none"    
-    ~  paste0("Vet_Cer",".", placement_organic),  
-    
-    
-    
-    organic  ==                 "vetch - cereal - innoculant"  
-    &  fertiliser ==             "none"   
-    &    other_ameliorant ==    "none"   
-    ~ paste0("Vet_Cer_In",".", placement_organic),  
-    
-    
-    
-    #fertiliser amendment
-    organic  ==                 "none"  
-    &  fertiliser ==            "MAP; Urea" |   fertiliser == "MAP" |fertiliser == "Urea"|fertiliser == "Tes"|fertiliser == "Urea" |fertiliser == "DAP, Urea, SOA and Muriate of Potash"
-    &    other_ameliorant ==    "none"    ~      
-    paste0("Fert",".", placement_fertiliser),
-    
-    
-    
-    organic  ==                 "none"  
-    &  fertiliser ==            "MAP; Urea" |   fertiliser == "MAP" |fertiliser == "Urea"|fertiliser == "Tes"|fertiliser == "Urea" |fertiliser == "DAP, Urea, SOA and Muriate of Potash"
-    &    other_ameliorant ==    "gypsum"    ~    
-    paste0("Fert",".", placement_fertiliser,".","Gypsum",".", placement_other),
-    
-    
-  
-    organic  ==                 "none"  
-    &  fertiliser ==            "MAP; Urea" |   fertiliser == "MAP" |fertiliser == "Urea"|fertiliser == "Tes"|fertiliser == "Urea" |fertiliser == "DAP, Urea, SOA and Muriate of Potash"
-    | fertiliser == "NuPak"  
-    &    other_ameliorant ==    "clay"    ~      
-    paste0("Fert",".", placement_fertiliser,".","Clay",".", placement_other),
-    
-    
-    organic  ==                 "none"  
-    &  fertiliser ==            "MAP; Urea" |   fertiliser == "MAP" |fertiliser == "Urea"|fertiliser == "Tes"|fertiliser == "Urea" |fertiliser == "DAP, Urea, SOA and Muriate of Potash"
-    &    other_ameliorant ==    "Muriate of Potash"    ~      
-      paste0("Fert",".", placement_fertiliser,".","K_added",".", placement_other),
-    
-    
-    
-    organic  == "chicken_compost" | organic  ==  "chicken_manure" | organic  ==  "chicken litter"| organic  ==  "chicken liitter"|organic  == "chicken_litter"
-    &  fertiliser ==            "none"  
-    &    other_ameliorant ==    "lime"    
-    & site != "Yenda" ~  
-    paste0("Cl",".", placement_organic, ".","Lime", ".",  placement_other),
-    
-   
-    organic  == "chicken_compost" | organic  ==  "chicken_manure" | organic  ==  "chicken litter"| organic  ==  "chicken liitter"|organic  == "chicken_litter"
-    &  fertiliser ==            "none"  
-    &    other_ameliorant ==    "lime"    
-    & site == "Yenda" ~  
-      paste0("Cl","@", organic_rate,".",placement_organic, ".","Lime", ".",  placement_other),
-    
-    
-    
-    
-    
-    organic  == "chicken_compost" | organic  ==  "chicken_manure" | organic  ==  "chicken litter"| organic  ==  "chicken liitter"|organic  == "chicken_litter"
-    &  fertiliser ==            "none"  
-    &    other_ameliorant ==    "lime"    ~      
-      paste0("Cl",".", placement_organic, ".","Lime", ".",  placement_other),
-    
-    
-    
-     organic  ==                "none"  
-    &  fertiliser ==           "none"   
-    &    other_ameliorant ==   "lime"    
-    ~ paste0("Lime",".", placement_other),
-    
-    
-    organic  ==                "none"  
-    &  fertiliser ==           "none"   
-    &    other_ameliorant ==   "Bi-Agra"    
-    ~ paste0("Bi-Agra",".", placement_other),
-    
-    organic  ==                "none"  
-    &  fertiliser ==           "none"   
-    &    other_ameliorant ==   "SE14"    
-    ~ paste0("SE14",".", placement_other),
-    
-    organic  ==                "none"  
-    &  fertiliser ==           "Urea and MAP" | fertiliser == "NuPak"  
-    &    other_ameliorant ==   "none"    
-    ~ paste0("Fert",".", placement_fertiliser),
-    
-    
-    
-    
-    
-    
-    TRUE ~ as.character("check")
-    
-  ) )      
- 
+## Make a couple of temp clm one for the organic + placement need to specify which sites have rates 
+# It seems that  this will work best when the sites are specified for each ifelse statment
+
+primary <- primary %>% 
+  mutate(amendment_organic = 
+           
+           ## chicken litter with rate
+           ifelse(site_sub           %in% c("Yenda","Bute_Trengrove")   #site list 1
+                  & organic          %in% c( "chicken_compost","chicken_manure","chicken litter","chicken liitter",
+                                              "chicken_litter","chicken litter"),    
+                  paste0("Cl","@", organic_rate,".", placement_organic ), 
+                  
+            
+            ## chicken litter with NO rate
+                  ifelse(site_sub    %in% c("Brooker","Bute_CSIRO","Cadgee","Ouyen_spade", "CarwarpAmelioration", 
+                                      "Karoonda", "Lowaldie_Crest","Lowaldie_Deep sand", "Murlong", "Ouyen_spade",
+                                      "Waikerie", "Younghusband")  #site list 2
+                  & organic          %in% c( "chicken_compost","chicken_manure","chicken litter","chicken liitter",
+                                              "chicken_litter","chicken litter"),  
+                 paste0("Cl",".", placement_organic),
+                         
+            
+            ## compost with NO rate    
+                 ifelse(site_sub    %in% c("Brooker","Bute_CSIRO","Cadgee","Ouyen_spade", "CarwarpAmelioration", 
+                                           "Karoonda", "Lowaldie_Crest","Lowaldie_Deep sand", "Murlong", "Ouyen_spade",
+                                           "Waikerie", "Younghusband", "Yenda","Bute_Trengrove")  #all the sites
+                        & organic          %in% c( "compost"),  
+                        paste0("Com",".", placement_organic),
+                        
+            
+            ## lucerne with NO rate    
+                        ifelse(site_sub    %in% c("Bute_CSIRO","Cadgee","Ouyen_spade", "CarwarpAmelioration", 
+                                                  "Karoonda", "Lowaldie_Crest","Lowaldie_Deep sand", "Murlong", "Ouyen_spade",
+                                                  "Waikerie", "Younghusband", "Yenda","Bute_Trengrove")  #set 1
+                               & organic          %in% c( "lucerne", "pelleted lucerne"),  
+                               paste0("Lc",".", placement_organic),  
+            
+            ## lucerne with rate    
+                               ifelse(site_sub    %in% c("Brooker")  #set 2
+                                      & organic          %in% c( "lucerne", "pelleted lucerne"),  
+                                      paste0("Lc","@", organic_rate,".", placement_organic ),    
+                 
+            
+            ## Cereal with NO rate   
+                 ifelse(site_sub    %in% c("Brooker","Bute_CSIRO","Cadgee","Ouyen_spade", "CarwarpAmelioration", 
+                                           "Karoonda", "Lowaldie_Crest","Lowaldie_Deep sand", "Murlong", "Ouyen_spade",
+                                           "Waikerie", "Younghusband", "Yenda","Bute_Trengrove")  #all the sites
+                                & organic %in% c("cereal"),   
+                   paste0("Cereal",".", placement_organic),
+                                
+            ## vetch with NO rate   
+                   ifelse(site_sub    %in% c("Brooker","Bute_CSIRO","Cadgee","Ouyen_spade", "CarwarpAmelioration", 
+                                             "Karoonda", "Lowaldie_Crest","Lowaldie_Deep sand", "Murlong", "Ouyen_spade",
+                                             "Waikerie", "Younghusband", "Yenda","Bute_Trengrove")  #all the sites
+                          & organic %in% c("cereal"),   
+                          paste0("Vetch",".", placement_organic),   
+                          
+           ## vetch - cereal with NO rate   
+                          ifelse(site_sub    %in% c("Brooker","Bute_CSIRO","Cadgee","Ouyen_spade", "CarwarpAmelioration", 
+                                                    "Karoonda", "Lowaldie_Crest","Lowaldie_Deep sand", "Murlong", "Ouyen_spade",
+                                                    "Waikerie", "Younghusband", "Yenda","Bute_Trengrove")  #all the sites
+                                 & organic %in% c("vetch-cereal"),   
+                                 paste0("Vet_Cer",".", placement_organic),
+                                 
+           ## vetch - cereal with innoculant   
+                                 ifelse(site_sub    %in% c("Brooker","Bute_CSIRO","Cadgee","Ouyen_spade", "CarwarpAmelioration", 
+                                                           "Karoonda", "Lowaldie_Crest","Lowaldie_Deep sand", "Murlong", "Ouyen_spade",
+                                                           "Waikerie", "Younghusband", "Yenda","Bute_Trengrove")  #all the sites
+                                        & organic %in% c("vetch-cereal-innoculant"),   
+                                        paste0("Vet_Cer_In",".", placement_organic),
+                                 
+                                "other"
+                                
+                         )))))))))#bracket for the number of ifelse statements
+  )# bracket for mutate function
+
+primary %>% 
+  distinct(amendment_organic) %>% 
+  arrange(desc(amendment_organic))
+
+## Temp clm one for the fert + placement  
+
+primary <- primary %>% 
+  mutate(amendment_fert = 
+           ifelse(fertiliser  %in% c("MAP; Urea", "NuPak", "MAP", "Urea", "Tes", "DAP, Urea, SOA and Muriate of Potash", "Urea and MAP"),   
+                  paste0("Fert",".", placement_fertiliser ), 
+                  "other"
+                  
+           )#bracket for the number of ifelse statements
+  )# bracket for mutate function
+
+primary %>% 
+  distinct(amendment_fert) %>% 
+  arrange(desc(amendment_fert))
+
+
+## Temp clm one for the other + placement  
+
+primary <- primary %>% 
+  mutate(amendment_other = 
+           ifelse(other_ameliorant  == "lime",    paste0("Lime",".", placement_other ), 
+           ifelse(other_ameliorant  == "gypsum",    paste0("Gypsum",".", placement_other ),      
+           ifelse(other_ameliorant  == "clay",    paste0("Clay",".", placement_other ),
+           ifelse(other_ameliorant  == "Muriate of Potash",    paste0("K_added",".", placement_other ),
+           ifelse(other_ameliorant  == "Bi-Agra",    paste0("Bi-Agra",".", placement_other ),
+           ifelse(other_ameliorant  == "SE14",    paste0("SE14",".", placement_other ),
+                  "other"
+                  
+           ))))))#bracket for the number of ifelse statements
+  )# bracket for mutate function
+
+primary %>% 
+  distinct(amendment_other) %>% 
+  arrange(desc(amendment_other))
+
+
+## ensure the NA are coded as none? or other
+
+#########################################################################################
+
+## Put the three clms togther 
+primary %>% 
+  distinct(amendment_organic) %>% 
+  arrange(desc(amendment_organic))
+primary %>% 
+  distinct(amendment_fert) %>% 
+  arrange(desc(amendment_fert))
+primary %>% 
+  distinct(amendment_other) %>% 
+  arrange(desc(amendment_other))
+
+
+
+primary <- primary %>% 
+  mutate(amendment = 
+           ifelse(amendment_organic  != "other"   
+                  & amendment_fert   == "other"    
+                  & amendment_other  == "other" ,
+                  paste0(amendment_organic), 
+                  
+                  
+                  
+            ifelse(amendment_organic         != "other"   
+                  & amendment_fert   != "other"    
+                  & amendment_other  == "other", 
+                 paste0(amendment_organic, ".",amendment_fert ), 
+                         
+                         
+            ifelse(amendment_organic         != "other"   
+                  & amendment_fert   != "other"    
+                  & amendment_other  != "other", 
+                  paste0(amendment_organic, ".",amendment_fert, ".", amendment_other ),
+                                
+                                
+            ifelse(amendment_organic         != "other"   
+                  & amendment_fert   == "other"    
+                  & amendment_other  != "other", 
+                  paste0(amendment_organic,  ".", amendment_other ),  
+                                       
+                                       
+                                       
+                                       
+            ifelse(amendment_organic         == "other"   
+                 & amendment_fert   != "other"    
+                 & amendment_other  == "other", 
+                 paste0(amendment_fert ), 
+                                              
+                                              
+            ifelse(amendment_organic         == "other"   
+            & amendment_fert   != "other"    
+            & amendment_other  != "other", 
+            paste0(amendment_fert, ".", amendment_other ),
+                                                     
+                                                     
+            ifelse(amendment_organic         == "other"   
+            & amendment_fert   == "other"    
+            & amendment_other  != "other", 
+            paste0(amendment_other ), 
+                                                            
+                                                            
+                                                            
+            ifelse(amendment_organic  == "other"   
+            & amendment_fert   == "other"    
+            & amendment_other  == "other",
+            paste0("none"), 
+            "check"
+))))))))#bracket for the number of ifelse statements
+  )# bracket for mutate function
+
+
+
+
+
+
 primary %>% 
   distinct(amendment) %>% 
   arrange(desc(amendment))
