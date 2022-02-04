@@ -16,7 +16,7 @@ list.of.files
 
 #Specify the site
 #site_name <- "Ouyen_spade"
-site_name <- "Bute" #"Bute_Trengrove" "Bute_CSIRO"
+#site_name <- "Bute" #"Bute_Trengrove" "Bute_CSIRO"
 #site_name <- "Lowaldie"
 #site_name <- "Brooker"
 #site_name <- "YoungHusband"
@@ -26,7 +26,7 @@ site_name <- "Bute" #"Bute_Trengrove" "Bute_CSIRO"
 #site_name <- "Karoonda"
 # site_name <- "Murlong"
 #site_name <- "Carwarp"
-#site_name <- "Yenda"
+site_name <- "Yenda"
 
 #Ouyen_spade, Bute, Lowaldie, Brooker, YoungHusband, Waikerie, "Brimpton Lake", "Cadgee", "Karoonda", "Murlong", "Carwarp", "Yenda"
 
@@ -37,12 +37,12 @@ list.files("X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2021/", ".csv",f
 
 #1 and 2 Bute
 
- input_data_file <- "X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/step1_collating_files/Bute_results.csv"
- input_data_file_metadata <- "X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/step1_collating_files/Bute_sites_metadata.csv"
+# input_data_file <- "X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/step1_collating_files/Bute_results.csv"
+# input_data_file_metadata <- "X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/step1_collating_files/Bute_sites_metadata.csv"
 
 # 3. Yenda
-# input_data_file <- "X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/step1_collating_files/Yenda_results.csv"
-#  input_data_file_metadata <- "X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/step1_collating_files/Yenda_site_metadata.csv"
+ input_data_file <- "X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/step1_collating_files/Yenda_results.csv"
+ input_data_file_metadata <- "X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/step1_collating_files/Yenda_site_metadata.csv"
 
 #4. using site name
 
@@ -59,10 +59,10 @@ list.files("X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2021/", ".csv",f
 list.files("X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2021/", ".csv",full.names=T)
 
 #1 and 2 Bute
-input_data_file_rain <- "X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2021/GS_rain_deciles_Sam_sites.csv"
+#input_data_file_rain <- "X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2021/GS_rain_deciles_Sam_sites.csv"
 
 #3 Yenda
-#input_data_file_rain <- "X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2021/GS_rain_deciles_Racheal_sites.csv"
+input_data_file_rain <- "X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2021/GS_rain_deciles_Racheal_sites.csv"
 
 #3 Ouyen Spade and all of Murrays and Waikerie and Carwarp
 #input_data_file_rain <- "X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2021/GS_rain_deciles_Murray_sites.csv"
@@ -338,19 +338,19 @@ primary <- primary %>%
   mutate(amendment_organic = 
            ifelse(site_sub            %in% c("Brooker","Cadgee","Ouyen_spade", "CarwarpAmelioration",
                                            "Karoonda", "Lowaldie_Crest","Lowaldie_Deep sand", "Murlong", "Ouyen_spade",
-                                           "Waikerie", "Younghusband", "Yenda","Bute_Trengrove")  #all the sites but not Bute CSIRO
+                                           "Waikerie", "Younghusband","Bute_Trengrove")  #all the sites but not Bute CSIRO
                  &   is.na(timing) ,
                 paste0(amendment_organic),
            
            ifelse(
-             site_sub                %in% c("Bute_CSIRO")   #site list 1
+             site_sub                %in% c("Bute_CSIRO", "Yenda")   #site list 1
               &      is.na(timing) ,
              paste0(amendment_organic),  
            
            ## annual
            ifelse(
-             site_sub                %in% c("Bute_CSIRO")   #site list 1
-              &    timing  == "annual",    
+             site_sub                %in% c("Bute_CSIRO", "Yenda")   #site list 1
+              &    timing  %in% c("annual","Yrs17,18,19"),    
                   paste0(amendment_organic, "_Yr18,19,20"), 
                  
              
@@ -910,27 +910,27 @@ check <- anti_join(primary_join_1, GS_rain_deciles)#? not sure if I am expecting
 
 names(primary_join_2)
 
-Bute_CSIRO_rep_block <- primary_join_2 %>% 
-  filter(site == "Bute_CSIRO") %>% 
-  distinct(rep_block) %>% 
-  arrange(rep_block)
-
-Bute_CSIRO_rep_block
-
-primary_join_2 <-primary_join_2 %>% 
-  filter(rep_block %in% c("1", "2","3","4"))
-
-Bute_CSIRO_plots <- primary_join_2 %>% 
-  filter(site == "Bute_CSIRO") %>% 
-  distinct(plot) %>% 
-  arrange(plot)
-Bute_CSIRO_plots
-
-primary_join_2 <-primary_join_2 %>% 
-  filter(plot != "B10") %>% 
-  filter(plot != "B5" ) %>% 
-  filter(plot != "B6" ) %>% 
-  filter(plot != "B9" ) 
+# Bute_CSIRO_rep_block <- primary_join_2 %>% 
+#   filter(site == "Bute_CSIRO") %>% 
+#   distinct(rep_block) %>% 
+#   arrange(rep_block)
+# 
+# Bute_CSIRO_rep_block
+# 
+# primary_join_2 <-primary_join_2 %>% 
+#   filter(rep_block %in% c("1", "2","3","4"))
+# 
+# Bute_CSIRO_plots <- primary_join_2 %>% 
+#   filter(site == "Bute_CSIRO") %>% 
+#   distinct(plot) %>% 
+#   arrange(plot)
+# Bute_CSIRO_plots
+# 
+# primary_join_2 <-primary_join_2 %>% 
+#   filter(plot != "B10") %>% 
+#   filter(plot != "B5" ) %>% 
+#   filter(plot != "B6" ) %>% 
+#   filter(plot != "B9" ) 
 
 write.csv(primary_join_2,
           paste0("X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/step2/",site_name, "_sites_step1_2.csv") ,
