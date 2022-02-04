@@ -17,7 +17,7 @@ list.of.files
 #Specify the site
 #site_name <- "Ouyen_spade"
 #site_name <- "Bute" #"Bute_Trengrove" "Bute_CSIRO"
-#site_name <- "Lowaldie"
+site_name <- "Lowaldie"
 #site_name <- "Brooker"
 #site_name <- "YoungHusband"
 # site_name <- "Waikerie"
@@ -26,7 +26,7 @@ list.of.files
 #site_name <- "Karoonda"
 # site_name <- "Murlong"
 #site_name <- "Carwarp"
-site_name <- "Yenda"
+#site_name <- "Yenda"
 
 #Ouyen_spade, Bute, Lowaldie, Brooker, YoungHusband, Waikerie, "Brimpton Lake", "Cadgee", "Karoonda", "Murlong", "Carwarp", "Yenda"
 
@@ -41,16 +41,16 @@ list.files("X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2021/", ".csv",f
 # input_data_file_metadata <- "X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/step1_collating_files/Bute_sites_metadata.csv"
 
 # 3. Yenda
- input_data_file <- "X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/step1_collating_files/Yenda_results.csv"
- input_data_file_metadata <- "X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/step1_collating_files/Yenda_site_metadata.csv"
+# input_data_file <- "X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/step1_collating_files/Yenda_results.csv"
+# input_data_file_metadata <- "X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/step1_collating_files/Yenda_site_metadata.csv"
 
 #4. using site name
 
-# input_data_file <- paste0("X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/step1_collating_files/",
-# site_name, "_results.csv")
-# 
-# input_data_file_metadata <- paste0("X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/step1_collating_files/",
-# site_name, "_sites_metadata.csv")
+ input_data_file <- paste0("X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/step1_collating_files/",
+ site_name, "_results.csv")
+ 
+ input_data_file_metadata <- paste0("X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/step1_collating_files/",
+ site_name, "_sites_metadata.csv")
 
 
 #####################################################################################################################
@@ -62,10 +62,10 @@ list.files("X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2021/", ".csv",f
 #input_data_file_rain <- "X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2021/GS_rain_deciles_Sam_sites.csv"
 
 #3 Yenda
-input_data_file_rain <- "X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2021/GS_rain_deciles_Racheal_sites.csv"
+#input_data_file_rain <- "X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2021/GS_rain_deciles_Racheal_sites.csv"
 
-#3 Ouyen Spade and all of Murrays and Waikerie and Carwarp
-#input_data_file_rain <- "X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2021/GS_rain_deciles_Murray_sites.csv"
+#3 Ouyen Spade and all of Murrays and Waikerie and Carwarp ? Lowaldie
+input_data_file_rain <- "X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2021/GS_rain_deciles_Murray_sites.csv"
 
 #4 Brooker and Murlong Spade and all of Murrays
 #input_data_file_rain <- "X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2021/GS_rain_deciles_Nigel_sites.csv"
@@ -86,7 +86,7 @@ primary <- read_csv(input_data_file,
                                            dry_biomass = col_double(), timing = col_character()))
 names(primary)
 # change the site name
-# primary <- primary %>% 
+# primary <- primary %>%
 #   mutate(site = "Lowaldie")
 
 #################################################################################################################
@@ -137,6 +137,8 @@ primary<- primary %>%
   ))
 
 str(primary)
+primary$placement_organic <- as.character(primary$placement_organic)
+
 unique(primary$placement_organic)
 
 
@@ -251,7 +253,7 @@ unique(primary$other_ameliorant)
 unique(primary$placement_organic)
 unique(primary$timing)
 unique(primary$site)
-
+unique(primary$site_sub)
 ##########
 
 ## Make a couple of temp clm one for the organic + placement need to specify which sites have rates 
@@ -309,21 +311,21 @@ primary <- primary %>%
                    ifelse(site_sub    %in% c("Brooker","Bute_CSIRO","Cadgee","Ouyen_spade", "CarwarpAmelioration", 
                                              "Karoonda", "Lowaldie_Crest","Lowaldie_Deep sand", "Murlong", "Ouyen_spade",
                                              "Waikerie", "Younghusband", "Yenda","Bute_Trengrove")  #all the sites
-                          & organic %in% c("cereal"),   
+                          & organic %in% c("vetch"),   
                           paste0("Vetch",".", placement_organic),   
                           
            ## vetch - cereal with NO rate   
                           ifelse(site_sub    %in% c("Brooker","Bute_CSIRO","Cadgee","Ouyen_spade", "CarwarpAmelioration", 
                                                     "Karoonda", "Lowaldie_Crest","Lowaldie_Deep sand", "Murlong", "Ouyen_spade",
                                                     "Waikerie", "Younghusband", "Yenda","Bute_Trengrove")  #all the sites
-                                 & organic %in% c("vetch-cereal"),   
+                                 & organic %in% c("vetch - cereal"),   
                                  paste0("Vet_Cer",".", placement_organic),
                                  
            ## vetch - cereal with innoculant   
                                  ifelse(site_sub    %in% c("Brooker","Bute_CSIRO","Cadgee","Ouyen_spade", "CarwarpAmelioration", 
                                                            "Karoonda", "Lowaldie_Crest","Lowaldie_Deep sand", "Murlong", "Ouyen_spade",
                                                            "Waikerie", "Younghusband", "Yenda","Bute_Trengrove")  #all the sites
-                                        & organic %in% c("vetch-cereal-innoculant"),   
+                                        & organic %in% c("vetch - cereal - innoculant"),   
                                         paste0("Vet_Cer_In",".", placement_organic),
                                  
                                 "other"
@@ -405,7 +407,6 @@ primary %>%
   arrange(desc(amendment_other))
 
 
-## ensure the NA are coded as none? or other
 
 #########################################################################################
 
