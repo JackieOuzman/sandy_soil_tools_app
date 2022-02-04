@@ -18,18 +18,22 @@ data_file <- "X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_wor
 
 ## download the data using the specified file path above
 
+summary_data_all <- read_csv(data_file, 
+                         col_types = cols(rep_block = col_character()))
 
 
-summary_data_all <- read_csv(data_file)
 unique(summary_data_all$site_sub)
+
+summary_data_all %>%  distinct(rep_block)
 
 #site_name <- "Bute_Trengrove" #"Bute_CSIRO"
 #site_name <- "Bute_CSIRO"
-site_name <-"Ouyen_spade"
+#site_name <-"Ouyen_spade"
+site_name <-"Lowaldie_Crest"      #"Lowaldie_Deep sand"
 
 list_of_descriptors<- summary_data_all %>% 
   #filter(site == site_name) %>% 
-  filter(site == "Ouyen") %>%
+  filter(site == "Lowaldie") %>%
   distinct(Descriptors) %>% 
   arrange(desc(Descriptors))
 
@@ -194,7 +198,8 @@ summary_data_all %>% distinct(site_sub)
 #site_name <- "Yenda"
 #site_name <- "Bute_Trengrove"
 #site_name <- "Bute_CSIRO"
-site_name <- "Ouyen_spade"
+#site_name <- "Ouyen_spade"
+site_name <-"Lowaldie_Crest"      #"Lowaldie_Deep sand"
 
 ## for what years
 # summary_data_all %>% filter(site == site_name) %>% 
@@ -213,11 +218,11 @@ rm(anova, cld, data_summary, plot, summary_data, tukey, tukey.cld, year_selected
 
 #year_selected <- 2021
 
-#year_selected <- 2020
+year_selected <- 2020
 #year_selected <- 2019
-#year_selected <- 2018
-year_selected <- 2017
 
+#year_selected <- 2018
+#year_selected <- 2017
 #year_selected <- 2016
 #year_selected <- 2015
 

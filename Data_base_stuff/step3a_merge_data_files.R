@@ -41,8 +41,8 @@ sites_merged %>%
   distinct(Descriptors) %>% 
   arrange(desc(Descriptors))
 
-
-
+str(sites_merged$rep_block)
+sites_merged %>%  distinct(rep_block)
                          
 output_folder <- "X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/stats_working/"
 

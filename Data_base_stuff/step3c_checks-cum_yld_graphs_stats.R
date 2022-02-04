@@ -4,13 +4,14 @@ data_file <- "X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_wor
 
 ## download the data using the specified file path above
 
-summary_data_all <- read_csv(data_file)
+
+
+
+summary_data_all <- read_csv(data_file, 
+                             col_types = cols(rep_block = col_character()))
+
+
 ##### order the Descriptors see step 3b
-
-
-
-
-
 
 
 str(summary_data_all)
@@ -19,10 +20,13 @@ unique(summary_data_all$site)
 
 #site_name <- "Yenda"
 #site_name <- "Bute_Trengrove"
-site_name <- "Bute_CSIRO"
+#site_name <- "Bute_CSIRO"
+#site_name <-"Ouyen_spade"
+site_name <-"Lowaldie_Crest"      #"Lowaldie_Deep sand"
 
 yld_site <- summary_data_all %>%
   filter(site_sub == site_name)
+str(yld_site)
 
 #subset the data
 cumulative_yld <- yld_site %>% 
@@ -94,7 +98,9 @@ site_year_yld_summary$Descriptors <- factor(site_year_yld_summary$Descriptors,
 
 site_year_yld_summary$Year <- factor(site_year_yld_summary$year,
                                             #levels = c("2021","2020","2019","2018","2017","2016","2015","2014"))
-                                            levels = c("2021","2020","2019","2018"))
+                                            #levels = c("2021","2020","2019","2018"))
+                                            # levels = c("2020","2019","2018", "2017"))
+                                              levels = c("2020","2019"))
 # barplot with letters
 plot_cumulative_yld <- site_year_yld_summary %>% 
   ggplot( aes(x = factor(Descriptors), y = mean, fill = Year, colour = Year)) + 
