@@ -11,6 +11,23 @@ summary_data_all <- read_csv(data_file,
                              col_types = cols(rep_block = col_character()))
 
 
+### For brooker remove low rep data
+# brooker <- summary_data_all %>%
+#   filter(site_sub == "Brooker") %>% 
+#   filter(Descriptors %in% c(
+#     "Control",
+#     "Unmodified_K_added.surface",
+#     "Spade.30_none",
+#     "Spade.30_K_added.surface",
+#     "Spade.30_Fert.incorp_30",
+#     "Spade.30_Fert.incorp_30.K_added.incorp_30",
+#     "Spade.30_Lc@4.incorp_30",
+#     "Spade.30_Lc@4.incorp_30.K_added.surface",
+#     "Spade.30_Lc@8.incorp_30",
+#     "Spade.30_Lc@8.incorp_30.K_added.surface",
+#     "Spade.30_Lc@15.incorp_30",
+#     "Spade.30_Lc@15.incorp_30.K_added.surface"))
+
 ##### order the Descriptors see step 3b
 
 
@@ -22,10 +39,16 @@ unique(summary_data_all$site)
 #site_name <- "Bute_Trengrove"
 #site_name <- "Bute_CSIRO"
 #site_name <-"Ouyen_spade"
-site_name <-"Lowaldie_Crest"      #"Lowaldie_Deep sand"
+#site_name <-"Lowaldie_Crest"      #"Lowaldie_Deep sand"
+#site_name <-"Lowaldie_Deep sand"
+#site_name <-"Brooker_reduced_trial"
+site_name <- "Waikerie"
+
 
 yld_site <- summary_data_all %>%
   filter(site_sub == site_name)
+#yld_site <- brooker 
+  
 str(yld_site)
 
 #subset the data
@@ -100,7 +123,9 @@ site_year_yld_summary$Year <- factor(site_year_yld_summary$year,
                                             #levels = c("2021","2020","2019","2018","2017","2016","2015","2014"))
                                             #levels = c("2021","2020","2019","2018"))
                                             # levels = c("2020","2019","2018", "2017"))
-                                              levels = c("2020","2019"))
+                                            # levels = c("2020","2019"))
+                                            # levels = c("2021","2020","2019"))
+                                              levels = c("2020","2019","2018"))
 # barplot with letters
 plot_cumulative_yld <- site_year_yld_summary %>% 
   ggplot( aes(x = factor(Descriptors), y = mean, fill = Year, colour = Year)) + 

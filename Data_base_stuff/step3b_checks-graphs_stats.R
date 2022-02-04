@@ -29,11 +29,15 @@ summary_data_all %>%  distinct(rep_block)
 #site_name <- "Bute_Trengrove" #"Bute_CSIRO"
 #site_name <- "Bute_CSIRO"
 #site_name <-"Ouyen_spade"
-site_name <-"Lowaldie_Crest"      #"Lowaldie_Deep sand"
+#site_name <-"Lowaldie_Crest"    
+#site_name <-"Lowaldie_Deep sand"
+#site_name <-"Brooker"
+#site_name <-"Younghusband"
+site_name <- "Waikerie"
 
 list_of_descriptors<- summary_data_all %>% 
-  #filter(site == site_name) %>% 
-  filter(site == "Lowaldie") %>%
+  filter(site == site_name) %>% 
+  #filter(site == "Lowaldie") %>%
   distinct(Descriptors) %>% 
   arrange(desc(Descriptors))
 
@@ -42,7 +46,7 @@ head(list_of_descriptors,25)
 ##### order the Descriptors
 order <- c("Control" ,
 "Unmodified_SE14.band_8" ,
-"Unmodified_Bi-Agra.surface+band_8" ,
+"Unmodified_Bi_Agra.surface+band_8" ,
 "Unmodified_Lc.surface" ,
 "Unmodified_Cl.surface" ,
 
@@ -199,7 +203,11 @@ summary_data_all %>% distinct(site_sub)
 #site_name <- "Bute_Trengrove"
 #site_name <- "Bute_CSIRO"
 #site_name <- "Ouyen_spade"
-site_name <-"Lowaldie_Crest"      #"Lowaldie_Deep sand"
+#site_name <-"Lowaldie_Crest"      #"Lowaldie_Deep sand"
+#site_name <-"Lowaldie_Deep sand"
+#site_name <-"Brooker_reduced_trial"
+#site_name <-"Younghusband"
+site_name <- "Waikerie"
 
 ## for what years
 # summary_data_all %>% filter(site == site_name) %>% 
@@ -211,6 +219,23 @@ summary_data_all %>% filter(site_sub == site_name) %>%
 ##################################################################################################################################
 
 ##################################################################################################################################
+### For brooker remove low rep data
+# brooker <- summary_data_all %>%
+#   filter(site_sub == "Brooker") %>% 
+#   filter(Descriptors %in% c(
+#     "Control",
+#     "Unmodified_K_added.surface",
+#     "Spade.30_none",
+#     "Spade.30_K_added.surface",
+#     "Spade.30_Fert.incorp_30",
+#     "Spade.30_Fert.incorp_30.K_added.incorp_30",
+#     "Spade.30_Lc@4.incorp_30",
+#     "Spade.30_Lc@4.incorp_30.K_added.surface",
+#     "Spade.30_Lc@8.incorp_30",
+#     "Spade.30_Lc@8.incorp_30.K_added.surface",
+#     "Spade.30_Lc@15.incorp_30",
+#     "Spade.30_Lc@15.incorp_30.K_added.surface"))
+
 
 
 ##################################################################################################################################
@@ -218,20 +243,22 @@ rm(anova, cld, data_summary, plot, summary_data, tukey, tukey.cld, year_selected
 
 #year_selected <- 2021
 
-year_selected <- 2020
+#year_selected <- 2020
 #year_selected <- 2019
+year_selected <- 2018
 
-#year_selected <- 2018
 #year_selected <- 2017
 #year_selected <- 2016
 #year_selected <- 2015
 
-# Compute the analysis of variance
-summary_data <- summary_data_all %>%
-  #filter(site == site_name) %>% 
-  filter(site_sub == site_name) %>%
-  filter(year==year_selected)
-
+  # # Compute the analysis of variance
+  
+  summary_data <- summary_data_all %>%
+    #summary_data <- brooker %>%
+    filter(site == site_name) %>%
+    #filter(site_sub == "Brooker") %>%
+    filter(year==year_selected)
+  
 anova <- aov(yield ~ Descriptors, data = summary_data)
 # Summary of the analysis
 summary(anova)

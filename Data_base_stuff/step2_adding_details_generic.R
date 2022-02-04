@@ -17,10 +17,10 @@ list.of.files
 #Specify the site
 #site_name <- "Ouyen_spade"
 #site_name <- "Bute" #"Bute_Trengrove" "Bute_CSIRO"
-site_name <- "Lowaldie"
+#site_name <- "Lowaldie"
 #site_name <- "Brooker"
 #site_name <- "YoungHusband"
-# site_name <- "Waikerie"
+ site_name <- "Waikerie"
 #site_name <- "Brimpton Lake"
 #site_name <- "Cadgee"
 #site_name <- "Karoonda"
@@ -30,7 +30,7 @@ site_name <- "Lowaldie"
 
 #Ouyen_spade, Bute, Lowaldie, Brooker, YoungHusband, Waikerie, "Brimpton Lake", "Cadgee", "Karoonda", "Murlong", "Carwarp", "Yenda"
 
-list.files("X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2021/", ".csv",full.names=T)
+#list.files("X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2021/", ".csv",full.names=T)
 
 #input_data_file_rain <- "X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2021/GS_rain_deciles_Sam_sites.csv"
 
@@ -64,10 +64,10 @@ list.files("X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2021/", ".csv",f
 #3 Yenda
 #input_data_file_rain <- "X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2021/GS_rain_deciles_Racheal_sites.csv"
 
-#3 Ouyen Spade and all of Murrays and Waikerie and Carwarp ? Lowaldie
+#3 Ouyen Spade and all of Murrays and Waikerie and Carwarp ? Lowaldie and all of Murrays
 input_data_file_rain <- "X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2021/GS_rain_deciles_Murray_sites.csv"
 
-#4 Brooker and Murlong Spade and all of Murrays
+#4 Brooker and Murlong Spade 
 #input_data_file_rain <- "X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2021/GS_rain_deciles_Nigel_sites.csv"
 
 #5 Younghusband a
@@ -395,7 +395,7 @@ primary <- primary %>%
            ifelse(other_ameliorant  == "gypsum",    paste0("Gypsum",".", placement_other ),      
            ifelse(other_ameliorant  == "clay",    paste0("Clay",".", placement_other ),
            ifelse(other_ameliorant  == "Muriate of Potash",    paste0("K_added",".", placement_other ),
-           ifelse(other_ameliorant  == "Bi-Agra",    paste0("Bi-Agra",".", placement_other ),
+           ifelse(other_ameliorant  == "Bi-Agra",    paste0("Bi_Agra",".", placement_other ),
            ifelse(other_ameliorant  == "SE14",    paste0("SE14",".", placement_other ),
                   "other"
                   
@@ -545,11 +545,12 @@ primary %>%
 
 str(primary)
 unique(primary$placement_fertiliser)
-# primary <- primary %>% 
-#     filter(placement_fertiliser== "band_8"|
-#             placement_fertiliser== "band_30"|
-#             placement_fertiliser== "band_60" |
-#              is.na(placement_fertiliser))
+primary <- primary %>%
+  
+    filter(placement_fertiliser== "band_8"|
+            placement_fertiliser== "band_30"|
+            placement_fertiliser== "band_60" |
+             is.na(placement_fertiliser))
 
 
 
