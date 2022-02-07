@@ -23,8 +23,8 @@ list.of.files
 # site_name <- "Waikerie"
 #site_name <- "Brimpton Lake"
 #site_name <- "Cadgee"
-site_name <- "Karoonda"
-# site_name <- "Murlong"
+#site_name <- "Karoonda"
+ site_name <- "Murlong"
 #site_name <- "Carwarp"
 #site_name <- "Yenda"
 
@@ -68,13 +68,13 @@ list.files("X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2021/", ".csv",f
 #input_data_file_rain <- "X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2021/GS_rain_deciles_Murray_sites.csv"
 
 #4 Brooker and Murlong Spade 
-#input_data_file_rain <- "X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2021/GS_rain_deciles_Nigel_sites.csv"
+input_data_file_rain <- "X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2021/GS_rain_deciles_Nigel_sites.csv"
 
 #5 Younghusband a
 #input_data_file_rain <- "X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2021/GS_rain_deciles_Younghusband_sites.csv"
 
 #6 New Horizons
-input_data_file_rain <- "X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2021/GS_rain_deciles_New_Horizons_sites.csv"
+#input_data_file_rain <- "X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2021/GS_rain_deciles_New_Horizons_sites.csv"
 
 ##################################################################################################################
 ## download the data using the specified file path above
@@ -931,6 +931,32 @@ filter(ID  != "Karoonda_2018_plot_6_rep_block_1") %>%
   filter(ID  != "Karoonda_2018_plot_37_rep_block_3") %>%
   filter(ID  != "Karoonda_2018_plot_48_rep_block_4") %>%
   filter(ID  != "Karoonda_2018_plot_64_rep_block_5")
+
+# Remove the spare (control b) at Murlong
+primary_join_2 <- primary_join_2 %>%
+  filter(ID  != "Murlong_2018_plot_4_rep_block_1") %>%
+  filter(ID  != "Murlong_2018_plot_19_rep_block_2") %>%
+  filter(ID  != "Murlong_2018_plot_28_rep_block_3") %>%
+  filter(ID  != "Murlong_2018_plot_43_rep_block_4") %>% 
+
+  filter(ID  != "Murlong_2019_plot_4_rep_block_1") %>%
+  filter(ID  != "Murlong_2019_plot_19_rep_block_2") %>%
+  filter(ID  != "Murlong_2019_plot_28_rep_block_3") %>%
+  filter(ID  != "Murlong_2019_plot_43_rep_block_4") %>% 
+  
+  filter(ID  != "Murlong_2020_plot_4_rep_block_1") %>%
+  filter(ID  != "Murlong_2020_plot_19_rep_block_2") %>%
+  filter(ID  != "Murlong_2020_plot_28_rep_block_3") %>%
+  filter(ID  != "Murlong_2020_plot_43_rep_block_4") %>% 
+
+  filter(ID  != "Murlong_2021_plot_4_rep_block_1") %>%
+  filter(ID  != "Murlong_2021_plot_19_rep_block_2") %>%
+  filter(ID  != "Murlong_2021_plot_28_rep_block_3") %>%
+  filter(ID  != "Murlong_2021_plot_43_rep_block_4")  
+
+
+
+
 
 ## something extra for Waikerie. There is a treatment which has..
 #Rip_30_none_surface 
