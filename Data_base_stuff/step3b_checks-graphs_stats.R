@@ -35,7 +35,8 @@ summary_data_all %>%  distinct(rep_block)
 #site_name <-"Younghusband"
 #site_name <- "Waikerie"
 #site_name <- "Brimpton Lake"
-site_name <- "Cadgee"
+#site_name <- "Cadgee"
+site_name <- "Karoonda"
   
 list_of_descriptors<- summary_data_all %>% 
   filter(site == site_name) %>% 
@@ -240,11 +241,11 @@ rm(anova, cld, data_summary, plot, summary_data, tukey, tukey.cld, year_selected
 #year_selected <- 2020
 #year_selected <- 2019
 
-#year_selected <- 2018
+year_selected <- 2018
 #year_selected <- 2017
 #year_selected <- 2016
 #year_selected <- 2015
-year_selected <- 2014
+#year_selected <- 2014
 
   # # Compute the analysis of variance
   
