@@ -24,8 +24,8 @@ list.of.files
 #site_name <- "Brimpton Lake"
 #site_name <- "Cadgee"
 #site_name <- "Karoonda"
- site_name <- "Murlong"
-#site_name <- "Carwarp"
+# site_name <- "Murlong"
+site_name <- "Carwarp"
 #site_name <- "Yenda"
 
 #Ouyen_spade, Bute, Lowaldie, Brooker, YoungHusband, Waikerie, "Brimpton Lake", "Cadgee", "Karoonda", "Murlong", "Carwarp", "Yenda"
@@ -65,10 +65,10 @@ list.files("X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2021/", ".csv",f
 #input_data_file_rain <- "X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2021/GS_rain_deciles_Racheal_sites.csv"
 
 #3 Ouyen Spade and all of Murrays and Waikerie and Carwarp ? Lowaldie and all of Murrays
-#input_data_file_rain <- "X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2021/GS_rain_deciles_Murray_sites.csv"
+input_data_file_rain <- "X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2021/GS_rain_deciles_Murray_sites.csv"
 
 #4 Brooker and Murlong Spade 
-input_data_file_rain <- "X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2021/GS_rain_deciles_Nigel_sites.csv"
+#input_data_file_rain <- "X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2021/GS_rain_deciles_Nigel_sites.csv"
 
 #5 Younghusband a
 #input_data_file_rain <- "X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2021/GS_rain_deciles_Younghusband_sites.csv"
@@ -803,7 +803,12 @@ unique(GS_rain_deciles$site)
 ## I Carwarp is splet wrong
 GS_rain_deciles <- GS_rain_deciles %>% 
   mutate(site = case_when(
-    #site == "Carwap" ~ "Carwarp"
+    site == "Carwap" ~ "Carwarp",
+    TRUE ~ site
+  ))
+
+GS_rain_deciles <- GS_rain_deciles %>% 
+  mutate(site = case_when(
     site == "Brimpton_Lake" ~ "Brimpton Lake",
     TRUE ~ site
   ))

@@ -28,8 +28,8 @@ library(stringr)
 #name_site <- "Brooker"
 #name_site <- "YoungHusband"
 #name_site <- "Waikerie"
-#name_site <- "Brimpton Lake"
-name_site <- "Cadgee"
+name_site <- "Brimpton Lake"
+#name_site <- "Cadgee"
 #name_site <- "Karoonda"
 #name_site <- "Murlong"
 #name_site <- "Carwarp" #CarwarpAmelioration

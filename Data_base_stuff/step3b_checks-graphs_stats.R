@@ -23,6 +23,7 @@ summary_data_all <- read_csv(data_file,
 
 
 unique(summary_data_all$site_sub)
+unique(summary_data_all$site)
 
 summary_data_all %>%  distinct(rep_block)
 
@@ -37,10 +38,13 @@ summary_data_all %>%  distinct(rep_block)
 #site_name <- "Brimpton Lake"
 #site_name <- "Cadgee"
 #site_name <- "Karoonda"
-site_name <- "Murlong"
+#site_name <- "Murlong"
+site_name <- "Carwarp"# "CarwarpAmelioration" OR "Carwarp"
+
   
 list_of_descriptors<- summary_data_all %>% 
-  filter(site == site_name) %>% 
+  #filter(site == site_name) %>% 
+  filter(site == "Carwarp") %>%
   #filter(site == "Lowaldie") %>%
   distinct(Descriptors) %>% 
   arrange(desc(Descriptors))
@@ -209,7 +213,8 @@ summary_data_all %>% distinct(site_sub)
 # summary_data_all %>% filter(site == site_name) %>% 
 #   distinct(year)
  
-summary_data_all %>% filter(site_sub == site_name) %>% 
+#summary_data_all %>% filter(site_sub == site_name) %>% 
+summary_data_all %>% filter(site_sub == "CarwarpAmelioration") %>% 
   distinct(year)
 
 ##################################################################################################################################
@@ -237,8 +242,9 @@ summary_data_all %>% filter(site_sub == site_name) %>%
 ##################################################################################################################################
 rm(anova, cld, data_summary, plot, summary_data, tukey, tukey.cld, year_selected)
 
-year_selected <- 2021
-#year_selected <- 2020
+#year_selected <- 2021
+
+year_selected <- 2020
 #year_selected <- 2019
 #year_selected <- 2018
 
@@ -286,7 +292,7 @@ print(data_summary)
 
 ## add in some details 
 data_summary <- data_summary %>% 
-  mutate(site = site_name,
+  mutate(site = site_name_output,
          year = year_selected)
 
 data_summary <- data_summary %>% 
@@ -295,9 +301,13 @@ data_summary <- data_summary %>%
 data_summary
 
 
+
+
 output_folder <- "X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/stats_working/"
 
 write.csv(data_summary, paste0(output_folder,"Yield_",site_name,year_selected,".csv"))
+
+
 
 ###############################################################################################################
 ### Now for the plots ###
@@ -309,7 +319,7 @@ output_folder <- "X:/Therese_Jackie/Sandy_soils/Development_database/other_sites
 
 
 
-data_summary <- read_csv(paste0(output_folder,"Yield_",site_name,year_selected,".csv"))
+data_summary <- read_csv(paste0(output_folder,"Yield_",site_name_output,year_selected,".csv"))
 print(data_summary)
 
 data_summary$Descriptors <- factor(data_summary$Descriptors,
