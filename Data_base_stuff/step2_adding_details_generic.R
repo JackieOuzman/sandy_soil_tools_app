@@ -20,10 +20,10 @@ list.of.files
 #site_name <- "Lowaldie"
 #site_name <- "Brooker"
 #site_name <- "YoungHusband"
- site_name <- "Waikerie"
+# site_name <- "Waikerie"
 #site_name <- "Brimpton Lake"
 #site_name <- "Cadgee"
-#site_name <- "Karoonda"
+site_name <- "Karoonda"
 # site_name <- "Murlong"
 #site_name <- "Carwarp"
 #site_name <- "Yenda"
@@ -65,7 +65,7 @@ list.files("X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2021/", ".csv",f
 #input_data_file_rain <- "X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2021/GS_rain_deciles_Racheal_sites.csv"
 
 #3 Ouyen Spade and all of Murrays and Waikerie and Carwarp ? Lowaldie and all of Murrays
-input_data_file_rain <- "X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2021/GS_rain_deciles_Murray_sites.csv"
+#input_data_file_rain <- "X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2021/GS_rain_deciles_Murray_sites.csv"
 
 #4 Brooker and Murlong Spade 
 #input_data_file_rain <- "X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2021/GS_rain_deciles_Nigel_sites.csv"
@@ -74,7 +74,7 @@ input_data_file_rain <- "X:/Therese_Jackie/Sandy_soils/Sands weather/met_file202
 #input_data_file_rain <- "X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2021/GS_rain_deciles_Younghusband_sites.csv"
 
 #6 New Horizons
-#input_data_file_rain <- "X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2021/GS_rain_deciles_New_Horizons_sites.csv"
+input_data_file_rain <- "X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2021/GS_rain_deciles_New_Horizons_sites.csv"
 
 ##################################################################################################################
 ## download the data using the specified file path above
@@ -273,7 +273,7 @@ primary <- primary %>%
             ## chicken litter with NO rate
                   ifelse(site_sub    %in% c("Brooker","Cadgee","Ouyen_spade", "CarwarpAmelioration", 
                                       "Karoonda", "Lowaldie_Crest","Lowaldie_Deep sand", "Murlong", "Ouyen_spade",
-                                      "Waikerie", "Younghusband")  #site list 3
+                                      "Waikerie", "Younghusband", "Brimpton Lake")  #site list 3
                   & organic          %in% c( "chicken_compost","chicken_manure","chicken litter","chicken liitter",
                                               "chicken_litter","chicken litter"),  
                  paste0("Cl",".", placement_organic),
@@ -282,7 +282,7 @@ primary <- primary %>%
             ## compost with NO rate    
                  ifelse(site_sub    %in% c("Brooker","Bute_CSIRO","Cadgee","Ouyen_spade", "CarwarpAmelioration", 
                                            "Karoonda", "Lowaldie_Crest","Lowaldie_Deep sand", "Murlong", "Ouyen_spade",
-                                           "Waikerie", "Younghusband", "Yenda","Bute_Trengrove")  #all the sites
+                                           "Waikerie", "Younghusband", "Yenda","Bute_Trengrove", "Brimpton Lake")  #all the sites
                         & organic          %in% c( "compost"),  
                         paste0("Com",".", placement_organic),
                         
@@ -290,7 +290,7 @@ primary <- primary %>%
             ## lucerne with NO rate    
                         ifelse(site_sub    %in% c("Bute_CSIRO","Cadgee","Ouyen_spade", "CarwarpAmelioration", 
                                                   "Karoonda", "Lowaldie_Crest","Lowaldie_Deep sand", "Murlong", "Ouyen_spade",
-                                                  "Waikerie", "Younghusband", "Yenda","Bute_Trengrove")  #set 1
+                                                  "Waikerie", "Younghusband", "Yenda","Bute_Trengrove", "Brimpton Lake")  #set 1
                                & organic          %in% c( "lucerne", "pelleted lucerne"),  
                                paste0("Lc",".", placement_organic),  
             
@@ -303,28 +303,28 @@ primary <- primary %>%
             ## Cereal with NO rate   
                  ifelse(site_sub    %in% c("Brooker","Bute_CSIRO","Cadgee","Ouyen_spade", "CarwarpAmelioration", 
                                            "Karoonda", "Lowaldie_Crest","Lowaldie_Deep sand", "Murlong", "Ouyen_spade",
-                                           "Waikerie", "Younghusband", "Yenda","Bute_Trengrove")  #all the sites
+                                           "Waikerie", "Younghusband", "Yenda","Bute_Trengrove", "Brimpton Lake")  #all the sites
                                 & organic %in% c("cereal"),   
                    paste0("Cereal",".", placement_organic),
                                 
             ## vetch with NO rate   
                    ifelse(site_sub    %in% c("Brooker","Bute_CSIRO","Cadgee","Ouyen_spade", "CarwarpAmelioration", 
                                              "Karoonda", "Lowaldie_Crest","Lowaldie_Deep sand", "Murlong", "Ouyen_spade",
-                                             "Waikerie", "Younghusband", "Yenda","Bute_Trengrove")  #all the sites
+                                             "Waikerie", "Younghusband", "Yenda","Bute_Trengrove", "Brimpton Lake")  #all the sites
                           & organic %in% c("vetch"),   
                           paste0("Vetch",".", placement_organic),   
                           
            ## vetch - cereal with NO rate   
                           ifelse(site_sub    %in% c("Brooker","Bute_CSIRO","Cadgee","Ouyen_spade", "CarwarpAmelioration", 
                                                     "Karoonda", "Lowaldie_Crest","Lowaldie_Deep sand", "Murlong", "Ouyen_spade",
-                                                    "Waikerie", "Younghusband", "Yenda","Bute_Trengrove")  #all the sites
+                                                    "Waikerie", "Younghusband", "Yenda","Bute_Trengrove", "Brimpton Lake")  #all the sites
                                  & organic %in% c("vetch - cereal"),   
                                  paste0("Vet_Cer",".", placement_organic),
                                  
            ## vetch - cereal with innoculant   
                                  ifelse(site_sub    %in% c("Brooker","Bute_CSIRO","Cadgee","Ouyen_spade", "CarwarpAmelioration", 
                                                            "Karoonda", "Lowaldie_Crest","Lowaldie_Deep sand", "Murlong", "Ouyen_spade",
-                                                           "Waikerie", "Younghusband", "Yenda","Bute_Trengrove")  #all the sites
+                                                           "Waikerie", "Younghusband", "Yenda","Bute_Trengrove", "Brimpton Lake")  #all the sites
                                         & organic %in% c("vetch - cereal - innoculant"),   
                                         paste0("Vet_Cer_In",".", placement_organic),
                                  
@@ -340,7 +340,7 @@ primary <- primary %>%
   mutate(amendment_organic = 
            ifelse(site_sub            %in% c("Brooker","Cadgee","Ouyen_spade", "CarwarpAmelioration",
                                            "Karoonda", "Lowaldie_Crest","Lowaldie_Deep sand", "Murlong", "Ouyen_spade",
-                                           "Waikerie", "Younghusband","Bute_Trengrove")  #all the sites but not Bute CSIRO
+                                           "Waikerie", "Younghusband","Bute_Trengrove", "Brimpton Lake")  #all the sites but not Bute CSIRO
                  &   is.na(timing) ,
                 paste0(amendment_organic),
            
@@ -537,37 +537,6 @@ primary %>%
   arrange(desc(Descriptors))
 
 
-## something extra for Waikerie. There is a treatment which has..
-#Rip_30_none_surface 
-#(it i.e. was ripped to 30cm and nothing was added – because the fertiliser was not a treatment, but in the data that I got from Murray it says the ‘placement was at surface’.
-#                     I don’t get how you can apply nothing but apply at the surface).
-# anyway TB email 27/1/22 suggested not to use this so I will exclude it here.
-
-str(primary)
-unique(primary$placement_fertiliser)
-primary <- primary %>%
-  
-    filter(placement_fertiliser== "band_8"|
-            placement_fertiliser== "band_30"|
-            placement_fertiliser== "band_60" |
-             is.na(placement_fertiliser))
-
-
-
-
-
-# New horizons Cadgee also has one to be excluded 2014 plot 10 rep 1
-primary <- primary %>% 
-     filter(Descriptors != "Unmodified_Clay.NA")
-
-### something for Mel data
-# primary_2019_2020_imapct <- primary_2019_2020_imapct %>% 
-#   mutate(Descriptors = case_when(
-#     site == "Telopea_Downs" & 
-#       other_ameliorant == "clay" &
-#       rip  == "none"  & 
-#       mix == "spade"  ~ paste0("Spade.30", "_", amendment, "@", other_rate), 
-#     TRUE ~ Descriptors))
 
 
 ###################################################################################################################
@@ -625,16 +594,7 @@ names(primary_metadata)
 primary_metadata <- primary_metadata %>% 
   rename(site  = `Site Name`)
 
-#################################################################################################
-##-------------------Jax------------------ Do this when I get all the metatdata
-#Only keep the impact site data
-# create a list of impact sites:
 
-# list_sites <- primary %>% 
-#   distinct(site)
-# list_sites  
-# primary_metadata <- primary_metadata %>% 
-#   filter(site %in% list_sites$site)
 
 ################################################################################################
 ### de identify the sites and change coords ###################################################
@@ -843,8 +803,9 @@ unique(GS_rain_deciles$site)
 ## I Carwarp is splet wrong
 GS_rain_deciles <- GS_rain_deciles %>% 
   mutate(site = case_when(
-    site == "Carwap" ~ "Carwarp",
-    TRUE ~site
+    #site == "Carwap" ~ "Carwarp"
+    site == "Brimpton_Lake" ~ "Brimpton Lake",
+    TRUE ~ site
   ))
 
 #Kooloonong is listed as Kooloonong_lupins, Kooloonong_chickpea, Kooloonong_lentil
@@ -879,6 +840,10 @@ str(primary_join_1)
 
 primary_join_1 <- primary_join_1 %>% 
   mutate(site_year = paste0(site,"_", year)) 
+
+primary_join_1 %>%  distinct(site_year)
+GS_rain_deciles %>%  distinct(site_year)
+
 primary_join_2<-left_join(primary_join_1, GS_rain_deciles)
 check <- anti_join(primary_join_1, GS_rain_deciles)#? not sure if I am expecting this to be I think zero
 
@@ -895,7 +860,7 @@ check <- anti_join(primary_join_1, GS_rain_deciles)#? not sure if I am expecting
 ## The rest looks like it is used for the app.
 
 #############################################################################################
-############                      Write out file                 ##########################
+######Write out file but before remove some treatments specific to certain sites################
 #############################################################################################
 
 # write.csv(primary_join_2,
@@ -933,6 +898,72 @@ names(primary_join_2)
 #   filter(plot != "B5" ) %>% 
 #   filter(plot != "B6" ) %>% 
 #   filter(plot != "B9" ) 
+
+str(primary_join_2)
+# Remove the sapre at Karoonda
+primary_join_2 <- primary_join_2 %>%
+  filter(ID  != "Karoonda_2014_plot_6_rep_block_1") %>%
+  filter(ID  != "Karoonda_2014_plot_20_rep_block_2") %>%
+  filter(ID  != "Karoonda_2014_plot_37_rep_block_3") %>%
+  filter(ID  != "Karoonda_2014_plot_48_rep_block_4") %>%
+  filter(ID  != "Karoonda_2014_plot_64_rep_block_5") %>% 
+
+filter(ID  != "Karoonda_2015_plot_6_rep_block_1") %>%
+  filter(ID  != "Karoonda_2015_plot_20_rep_block_2") %>%
+  filter(ID  != "Karoonda_2015_plot_37_rep_block_3") %>%
+  filter(ID  != "Karoonda_2015_plot_48_rep_block_4") %>%
+  filter(ID  != "Karoonda_2015_plot_64_rep_block_5") %>% 
+
+filter(ID  != "Karoonda_2016_plot_6_rep_block_1") %>%
+  filter(ID  != "Karoonda_2016_plot_20_rep_block_2") %>%
+  filter(ID  != "Karoonda_2016_plot_37_rep_block_3") %>%
+  filter(ID  != "Karoonda_2016_plot_48_rep_block_4") %>%
+  filter(ID  != "Karoonda_2016_plot_64_rep_block_5") %>% 
+
+filter(ID  != "Karoonda_2017_plot_6_rep_block_1") %>%
+  filter(ID  != "Karoonda_2017_plot_20_rep_block_2") %>%
+  filter(ID  != "Karoonda_2017_plot_37_rep_block_3") %>%
+  filter(ID  != "Karoonda_2017_plot_48_rep_block_4") %>%
+  filter(ID  != "Karoonda_2017_plot_64_rep_block_5") %>% 
+
+filter(ID  != "Karoonda_2018_plot_6_rep_block_1") %>%
+  filter(ID  != "Karoonda_2018_plot_20_rep_block_2") %>%
+  filter(ID  != "Karoonda_2018_plot_37_rep_block_3") %>%
+  filter(ID  != "Karoonda_2018_plot_48_rep_block_4") %>%
+  filter(ID  != "Karoonda_2018_plot_64_rep_block_5")
+
+## something extra for Waikerie. There is a treatment which has..
+#Rip_30_none_surface 
+#(it i.e. was ripped to 30cm and nothing was added – because the fertiliser was not a treatment, but in the data that I got from Murray it says the ‘placement was at surface’.
+#                     I don’t get how you can apply nothing but apply at the surface).
+# anyway TB email 27/1/22 suggested not to use this so I will exclude it here.
+
+# str(primary)
+# unique(primary$placement_fertiliser)
+# primary <- primary %>%
+#   filter(placement_fertiliser== "band_8"|
+#             placement_fertiliser== "band_30"|
+#             placement_fertiliser== "band_60" |
+#              is.na(placement_fertiliser))
+
+
+
+
+
+# New horizons Cadgee also has one to be excluded 2014 plot 10 rep 1
+primary <- primary %>% 
+  filter(Descriptors != "Unmodified_Clay.NA")
+
+### something for Mel data
+# primary_2019_2020_imapct <- primary_2019_2020_imapct %>% 
+#   mutate(Descriptors = case_when(
+#     site == "Telopea_Downs" & 
+#       other_ameliorant == "clay" &
+#       rip  == "none"  & 
+#       mix == "spade"  ~ paste0("Spade.30", "_", amendment, "@", other_rate), 
+#     TRUE ~ Descriptors))
+
+
 
 write.csv(primary_join_2,
           paste0("X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/step2/",site_name, "_sites_step1_2.csv") ,

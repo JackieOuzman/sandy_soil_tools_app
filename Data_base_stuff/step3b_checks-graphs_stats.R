@@ -33,8 +33,10 @@ summary_data_all %>%  distinct(rep_block)
 #site_name <-"Lowaldie_Deep sand"
 #site_name <-"Brooker"
 #site_name <-"Younghusband"
-site_name <- "Waikerie"
-
+#site_name <- "Waikerie"
+#site_name <- "Brimpton Lake"
+site_name <- "Cadgee"
+  
 list_of_descriptors<- summary_data_all %>% 
   filter(site == site_name) %>% 
   #filter(site == "Lowaldie") %>%
@@ -199,15 +201,7 @@ summary_data_all %>% distinct(site_sub)
 ####################################################################################################################################
 ####################################################################################################################################
 
-#site_name <- "Yenda"
-#site_name <- "Bute_Trengrove"
-#site_name <- "Bute_CSIRO"
-#site_name <- "Ouyen_spade"
-#site_name <-"Lowaldie_Crest"      #"Lowaldie_Deep sand"
-#site_name <-"Lowaldie_Deep sand"
-#site_name <-"Brooker_reduced_trial"
-#site_name <-"Younghusband"
-site_name <- "Waikerie"
+
 
 ## for what years
 # summary_data_all %>% filter(site == site_name) %>% 
@@ -245,11 +239,12 @@ rm(anova, cld, data_summary, plot, summary_data, tukey, tukey.cld, year_selected
 
 #year_selected <- 2020
 #year_selected <- 2019
-year_selected <- 2018
 
+#year_selected <- 2018
 #year_selected <- 2017
 #year_selected <- 2016
 #year_selected <- 2015
+year_selected <- 2014
 
   # # Compute the analysis of variance
   

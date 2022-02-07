@@ -42,7 +42,7 @@ unique(summary_data_all$site)
 #site_name <-"Lowaldie_Crest"      #"Lowaldie_Deep sand"
 #site_name <-"Lowaldie_Deep sand"
 #site_name <-"Brooker_reduced_trial"
-site_name <- "Waikerie"
+
 
 
 yld_site <- summary_data_all %>%
@@ -125,7 +125,9 @@ site_year_yld_summary$Year <- factor(site_year_yld_summary$year,
                                             # levels = c("2020","2019","2018", "2017"))
                                             # levels = c("2020","2019"))
                                             # levels = c("2021","2020","2019"))
-                                              levels = c("2020","2019","2018"))
+                                            #  levels = c("2020","2019","2018"))
+                                            #levels = c("2018","2017","2016","2015","2014"))
+                                            levels = c("2018","2017","2015","2014"))
 # barplot with letters
 plot_cumulative_yld <- site_year_yld_summary %>% 
   ggplot( aes(x = factor(Descriptors), y = mean, fill = Year, colour = Year)) + 
