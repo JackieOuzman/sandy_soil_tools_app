@@ -20,12 +20,12 @@ list.of.files
 #site_name <- "Lowaldie"
 #site_name <- "Brooker"
 #site_name <- "YoungHusband"
-# site_name <- "Waikerie"
+ site_name <- "Waikerie"
 #site_name <- "Brimpton Lake"
 #site_name <- "Cadgee"
 #site_name <- "Karoonda"
 # site_name <- "Murlong"
-site_name <- "Carwarp"
+#site_name <- "Carwarp"
 #site_name <- "Yenda"
 
 #Ouyen_spade, Bute, Lowaldie, Brooker, YoungHusband, Waikerie, "Brimpton Lake", "Cadgee", "Karoonda", "Murlong", "Carwarp", "Yenda"
@@ -882,27 +882,27 @@ check <- anti_join(primary_join_1, GS_rain_deciles)#? not sure if I am expecting
 
 names(primary_join_2)
 
-# Bute_CSIRO_rep_block <- primary_join_2 %>% 
-#   filter(site == "Bute_CSIRO") %>% 
-#   distinct(rep_block) %>% 
+# Bute_CSIRO_rep_block <- primary_join_2 %>%
+#   filter(site == "Bute_CSIRO") %>%
+#   distinct(rep_block) %>%
 #   arrange(rep_block)
 # 
 # Bute_CSIRO_rep_block
 # 
-# primary_join_2 <-primary_join_2 %>% 
+# primary_join_2 <-primary_join_2 %>%
 #   filter(rep_block %in% c("1", "2","3","4"))
 # 
-# Bute_CSIRO_plots <- primary_join_2 %>% 
-#   filter(site == "Bute_CSIRO") %>% 
-#   distinct(plot) %>% 
+# Bute_CSIRO_plots <- primary_join_2 %>%
+#   filter(site == "Bute_CSIRO") %>%
+#   distinct(plot) %>%
 #   arrange(plot)
 # Bute_CSIRO_plots
 # 
-# primary_join_2 <-primary_join_2 %>% 
-#   filter(plot != "B10") %>% 
-#   filter(plot != "B5" ) %>% 
-#   filter(plot != "B6" ) %>% 
-#   filter(plot != "B9" ) 
+# primary_join_2 <-primary_join_2 %>%
+#   filter(plot != "B10") %>%
+#   filter(plot != "B5" ) %>%
+#   filter(plot != "B6" ) %>%
+#   filter(plot != "B9" )
 
 str(primary_join_2)
 # Remove the sapre at Karoonda
@@ -976,6 +976,24 @@ primary_join_2 <- primary_join_2 %>%
 #             placement_fertiliser== "band_30"|
 #             placement_fertiliser== "band_60" |
 #              is.na(placement_fertiliser))
+
+
+# Remove the spare (control b) at Waikerie
+primary_join_2 <- primary_join_2 %>%
+  filter(ID  != "Waikerie_2018_plot_1_rep_block_1") %>%
+  filter(ID  != "Waikerie_2018_plot_20_rep_block_2") %>%
+  filter(ID  != "Waikerie_2018_plot_41_rep_block_3") %>%
+  filter(ID  != "Waikerie_2018_plot_52_rep_block_4") %>%
+
+  filter(ID  != "Waikerie_2019_plot_1_rep_block_1") %>%
+  filter(ID  != "Waikerie_2019_plot_20_rep_block_2") %>%
+  filter(ID  != "Waikerie_2019_plot_41_rep_block_3") %>%
+  filter(ID  != "Waikerie_2019_plot_52_rep_block_4") %>%
+  
+  filter(ID  != "Waikerie_2020_plot_1_rep_block_1") %>%
+  filter(ID  != "Waikerie_2020_plot_20_rep_block_2") %>%
+  filter(ID  != "Waikerie_2020_plot_41_rep_block_3") %>%
+  filter(ID  != "Waikerie_2020_plot_52_rep_block_4") 
 
 
 

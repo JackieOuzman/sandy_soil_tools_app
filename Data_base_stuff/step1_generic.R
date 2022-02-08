@@ -27,8 +27,8 @@ library(stringr)
 #name_site <- "Lowaldie"
 #name_site <- "Brooker"
 #name_site <- "YoungHusband"
-#name_site <- "Waikerie"
-name_site <- "Brimpton Lake"
+name_site <- "Waikerie"
+#name_site <- "Brimpton Lake"
 #name_site <- "Cadgee"
 #name_site <- "Karoonda"
 #name_site <- "Murlong"
@@ -248,41 +248,8 @@ list.of.files
 
 # Waikerie
 # 
-# site <- read_excel(paste0("X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/", "Waikerie", ".xlsx"),
-#                    sheet = "Database_format", skip = 1)
-# names(site)
-# site <- site %>% dplyr::select("ID":"comments"   )
-# 
-# 
-# 
-# 
-# # #
-# # ### a metadata
-# # #
-# metadata <- read_excel(paste0("X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/", "Waikerie", ".xlsx"),
-#                        sheet = "Site_metadata", col_types = c("text",
-#                                                               "numeric", "numeric", "numeric",
-#                                                               "numeric", "numeric", "numeric",
-#                                                               "numeric", "numeric", "numeric",
-#                                                               "numeric", "numeric", "numeric",
-#                                                               "numeric", "numeric", "numeric",
-#                                                               "numeric", "numeric", "numeric",
-#                                                               "date", "numeric", "text", "text",
-#                                                               "text", "text", "text", "text", "text",
-#                                                               "text",
-#                                                               "date", "date", "date",
-#                                                               "date", "date", "date",
-#                                                               "date",
-#                                                               "date", "date", "date",
-#                                                               "date", "date", "date",
-#                                                               "date"))
-
-
-
-#PIRSA_New Horizons
-
-site <- read_excel(paste0("X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/", "PIRSA_New Horizons_Fraser_2014-2018_jax", ".xlsx"),
-                   sheet = "Database format", skip = 0)
+site <- read_excel(paste0("X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/", "Waikerie", ".xlsx"),
+                   sheet = "Database_format", skip = 1)
 names(site)
 site <- site %>% dplyr::select("ID":"comments"   )
 
@@ -292,7 +259,7 @@ site <- site %>% dplyr::select("ID":"comments"   )
 # #
 # ### a metadata
 # #
-metadata <- read_excel(paste0("X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/", "PIRSA_New Horizons_Fraser_2014-2018_jax", ".xlsx"),
+metadata <- read_excel(paste0("X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/", "Waikerie", ".xlsx"),
                        sheet = "Site_metadata", col_types = c("text",
                                                               "numeric", "numeric", "numeric",
                                                               "numeric", "numeric", "numeric",
@@ -309,6 +276,39 @@ metadata <- read_excel(paste0("X:/Therese_Jackie/Sandy_soils/Development_databas
                                                               "date", "date", "date",
                                                               "date", "date", "date",
                                                               "date"))
+
+
+
+#PIRSA_New Horizons
+
+# site <- read_excel(paste0("X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/", "PIRSA_New Horizons_Fraser_2014-2018_jax", ".xlsx"),
+#                    sheet = "Database format", skip = 0)
+# names(site)
+# site <- site %>% dplyr::select("ID":"comments"   )
+
+
+
+
+# #
+# ### a metadata
+# #
+# metadata <- read_excel(paste0("X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/", "PIRSA_New Horizons_Fraser_2014-2018_jax", ".xlsx"),
+#                        sheet = "Site_metadata", col_types = c("text",
+#                                                               "numeric", "numeric", "numeric",
+#                                                               "numeric", "numeric", "numeric",
+#                                                               "numeric", "numeric", "numeric",
+#                                                               "numeric", "numeric", "numeric",
+#                                                               "numeric", "numeric", "numeric",
+#                                                               "numeric", "numeric", "numeric",
+#                                                               "date", "numeric", "text", "text",
+#                                                               "text", "text", "text", "text", "text",
+#                                                               "text",
+#                                                               "date", "date", "date",
+#                                                               "date", "date", "date",
+#                                                               "date",
+#                                                               "date", "date", "date",
+#                                                               "date", "date", "date",
+#                                                               "date"))
 
 # #Murlong
 # 
@@ -396,6 +396,7 @@ site <- site %>%
 #filter on site name
 unique(metadata$`Site Name`)
 unique(site$site)
+name_site
 
 metadata <- metadata %>%
   filter(`Site Name`== name_site)
