@@ -44,7 +44,7 @@ scatter_control_vs_trial <- ggplot(data = summary_control_data_all, mapping = ae
   geom_smooth(method = lm, se = FALSE) +
   labs(title = "Control yield - all data - no summary\nnote each site, treatment, year and rep is matched to control",
        x = "control yield t/ha", y = "trial yield t/ha")
-
+scatter_control_vs_trial
 ggplotly(scatter_control_vs_trial)
 
 ggplot(data = summary_control_data_all, mapping = aes(control_yield, yield,)) +
