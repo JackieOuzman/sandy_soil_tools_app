@@ -17,10 +17,10 @@ list.of.files
 #Specify the site
 #site_name <- "Ouyen_spade"
 #site_name <- "Bute" #"Bute_Trengrove" "Bute_CSIRO"
-#site_name <- "Lowaldie"
+site_name <- "Lowaldie"
 #site_name <- "Brooker"
 #site_name <- "YoungHusband"
- site_name <- "Waikerie"
+#site_name <- "Waikerie"
 #site_name <- "Brimpton Lake"
 #site_name <- "Cadgee"
 #site_name <- "Karoonda"
@@ -86,8 +86,8 @@ primary <- read_csv(input_data_file,
                                            dry_biomass = col_double(), timing = col_character()))
 names(primary)
 # change the site name
-# primary <- primary %>%
-#   mutate(site = "Lowaldie")
+primary <- primary %>%
+  mutate(site = "Lowaldie")
 
 #################################################################################################################
 ####   Create the descriptors #####
