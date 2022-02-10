@@ -38,13 +38,13 @@ summary_data_all %>%  distinct(rep_block)
 #site_name <- "Brimpton Lake"
 #site_name <- "Cadgee"
 #site_name <- "Karoonda"
-#site_name <- "Murlong"
-site_name <- "Carwarp"# "CarwarpAmelioration" OR "Carwarp"
+site_name <- "Murlong"
+#site_name <- "Carwarp"# "CarwarpAmelioration" OR "Carwarp"
 
   
 list_of_descriptors<- summary_data_all %>% 
   #filter(site == site_name) %>% 
-  filter(site == "Carwarp") %>%
+  #filter(site == "Carwarp") %>%
   #filter(site == "Lowaldie") %>%
   distinct(Descriptors) %>% 
   arrange(desc(Descriptors))
@@ -210,19 +210,19 @@ summary_data_all %>% distinct(site_sub)
 
 
 ## for what years
-# summary_data_all %>% filter(site == site_name) %>% 
-#   distinct(year)
+summary_data_all %>% filter(site == site_name) %>%
+  distinct(year)
  
 #summary_data_all %>% filter(site_sub == site_name) %>% 
-summary_data_all %>% filter(site_sub == "CarwarpAmelioration") %>% 
-  distinct(year)
+# summary_data_all %>% filter(site_sub == "CarwarpAmelioration") %>% 
+#   distinct(year)
 
 ##################################################################################################################################
 
 ##################################################################################################################################
 ### For brooker remove low rep data
 # brooker <- summary_data_all %>%
-#   filter(site_sub == "Brooker") %>% 
+#   filter(site_sub == "Brooker") %>%
 #   filter(Descriptors %in% c(
 #     "Control",
 #     "Unmodified_K_added.surface",
@@ -240,11 +240,14 @@ summary_data_all %>% filter(site_sub == "CarwarpAmelioration") %>%
 
 
 ##################################################################################################################################
+
+site_name_output <- "Murlong"
+
+
 rm(anova, cld, data_summary, plot, summary_data, tukey, tukey.cld, year_selected)
 
-#year_selected <- 2021
-
-year_selected <- 2020
+year_selected <- 2021
+#year_selected <- 2020
 #year_selected <- 2019
 #year_selected <- 2018
 
@@ -255,10 +258,10 @@ year_selected <- 2020
 
   # # Compute the analysis of variance
   
-  summary_data <- summary_data_all %>%
-    #summary_data <- brooker %>%
+   summary_data <- summary_data_all %>%
+  #  summary_data <- brooker %>%
     filter(site == site_name) %>%
-    #filter(site_sub == "Brooker") %>%
+    #filter(site_sub == "Brooker_reduced_trial") %>%
     filter(year==year_selected)
   
 anova <- aov(yield ~ Descriptors, data = summary_data)
@@ -305,9 +308,9 @@ data_summary
 
 output_folder <- "X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/stats_working/"
 
-write.csv(data_summary, paste0(output_folder,"Yield_",site_name,year_selected,".csv"))
+#write.csv(data_summary, paste0(output_folder,"Yield_",site_name,year_selected,".csv"))
 
-
+write.csv(data_summary, paste0(output_folder,"Yield_",site_name_output,year_selected,".csv"))
 
 ###############################################################################################################
 ### Now for the plots ###
@@ -330,7 +333,8 @@ plot <- data_summary %>%
 ggplot( aes(x = factor(Descriptors), y = mean)) + 
   geom_bar(stat = "identity",  alpha = 0.5)  +
   geom_errorbar(aes(ymin=mean-std_error, ymax=mean+std_error), width = 0.1) +
-  labs(x="", y="Yield t/ha", title = paste(site_name,": ", year_selected),
+  #labs(x="", y="Yield t/ha", title = paste(site_name,": ", year_selected),
+  labs(x="", y="Yield t/ha", title = paste(site_name_output,": ", year_selected),
        subtitle = "ANOVA with Tukey, threshold 0.05") +
   theme_bw() + 
   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank()) +
@@ -343,7 +347,8 @@ ggplot( aes(x = factor(Descriptors), y = mean)) +
 plot
 ggsave(plot,
        device = "png",
-       filename = paste0("Plot_yield", site_name,"_", year_selected, ".png"),
+       #filename = paste0("Plot_yield", site_name,"_", year_selected, ".png"),
+       filename = paste0("Plot_yield", site_name_output,"_", year_selected, ".png"),
        path= output_folder,
        width=8.62,
        height = 6.28,

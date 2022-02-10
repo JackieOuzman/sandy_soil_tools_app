@@ -93,7 +93,8 @@ print(cumulative_yld_table)
 
 ## add in some details 
 cumulative_yld_table <- cumulative_yld_table %>% 
-  mutate(site = site_name)
+  #mutate(site = site_name)
+  mutate(site = site_name_output)
 
 cumulative_yld_table <- cumulative_yld_table %>% 
   arrange(Descriptors)
@@ -132,7 +133,8 @@ site_year_yld_summary$Year <- factor(site_year_yld_summary$year,
 plot_cumulative_yld <- site_year_yld_summary %>% 
   ggplot( aes(x = factor(Descriptors), y = mean, fill = Year, colour = Year)) + 
   geom_bar(stat = "identity",  alpha = 0.5)  +
-  labs(x="", y="Cumulative Yield (t/ha)", title = paste(site_name))+
+  #labs(x="", y="Cumulative Yield (t/ha)", title = paste(site_name))+
+  labs(x="", y="Cumulative Yield (t/ha)", title = paste(site_name_output))+
   theme_bw() + 
   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank()) +
   theme(axis.text.x=element_text(angle=45,hjust=1))
@@ -146,11 +148,13 @@ plot_cumulative_yld <- site_year_yld_summary %>%
   
   ggsave(plot_cumulative_yld,
          device = "png",
-         filename = paste0("Plot_cumulative_yield", site_name,"_",  ".png"),
+         #filename = paste0("Plot_cumulative_yield", site_name,"_",  ".png"),
+         filename = paste0("Plot_cumulative_yield", site_name_output,"_",  ".png"),
          path= output_folder,
          width=8.62,
          height = 6.28,
          dpi=600
   )
   
-  write.csv(cumulative_yld_table, paste0(output_folder,"Cumulative_Yield_",site_name,".csv"))
+  #write.csv(cumulative_yld_table, paste0(output_folder,"Cumulative_Yield_",site_name,".csv"))
+  write.csv(cumulative_yld_table, paste0(output_folder,"Cumulative_Yield_",site_name_output,".csv"))
