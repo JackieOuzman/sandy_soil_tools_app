@@ -50,6 +50,11 @@ sites_merged_control %>%
   arrange(desc(Descriptors))
 
 
+## are there any reps in the ID clm?
+
+duplicated_ID <- sites_merged_control %>% 
+  group_by( ID  ) %>% 
+  filter(n()>1)
                          
 output_folder <- "X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/stats_working/"
 

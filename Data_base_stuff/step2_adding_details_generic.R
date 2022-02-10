@@ -17,9 +17,9 @@ list.of.files
 #Specify the site
 #site_name <- "Ouyen_spade"
 #site_name <- "Bute" #"Bute_Trengrove" "Bute_CSIRO"
-site_name <- "Lowaldie"
+#site_name <- "Lowaldie"
 #site_name <- "Brooker"
-#site_name <- "YoungHusband"
+site_name <- "YoungHusband"
 #site_name <- "Waikerie"
 #site_name <- "Brimpton Lake"
 #site_name <- "Cadgee"
@@ -65,13 +65,13 @@ list.files("X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2021/", ".csv",f
 #input_data_file_rain <- "X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2021/GS_rain_deciles_Racheal_sites.csv"
 
 #3 Ouyen Spade and all of Murrays and Waikerie and Carwarp ? Lowaldie and all of Murrays
-input_data_file_rain <- "X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2021/GS_rain_deciles_Murray_sites.csv"
+#input_data_file_rain <- "X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2021/GS_rain_deciles_Murray_sites.csv"
 
 #4 Brooker and Murlong Spade 
 #input_data_file_rain <- "X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2021/GS_rain_deciles_Nigel_sites.csv"
 
 #5 Younghusband a
-#input_data_file_rain <- "X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2021/GS_rain_deciles_Younghusband_sites.csv"
+input_data_file_rain <- "X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2021/GS_rain_deciles_Younghusband_sites.csv"
 
 #6 New Horizons
 #input_data_file_rain <- "X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2021/GS_rain_deciles_New_Horizons_sites.csv"
@@ -86,8 +86,14 @@ primary <- read_csv(input_data_file,
                                            dry_biomass = col_double(), timing = col_character()))
 names(primary)
 # change the site name
-primary <- primary %>%
-  mutate(site = "Lowaldie")
+# primary <- primary %>%
+#   mutate(site = "Lowaldie")
+
+duplicated_ID <- primary %>% 
+  group_by(ID) %>% 
+  summarise(count_ID = n())
+  
+
 
 #################################################################################################################
 ####   Create the descriptors #####
@@ -1048,6 +1054,21 @@ primary_neat <- primary_join_2 %>%
 # write.csv(primary_neat,
 #           "X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/step2/Yenda_sites_step1_2_neat.csv" ,
 #           row.names = FALSE)  
+
+
+duplicated_ID <- primary_neat %>% 
+  #group_by(ID, Descriptors) %>% 
+  group_by(ID) %>% 
+  summarise(count_ID = n()) %>% 
+  filter(count_ID >1)
+
+duplicated_ID <- primary_neat %>% 
+  group_by(ID, Descriptors) %>% 
+  #group_by(ID) %>% 
+  summarise(count_ID = n()) %>% 
+  filter(count_ID >1)
+### Note at Younghusband the ID is not unique it only becomes unique when I add in descriptors I did this in raw data using Treatment clm for plot!
+
 
 write.csv(primary_neat,
           paste0("X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/step2/",site_name, "_sites_step1_2_neat.csv") ,

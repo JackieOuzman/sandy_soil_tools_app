@@ -120,6 +120,58 @@ ggplot(summary_control_data_all, mapping = aes(control_yield, yield,)) +
        x = "control yield t/ha", y = "trial yield t/ha")+
   facet_wrap(.~ modification)
 
+###############################################################################################################################
+### subset data so we have no amendment
+str(summary_control_data_all)
+unique(summary_control_data_all$amendment)
+no_amendment <- summary_control_data_all %>% 
+  filter(amendment ==  "none"  )
+str(no_amendment)
+
+## change the order of the modification
+oder_modification <- c("Rip", "Spade", "Sweep" , "Inc" , "Delving","Unmodified" )
+no_amendment$modification <- factor(no_amendment$modification,
+                                       levels = oder_modification)
+
+
+### control vs trials
+ggplot(data = no_amendment, mapping = aes(control_yield, yield)) +
+  geom_point(aes(colour= modification),alpha= 0.4) +
+  geom_abline(intercept = 0, slope = 1, linetype="dashed", size = 0.5)+
+  geom_smooth(data = no_amendment, method = lm, se = FALSE, colour = "black", size = 0.5) +
+  labs(title = "Control yield - subset of data no amendment",
+       subtitle = "note each site, treatment, year and rep is matched to control",
+       x = "control yield t/ha", y = "trial yield t/ha")
+
+ggplot(data = no_amendment, mapping = aes(control_yield, yield)) +
+  geom_point(aes(colour= modification),alpha= 0.4) +
+  geom_abline(intercept = 0, slope = 1, linetype="dashed", size = 0.5)+
+  geom_smooth(data = no_amendment, method = lm, se = FALSE, colour = "black", size = 0.5) +
+  labs(title = "Control yield - subset of data no amendment",
+       subtitle = "note each site, treatment, year and rep is matched to control",
+       x = "control yield t/ha", y = "trial yield t/ha")+
+  facet_wrap(.~ modification)
+
+ggplot(data = no_amendment, mapping = aes(control_yield, yield)) +
+  geom_point(aes(colour= modification),alpha= 0.4) +
+  geom_abline(intercept = 0, slope = 1, linetype="dashed", size = 0.5)+
+  geom_smooth(data = no_amendment, method = lm, se = FALSE, colour = "black", size = 0.5) +
+  labs(title = "Control yield - subset of data no amendment",
+       subtitle = "note each site, treatment, year and rep is matched to control",
+       x = "control yield t/ha", y = "trial yield t/ha")+
+  facet_wrap(.~ site_sub)
+
+
+ggplot(data = no_amendment, mapping = aes(control_yield, yield)) +
+  geom_point(aes(colour= modification),alpha= 0.4) +
+  geom_abline(intercept = 0, slope = 1, linetype="dashed", size = 0.5)+
+  #geom_smooth(data = no_amendment, method = lm, se = FALSE, colour = "black", size = 0.5) +
+  labs(title = "Control yield - subset of data no amendment",
+       subtitle = "note each site, treatment, year and rep is matched to control",
+       x = "control yield t/ha", y = "trial yield t/ha")+
+  facet_wrap(.~ as.factor(yr_post_amelioration))
+
+
 ##############################################################################################################################
 #### Yld gain #####
 
@@ -154,6 +206,41 @@ ggplot(summary_control_data_all, aes(x = yield_gain)) +
          \nFacet wrap is modification\nBlue line is mean yield gain",
        x = "yield gain t/ha", y = "frequency of occurance")
 
+
+
+##############################################################################################################################
+#### Yld gain with subset of data#####
+
+#### need to make a yield gain clm first
+no_amendment <- no_amendment %>% 
+  mutate(yield_gain = yield-control_yield, na.rm = TRUE)
+
+
+ggplot(no_amendment, aes(yield_gain)) + 
+  geom_histogram(aes(y = (..count..)/sum(..count..)), colour = 1, fill = "white") +
+  geom_vline(data = no_amendment, aes(xintercept=mean(yield_gain,  na.rm = TRUE)), color="blue", linetype="dashed", size=1)+
+  geom_vline(data = no_amendment, aes(xintercept=0), color="black", linetype="dashed", size=1)+
+  labs(title = "Yield gains - subset of data no amendment",
+  subtitle = "Note each site, treatment, year and rep is matched to control\nBlue line is mean yield gain",
+       x = "yield gain t/ha", y = "frequency of occurance")
+
+
+
+## cal the mean yield gains for modification
+mean_values_no_amendment <- no_amendment %>% 
+  group_by(modification) %>% 
+  summarise(mod_mean = mean(yield_gain,  na.rm = TRUE))
+
+
+# Histogram for each modification with mean yield gain plotted
+ggplot(no_amendment, aes(yield_gain)) + 
+  geom_histogram(aes(y = (..count..)/sum(..count..)), colour = 1, fill = "white") +
+  geom_vline(data = mean_values_no_amendment, aes(xintercept=mod_mean), color="blue", linetype="dashed", size=1)+
+  geom_vline(data = no_amendment, aes(xintercept=0), color="black", linetype="dashed", size=1)+
+  labs(title = "Yield gains - subset of data no amendment",
+       subtitle = "Note each site, treatment, year and rep is matched to control\nBlue line is mean yield gain",
+       x = "yield gain t/ha", y = "frequency of occurance")+
+  facet_wrap(.~ modification)
 
 
 
@@ -281,6 +368,82 @@ cum_yld_gains_control %>%
 
 
 
+#########################################################################################################################
+###############             cummulative yields   with no amedments                                 #######################################
+#########################################################################################################################
+
+str(no_amendment)
+
+#keep the rep but not the year
+cum_yld_no_amendment <- no_amendment %>% 
+  group_by(site_sub, Descriptors,modification,rep_block ) %>% 
+  summarise(sum_yld = sum(yield, na.rm = TRUE),
+            sum__control_yld = sum(control_yield, na.rm = TRUE),
+            max_yr_post_amelioration = max(yr_post_amelioration  , na.rm = TRUE))
+cum_yld_no_amendment
+
+cum_yld_no_amendment <- cum_yld_no_amendment %>% 
+  mutate(`length of trial` = as.factor(max_yr_post_amelioration))
 
 
+  ggplot(data = cum_yld_no_amendment, mapping = aes(sum__control_yld, sum_yld, )) +
+    geom_point(aes(colour= modification),alpha= 0.4) +
+    geom_abline(intercept = 0, slope = 1, linetype="dashed", size = 0.5)+
+    geom_smooth(data = cum_yld_no_amendment, method = lm, se = FALSE, colour = "black", size = 0.5) +
+      labs(title = "Cumulative control yield - subset of data no amendment",
+         subtitle = "note that for each site, treatment and rep all yield is summed over all years\nand it is matched to summed control
+         \nBlack dashed is 1:1, solid line is regression line",
+         x = "control yield t/ha", y = "trial yield t/ha")+
+  geom_abline(intercept = 0, slope = 1, linetype="dashed")
+
+
+  
+  
+  #########################################################################################################################
+  ###############   Histograms cummulative yields   with yld gains  with no amedments          #######################################
+  #########################################################################################################################
+  
+  # Histogram for each modification with mean yield gain plotted
+  str(cum_yld_no_amendment)
+  
+  ## cal the mean yield gains for modification
+  mean_gains_values_no_amendment <- cum_yld_no_amendment %>% 
+    group_by(modification) %>% 
+    summarise(mod_mean_gains = mean(sum_yld,  na.rm = TRUE))
+  
+  
+  
+  cum_yld_no_amendment %>% 
+    ggplot( aes(x = sum_yld)) + 
+    geom_histogram(aes(y = (..count..)/sum(..count..)), group = 1, colour = 1, fill = "white") +
+    
+    geom_vline(data = mean_gains_values_no_amendment, 
+               aes(xintercept=mod_mean_gains),       color="blue", linetype="dashed", size=1)+
+    
+    geom_vline(data = cum_yld_no_amendment, 
+               aes(xintercept=0), color="black", linetype="dashed", size=1)+
+    facet_wrap(.~ modification)+
+    labs(title = "Cumulative control yield - subset of data no amendment",
+         subtitle ="note that for each site, treatment and rep yields are summed over multiple years\nand it is matched to summed control yield",
+         x = "cumulative yield gain t/ha", y = "frequency of occurance")
+  
+## just the ripping and spading
+  
+  cum_yld_no_amendment %>% 
+    filter(modification =="Spade"| modification == "Rip") %>% 
+    ggplot( aes(x = sum_yld)) + 
+    geom_histogram(aes(y = (..count..)/sum(..count..)), group = 1, colour = 1, fill = "white") +
+    
+    geom_vline(data = mean_gains_values_no_amendment%>% 
+                filter(modification =="Spade"| modification == "Rip"), 
+               aes(xintercept=mod_mean_gains),       color="blue", linetype="dashed", size=1)+
+    
+    geom_vline(data = cum_yld_no_amendment %>% 
+                filter(modification =="Spade"| modification == "Rip"), 
+               aes(xintercept=0), color="black", linetype="dashed", size=1)+
+    facet_wrap(.~ modification)+
+    labs(title = "Cumulative control yield - subset of data no amendment",
+         subtitle ="note that for each site, treatment and rep yields are summed over multiple years\nand it is matched to summed control yield",
+         x = "cumulative yield gain t/ha", y = "frequency of occurance")
+  
 
