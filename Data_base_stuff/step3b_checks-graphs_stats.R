@@ -38,8 +38,10 @@ summary_data_all %>%  distinct(rep_block)
 #site_name <- "Brimpton Lake"
 #site_name <- "Cadgee"
 #site_name <- "Karoonda"
-site_name <- "Murlong"
+#site_name <- "Murlong"
 #site_name <- "Carwarp"# "CarwarpAmelioration" OR "Carwarp"
+
+site_name <- "Buckleboo"
 
   
 list_of_descriptors<- summary_data_all %>% 
@@ -52,139 +54,151 @@ list_of_descriptors<- summary_data_all %>%
 head(list_of_descriptors,25)
 
 ##### order the Descriptors
-order <- c("Control" ,
-"Unmodified_SE14.band_8" ,
-"Unmodified_Bi_Agra.surface+band_8" ,
-"Unmodified_Lc.surface" ,
-"Unmodified_Cl.surface" ,
-
-"Unmodified_Cl.incorp_8" ,
-
-"Unmodified_Cl@2.5.surface",
-
-"Unmodified_Cl@5.incorp_8",
-"Unmodified_Cl@5.incorp_8.Fert.surface",#10
-"Unmodified_Cl@5.incorp_8.Clay.incorp_8",
-"Unmodified_Cl@5.incorp_8.Fert.surface.Clay.incorp_8", 
-
-"Unmodified_Cl@7.5.surface",
-"Unmodified_Cl@2.5.surface_Yr18,19,20",
-
-"Unmodified_Cl@20.incorp_8",
-"Unmodified_Cl@20.incorp_8.Fert.surface",
-"Unmodified_Cl@20.incorp_8.Clay.incorp_8",
-"Unmodified_Cl@20.incorp_8.Fert.surface.Clay.incorp_8",
-
-"Unmodified_Cl@3.incorp_8" ,
-
-"Unmodified_Fert.surface" ,
-"Unmodified_Fert.surface.Clay.incorp_8", 
-"Unmodified_Fert.foliar" ,  
-"Unmodified_Fert.incorp_8" , 
-"Unmodified_Fert.band_8" , #20
-
-"Unmodified_Fert.band_30" ,
-"Unmodified_Clay.incorp_10" ,
-"Unmodified_Clay.incorp_8" ,
-"Unmodified_K_added.surface" ,
-"Unmodified_Fert.band_30.Clay.incorp_10" ,
-
-
-"Spade.30_Lc@1.incorp_30" ,
-"Spade.30_Lc@2.incorp_30" ,
-"Spade.30_Lc@4.incorp_30" ,
-"Spade.30_Lc@6.incorp_30" ,
-"Spade.30_Lc@8.incorp_30" ,#30
-"Spade.30_Lc@10.incorp_30" ,
-"Spade.30_Lc@15.incorp_30" ,
-"Spade.30_Lc@20.incorp_30" ,
-"Spade.30_Lc@1.incorp_30.K_added.surface" ,
-"Spade.30_Lc@2.incorp_30.K_added.surface" ,
-"Spade.30_Lc@4.incorp_30.K_added.surface" ,
-"Spade.30_Lc@6.incorp_30.K_added.surface", 
-"Spade.30_Lc@8.incorp_30.K_added.surface" ,
-"Spade.30_Lc@10.incorp_30.K_added.surface", 
-"Spade.30_Lc@15.incorp_30.K_added.surface", #40
-"Spade.30_Lc@20.incorp_30.K_added.surface" ,
-"Spade.30_none" ,
-"Spade.30_Lc.incorp_30", 
-"Spade.30_Cl.incorp_30" ,
-"Spade.30_Com.incorp_30" ,
-"Spade.30_Cereal.incorp_30", 
-"Spade.30_K_added.surface" ,
-"Spade.30_Fert.incorp_30.K_added.incorp_30", 
-"Spade.30_Fert.incorp_30" ,
-"Spade.30_Fert.incorp_30.Clay.incorp_30", #50
-"Spade.30_Clay.incorp_30" ,
-"Spade.30_Lc.incorp_30.Clay.incorp_30" ,
-"Spade.30_Lc.incorp_30.Fert.incorp_30" ,
-"Spade.30_Lc.incorp_30.Fert.incorp_30.Clay.incorp_30" ,
-"Spade.30_Vetch.incorp_30" ,
-"Spade.30_Vet_Cer_In.incorp_30" ,
-"Spade.30_Vet_Cer.incorp_30" ,
-"Rip.30_none" ,
-"Rip.30_Cl.surface" ,
-"Rip.30_Cl@7.5.surface",    
-"Rip.30_Cl@7.5.band_30",
-"Rip.30_Cl.band_30" ,#60
-"Rip.30_Fert.band_8" ,
-"Rip.30_Fert.band_30" ,
-"Rip.30_Fert.incorp_30" ,
-"Rip.30_Lc.incorp_30" ,
-"Rip.40_none" ,
-"Rip.41_none" ,
-"Rip.41_Lc.incorp_41" ,
-"Rip.41_Fert.incorp_41" ,
-
-"Rip.50_none",
-"Rip.50_Cl@2.5.surface ",
-"Rip.50_Cl@2.5.surface_Yr18,19,20",
-"Rip.50_Cl@7.5.surface",
-"Rip.50_Cl@7.5.band_50",
-
-"Rip.50_Cl@5.incorp_50",#70
-"Rip.50_Cl@20.incorp_50",
-"Rip.50_Fert.surface",
-"Rip.50_Clay.incorp_50",
-"Rip.50_Fert.surface.Clay.incorp_50",
-"Rip.50_Cl@5.incorp_50.Fert.surface",
-"Rip.50_Cl@5.incorp_50.Clay.incorp_50",
-"Rip.50_Cl@5.incorp_50.Fert.surface.Clay.incorp_50",
-"Rip.50_Cl@20.incorp_50.Fert.surface",
-"Rip.50_Cl@20.incorp_50.Clay.incorp_50",
-"Rip.50_Cl@20.incorp_50.Fert.surface.Clay.incorp_50",#80
-
-"Rip.60_none" ,
-"Rip.60_Lc.incorp_60" ,
-"Rip.60_Fert.band_8" ,
-"Rip.60_Cl.surface" ,
-"Rip.60_Cl.band_60" ,
-"Rip.60_Fert.band_60" ,
-"Rip.30+60_none" ,
-"Rip.60Spade.30_none" ,
-"Rip.60Spade.30_Lc.band_30+60", 
-"Rip.30+60_Lc.band_30+60" ,#90
-
-"Rip.50_Cl.surface" ,
-"Rip.50_Cl.incorp_50" ,
-"Rip.50_Cl.band_50" ,
- 
-"Inc.50_none" ,
-"Inc.50_Cl.incorp_50" ,
-"Inc.50_Cl@7.5.incorp_50",
-"Rip.50IncRip_none" ,
-"Delving.18_none" ,
-"Delving.18_SE14.band_8" ,
-"Sweep.30_none" ,
-"Sweep.30_Cl.incorp_30" ,
-"Sweep.30_Cl@3.incorp_30",
-"Sweep.30_Cl@6.incorp_30",
-"Sweep.30_Cl@6.incorp_30.Yrs17,18,19",
-"Sweep.30_Cl@9.incorp_30",             
-             
-"Sweep.30_Cl@3.incorp_30.Lime.incorp_8",
-"Sweep.30_Lime.incorp_30" ,
-"Sweep.30_Cl.incorp_30.Clay.incorp_8" )
+order <- c(
+  "Control",
+  "Unmodified_SE14.band_8",
+  "Unmodified_Bi_Agra.surface+band_8",
+  "Unmodified_Lc.surface",
+  "Unmodified_Cl.surface",
+  "Unmodified_Cl@2.5.surface_Yr18,19,20",
+  "Unmodified_Cl@3.incorp_8",
+  "Unmodified_Cl@5.incorp_8",
+  "Unmodified_Cl@5.incorp_8.Fert.surface",
+  "Unmodified_Cl@5.incorp_8.Clay.incorp_8",
+  "Unmodified_Cl@5.incorp_8.Fert.surface.Clay.incorp_8",
+  "Unmodified_Cl@7.5.surface",
+  "Unmodified_Cl@20.incorp_8",
+  "Unmodified_Cl@20.incorp_8.Fert.surface",
+  "Unmodified_Cl@20.incorp_8.Clay.incorp_8",
+  "Unmodified_Cl@20.incorp_8.Fert.surface.Clay.incorp_8",
+  "Unmodified_Fert.foliar",
+  "Unmodified_Fert.surface",
+  "Unmodified_Fert.incorp_8",
+  "Unmodified_Fert.band_8",
+  "Unmodified_K_added.surface",
+  "Unmodified_Fert.band_30",
+  "Unmodified_Fert.surface.Clay.incorp_8",
+  "Unmodified_Fert.band_30.Clay.incorp_10",
+  "Unmodified_Clay.check",
+  "Unmodified_Clay.incorp_8",
+  "Unmodified_Clay.incorp_10",
+  
+  "Spade.30_none",
+  "Spade.30_Lc@1.incorp_30",
+  "Spade.30_Lc@2.incorp_30",
+  "Spade.30_Lc@4.incorp_30",
+  "Spade.30_Lc@6.incorp_30",
+  "Spade.30_Lc@8.incorp_30",
+  "Spade.30_Lc@15.incorp_30",
+  "Spade.30_Lc@10.incorp_30",
+  "Spade.30_Lc@20.incorp_30",
+  "Spade.30_Lc@1.incorp_30.K_added.surface",
+  "Spade.30_Lc@2.incorp_30.K_added.surface",
+  "Spade.30_Lc@4.incorp_30.K_added.surface",
+  "Spade.30_Lc@6.incorp_30.K_added.surface",
+  "Spade.30_Lc@8.incorp_30.K_added.surface",
+  "Spade.30_Lc@10.incorp_30.K_added.surface",
+  "Spade.30_Lc@15.incorp_30.K_added.surface",
+  "Spade.30_Lc@20.incorp_30.K_added.surface",
+  "Spade.30_Lc.incorp_30",
+  "Spade.30_Lc.incorp_30.Fert.incorp_30",
+  "Spade.30_Lc.incorp_30.Clay.incorp_30",
+  "Spade.30_Lc.incorp_30.Fert.incorp_30.Clay.incorp_30",
+  "Spade.30_Cl.incorp_30",
+  "Spade.30_Cl.incorp_30.Gypsum.incorp_30",
+  "Spade.30_Fert.incorp_30.Clay.incorp_30",
+  "Spade.30_Com.incorp_30",
+  "Spade.30_Cereal.incorp_30",
+  "Spade.30_Vetch.incorp_30",
+  "Spade.30_Vet_Cer.incorp_30",
+  "Spade.30_Vet_Cer_In.incorp_30",
+  "Spade.30_K_added.surface",
+  "Spade.30_Fert.incorp_30",
+  "Spade.30_Fert.incorp_30.K_added.incorp_30",
+  "Spade.30_Clay.check",
+  "Spade.30_Clay.incorp_30",
+  "Spade.30_Gypsum.incorp_30",
+  
+  "Rip.30_none",
+  "Rip.35_none",
+  "Rip.30_Cl.surface",
+  "Rip.30_Cl@7.5.surface",
+  "Rip.30_Cl.band_30",
+  "Rip.30_Cl@7.5.band_30",
+  "Rip.30_Lc.incorp_30",
+  "Rip.30_Fert.surface",
+  "Rip.30_Fert.incorp_30",
+  "Rip.30_Fert.band_8",
+  "Rip.30_Fert.band_30",
+  "Rip.30IncRip_none",
+  "Rip.30+60_none",
+  "Rip.30IncRip_Gypsum.incorp_30",
+  "Rip.30+60_Lc.band_30+60",
+  
+  "Sweep.30_none",
+  "Sweep.30_Lime.incorp_30",
+  "Sweep.30_Cl@9.incorp_30",
+  "Sweep.30_Cl@6.incorp_30_Yr18,19,20",
+  "Sweep.30_Cl@6.incorp_30",
+  "Sweep.30_Cl@3.incorp_30.Lime.incorp_8",
+  "Sweep.30_Cl@3.incorp_30",
+  
+  "Rip.40_none",
+  "Rip.40IncRip_none",
+  "Rip.40IncRip_Lc.incorp_30",
+  "Rip.40IncRip_Lc.incorp_40",
+  
+  "Rip.41_none",
+  "Rip.41_Lc.incorp_41",
+  "Rip.41_Fert.incorp_41",
+  
+  "Rip.45_none",
+  "Rip.45IncRip_none",
+  "Rip.45IncRip+Spade.30_none",
+  "Rip.45IncRip_Fert.incorp_45",
+  "Rip.45IncRip_Fert_Low.band_45",
+  "Rip.45IncRip_Fert_High.band_45",
+  "Rip.45IncRip_Fert_APP.band_45",
+  
+  "Rip.50_none",
+  "Rip.50_Cl.surface",
+  "Rip.50_Cl@2.5.surface_Yr18,19,20",
+  "Rip.50_Cl@7.5.surface",
+  "Rip.50_Cl@5.incorp_50",
+  "Rip.50_Cl@7.5.band_50",
+  "Rip.50_Cl@20.incorp_50",
+  "Rip.50_Cl.deep",
+  "Rip.50_Cl.band_50",
+  "Rip.50_Cl@5.incorp_50.Fert.surface",
+  "Rip.50_Cl@5.incorp_50.Clay.incorp_50",
+  "Rip.50_Cl@5.incorp_50.Fert.surface.Clay.incorp_50",
+  "Rip.50_Cl@20.incorp_50.Fert.surface",
+  "Rip.50_Cl@20.incorp_50.Clay.incorp_50",
+  "Rip.50_Cl@20.incorp_50.Fert.surface.Clay.incorp_50",
+  "Rip.50_Fert.surface",
+  "Rip.50_Clay.incorp_50",
+  "Rip.50_Fert.surface.Clay.incorp_50",
+  "Rip.50Spade.30_none",
+  "Inc.50_none",
+  "Inc.50_Cl@7.5.incorp_50",
+  "Rip.50IncRip_none",
+  "Rip.50IncRip_Cl.incorp_50",
+  
+  "Rip.60_none",
+  "Rip.60_Cl.surface",
+  "Rip.60_Cl.band_60",
+  "Rip.60_Lc.incorp_60",
+  "Rip.60_Fert.band_8",
+  "Rip.60_Fert.band_60",
+  "Rip.60Spade.30_none",
+  "Rip.60Spade.30_Lc.band_30+60",
+  "Rip.60IncRip_none",
+  "Rip.60IncRip+Spade.30_none",
+  
+  "Delving.18_none",
+  "Delving.18_SE14.band_8",
+  "DiscInv.30_none"
+)
 
 
 
@@ -197,8 +211,8 @@ summary_data_all$Descriptors <- factor(summary_data_all$Descriptors,
 
 
 str(summary_data_all)
-summary_data_all %>% distinct(site)
-summary_data_all %>% distinct(site_sub)
+list_sites <- summary_data_all %>% distinct(site)
+list_sub_sites <- summary_data_all %>% distinct(site_sub)
 
 
 ####################################################################################################################################
@@ -207,7 +221,7 @@ summary_data_all %>% distinct(site_sub)
 ####################################################################################################################################
 ####################################################################################################################################
 
-
+site_name
 
 ## for what years
 summary_data_all %>% filter(site == site_name) %>%
@@ -241,14 +255,14 @@ summary_data_all %>% filter(site == site_name) %>%
 
 ##################################################################################################################################
 
-site_name_output <- "Murlong"
+site_name_output <- "Buckleboo"
 
 
 rm(anova, cld, data_summary, plot, summary_data, tukey, tukey.cld, year_selected)
 
-year_selected <- 2021
+#year_selected <- 2021
 #year_selected <- 2020
-#year_selected <- 2019
+year_selected <- 2019
 #year_selected <- 2018
 
 #year_selected <- 2017
@@ -268,13 +282,19 @@ anova <- aov(yield ~ Descriptors, data = summary_data)
 # Summary of the analysis
 summary(anova)
 
+p_value <- summary(anova)[[1]][1,5]
+F_value <- summary(anova)[[1]][1,4]
+
+
 str(summary_data)
 data_summary <- summary_data %>% 
   group_by(Descriptors) %>%
   summarise(mean=mean(yield, na.rm = TRUE), 
             sd=sd(yield, na.rm = TRUE),
             count = n(),
-            std_error = sd/(sqrt(count))
+            std_error = sd/(sqrt(count)),
+            p_value  = p_value,
+            F_value  = F_value
             ) %>%
   arrange(desc(mean))
 print(data_summary)

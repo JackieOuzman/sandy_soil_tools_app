@@ -73,6 +73,8 @@ print(tukey_cum_yld)
 tukey_cum_yld.cld <- multcompLetters4(anova_cum_yld, tukey_cum_yld) # default is threshold = 0.05
 print(tukey_cum_yld.cld)
 
+p_value_cum <- summary(anova_cum_yld)[[1]][1,5]
+F_value_cum <- summary(anova_cum_yld)[[1]][1,4]
 
 ### this is to get the mean value of the cumlative yield
 cumulative_yld_table <- cumulative_yld %>% 
@@ -80,7 +82,9 @@ cumulative_yld_table <- cumulative_yld %>%
   summarise(mean_cum_yld=mean(sum_yld, na.rm = TRUE), 
             sd=sd(sum_yld, na.rm = TRUE),
             count = n(),
-            std_error = sd/(sqrt(count))
+            std_error = sd/(sqrt(count)),
+            p_value  = p_value_cum,
+            F_value  = F_value_cum
   ) %>%
   arrange(desc(mean_cum_yld))
 print(cumulative_yld_table)
@@ -122,10 +126,10 @@ site_year_yld_summary$Descriptors <- factor(site_year_yld_summary$Descriptors,
 
 site_year_yld_summary$Year <- factor(site_year_yld_summary$year,
                                             #levels = c("2021","2020","2019","2018","2017","2016","2015","2014"))
-                                            levels = c("2021","2020","2019","2018"))
+                                            #levels = c("2021","2020","2019","2018"))
                                             # levels = c("2020","2019","2018", "2017"))
                                             # levels = c("2020","2019"))
-                                            # levels = c("2021","2020","2019"))
+                                             levels = c("2021","2020","2019"))
                                             #  levels = c("2020","2019","2018"))
                                             #levels = c("2018","2017","2016","2015","2014"))
                                             #levels = c("2018","2017","2015","2014"))

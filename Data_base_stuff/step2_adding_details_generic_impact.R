@@ -101,7 +101,9 @@ primary<- primary %>%
     rip_depth == "75" ~ "7.5",
     rip_depth == "200" ~ "20",
     rip_depth == "300" ~ "30",
+    rip_depth == "350" ~ "35",
     rip_depth == "400" ~ "40",
+    rip_depth == "450" ~ "45",
     rip_depth == "500" ~ "50",
     rip_depth == "600" ~ "60",
     rip_depth == "700" ~ "70",
@@ -151,7 +153,7 @@ primary<- primary %>%
     placement_organic == "incorporated to 8 cm" ~         "incorp_8",
     placement_organic == "incorperated to 50 cm" ~        "incorp_50", 
     placement_organic == "incorporated to 40 cm" ~        "incorp_40",
-    placement_organic == "incorporated to 41 cm" ~        "incorp_41",
+    placement_organic == "incorporated to 41 cm" ~        "incorp_40", #therese wanted this changed
     placement_organic == "incorporated to 50 cm" ~        "incorp_50",
     placement_organic == "incorporated to 30 cm" ~        "incorp_30",
     placement_organic == "incorporated to 60 cm" ~        "incorp_60",
@@ -381,17 +383,100 @@ primary %>%
 
 
 
+
 ## Temp clm one for the fert + placement  
 
-primary <- primary %>% 
-  mutate(amendment_fert = 
-           ifelse(fertiliser  %in% c("MAP; Urea", "NuPak", "MAP", "Urea", "Tes", "DAP, Urea, SOA and Muriate of Potash", "Urea and MAP",
-                                     "K"   ,    "nupak_2", "nupak_1", "N_P",    "Nupak_1", "Nupak_2"),   
-                  paste0("Fert",".", placement_fertiliser ), 
-                  "other"
-                  
-           )#bracket for the number of ifelse statements
-  )# bracket for mutate function
+# primary <- primary %>% 
+#   mutate(amendment_fert = 
+#            ifelse(fertiliser  %in% c("MAP; Urea", "NuPak", 
+#                                      "MAP", "Urea", "Tes", 
+#                                      "DAP, Urea, SOA and Muriate of Potash", 
+#                                      "Urea and MAP",
+#                                      "K"   ,    
+#                                      "nupak_1",
+#                                      "nupak_2",
+#                                      "nupak_1", 
+#                                      "N_P", 
+#                                      "Nupak_1",
+#                                      "Nupak_2"),   
+#                   paste0("Fert",".", placement_fertiliser ), 
+#                   "other"
+#                   
+#            )#bracket for the number of ifelse statements
+#   )# bracket for mutate function
+
+## Temp clm one for the fert + placement  
+
+primary <- primary %>%
+  mutate(amendment_fert =
+           
+           #code for most sites if its a fert it gets descriptor fert
+           ifelse(
+             site_sub   %in% c(
+               "Kooloonong_chickpea",
+               "Kooloonong_lentil",
+               "Kooloonong_lupin",
+               "Tempy",
+               "Wynarka",
+               "Monia_Gap",
+               "Malinong",
+               "Sherwood",
+               "Cummins",
+               "Karkoo",
+               #"Buckleboo",# Not 
+               "Mt_Damper",
+               "Kybunga" ,
+               "Warnertown",
+               "Telopea_Downs",
+               "Mt Damper",
+               "Kooloonong_canola"
+             )  #all the sites expect Buckleboo
+             & fertiliser  %in% c(
+               "MAP; Urea",
+               "NuPak",
+               "MAP",
+               "Urea",
+               "Tes",
+               "DAP, Urea, SOA and Muriate of Potash",
+               "Urea and MAP",
+               "K"   ,
+               "nupak_1",
+               "nupak_2",
+               "nupak_1",
+               "N_P",
+               "Nupak_1",
+               "Nupak_2"
+             ),
+             paste0("Fert", ".", placement_fertiliser),
+             
+             #code for Buckleboo  if its a fert it gets descriptor that describes fert Low
+             ifelse(
+               site_sub   %in% c(
+                 "Buckleboo" )  #just one site for fert type 
+               & fertiliser  %in% c( "Nupak_1", "nupak_1"),
+             paste0("Fert_Low", ".", placement_fertiliser),
+             
+             #code for Buckleboo  if its a fert it gets descriptor that describes fert High
+             ifelse(
+               site_sub   %in% c(
+                 "Buckleboo" )  #just one site for fert type 
+               & fertiliser  %in% c( "Nupak_2", "nupak_2"),
+               paste0("Fert_High", ".", placement_fertiliser),
+               
+               #code for Buckleboo  if its a fert it gets descriptor that describes fert App
+               ifelse(
+                 site_sub   %in% c(
+                   "Buckleboo" )  #just one site for fert type 
+                 & fertiliser  %in% c( "N_P"),
+                 paste0("Fert_APP", ".", placement_fertiliser),
+             
+             "other"
+             
+           ))))#bracket for the number of ifelse statements
+         )# bracket for mutate function
+                
+                
+
 
 primary %>% 
   distinct(amendment_fert) %>% 
@@ -529,6 +614,11 @@ primary <- primary %>%
     TRUE ~ as.character("check")
     
   ) )
+
+
+primary %>% 
+  distinct(disturbance) %>% 
+  arrange(desc(disturbance))
 
 #step 2c make a clm with Descriptors which is disturbance _ ameliorant
 

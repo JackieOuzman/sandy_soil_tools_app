@@ -34,7 +34,8 @@ sites_merged <- rbind(Brimpton.Lake_sites_step1_2_neat.csv,
               Ouyen_spade_sites_step1_2_neat.csv ,
               Waikerie_sites_step1_2_neat.csv  ,  
               Yenda_sites_step1_2_neat.csv,
-              YoungHusband_sites_step1_2_neat.csv)
+              YoungHusband_sites_step1_2_neat.csv,
+              impact_sites_step1_2_neat.csv)
 
 
 sites_merged %>% 
