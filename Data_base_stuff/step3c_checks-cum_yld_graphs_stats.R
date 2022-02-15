@@ -73,8 +73,8 @@ print(tukey_cum_yld)
 tukey_cum_yld.cld <- multcompLetters4(anova_cum_yld, tukey_cum_yld) # default is threshold = 0.05
 print(tukey_cum_yld.cld)
 
-p_value_cum <- summary(anova_cum_yld)[[1]][1,5]
-F_value_cum <- summary(anova_cum_yld)[[1]][1,4]
+p_value_ANOVA_cum <- summary(anova_cum_yld)[[1]][1,5]
+F_value_ANOVA_cum <- summary(anova_cum_yld)[[1]][1,4]
 
 ### this is to get the mean value of the cumlative yield
 cumulative_yld_table <- cumulative_yld %>% 
@@ -83,8 +83,8 @@ cumulative_yld_table <- cumulative_yld %>%
             sd=sd(sum_yld, na.rm = TRUE),
             count = n(),
             std_error = sd/(sqrt(count)),
-            p_value  = p_value_cum,
-            F_value  = F_value_cum
+            p_value_ANOVA_cum  = p_value_ANOVA_cum,
+            F_value_ANOVA_cum  = F_value_ANOVA_cum
   ) %>%
   arrange(desc(mean_cum_yld))
 print(cumulative_yld_table)
@@ -104,6 +104,13 @@ cumulative_yld_table <- cumulative_yld_table %>%
   arrange(Descriptors)
 
 cumulative_yld_table
+
+tukey_cum_yld_df <- as.data.frame(tukey_cum_yld[[1:1]]) %>% 
+  mutate(site = site_name_output,
+         year = "sum_yld_yrs")
+
+tukey_cum_yld_df
+
 
 
 ###############################################################################################################
@@ -162,3 +169,4 @@ plot_cumulative_yld <- site_year_yld_summary %>%
   
   #write.csv(cumulative_yld_table, paste0(output_folder,"Cumulative_Yield_",site_name,".csv"))
   write.csv(cumulative_yld_table, paste0(output_folder,"Cumulative_Yield_",site_name_output,".csv"))
+  write.csv(tukey_cum_yld_df, paste0(output_folder,"Cumulative_Yield_Tukey",site_name_output,".csv"))

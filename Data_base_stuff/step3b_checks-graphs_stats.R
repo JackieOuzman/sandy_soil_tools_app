@@ -41,7 +41,7 @@ summary_data_all %>%  distinct(rep_block)
 #site_name <- "Murlong"
 #site_name <- "Carwarp"# "CarwarpAmelioration" OR "Carwarp"
 
-site_name <- "Buckleboo"
+site_name <- "Karkoo"
 
   
 list_of_descriptors<- summary_data_all %>% 
@@ -255,14 +255,14 @@ summary_data_all %>% filter(site == site_name) %>%
 
 ##################################################################################################################################
 
-site_name_output <- "Buckleboo"
+site_name_output <- "Karkoo"
 
 
 rm(anova, cld, data_summary, plot, summary_data, tukey, tukey.cld, year_selected)
 
-#year_selected <- 2021
+year_selected <- 2021
 #year_selected <- 2020
-year_selected <- 2019
+#year_selected <- 2019
 #year_selected <- 2018
 
 #year_selected <- 2017
@@ -282,8 +282,8 @@ anova <- aov(yield ~ Descriptors, data = summary_data)
 # Summary of the analysis
 summary(anova)
 
-p_value <- summary(anova)[[1]][1,5]
-F_value <- summary(anova)[[1]][1,4]
+p_value_anova <- summary(anova)[[1]][1,5]
+F_value_anova <- summary(anova)[[1]][1,4]
 
 
 str(summary_data)
@@ -293,8 +293,8 @@ data_summary <- summary_data %>%
             sd=sd(yield, na.rm = TRUE),
             count = n(),
             std_error = sd/(sqrt(count)),
-            p_value  = p_value,
-            F_value  = F_value
+            p_value_anova  = p_value_anova,
+            F_value_anova  = F_value_anova
             ) %>%
   arrange(desc(mean))
 print(data_summary)
@@ -308,6 +308,7 @@ tukey.cld <- multcompLetters4(anova, tukey) # default is threshold = 0.05
 print(tukey.cld)
 
 
+
 #adding the compact letter display to the table with means and sd
 cld <- as.data.frame.list(tukey.cld$Descriptors)
 data_summary$Tukey <- cld$Letters
@@ -318,19 +319,24 @@ data_summary <- data_summary %>%
   mutate(site = site_name_output,
          year = year_selected)
 
+
 data_summary <- data_summary %>% 
   arrange(Descriptors)
 
 data_summary
 
+tukey_p_adj_df <- as.data.frame(tukey[[1:1]]) %>% 
+  mutate(site = site_name_output,
+         year = year_selected)
 
-
+tukey_p_adj_df
 
 output_folder <- "X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/stats_working/"
 
 #write.csv(data_summary, paste0(output_folder,"Yield_",site_name,year_selected,".csv"))
 
 write.csv(data_summary, paste0(output_folder,"Yield_",site_name_output,year_selected,".csv"))
+write.csv(tukey_p_adj_df, paste0(output_folder,"Yield_Tukey",site_name_output,year_selected,".csv"))
 
 ###############################################################################################################
 ### Now for the plots ###
