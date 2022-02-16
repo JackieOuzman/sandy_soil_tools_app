@@ -498,6 +498,22 @@ primary <- primary %>%
            ))))))#bracket for the number of ifelse statements
   )# bracket for mutate function
 
+
+# "Telopea_Downs" site has a rate of clay
+primary <- primary %>% 
+  mutate(amendment_other = 
+ifelse(
+  site_sub   %in% c("Telopea_Downs" )  #just one site for fert type 
+  & amendment_other  == "Clay.check",
+  paste0("Clay", "@", other_rate, ".", placement_other),
+  amendment_other
+  
+)#bracket for the number of ifelse statements
+)# bracket for mutate function
+
+
+
+
 primary %>% 
   distinct(amendment_other) %>% 
   arrange(desc(amendment_other))

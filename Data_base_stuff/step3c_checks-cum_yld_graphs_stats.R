@@ -136,7 +136,8 @@ site_year_yld_summary$Year <- factor(site_year_yld_summary$year,
                                             #levels = c("2021","2020","2019","2018"))
                                             # levels = c("2020","2019","2018", "2017"))
                                             # levels = c("2020","2019"))
-                                             levels = c("2021","2020","2019"))
+                                              levels = c("2021","2020"))
+                                            # levels = c("2021","2020","2019"))
                                             #  levels = c("2020","2019","2018"))
                                             #levels = c("2018","2017","2016","2015","2014"))
                                             #levels = c("2018","2017","2015","2014"))
@@ -170,3 +171,5 @@ plot_cumulative_yld <- site_year_yld_summary %>%
   #write.csv(cumulative_yld_table, paste0(output_folder,"Cumulative_Yield_",site_name,".csv"))
   write.csv(cumulative_yld_table, paste0(output_folder,"Cumulative_Yield_",site_name_output,".csv"))
   write.csv(tukey_cum_yld_df, paste0(output_folder,"Cumulative_Yield_Tukey",site_name_output,".csv"))
+
+  

@@ -42,8 +42,8 @@ summary_data_all %>%  distinct(rep_block)
 #site_name <- "Carwarp"# "CarwarpAmelioration" OR "Carwarp"
 
 #site_name <- "Karkoo"
-site_name <- "Kooloonong_chickpea"
-site_name_output <- "Kooloonong_chickpea"  
+site_name <- "Telopea_Downs"
+site_name_output <- "Telopea_Downs"  
 
 list_of_descriptors<- summary_data_all %>% 
   #filter(site == site_name) %>% 
@@ -116,6 +116,8 @@ order <- c(
   "Spade.30_K_added.surface",
   "Spade.30_Fert.incorp_30",
   "Spade.30_Fert.incorp_30.K_added.incorp_30",
+  "Spade.30_Clay@250.check",
+  "Spade.30_Clay@500.check",
   "Spade.30_Clay.check",
   "Spade.30_Clay.incorp_30",
   "Spade.30_Gypsum.incorp_30",
@@ -215,6 +217,9 @@ str(summary_data_all)
 list_sites <- summary_data_all %>% distinct(site)
 list_sub_sites <- summary_data_all %>% distinct(site_sub)
 
+summary_data_site <- summary_data_all %>%
+  filter(site == site_name)
+
 
 ####################################################################################################################################
 ####################################################################################################################################
@@ -261,9 +266,10 @@ summary_data_all %>% filter(site == site_name) %>%
 
 rm(anova, cld, data_summary, plot, summary_data, tukey, tukey.cld, year_selected)
 
-#year_selected <- 2021
+year_selected <- 2021
 #year_selected <- 2020
-year_selected <- 2019
+#year_selected <- 2019
+
 #year_selected <- 2018
 
 #year_selected <- 2017
@@ -273,6 +279,8 @@ year_selected <- 2019
 
   # # Compute the analysis of variance
   
+
+
    summary_data <- summary_data_all %>%
   #  summary_data <- brooker %>%
     filter(site == site_name) %>%
@@ -386,3 +394,4 @@ ggsave(plot,
 
 
 ###############################################################################################################################
+
