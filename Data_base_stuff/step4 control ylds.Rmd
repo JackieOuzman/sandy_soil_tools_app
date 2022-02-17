@@ -28,33 +28,70 @@ library(hrbrthemes)
 
 This is for a select number of sites:
 
-•	Ouyen spade
-
-•	Lowaldie crest
-
-•	Lowaldie deep sand
-
-•	Waikerie
-
-•	Carwarp - Amelioration trial only
+##### Site in merged control files
+•	Brimpton Lake
 
 •	Brooker
 
-•	Murlong
+•	Buckleboo
 
-•	Yenda
+•	Bute_CSIRO
 
-•	Bute (Sand Hill)
+•	Bute_Trengrove
 
 •	Cadgee
 
+•	CarwarpAmelioration
+
+•	Cummins
+
+•	Karkoo
+
 •	Karoonda
 
-•	Brimpton
+•	Kooloonong_canola
 
-•	Bute with CSIRO
+•	Kooloonong_chickpea
 
-•	Younghusband
+•	Kooloonong_lentil
+
+•	Kooloonong_lupin
+
+•	Lowaldie_Crest
+
+•	Lowaldie_Deep sand
+
+•	Mt_Damper
+
+•	Murlong
+
+•	Ouyen_spade
+
+•	Telopea_Downs
+
+•	Tempy
+
+•	Waikerie
+
+•	Wynarka
+
+•	Yenda
+
+•	Younghusband (only one year)
+
+##### Not ready
+•	Kybunga
+
+•	Malinong
+
+•	Monia_Gap
+
+•	Sherwood
+
+•	Warnertown
+
+
+
 
 
 
@@ -95,6 +132,55 @@ unique(summary_control_data_all$site_sub)
 unique(summary_control_data_all$site)
 
 str(summary_control_data_all)
+
+
+
+##label problem with Mt Damper
+summary_control_data_all <- summary_control_data_all %>% 
+  mutate(
+    site_sub = case_when(
+      site_sub == "Mt Damper" ~ "Mt_Damper",
+      TRUE ~ site_sub))
+
+
+
+
+## list of sites that are ready ish
+
+list_sites_ready <- c("Brimpton Lake",
+                      "Brooker",
+                      "Buckleboo",
+                      "Bute_CSIRO",
+                      "Bute_Trengrove",
+                      "Cadgee",
+                      "CarwarpAmelioration",
+                      "Cummins",
+                      "Karkoo",
+                      "Karoonda",
+                      "Kooloonong_canola",
+                      "Kooloonong_chickpea",
+                      "Kooloonong_lentil",
+                      "Kooloonong_lupin",
+                      "Lowaldie_Crest",
+                      "Lowaldie_Deep sand",
+                      "Mt_Damper",
+                      "Murlong",
+                      "Ouyen_spade",
+                      "Telopea_Downs",
+                      "Tempy",
+                      "Waikerie",
+                      "Wynarka",
+                      "Yenda",
+                      "Younghusband")
+
+
+
+summary_control_data_all <- summary_control_data_all %>% 
+  filter(site_sub %in% list_sites_ready  )
+summary_data_all <- summary_data_all %>% 
+  filter(site_sub %in% list_sites_ready  )
+
+
 ```
 
 ## Scatter Plots
@@ -130,7 +216,12 @@ ggplotly(scatter_control_vs_trial)
 
 ## Scatter Plots with Facet wrap is years post amelioration, the NA related to trial with no metadata
 
+Missing year trial start date for;
 
+
+Kooloong Canola (missing I need to check what I have)
+
+Ouygen Sapde (missing)
 
 ```{r scatter plot all facet years post, echo=FALSE, message=FALSE, warning=FALSE}
 
@@ -170,6 +261,8 @@ This modification still includes everything all trials that had a modification a
 
 The unmodified exists because the trials might still have amendment.
 
+Note for Jackie - the below code will need to be updated when all the sites are included and if names change.
+
 ```{r working for modification, message=FALSE, warning=FALSE, include=FALSE}
 #### split the Descriptors into modification
 
@@ -191,11 +284,18 @@ summary_control_data_all <- summary_control_data_all %>%
     modification_with_depth ==  "Rip.40" ~ "Rip",
     modification_with_depth ==  "Rip.41" ~ "Rip",
     modification_with_depth ==  "Rip.50" ~ "Rip",
-    modification_with_depth ==  "Rip.50IncRip" ~ "Rip",
+    modification_with_depth ==  "Rip.50IncRip" ~ "In_Rip",
     modification_with_depth ==  "Rip.60" ~ "Rip",
     modification_with_depth ==  "Rip.30+60" ~ "Rip",
-    modification_with_depth ==  "Rip.60Spade.30" ~ "Rip",
-    
+    modification_with_depth ==  "Rip.60Spade.30" ~ "Rip+Spade",
+    modification_with_depth ==  "Rip.30IncRip" ~ "In_Rip",
+    modification_with_depth ==  "Rip.35" ~ "Rip",
+    modification_with_depth ==  "Rip.40IncRip" ~ "In_Rip",
+    modification_with_depth ==  "Rip.45" ~ "Rip",
+    modification_with_depth ==  "Rip.45IncRip" ~ "In_Rip",
+    modification_with_depth ==  "Rip.45IncRip+Spade.30" ~ "In_Rip+Spade",
+    modification_with_depth ==  "Rip.60IncRip" ~ "In_Rip",
+    modification_with_depth ==  "Rip.60IncRip+Spade.30" ~ "In_Rip+Spade",
     modification_with_depth ==  "Inc.50" ~ "Inc",
     modification_with_depth ==  "Delving.18" ~ "Delving",
     TRUE ~ "check"))
@@ -229,7 +329,7 @@ no_amendment <- summary_control_data_all %>%
 str(no_amendment)
 
 ## change the order of the modification
-oder_modification <- c("Rip", "Spade", "Sweep" , "Inc" , "Delving","Unmodified" )
+oder_modification <- c("Rip","Rip+Spade", "Spade", "Sweep" , "Inc" ,"In_Rip" ,"In_Rip+Spade","Delving","Unmodified" )
 no_amendment$modification <- factor(no_amendment$modification,
                                        levels = oder_modification)
 ```

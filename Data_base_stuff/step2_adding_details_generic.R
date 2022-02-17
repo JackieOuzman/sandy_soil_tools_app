@@ -16,7 +16,7 @@ list.of.files
 
 #Specify the site
 #site_name <- "Ouyen_spade"
-#site_name <- "Bute" #"Bute_Trengrove" "Bute_CSIRO"
+site_name <- "Bute" #"Bute_Trengrove" "Bute_CSIRO"
 #site_name <- "Lowaldie"
 #site_name <- "Brooker"
 #site_name <- "YoungHusband"
@@ -24,7 +24,7 @@ list.of.files
 #site_name <- "Brimpton Lake"
 #site_name <- "Cadgee"
 #site_name <- "Karoonda"
-# site_name <- "Murlong"
+#site_name <- "Murlong"
 #site_name <- "Carwarp"
 #site_name <- "Yenda"
 
@@ -59,7 +59,7 @@ list.of.files
 list.files("X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2021/", ".csv",full.names=T)
 
 #1 and 2 Bute
-#input_data_file_rain <- "X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2021/GS_rain_deciles_Sam_sites.csv"
+input_data_file_rain <- "X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2021/GS_rain_deciles_Sam_sites.csv"
 
 #3 Yenda
 #input_data_file_rain <- "X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2021/GS_rain_deciles_Racheal_sites.csv"
@@ -68,10 +68,10 @@ list.files("X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2021/", ".csv",f
 #input_data_file_rain <- "X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2021/GS_rain_deciles_Murray_sites.csv"
 
 #4 Brooker and Murlong Spade 
-#input_data_file_rain <- "X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2021/GS_rain_deciles_Nigel_sites.csv"
+input_data_file_rain <- "X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2021/GS_rain_deciles_Nigel_sites.csv"
 
 #5 Younghusband a
-input_data_file_rain <- "X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2021/GS_rain_deciles_Younghusband_sites.csv"
+#input_data_file_rain <- "X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2021/GS_rain_deciles_Younghusband_sites.csv"
 
 #6 New Horizons
 #input_data_file_rain <- "X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2021/GS_rain_deciles_New_Horizons_sites.csv"
@@ -121,6 +121,7 @@ primary<- primary %>%
     rip_depth == "500" ~ "50",
     rip_depth == "50 cm" ~ "50",
     rip_depth == "30 cm" ~ "30",
+    rip_depth == "41" ~ "40",
     
     TRUE ~ rip_depth
   ))
@@ -161,10 +162,11 @@ primary<- primary %>%
     placement_organic == "incorperated to 8 cm" ~         "incorp_8",
     placement_organic == "incorporated to 8 cm" ~         "incorp_8",
     placement_organic == "incorperated to 50 cm" ~        "incorp_50", 
-    placement_organic == "incorporated to 41 cm" ~        "incorp_41",
+    placement_organic == "incorporated to 41 cm" ~        "incorp_40",
     placement_organic == "incorporated to 50 cm" ~        "incorp_50",
     placement_organic == "incorporated to 30 cm" ~        "incorp_30",
     placement_organic == "incorporated to 60 cm" ~        "incorp_60",
+    placement_organic == "incorperated to 20 cm" ~        "incorp_20",
     
     placement_organic == "banded at 50 cm" ~              "band_50", 
     placement_organic == "banded at 30 cm" ~              "band_30",
@@ -195,7 +197,7 @@ primary<- primary %>%
     
     placement_fertiliser == "incorperated to 8 cm" ~         "incorp_8",
     placement_fertiliser == "incorporated to 8 cm" ~         "incorp_8",
-    placement_fertiliser == "incorporated to 41 cm" ~        "incorp_41",
+    placement_fertiliser == "incorporated to 41 cm" ~        "incorp_40",
     placement_fertiliser == "incorperated to 50 cm" ~        "incorp_50", 
     placement_fertiliser == "incorporated to 50 cm" ~        "incorp_50", 
     placement_fertiliser == "incorporated to 30 cm" ~        "incorp_30",  
@@ -233,6 +235,7 @@ primary<- primary %>%
     placement_other == "incorporated to 10 cm" ~         "incorp_10",
     placement_other == "incorporated to 50 cm" ~        "incorp_50", 
     placement_other == "incorporated to 30 cm" ~        "incorp_30",
+    placement_other == "incorperated to 20 cm" ~        "incorp_20",
     
     placement_other == "band at 8 cm" ~                 "band_8", 
     placement_other == "banded at 50 cm" ~              "band_50", 
@@ -662,8 +665,19 @@ unique(primary_metadata$site)
 #########################################################################################################################
 ## join metdata to primary data
 
-primary_join <- left_join(primary, primary_metadata) 
-check <- anti_join(primary, primary_metadata)
+str(primary)
+str(primary_metadata)
+#-----BUTE ------#
+primary_join <- left_join(primary, primary_metadata, by= c( "site_sub" = "site")) 
+#-----BUTE ------#
+check <- anti_join(primary, primary_metadata, by= c( "site_sub" = "site"))
+
+
+
+# primary_join <- left_join(primary, primary_metadata) 
+# check <- anti_join(primary, primary_metadata)
+
+
 
 names(primary_join)
 unique(primary_join$Amelioration_Year)
@@ -888,27 +902,27 @@ check <- anti_join(primary_join_1, GS_rain_deciles)#? not sure if I am expecting
 
 names(primary_join_2)
 
-# Bute_CSIRO_rep_block <- primary_join_2 %>%
-#   filter(site == "Bute_CSIRO") %>%
-#   distinct(rep_block) %>%
-#   arrange(rep_block)
-# 
-# Bute_CSIRO_rep_block
-# 
-# primary_join_2 <-primary_join_2 %>%
-#   filter(rep_block %in% c("1", "2","3","4"))
-# 
-# Bute_CSIRO_plots <- primary_join_2 %>%
-#   filter(site == "Bute_CSIRO") %>%
-#   distinct(plot) %>%
-#   arrange(plot)
-# Bute_CSIRO_plots
-# 
-# primary_join_2 <-primary_join_2 %>%
-#   filter(plot != "B10") %>%
-#   filter(plot != "B5" ) %>%
-#   filter(plot != "B6" ) %>%
-#   filter(plot != "B9" )
+Bute_CSIRO_rep_block <- primary_join_2 %>%
+  filter(site == "Bute_CSIRO") %>%
+  distinct(rep_block) %>%
+  arrange(rep_block)
+
+Bute_CSIRO_rep_block
+
+primary_join_2 <-primary_join_2 %>%
+  filter(rep_block %in% c("1", "2","3","4"))
+
+Bute_CSIRO_plots <- primary_join_2 %>%
+  filter(site == "Bute_CSIRO") %>%
+  distinct(plot) %>%
+  arrange(plot)
+Bute_CSIRO_plots
+
+primary_join_2 <-primary_join_2 %>%
+  filter(plot != "B10") %>%
+  filter(plot != "B5" ) %>%
+  filter(plot != "B6" ) %>%
+  filter(plot != "B9" )
 
 str(primary_join_2)
 # Remove the sapre at Karoonda

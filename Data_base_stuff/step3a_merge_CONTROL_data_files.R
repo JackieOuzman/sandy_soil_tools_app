@@ -40,7 +40,8 @@ sites_merged_control <- rbind(
   Ouyen_spade_sites_step1_2_control.csv  ,
   Waikerie_sites_step1_2_control.csv,
   Yenda_sites_step1_2_control.csv,
-  YoungHusband_sites_step1_2_control.csv
+  YoungHusband_sites_step1_2_control.csv,
+  impact_sites_step1_2_control.csv
 )
 
 
