@@ -181,6 +181,14 @@ summary_data_all <- summary_data_all %>%
   filter(site_sub %in% list_sites_ready  )
 
 
+write.csv(summary_control_data_all, 
+"X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/stats_working/sites_merged_CONTROL_incomplete.csv",
+row.names = FALSE)
+
+write.csv(summary_data_all, 
+"X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/stats_working/sites_merged_incomplete.csv",
+row.names = FALSE)
+
 ```
 
 ## Scatter Plots
