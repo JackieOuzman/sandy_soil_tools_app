@@ -15,38 +15,11 @@ list.of.files
 #### Get results and metadata file path
 
 #Specify the site
-#site_name <- "Ouyen_spade"
-#site_name <- "Bute" #"Bute_Trengrove" "Bute_CSIRO"
-#site_name <- "Lowaldie"
-#site_name <- "Brooker"
-#site_name <- "YoungHusband"
-#site_name <- "Waikerie"
-#site_name <- "Brimpton Lake"
-#site_name <- "Cadgee"
-#site_name <- "Karoonda"
-# site_name <- "Murlong"
-#site_name <- "Carwarp"
-#site_name <- "Yenda"
 
 site_name <- "impact"
 
-#Ouyen_spade, Bute, Lowaldie, Brooker, YoungHusband, Waikerie, "Brimpton Lake", "Cadgee", "Karoonda", "Murlong", "Carwarp", "Yenda"
 
-#list.files("X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2021/", ".csv",full.names=T)
-
-#input_data_file_rain <- "X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2021/GS_rain_deciles_Sam_sites.csv"
-
-
-#1 and 2 Bute
-
-# input_data_file <- "X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/step1_collating_files/Bute_results.csv"
-# input_data_file_metadata <- "X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/step1_collating_files/Bute_sites_metadata.csv"
-
-# 3. Yenda
-# input_data_file <- "X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/step1_collating_files/Yenda_results.csv"
-# input_data_file_metadata <- "X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/step1_collating_files/Yenda_site_metadata.csv"
-
-#4. using site name
+# using site name
 
  input_data_file <- paste0("X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/step1_collating_files/",
  site_name, "_results.csv")
@@ -73,10 +46,7 @@ primary <- read_csv(input_data_file)
 primary <- read_csv(input_data_file, 
                           col_types = cols(drill_depth = col_double(), 
                                            dry_biomass = col_double(), timing = col_character()))
-names(primary)
-# change the site name
-# primary <- primary %>%
-#   mutate(site = "Lowaldie")
+
 
 duplicated_ID <- primary %>% 
   group_by(ID) %>% 
@@ -381,30 +351,6 @@ primary %>%
 
 
 
-
-
-
-## Temp clm one for the fert + placement  
-
-# primary <- primary %>% 
-#   mutate(amendment_fert = 
-#            ifelse(fertiliser  %in% c("MAP; Urea", "NuPak", 
-#                                      "MAP", "Urea", "Tes", 
-#                                      "DAP, Urea, SOA and Muriate of Potash", 
-#                                      "Urea and MAP",
-#                                      "K"   ,    
-#                                      "nupak_1",
-#                                      "nupak_2",
-#                                      "nupak_1", 
-#                                      "N_P", 
-#                                      "Nupak_1",
-#                                      "Nupak_2"),   
-#                   paste0("Fert",".", placement_fertiliser ), 
-#                   "other"
-#                   
-#            )#bracket for the number of ifelse statements
-#   )# bracket for mutate function
-
 ## Temp clm one for the fert + placement  
 
 primary <- primary %>%
@@ -699,13 +645,7 @@ primary_metadata <- read_csv(input_data_file_metadata,
 
 
 
-names(primary_metadata)
-# primary_metadata <- primary_metadata %>% 
-#   dplyr::select(`Site Name`,Repellence:other, 
-#                 `Trial Years_Year_01`:`Trial Years_Year_07`,
-#                 
-#                 
-#                 Amelioration_Year)
+
 
 
 primary_metadata <- primary_metadata %>% 
@@ -720,97 +660,89 @@ primary_metadata <- primary_metadata %>%
 ### Assign the location based on met station info. remove old coodinates
 
 unique(primary_metadata$site)
+
+
 primary_metadata <- primary_metadata %>%
   mutate(
     Latitude = case_when(
       site == "Carwarp" ~        -34.3075,
       #Red Cliffs is the closest met station Carwarp Amelioration
-      site == "Waikerie" ~       -34.2159,
-      site == "Lowalide" ~       -35.0459,
-      site == "Ouyen" ~          -35.0681,
-      site == "Bute_Trengrove" ~  -33.8612,
-      site == "Bute_CSIRO" ~      -33.8612,
-      site == "Yenda" ~           -34.2502,
-      site == "Brooker" ~         -34.1317,
-      site == "Younghusband" ~    -34.9145,
-      site == "Brimpton Lake" ~   -34.0586,
-      site == "Cadgee" ~          -36.8297,
-      site == "Karoonda" ~        -35.0900,
-      site == "Murlong" ~         -33.6993,
+      site == "Waikerie"         ~ -34.2159,
+      site == "Lowalide"         ~ -35.0459,
+      site == "Ouyen"            ~ -35.0681,
+      site == "Bute_Trengrove"   ~ -33.8612,
+      site == "Bute_CSIRO"       ~ -33.8612,
+      site == "Yenda"            ~ -34.2502,
+      site == "Brooker"          ~ -34.1317,
+      site == "Younghusband"     ~ -34.9145,
+      site == "Brimpton Lake"    ~ -34.0586,
+      site == "Cadgee"           ~ -36.8297,
+      site == "Karoonda"         ~ -35.0900,
+      site == "Murlong"          ~ -33.6993,
       
-      site == "Buckleboo"   ~      -33.1416,
-      site == "Karkoo"    ~      -34.1317,
-      site == "Cummins"    ~        -34.2644,
-      site == "Mt_Damper"  ~       -32.8361,
+      site == "Buckleboo"        ~ -33.1416,
+      site == "Karkoo"           ~ -34.1317,
+      site == "Cummins"          ~ -34.2644,
+      site == "Mt_Damper"        ~ -32.8361,
       site == "Kooloonong_chickpea" ~ -34.6398,
       site == "Kooloonong_lentil" ~ -34.6398,
-      site == "Kooloonong_lupin" ~ -34.6398,
+      site == "Kooloonong_lupin"  ~ -34.6398,
+      
       #site =="Taplan"
-      site == "Tempy"  ~ -35.0681,
+      site == "Tempy"            ~ -35.0681,
       #site =="Walpeup"
-      site == "Wynarka"  ~ -35.09,
+      site == "Wynarka"          ~ -35.09,
+      
       #site =="Younghusband"
-      site == "Telopea_Downs"   ~ -36.3667,
-      site == "Sherwood"     ~ -36.098,
-      site == "Malinong"    ~ -35.5217,
-      site == "Monia_Gap"    ~ -33.4915,
-      site == "Warnertown"-33.35,
-      site == "Kybunga"      ~ -33.8364
+      site == "Telopea_Downs"    ~ -36.3667,
+      site == "Sherwood"         ~ -36.098,
+      site == "Malinong"         ~ -35.5217,
+      site == "Monia_Gap"        ~ -33.4915,
+      site == "Warnertown"       ~ -33.35,
+      site == "Kybunga"          ~ -33.8364,
+      TRUE ~ as.numeric(Latitude)
     )
   )
+     
 primary_metadata <- primary_metadata %>%
   mutate(
     Longitude = case_when(
-      site == "Carwarp" ~        142.1882, #Red Cliffs is the closest met station
-      site == "Waikerie" ~        140.1860,
-      site == "Lowalide" ~        139.9791 ,
-      site == "Ouyen" ~           142.3125,
-      site == "Bute_Trengrove" ~  138.0114,
-      site == "Bute_CSIRO" ~      138.0114,
-      site == "Yenda"~            146.1897,
-      site == "Brooker" ~         135.7301,
-      site == "Younghusband" ~    139.3010,
-      site == "Brimpton Lake" ~   135.5038,
-      site == "Cadgee" ~          140.5328,
-      site == "Karoonda" ~        139.8972,
-      site == "Murlong" ~         135.9238,
+      site == "Carwarp"          ~ 142.1882, #Red Cliffs is the closest met station
+      site == "Waikerie"        ~ 140.1860,
+      site == "Lowalide"        ~ 139.9791 ,
+      site == "Ouyen"           ~ 142.3125,
+      site == "Bute_Trengrove"  ~ 138.0114,
+      site == "Bute_CSIRO"      ~ 138.0114,
+      site == "Yenda"           ~ 146.1897,
+      site == "Brooker"         ~ 135.7301,
+      site == "Younghusband"    ~ 139.3010,
+      site == "Brimpton Lake"   ~ 135.5038,
+      site == "Cadgee"          ~ 140.5328,
+      site == "Karoonda"        ~ 139.8972,
+      site == "Murlong"         ~ 135.9238,
       
-      site == "Buckleboo"   ~         136.4126,
-      site == "Karkoo"    ~           135.7301,
-      site == "Cummins"    ~          135.7266,
-      site == "Mt_Damper"  ~          135.15,
+      site == "Buckleboo"        ~ 136.4126,
+      site == "Karkoo"           ~ 135.7301,
+      site == "Cummins"          ~ 135.7266,
+      site == "Mt_Damper"        ~ 135.15,
       site == "Kooloonong_chickpea" ~ 143.561,
-      site == "Kooloonong_lentil" ~   143.561,
-      site == "Kooloonong_lupin" ~    143.561,
+      site == "Kooloonong_lentil"~ 143.561,
+      site == "Kooloonong_lupin" ~ 143.561,
       #site =="Taplan"
-      site == "Tempy"  ~              142.3125,
+      site == "Tempy"            ~ 142.3125,
       #site =="Walpeup"
-      site == "Wynarka"  ~            139.8972,
+      site == "Wynarka"          ~ 139.8972,
       #site =="Younghusband"
-      site == "Telopea_Downs"   ~     140.9833,
-      site == "Sherwood"     ~        140.3556,
-      site == "Malinong"    ~         139.5133,
-      site == "Monia_Gap"    ~        145.5248,
-      site == "Warnertown"~           138.102,
-      site == "Kybunga"      ~        138.6125
+      site == "Telopea_Downs"    ~ 140.9833,
+      site == "Sherwood"         ~ 140.3556,
+      site == "Malinong"         ~ 139.5133,
+      site == "Monia_Gap"        ~ 145.5248,
+      site == "Warnertown"       ~ 138.102,
+      site == "Kybunga"          ~ 138.6125
     )
   )
 
-unique(primary_metadata$site)
-primary_metadata <- primary_metadata %>% 
-  mutate(site = case_when(
-    site == "Carwarp Amelioration" ~  "Carwarp",
-    site == "Lowalide" ~              "Lowaldie",
-    site == "Mt Damper" ~              "Mt_Damper",
-    # site == "Bute_Trengrove" ~        "Bute", #not sure if this is what I want to do ? ie call both Bute sites Bute 
-    # site == "Bute_CSIRO" ~            "Bute",
-    
-    TRUE ~ site))
 
-primary <- primary %>% 
-  mutate(site = case_when(
-      site == "Mt Damper" ~              "Mt_Damper",
-        TRUE ~ site))
 
 unique(primary$site)
 unique(primary_metadata$site)
@@ -821,8 +753,7 @@ unique(primary_metadata$site)
 primary_join <- left_join(primary, primary_metadata) 
 check <- anti_join(primary, primary_metadata)
 
-names(primary_join)
-unique(primary_join$Amelioration_Year)
+
 
 
 ## new clm for years post Amelioration _ this is complicated when we have Amelioration_Year = multiple
@@ -851,11 +782,7 @@ primary_join <- primary_join %>%
 str(primary_join)
 unique(primary_join$yr_post_amelioration)                
  
-### check
-# str(primary_join)
-# test <- primary_join %>% 
-#   dplyr::select(site:crop  ,Descriptors,timing,`Trial Years_Year_01`,Amelioration_Year, Amelioration_Year_value, yr_post_amelioration )
-                
+
 ### get the sowing date
 primary_join <- primary_join %>%
   mutate (sowing_date = case_when(
@@ -946,7 +873,7 @@ primary_join_1 <- primary_join %>%
     -"Trial Years_Year_06",
     -"Trial Years_Year_07")
 
-names(primary_join_1)    # #  
+
 
 #######################################################################################
 ### Climate data ########
@@ -961,23 +888,19 @@ names(primary_join_1)    # #
 GS_rain_deciles <- read_csv(input_data_file_rain)
 GS_rain_deciles <- dplyr::select(GS_rain_deciles, -'X1')
 
-unique(GS_rain_deciles$site)
-## I Carwarp is splet wrong
-GS_rain_deciles <- GS_rain_deciles %>% 
-  mutate(site = case_when(
-    site == "Carwap" ~ "Carwarp",
-    TRUE ~ site
-  ))
+
+
 
 GS_rain_deciles <- GS_rain_deciles %>% 
   mutate(site = case_when(
     site == "Brimpton_Lake" ~ "Brimpton Lake",
+    site == "Mt_Damper"     ~ "Mt Damper",
     TRUE ~ site
   ))
 
 
 
-GS_rain_deciles
+
 
 GS_rain_deciles <- GS_rain_deciles %>% 
   mutate(site_year =paste0(site,"_", year))
@@ -986,8 +909,7 @@ str(GS_rain_deciles)
 
 ## join to primary data based on year and site
 str(primary_join_1)
-# primary_join_1 <- primary_join_1 %>%
-#   mutate(site = "Bute")
+
 
 primary_join_1 <- primary_join_1 %>% 
   mutate(site_year = paste0(site,"_", year)) 
@@ -1011,43 +933,10 @@ check <- anti_join(primary_join_1, GS_rain_deciles)#? not sure if I am expecting
 ######Write out file but before remove some treatments specific to certain sites################
 #############################################################################################
 
-# write.csv(primary_join_2,
-#           "X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/step2/Bute_sites_step1_2.csv" ,
-#           row.names = FALSE)
-
-# write.csv(primary_join_2,
-#           "X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/step2/Yenda_sites_step1_2.csv" ,
-#           row.names = FALSE)
 
 
 
-#Bute CSIRO remove the buffer demo and blockRep = 0
 
-names(primary_join_2)
-
-# Bute_CSIRO_rep_block <- primary_join_2 %>%
-#   filter(site == "Bute_CSIRO") %>%
-#   distinct(rep_block) %>%
-#   arrange(rep_block)
-# 
-# Bute_CSIRO_rep_block
-# 
-# primary_join_2 <-primary_join_2 %>%
-#   filter(rep_block %in% c("1", "2","3","4"))
-# 
-# Bute_CSIRO_plots <- primary_join_2 %>%
-#   filter(site == "Bute_CSIRO") %>%
-#   distinct(plot) %>%
-#   arrange(plot)
-# Bute_CSIRO_plots
-# 
-# primary_join_2 <-primary_join_2 %>%
-#   filter(plot != "B10") %>%
-#   filter(plot != "B5" ) %>%
-#   filter(plot != "B6" ) %>%
-#   filter(plot != "B9" )
-
-str(primary_join_2)
 # Remove the spare at Karoonda
 primary_join_2 <- primary_join_2 %>%
   filter(ID  != "Karoonda_2014_plot_6_rep_block_1") %>%
@@ -1107,18 +996,6 @@ primary_join_2 <- primary_join_2 %>%
 
 
 ## something extra for Waikerie. There is a treatment which has..
-#Rip_30_none_surface 
-#(it i.e. was ripped to 30cm and nothing was added – because the fertiliser was not a treatment, but in the data that I got from Murray it says the ‘placement was at surface’.
-#                     I don’t get how you can apply nothing but apply at the surface).
-# anyway TB email 27/1/22 suggested not to use this so I will exclude it here.
-
-# str(primary)
-# unique(primary$placement_fertiliser)
-# primary <- primary %>%
-#   filter(placement_fertiliser== "band_8"|
-#             placement_fertiliser== "band_30"|
-#             placement_fertiliser== "band_60" |
-#              is.na(placement_fertiliser))
 
 
 # Remove the spare (control b) at Waikerie
@@ -1146,14 +1023,6 @@ primary_join_2 <- primary_join_2 %>%
 primary <- primary %>% 
   filter(Descriptors != "Unmodified_Clay.NA")
 
-### something for Mel data
-# primary_2019_2020_imapct <- primary_2019_2020_imapct %>% 
-#   mutate(Descriptors = case_when(
-#     site == "Telopea_Downs" & 
-#       other_ameliorant == "clay" &
-#       rip  == "none"  & 
-#       mix == "spade"  ~ paste0("Spade.30", "_", amendment, "@", other_rate), 
-#     TRUE ~ Descriptors))
 
 site_name
 
@@ -1183,14 +1052,7 @@ primary_neat <- primary_join_2 %>%
                 comments
                 )
  
-#View(primary_neat)               
-# write.csv(primary_neat,
-#           "X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/step2/Bute_sites_step1_2_neat.csv" ,
-#           row.names = FALSE)
 
-# write.csv(primary_neat,
-#           "X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/step2/Yenda_sites_step1_2_neat.csv" ,
-#           row.names = FALSE)  
 
 
 duplicated_ID <- primary_neat %>% 
@@ -1237,7 +1099,7 @@ primary_control <- primary_control %>%
 
 
 ## Looks like I want to match up the control with the site year and rep_block
-## But be careful at Ouyen the site need to use site_sub and same for Bute
+
 
 #a) make the dataset for control as small as possible and rename the yield biomass and established headings
 str(primary_control)
@@ -1272,12 +1134,7 @@ primary_with_control <- primary_with_control %>%
   filter(Descriptors != "Control")
 
 
-# write.csv(primary_with_control,
-#           "X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/step2/Bute_sites_step1_2_control.csv" ,
-#           row.names = FALSE)
-# write.csv(primary_with_control,
-#           "X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/step2/Yenda_sites_step1_2_control.csv" ,
-#           row.names = FALSE) 
+
 
 write.csv(primary_with_control,
           paste0("X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/step2/",site_name, "_sites_step1_2_control.csv") ,
