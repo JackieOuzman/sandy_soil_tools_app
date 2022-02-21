@@ -433,29 +433,12 @@ write.csv(GS_rain_deciles, "X:/Therese_Jackie/Sandy_soils/Sands weather/met_file
 ########################################################################################
 list.of.files                   
 
-# find the files that you want
-# list.of.files <- list.files(current.folder, ".csv",full.names=T) #the trick is getting the full name
-# list.of.files #with path
-
-
-#list.of.files <-"X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2021/station_download/Bute_21012.csv"  
-
-# list.of.files <- c(
-#   "X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2021/station_download/Yeelanna_18099.csv" ,
-#   "X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2021/station_download/Naracoorte_Lochaber_26015.csv",
-#   "X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2021/station_download/Karoonda_25006.csv"
-# )
-
-#list.of.files <-"X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2021/station_download/Mannum_Council_Depot_24517.csv"  
 
 
 for (list.of.files in list.of.files){
   
-download_date <- read_csv(list.of.files, 
-                            col_names = FALSE, skip = 7)
-download_date <-download_date[1,1] #just the row with the download date
-download_date <-stringr::str_extract(download_date, "[[:digit:]]+") #just the numbers
-download_date <- as.Date(as.character(download_date),format="%Y%m%d")
+
+download_date <- as.Date(as.character(download_date_for_all_sites),format="%Y%m%d")
   
   #minus one day from download
 download_date <- lubridate::ymd(download_date) - days(1)
@@ -523,46 +506,56 @@ assign(name_annual_rain,annual_rain)
 }
 
 
+annual_rain_2020 <- rbind(
+  `BALRANALD (RSL)_049002annual_rain`,
+  BUTE_021012annual_rain,
+  `CLARE POST OFFICE_021014annual_rain`,
+  `COOMANDOOK (MALINONG)_025508annual_rain`,
+  CUMMINS_018023annual_rain,
+  `HILLSTON AIRPORT_075032annual_rain`,
+  KAROONDA_025006annual_rain,
+  KEITH_025507annual_rain,
+  KIMBA_018040annual_rain,
+  `LOWALDIE_025039annual_rain`,
+  `MANNUM COUNCIL DEPOT_024517annual_rain`,
+  `MINNIPA AGRICULTURAL CENTRE_018052annual_rain`,
+  `MURDINGA (MUNGALA)_018164annual_rain`,
+  `NARACOORTE (LOCHABER)_026015annual_rain`,
+  `NUROM (RIVERSIDE FARM)_021102annual_rain`,
+  `OUYEN (POST OFFICE)_076047annual_rain`,
+  `RED CLIFFS (POST OFFICE)_076052annual_rain`,
+  SERVICETON_078034annual_rain,
+  `WAIKERIE (EREMOPHILA PARK)_024029annual_rain`,
+  YEELANNA_018099annual_rain,
+  `YENDA (HENRY STREET)_075079annual_rain`
+)
 
+                          
+rm(`BALRANALD (RSL)_049002annual_rain`,
+   BUTE_021012annual_rain,
+   `CLARE POST OFFICE_021014annual_rain`,
+   `COOMANDOOK (MALINONG)_025508annual_rain`,
+   CUMMINS_018023annual_rain,
+   `HILLSTON AIRPORT_075032annual_rain`,
+   KAROONDA_025006annual_rain,
+   KEITH_025507annual_rain,
+   KIMBA_018040annual_rain,
+   `LOWALDIE_025039annual_rain`,
+   `MANNUM COUNCIL DEPOT_024517annual_rain`,
+   `MINNIPA AGRICULTURAL CENTRE_018052annual_rain`,
+   `MURDINGA (MUNGALA)_018164annual_rain`,
+   `NARACOORTE (LOCHABER)_026015annual_rain`,
+   `NUROM (RIVERSIDE FARM)_021102annual_rain`,
+   `OUYEN (POST OFFICE)_076047annual_rain`,
+   `RED CLIFFS (POST OFFICE)_076052annual_rain`,
+   SERVICETON_078034annual_rain,
+   `WAIKERIE (EREMOPHILA PARK)_024029annual_rain`,
+   YEELANNA_018099annual_rain,
+   `YENDA (HENRY STREET)_075079annual_rain`)                          
+                          
+                          
+ 
 
-# annual_rain_2020 <- rbind(`OUYEN (POST OFFICE)_076047annual_rain`,
-#                           `LOWALDIE_025039annual_rain`,
-#                           `WAIKERIE (EREMOPHILA PARK)_024029annual_rain`,
-#                           `RED CLIFFS (POST OFFICE)_076052annual_rain`)
-
-# annual_rain_2020 <- rbind(YEELANNA_018099annual_rain,
-#                           `MURDINGA (MUNGALA)_018164annual_rain`)
-
-#annual_rain_2020 <- rbind(`YENDA (HENRY STREET)_075079annual_rain`)
-
-#annual_rain_2020 <- rbind(BUTE_021012annual_rain)
-
-# annual_rain_2020 <- rbind(YEELANNA_018099annual_rain,
-#                           `NARACOORTE (LOCHABER)_026015annual_rain`,
-#                           KAROONDA_025006annual_rain
-#                           )
-# 
-# annual_rain_2020 <- rbind(`MANNUM COUNCIL DEPOT_024517annual_rain`
-# )
-
-annual_rain_2020 <- rbind(KIMBA_018040annual_rain,
-                          CUMMINS_018023annual_rain,
-                          YEELANNA_018099annual_rain,
-                          `BALRANALD (RSL)_049002annual_rain`,
-                          `CLARE POST OFFICE_021014annual_rain`,
-                          `COOMANDOOK (MALINONG)_025508annual_rain`,
-                          `HILLSTON AIRPORT_075032annual_rain`,
-                          `MINNIPA AGRICULTURAL CENTRE_018052annual_rain`,
-                          KEITH_025507annual_rain,
-                          SERVICETON_078034annual_rain,
-                          `OUYEN (POST OFFICE)_076047annual_rain`,
-                          `NUROM (RIVERSIDE FARM)_021102annual_rain`,
-                          KAROONDA_025006annual_rain)
-
-
-# write.csv(annual_rain_2020, "X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2021/annual_rain_2021_Racheal_sites.csv")
-# write.csv(annual_rain_2020, "X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2021/annual_rain_2021_Sam_sites.csv")
-write.csv(annual_rain_2020, "X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2022/annual_rain_2022_Impact_sites.csv")
+write.csv(annual_rain_2020, "X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2022/annual_rain_2022_research_impact_sites.csv")
 
  
- #"X:\Therese_Jackie\Sandy_soils\Sands weather\met_file2021"
