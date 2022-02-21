@@ -10,17 +10,6 @@ library(lubridate)
 library(data.table)
 library(stringr)
 
-#Processed files:
-#1. Sams Bute
-#2. CSIRO Bute
-#3. Yenda
-#4. Ouyen spade
-#5. Lowaldie
-#6. Brooker
-#7. YoungHusband
-#8. Waikerie
-#9. New horizons sites Brimpton Lake, Cadgee, Karoonda
-#10. Murlong
 
 
 current.folder <- "X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/"

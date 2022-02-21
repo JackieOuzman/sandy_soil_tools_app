@@ -314,14 +314,14 @@ GS_rain_deciles <- GS_rain_deciles %>%
     met_name_number == "KAROONDA_025006" ~ "Wynarka", # and "Karoonda"
     met_name_number == "KEITH_025507" ~ "Sherwood",
     met_name_number == "KIMBA_018040" ~ "Buckleboo",
-    met_name_number == "LOWALDIE_025039" ~ "Lowaldie",
+    met_name_number == "LOWALDIE_025039" ~ "Lowaldie", #Lowaldie_Crest and Lowaldie_Deep sand
     met_name_number == "MANNUM COUNCIL DEPOT_024517" ~ "Younghusband",
     met_name_number == "MINNIPA AGRICULTURAL CENTRE_018052" ~ "Mt_Damper",
     met_name_number == "MURDINGA (MUNGALA)_018164" ~ "Murlong",
     met_name_number == "NARACOORTE (LOCHABER)_026015" ~ "Cadgee",
     met_name_number == "NUROM (RIVERSIDE FARM)_021102" ~ "Warnertown",
     met_name_number == "OUYEN (POST OFFICE)_076047" ~ "Tempy", # and "Ouyen"
-    met_name_number == "RED CLIFFS (POST OFFICE)_076052" ~ "Carwap",
+    met_name_number == "RED CLIFFS (POST OFFICE)_076052" ~ "Carwarp_Amelioration",
     met_name_number == "SERVICETON_078034" ~ "Telopea_Downs",
     met_name_number == "WAIKERIE (EREMOPHILA PARK)_024029" ~ "Waikerie",
     met_name_number == "YEELANNA_018099" ~ "Karkoo", # and "Brooker" and "Brimpton_Lake"
@@ -371,7 +371,7 @@ BUTE_sites <-  rbind(Bute_Trengrove, Bute_CSIRO)
 #remove "Bute"
 GS_rain_deciles <- GS_rain_deciles %>%
   filter( site != "Bute")
-#Add "Kooloonong x3
+#Add "bute x2
 GS_rain_deciles <- rbind(GS_rain_deciles, BUTE_sites)
 
 
@@ -391,7 +391,7 @@ GS_rain_deciles <- rbind(GS_rain_deciles, Karoonda)
 Ouyen <- GS_rain_deciles %>%
   filter(site == "Tempy")
 Ouyen <- Ouyen %>%
-  mutate(site = "Ouyen")
+  mutate(site = "Oyen_Spade")
 
 GS_rain_deciles <- rbind(GS_rain_deciles, Ouyen)
 
@@ -414,8 +414,36 @@ Brimpton_Lake <- Brimpton_Lake %>%
 GS_rain_deciles <- rbind(GS_rain_deciles, Brimpton_Lake)
 
 
+
+### Lowaldie
+
+LOWALDIE <- GS_rain_deciles %>%
+  filter(site == "Lowaldie")
+
+Lowaldie_Crest <- LOWALDIE %>%
+  mutate(site = "Lowaldie_Crest")
+`Lowaldie_Deep sand` <-  LOWALDIE%>%
+  mutate(site = "Lowaldie_Deep sand")
+
+LOWALDIE_sites <-  rbind(Lowaldie_Crest, `Lowaldie_Deep sand`)
+#remove "LOWALDIE"
+GS_rain_deciles <- GS_rain_deciles %>%
+  filter( site != "Lowaldie")
+#Add "Lowaldie x2
+GS_rain_deciles <- rbind(GS_rain_deciles, LOWALDIE_sites)
+
+
+
+
+
 rm(Brimpton_Lake, Brooker, Ouyen, Karoonda, Kooloonong_chickpea, Kooloonong_lentil, Kooloonong_lupin, BALRANALD, BALRANALD_sites, 
    BUTE,BUTE_sites, Bute_CSIRO, Bute_Trengrove)
+
+
+
+
+
+
 
 unique(GS_rain_deciles$site)
 
