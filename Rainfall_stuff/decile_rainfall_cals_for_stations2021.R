@@ -33,7 +33,7 @@ library(stringr)
 
 ########################################################################################
 # identify the folders for the met files
-#current.folder <- "X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2021/station_download/"
+
 current.folder <- "X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2022/"
 
 # find the files that you want
@@ -42,29 +42,38 @@ list.of.files #with path
 
 #list.of.files <- "X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2021/station_download/Bute_21012.csv"           
 
-# list.of.files <- c(
-# "X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2021/station_download/Yeelanna_18099.csv" ,
-# "X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2021/station_download/Naracoorte_Lochaber_26015.csv",
-# "X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2021/station_download/Karoonda_25006.csv"
-# )
+# list.of.files <- c("X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2021/station_download/Naracoorte_Lochaber_26015.csv")
 
-#list.of.files <- "X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2021/station_download/Karoonda_25006.csv" 
+
 
 list.of.files <- c(
-"X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2022/Balranald_49002_Feb22.csv" ,          
-"X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2022/Clare_Post_Office_21014_Feb22.csv"  , 
-"X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2022/Coomandook_25508_Feb22.csv",          
-"X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2022/Cummins_18023_Feb22.csv" ,            
-"X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2022/Hillston_Airport_75032_Feb22.csv",    
-"X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2022/Karoonda_25006_Feb22.csv" ,           
-"X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2022/Keith_25507_Feb22.csv" ,              
-"X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2022/Kimba_18040_Feb22.csv",               
-"X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2022/Minnipa_Ag_Cnt_18052_Feb22.csv" ,     
+#impact sites downlaoded on the 15/2/2022
+"X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2022/Balranald_49002_Feb22.csv" ,
+"X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2022/Clare_Post_Office_21014_Feb22.csv"  ,
+"X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2022/Coomandook_25508_Feb22.csv",
+"X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2022/Cummins_18023_Feb22.csv" ,
+"X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2022/Hillston_Airport_75032_Feb22.csv",
+"X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2022/Karoonda_25006_Feb22.csv" ,
+"X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2022/Keith_25507_Feb22.csv" ,
+"X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2022/Kimba_18040_Feb22.csv",
+"X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2022/Minnipa_Ag_Cnt_18052_Feb22.csv" ,
 "X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2022/Nurom_Riverside_Farm_21102_Feb22.csv",
-"X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2022/Ouyen_Post_office_76047_Feb22.csv"  , 
-"X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2022/Serviceton_78034_Feb22.csv",        
-"X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2022/Yeelanna_18099_Feb22.csv") 
+"X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2022/Ouyen_Post_office_76047_Feb22.csv"  ,
+"X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2022/Serviceton_78034_Feb22.csv",
+"X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2022/Yeelanna_18099_Feb22.csv",
 
+# #rearch sites downlaoded on the 15/2/2022    
+ "X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2022/Lowaldie_25039.csv",   
+ "X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2022/Waikerie_24029.csv",
+ "X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2022/Red_Cliffs_76052.csv"  ,
+ "X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2022/Murdinga_18164.csv" ,
+ "X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2022/Yenda_75079.csv",
+ "X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2022/Bute_21012.csv" ,
+ "X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2022/Naracoorte_26015.csv",
+ "X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2022/Mannum_24517.csv" 
+) 
+
+download_date_for_all_sites <-"20220215"  
 
 ########################################################################################
 
@@ -74,17 +83,25 @@ list.of.files <- c(
 
 for (list.of.files in list.of.files){
 
+  
 # day the met file was downloaded
+ 
 
-
-download_date <- read_csv(list.of.files, 
-                          col_names = FALSE, skip = 7)
-download_date <-download_date[1,1] #just the row with the download date
-download_date <-stringr::str_extract(download_date, "[[:digit:]]+") #just the numbers
-download_date <- as.Date(as.character(download_date),format="%Y%m%d")
-
-#minus one day from download
+# download_date <- read_csv(list.of.files, 
+#                           col_names = FALSE, skip = 7)
+# download_date <-download_date[1,1] #just the row with the download date
+# download_date <-stringr::str_extract(download_date, "[[:digit:]]+") #just the numbers
+# download_date <- as.Date(as.character(download_date),format="%Y%m%d")
+# 
+# #minus one day from download
+# download_date <- lubridate::ymd(download_date) - days(1)
+  
+#download_date <-"20220215"  
+download_date <- as.Date(as.character(download_date_for_all_sites),format="%Y%m%d")
+ 
+ #minus one day from download
 download_date <- lubridate::ymd(download_date) - days(1)
+
 
 ## station number
 station_number <- read_csv(list.of.files,
@@ -232,77 +249,54 @@ sites_for_binding <- ls(pattern="summer")
 print(sites_for_binding)
 
 
-### Impact sites I have updated Feb 2022
+### Impact and research sites I have updated Feb 2022
 GS_rain_deciles <- rbind(
-  `BALRANALD (RSL)_049002gs_rain_with_summer`,
-  `CLARE POST OFFICE_021014gs_rain_with_summer`,
-  `COOMANDOOK (MALINONG)_025508gs_rain_with_summer`,
-  `CUMMINS_018023gs_rain_with_summer`,
-  `HILLSTON AIRPORT_075032gs_rain_with_summer`,
-  `KAROONDA_025006gs_rain_with_summer`,
-  `KEITH_025507gs_rain_with_summer`,
-  `KIMBA_018040gs_rain_with_summer`,
-  `MINNIPA AGRICULTURAL CENTRE_018052gs_rain_with_summer`,
-  `NUROM (RIVERSIDE FARM)_021102gs_rain_with_summer`,
-  `OUYEN (POST OFFICE)_076047gs_rain_with_summer`,
-  `SERVICETON_078034gs_rain_with_summer`,
-  `YEELANNA_018099gs_rain_with_summer`
+   `BALRANALD (RSL)_049002gs_rain_with_summer`,
+   `BUTE_021012gs_rain_with_summer` ,                      
+   `CLARE POST OFFICE_021014gs_rain_with_summer` ,
+   `COOMANDOOK (MALINONG)_025508gs_rain_with_summer`,      
+   `CUMMINS_018023gs_rain_with_summer`  ,
+   `HILLSTON AIRPORT_075032gs_rain_with_summer`  ,         
+   `KAROONDA_025006gs_rain_with_summer`,
+   `KEITH_025507gs_rain_with_summer`  ,                    
+   `KIMBA_018040gs_rain_with_summer`  ,
+   `LOWALDIE_025039gs_rain_with_summer` ,                  
+   `MANNUM COUNCIL DEPOT_024517gs_rain_with_summer`  ,
+   `MINNIPA AGRICULTURAL CENTRE_018052gs_rain_with_summer`,
+   `MURDINGA (MUNGALA)_018164gs_rain_with_summer` ,
+   `NARACOORTE (LOCHABER)_026015gs_rain_with_summer`  ,    
+   `NUROM (RIVERSIDE FARM)_021102gs_rain_with_summer` ,
+   `OUYEN (POST OFFICE)_076047gs_rain_with_summer`,        
+   `RED CLIFFS (POST OFFICE)_076052gs_rain_with_summer` ,
+   `SERVICETON_078034gs_rain_with_summer`  ,               
+   `WAIKERIE (EREMOPHILA PARK)_024029gs_rain_with_summer` ,
+   `YEELANNA_018099gs_rain_with_summer` ,                
+   `YENDA (HENRY STREET)_075079gs_rain_with_summer`     
+  
+  
 )
 
-#############################################################################################################
-############### These are Murrays site ######################################################################
-#############################################################################################################
-# `OUYEN (POST OFFICE)_076047gs_rain_with_summer`
-# `LOWALDIE_025039gs_rain_with_summer
-# `WAIKERIE (EREMOPHILA PARK)_024029gs_rain_with_summer`
-# `RED CLIFFS (POST OFFICE)_076052gs_rain_with_summer`
-
-# GS_rain_deciles <- rbind(
-#   `OUYEN (POST OFFICE)_076047gs_rain_with_summer`,
-#   `LOWALDIE_025039gs_rain_with_summer`,
-#   `WAIKERIE (EREMOPHILA PARK)_024029gs_rain_with_summer`,
-#   `RED CLIFFS (POST OFFICE)_076052gs_rain_with_summer`
-# )
-
-#############################################################################################################
-############### These are Mels / Nigel  site ######################################################################
-#############################################################################################################
-# GS_rain_deciles <- rbind(
-#   YEELANNA_018099gs_rain_with_summer,
-#   `MURDINGA (MUNGALA)_018164gs_rain_with_summer`
-# )
-
-#############################################################################################################
-############### This are Racheal  site ######################################################################
-#############################################################################################################
-# GS_rain_deciles <- rbind(
-#   `YENDA (HENRY STREET)_075079gs_rain_with_summer`
-# )
-
-#############################################################################################################
-############### This are Sam  site ######################################################################
-#############################################################################################################
-# GS_rain_deciles <- rbind(
-#   `BUTE_021012gs_rain_with_summer`
-# )
-
-#############################################################################################################
-############### This is New Horizons sites Mel ######################################################################
-#############################################################################################################
-# GS_rain_deciles <- rbind(
-#   KAROONDA_025006gs_rain_with_summer,
-#   `NARACOORTE (LOCHABER)_026015gs_rain_with_summer`,
-#   YEELANNA_018099gs_rain_with_summer
-# )
-
-
-#############################################################################################################
-############### This is New Horizons sites Younghusband Jack? ######################################################################
-#############################################################################################################
-# GS_rain_deciles <- rbind(
-#   `MANNUM COUNCIL DEPOT_024517gs_rain_with_summer`
-# )
-
+rm("BALRANALD (RSL)_049002gs_rain_with_summer",
+   "BUTE_021012gs_rain_with_summer" ,                      
+   "CLARE POST OFFICE_021014gs_rain_with_summer" ,
+   "COOMANDOOK (MALINONG)_025508gs_rain_with_summer",      
+   "CUMMINS_018023gs_rain_with_summer"  ,
+   "HILLSTON AIRPORT_075032gs_rain_with_summer"  ,         
+   "KAROONDA_025006gs_rain_with_summer",
+   "KEITH_025507gs_rain_with_summer"  ,                    
+   "KIMBA_018040gs_rain_with_summer"  ,
+   "LOWALDIE_025039gs_rain_with_summer" ,                  
+   "MANNUM COUNCIL DEPOT_024517gs_rain_with_summer"  ,
+   "MINNIPA AGRICULTURAL CENTRE_018052gs_rain_with_summer",
+   "MURDINGA (MUNGALA)_018164gs_rain_with_summer" ,
+   "NARACOORTE (LOCHABER)_026015gs_rain_with_summer"  ,    
+   "NUROM (RIVERSIDE FARM)_021102gs_rain_with_summer" ,
+   "OUYEN (POST OFFICE)_076047gs_rain_with_summer",        
+   "RED CLIFFS (POST OFFICE)_076052gs_rain_with_summer" ,
+   "SERVICETON_078034gs_rain_with_summer"  ,               
+   "WAIKERIE (EREMOPHILA PARK)_024029gs_rain_with_summer" ,
+   "YEELANNA_018099gs_rain_with_summer"   ,                
+   "YENDA (HENRY STREET)_075079gs_rain_with_summer"  )
 #################################################################################################################
 names(GS_rain_deciles)
 GS_rain_deciles <- GS_rain_deciles %>% 
@@ -311,88 +305,121 @@ unique(GS_rain_deciles$met_name_number)
 
 GS_rain_deciles <- GS_rain_deciles %>%
   mutate(site = case_when(
-    met_name_number == "BALRANALD (RSL)_049002" ~ "Kooloonong",
-    met_name_number == "KIMBA_018040" ~ "Buckleboo",
-    met_name_number == "CUMMINS_018023" ~ "Cummins",
-    met_name_number == "YEELANNA_018099" ~ "Karkoo",
+    met_name_number == "BALRANALD (RSL)_049002" ~ "Kooloonong", # same as Kooloonong_chickpea Kooloonong_lupin and Kooloonong_lentil, 
+    met_name_number == "BUTE_021012" ~ "Bute", #Bute_Trengrove and Bute_CSIRO
     met_name_number == "CLARE POST OFFICE_021014" ~ "Kybunga",
     met_name_number == "COOMANDOOK (MALINONG)_025508" ~ "Malinong",
+    met_name_number == "CUMMINS_018023" ~ "Cummins",
     met_name_number == "HILLSTON AIRPORT_075032" ~ "Monia_Gap",
-    met_name_number == "MINNIPA AGRICULTURAL CENTRE_018052" ~ "Mt_Damper",
+    met_name_number == "KAROONDA_025006" ~ "Wynarka", # and "Karoonda"
     met_name_number == "KEITH_025507" ~ "Sherwood",
-    met_name_number == "SERVICETON_078034" ~ "Telopea_Downs",
-    met_name_number == "OUYEN (POST OFFICE)_076047" ~ "Tempy",
+    met_name_number == "KIMBA_018040" ~ "Buckleboo",
+    met_name_number == "LOWALDIE_025039" ~ "Lowaldie",
+    met_name_number == "MANNUM COUNCIL DEPOT_024517" ~ "Younghusband",
+    met_name_number == "MINNIPA AGRICULTURAL CENTRE_018052" ~ "Mt_Damper",
+    met_name_number == "MURDINGA (MUNGALA)_018164" ~ "Murlong",
+    met_name_number == "NARACOORTE (LOCHABER)_026015" ~ "Cadgee",
     met_name_number == "NUROM (RIVERSIDE FARM)_021102" ~ "Warnertown",
-    met_name_number == "KAROONDA_025006" ~ "Wynarka",
+    met_name_number == "OUYEN (POST OFFICE)_076047" ~ "Tempy", # and "Ouyen"
+    met_name_number == "RED CLIFFS (POST OFFICE)_076052" ~ "Carwap",
+    met_name_number == "SERVICETON_078034" ~ "Telopea_Downs",
+    met_name_number == "WAIKERIE (EREMOPHILA PARK)_024029" ~ "Waikerie",
+    met_name_number == "YEELANNA_018099" ~ "Karkoo", # and "Brooker" and "Brimpton_Lake"
+    met_name_number == "YENDA (HENRY STREET)_075079" ~ "Yenda",
+    
     TRUE ~ as.character("check")
   ))
-
-# GS_rain_deciles <- GS_rain_deciles %>% 
-#   mutate(site = case_when(
-#     met_name_number == "OUYEN (POST OFFICE)_076047" ~ "Ouyen",
-#     met_name_number == "LOWALDIE_025039" ~ "Lowaldie",
-#     met_name_number == "WAIKERIE (EREMOPHILA PARK)_024029" ~ "Waikerie",
-#     met_name_number == "RED CLIFFS (POST OFFICE)_076052" ~ "Carwap",
-#     TRUE ~ as.character("check")
-#   ))
-
-# GS_rain_deciles <- GS_rain_deciles %>% 
-#   mutate(site = case_when(
-#     met_name_number == "YEELANNA_018099" ~ "Brooker",
-#     met_name_number == "MURDINGA (MUNGALA)_018164" ~ "Murlong",
-#     TRUE ~ as.character("check")
-#   ))
-
-# GS_rain_deciles <- GS_rain_deciles %>% 
-#   mutate(site = case_when(
-#     met_name_number == "YENDA (HENRY STREET)_075079" ~ "Yenda",
-#       TRUE ~ as.character("check")
-#   ))
-
-# GS_rain_deciles <- GS_rain_deciles %>% 
-#   mutate(site = case_when(
-#     met_name_number == "BUTE_021012" ~ "Bute",
-#     TRUE ~ as.character("check")
-#   ))
-
-# GS_rain_deciles <- GS_rain_deciles %>% 
-#   mutate(site = case_when(
-#     met_name_number == "KAROONDA_025006" ~ "Karoonda",
-#     met_name_number == "NARACOORTE (LOCHABER)_026015" ~ "Cadgee",
-#     met_name_number == "YEELANNA_018099" ~ "Brimpton_Lake",
-#     
-#     TRUE ~ as.character("check")
-#   ))
-
-# GS_rain_deciles <- GS_rain_deciles %>% 
-#   mutate(site = case_when(
-#     met_name_number == "MANNUM COUNCIL DEPOT_024517" ~ "Younghusband",
-#     
-#     TRUE ~ as.character("check")
-#   ))
 
 
 
 ### stuff around duplicating some of the met sites so names match in the trial data.
 unique(GS_rain_deciles$site)
-GS_rain_deciles <- GS_rain_deciles %>%
-  mutate(site = case_when(
-    site == "Kooloonong" ~ "Kooloonong_chickpea",
-    TRUE ~ site
-  ))
 
-Kooloonong_lentil <- GS_rain_deciles %>%
-  filter(site == "Kooloonong_chickpea") %>% 
+#"BALRANALD (RSL)_049002" is the same station for: 
+# Kooloonong_chickpea Kooloonong_lupin and Kooloonong_lentil
+
+BALRANALD <- GS_rain_deciles %>%
+  filter(site == "Kooloonong")
+
+Kooloonong_lentil <- BALRANALD %>%
   mutate(site = "Kooloonong_lentil")
-Kooloonong_lupin <- GS_rain_deciles %>%
-  filter(site == "Kooloonong_chickpea") %>% 
-  mutate(site = "Kooloonong_lupin")
+Kooloonong_lupin <- BALRANALD %>%
+    mutate(site = "Kooloonong_lupin")
+Kooloonong_chickpea <- BALRANALD %>%
+  mutate(site = "Kooloonong_chickpea")
 
-GS_rain_deciles <-  rbind(GS_rain_deciles, Kooloonong_lentil, Kooloonong_lupin)
+BALRANALD_sites <-  rbind(Kooloonong_lentil, Kooloonong_lupin, Kooloonong_chickpea)
+#remove "Kooloonong"
+GS_rain_deciles <- GS_rain_deciles %>%
+  filter( site != "Kooloonong")
+#Add "Kooloonong x3
+GS_rain_deciles <- rbind(GS_rain_deciles, BALRANALD_sites)
+
+
+### Bute
+
+BUTE <- GS_rain_deciles %>%
+  filter(site == "Bute")
+
+Bute_Trengrove <- BUTE %>%
+  mutate(site = "Bute_Trengrove")
+Bute_CSIRO <-  BUTE%>%
+  mutate(site = "Bute_CSIRO")
+
+
+BUTE_sites <-  rbind(Bute_Trengrove, Bute_CSIRO)
+#remove "Bute"
+GS_rain_deciles <- GS_rain_deciles %>%
+  filter( site != "Bute")
+#Add "Kooloonong x3
+GS_rain_deciles <- rbind(GS_rain_deciles, BUTE_sites)
+
+
+#"KAROONDA_025006" is the same station for: Karoonda and Wynarka
+
+Karoonda <- GS_rain_deciles %>%
+  filter(site == "Wynarka")
+Karoonda <- Karoonda %>%
+  mutate(site = "Karoonda")
+
+GS_rain_deciles <- rbind(GS_rain_deciles, Karoonda)
+
+
+
+#"OUYEN (POST OFFICE)_076047" is the same station for: Tempy and Ouyen
+
+Ouyen <- GS_rain_deciles %>%
+  filter(site == "Tempy")
+Ouyen <- Ouyen %>%
+  mutate(site = "Ouyen")
+
+GS_rain_deciles <- rbind(GS_rain_deciles, Ouyen)
+
+
+
+#YEELANNA_018099" is the same station for:"Karkoo" and "Brooker" and "Brimpton_Lake"
+
+Brooker <- GS_rain_deciles %>%
+  filter(site == "Karkoo")
+Brooker <- Brooker %>%
+  mutate(site = "Brooker")
+
+GS_rain_deciles <- rbind(GS_rain_deciles, Brooker)
+
+Brimpton_Lake <- GS_rain_deciles %>%
+  filter(site == "Karkoo")
+Brimpton_Lake <- Brimpton_Lake %>%
+  mutate(site = "Brimpton_Lake")
+
+GS_rain_deciles <- rbind(GS_rain_deciles, Brimpton_Lake)
+
+
+rm(Brimpton_Lake, Brooker, Ouyen, Karoonda, Kooloonong_chickpea, Kooloonong_lentil, Kooloonong_lupin, BALRANALD, BALRANALD_sites, 
+   BUTE,BUTE_sites, Bute_CSIRO, Bute_Trengrove)
 
 unique(GS_rain_deciles$site)
 
-write.csv(GS_rain_deciles, "X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2022/GS_rain_deciles_impact_sites.csv")
+write.csv(GS_rain_deciles, "X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2022/GS_rain_deciles_research_impact_sites.csv")
                     
 
                    
