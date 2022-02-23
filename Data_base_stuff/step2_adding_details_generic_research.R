@@ -669,11 +669,12 @@ unique(primary_metadata$site)
 primary_metadata <- primary_metadata %>%
   mutate(
     Latitude = case_when(
-      site == "Carwarp" ~        -34.3075,
+      site == "Carwarp_Amelioration" ~        -34.3075,
       #Red Cliffs is the closest met station Carwarp Amelioration
       site == "Waikerie"         ~ -34.2159,
-      site == "Lowalide"         ~ -35.0459,
-      site == "Ouyen"            ~ -35.0681,
+      site == "Lowaldie_Crest"   ~ -35.0459,
+      site == "Lowaldie_Deep sand" ~ -35.0459,
+      site == "Oyen_Spade"            ~ -35.0681,
       site == "Bute_Trengrove"   ~ -33.8612,
       site == "Bute_CSIRO"       ~ -33.8612,
       site == "Yenda"            ~ -34.2502,
@@ -711,10 +712,11 @@ primary_metadata <- primary_metadata %>%
 primary_metadata <- primary_metadata %>%
   mutate(
     Longitude = case_when(
-      site == "Carwarp"          ~ 142.1882, #Red Cliffs is the closest met station
+      site == "Carwarp_Amelioration"         ~ 142.1882, #Red Cliffs is the closest met station
       site == "Waikerie"        ~ 140.1860,
-      site == "Lowalide"        ~ 139.9791 ,
-      site == "Ouyen"           ~ 142.3125,
+      site == "Lowaldie_Crest"  ~ 139.9791 ,
+      site == "Lowaldie_Deep sand"~ 139.9791 ,
+      site == "Oyen_Spade"           ~ 142.3125,
       site == "Bute_Trengrove"  ~ 138.0114,
       site == "Bute_CSIRO"      ~ 138.0114,
       site == "Yenda"           ~ 146.1897,
@@ -742,7 +744,8 @@ primary_metadata <- primary_metadata %>%
       site == "Malinong"         ~ 139.5133,
       site == "Monia_Gap"        ~ 145.5248,
       site == "Warnertown"       ~ 138.102,
-      site == "Kybunga"          ~ 138.6125
+      site == "Kybunga"          ~ 138.6125,
+        TRUE ~ as.numeric(Longitude)
     )
   )
 

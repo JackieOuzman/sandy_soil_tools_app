@@ -9,7 +9,6 @@ impact_sites_step1_2_all <-
 impact_sites_step1_2_all <- impact_sites_step1_2_all %>% 
   select(site,
   site_sub,
-  year,
   Latitude,
   Longitude,
   Repellence,
@@ -25,7 +24,6 @@ research_sites_sites_step1_2_all <-
 research_sites_sites_step1_2_all <- research_sites_sites_step1_2_all %>% 
   select(site,
          site_sub,
-         year,
          Latitude,
          Longitude,
          Repellence,
@@ -43,8 +41,7 @@ sites_merged_all <- rbind(
 )
 
 metedata_sites <- sites_merged_all %>% 
-  distinct(site_sub, .keep_all = TRUE) %>% 
-  select(- year)
+  distinct(site_sub, .keep_all = TRUE) 
 
 
 
@@ -75,6 +72,12 @@ list_sites_ready <- c("Brimpton Lake",
                       "Younghusband")
 
 
-
 metedata_sites_ready <- metedata_sites %>% 
   filter(site_sub %in% list_sites_ready  )
+
+names(metedata_sites_ready)
+
+
+metedata_sites_ready <- metedata_sites_ready %>% 
+  select(- site_sub )
+write.csv(metedata_sites_ready, "X:/Therese_Jackie/Sandy_soils/Development_database/for_presentations/metadata.csv",row.names = FALSE )
