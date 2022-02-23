@@ -142,7 +142,17 @@ summary_control_data_all <- summary_control_data_all %>%
       site_sub == "Mt Damper" ~ "Mt_Damper",
       TRUE ~ site_sub))
 
-
+##label problem with Ouyen
+summary_control_data_all <- summary_control_data_all %>% 
+  mutate(
+    site_sub = case_when(
+      site_sub == "Oyen_Spade" ~ "Ouyen_Spade",
+      TRUE ~ site_sub))
+summary_control_data_all <- summary_control_data_all %>% 
+  mutate(
+    site = case_when(
+      site == "Oyen_Spade" ~ "Ouyen_Spade",
+      TRUE ~ site))
 
 
 ## list of sites that are ready ish
@@ -153,19 +163,21 @@ list_sites_ready <- c("Brimpton Lake",
                       "Bute_CSIRO",
                       "Bute_Trengrove",
                       "Cadgee",
-                      "CarwarpAmelioration",
+                      "Carwarp_Amelioration",
                       "Cummins",
                       "Karkoo",
                       "Karoonda",
-                      "Kooloonong_canola",
+                      #"Kooloonong_canola",
                       "Kooloonong_chickpea",
                       "Kooloonong_lentil",
                       "Kooloonong_lupin",
                       "Lowaldie_Crest",
                       "Lowaldie_Deep sand",
+                      "Mt Damper",
                       "Mt_Damper",
                       "Murlong",
-                      "Ouyen_spade",
+                      "Oyen_Spade",
+                      "Ouyen_Spade",
                       "Telopea_Downs",
                       "Tempy",
                       "Waikerie",
@@ -174,22 +186,67 @@ list_sites_ready <- c("Brimpton Lake",
                       "Younghusband")
 
 
-
 summary_control_data_all <- summary_control_data_all %>% 
   filter(site_sub %in% list_sites_ready  )
 summary_data_all <- summary_data_all %>% 
   filter(site_sub %in% list_sites_ready  )
 
 
-write.csv(summary_control_data_all, 
-"X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/stats_working/sites_merged_CONTROL_incomplete.csv",
-row.names = FALSE)
 
-write.csv(summary_data_all, 
-"X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/stats_working/sites_merged_incomplete.csv",
-row.names = FALSE)
+
+
+# write.csv(summary_control_data_all, 
+# "X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/stats_working/sites_merged_CONTROL_incomplete.csv",
+# row.names = FALSE)
+# 
+# write.csv(summary_data_all, 
+# "X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/stats_working/sites_merged_incomplete.csv",
+# row.names = FALSE)
 
 ```
+
+How many sites?
+
+```{r how many sites all, echo=FALSE, message=FALSE, warning=FALSE}
+#How many site?
+
+sites <- summary_data_all %>% 
+  distinct(site) 
+sites %>% 
+  count()
+```
+
+
+How many desciptors?
+
+```{r how many desciptors all, echo=FALSE, message=FALSE, warning=FALSE}
+## how many desciptors?
+
+#names(summary_data_all)
+desciptors <- summary_data_all %>% 
+  distinct(Descriptors) 
+desciptors %>% 
+  count()
+```
+
+How many soil modification (including different depths)?
+
+```{r how many modification all, echo=FALSE, message=FALSE, warning=FALSE}
+## how many different modification?
+
+summary_data_all <- summary_data_all %>% 
+  mutate(Descriptors_temp = Descriptors) %>% 
+  separate(Descriptors_temp, c("modification_with_depth", "amendment"), sep = "_")
+
+modification_with_depth <- summary_data_all %>% 
+  distinct(modification_with_depth) %>% 
+  arrange(modification_with_depth)
+modification_with_depth %>% 
+  count()
+
+
+```
+
 
 ## Scatter Plots
 
@@ -200,6 +257,9 @@ ggplot(data = summary_control_data_all, mapping = aes(control_yield, yield,)) +
   geom_abline(intercept = 0, slope = 1, linetype="dashed")+
   geom_point(alpha= 0.4) +
   geom_smooth(method = lm, se = FALSE) +
+  scale_x_continuous(breaks=seq(0,10,by=0.5))+
+  scale_y_continuous(breaks=seq(0,10,by=0.5))+
+  theme_bw()+
   labs(title = "Control yield - all data - no summary\nnote each site, treatment, year and rep is matched to control",
        x = "control yield t/ha", y = "trial yield t/ha")
 ```
@@ -238,6 +298,9 @@ ggplot(data = summary_control_data_all, mapping = aes(control_yield, yield,)) +
   geom_point() +
   geom_smooth(method = lm, se = FALSE) +
   geom_abline(intercept = 0, slope = 1, linetype="dashed")+
+  # scale_x_continuous(breaks=seq(0,10,by=0.5))+
+  # scale_y_continuous(breaks=seq(0,10,by=0.5))+
+  theme_bw()+
   labs(title = "Control yield - all data - no summary\nnote each site, treatment, year and rep is matched to control
        \nFacet wrap is years post amelioration, the NA related to trial with no metdata",
        x = "control yield t/ha", y = "trial yield t/ha")+
@@ -256,6 +319,9 @@ ggplot(data = summary_control_data_all, mapping = aes(control_yield, yield,)) +
   geom_point() +
   geom_smooth(method = lm, se = FALSE) +
   geom_abline(intercept = 0, slope = 1, linetype="dashed")+
+  # scale_x_continuous(breaks=seq(0,10,by=0.5))+
+  # scale_y_continuous(breaks=seq(0,10,by=0.5))+
+  theme_bw()+
   labs(title = "Control yield - all data - no summary\nnote each site, treatment, year and rep is matched to control
        \nFacet wrap is sites",
        x = "control yield t/ha", y = "trial yield t/ha")+
@@ -312,16 +378,45 @@ summary_control_data_all <- summary_control_data_all %>%
 ```
 
 
+How many soil modification (with NO depth differences eg all the ripping is included in rip)?
+
+```{r how many NO depth modification all, echo=FALSE, message=FALSE, warning=FALSE}
+modification_NO_depth <- summary_control_data_all %>% 
+  distinct(modification) %>% 
+  arrange(modification)
+modification_NO_depth %>% 
+  count()
+  
+```  
+  
 
 ```{r scatter modification, echo=FALSE, message=FALSE, warning=FALSE}
-ggplot(summary_control_data_all, mapping = aes(control_yield, yield,)) +
+# ggplot(summary_control_data_all, mapping = aes(control_yield, yield,)) +
+#   geom_point() +
+#   geom_smooth(method = lm, se = FALSE) +
+#   geom_abline(intercept = 0, slope = 1, linetype="dashed")+
+#   scale_x_continuous(breaks=seq(0,10,by=0.5))+
+#   scale_y_continuous(breaks=seq(0,10,by=0.5))+
+#   theme_bw()+
+#   labs(title = "Control yield - all data - no summary\nnote each site, treatment, year and rep is matched to control
+#        \nFacet wrap is modification",
+#        x = "control yield t/ha", y = "trial yield t/ha")+
+#   facet_wrap(.~ modification)
+
+
+summary_control_data_all %>%  filter(modification != "Unmodified") %>% 
+ggplot( mapping = aes(control_yield, yield,)) +
   geom_point() +
   geom_smooth(method = lm, se = FALSE) +
   geom_abline(intercept = 0, slope = 1, linetype="dashed")+
-  labs(title = "Control yield - all data - no summary\nnote each site, treatment, year and rep is matched to control
-       \nFacet wrap is modification",
+  #scale_x_continuous(breaks=seq(0,10,by=0.5))+
+  #scale_y_continuous(breaks=seq(0,10,by=0.5))+
+  theme_bw()+
+  labs(#title = "Control yield - all data - no summary\nnote each site, treatment, year and rep is matched to control
+       #\nFacet wrap is modification",
        x = "control yield t/ha", y = "trial yield t/ha")+
   facet_wrap(.~ modification)
+
 
 ```
 
@@ -350,9 +445,15 @@ ggplot(data = no_amendment, mapping = aes(control_yield, yield)) +
   geom_point(aes(colour= modification),alpha= 0.4) +
   geom_abline(intercept = 0, slope = 1, linetype="dashed", size = 0.5)+
   geom_smooth(data = no_amendment, method = lm, se = FALSE, colour = "black", size = 0.5) +
+  scale_x_continuous(breaks=seq(0,10,by=0.5))+
+  scale_y_continuous(breaks=seq(0,10,by=0.5))+
+  theme_bw()+
   labs(title = "Control yield - subset of data no amendment",
        subtitle = "note each site, treatment, year and rep is matched to control",
        x = "control yield t/ha", y = "trial yield t/ha")
+
+
+
 ```
 
 

@@ -245,8 +245,8 @@ primary <- primary %>%
                   
                   
                   ## chicken litter with NO rate
-                  ifelse(site_sub    %in% c("Brooker","Cadgee","Ouyen_spade", "CarwarpAmelioration", 
-                                            "Karoonda", "Lowaldie_Crest","Lowaldie_Deep sand", "Murlong", "Ouyen_spade",
+                  ifelse(site_sub    %in% c("Brooker","Cadgee","Ouyen_Spade", "Carwarp_Amelioration", 
+                                            "Karoonda", "Lowaldie_Crest","Lowaldie_Deep sand", "Murlong", "Ouyen_Spade",
                                             "Waikerie", "Younghusband", "Brimpton Lake")  #site list 3
                          & organic          %in% c( "chicken_compost","chicken_manure","chicken litter","chicken liitter",
                                                     "chicken_litter","chicken litter"),  
@@ -254,16 +254,16 @@ primary <- primary %>%
                          
                          
                          ## compost with NO rate    
-                         ifelse(site_sub    %in% c("Brooker","Bute_CSIRO","Cadgee","Ouyen_spade", "CarwarpAmelioration", 
-                                                   "Karoonda", "Lowaldie_Crest","Lowaldie_Deep sand", "Murlong", "Ouyen_spade",
+                         ifelse(site_sub    %in% c("Brooker","Bute_CSIRO","Cadgee","Ouyen_Spade", "Carwarp_Amelioration", 
+                                                   "Karoonda", "Lowaldie_Crest","Lowaldie_Deep sand", "Murlong", "Ouyen_Spade",
                                                    "Waikerie", "Younghusband", "Yenda","Bute_Trengrove", "Brimpton Lake")  #all the sites
                                 & organic          %in% c( "compost"),  
                                 paste0("Com",".", placement_organic),
                                 
                                 
                                 ## lucerne with NO rate    
-                                ifelse(site_sub    %in% c("Bute_CSIRO","Cadgee","Ouyen_spade", "CarwarpAmelioration", 
-                                                          "Karoonda", "Lowaldie_Crest","Lowaldie_Deep sand", "Murlong", "Ouyen_spade",
+                                ifelse(site_sub    %in% c("Bute_CSIRO","Cadgee","Ouyen_Spade", "Carwarp_Amelioration", 
+                                                          "Karoonda", "Lowaldie_Crest","Lowaldie_Deep sand", "Murlong", "Ouyen_Spade",
                                                           "Waikerie", "Younghusband", "Yenda","Bute_Trengrove", "Brimpton Lake")  #set 1
                                        & organic          %in% c( "lucerne", "pelleted lucerne"),  
                                        paste0("Lc",".", placement_organic),  
@@ -275,29 +275,29 @@ primary <- primary %>%
                                               
                                               
                                               ## Cereal with NO rate   
-                                              ifelse(site_sub    %in% c("Brooker","Bute_CSIRO","Cadgee","Ouyen_spade", "CarwarpAmelioration", 
-                                                                        "Karoonda", "Lowaldie_Crest","Lowaldie_Deep sand", "Murlong", "Ouyen_spade",
+                                              ifelse(site_sub    %in% c("Brooker","Bute_CSIRO","Cadgee","Ouyen_Spade", "Carwarp_Amelioration", 
+                                                                        "Karoonda", "Lowaldie_Crest","Lowaldie_Deep sand", "Murlong", "Ouyen_Spade",
                                                                         "Waikerie", "Younghusband", "Yenda","Bute_Trengrove", "Brimpton Lake")  #all the sites
                                                      & organic %in% c("cereal"),   
                                                      paste0("Cereal",".", placement_organic),
                                                      
                                                      ## vetch with NO rate   
-                                                     ifelse(site_sub    %in% c("Brooker","Bute_CSIRO","Cadgee","Ouyen_spade", "CarwarpAmelioration", 
-                                                                               "Karoonda", "Lowaldie_Crest","Lowaldie_Deep sand", "Murlong", "Ouyen_spade",
+                                                     ifelse(site_sub    %in% c("Brooker","Bute_CSIRO","Cadgee","Ouyen_Spade", "Carwarp_Amelioration", 
+                                                                               "Karoonda", "Lowaldie_Crest","Lowaldie_Deep sand", "Murlong", "Ouyen_Spade",
                                                                                "Waikerie", "Younghusband", "Yenda","Bute_Trengrove", "Brimpton Lake")  #all the sites
                                                             & organic %in% c("vetch"),   
                                                             paste0("Vetch",".", placement_organic),   
                                                             
                                                             ## vetch - cereal with NO rate   
-                                                            ifelse(site_sub    %in% c("Brooker","Bute_CSIRO","Cadgee","Ouyen_spade", "CarwarpAmelioration", 
-                                                                                      "Karoonda", "Lowaldie_Crest","Lowaldie_Deep sand", "Murlong", "Ouyen_spade",
+                                                            ifelse(site_sub    %in% c("Brooker","Bute_CSIRO","Cadgee","Ouyen_Spade", "Carwarp_Amelioration", 
+                                                                                      "Karoonda", "Lowaldie_Crest","Lowaldie_Deep sand", "Murlong", "Ouyen_Spade",
                                                                                       "Waikerie", "Younghusband", "Yenda","Bute_Trengrove", "Brimpton Lake")  #all the sites
                                                                    & organic %in% c("vetch - cereal"),   
                                                                    paste0("Vet_Cer",".", placement_organic),
                                                                    
                                                                    ## vetch - cereal with innoculant   
-                                                                   ifelse(site_sub    %in% c("Brooker","Bute_CSIRO","Cadgee","Ouyen_spade", "CarwarpAmelioration", 
-                                                                                             "Karoonda", "Lowaldie_Crest","Lowaldie_Deep sand", "Murlong", "Ouyen_spade",
+                                                                   ifelse(site_sub    %in% c("Brooker","Bute_CSIRO","Cadgee","Ouyen_Spade", "Carwarp_Amelioration", 
+                                                                                             "Karoonda", "Lowaldie_Crest","Lowaldie_Deep sand", "Murlong", "Ouyen_Spade",
                                                                                              "Waikerie", "Younghusband", "Yenda","Bute_Trengrove", "Brimpton Lake")  #all the sites
                                                                           & organic %in% c("vetch - cereal - innoculant"),   
                                                                           paste0("Vet_Cer_In",".", placement_organic),
@@ -312,8 +312,8 @@ primary <- primary %>%
 primary <- primary %>% 
   
   mutate(amendment_organic = 
-           ifelse(site_sub            %in% c("Brooker","Cadgee","Ouyen_spade", "CarwarpAmelioration",
-                                             "Karoonda", "Lowaldie_Crest","Lowaldie_Deep sand", "Murlong", "Ouyen_spade",
+           ifelse(site_sub            %in% c("Brooker","Cadgee","Ouyen_Spade", "Carwarp_Amelioration",
+                                             "Karoonda", "Lowaldie_Crest","Lowaldie_Deep sand", "Murlong", "Ouyen_Spade",
                                              "Waikerie", "Younghusband","Bute_Trengrove", "Brimpton Lake")  #all the sites but not Bute CSIRO
                   &   is.na(timing) ,
                   paste0(amendment_organic),

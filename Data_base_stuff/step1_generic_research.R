@@ -109,18 +109,18 @@ Yenda <- read_excel("X:/Therese_Jackie/Sandy_soils/Development_database/other_si
                                                                          "date"))
 
 
-#4. Oyen_Spade
+#4. Ouyen_Spade
 
 
 
-Oyen_Spade <- read_excel("X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/Ouyen.xlsm",
+Ouyen_Spade <- read_excel("X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/Ouyen.xlsm",
                           sheet = "Database_format_spade", skip = 1)
- names(Oyen_Spade)
- Oyen_Spade <- Oyen_Spade %>% dplyr::select("ID":"comments"   )
+ names(Ouyen_Spade)
+ Ouyen_Spade <- Ouyen_Spade %>% dplyr::select("ID":"comments"   )
 #
 ### a metadata
 #
- metadata_Oyen_Spade <- read_excel("X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/Ouyen.xlsm",
+ metadata_Ouyen_Spade <- read_excel("X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/Ouyen.xlsm",
                                   sheet = "Site_metadata", col_types = c("text",
                                                                          "numeric", "numeric", "numeric",
                                                                          "numeric", "numeric", "numeric",
@@ -138,11 +138,11 @@ Oyen_Spade <- read_excel("X:/Therese_Jackie/Sandy_soils/Development_database/oth
                                                                          "date", "date", "date",
                                                                          "date"))
 
- Oyen_Spade <- Oyen_Spade %>%
-   mutate(site = "Oyen_Spade")
+ Ouyen_Spade <- Ouyen_Spade %>%
+   mutate(site = "Ouyen_Spade")
  
- metadata_Oyen_Spade <- metadata_Oyen_Spade %>%
-   mutate(`Site Name` = "Oyen_Spade")
+ metadata_Ouyen_Spade <- metadata_Ouyen_Spade %>%
+   mutate(`Site Name` = "Ouyen_Spade")
  
 #5. Lowaldie
 
@@ -367,7 +367,7 @@ site <- rbind(
   Lowaldie,
   Murlong,
   New_Horizons,
-  Oyen_Spade,
+  Ouyen_Spade,
   Waikerie,
   Yenda,
   YoungHusband
@@ -385,14 +385,14 @@ rm(Brooker,
    Lowaldie,
    Murlong,
    New_Horizons,
-   Oyen_Spade,
+   Ouyen_Spade,
    Waikerie,
    Yenda,
    YoungHusband)
 #-----Research sites bind the metadata df ------#
  
 str(metadata_Brooker)
-str(metadata_Oyen_Spade)
+str(metadata_Ouyen_Spade)
 
 metadata <- rbind(
   metadata_Brooker,
@@ -400,7 +400,7 @@ metadata <- rbind(
   metadata_Lowaldie,
   metadata_Murlong,
   metadata_New_Horizons,
-  metadata_Oyen_Spade,
+  metadata_Ouyen_Spade,
   metadata_Waikerie,
   metadata_Yenda,
   metadata_YoungHusband,
