@@ -29,23 +29,9 @@ unique(summary_data_all$site)
 
 summary_data_all %>%  distinct(rep_block)
 
-#site_name <- "Bute_Trengrove" #"Bute_CSIRO"
-#site_name <- "Bute_CSIRO"
-#site_name <-"Ouyen_spade"
-#site_name <-"Lowaldie_Crest"    
-#site_name <-"Lowaldie_Deep sand"
-#site_name <-"Brooker"
-#site_name <-"Younghusband"
-#site_name <- "Waikerie"
-#site_name <- "Brimpton Lake"
-#site_name <- "Cadgee"
-#site_name <- "Karoonda"
-#site_name <- "Murlong"
-#site_name <- "Carwarp"# "CarwarpAmelioration" OR "Carwarp"
 
-#site_name <- "Karkoo"
-site_name <- "Lowaldie_Deep sand"
-site_name_output <- "Lowaldie_Deep sand"
+site_name <- "Murlong"
+site_name_output <- "Murlong"
 
 list_of_descriptors<- summary_data_all %>% 
   #filter(site == site_name) %>% 
@@ -272,10 +258,10 @@ max_yld
 rm(anova, cld, data_summary, plot, summary_data, tukey, tukey.cld, year_selected)
 
 #year_selected <- 2021
-year_selected <- 2020
+#year_selected <- 2020
 #year_selected <- 2019
 
-#year_selected <- 2018
+year_selected <- 2018
 #year_selected <- 2017
 
 #year_selected <- 2016
