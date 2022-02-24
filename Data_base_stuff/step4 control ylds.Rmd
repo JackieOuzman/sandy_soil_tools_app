@@ -247,6 +247,22 @@ modification_with_depth %>%
 
 ```
 
+How many soil amendment (including different depths)?
+
+```{r how many amendment all, echo=FALSE, message=FALSE, warning=FALSE}
+amendment_with_depth <- summary_data_all %>% 
+  distinct(amendment) %>% 
+  arrange(amendment) %>% 
+  filter(!is.na(amendment)) %>% 
+  filter(amendment != "none" ) 
+
+
+amendment_with_depth %>% 
+  count()
+
+```
+
+
 
 ## Scatter Plots
 

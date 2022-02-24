@@ -5,7 +5,9 @@ library(readxl)
 library(tidyverse)
 library(multcompView)
 
+#install.packages("scales")
 
+library(scales)
 
 #################################################################################################################
 ####   Get the data #####
@@ -42,8 +44,8 @@ summary_data_all %>%  distinct(rep_block)
 #site_name <- "Carwarp"# "CarwarpAmelioration" OR "Carwarp"
 
 #site_name <- "Karkoo"
-site_name <- "Yenda"
-site_name_output <- "Yenda"
+site_name <- "Lowaldie_Deep sand"
+site_name_output <- "Lowaldie_Deep sand"
 
 list_of_descriptors<- summary_data_all %>% 
   #filter(site == site_name) %>% 
@@ -229,13 +231,8 @@ summary_data_site <- summary_data_all %>%
 
 site_name
 
-## for what years
-summary_data_all %>% filter(site == site_name) %>%
-  distinct(year)
+
  
-#summary_data_all %>% filter(site_sub == site_name) %>% 
-# summary_data_all %>% filter(site_sub == "CarwarpAmelioration") %>% 
-#   distinct(year)
 
 ##################################################################################################################################
 
@@ -261,18 +258,26 @@ summary_data_all %>% filter(site == site_name) %>%
 
 ##################################################################################################################################
 
+#check that we have the correct site:
+summary_data_site <- summary_data_all %>% filter(site == site_name)
 
+## for what years
+summary_data_site %>% distinct(year)
+
+max_yld <- max(summary_data_site$yield, na.rm = TRUE) 
+max_yld <-max_yld +0.5
+max_yld
 
 
 rm(anova, cld, data_summary, plot, summary_data, tukey, tukey.cld, year_selected)
 
-year_selected <- 2021
-#year_selected <- 2020
+#year_selected <- 2021
+year_selected <- 2020
 #year_selected <- 2019
 
 #year_selected <- 2018
-
 #year_selected <- 2017
+
 #year_selected <- 2016
 #year_selected <- 2015
 #year_selected <- 2014
@@ -281,7 +286,7 @@ year_selected <- 2021
   
 
 
-   summary_data <- summary_data_all %>%
+   summary_data <- summary_data_site %>%
   #  summary_data <- brooker %>%
     filter(site == site_name) %>%
     #filter(site_sub == "Brooker_reduced_trial") %>%
@@ -371,11 +376,16 @@ ggplot( aes(x = factor(Descriptors), y = mean)) +
   #labs(x="", y="Yield t/ha", title = paste(site_name,": ", year_selected),
   labs(x="", y="Yield t/ha", title = paste(site_name_output,": ", year_selected),
        subtitle = "ANOVA with Tukey, threshold 0.05") +
-  theme_bw() + 
+  theme_classic() + 
+  
+  scale_y_continuous(breaks=seq(0,max_yld,by=0.5), limits = c(0, max_yld))+
   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank()) +
   theme(legend.position = c(0.1, 0.75)) +
-  geom_text(aes(label=Tukey), position = position_dodge(0.80), size = 4, 
-            vjust=-0.5, hjust=-0.5, colour = "gray25")+
+  geom_text(aes(label=Tukey), 
+            position = position_dodge(0.80), 
+            size = 4,
+            vjust=-0.5, hjust=-0.5, 
+            colour = "gray25")+
   theme(axis.text.x=element_text(angle=45,hjust=1))
 
 

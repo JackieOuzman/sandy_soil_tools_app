@@ -8,13 +8,6 @@ library(tidyverse)
 ####   Get the data #####
 
 current.folder <- "X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/step2"
-# find the files that you want
-
-list.of.files <- list.files(current.folder, "neat.csv",full.names=T) 
-list.of.files
-
-
-
 
 
 

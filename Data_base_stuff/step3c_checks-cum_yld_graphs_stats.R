@@ -43,7 +43,8 @@ unique(summary_data_all$site)
 #site_name <-"Lowaldie_Deep sand"
 #site_name <-"Brooker_reduced_trial"
 
-
+site_name <- "Lowaldie_Deep sand" 
+site_name_output <- "Lowaldie_Deep sand" 
 
 yld_site <- summary_data_all %>%
   filter(site_sub == site_name)
@@ -59,7 +60,7 @@ cumulative_yld <- yld_site %>%
 cumulative_yld <- cumulative_yld %>% 
   group_by(Descriptors,rep_block ) %>% 
   summarise(sum_yld = sum(yield, na.rm = TRUE))
-cumulative_yld
+
 
 
 anova_cum_yld <- aov(sum_yld ~ Descriptors, data = cumulative_yld)
@@ -113,6 +114,8 @@ tukey_cum_yld_df
 
 
 
+
+
 ###############################################################################################################
 ### Now for the plots ###
 
@@ -127,29 +130,44 @@ site_year_yld_summary <- yld_site %>%
   arrange(desc(mean))
 print(site_year_yld_summary)
 
+max_sum_descriptors <-site_year_yld_summary %>% 
+  group_by(Descriptors) %>% 
+  summarise(cum_mean = sum(mean, na.rm = TRUE))
+
+
+max_sum <- max(max_sum_descriptors$cum_mean, na.rm = TRUE)
+max_sum <- max_sum +0.5
+max_sum
 
 site_year_yld_summary$Descriptors <- factor(site_year_yld_summary$Descriptors,
                                    levels = order)
 
 site_year_yld_summary$Year <- factor(site_year_yld_summary$year,
                                             #levels = c("2021","2020","2019","2018","2017","2016","2015","2014"))
-                                            #levels = c("2021","2020","2019","2018"))
+                                            #levels = c("2021","2020","2019","2018", "2017"))
                                             # levels = c("2020","2019","2018", "2017"))
-                                            # levels = c("2020","2019"))
-                                              levels = c("2021","2020"))
+                                             levels = c("2020","2019"))
+                                            # levels = c("2021","2020"))
                                             # levels = c("2021","2020","2019"))
                                             #  levels = c("2020","2019","2018"))
                                             #levels = c("2018","2017","2016","2015","2014"))
                                             #levels = c("2018","2017","2015","2014"))
-# barplot with letters
+
+
+site_year_yld_summary$Descriptors <- factor(site_year_yld_summary$Descriptors,
+                                       levels = order)
+
+
+
 plot_cumulative_yld <- site_year_yld_summary %>% 
   ggplot( aes(x = factor(Descriptors), y = mean, fill = Year, colour = Year)) + 
   geom_bar(stat = "identity",  alpha = 0.5)  +
-  #labs(x="", y="Cumulative Yield (t/ha)", title = paste(site_name))+
   labs(x="", y="Cumulative Yield (t/ha)", title = paste(site_name_output))+
   theme_bw() + 
+  scale_y_continuous(breaks=seq(0,max_sum,by=0.5), limits = c(0, max_sum))+
   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank()) +
   theme(axis.text.x=element_text(angle=45,hjust=1))
+ 
   
 
   plot_cumulative_yld

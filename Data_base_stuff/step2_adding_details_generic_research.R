@@ -121,6 +121,8 @@ primary<- primary %>%
     
     placement_organic == "incorperated to 8 cm" ~         "incorp_8",
     placement_organic == "incorporated to 8 cm" ~         "incorp_8",
+    placement_organic == "incorperated to 20 cm" ~        "incorp_20",
+    
     placement_organic == "incorperated to 50 cm" ~        "incorp_50", 
     placement_organic == "incorporated to 40 cm" ~        "incorp_40",
     placement_organic == "incorporated to 41 cm" ~        "incorp_40", #therese wanted this changed
@@ -164,6 +166,7 @@ primary<- primary %>%
     placement_fertiliser == "incorperated to 50 cm" ~        "incorp_50", 
     placement_fertiliser == "incorporated to 50 cm" ~        "incorp_50", 
     placement_fertiliser == "incorporated to 30 cm" ~        "incorp_30",  
+    placement_fertiliser == "incorperated to 20 cm" ~        "incorp_20",
     
     placement_fertiliser == "banded at 8 cm" ~               "band_8", 
     placement_fertiliser == "banded at 50 cm" ~              "band_50", 
@@ -193,6 +196,7 @@ primary<- primary %>%
     
     placement_other == "incorperated to 8 cm" ~         "incorp_8",
     placement_other == "incorperated to 50 cm" ~        "incorp_50", 
+    placement_other == "incorperated to 20 cm" ~        "incorp_20",
     
     
     placement_other == "incorporated to 8 cm" ~         "incorp_8",
