@@ -1024,6 +1024,11 @@ primary <- primary %>%
   filter(Descriptors != "Unmodified_Clay.NA")
 
 
+# Remove the extra control at Warnertown 
+
+primary_join_2 <- primary_join_2 %>%
+  filter(ID  != "Warnertown_2021_plot_19_rep_block_4")
+
 site_name
 
 write.csv(primary_join_2,

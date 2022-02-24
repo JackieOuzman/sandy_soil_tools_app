@@ -25,13 +25,13 @@ summary_data_all <- read_csv(data_file,
 
 
 unique(summary_data_all$site_sub)
-unique(summary_data_all$site)
+unique(summary_data_all$site) 
 
-summary_data_all %>%  distinct(rep_block)
+summary_data_all %>%  distinct(rep_block) 
 
 
-site_name <- "Murlong"
-site_name_output <- "Murlong"
+site_name <- "Monia_Gap"
+site_name_output <- "Monia_Gap"
 
 list_of_descriptors<- summary_data_all %>% 
   #filter(site == site_name) %>% 
@@ -139,9 +139,9 @@ order <- c(
   "Rip.40IncRip_Lc.incorp_30",
   "Rip.40IncRip_Lc.incorp_40",
   
-  "Rip.41_none",
-  "Rip.41_Lc.incorp_41",
-  "Rip.41_Fert.incorp_41",
+  
+  "Rip.40_Lc.incorp_40",
+  "Rip.40_Fert.incorp_40",
   
   "Rip.45_none",
   "Rip.45IncRip_none",
@@ -259,9 +259,9 @@ rm(anova, cld, data_summary, plot, summary_data, tukey, tukey.cld, year_selected
 
 #year_selected <- 2021
 #year_selected <- 2020
-#year_selected <- 2019
+year_selected <- 2019
 
-year_selected <- 2018
+#year_selected <- 2018
 #year_selected <- 2017
 
 #year_selected <- 2016

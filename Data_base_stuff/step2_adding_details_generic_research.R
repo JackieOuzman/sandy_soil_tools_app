@@ -82,6 +82,7 @@ primary<- primary %>%
     rip_depth == "500" ~ "50",
     rip_depth == "50 cm" ~ "50",
     rip_depth == "30 cm" ~ "30",
+    rip_depth == "41" ~ "40",
     
     TRUE ~ rip_depth
   ))
@@ -161,7 +162,7 @@ primary<- primary %>%
     
     placement_fertiliser == "incorperated to 8 cm" ~         "incorp_8",
     placement_fertiliser == "incorporated to 8 cm" ~         "incorp_8",
-    placement_fertiliser == "incorporated to 41 cm" ~        "incorp_41",
+    placement_fertiliser == "incorporated to 41 cm" ~        "incorp_40",
     placement_fertiliser == "incorporated to 45 cm" ~        "incorp_45",
     placement_fertiliser == "incorperated to 50 cm" ~        "incorp_50", 
     placement_fertiliser == "incorporated to 50 cm" ~        "incorp_50", 
