@@ -35,8 +35,8 @@ str(summary_data_all)
 unique(summary_data_all$year)
 unique(summary_data_all$site)
 
-site_name <- "Monia_Gap"
-site_name_output <- "Monia_Gap"
+site_name <- "Kybunga"
+site_name_output <- "Kybunga"
 
 yld_site <- summary_data_all %>%
   filter(site_sub == site_name)
