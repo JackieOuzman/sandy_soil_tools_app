@@ -129,6 +129,7 @@ primary<- primary %>%
     placement_organic == "incorporated to 41 cm" ~        "incorp_40", #therese wanted this changed
     placement_organic == "incorporated to 50 cm" ~        "incorp_50",
     placement_organic == "incorporated to 30 cm" ~        "incorp_30",
+    placement_organic == "incorporated to 30" ~           "incorp_30",
     placement_organic == "incorporated to 60 cm" ~        "incorp_60",
     
     placement_organic == "banded at 50 cm" ~              "band_50",
@@ -136,7 +137,15 @@ primary<- primary %>%
     placement_organic == "banded to 50 cm" ~              "band_50", 
     placement_organic == "banded at 30 cm" ~              "band_30",
     placement_organic == "banded at 60 cm" ~              "band_60",
+   
+    
     placement_organic == "banded to 30+60 cm" ~           "band_30+60",
+    placement_organic == "banded at 30+60 cm" ~           "band_30+60",
+    placement_organic == "incorporated to 30 + banded at 60 cm" ~           "incorp_30+band_60",
+    
+    
+    
+    
     
     
     placement_organic == "surface" ~                      "surface", 

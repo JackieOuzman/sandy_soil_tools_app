@@ -35,8 +35,8 @@ str(summary_data_all)
 unique(summary_data_all$year)
 unique(summary_data_all$site)
 
-site_name <- "Kybunga"
-site_name_output <- "Kybunga"
+site_name <- "Carwarp_Amelioration"
+site_name_output <- "Carwarp_Amelioration"
 
 yld_site <- summary_data_all %>%
   filter(site_sub == site_name)
@@ -140,8 +140,8 @@ site_year_yld_summary$Year <- factor(site_year_yld_summary$year,
                                             # levels = c("2020","2019","2018", "2017"))
                                             # levels = c("2020","2019"))
                                             # levels = c("2021","2020"))
-                                             levels = c("2021","2020","2019"))
-                                            #  levels = c("2020","2019","2018"))
+                                            # levels = c("2021","2020","2019"))
+                                              levels = c("2020","2019","2018"))
                                             #levels = c("2018","2017","2016","2015","2014"))
                                             #levels = c("2018","2017","2015","2014"))
 

@@ -30,8 +30,8 @@ unique(summary_data_all$site)
 summary_data_all %>%  distinct(rep_block) 
 
 
-site_name <- "Kybunga"
-site_name_output <- "Kybunga"
+site_name <- "Carwarp_Amelioration"
+site_name_output <- "Carwarp_Amelioration"
 
 list_of_descriptors<- summary_data_all %>% 
   #filter(site == site_name) %>% 
@@ -104,8 +104,9 @@ order <- c(
   "Spade.30_K_added.surface",
   "Spade.30_Fert.incorp_30",
   "Spade.30_Fert.incorp_30.K_added.incorp_30",
-  "Spade.30_Clay@250.check",
-  "Spade.30_Clay@500.check",
+  
+  "Spade.30_Clay@250.incorp_30",
+  "Spade.30_Clay@500.incorp_30_Yr07,20",
   "Spade.30_Clay.check",
   "Spade.30_Clay.incorp_30",
   "Spade.30_Gypsum.incorp_30",
@@ -117,6 +118,7 @@ order <- c(
   "Rip.30_Cl.band_30",
   "Rip.30_Cl@7.5.band_30",
   "Rip.30_Lc.incorp_30",
+  "Rip.30_Lc.band_30",
   "Rip.30_Fert.surface",
   "Rip.30_Fert.incorp_30",
   "Rip.30_Fert.band_8",
@@ -174,21 +176,25 @@ order <- c(
   "Inc.50_Cl@7.5.incorp_50",
   "Rip.50IncRip_none",
   "Rip.50IncRip_Cl.incorp_50",
+  "Rip.50IncRip_Cl.surface",
   
   "Rip.60_none",
   "Rip.60_Cl.surface",
   "Rip.60_Cl.band_60",
   "Rip.60_Lc.incorp_60",
+  "Rip.60_Lc.band_60",
   "Rip.60_Fert.band_8",
   "Rip.60_Fert.band_60",
   "Rip.60Spade.30_none",
   "Rip.60Spade.30_Lc.band_30+60",
+  "Rip.60Spade.30_Lc.incorp_30+band_60",
   "Rip.60IncRip_none",
   "Rip.60IncRip+Spade.30_none",
   
   "Delving.18_none",
   "Delving.18_SE14.band_8",
   "DiscInv.30_none"
+  
 )
 
 
@@ -258,8 +264,8 @@ max_yld
 rm(anova, cld, data_summary, plot, summary_data, tukey, tukey.cld, year_selected)
 
 #year_selected <- 2021
-#year_selected <- 2020
-year_selected <- 2019
+year_selected <- 2020
+#year_selected <- 2019
 
 #year_selected <- 2018
 #year_selected <- 2017

@@ -199,6 +199,7 @@ primary<- primary %>%
     placement_other == "incorporated to 10 cm" ~         "incorp_10",
     placement_other == "incorporated to 50 cm" ~        "incorp_50", 
     placement_other == "incorporated to 30 cm" ~        "incorp_30",
+    placement_other == "incorporate at 30 cm" ~        "incorp_30",
     
     placement_other == "band at 8 cm" ~                 "band_8", 
     placement_other == "banded at 50 cm" ~              "band_50", 
@@ -325,7 +326,10 @@ primary <- primary %>%
                                              "Telopea_Downs","Mt Damper", "Kooloonong_canola")  #all the sites but not Bute CSIRO
                  &   is.na(timing) ,
                 paste0(amendment_organic),
-           
+                
+                ifelse(site_sub            %in% c("Telopea_Downs")  #just Telopea_Downs
+                       &   timing  %in% c("Yrs07, 20"), 
+                       paste0(amendment_organic),
            
            
            ## annual
@@ -340,7 +344,7 @@ primary <- primary %>%
              
                   "check"
                    
-            ))#bracket for the number of ifelse statements
+            )))#bracket for the number of ifelse statements
 )# bracket for mutate function
 
 
@@ -450,11 +454,19 @@ primary <- primary %>%
   mutate(amendment_other = 
 ifelse(
   site_sub   %in% c("Telopea_Downs" )  #just one site for fert type 
-  & amendment_other  == "Clay.check",
+  & amendment_other  == "Clay.incorp_30"
+  &   is.na(timing),
   paste0("Clay", "@", other_rate, ".", placement_other),
+  
+  ifelse(
+    site_sub   %in% c("Telopea_Downs" )  #just one site for fert type 
+    & amendment_other  == "Clay.incorp_30"
+    &   timing  %in% c("Yrs07, 20"),
+    paste0("Clay", "@", other_rate, ".", placement_other, "_Yr07,20"),
+  
   amendment_other
   
-)#bracket for the number of ifelse statements
+))#bracket for the number of ifelse statements
 )# bracket for mutate function
 
 

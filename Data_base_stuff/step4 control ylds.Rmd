@@ -19,6 +19,7 @@ library(hrbrthemes)
 library(viridis)
 library(forcats)
 library(hrbrthemes)
+library(stringr)
 #install.packages("hrbrthemes")
 
 
@@ -167,24 +168,29 @@ list_sites_ready <- c("Brimpton Lake",
                       "Cummins",
                       "Karkoo",
                       "Karoonda",
-                      #"Kooloonong_canola",
+                      "Kooloonong_canola",
                       "Kooloonong_chickpea",
                       "Kooloonong_lentil",
                       "Kooloonong_lupin",
+                      "Kybunga",#newly added
                       "Lowaldie_Crest",
                       "Lowaldie_Deep sand",
+                      "Malinong", #newly added
+                      "Monia_Gap", #newly added
                       "Mt Damper",
                       "Mt_Damper",
                       "Murlong",
                       "Oyen_Spade",
                       "Ouyen_Spade",
+                      "Sherwood",
                       "Telopea_Downs",
                       "Tempy",
                       "Waikerie",
+                      "Warnertown", #newly added
                       "Wynarka",
-                      "Yenda",
-                      "Younghusband")
-
+                      "Yenda"
+                      #"Younghusband"
+                      )
 
 summary_control_data_all <- summary_control_data_all %>% 
   filter(site_sub %in% list_sites_ready  )
@@ -226,35 +232,149 @@ How many desciptors?
 desciptors <- summary_data_all %>% 
   distinct(Descriptors) 
 desciptors %>% 
-  count()
+count()
+
 ```
 
 How many soil modification (including different depths)?
 
-```{r how many modification all, echo=FALSE, message=FALSE, warning=FALSE}
+```{r working out how many modification all 1, message=FALSE, warning=FALSE, include=FALSE}
 ## how many different modification?
 
-summary_data_all <- summary_data_all %>% 
-  mutate(Descriptors_temp = Descriptors) %>% 
-  separate(Descriptors_temp, c("modification_with_depth", "amendment"), sep = "_")
+#### split the Descriptors into modification
 
-modification_with_depth <- summary_data_all %>% 
-  distinct(modification_with_depth) %>% 
-  arrange(modification_with_depth)
-modification_with_depth %>% 
-  count()
+# summary_control_data_all <- summary_control_data_all %>% 
+#   distinct(site, Descriptors, .keep_all=TRUE) %>% 
+#   select(site,
+#          Descriptors )
+# summary_control_data_all <- summary_control_data_all %>% arrange(site,Descriptors )
+
+### get the soil modification from the Descriptors
+summary_control_data_all <- summary_control_data_all %>% 
+  mutate(soil_modification =  str_extract(summary_control_data_all$Descriptors, "[^.]+"))#keep everything before the first 
+head(summary_control_data_all)
+#the Unmodified seems to have a problem this fixes it :)
+summary_control_data_all <- summary_control_data_all %>% 
+  mutate(soil_modification = str_extract(summary_control_data_all$soil_modification, "[^_]+")) #keep everything after the first _
+
+
+### problem for later ...
+summary_control_data_all <- summary_control_data_all %>% 
+  mutate(soil_modification = case_when(
+    Descriptors == "Rip.30IncRip_Gypsum.incorp_30" ~ "IncRip",
+    Descriptors == "Rip.30IncRip_none" ~ "IncRip",
+    Descriptors == "Rip.40IncRip_Lc.incorp_40" ~ "IncRip",
+    Descriptors == "Rip.40IncRip_none" ~ "IncRip",
+    Descriptors == "Rip.45IncRip_Fert_APP.band_45" ~ "IncRip",
+    Descriptors == "Rip.45IncRip_Fert_High.band_45" ~ "IncRip",
+    Descriptors == "Rip.45IncRip_Fert_Low.band_45" ~ "IncRip",
+    Descriptors == "Rip.45IncRip_none" ~ "IncRip",
+    Descriptors == "Rip.45IncRip_Fert.incorp_45" ~ "IncRip",
+    #Descriptors == "Rip.45IncRip+Spade.30_none" ~ "IncRip",
+    Descriptors == "Rip.50IncRip_Cl.surface" ~ "IncRip",
+    Descriptors == "Rip.50IncRip_none" ~ "IncRip",
+    Descriptors == "Rip.50IncRip_none" ~ "IncRip",
+    Descriptors == "Rip.50IncRip_none" ~ "IncRip",
+    Descriptors == "Rip.60IncRip_none" ~ "IncRip",
+    
+    Descriptors == "Rip.60Spade.30_none" ~ "Rip+Spade",
+    Descriptors == "Rip.50Spade.30_none" ~ "Rip+Spade",
+    Descriptors == "Rip.60Spade.30_none" ~ "Rip+Spade",
+    Descriptors == "Rip.45IncRip+Spade.30_none" ~ "Rip+Spade",
+    Descriptors == "Rip.60IncRip+Spade.30_none	" ~ "Rip+Spade",
+    Descriptors == "Rip.60Spade.30_none" ~ "Rip+Spade",
+    Descriptors == "Rip.60Spade.30_Lc.incorp_30+band_60	" ~ "Rip+Spade",
+    
+    Descriptors == "Rip.60IncRip+Spade.30_none" ~ "IncRip+Spade",
+    Descriptors == "Rip.45IncRip+Spade.30_none" ~ "IncRip+Spade",
+    TRUE ~ soil_modification))
+
+
+### get the soil Amendment from the Descriptors
+# gets all the amendments
+summary_control_data_all <- summary_control_data_all %>% 
+  mutate(amendment_all = sub("^[^_]*_", "", summary_control_data_all$Descriptors)) #keep everything after the first _
+#pull out the first amendment listed but has rates
+summary_control_data_all <- summary_control_data_all %>% 
+  mutate(amendment_1 = str_extract(summary_control_data_all$amendment_all, "[^.]+"))#keep everything before the first 
+#removed the rates in the first amendment listed 
+summary_control_data_all <- summary_control_data_all %>% 
+  mutate(amendment_1 = str_extract(summary_control_data_all$amendment_1, "[^@]+")) #keep everything before the first @
+  
+  
+#pull out the second amendment listed but has rates (_/.)
+summary_control_data_all <- summary_control_data_all %>% 
+  mutate(amendment_2a = sub("^[^.]*.", "", summary_control_data_all$amendment_all)) 
+summary_control_data_all <- summary_control_data_all %>% 
+  mutate(amendment_2b = sub("^[^.]*.", "", summary_control_data_all$amendment_2a)) 
+summary_control_data_all <- summary_control_data_all %>% 
+  mutate(amendment_2 = str_extract(summary_control_data_all$amendment_2b, "[^.]+"))
+
+
+
+
+#pull out the thrid amendment listed but has rates (_/.)
+summary_control_data_all <- summary_control_data_all %>% 
+  mutate(amendment_3a = sub("^[^.]*.", "", summary_control_data_all$amendment_2b)) 
+summary_control_data_all <- summary_control_data_all %>% 
+  mutate(amendment_3b = sub("^[^.]*.", "", summary_control_data_all$amendment_3a)) 
+summary_control_data_all <- summary_control_data_all %>% 
+  mutate(amendment_3 = str_extract(summary_control_data_all$amendment_3b, "[^.]+"))
+
+#tidy up working outs
+summary_control_data_all <- summary_control_data_all %>%
+  select(-amendment_2a, -amendment_2b, -amendment_3a, -amendment_3b)
+
+
+
+### bugger the timing year for amenedment 2 is stuffed up!
+unique(summary_control_data_all$amendment_1)
+unique(summary_control_data_all$amendment_2)
+unique(summary_control_data_all$amendment_3)
+
+summary_control_data_all <- summary_control_data_all %>% 
+  mutate(amendment_2 = case_when(
+    amendment_2 ==  "surface_Yr18,19,20" ~ "NA",
+    amendment_2 ==  "incorp_50" ~ "NA",
+    amendment_2 ==  "band_30" ~ "NA",
+    amendment_2 ==  "band_50" ~ "NA",
+    amendment_2 ==  "surface" ~ "NA",
+    TRUE ~ amendment_2
+  ))
+
+
+
+
+
 
 
 ```
 
+```{r working out how many modification all, echo=FALSE, message=FALSE, warning=FALSE}
+## how many different modification?
+
+#summary_control_data_all
+
+
+soil_modifications <- summary_control_data_all %>% 
+  distinct(soil_modification) %>% 
+  arrange(soil_modification) %>% 
+  filter(!is.na(soil_modification)) %>% 
+  filter(soil_modification != "none" ) 
+
+count(soil_modifications)
+
+```
+
+
 How many soil amendment (including different depths)?
 
 ```{r how many amendment all, echo=FALSE, message=FALSE, warning=FALSE}
-amendment_with_depth <- summary_data_all %>% 
-  distinct(amendment) %>% 
-  arrange(amendment) %>% 
-  filter(!is.na(amendment)) %>% 
-  filter(amendment != "none" ) 
+amendment_with_depth <- summary_control_data_all %>% 
+  distinct(amendment_all) %>% 
+  arrange(amendment_all) %>% 
+  filter(!is.na(amendment_all)) %>% 
+  filter(amendment_all != "none" ) 
 
 
 amendment_with_depth %>% 
@@ -353,53 +473,15 @@ The unmodified exists because the trials might still have amendment.
 
 Note for Jackie - the below code will need to be updated when all the sites are included and if names change.
 
-```{r working for modification, message=FALSE, warning=FALSE, include=FALSE}
-#### split the Descriptors into modification
 
-summary_control_data_all <- summary_control_data_all %>% 
-  mutate(Descriptors_temp = Descriptors) %>% 
-  separate(Descriptors_temp, c("modification_with_depth", "amendment"), sep = "_")
-
-unique(summary_control_data_all$modification_with_depth)
-
-summary_control_data_all <- summary_control_data_all %>% 
-  mutate(modification = case_when(
-    
-    modification_with_depth ==  "Unmodified" ~ "Unmodified",
-    modification_with_depth ==  "Spade.30" ~ "Spade",
-    modification_with_depth ==  "Sweep.30" ~ "Sweep",
-    modification_with_depth ==  "Delving.18" ~ "Delving",
-    
-    modification_with_depth ==  "Rip.30" ~ "Rip",
-    modification_with_depth ==  "Rip.40" ~ "Rip",
-    modification_with_depth ==  "Rip.41" ~ "Rip",
-    modification_with_depth ==  "Rip.50" ~ "Rip",
-    modification_with_depth ==  "Rip.50IncRip" ~ "In_Rip",
-    modification_with_depth ==  "Rip.60" ~ "Rip",
-    modification_with_depth ==  "Rip.30+60" ~ "Rip",
-    modification_with_depth ==  "Rip.60Spade.30" ~ "Rip+Spade",
-    modification_with_depth ==  "Rip.30IncRip" ~ "In_Rip",
-    modification_with_depth ==  "Rip.35" ~ "Rip",
-    modification_with_depth ==  "Rip.40IncRip" ~ "In_Rip",
-    modification_with_depth ==  "Rip.45" ~ "Rip",
-    modification_with_depth ==  "Rip.45IncRip" ~ "In_Rip",
-    modification_with_depth ==  "Rip.45IncRip+Spade.30" ~ "In_Rip+Spade",
-    modification_with_depth ==  "Rip.60IncRip" ~ "In_Rip",
-    modification_with_depth ==  "Rip.60IncRip+Spade.30" ~ "In_Rip+Spade",
-    modification_with_depth ==  "Inc.50" ~ "Inc",
-    modification_with_depth ==  "Delving.18" ~ "Delving",
-    TRUE ~ "check"))
-    
-
-```
 
 
 How many soil modification (with NO depth differences eg all the ripping is included in rip)?
 
 ```{r how many NO depth modification all, echo=FALSE, message=FALSE, warning=FALSE}
 modification_NO_depth <- summary_control_data_all %>% 
-  distinct(modification) %>% 
-  arrange(modification)
+  distinct(soil_modification) %>% 
+  arrange(soil_modification)
 modification_NO_depth %>% 
   count()
   
@@ -407,20 +489,11 @@ modification_NO_depth %>%
   
 
 ```{r scatter modification, echo=FALSE, message=FALSE, warning=FALSE}
-# ggplot(summary_control_data_all, mapping = aes(control_yield, yield,)) +
-#   geom_point() +
-#   geom_smooth(method = lm, se = FALSE) +
-#   geom_abline(intercept = 0, slope = 1, linetype="dashed")+
-#   scale_x_continuous(breaks=seq(0,10,by=0.5))+
-#   scale_y_continuous(breaks=seq(0,10,by=0.5))+
-#   theme_bw()+
-#   labs(title = "Control yield - all data - no summary\nnote each site, treatment, year and rep is matched to control
-#        \nFacet wrap is modification",
-#        x = "control yield t/ha", y = "trial yield t/ha")+
-#   facet_wrap(.~ modification)
 
 
-summary_control_data_all %>%  filter(modification != "Unmodified") %>% 
+
+summary_control_data_all %>%  
+  filter(soil_modification != "Unmodified") %>% 
 ggplot( mapping = aes(control_yield, yield,)) +
   geom_point() +
   geom_smooth(method = lm, se = FALSE) +
@@ -431,7 +504,7 @@ ggplot( mapping = aes(control_yield, yield,)) +
   labs(#title = "Control yield - all data - no summary\nnote each site, treatment, year and rep is matched to control
        #\nFacet wrap is modification",
        x = "control yield t/ha", y = "trial yield t/ha")+
-  facet_wrap(.~ modification)
+  facet_wrap(.~ soil_modification)
 
 
 ```
@@ -442,15 +515,25 @@ ggplot( mapping = aes(control_yield, yield,)) +
 ```{r subset data, message=FALSE, warning=FALSE, include=FALSE}
 ### subset data so we have no amendment
 str(summary_control_data_all)
-unique(summary_control_data_all$amendment)
+unique(summary_control_data_all$amendment_all)
 no_amendment <- summary_control_data_all %>% 
-  filter(amendment ==  "none"  )
+  filter(amendment_all ==  "none"  )
 str(no_amendment)
+unique(summary_control_data_all$soil_modification)
 
 ## change the order of the modification
-oder_modification <- c("Rip","Rip+Spade", "Spade", "Sweep" , "Inc" ,"In_Rip" ,"In_Rip+Spade","Delving","Unmodified" )
-no_amendment$modification <- factor(no_amendment$modification,
-                                       levels = oder_modification)
+order_modification <- c("Rip",
+                        "Rip+Spade", 
+                        "Spade", 
+                        "Sweep" , 
+                        "Inc" ,
+                        "IncRip" ,
+                        "IncRip+Spade",
+                        #"Delving",
+                        "DiscInv",
+                        "Unmodified" )
+no_amendment$soil_modification <- factor(no_amendment$soil_modification,
+                                         levels = order_modification)
 ```
 
 ## Scatter Plots with subset data
@@ -458,7 +541,7 @@ no_amendment$modification <- factor(no_amendment$modification,
 ```{r scatter subset data, echo=FALSE, message=FALSE, warning=FALSE}
 ### control vs trials
 ggplot(data = no_amendment, mapping = aes(control_yield, yield)) +
-  geom_point(aes(colour= modification),alpha= 0.4) +
+  geom_point(aes(colour= soil_modification),alpha= 0.4) +
   geom_abline(intercept = 0, slope = 1, linetype="dashed", size = 0.5)+
   geom_smooth(data = no_amendment, method = lm, se = FALSE, colour = "black", size = 0.5) +
   scale_x_continuous(breaks=seq(0,10,by=0.5))+
@@ -479,7 +562,7 @@ ggplot(data = no_amendment, mapping = aes(control_yield, yield)) +
 ### Facet wrap is years post amelioration, the NA related to trial with no metdata
 ```{r scatter subset data facet yrs post, echo=FALSE, message=FALSE, warning=FALSE}
 ggplot(data = no_amendment, mapping = aes(control_yield, yield)) +
-  geom_point(aes(colour= modification),alpha= 0.4) +
+  geom_point(aes(colour= soil_modification),alpha= 0.4) +
   geom_abline(intercept = 0, slope = 1, linetype="dashed", size = 0.5)+
   #geom_smooth(data = no_amendment, method = lm, se = FALSE, colour = "black", size = 0.5) +
   labs(title = "Control yield - subset of data no amendment",
@@ -498,7 +581,7 @@ ggplot(data = no_amendment, mapping = aes(control_yield, yield)) +
 
 ```{r scatter subset data facet site, echo=FALSE, message=FALSE, warning=FALSE}
 ggplot(data = no_amendment, mapping = aes(control_yield, yield)) +
-  geom_point(aes(colour= modification),alpha= 0.4) +
+  geom_point(aes(colour= soil_modification),alpha= 0.4) +
   geom_abline(intercept = 0, slope = 1, linetype="dashed", size = 0.5)+
   geom_smooth(data = no_amendment, method = lm, se = FALSE, colour = "black", size = 0.5) +
   labs(title = "Control yield - subset of data no amendment",
@@ -513,13 +596,13 @@ ggplot(data = no_amendment, mapping = aes(control_yield, yield)) +
 
 ```{r scatter subset data facet modification, echo=FALSE, message=FALSE, warning=FALSE}
 ggplot(data = no_amendment, mapping = aes(control_yield, yield)) +
-  geom_point(aes(colour= modification),alpha= 0.4) +
+  geom_point(aes(colour= soil_modification),alpha= 0.4) +
   geom_abline(intercept = 0, slope = 1, linetype="dashed", size = 0.5)+
   geom_smooth(data = no_amendment, method = lm, se = FALSE, colour = "black", size = 0.5) +
   labs(title = "Control yield - subset of data no amendment",
        subtitle = "note each site, treatment, year and rep is matched to control",
        x = "control yield t/ha", y = "trial yield t/ha")+
-  facet_wrap(.~ modification)
+  facet_wrap(.~ soil_modification)
 ```
 
 
@@ -538,7 +621,7 @@ summary_control_data_all <- summary_control_data_all %>%
 
 ## cal the mean yield gains for modification
 mean_values <- summary_control_data_all %>% 
-  group_by(modification) %>% 
+  group_by(soil_modification) %>% 
   summarise(mod_mean = mean(yield_gain,  na.rm = TRUE))
 
 ```
@@ -564,7 +647,7 @@ ggplot(summary_control_data_all, aes(x = yield_gain)) +
   geom_histogram(aes(y = (..count..)/sum(..count..)), group = 1, colour = 1, fill = "white") +
   geom_vline(data = mean_values, aes(xintercept=mod_mean),       color="blue", linetype="dashed", size=1)+
   geom_vline(data = summary_control_data_all, aes(xintercept=0), color="black", linetype="dashed", size=1)+
-  facet_wrap(.~ modification)+
+  facet_wrap(.~ soil_modification)+
   labs(title = "Yield gains - all data - no summary\nNote each site, treatment, year and rep is matched to control
          \nFacet wrap is modification\nBlue line is mean yield gain",
        x = "yield gain t/ha", y = "frequency of occurance")
@@ -584,7 +667,7 @@ no_amendment <- no_amendment %>%
 
 ## cal the mean yield gains for modification
 mean_values_no_amendment <- no_amendment %>% 
-  group_by(modification) %>% 
+  group_by(soil_modification) %>% 
   summarise(mod_mean = mean(yield_gain,  na.rm = TRUE))
 
 ```
@@ -614,7 +697,7 @@ ggplot(no_amendment, aes(yield_gain)) +
   labs(title = "Yield gains - subset of data no amendment",
        subtitle = "Note each site, treatment, year and rep is matched to control\nBlue line is mean yield gain",
        x = "yield gain t/ha", y = "frequency of occurance")+
-  facet_wrap(.~ modification)
+  facet_wrap(.~ soil_modification)
 ```
 
 
@@ -677,44 +760,122 @@ cum_yld_gains_control <- summary_control_data_all %>%
             max_yr_post_amelioration = max(yr_post_amelioration  , na.rm = TRUE))
 cum_yld_gains_control
 
+cum_yld_gains_control <- ungroup(cum_yld_gains_control)
 
 
 
-#### split the Descriptors into modification
+
+
+### get the soil modification from the Descriptors
+cum_yld_gains_control <- cum_yld_gains_control %>% 
+  mutate(soil_modification =  str_extract(cum_yld_gains_control$Descriptors, "[^.]+"))#keep everything before the first 
+head(cum_yld_gains_control)
+#the Unmodified seems to have a problem this fixes it :)
+cum_yld_gains_control <- cum_yld_gains_control %>% 
+  mutate(soil_modification = str_extract(cum_yld_gains_control$soil_modification, "[^_]+")) #keep everything after the first _
+
+
+### problem for later ...
+cum_yld_gains_control <- cum_yld_gains_control %>% 
+  mutate(soil_modification = case_when(
+    Descriptors == "Rip.30IncRip_Gypsum.incorp_30" ~ "IncRip",
+    Descriptors == "Rip.30IncRip_none" ~ "IncRip",
+    Descriptors == "Rip.40IncRip_Lc.incorp_40" ~ "IncRip",
+    Descriptors == "Rip.40IncRip_none" ~ "IncRip",
+    Descriptors == "Rip.45IncRip_Fert_APP.band_45" ~ "IncRip",
+    Descriptors == "Rip.45IncRip_Fert_High.band_45" ~ "IncRip",
+    Descriptors == "Rip.45IncRip_Fert_Low.band_45" ~ "IncRip",
+    Descriptors == "Rip.45IncRip_none" ~ "IncRip",
+    Descriptors == "Rip.45IncRip_Fert.incorp_45" ~ "IncRip",
+    Descriptors == "Rip.45IncRip+Spade.30_none" ~ "IncRip",
+    Descriptors == "Rip.50IncRip_Cl.surface" ~ "IncRip",
+    Descriptors == "Rip.50IncRip_none" ~ "IncRip",
+    Descriptors == "Rip.50IncRip_none" ~ "IncRip",
+    Descriptors == "Rip.50IncRip_none" ~ "IncRip",
+    Descriptors == "Rip.60IncRip_none" ~ "IncRip",
+    
+    Descriptors == "Rip.60Spade.30_none" ~ "Rip+Spade",
+    Descriptors == "Rip.50Spade.30_none" ~ "Rip+Spade",
+    Descriptors == "Rip.60Spade.30_none" ~ "Rip+Spade",
+    Descriptors == "Rip.45IncRip+Spade.30_none" ~ "Rip+Spade",
+    Descriptors == "Rip.60IncRip+Spade.30_none	" ~ "Rip+Spade",
+    Descriptors == "Rip.60Spade.30_none" ~ "Rip+Spade",
+    Descriptors == "Rip.60Spade.30_Lc.incorp_30+band_60	" ~ "Rip+Spade",
+    
+    Descriptors == "Rip.60IncRip+Spade.30_none" ~ "IncRip+Spade",
+    Descriptors == "Rip.45IncRip+Spade.30_none" ~ "IncRip+Spade",
+    TRUE ~ soil_modification))
+
+
+### get the soil Amendment from the Descriptors
+# gets all the amendments
+cum_yld_gains_control <- cum_yld_gains_control %>% 
+  mutate(amendment_all = sub("^[^_]*_", "", cum_yld_gains_control$Descriptors)) #keep everything after the first _
+#pull out the first amendment listed but has rates
+cum_yld_gains_control <- cum_yld_gains_control %>% 
+  mutate(amendment_1 = str_extract(cum_yld_gains_control$amendment_all, "[^.]+"))#keep everything before the first 
+#removed the rates in the first amendment listed 
+cum_yld_gains_control <- cum_yld_gains_control %>% 
+  mutate(amendment_1 = str_extract(cum_yld_gains_control$amendment_1, "[^@]+")) #keep everything before the first @
+  
+  
+#pull out the second amendment listed but has rates (_/.)
+cum_yld_gains_control <- cum_yld_gains_control %>% 
+  mutate(amendment_2a = sub("^[^.]*.", "", cum_yld_gains_control$amendment_all)) 
+cum_yld_gains_control <- cum_yld_gains_control %>% 
+  mutate(amendment_2b = sub("^[^.]*.", "", cum_yld_gains_control$amendment_2a)) 
+cum_yld_gains_control <- cum_yld_gains_control %>% 
+  mutate(amendment_2 = str_extract(cum_yld_gains_control$amendment_2b, "[^.]+"))
+
+
+
+
+#pull out the thrid amendment listed but has rates (_/.)
+cum_yld_gains_control <- cum_yld_gains_control %>% 
+  mutate(amendment_3a = sub("^[^.]*.", "", cum_yld_gains_control$amendment_2b)) 
+cum_yld_gains_control <- cum_yld_gains_control %>% 
+  mutate(amendment_3b = sub("^[^.]*.", "", cum_yld_gains_control$amendment_3a)) 
+cum_yld_gains_control <- cum_yld_gains_control %>% 
+  mutate(amendment_3 = str_extract(cum_yld_gains_control$amendment_3b, "[^.]+"))
+
+#tidy up working outs
+cum_yld_gains_control <- cum_yld_gains_control %>%
+  select(-amendment_2a, -amendment_2b, -amendment_3a, -amendment_3b)
+
+
+
+### bugger the timing year for amenedment 2 is stuffed up!
+unique(cum_yld_gains_control$amendment_1)
+unique(cum_yld_gains_control$amendment_2)
+unique(cum_yld_gains_control$amendment_3)
 
 cum_yld_gains_control <- cum_yld_gains_control %>% 
-  mutate(Descriptors_temp = Descriptors) %>% 
-  separate(Descriptors_temp, c("modification_with_depth", "amendment"), sep = "_")
+  mutate(amendment_2 = case_when(
+    amendment_2 ==  "surface_Yr18,19,20" ~ "NA",
+    amendment_2 ==  "incorp_50" ~ "NA",
+    amendment_2 ==  "band_30" ~ "NA",
+    amendment_2 ==  "band_50" ~ "NA",
+    amendment_2 ==  "surface" ~ "NA",
+    TRUE ~ amendment_2
+  ))
 
-unique(cum_yld_gains_control$modification_with_depth)
 
 
-cum_yld_gains_control <- cum_yld_gains_control %>% 
-  mutate(modification = case_when(
-    
-    modification_with_depth ==  "Unmodified" ~ "Unmodified",
-    modification_with_depth ==  "Spade.30" ~ "Spade",
-    modification_with_depth ==  "Sweep.30" ~ "Sweep",
-    modification_with_depth ==  "Delving.18" ~ "Delving",
-    
-    modification_with_depth ==  "Rip.30" ~ "Rip",
-    modification_with_depth ==  "Rip.40" ~ "Rip",
-    modification_with_depth ==  "Rip.41" ~ "Rip",
-    modification_with_depth ==  "Rip.50" ~ "Rip",
-    modification_with_depth ==  "Rip.50IncRip" ~ "Rip",
-    modification_with_depth ==  "Rip.60" ~ "Rip",
-    modification_with_depth ==  "Rip.30+60" ~ "Rip",
-    modification_with_depth ==  "Rip.60Spade.30" ~ "Rip",
-    
-    modification_with_depth ==  "Inc.50" ~ "Inc",
-    modification_with_depth ==  "Delving.18" ~ "Delving",
-    TRUE ~ "check"))
 
+
+
+
+
+
+
+
+
+############################################################################
 
 
 ## cal the mean yield gains for modification
 mean_gains_values <- cum_yld_gains_control %>% 
-  group_by(modification) %>% 
+  group_by(soil_modification) %>% 
   summarise(mod_mean_gains = mean(sum_yld_gains,  na.rm = TRUE))
 
 cum_yld_gains_control <- cum_yld_gains_control %>% 
@@ -744,14 +905,14 @@ ggplot(cum_yld_gains_control, aes(sum_yld_gains)) +
 
 
 cum_yld_gains_control %>% 
-  filter(modification =="Spade"| modification == "Rip") %>% 
+  filter(soil_modification =="Spade"| soil_modification == "Rip") %>% 
  ggplot( aes(x = sum_yld_gains)) + 
   geom_histogram(aes(y = (..count..)/sum(..count..)), group = 1, colour = 1, fill = "white") +
   geom_vline(data = mean_gains_values %>% 
-               filter(modification =="Spade"| modification == "Rip"), aes(xintercept=mod_mean_gains),       color="blue", linetype="dashed", size=1)+
+               filter(soil_modification =="Spade"| soil_modification == "Rip"), aes(xintercept=mod_mean_gains),       color="blue", linetype="dashed", size=1)+
   geom_vline(data = cum_yld_gains_control%>% 
-               filter(modification =="Spade"| modification == "Rip"), aes(xintercept=0), color="black", linetype="dashed", size=1)+
-  facet_wrap(.~ modification)+
+               filter(soil_modification =="Spade"| soil_modification == "Rip"), aes(xintercept=0), color="black", linetype="dashed", size=1)+
+  facet_wrap(.~ soil_modification)+
   labs(title = "Cumulative control yield",
        subtitle ="note that for each site, treatment and rep yields are summed over multiple years\nand it is matched to summed control yield",
        x = "cumulative yield gain t/ha", y = "frequency of occurance")
@@ -765,7 +926,7 @@ cum_yld_gains_control %>%
 ```{r cum yld gains no amedments cals, message=FALSE, warning=FALSE, include=FALSE}
 #keep the rep but not the year
 cum_yld_no_amendment <- no_amendment %>% 
-  group_by(site_sub, Descriptors,modification,rep_block ) %>% 
+  group_by(site_sub, Descriptors,soil_modification,rep_block ) %>% 
   summarise(sum_yld = sum(yield, na.rm = TRUE),
             sum__control_yld = sum(control_yield, na.rm = TRUE),
             max_yr_post_amelioration = max(yr_post_amelioration  , na.rm = TRUE))
@@ -780,7 +941,7 @@ cum_yld_no_amendment <- cum_yld_no_amendment %>%
 
 ```{r cum yld gains no amedments scatter, message=FALSE, warning=FALSE, include=FALSE}
   ggplot(data = cum_yld_no_amendment, mapping = aes(sum__control_yld, sum_yld, )) +
-    geom_point(aes(colour= modification),alpha= 0.4) +
+    geom_point(aes(colour= soil_modification),alpha= 0.4) +
     geom_abline(intercept = 0, slope = 1, linetype="dashed", size = 0.5)+
     geom_smooth(data = cum_yld_no_amendment, method = lm, se = FALSE, colour = "black", size = 0.5) +
       labs(title = "Cumulative control yield - subset of data no amendment",
@@ -797,7 +958,7 @@ cum_yld_no_amendment <- cum_yld_no_amendment %>%
   
   ## cal the mean yield gains for modification
   mean_gains_values_no_amendment <- cum_yld_no_amendment %>% 
-    group_by(modification) %>% 
+    group_by(soil_modification) %>% 
     summarise(mod_mean_gains = mean(sum_yld,  na.rm = TRUE))
   
 ``` 
@@ -814,7 +975,7 @@ cum_yld_no_amendment <- cum_yld_no_amendment %>%
     
     geom_vline(data = cum_yld_no_amendment, 
                aes(xintercept=0), color="black", linetype="dashed", size=1)+
-    facet_wrap(.~ modification)+
+    facet_wrap(.~ soil_modification)+
     labs(title = "Cumulative control yield - subset of data no amendment",
          subtitle ="note that for each site, treatment and rep yields are summed over multiple years\nand it is matched to summed control yield",
          x = "cumulative yield gain t/ha", y = "frequency of occurance")
@@ -825,18 +986,18 @@ cum_yld_no_amendment <- cum_yld_no_amendment %>%
 ### Histograms just the ripping and spading
 ```{r cum yld gains no amedments hist spad and rip, echo=FALSE, message=FALSE, warning=FALSE}
   cum_yld_no_amendment %>% 
-    filter(modification =="Spade"| modification == "Rip") %>% 
+    filter(soil_modification =="Spade"| soil_modification == "Rip") %>% 
     ggplot( aes(x = sum_yld)) + 
     geom_histogram(aes(y = (..count..)/sum(..count..)), group = 1, colour = 1, fill = "white") +
     
     geom_vline(data = mean_gains_values_no_amendment%>% 
-                filter(modification =="Spade"| modification == "Rip"), 
+                filter(soil_modification =="Spade"| soil_modification == "Rip"), 
                aes(xintercept=mod_mean_gains),       color="blue", linetype="dashed", size=1)+
     
     geom_vline(data = cum_yld_no_amendment %>% 
-                filter(modification =="Spade"| modification == "Rip"), 
+                filter(soil_modification =="Spade"| soil_modification == "Rip"), 
                aes(xintercept=0), color="black", linetype="dashed", size=1)+
-    facet_wrap(.~ modification)+
+    facet_wrap(.~ soil_modification)+
     labs(title = "Cumulative control yield - subset of data no amendment",
          subtitle ="note that for each site, treatment and rep yields are summed over multiple years\nand it is matched to summed control yield",
          x = "cumulative yield gain t/ha", y = "frequency of occurance")
