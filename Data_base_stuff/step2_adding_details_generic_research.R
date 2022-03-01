@@ -668,7 +668,9 @@ primary_metadata <- read_csv(input_data_file_metadata,
 
 primary_metadata <- primary_metadata %>% 
   rename(site  = `Site Name`)
-
+# remove duplication that has crept in.
+primary_metadata <- primary_metadata %>% 
+  distinct(site, .keep_all = TRUE)
 
 
 ################################################################################################
