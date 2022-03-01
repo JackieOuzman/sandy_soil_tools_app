@@ -89,23 +89,40 @@ summary_control_data_all <- summary_control_data_all %>%
 #####################################################################################
 
 
+
+
+str(summary_control_data_all)
+#keep the rep but not the year
+cum_yld_gains_control <- summary_control_data_all %>% 
+  group_by(site_sub, Descriptors,rep_block ) %>% 
+  summarise(sum_yld_gains = sum(yield_gain, na.rm = TRUE),
+            max_yr_post_amelioration = max(yr_post_amelioration  , na.rm = TRUE))
+cum_yld_gains_control
+
+cum_yld_gains_control <- ungroup(cum_yld_gains_control)
+
+
+
+
+
+
 #####################################################################################
 #####  soil modifications      #####
 #####################################################################################
-summary_control_data_all <- summary_control_data_all %>%
-  distinct(site, Descriptors, .keep_all=TRUE) %>%
-  select(site,
-         Descriptors )
-summary_control_data_all <- summary_control_data_all %>% arrange(site,Descriptors )
+# summary_control_data_all <- summary_control_data_all %>%
+#   distinct(site, Descriptors, .keep_all=TRUE) %>%
+#   select(site,
+#          Descriptors )
+# summary_control_data_all <- summary_control_data_all %>% arrange(site,Descriptors )
 
 ### get the soil modification from the Descriptors
 
 #1 soil modification with depth
-summary_control_data_all <- summary_control_data_all %>% 
-  mutate(soil_modification_depth =  str_extract(summary_control_data_all$Descriptors, "[^_]+"))#keep everything before the first_
+cum_yld_gains_control <- cum_yld_gains_control %>% 
+  mutate(soil_modification_depth =  str_extract(cum_yld_gains_control$Descriptors, "[^_]+"))#keep everything before the first_
 
 #how many modification_depth
-soil_modification_depth <- summary_control_data_all %>% 
+soil_modification_depth <- cum_yld_gains_control %>% 
   distinct(soil_modification_depth) %>% 
   arrange(soil_modification_depth) %>% 
   filter(soil_modification_depth != "Unmodified")
@@ -114,15 +131,15 @@ count(soil_modification_depth) #20 excluding the unmodified
 
 
 #1a working clms - soil modification without depth 1 only
-summary_control_data_all <- summary_control_data_all %>% 
-  mutate(soil_modification_1 =  str_extract(summary_control_data_all$Descriptors, "[^.]+"))#keep everything before the first .
+cum_yld_gains_control <- cum_yld_gains_control %>% 
+  mutate(soil_modification_1 =  str_extract(cum_yld_gains_control$Descriptors, "[^.]+"))#keep everything before the first .
 
 #the Unmodified seems to have a problem this fixes it :)
-summary_control_data_all <- summary_control_data_all %>% 
-  mutate(soil_modification_1 = str_extract(summary_control_data_all$soil_modification_1, "[^_]+")) #keep everything after the first _
+cum_yld_gains_control <- cum_yld_gains_control %>% 
+  mutate(soil_modification_1 = str_extract(cum_yld_gains_control$soil_modification_1, "[^_]+")) #keep everything after the first _
 
 #1a working clms - 2 soil modification without depth 2
-summary_control_data_all <- summary_control_data_all %>% 
+cum_yld_gains_control <- cum_yld_gains_control %>% 
   mutate(soil_modification_2 = case_when(
     soil_modification_depth == "Rip.50Spade.30" ~        "Rip+Spade",
     soil_modification_depth == "Rip.60Spade.30" ~        "Rip+Spade",
@@ -134,7 +151,7 @@ summary_control_data_all <- summary_control_data_all %>%
 	
 #2 all soil modification without depth (if 2 soil modification used keep this)	
 
-summary_control_data_all <- summary_control_data_all %>% 
+cum_yld_gains_control <- cum_yld_gains_control %>% 
   mutate(soil_modification = case_when(
     soil_modification_2 == "NA" ~ soil_modification_1,
     TRUE ~ soil_modification_2
@@ -142,13 +159,13 @@ summary_control_data_all <- summary_control_data_all %>%
 	
 	
 ### remove the working clms
-summary_control_data_all <- summary_control_data_all %>% 
+cum_yld_gains_control <- cum_yld_gains_control %>% 
   select(-soil_modification_1,
          -soil_modification_2)
 
 
 #how many modification without depth
-soil_modification_depth <- summary_control_data_all %>% 
+soil_modification_depth <- cum_yld_gains_control %>% 
   distinct(soil_modification) %>% 
   arrange(soil_modification) %>% 
   filter(soil_modification != "Unmodified")
@@ -160,31 +177,31 @@ count(soil_modification_depth) #7 excluding the unmodified
 #####################################################################################
 #####  soil amendments      #####
 #####################################################################################
-back_up <- summary_control_data_all
+back_up <- cum_yld_gains_control
 ### get the soil Amendment from the Descriptors
 # gets all the amendments
-summary_control_data_all <- summary_control_data_all %>% 
-  mutate(amendment_all = sub("^[^_]*_", "", summary_control_data_all$Descriptors)) #keep everything after the first _
+cum_yld_gains_control <- cum_yld_gains_control %>% 
+  mutate(amendment_all = sub("^[^_]*_", "", cum_yld_gains_control$Descriptors)) #keep everything after the first _
 #pull out the first amendment listed but has rates
-summary_control_data_all <- summary_control_data_all %>% 
-  mutate(amendment_1 = str_extract(summary_control_data_all$amendment_all, "[^.]+"))#keep everything before the first 
+cum_yld_gains_control <- cum_yld_gains_control %>% 
+  mutate(amendment_1 = str_extract(cum_yld_gains_control$amendment_all, "[^.]+"))#keep everything before the first 
 #removed the rates in the first amendment listed 
-summary_control_data_all <- summary_control_data_all %>% 
-  mutate(amendment_1 = str_extract(summary_control_data_all$amendment_1, "[^@]+")) #keep everything before the first @
+cum_yld_gains_control <- cum_yld_gains_control %>% 
+  mutate(amendment_1 = str_extract(cum_yld_gains_control$amendment_1, "[^@]+")) #keep everything before the first @
 
 
 #pull out the second amendment listed but has rates (_/.)
-summary_control_data_all <- summary_control_data_all %>% 
-  mutate(amendment_2a = sub("^[^.]*.", "", summary_control_data_all$amendment_all)) 
-summary_control_data_all <- summary_control_data_all %>% 
-  mutate(amendment_2b = sub("^[^.]*.", "", summary_control_data_all$amendment_2a)) 
-summary_control_data_all <- summary_control_data_all %>% 
-  mutate(amendment_2 = str_extract(summary_control_data_all$amendment_2b, "[^.]+"))
+cum_yld_gains_control <- cum_yld_gains_control %>% 
+  mutate(amendment_2a = sub("^[^.]*.", "", cum_yld_gains_control$amendment_all)) 
+cum_yld_gains_control <- cum_yld_gains_control %>% 
+  mutate(amendment_2b = sub("^[^.]*.", "", cum_yld_gains_control$amendment_2a)) 
+cum_yld_gains_control <- cum_yld_gains_control %>% 
+  mutate(amendment_2 = str_extract(cum_yld_gains_control$amendment_2b, "[^.]+"))
 
 ### not quite right remove some problems!
-unique(summary_control_data_all$amendment_2)
+unique(cum_yld_gains_control$amendment_2)
 
-summary_control_data_all <- summary_control_data_all %>% 
+cum_yld_gains_control <- cum_yld_gains_control %>% 
   mutate(amendment_2 = case_when(
     amendment_2 ==  "surface_Yr18,19,20" ~ "",
     amendment_2 ==  "incorp_50" ~ "",
@@ -193,56 +210,56 @@ summary_control_data_all <- summary_control_data_all %>%
     amendment_2 ==  "surface" ~ "",
     TRUE ~ amendment_2
   ))
-unique(summary_control_data_all$amendment_2)
+unique(cum_yld_gains_control$amendment_2)
 
 
 
 #pull out the thrid amendment listed but has rates (_/.)
-summary_control_data_all <- summary_control_data_all %>% 
-  mutate(amendment_3a = sub("^[^.]*.", "", summary_control_data_all$amendment_2b)) 
-summary_control_data_all <- summary_control_data_all %>% 
-  mutate(amendment_3b = sub("^[^.]*.", "", summary_control_data_all$amendment_3a)) 
-summary_control_data_all <- summary_control_data_all %>% 
-  mutate(amendment_3 = str_extract(summary_control_data_all$amendment_3b, "[^.]+"))
+cum_yld_gains_control <- cum_yld_gains_control %>% 
+  mutate(amendment_3a = sub("^[^.]*.", "", cum_yld_gains_control$amendment_2b)) 
+cum_yld_gains_control <- cum_yld_gains_control %>% 
+  mutate(amendment_3b = sub("^[^.]*.", "", cum_yld_gains_control$amendment_3a)) 
+cum_yld_gains_control <- cum_yld_gains_control %>% 
+  mutate(amendment_3 = str_extract(cum_yld_gains_control$amendment_3b, "[^.]+"))
 
 
 
 
 
 ### bugger the timing year for amenedment 2 is stuffed up!
-unique(summary_control_data_all$amendment_1)
-unique(summary_control_data_all$amendment_2)
-unique(summary_control_data_all$amendment_3)
+unique(cum_yld_gains_control$amendment_1)
+unique(cum_yld_gains_control$amendment_2)
+unique(cum_yld_gains_control$amendment_3)
 
 
 
 ## amendments 1, 2, 3 together.
-str(summary_control_data_all)
+str(cum_yld_gains_control)
 
 
-summary_control_data_all$amendment_1 <-  
-  stringr::str_replace_na(summary_control_data_all$amendment_1 , replacement='')
+cum_yld_gains_control$amendment_1 <-  
+  stringr::str_replace_na(cum_yld_gains_control$amendment_1 , replacement='')
 
-summary_control_data_all$amendment_2 <-  
-  stringr::str_replace_na(summary_control_data_all$amendment_2 , replacement='')  
+cum_yld_gains_control$amendment_2 <-  
+  stringr::str_replace_na(cum_yld_gains_control$amendment_2 , replacement='')  
 
-summary_control_data_all$amendment_3 <-  
-  stringr::str_replace_na(summary_control_data_all$amendment_3 , replacement='')
+cum_yld_gains_control$amendment_3 <-  
+  stringr::str_replace_na(cum_yld_gains_control$amendment_3 , replacement='')
 
 
-summary_control_data_all <-  summary_control_data_all %>% 
+cum_yld_gains_control <-  cum_yld_gains_control %>% 
   mutate(amendment_123 = paste0(amendment_1,
                                 amendment_2,
                                 amendment_3))
 
 
 #tidy up working outs
-summary_control_data_all <- summary_control_data_all %>%
+cum_yld_gains_control <- cum_yld_gains_control %>%
   select(-amendment_2a, -amendment_2b, -amendment_3a, -amendment_3b)
 
-unique(summary_control_data_all$amendment_123)
+unique(cum_yld_gains_control$amendment_123)
 #how many amendment without depth
-amendment_no_depth <- summary_control_data_all %>% 
+amendment_no_depth <- cum_yld_gains_control %>% 
   distinct(amendment_123) %>% 
   arrange(amendment_123) %>% 
   filter(amendment_123 != "none")
