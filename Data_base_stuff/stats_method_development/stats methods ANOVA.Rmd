@@ -1,0 +1,464 @@
+---
+title: "Analysis of sandy soil trial results"
+author: "Jackie Ouzman"
+date: "03/03/2022"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Some notes and resources
+
+https://www.youtube.com/watch?v=o5IOyr-7tVY
+This gives you some background in the Fishers LSD test and some further reading.
+
+One thing to note is that if you are comparing more than 3 means (3 groups) the type 1 error increase.
+
+Or family wise error
+
+Fishers is a more powerful test when comparing a smaller trial (eg with less comparison).
+
+You can do this manually but there are also R packages that will help.
+
+A manual approach uses the ANOVA results (if significantly different).
+
+step 1 = Calulate the LSD 
+
+this uses the degrees of freedom 
+MSW
+and the sample size
+
+step 2 = use the absoulate value between the means of the two groups you are comparing.
+
+step 3 = compare the value in step 1 vs. value in setep 2 to accept or reject the null hypothesis.
+
+
+
+
+## worked through examples
+
+https://rcompanion.org/rcompanion/d_05.html
+
+
+This tutorial looks at a number of packages.
+
+
+- agricolae
+
+- lsmeans
+
+- multcompView
+
+
+```{r packages to use, include=FALSE}
+# Packages used in this chapter
+# The following commands will install these packages if they are not already installed:
+
+
+if(!require(dplyr)){install.packages("dplyr")}
+if(!require(FSA)){install.packages("FSA")}
+if(!require(car)){install.packages("car")}
+if(!require(agricolae)){install.packages("agricolae")}
+if(!require(multcomp)){install.packages("multcomp")}
+if(!require(DescTools)){install.packages("DescTools")}
+if(!require(lsmeans)){install.packages("lsmeans")}
+if(!require(multcompView)){install.packages("multcompView")}
+if(!require(Rmisc)){install.packages("Rmisc")}
+if(!require(ggplot2)){install.packages("ggplot2")}
+if(!require(pwr)){install.packages("pwr")}
+
+library(readxl)
+library(tidyverse)
+library(dplyr)
+library(FSA) 
+#library(agricolae)
+```
+
+## Create and import datasets
+
+
+
+```{r example dataset and sandy soils dataset, include=FALSE}
+
+#Example dataset
+Input =("
+Location   Aam
+Tillamook  0.0571
+Tillamook  0.0813
+Tillamook  0.0831
+Tillamook  0.0976
+Tillamook  0.0817
+Tillamook  0.0859
+Tillamook  0.0735
+Tillamook  0.0659
+Tillamook  0.0923
+Tillamook  0.0836
+Newport    0.0873
+Newport    0.0662
+Newport    0.0672
+Newport    0.0819
+Newport    0.0749
+Newport    0.0649
+Newport    0.0835
+Newport    0.0725
+Petersburg 0.0974
+Petersburg 0.1352
+Petersburg 0.0817
+Petersburg 0.1016
+Petersburg 0.0968
+Petersburg 0.1064
+Petersburg 0.1050
+Magadan    0.1033
+Magadan    0.0915
+Magadan    0.0781
+Magadan    0.0685
+Magadan    0.0677
+Magadan    0.0697
+Magadan    0.0764
+Magadan    0.0689
+Tvarminne  0.0703
+Tvarminne  0.1026 
+Tvarminne  0.0956
+Tvarminne  0.0973
+Tvarminne  0.1039
+Tvarminne  0.1045
+")
+
+
+Data = read.table(textConnection(Input),header=TRUE)
+
+
+#Specify the order of factor levels for plots and Dunnett comparison
+ 
+Data =
+mutate(Data,
+       Location = factor(Location, levels=unique(Location)))
+
+################################################################################################
+
+# sandy soils dataset
+data_file <- "X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/stats_working/sites_merged.csv"
+
+## download the data using the specified file path above
+
+summary_data_all <- read_csv(data_file, 
+                         col_types = cols(rep_block = col_character()))
+
+site_name <- "Carwarp_Amelioration"
+site_name_output <- "Carwarp_Amelioration"
+
+##### order the Descriptors
+order <- c(
+  "Control",
+  "Unmodified_SE14.band_8",
+  "Unmodified_Bi_Agra.surface+band_8",
+  "Unmodified_Lc.surface",
+  "Unmodified_Cl.surface",
+  "Unmodified_Cl@2.5.surface_Yr18,19,20",
+  "Unmodified_Cl@3.incorp_8",
+  "Unmodified_Cl@5.incorp_8",
+  "Unmodified_Cl@5.incorp_8.Fert.surface",
+  "Unmodified_Cl@5.incorp_8.Clay.incorp_8",
+  "Unmodified_Cl@5.incorp_8.Fert.surface.Clay.incorp_8",
+  "Unmodified_Cl@7.5.surface",
+  "Unmodified_Cl@20.incorp_8",
+  "Unmodified_Cl@20.incorp_8.Fert.surface",
+  "Unmodified_Cl@20.incorp_8.Clay.incorp_8",
+  "Unmodified_Cl@20.incorp_8.Fert.surface.Clay.incorp_8",
+  "Unmodified_Fert.foliar",
+  "Unmodified_Fert.surface",
+  "Unmodified_Fert.incorp_8",
+  "Unmodified_Fert.band_8",
+  "Unmodified_K_added.surface",
+  "Unmodified_Fert.band_30",
+  "Unmodified_Fert.surface.Clay.incorp_8",
+  "Unmodified_Fert.band_30.Clay.incorp_10",
+  "Unmodified_Clay.check",
+  "Unmodified_Clay.incorp_8",
+  "Unmodified_Clay.incorp_10",
+  
+  "Spade.30_none",
+  "Spade.30_Lc@1.incorp_30",
+  "Spade.30_Lc@2.incorp_30",
+  "Spade.30_Lc@4.incorp_30",
+  "Spade.30_Lc@6.incorp_30",
+  "Spade.30_Lc@8.incorp_30",
+  "Spade.30_Lc@15.incorp_30",
+  "Spade.30_Lc@10.incorp_30",
+  "Spade.30_Lc@20.incorp_30",
+  "Spade.30_Lc@1.incorp_30.K_added.surface",
+  "Spade.30_Lc@2.incorp_30.K_added.surface",
+  "Spade.30_Lc@4.incorp_30.K_added.surface",
+  "Spade.30_Lc@6.incorp_30.K_added.surface",
+  "Spade.30_Lc@8.incorp_30.K_added.surface",
+  "Spade.30_Lc@10.incorp_30.K_added.surface",
+  "Spade.30_Lc@15.incorp_30.K_added.surface",
+  "Spade.30_Lc@20.incorp_30.K_added.surface",
+  "Spade.30_Lc.incorp_30",
+  "Spade.30_Lc.incorp_30.Fert.incorp_30",
+  "Spade.30_Lc.incorp_30.Clay.incorp_30",
+  "Spade.30_Lc.incorp_30.Fert.incorp_30.Clay.incorp_30",
+  "Spade.30_Cl.incorp_30",
+  "Spade.30_Cl.incorp_30.Gypsum.incorp_30",
+  "Spade.30_Fert.incorp_30.Clay.incorp_30",
+  "Spade.30_Com.incorp_30",
+  "Spade.30_Cereal.incorp_30",
+  "Spade.30_Vetch.incorp_30",
+  "Spade.30_Vet_Cer.incorp_30",
+  "Spade.30_Vet_Cer_In.incorp_30",
+  "Spade.30_K_added.surface",
+  "Spade.30_Fert.incorp_30",
+  "Spade.30_Fert.incorp_30.K_added.incorp_30",
+  
+  "Spade.30_Clay@250.incorp_30",
+  "Spade.30_Clay@500.incorp_30_Yr07,20",
+  "Spade.30_Clay.check",
+  "Spade.30_Clay.incorp_30",
+  "Spade.30_Gypsum.incorp_30",
+  
+  "Rip.30_none",
+  "Rip.35_none",
+  "Rip.30_Cl.surface",
+  "Rip.30_Cl@7.5.surface",
+  "Rip.30_Cl.band_30",
+  "Rip.30_Cl@7.5.band_30",
+  "Rip.30_Lc.incorp_30",
+  "Rip.30_Lc.band_30",
+  "Rip.30_Fert.surface",
+  "Rip.30_Fert.incorp_30",
+  "Rip.30_Fert.band_8",
+  "Rip.30_Fert.band_30",
+  "Rip.30IncRip_none",
+  "Rip.30+60_none",
+  "Rip.30IncRip_Gypsum.incorp_30",
+  "Rip.30+60_Lc.band_30+60",
+  
+  "Sweep.30_none",
+  "Sweep.30_Lime.incorp_30",
+  "Sweep.30_Cl@9.incorp_30",
+  "Sweep.30_Cl@6.incorp_30_Yr18,19,20",
+  "Sweep.30_Cl@6.incorp_30",
+  "Sweep.30_Cl@3.incorp_30.Lime.incorp_8",
+  "Sweep.30_Cl@3.incorp_30",
+  
+  "Rip.40_none",
+  "Rip.40IncRip_none",
+  "Rip.40IncRip_Lc.incorp_30",
+  "Rip.40IncRip_Lc.incorp_40",
+  
+  
+  "Rip.40_Lc.incorp_40",
+  "Rip.40_Fert.incorp_40",
+  
+  "Rip.45_none",
+  "Rip.45IncRip_none",
+  "Rip.45IncRip+Spade.30_none",
+  "Rip.45IncRip_Fert.incorp_45",
+  "Rip.45IncRip_Fert_Low.band_45",
+  "Rip.45IncRip_Fert_High.band_45",
+  "Rip.45IncRip_Fert_APP.band_45",
+  
+  "Rip.50_none",
+  "Rip.50_Cl.surface",
+  "Rip.50_Cl@2.5.surface_Yr18,19,20",
+  "Rip.50_Cl@7.5.surface",
+  "Rip.50_Cl@5.incorp_50",
+  "Rip.50_Cl@7.5.band_50",
+  "Rip.50_Cl@20.incorp_50",
+  "Rip.50_Cl.deep",
+  "Rip.50_Cl.band_50",
+  "Rip.50_Cl@5.incorp_50.Fert.surface",
+  "Rip.50_Cl@5.incorp_50.Clay.incorp_50",
+  "Rip.50_Cl@5.incorp_50.Fert.surface.Clay.incorp_50",
+  "Rip.50_Cl@20.incorp_50.Fert.surface",
+  "Rip.50_Cl@20.incorp_50.Clay.incorp_50",
+  "Rip.50_Cl@20.incorp_50.Fert.surface.Clay.incorp_50",
+  "Rip.50_Fert.surface",
+  "Rip.50_Clay.incorp_50",
+  "Rip.50_Fert.surface.Clay.incorp_50",
+  "Rip.50Spade.30_none",
+  "Inc.50_none",
+  "Inc.50_Cl@7.5.incorp_50",
+  "Rip.50IncRip_none",
+  "Rip.50IncRip_Cl.incorp_50",
+  "Rip.50IncRip_Cl.surface",
+  
+  "Rip.60_none",
+  "Rip.60_Cl.surface",
+  "Rip.60_Cl.band_60",
+  "Rip.60_Lc.incorp_60",
+  "Rip.60_Lc.band_60",
+  "Rip.60_Fert.band_8",
+  "Rip.60_Fert.band_60",
+  "Rip.60Spade.30_none",
+  "Rip.60Spade.30_Lc.band_30+60",
+  "Rip.60Spade.30_Lc.incorp_30+band_60",
+  "Rip.60IncRip_none",
+  "Rip.60IncRip+Spade.30_none",
+  
+  "Delving.18_none",
+  "Delving.18_SE14.band_8",
+  "DiscInv.30_none"
+  
+)
+
+
+
+
+
+      
+
+summary_data_all$Descriptors <- factor(summary_data_all$Descriptors,
+                                       levels = order)
+
+site_name <- "Carwarp_Amelioration"
+
+summary_data_site <- summary_data_all %>%
+  filter(site == site_name)
+
+```
+
+### Produce summary statistics for example dataset using FSA
+
+```{r summary statistics example, include=TRUE} 
+#using library(FSA) 
+
+Summarize(Aam ~ Location,
+           data=Data,
+           digits=3)
+
+
+
+```
+
+
+
+### Produce summary statistics for sandy soil dataset using FSA
+
+```{r summary statistics sandy, include=TRUE} 
+#using library(FSA) 
+
+#names(summary_data_site)
+Summarize(yield ~ Descriptors,
+           data=summary_data_site,
+           digits=3)
+
+
+
+```
+
+
+### Fit the linear model and conduct ANOVA for example dataset
+ 
+```{r fit model example, include=TRUE} 
+model = lm(Aam ~ Location,
+           data=Data)
+
+library(car)
+anova(model) 
+Anova(model, type="II") # Can use type="III"
+
+   ### If you use type="III", you need the following line before the analysi
+   ### options(contrasts = c("contr.sum", "contr.poly"))
+
+                              # Produces type I sum of squares
+summary(model)     #
+
+```
+
+
+### Fit the linear model and conduct ANOVA for sandy soil dataset
+ 
+```{r fit model sandys, include=TRUE} 
+model_sand = lm( yield ~ Descriptors,
+           data=summary_data_site)
+
+
+anova(model_sand) 
+Anova(model_sand, type="II") # Can use type="III"
+
+   ### If you use type="III", you need the following line before the analysi
+   ### options(contrasts = c("contr.sum", "contr.poly"))
+
+                              # Produces type I sum of squares
+summary(model_sand)     #
+
+```
+
+
+### Checking assumptions of the model example
+
+#### Histogram
+
+A histogram of residuals from a linear model.  The distribution of these residuals should be approximately normal.
+So we are looking for a normal distribution.
+
+```{r assumptions example, include=TRUE} 
+hist(residuals(model),
+     col="darkgray")
+```
+
+### Checking assumptions of the model sandy soils
+
+#### Histogram
+
+Does'nt look like a normal distribution to me.
+
+```{r assumptions sandy, include=TRUE} 
+hist(residuals(model_sand),
+     col="darkgray")
+```
+
+
+### Checking assumptions of the model example
+
+#### Residuals
+
+A plot of residuals vs. predicted values.  The residuals should be unbiased and homoscedastic.  For an illustration of these properties, see this diagram by Steve Jost at DePaul University: condor.depaul.edu/sjost/it223/documents/resid-plots.gif.
+
+They look ok to me unbiased and homoscedastic (even spread across plot no obvious groupings)
+
+```{r Residuals example, include=TRUE} 
+
+plot(fitted(model),
+     residuals(model))
+```
+
+### Checking assumptions of the model sandy
+
+#### Residuals
+
+Looks ok to me.
+
+```{r Residuals sand, include=TRUE} 
+
+plot(fitted(model_sand),
+     residuals(model_sand))
+```
+
+
+### Tukey and Least Significant Difference mean separation tests (pairwise comparisons)
+
+Tukey and other multiple comparison tests can be performed with a handful of functions.  
+
+The functions TukeyHSD, HSD.test, and LSD.test are probably not appropriate for cases where there are unbalanced data or unequal variances among levels of the factor, though TukeyHSD does make an adjustment for mildly unbalanced data.  
+
+**  It is my understanding that the multcomp and lsmeans packages are more appropriate for unbalanced data.  **  
+
+Another alternative is the DTK package that performs mean separation tests on data with unequal sample sizes and no assumption of equal variances.
+
+
+### Tukey comparisons in agricolae package with example data
+
+
+```{r Tukey with agricolae example, include=TRUE} 
+#library(agricolae)
+
+(HSD.test(model, "Location"))          # outer parentheses print result
+
+```
+
+ 
+
