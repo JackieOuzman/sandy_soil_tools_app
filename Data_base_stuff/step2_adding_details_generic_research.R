@@ -379,14 +379,16 @@ primary %>%
 primary <- primary %>% 
   mutate(amendment_other = 
            ifelse(other_ameliorant  == "lime",    paste0("Lime",".", placement_other ), 
-                  ifelse(other_ameliorant  == "gypsum",    paste0("Gypsum",".", placement_other ),      
-                         ifelse(other_ameliorant  == "clay",    paste0("Clay",".", placement_other ),
-                                ifelse(other_ameliorant  == "Muriate of Potash",    paste0("K_added",".", placement_other ),
-                                       ifelse(other_ameliorant  == "Bi-Agra",    paste0("Bi_Agra",".", placement_other ),
-                                              ifelse(other_ameliorant  == "SE14",    paste0("SE14",".", placement_other ),
-                                                     "other"
+           ifelse(other_ameliorant  == "gypsum",    paste0("Gypsum",".", placement_other ),      
+           ifelse(other_ameliorant  == "clay",    paste0("Clay",".", placement_other ),
+           ifelse(other_ameliorant  == "Muriate of Potash",    paste0("K_added",".", placement_other ),
+           ifelse(other_ameliorant  == "Bi-Agra",    paste0("Bi_Agra",".", placement_other ),
+           ifelse(other_ameliorant  == "Bi-Agra Band SZ+FS",    paste0("Bi_Agra+SZ+FS",".", placement_other ),
+           ifelse(other_ameliorant  == "SE14 SZ",    paste0("SE14_SZ",".", placement_other ),      
+           ifelse(other_ameliorant  == "SE14",    paste0("SE14",".", placement_other ),
+           "other"
                                                      
-                                              ))))))#bracket for the number of ifelse statements
+                                              ))))))))#bracket for the number of ifelse statements
   )# bracket for mutate function
 
 primary %>% 
@@ -572,20 +574,24 @@ primary %>%
 str(primary)
 unique(primary$rip)
 unique(primary$Rip_depth_jax)
+unique(primary$sowing_strategy)
 
 unique(primary$mix)
 
 
 primary <- primary %>% 
   mutate(disturbance  = case_when(
+    rip  == "none"      &      mix == "none"    &  sowing_strategy ==   "on-row"    ~      "Unmodified+OnRow",
     rip  == "none"      &      mix == "none"           ~      "Unmodified",
+    
     rip  == "none"      &      mix == "spade"          ~       paste0("Spade.30" ),
     rip  == "none"      &      mix == "sapde"          ~       paste0("Spade.30" ),
     rip  == "none"      &      mix == "Plozza"         ~       paste0("DiscInv.30" ),
     rip  == "none"      &      mix == "pre-drill"      ~       paste0("Pre_drill.", drill_depth ),
     rip  == "none"      &      mix == "inclusion"      ~       paste0("Inc.50" ),#check that this is always 50cm
     rip  == "none"      &      mix == "sweep"      ~           paste0("Sweep.30"),
-    rip  == "none"      &      mix == "delving"      ~         paste0("Delving.18"),#check that this is always 18cm it was supplied as a range I used the upper value
+    #rip  == "none"      &      mix == "delving"      ~         paste0("Delving.18"),#check that this is always 18cm it was supplied as a range I used the upper value
+    rip  == "none"      &      mix == "deep furrow till"      ~ paste0("Unmodified+DeepTill.18"),#check that this is always 18cm it was supplied as a range I used the upper value
     
     rip  == "rip"       &      mix == "none"           ~    paste0("Rip.", Rip_depth_jax ),
     rip  == "rip"       &      mix == "inclusion"      ~    paste0("Rip.", Rip_depth_jax, "IncRip" ),
