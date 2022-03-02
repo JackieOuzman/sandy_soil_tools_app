@@ -54,7 +54,9 @@ Bute_Sam <- Bute_Sam %>% dplyr::select("ID":"comments"   )
 ### CSIRO
 Bute_CSIRO <- read_excel("X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/Bute_Trial_2018_2021.xlsx",
                        sheet = "2018_2021", skip = 1)
-
+names(Bute_CSIRO)
+Bute_CSIRO <- Bute_CSIRO %>% 
+  rename("comments" ="...25")
 Bute_CSIRO <- Bute_CSIRO %>% dplyr::select("ID":"comments"   )
 
 ### CSIRO metadata
@@ -201,16 +203,16 @@ metadata_Brooker <- read_excel(paste0("X:/Therese_Jackie/Sandy_soils/Development
 
 
 
-# # # YoungHusband 2020 only!!!
+# # # YoungHusband 
 
- YoungHusband <- read_excel(paste0("X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/", "YoungHusband Sands Impact-SAGIT Data 2020-21_jaxs", ".xlsx"),
-                    sheet = "Database format Young Husband20", skip = 1)
+YoungHusband <- read_excel(paste0("X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/Younghusband/", "Sandy Soils Younghusband Data jaxs2020_2021", ".xlsx"),
+                    sheet = "Database format 2020_21", skip = 0)
   names(YoungHusband)
  YoungHusband <- YoungHusband %>% dplyr::select("ID":"comments"   )
 # #
 # ### a metadata
 # #
-metadata_YoungHusband <- read_excel(paste0("X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/", "YoungHusband Sands Impact-SAGIT Data 2020-21_jaxs", ".xlsx"),
+metadata_YoungHusband <- read_excel(paste0("X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/Younghusband/", "Sandy Soils Younghusband Data jaxs2020_2021", ".xlsx"),
                        sheet = "Site_metadata", col_types = c("text",
                                                               "numeric", "numeric", "numeric",
                                                               "numeric", "numeric", "numeric",
