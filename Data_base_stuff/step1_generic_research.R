@@ -375,6 +375,9 @@ site <- rbind(
   YoungHusband
 )
 
+site <- site %>% 
+  filter(!is.na(site))
+
 #-----Add in an extra column for the sub site at this stage it is the same ------#
 site <- site %>%
   mutate(site_sub = site) 

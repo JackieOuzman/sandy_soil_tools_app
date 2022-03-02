@@ -41,11 +41,13 @@ input_data_file_rain <- "X:/Therese_Jackie/Sandy_soils/Sands weather/met_file202
 ##################################################################################################################
 ## download the data using the specified file path above
 
-primary <- read_csv(input_data_file)
+
 
 primary <- read_csv(input_data_file, 
-                          col_types = cols(drill_depth = col_double(), 
-                                           dry_biomass = col_double(), timing = col_character()))
+                    col_types = cols(drill_depth = col_character(), 
+                                     rip_depth = col_character(), 
+                                     sowing_strategy = col_character(), 
+                                     timing = col_character()))
 
 
 duplicated_ID <- primary %>% 
@@ -240,6 +242,7 @@ unique(primary$fertiliser)
 unique(primary$other_ameliorant)
 unique(primary$placement_organic)
 unique(primary$timing)
+unique(primary$sowing_strategy)
 unique(primary$site)
 unique(primary$site_sub)
 ##########
