@@ -16,6 +16,8 @@ This gives you some background in the Fishers LSD test and some further reading.
 
 One thing to note is that if you are comparing more than 3 means (3 groups) the type 1 error increase.
 
+Type I errors = claiming that conditions have different means when they really don't.
+
 Or family wise error
 
 Fishers is a more powerful test when comparing a smaller trial (eg with less comparison).
@@ -33,6 +35,8 @@ and the sample size
 step 2 = use the absoulate value between the means of the two groups you are comparing.
 
 step 3 = compare the value in step 1 vs. value in setep 2 to accept or reject the null hypothesis.
+
+If your LSD is smaller than the difference (between the two means) it suggests the two means of different treatments are significantly different.
 
 
 
@@ -57,23 +61,25 @@ This tutorial looks at a number of packages.
 # The following commands will install these packages if they are not already installed:
 
 
-if(!require(dplyr)){install.packages("dplyr")}
-if(!require(FSA)){install.packages("FSA")}
-if(!require(car)){install.packages("car")}
-if(!require(agricolae)){install.packages("agricolae")}
-if(!require(multcomp)){install.packages("multcomp")}
-if(!require(DescTools)){install.packages("DescTools")}
-if(!require(lsmeans)){install.packages("lsmeans")}
-if(!require(multcompView)){install.packages("multcompView")}
-if(!require(Rmisc)){install.packages("Rmisc")}
-if(!require(ggplot2)){install.packages("ggplot2")}
-if(!require(pwr)){install.packages("pwr")}
+# if(!require(dplyr)){install.packages("dplyr")}
+# if(!require(FSA)){install.packages("FSA")}
+# if(!require(car)){install.packages("car")}
+# if(!require(agricolae)){install.packages("agricolae")}
+# if(!require(multcomp)){install.packages("multcomp")}
+# if(!require(DescTools)){install.packages("DescTools")}
+# if(!require(lsmeans)){install.packages("lsmeans")}
+# if(!require(multcompView)){install.packages("multcompView")}
+# if(!require(Rmisc)){install.packages("Rmisc")}
+# if(!require(ggplot2)){install.packages("ggplot2")}
+# if(!require(pwr)){install.packages("pwr")}
 
 library(readxl)
 library(tidyverse)
 library(dplyr)
 library(FSA) 
-#library(agricolae)
+library(agricolae)
+library(multcomp)
+library(multcomp)
 ```
 
 ## Create and import datasets
@@ -460,5 +466,217 @@ Another alternative is the DTK package that performs mean separation tests on da
 
 ```
 
+
+### Tukey comparisons in agricolae package with sand data
+
+
+```{r Tukey with agricolae sand, include=TRUE} 
+#library(agricolae)
+
+(HSD.test(model_sand, "Descriptors"))          # outer parentheses print result
+
+```
+
+###  LSD comparisons in agricolae package example data
+
+Note in this example the LSD does not appear in the output.
+I found a post says that:
+"No LSD value is given in the output because it appears that this output is only included when you have perfectly balanced data, and the data you have provided are unbalanced"
+
+
+Also choosing the correct p.adj value is important.
+
+These are the options:
+
+"none",
+
+"holm",
+
+"hommel", 
+
+"hochberg", 
+
+"bonferroni", 
+
+"BH", 
+
+"BY",
+
+"fdr"
+
+
+I have selected none which is t-student
+
+
+```{r LSD with agricolae example, include=TRUE} 
+#library(agricolae)
+
+(LSD.test(model, "Location",   # outer parentheses print result
+           alpha = 0.05,      
+           p.adj="none"))      # see ?p.adjust for options
+
+```
+
+
+###  LSD comparisons in agricolae package sand data
+
+```{r LSD with agricolae sand, include=TRUE} 
+#library(agricolae)
+
+(LSD.test(model_sand, "Descriptors",   # outer parentheses print result
+           alpha = 0.05,      
+           p.adj="none"))      # see ?p.adjust for options"none" is t-student.
+
+
+
+```
+
+### Extract the LSD value from the anlsysis - sand example
+
+The code below writes out the analsyis to an object
+Then uses the object to get at the LSD.
+If the anlsyis is balanced you can extract the LSD value
+
+
+```{r LSD with agricolae sand LSD value, include=TRUE} 
+#library(agricolae)
+
+
+
+agricolae_LSD_output_sand <- (LSD.test(model_sand, "Descriptors",   # outer parentheses print result
+           alpha = 0.05,      
+           p.adj="none"))      # see ?p.adjust for options"none" is t-student.
+
+
+agricolae_LSD_output_sand$statistics$LSD
+
+```
+
+
+
+
+#### Multiple comparisons in multcomp package example data
+
+Note that “Tukey” here **does not mean Tukey-adjusted** comparisons.  
+
+It just sets up a matrix to compare each mean to each other mean.
+
+```{r Multiple comparisons in multcomp example, include=TRUE} 
+#library(multcomp)
+
+mc = glht(model,
+          mcp(Location = "Tukey"))
+
+mcs = summary(mc, test=adjusted("single-step"))
+
+mcs
+
+   ### Adjustment options: "none", "single-step", "Shaffer",
+   ###                     "Westfall", "free", "holm", "hochberg",
+   ###                     "hommel", "bonferroni", "BH", "BY", "fdr"
+
+
+
+
+```
+Compact letter display for report and orders it.
+
+This function extracts all the information from glht, summary.glht or confint.glht objects that is required to create a compact letter display of all pair-wise comparisons
+
+
+```{r Compact letter display example order, include=TRUE} 
+
+cld(mcs,
+    level=0.05,
+    decreasing=TRUE)
+```
+
+
+#### Multiple comparisons in multcomp package sand data
+
+Note that “Tukey” here **does not mean Tukey-adjusted** comparisons.  
+
+It just sets up a matrix to compare each mean to each other mean.
+
+```{r Multiple comparisons in multcomp sand, include=TRUE} 
+#library(multcomp)
+
+mc_sand = glht(model_sand,
+          mcp(Descriptors = "Tukey"))
+
+mc_sand_s = summary(mc_sand, test=adjusted("single-step"))
+
+mc_sand_s
+
+   ### Adjustment options: "none", "single-step", "Shaffer",
+   ###                     "Westfall", "free", "holm", "hochberg",
+   ###                     "hommel", "bonferroni", "BH", "BY", "fdr"
+
+
+
+
+```
+
+Compact letter display for report and orders it.
+
+This function extracts all the information from glht, summary.glht or confint.glht objects that is required to create a compact letter display of all pair-wise comparisons
+
+```{r Compact letter display sand order, include=TRUE} 
+
+cld(mc_sand_s,
+    level=0.05,
+    decreasing=TRUE)
+```
+
+### Multiple comparisons to a control in multcomp package with example dataset
  
 
+Note the control is the first level of the factor
+? is this just the first one on the list?
+
+```{r comparision to control multcomp  example , include=TRUE} 
+
+#library(multcomp)
+
+mc_control = glht(model,
+          mcp(Location = "Dunnett"))
+
+summary(mc_control, test=adjusted("single-step"))
+
+   ### Adjustment options: "none", "single-step", "Shaffer",
+   ###                     "Westfall", "free", "holm", "hochberg",
+   ###                     "hommel", "bonferroni", "BH", "BY", "fdr"
+
+
+```
+### Multiple comparisons to a control in multcomp package with sand dataset
+ 
+
+Note the control is the first level of the factor
+? is this just the first one on the list?
+
+It seem to have found it?
+In the example dataset the control is not labelled control but its frist on the list.
+
+
+```{r comparision to control multcomp  sand , include=TRUE} 
+
+#library(multcomp)
+
+#Specify the order of factor levels for plots and Dunnett comparison
+ 
+summary_data_site =
+mutate(summary_data_site,
+       Location = factor(Descriptors, levels=unique(Descriptors)))
+
+mc_sand_control = glht(model_sand,
+          mcp(Descriptors = "Dunnett"))
+
+summary(mc_sand_control, test=adjusted("single-step"))
+
+   ### Adjustment options: "none", "single-step", "Shaffer",
+   ###                     "Westfall", "free", "holm", "hochberg",
+   ###                     "hommel", "bonferroni", "BH", "BY", "fdr"
+
+
+```
