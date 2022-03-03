@@ -38,7 +38,7 @@ step 3 = compare the value in step 1 vs. value in setep 2 to accept or reject th
 
 If your LSD is smaller than the difference (between the two means) it suggests the two means of different treatments are significantly different.
 
-
+https://www.researchgate.net/publication/327283926_What_is_the_proper_way_to_apply_multiple_comparison_test
 
 
 ## worked through examples
