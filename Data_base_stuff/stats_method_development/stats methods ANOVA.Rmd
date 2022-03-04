@@ -80,6 +80,12 @@ library(FSA)
 library(agricolae)
 library(multcomp)
 library(multcomp)
+library(lsmeans)
+library(multcompView)
+library(Rmisc)
+
+library(ggplot2)
+
 ```
 
 ## Create and import datasets
@@ -322,7 +328,8 @@ summary_data_all$Descriptors <- factor(summary_data_all$Descriptors,
 site_name <- "Carwarp_Amelioration"
 
 summary_data_site <- summary_data_all %>%
-  filter(site == site_name)
+  filter(site == site_name) %>% 
+  filter(year == 2018)
 
 ```
 
@@ -358,7 +365,7 @@ Summarize(yield ~ Descriptors,
 
 ### Fit the linear model and conduct ANOVA for example dataset
  
-```{r fit model example, include=TRUE} 
+```{r fit model example, message=FALSE, warning=FALSE, include=TRUE}
 model = lm(Aam ~ Location,
            data=Data)
 
@@ -377,7 +384,7 @@ summary(model)     #
 
 ### Fit the linear model and conduct ANOVA for sandy soil dataset
  
-```{r fit model sandys, include=TRUE} 
+```{r fit model sandys, message=FALSE, warning=FALSE, include=TRUE}
 model_sand = lm( yield ~ Descriptors,
            data=summary_data_site)
 
@@ -410,7 +417,7 @@ hist(residuals(model),
 
 #### Histogram
 
-Does'nt look like a normal distribution to me.
+Look like a normal distribution to me.
 
 ```{r assumptions sandy, include=TRUE} 
 hist(residuals(model_sand),
@@ -672,7 +679,8 @@ mutate(summary_data_site,
 mc_sand_control = glht(model_sand,
           mcp(Descriptors = "Dunnett"))
 
-summary(mc_sand_control, test=adjusted("single-step"))
+summary(mc_sand_control, test=adjusted("single-step")) # I dont think I want this I think this uses dependencies
+summary(mc_sand_control, test=adjusted("none")) #perhaps this is better - I need to find out more
 
    ### Adjustment options: "none", "single-step", "Shaffer",
    ###                     "Westfall", "free", "holm", "hochberg",
@@ -680,3 +688,167 @@ summary(mc_sand_control, test=adjusted("single-step"))
 
 
 ```
+
+
+### Multiple comparisons least square means  with example dataset
+
+Least square means can be calculated for each group.  
+
+Here a Tukey adjustment is applied for multiple comparisons among group least square means.  
+
+The multiple comparisons can be displayed as a compact letter display.
+
+```{r Multiple comparision east square means example , include=TRUE} 
+
+#Multiple comparisons with least square means
+
+#library(lsmeans)
+#library(multcompView)
+
+leastsquare = lsmeans(model,
+                      pairwise ~ Location,
+                      adjust = "tukey")
+
+ 
+cld(leastsquare,
+    alpha   = 0.05,
+    Letters = letters,
+    adjust="tukey")
+```
+
+
+### Multiple comparisons least square means  with sand dataset
+
+
+
+```{r Multiple comparision east square means sand , include=TRUE} 
+
+#Multiple comparisons with least square means
+
+#library(lsmeans)
+#library(multcompView)
+
+leastsquare_sand = lsmeans(model_sand,
+                      pairwise ~ Descriptors,
+                      adjust = "tukey")
+
+ 
+cld(leastsquare_sand,
+    alpha   = 0.05,
+    Letters = letters,
+    adjust="tukey")
+```
+
+### Graphing the results example data
+
+Simple box plots of values across groups
+Box plots of values for each level of the independent variable for a one-way analysis of variance (ANOVA).
+ 
+```{r Graphing the results example , include=TRUE} 
+
+boxplot(Aam ~ Location,
+        data = Data,
+        ylab="aam / height",
+        xlab="Location")
+```
+
+### Graphing the results sand data
+
+Simple box plots of values across groups
+should be able to do something better with ggplot
+ 
+```{r Graphing the results sand , include=TRUE} 
+
+boxplot(yield ~ Descriptors,
+        data = summary_data_site,
+        ylab="yield",
+        xlab="Descriptors")
+```
+
+ 
+
+### Summarize the data frame (Data) into a table
+
+Not sure what this is doing?
+
+Bar plot of means for each level of the independent variable for a one-way analysis of variance (ANOVA).
+
+
+```{r Summarize and Graphing the results example , include=TRUE} 
+#library(Rmisc)  
+
+Data2 = summarySE(data=Data,
+          "Aam",
+          groupvars="Location",
+          conf.interval = 0.95)
+
+Tabla = as.table(Data2$Aam)         
+rownames(Tabla) = Data2$Location
+
+Tabla
+
+barplot(Tabla,
+        ylab="aam / height",
+        xlab="Location")
+
+```
+
+
+
+
+### Plot using ggplot example data
+
+Bar plot of means with error bars across groups
+
+Bar plot of means for each level of the independent variable of a one-way analysis of variance (ANOVA).  
+
+Error indicates standard error of the mean.  
+
+Bars sharing the same letter are not significantly different according to Tukey’s HSD test.
+
+```{r ggplot example, include=TRUE}  
+
+
+offset.v = -3     # offsets for mean letters
+offset.h = 0.5
+
+ggplot(Data2,
+       aes(x = Location, y = Aam,
+           ymax=0.12, ymin=0.0))  +
+       geom_bar(stat="identity", fill="gray50",
+           colour = "black", width = 0.7)  +
+       geom_errorbar(aes(ymax=Aam+se, ymin=Aam-se),
+                     width=0.0, size=0.5, color="black")  +
+       geom_text(aes(label=c("bc","c","a","bc","ab"),
+                 hjust=offset.h, vjust=offset.v)) +             
+       labs(x = "Sample location",
+            y = "aam / height")  +
+       ## ggtitle("Main title") +
+       theme_bw()  +
+       theme(panel.grid.major.x = element_blank(),
+             panel.grid.major.y = element_line(colour = "grey80"),
+             plot.title = element_text(size = rel(1.5),
+             face = "bold", vjust = 1.5),
+             axis.title = element_text(face = "bold"),
+             axis.title.y = element_text(vjust= 1.8),
+             axis.title.x = element_text(vjust= -0.5),
+             panel.border = element_rect(colour="black")
+             )
+
+```
+
+
+
+
+Example of presenting results using Fishers (from one of Therses papers)
+
+Analysis of Variance (ANOVA) was undertaken using
+the GENSTAT version 13 statistical package (VSN
+International, Rothamsted, UK). 
+
+Assumptions of constant error variance (homogeneity), normality of data
+distribution and additivity of treatment and replicate
+effects were tested for each analysis. 
+
+Least significant difference (l.s.d.) between treatments was determined at
+<5 % significance using Fisher’s protected l.s.d.
