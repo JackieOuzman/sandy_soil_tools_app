@@ -1234,8 +1234,7 @@ ggplot(aes(Descriptors, yield))+
   theme(axis.text.x=element_text(angle=45,hjust=1))
 ```
 
- ######################################################################################
-##################### Up to HERE #####################################################
+ 
 
 #### barplots
 
@@ -1362,19 +1361,118 @@ ggplot( aes(x = factor(Descriptors), y = mean)) +
 plot
  
 ```
- 
- * Add in letters 
- 
-anova_sand_graph <- aov(yield ~ Descriptors, data = summary_data_site)
 
-tukey <- (HSD.test(anova_sand_graph, "Descriptors"))
-print(tukey)
+* Add in the output of the agricolae HSD Tukey
+* Add the letters from the analysis to the graph
 
 
-tukey.cld <- multcompLetters4(anova_sand_graph, tukey) # default is threshold = 0.05
-print(tukey.cld)
+```{r Summarize and Graphing the results with Tukey sand, message=FALSE, warning=FALSE, include=TRUE}
+
+#ensure the summaried data in a data frame and ungrouped
+data_summary <- as.data.frame(ungroup(data_summary))
+
+# Add in agricolae HSD Tukey letters 
+
+tukey_agricolae <- (HSD.test(anova_sand_graph, "Descriptors"))
+
+# I want to access the groups but its part of a list
 
 
+tukey_agricolae_df <- as.data.frame(tukey_agricolae[[5]]) #get the fith item in the list
+tukey_agricolae_df$Descriptors <- rownames(tukey_agricolae_df) #move rwo names into a clm for joining
+
+
+
+data_summary <- left_join(data_summary,tukey_agricolae_df)
+
+
+plot <- data_summary %>%  
+  ggplot( aes(x = factor(Descriptors), y = mean)) + 
+  geom_bar(stat = "identity",  alpha = 0.5)  +
+  geom_errorbar(aes(ymin=mean-std_error, ymax=mean+std_error), width = 0.1) +
+  #labs(x="", y="Yield t/ha", title = paste(site_name,": ", year_selected),
+  labs(x="", y="Yield t/ha", 
+       #title = paste(site_name_output,": ", year_selected),
+       subtitle = "ANOVA with agricolae HSD Tukey, threshold 0.05") +
+  theme_classic() + 
+  
+  #scale_y_continuous(breaks=seq(0,max_yld,by=0.5), limits = c(0, max_yld))+
+  theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank()) +
+  theme(legend.position = c(0.1, 0.75)) +
+  geom_text(aes(label=groups),
+            position = position_dodge(0.80),
+            size = 4,
+            vjust=-0.5, hjust=-0.5,
+            colour = "gray25")+
+  theme(axis.text.x=element_text(angle=45,hjust=1))
+
+plot
+
+
+```
+
+#### barplots with LSD results 
+
+**sands data**
+
+```{r Summarize and Graphing the results with LSD sand, message=FALSE, warning=FALSE, include=TRUE}
+data_summary_LSD <- summary_data_site %>% 
+  dplyr::group_by(Descriptors) %>%
+  dplyr::summarise(mean=mean(yield, na.rm = TRUE), 
+                   sd=sd(yield, na.rm = TRUE),
+                   count = n(),
+                   std_error = sd/(sqrt(count))
+  ) %>%
+  arrange(desc(mean))
+
+max_yld <- max(summary_data_site$yield, na.rm = TRUE) 
+
+data_summary_LSD <- as.data.frame(ungroup(data_summary_LSD))
+
+
+agricolae_LSD_output_sand <- (LSD.test(model_sand, "Descriptors",   # outer parentheses print result
+                                       alpha = 0.05,      
+                                       p.adj="none"))      # see ?p.adjust for options"none" is t-student.
+
+
+
+
+#Extract the LSD value from the anlsysis and add it to the summary data
+LSD <- agricolae_LSD_output_sand$statistics$LSD
+
+data_summary_LSD <- data_summary_LSD %>% 
+  mutate(LSD = LSD)
+#Extract the LSD letters from the anlsysis and add it to the summary data
+
+agricolae_LSD_output_sand_df <- as.data.frame(agricolae_LSD_output_sand[[5]]) #get the fith item in the list
+agricolae_LSD_output_sand_df$Descriptors <- rownames(agricolae_LSD_output_sand_df) #move rwo names into a clm for joining
+
+
+data_summary_LSD <- left_join(data_summary_LSD,agricolae_LSD_output_sand_df)
+
+plot_LSD <- data_summary_LSD %>%  
+  ggplot( aes(x = factor(Descriptors), y = mean)) + 
+  geom_bar(stat = "identity",  alpha = 0.5)  +
+  geom_errorbar(aes(ymin=mean-std_error, ymax=mean+std_error), width = 0.1) +
+  #labs(x="", y="Yield t/ha", title = paste(site_name,": ", year_selected),
+  labs(x="", y="Yield t/ha", 
+       #title = paste(site_name_output,": ", year_selected),
+       subtitle = "ANOVA with agricolae LSD, threshold 0.05") +
+  theme_classic() + 
+  
+  #scale_y_continuous(breaks=seq(0,max_yld,by=0.5), limits = c(0, max_yld))+
+  theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank()) +
+  theme(legend.position = c(0.1, 0.75)) +
+  geom_text(aes(label=groups),
+            position = position_dodge(0.80),
+            size = 4,
+            vjust=-0.5, hjust=-0.5,
+            colour = "gray25")+
+  theme(axis.text.x=element_text(angle=45,hjust=1))
+
+plot_LSD
+
+```
 
 
 
@@ -1386,13 +1484,9 @@ print(tukey.cld)
 
 Example of presenting results using Fishers (from one of Therses papers)
 
-Analysis of Variance (ANOVA) was undertaken using
-the GENSTAT version 13 statistical package (VSN
-International, Rothamsted, UK). 
+Analysis of Variance (ANOVA) was undertaken using the GENSTAT version 13 statistical package (VSN International, Rothamsted, UK). 
 
 Assumptions of constant error variance (homogeneity), normality of data
-distribution and additivity of treatment and replicate
-effects were tested for each analysis. 
+distribution and additivity of treatment and replicate effects were tested for each analysis. 
 
-Least significant difference (l.s.d.) between treatments was determined at
-<5 % significance using Fisher’s protected l.s.d.
+Least significant difference (l.s.d.) between treatments was determined at <5 % significance using Fisher’s protected l.s.d.
