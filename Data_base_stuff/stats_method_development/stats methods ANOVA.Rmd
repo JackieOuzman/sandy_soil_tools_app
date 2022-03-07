@@ -83,7 +83,7 @@ library(DescTools)
 
 ```
 
-**Create and import datasets**
+**Create and import data sets**
 
 
 
@@ -333,7 +333,7 @@ summary_data_site <- summary_data_all %>%
 
 **Produce summary statistics using FSA**
 
-Example dataset 
+Example data set 
 
 ```{r summary statistics example, echo=FALSE}
 
@@ -347,7 +347,7 @@ Summarize(Aam ~ Location,
 
 
 
-sandy soil dataset
+sandy soil data set
 
 ```{r summary statistics sandy, echo=FALSE, message=FALSE, warning=FALSE}
 
@@ -398,7 +398,7 @@ This will calculate the test statistic for ANOVA and determine whether there is 
 
 **Code in R**
 
-one.way <- aov(variable 1  ~ varaiable 2, data = df)
+one.way <- aov(variable 1  ~ variable 2, data = df)
 
 summary(one.way)
 
@@ -422,12 +422,12 @@ summary(one.way)
 
 * This shows how likely it is that the F-value calculated from the test would have occurred if the null hypothesis of no difference among group means were true.
 
-* *If the p-value of the 'varaible 2' variable is low (p < 0.001), then it appears that the type of 'varaible 2' has a real impact on the "variable 1".*
+* *If the p-value of the 'variable 2' variable is low (p < 0.001), then it appears that the type of 'variable 2' has a real impact on the "variable 1".*
 
 
 ### **Step 1a and 1b** Fit the model and conduct One-way ANOVA 
 
-*example dataset* (linear model)
+*example data set* (linear model)
  
 ```{r fit model example, echo=FALSE, message=FALSE, warning=FALSE}
 model = lm(Aam ~ Location,
@@ -447,7 +447,7 @@ summary(model)     #
 
 
 
-*sandy soil dataset* (linear model)
+*sandy soil data set* (linear model)
 
 
 
@@ -475,11 +475,11 @@ summary(model_sand)     #
 
 * Type I should be used with caution.
 
-* When the dataset is simple and balanced the Type I , II and III should give you very similar results.
+* When the data set is simple and balanced the Type I , II and III should give you very similar results.
 
 * In sand and the example data they all come out as significant, type I and II are the same.
 
-* Type III has a smaller P value suggesting that the test is more likley to report differences.
+* Type III has a smaller P value suggesting that the test is more likely to report differences.
 
 ***From Help***
 
@@ -506,7 +506,7 @@ summary(model_sand)     #
 
 
 
-**Example dataset** results for type I II III ANOVA.
+**Example data set** results for type I II III ANOVA.
 
 ```{r ANOVA type example, echo=FALSE, message=FALSE, warning=FALSE}
 
@@ -546,7 +546,7 @@ p_value_comp_table_example
 
 ```
 
-**Sands dataset** results for type I II III ANOVA.
+**Sands data set** results for type I II III ANOVA.
 
 
 ```{r ANOVA type sandys 1, echo=FALSE, message=FALSE, warning=FALSE}
@@ -618,13 +618,13 @@ https://www.scribbr.com/statistics/anova-in-r/
 
 * which means that it explains 71% of the total variation in the dependent variable that can be explained by the full set of models.
 
-* The model with blocking term contains an additional 15% of the AIC weight, but because it is more than 2 delta-AIC worse than the best model, it probably isn’t good enough to include in your results.
+* The model with blocking term contains an additional 15% of the AIC weight, but because it is more than 2 delta-AIC worse than the best model, it probably is not’t good enough to include in your results.
 
 
 
 **Notes:**
 
-*I can't get this package to load - can't work this out doesn seem to have dependecies.*
+*I can't get this package to load - can't work this out does not seem to have dependencies.*
 
 *It's not a problem for these example.*
 
@@ -679,10 +679,10 @@ https://www.scribbr.com/statistics/anova-in-r/
 
 * For an illustration of these properties, see this diagram by Steve Jost at DePaul University: condor.depaul.edu/sjost/it223/documents/resid-plots.gif.
 
-* If your model doesn’t fit the assumption of homoscedasticity, you can try the Kruskall-Wallis test instead.
+* If your model does not’t fit the assumption of homoscedasticity, you can try the Kruskall-Wallis test instead.
 
 
-comments: They look ok to me unbiased and homoscedastic (even spread across plot no obvious groupings)
+comments: They look OK to me unbiased and homoscedastic (even spread across plot no obvious groupings)
 
 
 
@@ -739,7 +739,7 @@ plot(fitted(model_sand),
 
 * A significant result for these tests (p < 0.05) suggests that groups are heteroscedastic.  
 
-* One approach with heteroscedastic data in a one way anova is to use the Welch correction with the oneway.test function in the native stats package.  
+* One approach with heteroscedastic data in a one way anova is to use the Welch correction with the one-way.test function in the native stats package.  
 
 * A more versatile approach is to use the white.adjust=TRUE option in the Anova function from the car package.
 
@@ -815,7 +815,7 @@ In these examples test for homogeneity of variance has p values of
 
 Welch’s anova - unequal variances
 
-```{r ANOVA Welch unequal variances example, echo=FALSE}
+```{r ANOVA Welch unequal variances example 1, echo=FALSE}
 
 
 ### Welch’s anova for unequal variances
@@ -833,7 +833,7 @@ White-adjusted anova - heteroscedasticity
 
 
 
-```{r ANOVA Welch unequal variances example, echo=FALSE}
+```{r ANOVA Welch unequal variances example 2, echo=FALSE}
 
 ### White-adjusted anova for heteroscedasticity
 
@@ -868,7 +868,7 @@ oneway.test(yield ~ Descriptors,
 
 White-adjusted anova - heteroscedasticity
 
-```{r ANOVA Welch unequal variances example, echo=FALSE}
+```{r ANOVA Welch unequal variances example 3, echo=FALSE}
 
 ### White-adjusted anova for heteroscedasticity
 
@@ -1372,6 +1372,8 @@ plot
 data_summary <- as.data.frame(ungroup(data_summary))
 
 # Add in agricolae HSD Tukey letters 
+anova_sand_graph = lm( yield ~ Descriptors,
+                 data=summary_data_site)
 
 tukey_agricolae <- (HSD.test(anova_sand_graph, "Descriptors"))
 
@@ -1475,18 +1477,217 @@ plot_LSD
 ```
 
 
+#### barplots with Dunnets results 
+
+**sands data**
+
+
+
+```{r Summarize and Graphing the results with dunnets sand, message=FALSE, warning=FALSE, include=TRUE}
+data_summary_Dunnets <- summary_data_site %>% 
+  dplyr::group_by(Descriptors) %>%
+  dplyr::summarise(mean=mean(yield, na.rm = TRUE), 
+                   sd=sd(yield, na.rm = TRUE),
+                   count = n(),
+                   std_error = sd/(sqrt(count))
+  ) %>%
+  arrange(desc(mean))
+
+max_yld <- max(summary_data_site$yield, na.rm = TRUE) 
+
+data_summary_Dunnets <- as.data.frame(ungroup(data_summary_Dunnets))
 
 
 
 
 
 
+DunnettTest <- DunnettTest(yield ~ Descriptors,
+            data = summary_data_site,
+            control = "Control")
 
-Example of presenting results using Fishers (from one of Therses papers)
+DunnettTest_df <- as.data.frame(DunnettTest[[1]]) #get the fith item in the list
+DunnettTest_df$Descriptors_control <- rownames(DunnettTest_df) #move rwo names into a clm for joining
 
-Analysis of Variance (ANOVA) was undertaken using the GENSTAT version 13 statistical package (VSN International, Rothamsted, UK). 
+## strip the control from the descriptor name
+DunnettTest_df <- DunnettTest_df %>% 
+  mutate(Descriptors = str_replace(Descriptors_control, "(-Control)", ""))
 
-Assumptions of constant error variance (homogeneity), normality of data
-distribution and additivity of treatment and replicate effects were tested for each analysis. 
 
-Least significant difference (l.s.d.) between treatments was determined at <5 % significance using Fisher’s protected l.s.d.
+#Add in the significance ***
+
+DunnettTest_df <- DunnettTest_df %>% 
+  mutate(significance_control = case_when(
+    pval < 0.001 ~ "***",
+    pval <= 0.01 ~  "**",
+    pval <= 0.05 ~  "*",
+    pval >  0.05 ~  "ns",
+    TRUE ~ "check"
+    
+  ))
+DunnettTest_df <- DunnettTest_df %>% 
+  dplyr::select(Descriptors, pval, significance_control)
+
+
+#join it the summary data
+
+data_summary_Dunnets <- left_join(data_summary_Dunnets, DunnettTest_df)
+
+
+#rename the clms so they are more reflect the test 
+data_summary_Dunnets <- data_summary_Dunnets %>% 
+  dplyr::rename("pval_Dunnets" = "pval")
+
+
+
+plot_Dunnets <- data_summary_Dunnets %>%  
+  ggplot( aes(x = factor(Descriptors), y = mean)) + 
+  geom_bar(stat = "identity",  alpha = 0.5)  +
+  geom_errorbar(aes(ymin=mean-std_error, ymax=mean+std_error), width = 0.1) +
+  #labs(x="", y="Yield t/ha", title = paste(site_name,": ", year_selected),
+  labs(x="", y="Yield t/ha", 
+       #title = paste(site_name_output,": ", year_selected),
+       subtitle = "ANOVA with Dunnets, threshold 0.05") +
+  theme_classic() + 
+  
+  #scale_y_continuous(breaks=seq(0,max_yld,by=0.5), limits = c(0, max_yld))+
+  theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank()) +
+  theme(legend.position = c(0.1, 0.75)) +
+  geom_text(aes(label=significance_control),
+            position = position_dodge(0.80),
+            size = 4,
+            vjust=-0.5, hjust=-0.2,
+            colour = "gray25")+
+  theme(axis.text.x=element_text(angle=45,hjust=1))
+
+plot_Dunnets
+
+
+
+```
+
+
+
+I think the best options is the Dunnets.
+It seems to make the most sense to me.
+There is a lot of trials and this is just comparing the control.
+I am not that familiar with this test though.
+
+Maybe the best approach is to do all of the tests and then we can work out the best one afterwards.
+I just hope I am outputting the most appropriate values for reporting later.
+
+
+#### data set of results with HSD Tukey, LSD and Dunnets results 
+
+```{r Summarize with HSD Tukey, message=FALSE, warning=FALSE, include=FALSE, LSD and Dunnets results sand, message=FALSE}
+
+data_summary_all_analysis <- summary_data_site %>% 
+  dplyr::group_by(Descriptors) %>%
+  dplyr::summarise(mean=mean(yield, na.rm = TRUE), 
+                   sd=sd(yield, na.rm = TRUE),
+                   count = n(),
+                   std_error = sd/(sqrt(count))
+  ) %>%
+  arrange(desc(mean))
+
+max_yld <- max(summary_data_site$yield, na.rm = TRUE) 
+
+data_summary_all_analysis <- as.data.frame(ungroup(data_summary_all_analysis))
+data_summary_all_analysis
+
+########################################################################################################################################################
+#### agricolae_LSD
+agricolae_LSD_output_sand <- (LSD.test(model_sand, "Descriptors",   # outer parentheses print result
+                                       alpha = 0.05,      
+                                       p.adj="none"))      # see ?p.adjust for options"none" is t-student.
+
+
+
+
+#Extract the LSD value from the anlsysis and add it to the summary data
+LSD <- agricolae_LSD_output_sand$statistics$LSD
+
+
+#Extract the LSD letters from the anlsysis and add it to the summary data
+
+agricolae_LSD_output_sand_df <- as.data.frame(agricolae_LSD_output_sand[[5]]) #get the fith item in the list
+agricolae_LSD_output_sand_df$Descriptors <- rownames(agricolae_LSD_output_sand_df) #move rwo names into a clm for joining
+
+agricolae_LSD_output_sand_df <- agricolae_LSD_output_sand_df %>% 
+  mutate(LSD = LSD)
+  
+data_summary_all_analysis <- left_join(data_summary_all_analysis,agricolae_LSD_output_sand_df)
+
+data_summary_all_analysis <- dplyr::select(data_summary_all_analysis, -yield) %>% 
+  dplyr::rename(groups_LSD = groups)
+data_summary_all_analysis
+
+########################################################################################################################################################
+#### agricolae_HSD.test
+
+tukey_agricolae <- (HSD.test(anova_sand_graph, "Descriptors"))
+
+# I want to access the groups but its part of a list
+
+
+tukey_agricolae_df <- as.data.frame(tukey_agricolae[[5]]) #get the fith item in the list
+tukey_agricolae_df$Descriptors <- rownames(tukey_agricolae_df) #move rwo names into a clm for joining
+
+data_summary_all_analysis <- left_join(data_summary_all_analysis,tukey_agricolae_df)
+data_summary_all_analysis <- dplyr::select(data_summary_all_analysis, -yield) %>% 
+  dplyr::rename(groups_HSD_Tukey = groups)
+data_summary_all_analysis
+
+
+data_summary_all_analysis
+
+########################################################################################################################################################
+### Dunnet test
+
+DunnettTest <- DunnettTest(yield ~ Descriptors,
+            data = summary_data_site,
+            control = "Control")
+
+DunnettTest_df <- as.data.frame(DunnettTest[[1]]) #get the fith item in the list
+DunnettTest_df$Descriptors_control <- rownames(DunnettTest_df) #move rwo names into a clm for joining
+
+## strip the control from the descriptor name
+DunnettTest_df <- DunnettTest_df %>% 
+  mutate(Descriptors = str_replace(Descriptors_control, "(-Control)", ""))
+
+
+#Add in the significance ***
+
+DunnettTest_df <- DunnettTest_df %>% 
+  mutate(significance_control = case_when(
+    pval < 0.001 ~ "***",
+    pval <= 0.01 ~  "**",
+    pval <= 0.05 ~  "*",
+    pval >  0.05 ~  "ns",
+    TRUE ~ "check"
+    
+  ))
+DunnettTest_df <- DunnettTest_df %>% 
+  dplyr::select(Descriptors, pval, significance_control)
+
+
+#join it the summary data
+
+data_summary_all_analysis <- left_join(data_summary_all_analysis, DunnettTest_df)
+
+
+#rename the clms so they are more reflect the test 
+data_summary_all_analysis <- data_summary_all_analysis %>% 
+  dplyr::rename("pval_Dunnets" = "pval")
+
+
+data_summary_all_analysis
+
+
+
+
+```
+
+
+The next step will be working out how to write this as a function and then running it as a batch
+Also need to do the same thing for cumulative yield
