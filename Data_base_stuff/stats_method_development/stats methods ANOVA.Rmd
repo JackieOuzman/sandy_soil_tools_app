@@ -85,6 +85,7 @@ library(multcompView)
 library(Rmisc)
 
 library(ggplot2)
+library(car)
 
 ```
 
@@ -92,7 +93,7 @@ library(ggplot2)
 
 
 
-```{r example dataset and sandy soils dataset, include=FALSE}
+```{r example dataset and sandy soils dataset, message=TRUE, warning=FALSE, include=FALSE}
 
 #Example dataset
 Input =("
@@ -333,6 +334,9 @@ summary_data_site <- summary_data_all %>%
 
 ```
 
+#Summary stats
+
+
 ### Produce summary statistics for example dataset using FSA
 
 ```{r summary statistics example, include=TRUE} 
@@ -350,7 +354,7 @@ Summarize(Aam ~ Location,
 
 ### Produce summary statistics for sandy soil dataset using FSA
 
-```{r summary statistics sandy, include=TRUE} 
+```{r summary statistics sandy, echo=FALSE, message=FALSE, warning=FALSE}
 #using library(FSA) 
 
 #names(summary_data_site)
@@ -361,16 +365,82 @@ Summarize(yield ~ Descriptors,
 
 
 ```
+# ANOVA 
 
 
-### Fit the linear model and conduct ANOVA for example dataset
+*Step 1a* I have fitted a linear model to my data.
+
+*Step 1b* One-way ANOVA using type II, or I or III.
+
+*Step 1c* which is the best fit of model (can be used if choosing between one-way or two-way ANOVA)
+
+*Step 1d* check for assumptions of analysis
+
+
+
+# One-way ANOVA 
+
+
+ANOVA is a statistical test for estimating how a quantitative dependent variable changes according to the levels of one or more categorical independent variables. 
+
+ANOVA tests whether there is a difference in means of the groups at each level of the independent variable.
+
+The null hypothesis (H0) of the ANOVA is no difference in means, and the alternate hypothesis (Ha) is that the means are different from one another.
+
+
+Step 1 is to descide what type of ANOVA you need.
+
+one-way ANOVA (one independent variable) 
+
+two-way ANOVA (two independent variables)
+
+
+ANOVA tests whether any of the group means are different from the overall mean of the data by checking the variance of each individual group against the overall variance of the data. 
+
+If one or more groups falls outside the range of variation predicted by the null hypothesis (all group means are equal), then the test is statistically significant.
+
+We can perform an ANOVA in R using the aov() function. 
+
+This will calculate the test statistic for ANOVA and determine whether there is significant variation among the groups formed by the levels of the independent variable.
+
+**Code in R**
+
+one.way <- aov(variable 1  ~ varaiable 2, data = df)
+
+summary(one.way)
+
+The model summary first lists the independent variables being tested in the model (in this case we have only one, ‘variable 2’) and the model residuals (‘Residual’). 
+
+All of the variation that is not explained by the independent variables ("variable 2") is called residual variance.
+
+The rest of the values in the output table describe the independent variable and the residuals:
+
+The Df column displays the degrees of freedom for the independent variable (the number of levels in the variable minus 1), and the degrees of freedom for the residuals (the total number of observations minus one and minus the number of levels in the independent variables).
+
+The Sum Sq column displays the sum of squares (a.k.a. the total variation between the group means and the overall mean).
+
+The Mean Sq column is the mean of the sum of squares, calculated by dividing the sum of squares by the degrees of freedom for each parameter.
+
+The F-value column is the test statistic from the F test. This is the mean square of each independent variable divided by the mean square of the residuals.
+
+*The larger the F value, the more likely it is that the variation caused by the independent variable is real and not due to chance.*
+
+The Pr(>F) column is the p-value of the F-statistic. 
+
+This shows how likely it is that the F-value calculated from the test would have occurred if the null hypothesis of no difference among group means were true.
+
+If the p-value of the 'varaible 2' variable is low (p < 0.001), then it appears that the type of 'varaible 2' has a real impact on the "variable 1".
+
+
+### Step 1a and 1b Fit the model and conduct One-way ANOVA 
+
+####In the *example dataset* I fit a linear model
  
 ```{r fit model example, message=FALSE, warning=FALSE, include=TRUE}
 model = lm(Aam ~ Location,
            data=Data)
 
-library(car)
-anova(model) 
+
 Anova(model, type="II") # Can use type="III"
 
    ### If you use type="III", you need the following line before the analysi
@@ -382,14 +452,19 @@ summary(model)     #
 ```
 
 
-### Fit the linear model and conduct ANOVA for sandy soil dataset
+
+
+
+
+
+#### Fit the linear model and conduct One-way ANOVA for *sandy soil dataset*
  
 ```{r fit model sandys, message=FALSE, warning=FALSE, include=TRUE}
 model_sand = lm( yield ~ Descriptors,
            data=summary_data_site)
 
 
-anova(model_sand) 
+#anova(model_sand) 
 Anova(model_sand, type="II") # Can use type="III"
 
    ### If you use type="III", you need the following line before the analysi
@@ -399,6 +474,170 @@ Anova(model_sand, type="II") # Can use type="III"
 summary(model_sand)     #
 
 ```
+
+## Step 1b: One-way - ANOVA Type Options 
+
+In these example I have used Type II ANOVA.
+
+There are other options such as Type I and Type III.
+
+Type I should be used with caution.
+
+When the dataset is simple and balanced the Type I , II and III should give you very similar results.
+
+In sand and the example data they all come out as significant, type I and II are the same.
+
+Type III has a smaller P value suggesting that the test is more likley to report differences.
+
+***From Help***
+
+*The designations "type-II" and "type-III" are borrowed from SAS, but the definitions used here do not correspond precisely to those employed by SAS.* 
+
+*Type-II tests are calculated according to the principle of marginality, testing each term after all others, except ignoring the term's higher-order relatives; so-called type-III tests violate marginality, testing each term in the model after all of the others. This definition of Type-II tests corresponds to the tests produced by SAS for analysis-of-variance models, where all of the predictors are factors, but not more generally (i.e., when there are quantitative predictors). Be very careful in formulating the model for type-III tests, or the hypotheses tested will not make sense.*
+
+*As implemented here, type-II Wald tests are a generalization of the linear hypotheses used to generate these tests in linear models.*
+
+*For tests for linear models, multivariate linear models, and Wald tests for generalized linear models, Cox models, mixed-effects models, generalized linear models fit to survey data, and in the default case, Anova finds the test statistics without refitting the model. The svyglm method simply calls the default method and therefore can take the same arguments.*
+
+*The standard R anova function calculates sequential ("type-I") tests. These rarely test interesting hypotheses in unbalanced designs*
+
+
+**In summary use the type II ANOVA.**
+
+
+
+#### *Example dataset* results for type I II III ANOVA.
+
+```{r ANOVA type example, echo=FALSE, message=FALSE, warning=FALSE}
+
+#### example ###
+
+anova_eg_I <- Anova(model, type="II") 
+anova_eg_II <- Anova(model, type="II")
+anova_eg_III <- Anova(model, type="III")
+
+
+p_value_eg_anovaI <- anova_I[1,4]
+p_value_eg_anovaII <- anova_II[1,4]
+p_value_eg_anovaIII <- anova_III[1,4]
+
+
+
+Type_of_ANOVA <- c("anova_I", "anova_II", "anova_III")
+P_values <- c(p_value_eg_anovaI, p_value_eg_anovaII, p_value_eg_anovaIII)
+
+### make a table /df to display the results
+p_value_comp_table_example <- data.frame(Type_of_ANOVA, P_values)
+
+p_value_comp_table_example <- p_value_comp_table_example %>% 
+  mutate(significance = case_when(
+    P_values_type < 0.001 ~ "***",
+    P_values_type <= 0.01 ~  "**",
+    P_values_type <= 0.05 ~  "*",
+    P_values_type >  0.05 ~  "ns",
+    TRUE ~ "check"
+    
+  ))
+p_value_comp_table_example
+
+
+```
+
+#### *Sands dataset* results for type I II III ANOVA.
+
+
+```{r ANOVA type sandys, echo=FALSE, message=FALSE, warning=FALSE}
+model_sand = lm( yield ~ Descriptors,
+                 data=summary_data_site)
+
+anova_I <- Anova(model_sand, type="II") 
+anova_II <- Anova(model_sand, type="II")
+anova_III <- Anova(model_sand, type="III")
+
+
+p_value_anovaI <- anova_I[1,4]
+p_value_anovaII <- anova_II[1,4]
+p_value_anovaIII <- anova_III[1,4]
+
+
+
+Type_of_ANOVA <- c("anova_I", "anova_II", "anova_III")
+P_values <- c(p_value_anovaI, p_value_anovaII, p_value_anovaIII)
+
+### make a table /df to display the results
+p_value_comp_table <- data.frame(Type_of_ANOVA, P_values)
+p_value_comp_table <- p_value_comp_table %>% 
+  mutate(significance = case_when(
+    P_values_type < 0.001 ~ "***",
+    P_values_type <= 0.01 ~  "**",
+    P_values_type <= 0.05 ~  "*",
+    P_values_type >  0.05 ~  "ns",
+    TRUE ~ "check"
+    
+  ))
+p_value_comp_table
+
+```
+
+
+#### Step 1c Best fit for chosen ANOVA model.
+
+In these examples I am only looking at one - way anova.
+
+But in other examples you could choose between:
+
+one.way
+
+two.way
+
+interaction
+
+blocking
+
+
+
+https://www.scribbr.com/statistics/anova-in-r/
+
+
+Usually you’ll want to use the ‘best-fit’ model – the model that best explains the variation in the dependent variable.
+
+The Akaike information criterion (AIC) is a good test for model fit. 
+
+AIC calculates the information value of each model by balancing the variation explained against the number of parameters used.
+
+In AIC model selection, we compare the information value of each model and choose the one with the *lowest AIC value* (a lower number means more information explained!)
+
+
+AIC model selection
+Select model with the lowest AIC value.
+
+eg The two-way model has the lowest AIC value, and 71% of the AIC weight, 
+
+which means that it explains 71% of the total variation in the dependent variable that can be explained by the full set of models.
+
+The model with blocking term contains an additional 15% of the AIC weight, but because it is more than 2 delta-AIC worse than the best model, it probably isn’t good enough to include in your results.
+
+```{r ANOVA type sandys, message=FALSE, warning=FALSE, include=FALSE}
+library(broom)
+library(AICcmodavg)
+
+model.set <- list(one.way, two.way, interaction, blocking)
+model.names <- c("one.way", "two.way", "interaction", "blocking")
+
+aictab(model.set, modnames = model.names)
+
+```
+
+
+
+
+
+
+
+
+
+
+
 
 
 ### Checking assumptions of the model example
