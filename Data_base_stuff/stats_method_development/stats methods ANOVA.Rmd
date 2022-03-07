@@ -9,41 +9,29 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-## Some notes and resources
+# Notes and resources
 
 https://www.youtube.com/watch?v=o5IOyr-7tVY
+
 This gives you some background in the Fishers LSD test and some further reading.
 
-One thing to note is that if you are comparing more than 3 means (3 groups) the type 1 error increase.
+*One thing to note is that if you are comparing more than 3 means (3 groups) the type 1 error increase.*
 
-Type I errors = claiming that conditions have different means when they really don't.
+* Type I errors = claiming that conditions have different means when they really don't.
 
-Or family wise error
 
-Fishers is a more powerful test when comparing a smaller trial (eg with less comparison).
+
+* Fishers is a more powerful test when comparing a smaller trial (eg with less comparison).
+
+* If your LSD is smaller than the difference (between the two means) it suggests the two means of different treatments are significantly different.
 
 You can do this manually but there are also R packages that will help.
 
-A manual approach uses the ANOVA results (if significantly different).
-
-step 1 = Calulate the LSD 
-
-this uses the degrees of freedom 
-MSW
-and the sample size
-
-step 2 = use the absoulate value between the means of the two groups you are comparing.
-
-step 3 = compare the value in step 1 vs. value in setep 2 to accept or reject the null hypothesis.
-
-If your LSD is smaller than the difference (between the two means) it suggests the two means of different treatments are significantly different.
-
-https://www.researchgate.net/publication/327283926_What_is_the_proper_way_to_apply_multiple_comparison_test
 
 
-## worked through examples
 
-https://rcompanion.org/rcompanion/d_05.html
+
+**worked through examples**
 
 
 This tutorial looks at a number of packages.
@@ -54,6 +42,11 @@ This tutorial looks at a number of packages.
 - lsmeans
 
 - multcompView
+
+
+https://www.researchgate.net/publication/327283926_What_is_the_proper_way_to_apply_multiple_comparison_test
+
+https://rcompanion.org/rcompanion/d_05.html
 
 
 ```{r packages to use, include=FALSE}
@@ -86,10 +79,11 @@ library(Rmisc)
 
 library(ggplot2)
 library(car)
+library(DescTools)
 
 ```
 
-## Create and import datasets
+**Create and import datasets**
 
 
 
@@ -334,13 +328,14 @@ summary_data_site <- summary_data_all %>%
 
 ```
 
-#Summary stats
+# Summary stats
 
 
-### Produce summary statistics for example dataset using FSA
+**Produce summary statistics using FSA**
 
-```{r summary statistics example, include=TRUE} 
-#using library(FSA) 
+Example dataset 
+
+```{r summary statistics example, echo=FALSE}
 
 Summarize(Aam ~ Location,
            data=Data,
@@ -352,12 +347,10 @@ Summarize(Aam ~ Location,
 
 
 
-### Produce summary statistics for sandy soil dataset using FSA
+sandy soil dataset
 
 ```{r summary statistics sandy, echo=FALSE, message=FALSE, warning=FALSE}
-#using library(FSA) 
 
-#names(summary_data_site)
 Summarize(yield ~ Descriptors,
            data=summary_data_site,
            digits=3)
@@ -368,38 +361,38 @@ Summarize(yield ~ Descriptors,
 # ANOVA 
 
 
-*Step 1a* I have fitted a linear model to my data.
+*Step 1a*     Fitted a linear model to data.
 
-*Step 1b* One-way ANOVA using type II, or I or III.
+*Step 1b*     One-way ANOVA (using type II, or I or III).
 
-*Step 1c* which is the best fit of model (can be used if choosing between one-way or two-way ANOVA)
+*Step 1c*     Best fit of model (can be used if choosing between one-way or two-way ANOVA)
 
-*Step 1d* check for assumptions of analysis
+*Step 1d*     Check for assumptions of analysis
 
 
 
-# One-way ANOVA 
+## Background one-way ANOVA 
 
 
 ANOVA is a statistical test for estimating how a quantitative dependent variable changes according to the levels of one or more categorical independent variables. 
 
-ANOVA tests whether there is a difference in means of the groups at each level of the independent variable.
+* ANOVA tests whether there is a difference in means of the groups at each level of the independent variable.
 
-The null hypothesis (H0) of the ANOVA is no difference in means, and the alternate hypothesis (Ha) is that the means are different from one another.
+* The null hypothesis (H0) of the ANOVA is no difference in means, and the alternate hypothesis (Ha) is that the means are different from one another.
 
 
-Step 1 is to descide what type of ANOVA you need.
+* **Decide what type of ANOVA you need.**
 
-one-way ANOVA (one independent variable) 
+* one-way ANOVA (one independent variable) 
 
-two-way ANOVA (two independent variables)
+* two-way ANOVA (two independent variables)
 
 
 ANOVA tests whether any of the group means are different from the overall mean of the data by checking the variance of each individual group against the overall variance of the data. 
 
 If one or more groups falls outside the range of variation predicted by the null hypothesis (all group means are equal), then the test is statistically significant.
 
-We can perform an ANOVA in R using the aov() function. 
+Perform an ANOVA in R using the aov() function. 
 
 This will calculate the test statistic for ANOVA and determine whether there is significant variation among the groups formed by the levels of the independent variable.
 
@@ -409,34 +402,34 @@ one.way <- aov(variable 1  ~ varaiable 2, data = df)
 
 summary(one.way)
 
-The model summary first lists the independent variables being tested in the model (in this case we have only one, ‘variable 2’) and the model residuals (‘Residual’). 
+* The model summary first lists the independent variables being tested in the model (in this case we have only one, ‘variable 2’) and the model residuals  (‘Residual’). 
 
-All of the variation that is not explained by the independent variables ("variable 2") is called residual variance.
+* All of the variation that is not explained by the independent variables ("variable 2") is called residual variance.
 
-The rest of the values in the output table describe the independent variable and the residuals:
+* The rest of the values in the output table describe the independent variable and the residuals:
 
-The Df column displays the degrees of freedom for the independent variable (the number of levels in the variable minus 1), and the degrees of freedom for the residuals (the total number of observations minus one and minus the number of levels in the independent variables).
+* The Df column displays the degrees of freedom for the independent variable (the number of levels in the variable minus 1), and the degrees of freedom for the residuals (the total number of observations minus one and minus the number of levels in the independent variables).
 
-The Sum Sq column displays the sum of squares (a.k.a. the total variation between the group means and the overall mean).
+* The Sum Sq column displays the sum of squares (a.k.a. the total variation between the group means and the overall mean).
 
-The Mean Sq column is the mean of the sum of squares, calculated by dividing the sum of squares by the degrees of freedom for each parameter.
+* The Mean Sq column is the mean of the sum of squares, calculated by dividing the sum of squares by the degrees of freedom for each parameter.
 
-The F-value column is the test statistic from the F test. This is the mean square of each independent variable divided by the mean square of the residuals.
+* The F-value column is the test statistic from the F test. This is the mean square of each independent variable divided by the mean square of the residuals.
 
-*The larger the F value, the more likely it is that the variation caused by the independent variable is real and not due to chance.*
+* *The larger the F value, the more likely it is that the variation caused by the independent variable is real and not due to chance.*
 
-The Pr(>F) column is the p-value of the F-statistic. 
+* The Pr(>F) column is the p-value of the F-statistic. 
 
-This shows how likely it is that the F-value calculated from the test would have occurred if the null hypothesis of no difference among group means were true.
+* This shows how likely it is that the F-value calculated from the test would have occurred if the null hypothesis of no difference among group means were true.
 
-If the p-value of the 'varaible 2' variable is low (p < 0.001), then it appears that the type of 'varaible 2' has a real impact on the "variable 1".
+* *If the p-value of the 'varaible 2' variable is low (p < 0.001), then it appears that the type of 'varaible 2' has a real impact on the "variable 1".*
 
 
-### Step 1a and 1b Fit the model and conduct One-way ANOVA 
+### **Step 1a and 1b** Fit the model and conduct One-way ANOVA 
 
-####In the *example dataset* I fit a linear model
+*example dataset* (linear model)
  
-```{r fit model example, message=FALSE, warning=FALSE, include=TRUE}
+```{r fit model example, echo=FALSE, message=FALSE, warning=FALSE}
 model = lm(Aam ~ Location,
            data=Data)
 
@@ -454,12 +447,11 @@ summary(model)     #
 
 
 
+*sandy soil dataset* (linear model)
 
 
 
-#### Fit the linear model and conduct One-way ANOVA for *sandy soil dataset*
- 
-```{r fit model sandys, message=FALSE, warning=FALSE, include=TRUE}
+```{r fit model sandys, echo=FALSE, message=FALSE, warning=FALSE}
 model_sand = lm( yield ~ Descriptors,
            data=summary_data_site)
 
@@ -475,19 +467,19 @@ summary(model_sand)     #
 
 ```
 
-## Step 1b: One-way - ANOVA Type Options 
+### **Step 1b**: One-way - ANOVA Type Options 
 
-In these example I have used Type II ANOVA.
+* In these example I have used Type II ANOVA.
 
-There are other options such as Type I and Type III.
+* There are other options such as Type I and Type III.
 
-Type I should be used with caution.
+* Type I should be used with caution.
 
-When the dataset is simple and balanced the Type I , II and III should give you very similar results.
+* When the dataset is simple and balanced the Type I , II and III should give you very similar results.
 
-In sand and the example data they all come out as significant, type I and II are the same.
+* In sand and the example data they all come out as significant, type I and II are the same.
 
-Type III has a smaller P value suggesting that the test is more likley to report differences.
+* Type III has a smaller P value suggesting that the test is more likley to report differences.
 
 ***From Help***
 
@@ -502,11 +494,19 @@ Type III has a smaller P value suggesting that the test is more likley to report
 *The standard R anova function calculates sequential ("type-I") tests. These rarely test interesting hypotheses in unbalanced designs*
 
 
+
+
+
+
 **In summary use the type II ANOVA.**
 
 
 
-#### *Example dataset* results for type I II III ANOVA.
+
+
+
+
+**Example dataset** results for type I II III ANOVA.
 
 ```{r ANOVA type example, echo=FALSE, message=FALSE, warning=FALSE}
 
@@ -517,9 +517,9 @@ anova_eg_II <- Anova(model, type="II")
 anova_eg_III <- Anova(model, type="III")
 
 
-p_value_eg_anovaI <- anova_I[1,4]
-p_value_eg_anovaII <- anova_II[1,4]
-p_value_eg_anovaIII <- anova_III[1,4]
+p_value_eg_anovaI <- anova_eg_I[1,4]
+p_value_eg_anovaII <- anova_eg_II[1,4]
+p_value_eg_anovaIII <- anova_eg_III[1,4]
 
 
 
@@ -527,7 +527,11 @@ Type_of_ANOVA <- c("anova_I", "anova_II", "anova_III")
 P_values <- c(p_value_eg_anovaI, p_value_eg_anovaII, p_value_eg_anovaIII)
 
 ### make a table /df to display the results
-p_value_comp_table_example <- data.frame(Type_of_ANOVA, P_values)
+Type_of_ANOVA <- c("anova_I", "anova_II", "anova_III")
+P_values_type <- c(p_value_eg_anovaI, p_value_eg_anovaII, p_value_eg_anovaIII)
+
+### make a table /df to display the results
+p_value_comp_table_example <- data.frame(Type_of_ANOVA, P_values_type)
 
 p_value_comp_table_example <- p_value_comp_table_example %>% 
   mutate(significance = case_when(
@@ -540,13 +544,12 @@ p_value_comp_table_example <- p_value_comp_table_example %>%
   ))
 p_value_comp_table_example
 
-
 ```
 
-#### *Sands dataset* results for type I II III ANOVA.
+**Sands dataset** results for type I II III ANOVA.
 
 
-```{r ANOVA type sandys, echo=FALSE, message=FALSE, warning=FALSE}
+```{r ANOVA type sandys 1, echo=FALSE, message=FALSE, warning=FALSE}
 model_sand = lm( yield ~ Descriptors,
                  data=summary_data_site)
 
@@ -580,51 +583,62 @@ p_value_comp_table
 ```
 
 
-#### Step 1c Best fit for chosen ANOVA model.
+### **Step 1c** Best fit for chosen ANOVA model.
 
 In these examples I am only looking at one - way anova.
 
 But in other examples you could choose between:
 
-one.way
+* one.way
 
-two.way
+* two.way
 
-interaction
+* interaction
 
-blocking
+* blocking
 
 
 
 https://www.scribbr.com/statistics/anova-in-r/
 
 
-Usually you’ll want to use the ‘best-fit’ model – the model that best explains the variation in the dependent variable.
+* Usually you’ll want to use the ‘best-fit’ model – the model that best explains the variation in the dependent variable.
 
-The Akaike information criterion (AIC) is a good test for model fit. 
+* The Akaike information criterion (AIC) is a good test for model fit. 
 
-AIC calculates the information value of each model by balancing the variation explained against the number of parameters used.
+* AIC calculates the information value of each model by balancing the variation explained against the number of parameters used.
 
-In AIC model selection, we compare the information value of each model and choose the one with the *lowest AIC value* (a lower number means more information explained!)
+* In AIC model selection, we compare the information value of each model and choose the one with the *lowest AIC value* (a lower number means more information explained!)
 
 
-AIC model selection
-Select model with the lowest AIC value.
+**AIC model selection**
+* Select model with the lowest AIC value.
 
-eg The two-way model has the lowest AIC value, and 71% of the AIC weight, 
+* eg The two-way model has the lowest AIC value, and 71% of the AIC weight, 
 
-which means that it explains 71% of the total variation in the dependent variable that can be explained by the full set of models.
+* which means that it explains 71% of the total variation in the dependent variable that can be explained by the full set of models.
 
-The model with blocking term contains an additional 15% of the AIC weight, but because it is more than 2 delta-AIC worse than the best model, it probably isn’t good enough to include in your results.
+* The model with blocking term contains an additional 15% of the AIC weight, but because it is more than 2 delta-AIC worse than the best model, it probably isn’t good enough to include in your results.
+
+
+
+**Notes:**
+
+*I can't get this package to load - can't work this out doesn seem to have dependecies.*
+
+*It's not a problem for these example.*
+
+*But it looks like this package might be useful for other analysis.*
 
 ```{r ANOVA type sandys, message=FALSE, warning=FALSE, include=FALSE}
-library(broom)
-library(AICcmodavg)
-
-model.set <- list(one.way, two.way, interaction, blocking)
-model.names <- c("one.way", "two.way", "interaction", "blocking")
-
-aictab(model.set, modnames = model.names)
+# library(broom)
+# library(ggpubr)
+# library(AICcmodavg)
+# 
+# model.set <- list(one.way, two.way, interaction, blocking)
+# model.names <- c("one.way", "two.way", "interaction", "blocking")
+# 
+# aictab(model.set, modnames = model.names)
 
 ```
 
@@ -637,125 +651,330 @@ aictab(model.set, modnames = model.names)
 
 
 
+### **Step 1d Assumptions of the model**
 
 
 
-### Checking assumptions of the model example
 
-#### Histogram
+* A histogram of residuals from a linear model.  
 
-A histogram of residuals from a linear model.  The distribution of these residuals should be approximately normal.
-So we are looking for a normal distribution.
+* The distribution of these residuals should be approximately normal.
 
-```{r assumptions example, include=TRUE} 
+
+
+
+* The diagnostic plots show the unexplained variance (residuals) across the range of the observed data.
+
+* Each plot gives a specific piece of information about the model fit, but it’s enough to know that the red line representing the mean of the residuals should be horizontal and centered on zero (or on one, in the scale-location plot), meaning that there are no large outliers that would cause bias in the model.
+
+* The normal Q-Q plot plots a regression between the theoretical residuals of a perfectly-homoscedastic model and the actual residuals of your model, so the closer to a slope of 1 this is the better. This Q-Q plot is very close, with only a bit of deviation.
+
+* From these diagnostic plots we can say that the model fits the assumption of homoscedasticity.
+
+
+
+* A plot of residuals vs. predicted values.  
+
+* The residuals should be unbiased and homoscedastic.  
+
+* For an illustration of these properties, see this diagram by Steve Jost at DePaul University: condor.depaul.edu/sjost/it223/documents/resid-plots.gif.
+
+* If your model doesn’t fit the assumption of homoscedasticity, you can try the Kruskall-Wallis test instead.
+
+
+comments: They look ok to me unbiased and homoscedastic (even spread across plot no obvious groupings)
+
+
+
+
+
+
+
+
+**Model example**
+
+```{r assumptions example, echo=FALSE}
 hist(residuals(model),
      col="darkgray")
+
+par(mfrow=c(2,2))
+plot(model)
+par(mfrow=c(1,1))
 ```
 
-### Checking assumptions of the model sandy soils
+**Sands example**
 
-#### Histogram
+
 
 Look like a normal distribution to me.
 
-```{r assumptions sandy, include=TRUE} 
+```{r assumptions sandy, echo=FALSE}
 hist(residuals(model_sand),
      col="darkgray")
+
+par(mfrow=c(2,2))
+plot(model_sand)
+par(mfrow=c(1,1))
 ```
 
 
-### Checking assumptions of the model example
 
-#### Residuals
-
-A plot of residuals vs. predicted values.  The residuals should be unbiased and homoscedastic.  For an illustration of these properties, see this diagram by Steve Jost at DePaul University: condor.depaul.edu/sjost/it223/documents/resid-plots.gif.
-
-They look ok to me unbiased and homoscedastic (even spread across plot no obvious groupings)
-
-```{r Residuals example, include=TRUE} 
+```{r Residuals example, eval=FALSE, include=FALSE}
 
 plot(fitted(model),
      residuals(model))
 ```
 
-### Checking assumptions of the model sandy
 
-#### Residuals
 
-Looks ok to me.
-
-```{r Residuals sand, include=TRUE} 
+```{r Residuals sand, eval=FALSE, include=FALSE}
 
 plot(fitted(model_sand),
      residuals(model_sand))
 ```
 
+### **Step 1d Assumptions** of the ANOVA
 
-### Tukey and Least Significant Difference mean separation tests (pairwise comparisons)
+* Bartlett’s test and Levene’s test can be used to check the homoscedasticity of groups from a one-way anova.  
+
+* A significant result for these tests (p < 0.05) suggests that groups are heteroscedastic.  
+
+* One approach with heteroscedastic data in a one way anova is to use the Welch correction with the oneway.test function in the native stats package.  
+
+* A more versatile approach is to use the white.adjust=TRUE option in the Anova function from the car package.
+
+
+**example data**
+Bartlett test
+
+```{r Residuals Bartlett, echo=FALSE}
+
+### Bartlett test for homogeneity of variance
+
+bartlett.test(Aam ~ Location,
+              data = Data) 
+```
+
+Levene test
+
+```{r Residuals Levene, echo=FALSE}
+### Levene test for homogeneity of variance
+
+library(car)
+
+leveneTest(Aam ~ Location,
+           data = Data)
+
+```
+
+
+
+**Sands example**
+Bartlett test
+
+```{r Residuals Bartlett sand, echo=FALSE}
+
+### Bartlett test for homogeneity of variance
+
+bartlett.test(yield ~ Descriptors,
+              data = summary_data_site) 
+
+ 
+```
+
+Levene test
+
+```{r Residuals Levene sand, echo=FALSE}
+### Levene test for homogeneity of variance
+
+#library(car)
+
+leveneTest(yield ~ Descriptors,
+              data = summary_data_site)
+
+```
+
+In these examples test for homogeneity of variance has p values of
+
+* Bartlett example data: p = 0.6565
+
+* Bartlett sample data:  p  = 0.5951
+
+* A significant result for these tests (p < 0.05) suggests that groups are heteroscedastic.
+
+* These examples are not heteroscedastic.
+
+* It is safe to use the normal test
+
+
+
+
+### **Step 1a&b IF REQUIRED fit a linear model and use ANOVA for data with unequal variances or heteroscedasticity
+
+**example data**
+
+Welch’s anova - unequal variances
+
+```{r ANOVA Welch unequal variances example, echo=FALSE}
+
+
+### Welch’s anova for unequal variances
+
+oneway.test(Aam ~ Location,
+            data=Data,
+            var.equal=FALSE)
+
+ 
+```
+
+White-adjusted anova - heteroscedasticity
+
+* A more versatile approach is to use the white.adjust=TRUE option in the Anova function from the car package.
+
+
+
+```{r ANOVA Welch unequal variances example, echo=FALSE}
+
+### White-adjusted anova for heteroscedasticity
+
+model = lm(Aam ~ Location,
+           data=Data)
+
+#library(car)
+
+Anova(model, Type="II",
+      white.adjust=TRUE)
+ 
+```
+ 
+
+ 
+
+**sands data**
+
+Welch’s anova - unequal variances
+
+```{r ANOVA Welch unequal variances sand, echo=FALSE}
+
+
+### Welch’s anova for unequal variances
+
+oneway.test(yield ~ Descriptors,
+              data = summary_data_site,
+            var.equal=FALSE)
+
+ 
+```
+
+White-adjusted anova - heteroscedasticity
+
+```{r ANOVA Welch unequal variances example, echo=FALSE}
+
+### White-adjusted anova for heteroscedasticity
+
+model_White_adjusted = lm(yield ~ Descriptors,
+              data = summary_data_site)
+
+#library(car)
+
+Anova(model_White_adjusted, Type="II",
+      white.adjust=TRUE)
+ 
+```
+
+ 
+
+
+
+
+
+# Post Hoc analysis or multiple comparisons 
+
+* This is done after the ANOVA analysis 
+* Once you get an ANOVA with significant differences
+
+
+There are multiple options for what test to use:
+
+* Tukey comparisons in agricolae package
+* LSD comparisons in agricolae package
+* Multiple comparisons in multcomp package
+* Multiple comparisons to a control in multcomp package
+* Multiple comparisons to a control with Dunnett test
+* Multiple comparisons least square means
+
+
+
+## Tukey and Least Significant Difference mean separation tests (pairwise comparisons)
 
 Tukey and other multiple comparison tests can be performed with a handful of functions.  
 
 The functions TukeyHSD, HSD.test, and LSD.test are probably not appropriate for cases where there are unbalanced data or unequal variances among levels of the factor, though TukeyHSD does make an adjustment for mildly unbalanced data.  
 
-**  It is my understanding that the multcomp and lsmeans packages are more appropriate for unbalanced data.  **  
-
-Another alternative is the DTK package that performs mean separation tests on data with unequal sample sizes and no assumption of equal variances.
-
-
-### Tukey comparisons in agricolae package with example data
+* See note at the start, as the number of comparison increase, the best options for analysis change.
+* LSD is good option for 3 or less mean comparison.
 
 
-```{r Tukey with agricolae example, include=TRUE} 
+#### Tukey comparisons in agricolae package 
+
+**example data**
+
+```{r Tukey with agricolae example, echo=FALSE, message=FALSE, warning=FALSE}
 #library(agricolae)
 
 (HSD.test(model, "Location"))          # outer parentheses print result
 
 ```
 
+**sands data**
 
-### Tukey comparisons in agricolae package with sand data
 
 
-```{r Tukey with agricolae sand, include=TRUE} 
+```{r Tukey with agricolae sand, echo=FALSE, message=FALSE, warning=FALSE}
 #library(agricolae)
 
 (HSD.test(model_sand, "Descriptors"))          # outer parentheses print result
 
 ```
 
-###  LSD comparisons in agricolae package example data
 
-Note in this example the LSD does not appear in the output.
-I found a post says that:
+#### LSD comparisons in agricolae package
+
+**example data**
+
+
+* Note in this example the LSD does not appear in the R output.
+* I found a post says that:
 "No LSD value is given in the output because it appears that this output is only included when you have perfectly balanced data, and the data you have provided are unbalanced"
 
 
-Also choosing the correct p.adj value is important.
+* Also choosing the correct p.adj value is important.
 
 These are the options:
 
-"none",
+*none
 
-"holm",
+*holm
 
-"hommel", 
+*hommel
 
-"hochberg", 
+*hochberg
 
-"bonferroni", 
+*"bonferroni
 
-"BH", 
+*BH
 
-"BY",
+*BY
 
-"fdr"
-
-
-I have selected none which is t-student
+*fdr
 
 
-```{r LSD with agricolae example, include=TRUE} 
-#library(agricolae)
+
+I have selected **none** which is t-student
+
+
+```{r LSD with agricolae example, echo=FALSE, message=FALSE, warning=FALSE}
+
 
 (LSD.test(model, "Location",   # outer parentheses print result
            alpha = 0.05,      
@@ -763,29 +982,12 @@ I have selected none which is t-student
 
 ```
 
-
-###  LSD comparisons in agricolae package sand data
-
-```{r LSD with agricolae sand, include=TRUE} 
-#library(agricolae)
-
-(LSD.test(model_sand, "Descriptors",   # outer parentheses print result
-           alpha = 0.05,      
-           p.adj="none"))      # see ?p.adjust for options"none" is t-student.
+**Sand data**
 
 
 
-```
+```{r LSD with agricolae sand, echo=FALSE, message=FALSE, warning=FALSE}
 
-### Extract the LSD value from the anlsysis - sand example
-
-The code below writes out the analsyis to an object
-Then uses the object to get at the LSD.
-If the anlsyis is balanced you can extract the LSD value
-
-
-```{r LSD with agricolae sand LSD value, include=TRUE} 
-#library(agricolae)
 
 
 
@@ -794,6 +996,9 @@ agricolae_LSD_output_sand <- (LSD.test(model_sand, "Descriptors",   # outer pare
            p.adj="none"))      # see ?p.adjust for options"none" is t-student.
 
 
+agricolae_LSD_output_sand
+
+#Extract the LSD value from the anlsysis 
 agricolae_LSD_output_sand$statistics$LSD
 
 ```
@@ -801,13 +1006,21 @@ agricolae_LSD_output_sand$statistics$LSD
 
 
 
-#### Multiple comparisons in multcomp package example data
+#### Multiple comparisons in multcomp package
 
-Note that “Tukey” here **does not mean Tukey-adjusted** comparisons.  
+**example data**
 
-It just sets up a matrix to compare each mean to each other mean.
 
-```{r Multiple comparisons in multcomp example, include=TRUE} 
+* Note that “Tukey” here **does not mean Tukey-adjusted** comparisons.  
+
+* It just sets up a matrix to compare each mean to each other mean.
+
+* Compact letter display for report and orders it.
+
+* This function extracts all the information from glht, summary.glht or confint.glht objects that is required to create a compact letter display of all pair-wise comparisons
+
+
+```{r Multiple comparisons in multcomp example, echo=FALSE, message=FALSE, warning=FALSE}
 #library(multcomp)
 
 mc = glht(model,
@@ -825,9 +1038,6 @@ mcs
 
 
 ```
-Compact letter display for report and orders it.
-
-This function extracts all the information from glht, summary.glht or confint.glht objects that is required to create a compact letter display of all pair-wise comparisons
 
 
 ```{r Compact letter display example order, include=TRUE} 
@@ -837,14 +1047,11 @@ cld(mcs,
     decreasing=TRUE)
 ```
 
+**sands data**
 
-#### Multiple comparisons in multcomp package sand data
 
-Note that “Tukey” here **does not mean Tukey-adjusted** comparisons.  
 
-It just sets up a matrix to compare each mean to each other mean.
-
-```{r Multiple comparisons in multcomp sand, include=TRUE} 
+```{r Multiple comparisons in multcomp sand, echo=FALSE, message=FALSE, warning=FALSE}
 #library(multcomp)
 
 mc_sand = glht(model_sand,
@@ -859,30 +1066,26 @@ mc_sand_s
    ###                     "hommel", "bonferroni", "BH", "BY", "fdr"
 
 
-
-
-```
-
-Compact letter display for report and orders it.
-
-This function extracts all the information from glht, summary.glht or confint.glht objects that is required to create a compact letter display of all pair-wise comparisons
-
-```{r Compact letter display sand order, include=TRUE} 
-
 cld(mc_sand_s,
     level=0.05,
     decreasing=TRUE)
+
 ```
 
-### Multiple comparisons to a control in multcomp package with example dataset
- 
 
-Note the control is the first level of the factor
-? is this just the first one on the list?
 
-```{r comparision to control multcomp  example , include=TRUE} 
+#### Multiple comparisons to a control in multcomp package
 
-#library(multcomp)
+**example data**
+
+
+* Note the control is the first level of the factor
+
+* ? is this just the first one on the list?
+
+```{r comparision to control multcomp  example, echo=FALSE, message=FALSE, warning=FALSE}
+
+
 
 mc_control = glht(model,
           mcp(Location = "Dunnett"))
@@ -895,31 +1098,17 @@ summary(mc_control, test=adjusted("single-step"))
 
 
 ```
-### Multiple comparisons to a control in multcomp package with sand dataset
- 
 
-Note the control is the first level of the factor
-? is this just the first one on the list?
+**sand data**
 
-It seem to have found it?
-In the example dataset the control is not labelled control but its frist on the list.
+```{r comparision to control multcomp  sand, echo=FALSE, message=FALSE, warning=FALSE}
 
 
-```{r comparision to control multcomp  sand , include=TRUE} 
 
-#library(multcomp)
-
-#Specify the order of factor levels for plots and Dunnett comparison
- 
-summary_data_site =
-mutate(summary_data_site,
-       Location = factor(Descriptors, levels=unique(Descriptors)))
-
-mc_sand_control = glht(model_sand,
+mc_control = glht(model_sand,
           mcp(Descriptors = "Dunnett"))
 
-summary(mc_sand_control, test=adjusted("single-step")) # I dont think I want this I think this uses dependencies
-summary(mc_sand_control, test=adjusted("none")) #perhaps this is better - I need to find out more
+summary(mc_control, test=adjusted("single-step"))
 
    ### Adjustment options: "none", "single-step", "Shaffer",
    ###                     "Westfall", "free", "holm", "hochberg",
@@ -929,13 +1118,46 @@ summary(mc_sand_control, test=adjusted("none")) #perhaps this is better - I need
 ```
 
 
-### Multiple comparisons least square means  with example dataset
+ 
+#### Multiple comparisons to a control with Dunnett test (DescTools)
 
-Least square means can be calculated for each group.  
+**example data**
 
-Here a Tukey adjustment is applied for multiple comparisons among group least square means.  
 
-The multiple comparisons can be displayed as a compact letter display.
+
+```{r Multiple comparisons in Dunnetts with control example, echo=FALSE, message=FALSE, warning=FALSE}
+
+
+
+DunnettTest(Aam ~ Location,
+            data = Data)
+
+```
+
+**sand data**
+
+
+
+```{r Multiple comparisons in Dunnetts with control sand, echo=FALSE, message=FALSE, warning=FALSE}
+summary_data_site =
+mutate(summary_data_site,
+       Location = factor(Descriptors, levels=unique(Descriptors)))
+
+DunnettTest(yield ~ Descriptors,
+            data = summary_data_site)
+
+```
+
+#### Multiple comparisons least square means
+
+**example data**
+
+
+* Least square means can be calculated for each group.  
+
+* Here a Tukey adjustment is applied for multiple comparisons among group least square means.  
+
+* The multiple comparisons can be displayed as a compact letter display.
 
 ```{r Multiple comparision east square means example , include=TRUE} 
 
@@ -956,7 +1178,7 @@ cld(leastsquare,
 ```
 
 
-### Multiple comparisons least square means  with sand dataset
+**sands data**
 
 
 
@@ -978,10 +1200,18 @@ cld(leastsquare_sand,
     adjust="tukey")
 ```
 
-### Graphing the results example data
 
-Simple box plots of values across groups
-Box plots of values for each level of the independent variable for a one-way analysis of variance (ANOVA).
+
+
+# Graphing the results 
+
+#### Boxplots
+
+**example data**
+
+* Simple box plots of values across groups
+
+* Box plots of values for each level of the independent variable for a one-way analysis of variance (ANOVA).
  
 ```{r Graphing the results example , include=TRUE} 
 
@@ -991,26 +1221,31 @@ boxplot(Aam ~ Location,
         xlab="Location")
 ```
 
-### Graphing the results sand data
+**sands data**
 
-Simple box plots of values across groups
-should be able to do something better with ggplot
+* ggplot
  
 ```{r Graphing the results sand , include=TRUE} 
 
-boxplot(yield ~ Descriptors,
-        data = summary_data_site,
-        ylab="yield",
-        xlab="Descriptors")
+summary_data_site %>% 
+ggplot(aes(Descriptors, yield))+
+  geom_boxplot()+ 
+  geom_point()+
+  theme(axis.text.x=element_text(angle=45,hjust=1))
 ```
 
- 
+ ######################################################################################
+##################### Up to HERE #####################################################
 
-### Summarize the data frame (Data) into a table
+#### barplots
 
-Not sure what this is doing?
+**example data**
 
-Bar plot of means for each level of the independent variable for a one-way analysis of variance (ANOVA).
+* Summarize the data frame (Data) into a table
+
+* summarySE - Not sure what this is doing it specifies a conf.interval.
+
+* Bar plot of means for each level of the independent variable for a one-way analysis of variance (ANOVA).
 
 
 ```{r Summarize and Graphing the results example , include=TRUE} 
@@ -1035,15 +1270,16 @@ barplot(Tabla,
 
 
 
-### Plot using ggplot example data
 
-Bar plot of means with error bars across groups
+* Bar plot of means with error bars across groups
 
-Bar plot of means for each level of the independent variable of a one-way analysis of variance (ANOVA).  
+* Bar plot of means for each level of the independent variable of a one-way analysis of variance (ANOVA).  
 
-Error indicates standard error of the mean.  
+* Error indicates standard error of the mean.  
 
-Bars sharing the same letter are not significantly different according to Tukey’s HSD test.
+* Bars sharing the same letter are not significantly different according to Tukey’s HSD test.
+
+
 
 ```{r ggplot example, include=TRUE}  
 
@@ -1058,7 +1294,7 @@ ggplot(Data2,
            colour = "black", width = 0.7)  +
        geom_errorbar(aes(ymax=Aam+se, ymin=Aam-se),
                      width=0.0, size=0.5, color="black")  +
-       geom_text(aes(label=c("bc","c","a","bc","ab"),
+       geom_text(aes(label=c("bc","c","a","bc","ab"), #manually set
                  hjust=offset.h, vjust=offset.v)) +             
        labs(x = "Sample location",
             y = "aam / height")  +
@@ -1075,6 +1311,75 @@ ggplot(Data2,
              )
 
 ```
+
+
+
+
+**sands data**
+
+
+* bar plots with group_by
+
+
+
+ 
+ 
+```{r Summarize and Graphing the results sand , include=TRUE} 
+
+
+data_summary <- summary_data_site %>% 
+  dplyr::group_by(Descriptors) %>%
+  dplyr::summarise(mean=mean(yield, na.rm = TRUE), 
+            sd=sd(yield, na.rm = TRUE),
+            count = n(),
+            std_error = sd/(sqrt(count))
+  ) %>%
+  arrange(desc(mean))
+
+max_yld <- max(summary_data_site$yield, na.rm = TRUE) 
+
+plot <- data_summary %>%  
+ggplot( aes(x = factor(Descriptors), y = mean)) + 
+  geom_bar(stat = "identity",  alpha = 0.5)  +
+  geom_errorbar(aes(ymin=mean-std_error, ymax=mean+std_error), width = 0.1) +
+  #labs(x="", y="Yield t/ha", title = paste(site_name,": ", year_selected),
+  labs(x="", y="Yield t/ha", 
+       #title = paste(site_name_output,": ", year_selected),
+       subtitle = "ANOVA with Tukey, threshold 0.05") +
+  theme_classic() + 
+  
+  #scale_y_continuous(breaks=seq(0,max_yld,by=0.5), limits = c(0, max_yld))+
+  theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank()) +
+  theme(legend.position = c(0.1, 0.75)) +
+  # geom_text(aes(label=Tukey), 
+  #           position = position_dodge(0.80), 
+  #           size = 4,
+  #           vjust=-0.5, hjust=-0.5, 
+  #           colour = "gray25")+
+  theme(axis.text.x=element_text(angle=45,hjust=1))
+
+
+plot
+ 
+```
+ 
+ * Add in letters 
+ 
+anova_sand_graph <- aov(yield ~ Descriptors, data = summary_data_site)
+
+tukey <- (HSD.test(anova_sand_graph, "Descriptors"))
+print(tukey)
+
+
+tukey.cld <- multcompLetters4(anova_sand_graph, tukey) # default is threshold = 0.05
+print(tukey.cld)
+
+
+
+
+
+
+
 
 
 
