@@ -1579,7 +1579,7 @@ I just hope I am outputting the most appropriate values for reporting later.
 
 #### data set of results with HSD Tukey, LSD and Dunnets results 
 
-```{r Summarize with HSD Tukey, message=FALSE, warning=FALSE, include=FALSE, LSD and Dunnets results sand, message=FALSE}
+```{r Summarize with HSD Tukey LSD and Dunnets results sand, message=FALSE, warning=FALSE, include=FALSE,  message=FALSE}
 
 data_summary_all_analysis <- summary_data_site %>% 
   dplyr::group_by(Descriptors) %>%
