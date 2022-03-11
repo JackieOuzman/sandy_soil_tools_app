@@ -13,23 +13,56 @@ library(car)
 library(DescTools)
 
 
-a = "Carwarp_Amelioration"
-b = 2018
+# am not running this as a function but as a four loop that runs through the list
+
+# sites <- read_csv("X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/stats_working/sites_merged.csv",
+#                              col_types = cols(rep_block = col_character()))
+# 
+# list_of_sites <- sites %>%  distinct(site) %>% dplyr::arrange(site)
+# list_of_sites
+# # ## what years do I have?
+# a <-  "Brimpton Lake"
+#  sites_names <- sites %>%   filter(site == a) %>% distinct(year)
+#  min(sites_names)
+#  max(sites_names)
+
+
+### List of sites I want to run analysis for:
+site_yrs_list <- c("Carwarp_AmeliorationX2018",
+                   "Carwarp_AmeliorationX2019",
+                   "Carwarp_AmeliorationX2020",
+                   "Brimpton LakeX2014",
+                   "Brimpton LakeX2015",
+                   "Brimpton LakeX2016",
+                   "Brimpton LakeX2017",
+                   "Brimpton LakeX2018")
+
 
 
 #######################################################################################################################################################
 ##########                                                    function                                                                       ##########
 #######################################################################################################################################################
-function_anova <- function(a, b){
+#function_anova <- function(a, b){ # if you want it as a function
 
+
+for (site_yrs_list in site_yrs_list){
+
+  
+##########################################
+  site_and_yr <- as.data.frame(str_split(site_yrs_list, "X"),
+                               col.names = "site_and_yr" )
+  
+  site_and_yr$site_and_yr <- as.character(site_and_yr$site_and_yr)
+  site_and_yr
+  a <- site_and_yr[1,1]
+  b <- site_and_yr[2,1]
+  b <- as.double(b)
+
+######################################
 # bring in the data
 data_file <- "X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/stats_working/sites_merged.csv"
 summary_data_all_1 <- read_csv(data_file, 
                                col_types = cols(rep_block = col_character()))
-# set the site name and year
-site_name        <- a
-site_name_output <- a
-year             <- b
 
 
 ##### order the Descriptors
@@ -216,14 +249,45 @@ data_summary_all_analysis <- summary_data_site %>%
 
 
 data_summary_all_analysis <- data_summary_all_analysis %>% 
-  mutate(site =  site_name,
-          year =  year)
+  mutate(site =  a,
+          year =  b)
 
 
 
 data_summary_all_analysis <- as.data.frame(ungroup(data_summary_all_analysis))
 
 
+
+
+########################################################################################################################################################
+#### ANOVA #####
+
+model = lm( yield ~ Descriptors,
+                data=summary_data_site)
+
+anova_yld <- Anova(model, type="II") # Can use type="III"
+
+p_value_ANOVA <- anova_yld[1,4]
+F_value_ANOVA <- anova_yld[1,3]
+
+### add these values into the summary data
+
+data_summary_all_analysis <- data_summary_all_analysis %>% 
+  mutate(p_value_ANOVA  = p_value_ANOVA,
+         F_value_ANOVA  = F_value_ANOVA)
+
+
+########################################################################################################################################################
+#####homoscedasticity vs equal variance test we can use Bartlett test
+
+bartlett.test <- bartlett.test(yield ~ Descriptors,
+              data = summary_data_site) 
+
+p_value_barlett <- bartlett.test[[3]]
+
+### add these values into the summary data
+data_summary_all_analysis <- data_summary_all_analysis %>% 
+  mutate(p_value_barlett  = p_value_barlett)
 
 
 ########################################################################################################################################################
@@ -318,36 +382,110 @@ data_summary_all_analysis <- data_summary_all_analysis %>%
 
 
 
-return(data_summary_all_analysis)
+name <- paste0(a,"_", b, "_ANOVA")
+assign(name,data_summary_all_analysis)
+
+rm(site_and_yr,
+   summary_data_all_1,
+   summary_data_site,
+   model_sand,
+   agricolae_LSD_output_sand,
+   agricolae_LSD_output_sand_df,
+   tukey_agricolae,
+   tukey_agricolae_df,
+   data_summary_all_analysis,
+   DunnettTest_df,
+   DunnettTest,
+   a,
+   b,
+   data_file,
+   LSD,
+   name,
+   order,
+   site_yrs_list,
+   anova_yld,
+   bartlett.test,
+   p_value_barlett,
+   F_value_ANOVA,
+   p_value_ANOVA,
+   model
+   
+   )
+
+#return(data_summary_all_analysis) #if you want it as a function
 }
+
+
+
+
+
+#### merge the files run
+
+
+Amelioration <- rbind(         Carwarp_Amelioration_2018_ANOVA,
+                               Carwarp_Amelioration_2019_ANOVA,
+                               Carwarp_Amelioration_2020_ANOVA,
+                               
+                               `Brimpton Lake_2014_ANOVA`,
+                               `Brimpton Lake_2015_ANOVA`,
+                               `Brimpton Lake_2016_ANOVA`,
+                               `Brimpton Lake_2017_ANOVA`,
+                               `Brimpton Lake_2018_ANOVA`
+                       )
+
+
+
+
+
+
+rm(Carwarp_Amelioration_2018_ANOVA,
+   Carwarp_Amelioration_2019_ANOVA,
+   Carwarp_Amelioration_2020_ANOVA,
+   `Brimpton Lake_2014_ANOVA`,
+   `Brimpton Lake_2015_ANOVA`,
+   `Brimpton Lake_2016_ANOVA`,
+   `Brimpton Lake_2017_ANOVA`,
+   `Brimpton Lake_2018_ANOVA`)
+
+
+str(Amelioration)
+
+write.csv(Amelioration,"X:/Therese_Jackie/Sandy_soils/Development_database/stats_batch_output/ANOVA_by_Yr_sites_merged.csv" ,
+          row.names = FALSE)
+
+
+
+
+
+
 
 #######################################################################################################################################################
 
-
+### Code if you want to run it as a function
 ### what sites do I have?
-sites <- read_csv("X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/stats_working/sites_merged.csv", 
-                             col_types = cols(rep_block = col_character()))
-
-list_of_sites <- sites %>%  distinct(site) %>% dplyr::arrange(site)
-list_of_sites
-
-#### site to analyse
-a = "Carwarp_Amelioration"
-
-## what years do I have?
-sites_names <- sites %>%   filter(site == a) %>% distinct(year)
-min(sites_names)
-max(sites_names)
-
-### Run function
-Carwarp_Amelioration_2018 <- function_anova(a, 2018)
-Carwarp_Amelioration_2019 <- function_anova(a, 2019)
-Carwarp_Amelioration_2020 <- function_anova(a, 2020)
-
-### Merge df
-
-Carwarp_Amelioration_ANOVA <- rbind(Carwarp_Amelioration_2018,
-                                    Carwarp_Amelioration_2019,
-                                    Carwarp_Amelioration_2020)
-
-rm(Carwarp_Amelioration_2018, Carwarp_Amelioration_2019, Carwarp_Amelioration_2020)
+# sites <- read_csv("X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/stats_working/sites_merged.csv", 
+#                              col_types = cols(rep_block = col_character()))
+# 
+# list_of_sites <- sites %>%  distinct(site) %>% dplyr::arrange(site)
+# list_of_sites
+# 
+# #### site to analyse
+# a = "Carwarp_Amelioration"
+# 
+# ## what years do I have?
+# sites_names <- sites %>%   filter(site == a) %>% distinct(year)
+# min(sites_names)
+# max(sites_names)
+# 
+# ### Run function
+# Carwarp_Amelioration_2018 <- function_anova(a, 2018)
+# Carwarp_Amelioration_2019 <- function_anova(a, 2019)
+# Carwarp_Amelioration_2020 <- function_anova(a, 2020)
+# 
+# ### Merge df
+# 
+# Carwarp_Amelioration_ANOVA <- rbind(Carwarp_Amelioration_2018,
+#                                     Carwarp_Amelioration_2019,
+#                                     Carwarp_Amelioration_2020)
+# 
+# rm(Carwarp_Amelioration_2018, Carwarp_Amelioration_2019, Carwarp_Amelioration_2020)
