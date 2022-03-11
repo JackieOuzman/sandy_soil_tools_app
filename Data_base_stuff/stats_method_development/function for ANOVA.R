@@ -422,7 +422,7 @@ rm(site_and_yr,
 #### merge the files run
 
 
-Amelioration <- rbind(         Carwarp_Amelioration_2018_ANOVA,
+ANOVA_sites_yr <- rbind(         Carwarp_Amelioration_2018_ANOVA,
                                Carwarp_Amelioration_2019_ANOVA,
                                Carwarp_Amelioration_2020_ANOVA,
                                
@@ -450,7 +450,7 @@ rm(Carwarp_Amelioration_2018_ANOVA,
 
 str(Amelioration)
 
-write.csv(Amelioration,"X:/Therese_Jackie/Sandy_soils/Development_database/stats_batch_output/ANOVA_by_Yr_sites_merged.csv" ,
+write.csv(ANOVA_sites_yr,"X:/Therese_Jackie/Sandy_soils/Development_database/stats_batch_output/ANOVA_by_Yr_sites_merged.csv" ,
           row.names = FALSE)
 
 
