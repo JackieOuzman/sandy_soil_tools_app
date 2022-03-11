@@ -9,8 +9,26 @@ library(tidyverse)
 library(multcompView)
 library(scales)
 
-site_yrs_list <- "Carwarp_AmeliorationX2018"
+#site_yrs_list <- "Carwarp_AmeliorationX2018"
 
+### List of sites I want to run analysis for:
+site_yrs_list <- c("Carwarp_AmeliorationX2018",
+                   "Carwarp_AmeliorationX2019",
+                   "Carwarp_AmeliorationX2020",
+                   "Brimpton LakeX2014",
+                   "Brimpton LakeX2015",
+                   "Brimpton LakeX2016",
+                   "Brimpton LakeX2017",
+                   "Brimpton LakeX2018")
+
+
+
+#######################################################################################################################################################
+##########                                                    As a loop                                                                       ##########
+#######################################################################################################################################################
+
+for (site_yrs_list in site_yrs_list){
+  
 
 ##################################################################################################################
 
@@ -192,10 +210,6 @@ order <- c(
 
 
 
-
-
-
-
 ANOVA_results$Descriptors <- factor(ANOVA_results$Descriptors,
                                          levels = order)
 
@@ -207,19 +221,17 @@ ANOVA_results_site <- ANOVA_results %>%
 max_yld <- max(ANOVA_results_site$mean, na.rm = TRUE) 
 max_yld <- max_yld +0.5
 max_yld <- ceiling(max_yld)
-max_yld
+
 
 LSD <- max(ANOVA_results$LSD)
 LSD <- signif(LSD, digits = 4)
-LSD
+
 
 ANOVA_results <- ANOVA_results_site %>%
   filter(year == b)
 
 
-names(ANOVA_results)
-
-# barplot with letters
+# barplot with letters from LSD
 plot <- ANOVA_results %>%  
   ggplot( aes(x = factor(Descriptors), y = mean)) + 
   geom_bar(stat = "identity",  alpha = 0.5)  +
@@ -234,16 +246,38 @@ plot <- ANOVA_results %>%
   
   geom_text(aes(label=groups_LSD), 
             position = position_dodge(0.80), 
-            size = 4,
-            vjust=-0.5, hjust=-0.5, 
+            size = 3,
+            vjust=-0.5, hjust=-0.3, 
             colour = "gray25")+
   
   theme(axis.text.x=element_text(angle=45,hjust=1))+
   labs(x="", 
        y="Yield t/ha", title = paste0(a,": ", b),
-       subtitle = paste0("ANOVA with LSD, LSD = ", LSD)) 
+       subtitle = paste0("ANOVA, LSD = ", LSD)) 
 
-
+### save the plot
+ggsave(plot,
+       device = "png",
+       filename = paste0("Plot_yield_", 
+                         a,"_", b, "_ANOVA_Plot", ".png"),
+       path= "X:/Therese_Jackie/Sandy_soils/Development_database/stats_batch_output/",
+       width=8.62,
+       height = 6.28,
+       dpi=600
+)
 
 name <- paste0(a,"_", b, "_ANOVA_Plot")
 assign(name,plot)
+
+rm(a,
+   b,
+   max_yld,
+   data_file,
+   order,
+   site_and_yr,
+   ANOVA_results,
+   ANOVA_results_site)
+
+}
+
+
