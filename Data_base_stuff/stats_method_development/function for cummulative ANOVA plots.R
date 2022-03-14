@@ -8,11 +8,11 @@ library(tidyverse)
 library(multcompView)
 library(scales)
 
-site_yrs_list <- "Brimpton LakeX2014to2018"
+#site_yrs_list <- "Brimpton LakeX2014to2018"
 
 ### List of sites I want to run analysis for:
-# site_yrs_list <- c("Carwarp_AmeliorationX2018to2020",
-#                     "Brimpton LakeX2014to2018")
+site_yrs_list <- c("Carwarp_AmeliorationX2018to2020",
+                    "Brimpton LakeX2014to2018")
 
 
 
@@ -20,7 +20,7 @@ site_yrs_list <- "Brimpton LakeX2014to2018"
 ##########                                                    As a loop                                                                       ##########
 #######################################################################################################################################################
 
-#for (site_yrs_list in site_yrs_list){
+for (site_yrs_list in site_yrs_list){
   
   
 #################################################################################################################
@@ -300,7 +300,7 @@ CumPlot_LSD <- site_year_yld_summary %>%
             size = 3,
             vjust=-0.5, hjust=0.1, 
             colour = "gray25")
-CumPlot
+
 
 ### save the plot
 ggsave(CumPlot_LSD,
@@ -331,7 +331,7 @@ CumPlot_Dun <- site_year_yld_summary %>%
             size = 3,
             vjust=-0.5, hjust=0.1, 
             colour = "gray25")
-CumPlot_Dun
+
 
 ### save the plot
 ggsave(CumPlot_Dun,
@@ -343,6 +343,26 @@ ggsave(CumPlot_Dun,
        height = 6.28,
        dpi=600
 )
+
+
+rm(a,
+   b,
+   data_file,
+   data_file_Cum_ANOVA,
+   LSD_cum,
+   max_sum_cum,
+   max_yr,
+   order,
+   order_yrs,
+   
+   Cum_ANOVA_results,
+   Cum_ANOVA_results_site,
+   CumPlot_LSD,
+   CumPlot_Dun,
+   site_and_yr,
+   site_year_yld_summary,
+   site_year_yld_summary_site,
+   summary_data_all)
 
 
 }
