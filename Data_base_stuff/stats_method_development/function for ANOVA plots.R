@@ -9,7 +9,7 @@ library(tidyverse)
 library(multcompView)
 library(scales)
 
-#site_yrs_list <- "Carwarp_AmeliorationX2018"
+site_yrs_list <- "Carwarp_AmeliorationX2018"
 
 ### List of sites I want to run analysis for:
 site_yrs_list <- c("Carwarp_AmeliorationX2018",
@@ -232,7 +232,7 @@ ANOVA_results <- ANOVA_results_site %>%
 
 
 # barplot with letters from LSD
-plot <- ANOVA_results %>%  
+plot_LSD <- ANOVA_results %>%  
   ggplot( aes(x = factor(Descriptors), y = mean)) + 
   geom_bar(stat = "identity",  alpha = 0.5)  +
   geom_errorbar(aes(ymin=mean-std_error, ymax=mean+std_error), width = 0.1) +
@@ -255,19 +255,57 @@ plot <- ANOVA_results %>%
        y="Yield t/ha", title = paste0(a,": ", b),
        subtitle = paste0("ANOVA, LSD = ", LSD)) 
 
-### save the plot
-ggsave(plot,
+### save the LSD
+ggsave(plot_LSD,
        device = "png",
        filename = paste0("Plot_yield_", 
-                         a,"_", b, "_ANOVA_Plot", ".png"),
-       path= "X:/Therese_Jackie/Sandy_soils/Development_database/stats_batch_output/",
+                         a,"_", b, "_ANOVA_Plot_LSD", ".png"),
+       path= "X:/Therese_Jackie/Sandy_soils/Development_database/stats_batch_output/Yield_Yrs_LSD_Plots/",
        width=8.62,
        height = 6.28,
        dpi=600
 )
 
-name <- paste0(a,"_", b, "_ANOVA_Plot")
-assign(name,plot)
+#################################################################################################################
+
+
+
+# barplot with letters from dunnetts
+plot_dun <- ANOVA_results %>%  
+  ggplot( aes(x = factor(Descriptors), y = mean)) + 
+  geom_bar(stat = "identity",  alpha = 0.5)  +
+  geom_errorbar(aes(ymin=mean-std_error, ymax=mean+std_error), width = 0.1) +
+  theme_classic() + 
+  
+  scale_y_continuous(breaks=seq(0,max_yld,by=0.5), limits = c(0, max_yld))+
+  
+  
+  theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank()) +
+  theme(legend.position = c(0.1, 0.75)) +
+  
+  geom_text(aes(label=significance_control), 
+            position = position_dodge(0.80), 
+            size = 3,
+            vjust=-0.5, hjust=-0.3, 
+            colour = "gray25")+
+  
+  theme(axis.text.x=element_text(angle=45,hjust=1))+
+  labs(x="", 
+       y="Yield t/ha", title = paste0(a,": ", b),
+       subtitle = paste0("ANOVA, Dunnetts")) 
+
+### save the plot
+ggsave(plot_dun,
+       device = "png",
+       filename = paste0("Plot_yield_", 
+                         a,"_", b, "_ANOVA_Plot_dun", ".png"),
+       path= "X:/Therese_Jackie/Sandy_soils/Development_database/stats_batch_output/Yield_Yrs_Dunnetts_Plots/",
+       width=8.62,
+       height = 6.28,
+       dpi=600
+)
+
+
 
 rm(a,
    b,
@@ -276,7 +314,10 @@ rm(a,
    order,
    site_and_yr,
    ANOVA_results,
-   ANOVA_results_site)
+   ANOVA_results_site,
+   plot_LSD,
+   plot_dun,
+   LSD)
 
 }
 
