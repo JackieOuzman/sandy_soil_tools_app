@@ -15,13 +15,13 @@ library(DescTools)
 
 # am not running this as a function but as a four loop that runs through the list
 
-# sites <- read_csv("X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/stats_working/sites_merged.csv",
+#sites <- read_csv("X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/stats_working/sites_merged.csv",
 #                               col_types = cols(rep_block = col_character()))
-# # 
+# #
 # list_of_sites <- sites %>%  distinct(site) %>% dplyr::arrange(site)
-# head(list_of_sites,20)
+# tail(list_of_sites,15)
 # # ## what years do I have?
-# a <-  "Mt Damper"
+# a <-  "Younghusband"
 #  sites_names <- sites %>%   filter(site == a) %>% distinct(year)
 #  min(sites_names)
 #  max(sites_names)
@@ -120,7 +120,48 @@ site_yrs_list <- c(
 
                    "Mt DamperX2019",
                    "Mt DamperX2020",
-                   "Mt DamperX2021"
+                   "Mt DamperX2021", # 20 sites
+                   
+                   "MurlongX2018",
+                   "MurlongX2019",
+                   "MurlongX2020",
+                   "MurlongX2021",
+                   
+                   "Ouyen_SpadeX2017",
+                   "Ouyen_SpadeX2018",
+                   "Ouyen_SpadeX2019",
+                   "Ouyen_SpadeX2020",
+                   
+                   "SherwoodX2019",
+                   "SherwoodX2020",
+                   "SherwoodX2021",
+                   
+                   "Telopea_DownsX2020",
+                   "Telopea_DownsX2021",
+                   
+                   "TempyX2019",
+                   "TempyX2020",
+                   #"TempyX2021", #no yield
+                   
+                   "WaikerieX2018",
+                   "WaikerieX2019",
+                   "WaikerieX2020",
+                   
+                   "WarnertownX2019",
+                   "WarnertownX2020",
+                   "WarnertownX2021",
+                   
+                   "WynarkaX2019",
+                   "WynarkaX2020",
+                   "WynarkaX2021",
+                   
+                   "YendaX2017",
+                   "YendaX2018",
+                   "YendaX2019",
+                   "YendaX2020",
+                   "YendaX2021",
+                   
+                   "YounghusbandX2020"
                    )
 
 
@@ -540,7 +581,8 @@ rm(site_and_yr,
 #### merge the files run
 
 
-ANOVA_sites_yr <- rbind(       `Brimpton Lake_2014_ANOVA`,
+ANOVA_sites_yr <- rbind(       
+                               `Brimpton Lake_2014_ANOVA`,
                                `Brimpton Lake_2015_ANOVA`,
                                `Brimpton Lake_2016_ANOVA`,
                                `Brimpton Lake_2017_ANOVA`,
@@ -628,7 +670,49 @@ ANOVA_sites_yr <- rbind(       `Brimpton Lake_2014_ANOVA`,
 
                                `Mt Damper_2019_ANOVA`,
                                `Mt Damper_2020_ANOVA`,
-                               `Mt Damper_2021_ANOVA`
+                               `Mt Damper_2021_ANOVA`,
+                               
+                               
+                               Murlong_2018_ANOVA,
+                               Murlong_2019_ANOVA,
+                               Murlong_2020_ANOVA,
+                               Murlong_2021_ANOVA,
+                               
+                               Ouyen_Spade_2017_ANOVA,
+                               Ouyen_Spade_2018_ANOVA,
+                               Ouyen_Spade_2019_ANOVA,
+                               Ouyen_Spade_2020_ANOVA,
+                               
+                               Sherwood_2019_ANOVA,
+                               Sherwood_2020_ANOVA,
+                               Sherwood_2021_ANOVA,
+                               
+                               Telopea_Downs_2020_ANOVA,
+                               Telopea_Downs_2021_ANOVA,
+                               
+                               Tempy_2019_ANOVA,
+                               Tempy_2020_ANOVA,
+                               #"TempyX2021", #no yield
+                               
+                               Waikerie_2018_ANOVA,
+                               Waikerie_2019_ANOVA,
+                               Waikerie_2020_ANOVA,
+                               
+                               Warnertown_2019_ANOVA,
+                               Warnertown_2020_ANOVA,
+                               Warnertown_2021_ANOVA,
+                               
+                               Wynarka_2019_ANOVA,
+                               Wynarka_2020_ANOVA,
+                               Wynarka_2021_ANOVA,
+                               
+                               Yenda_2017_ANOVA,
+                               Yenda_2018_ANOVA,
+                               Yenda_2019_ANOVA,
+                               Yenda_2020_ANOVA,
+                               Yenda_2021_ANOVA,
+                               
+                               Younghusband_2020_ANOVA
                        )
 
 
@@ -724,7 +808,48 @@ rm( `Brimpton Lake_2014_ANOVA`,
 
     `Mt Damper_2019_ANOVA`,
     `Mt Damper_2020_ANOVA`,
-    `Mt Damper_2021_ANOVA`
+    `Mt Damper_2021_ANOVA`,
+    
+    Murlong_2018_ANOVA,
+    Murlong_2019_ANOVA,
+    Murlong_2020_ANOVA,
+    Murlong_2021_ANOVA,
+    
+    Ouyen_Spade_2017_ANOVA,
+    Ouyen_Spade_2018_ANOVA,
+    Ouyen_Spade_2019_ANOVA,
+    Ouyen_Spade_2020_ANOVA,
+    
+    Sherwood_2019_ANOVA,
+    Sherwood_2020_ANOVA,
+    Sherwood_2021_ANOVA,
+    
+    Telopea_Downs_2020_ANOVA,
+    Telopea_Downs_2021_ANOVA,
+    
+    Tempy_2019_ANOVA,
+    Tempy_2020_ANOVA,
+    #"TempyX2021", #no yield
+    
+    Waikerie_2018_ANOVA,
+    Waikerie_2019_ANOVA,
+    Waikerie_2020_ANOVA,
+    
+    Warnertown_2019_ANOVA,
+    Warnertown_2020_ANOVA,
+    Warnertown_2021_ANOVA,
+    
+    Wynarka_2019_ANOVA,
+    Wynarka_2020_ANOVA,
+    Wynarka_2021_ANOVA,
+    
+    Yenda_2017_ANOVA,
+    Yenda_2018_ANOVA,
+    Yenda_2019_ANOVA,
+    Yenda_2020_ANOVA,
+    Yenda_2021_ANOVA,
+    
+    Younghusband_2020_ANOVA
 )
 
 
