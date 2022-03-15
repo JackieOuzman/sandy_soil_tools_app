@@ -26,7 +26,18 @@ site_yrs_list <- c(
                    #"Lowaldie_Deep sandX2021",#no data
                    "MalinongX2019to2021",
                    "Monia_GapX2019to2021",
-                   "Mt DamperX2019to2021"
+                   "Mt DamperX2019to2021",
+                   
+                   "MurlongX2018to2021",
+                   "Ouyen_SpadeX2017to2020",
+                   "SherwoodX2019to2021",
+                   "Telopea_DownsX2020to2021",
+                   "TempyX2019to2020", #"TempyX2021", #no yield
+                   "WaikerieX2018to2020",
+                   "WarnertownX2019to2021",
+                   "WynarkaX2019to2021",
+                   "YendaX2017to2021",
+                   "YounghusbandX2020"
                    
                    )
 
@@ -467,7 +478,20 @@ Cum_ANOVA_sites_yr <- rbind(
   `Lowaldie_Deep sand_2019to2020_Cum_ANOVA`,
   Malinong_2019to2021_Cum_ANOVA,
   Monia_Gap_2019to2021_Cum_ANOVA,
-  `Mt Damper_2019to2021_Cum_ANOVA`)
+  `Mt Damper_2019to2021_Cum_ANOVA`,
+  
+  Murlong_2018to2021_Cum_ANOVA,
+  Ouyen_Spade_2017to2020_Cum_ANOVA,
+  Sherwood_2019to2021_Cum_ANOVA,
+  Telopea_Downs_2020to2021_Cum_ANOVA,
+  Tempy_2019to2020_Cum_ANOVA, #"TempyX2021", #no yield
+  Waikerie_2018to2020_Cum_ANOVA,
+  Warnertown_2019to2021_Cum_ANOVA,
+  Wynarka_2019to2021_Cum_ANOVA,
+  Yenda_2017to2021_Cum_ANOVA,
+  Younghusband_2020_Cum_ANOVA
+  
+  )
   
   
 
@@ -490,7 +514,17 @@ rm( `Brimpton Lake_2014to2018_Cum_ANOVA`,
     `Lowaldie_Deep sand_2019to2020_Cum_ANOVA`,
     Malinong_2019to2021_Cum_ANOVA,
     Monia_Gap_2019to2021_Cum_ANOVA,
-    `Mt Damper_2019to2021_Cum_ANOVA`)
+    `Mt Damper_2019to2021_Cum_ANOVA`,
+    Murlong_2018to2021_Cum_ANOVA,
+    Ouyen_Spade_2017to2020_Cum_ANOVA,
+    Sherwood_2019to2021_Cum_ANOVA,
+    Telopea_Downs_2020to2021_Cum_ANOVA,
+    Tempy_2019to2020_Cum_ANOVA, #"TempyX2021", #no yield
+    Waikerie_2018to2020_Cum_ANOVA,
+    Warnertown_2019to2021_Cum_ANOVA,
+    Wynarka_2019to2021_Cum_ANOVA,
+    Yenda_2017to2021_Cum_ANOVA,
+    Younghusband_2020_Cum_ANOVA)
 
 
 
