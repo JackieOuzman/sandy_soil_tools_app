@@ -284,20 +284,20 @@ order <- c(
   "Rip.50_Cl.surface",
   "Rip.50_Cl@2.5.surface_Yr18,19,20",
   "Rip.50_Cl@7.5.surface",
-  "Rip.50_Cl@5.incorp_50",
+  "Rip.50_Cl@5.incorp_20",#changed
   "Rip.50_Cl@7.5.band_50",
-  "Rip.50_Cl@20.incorp_50",
+  "Rip.50_Cl@20.incorp_20",#changed
   "Rip.50_Cl.deep",
   "Rip.50_Cl.band_50",
-  "Rip.50_Cl@5.incorp_50.Fert.surface",
-  "Rip.50_Cl@5.incorp_50.Clay.incorp_50",
-  "Rip.50_Cl@5.incorp_50.Fert.surface.Clay.incorp_50",
-  "Rip.50_Cl@20.incorp_50.Fert.surface",
-  "Rip.50_Cl@20.incorp_50.Clay.incorp_50",
-  "Rip.50_Cl@20.incorp_50.Fert.surface.Clay.incorp_50",
+  "Rip.50_Cl@5.incorp_20.Fert.surface", #changed
+  "Rip.50_Cl@5.incorp_20.Clay.incorp_20",#changed
+  "Rip.50_Cl@5.incorp_20.Fert.surface.Clay.incorp_20",#changed
+  "Rip.50_Cl@20.incorp_20.Fert.surface", #changed
+  "Rip.50_Cl@20.incorp_20.Clay.incorp_20",#changed
+  "Rip.50_Cl@20.incorp_20.Fert.surface.Clay.incorp_20",#changed
   "Rip.50_Fert.surface",
-  "Rip.50_Clay.incorp_50",
-  "Rip.50_Fert.surface.Clay.incorp_50",
+  "Rip.50_Clay.incorp_20",#changed
+  "Rip.50_Fert.surface.Clay.incorp_20",#changed
   "Rip.50Spade.30_none",
   "Inc.50_none",
   "Inc.50_Cl@7.5.incorp_50",
@@ -321,7 +321,6 @@ order <- c(
   "Delving.18_none",
   "Delving.18_SE14.band_8",
   "DiscInv.30_none"
-  
 )
 
 
