@@ -16,33 +16,119 @@ library(DescTools)
 # am not running this as a function but as a four loop that runs through the list
 
 # sites <- read_csv("X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/stats_working/sites_merged.csv",
-#                              col_types = cols(rep_block = col_character()))
-# 
+#                               col_types = cols(rep_block = col_character()))
+# # 
 # list_of_sites <- sites %>%  distinct(site) %>% dplyr::arrange(site)
-# list_of_sites
+# head(list_of_sites,20)
 # # ## what years do I have?
-# a <-  "Brimpton Lake"
+# a <-  "Mt Damper"
 #  sites_names <- sites %>%   filter(site == a) %>% distinct(year)
 #  min(sites_names)
 #  max(sites_names)
 
+ 
+ ## test 
+#site_yrs_list <-"Lowaldie_CrestX2021"
+ 
 
 ### List of sites I want to run analysis for:
-site_yrs_list <- c("Carwarp_AmeliorationX2018",
-                   "Carwarp_AmeliorationX2019",
-                   "Carwarp_AmeliorationX2020",
+site_yrs_list <- c(
                    "Brimpton LakeX2014",
                    "Brimpton LakeX2015",
                    "Brimpton LakeX2016",
                    "Brimpton LakeX2017",
-                   "Brimpton LakeX2018")
+                   "Brimpton LakeX2018",
+                   
+                   "BrookerX2019",
+                   "BrookerX2020",
+                   "BrookerX2021",
+
+                   "BucklebooX2019",
+                   "BucklebooX2020",
+                   "BucklebooX2021",
+
+                   "Bute_CSIROX2018",
+                   "Bute_CSIROX2019",
+                   "Bute_CSIROX2020",
+                   "Bute_CSIROX2021",
+
+                   "Bute_TrengroveX2015",
+                   "Bute_TrengroveX2016",
+                   "Bute_TrengroveX2017",
+                   "Bute_TrengroveX2018",
+                   "Bute_TrengroveX2019",
+                   "Bute_TrengroveX2020",
+                   "Bute_TrengroveX2021",
+
+                   "CadgeeX2014",
+                   "CadgeeX2015",
+                   #"CadgeeX2016", #no yield data
+                   "CadgeeX2017",
+                   "CadgeeX2018",
+
+                   "Carwarp_AmeliorationX2018",
+                   "Carwarp_AmeliorationX2019",
+                   "Carwarp_AmeliorationX2020",
+
+                   "CumminsX2019",
+                   "CumminsX2020",
+                   "CumminsX2021",
+
+                   "KarkooX2019",
+                   "KarkooX2020",
+                   "KarkooX2021",
+
+                   "KaroondaX2014",
+                   "KaroondaX2015",
+                   "KaroondaX2016",
+                   "KaroondaX2017",
+                   "KaroondaX2018",
+
+                   "Kooloonong_canolaX2021",
+
+                   "Kooloonong_chickpeaX2019",
+                   "Kooloonong_chickpeaX2020",
+                   "Kooloonong_chickpeaX2021",
+
+                   "Kooloonong_lentilX2019",
+                   "Kooloonong_lentilX2020",
+                   "Kooloonong_lentilX2021",
+
+                   "Kooloonong_lupinX2019",
+                   "Kooloonong_lupinX2020",
+                   "Kooloonong_lupinX2021",
+
+                   "KybungaX2019",
+                   "KybungaX2020",
+                   "KybungaX2021",
+
+                   "Lowaldie_CrestX2019",
+                   "Lowaldie_CrestX2020",
+                   #"Lowaldie_CrestX2021", #no data 
+
+                   "Lowaldie_Deep sandX2019",
+                   "Lowaldie_Deep sandX2020",
+                   #"Lowaldie_Deep sandX2021",#no data
+
+                   "MalinongX2019",
+                   "MalinongX2020",
+                   "MalinongX2021",
+
+                   "Monia_GapX2019",
+                   "Monia_GapX2020",
+                   "Monia_GapX2021",
+
+                   "Mt DamperX2019",
+                   "Mt DamperX2020",
+                   "Mt DamperX2021"
+                   )
 
 
 
 #######################################################################################################################################################
-##########                                                    function                                                                       ##########
+##########                                                    As a loop                                                                     ##########
 #######################################################################################################################################################
-#function_anova <- function(a, b){ # if you want it as a function
+
 
 
 for (site_yrs_list in site_yrs_list){
@@ -63,6 +149,24 @@ for (site_yrs_list in site_yrs_list){
 data_file <- "X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/stats_working/sites_merged.csv"
 summary_data_all_1 <- read_csv(data_file, 
                                col_types = cols(rep_block = col_character()))
+
+
+### brooker is a problem site I want to filter out these ones:
+
+summary_data_all_1 <- summary_data_all_1 %>%
+  filter(Descriptors  != "Spade.30_Lc@1.incorp_30") %>%
+  filter(Descriptors  != "Spade.30_Lc@1.incorp_30.K_added.surface") %>%
+  filter(Descriptors  != "Spade.30_Lc@2.incorp_30") %>%
+  filter(Descriptors  != "Spade.30_Lc@2.incorp_30.K_added.surface") %>%
+  filter(Descriptors  != "Spade.30_Lc@6.incorp_30") %>%
+  filter(Descriptors  != "Spade.30_Lc@6.incorp_30.K_added.surface") %>%
+  filter(Descriptors  != "Spade.30_Lc@10.incorp_30") %>%
+  filter(Descriptors  != "Spade.30_Lc@10.incorp_30.K_added.surface") %>%
+  filter(Descriptors  != "Spade.30_Lc@20.incorp_30") %>% 
+  filter(Descriptors  != "Spade.30_Lc@20.incorp_30.K_added.surface")
+
+
+
 
 
 ##### order the Descriptors
@@ -229,7 +333,6 @@ order <- c(
 summary_data_all_1$Descriptors <- factor(summary_data_all_1$Descriptors,
                                        levels = order)
 
-
 #filter the data
 summary_data_site <- summary_data_all_1 %>%
   filter(site == a) %>% 
@@ -303,9 +406,24 @@ agricolae_LSD_output_sand <- (LSD.test(model_sand, "Descriptors",   # outer pare
 
 
 #Extract the LSD value from the anlsysis and add it to the summary data
-LSD <- agricolae_LSD_output_sand$statistics$LSD
+
+LSD_value_1 <- agricolae_LSD_output_sand$statistics$LSD #this becomes NULL if there is not values
 
 
+#get the 'max value' aka make it a value and make a df 
+LSD_value_1 <- max(LSD_value_1)
+LSD_value_df <- data.frame(LSD_value_1)
+
+LSD_value_df <- LSD_value_df %>% 
+  dplyr::mutate(
+    LSD_max = case_when(
+      LSD_value_1 > 0 ~ as.character(LSD_value_1),
+      TRUE ~ "not reported"
+    ))
+
+
+LSD <- LSD_value_df[1,2]
+LSD
 #Extract the LSD letters from the anlsysis and add it to the summary data
 
 agricolae_LSD_output_sand_df <- as.data.frame(agricolae_LSD_output_sand[[5]]) #get the fith item in the list
@@ -329,7 +447,7 @@ tukey_agricolae <- (HSD.test(model_sand, "Descriptors"))
 
 
 tukey_agricolae_df <- as.data.frame(tukey_agricolae[[5]]) #get the fith item in the list
-tukey_agricolae_df$Descriptors <- rownames(tukey_agricolae_df) #move rwo names into a clm for joining
+tukey_agricolae_df$Descriptors <- rownames(tukey_agricolae_df) #move row names into a clm for joining
 
 data_summary_all_analysis <- left_join(data_summary_all_analysis,tukey_agricolae_df)
 data_summary_all_analysis <- dplyr::select(data_summary_all_analysis, -yield) %>% 
@@ -408,13 +526,14 @@ rm(site_and_yr,
    p_value_barlett,
    F_value_ANOVA,
    p_value_ANOVA,
-   model
+   model,
+   LSD_value_1,
+   LSD_value_df
    
    )
 
-#return(data_summary_all_analysis) #if you want it as a function
-}
 
+}
 
 
 
@@ -422,15 +541,95 @@ rm(site_and_yr,
 #### merge the files run
 
 
-ANOVA_sites_yr <- rbind(         Carwarp_Amelioration_2018_ANOVA,
-                               Carwarp_Amelioration_2019_ANOVA,
-                               Carwarp_Amelioration_2020_ANOVA,
-                               
-                               `Brimpton Lake_2014_ANOVA`,
+ANOVA_sites_yr <- rbind(       `Brimpton Lake_2014_ANOVA`,
                                `Brimpton Lake_2015_ANOVA`,
                                `Brimpton Lake_2016_ANOVA`,
                                `Brimpton Lake_2017_ANOVA`,
-                               `Brimpton Lake_2018_ANOVA`
+                               `Brimpton Lake_2018_ANOVA`,
+                               
+                               
+                               Brooker_2019_ANOVA,
+                               Brooker_2020_ANOVA,
+                               Brooker_2021_ANOVA ,
+
+                               Buckleboo_2019_ANOVA,
+                               Buckleboo_2020_ANOVA,
+                               Buckleboo_2021_ANOVA,
+
+                               Bute_CSIRO_2018_ANOVA,
+                               Bute_CSIRO_2019_ANOVA,
+                               Bute_CSIRO_2020_ANOVA,
+                               Bute_CSIRO_2021_ANOVA,
+
+                               Bute_Trengrove_2015_ANOVA,
+                               Bute_Trengrove_2016_ANOVA,
+                               Bute_Trengrove_2017_ANOVA,
+                               Bute_Trengrove_2018_ANOVA,
+                               Bute_Trengrove_2019_ANOVA,
+                               Bute_Trengrove_2020_ANOVA,
+                               Bute_Trengrove_2021_ANOVA,
+
+                               Cadgee_2014_ANOVA,
+                               Cadgee_2015_ANOVA,
+                               #Cadgee_2016_ANOVA, #this has no yield data
+                               Cadgee_2017_ANOVA,
+                               Cadgee_2018_ANOVA,
+
+                               Carwarp_Amelioration_2018_ANOVA,
+                               Carwarp_Amelioration_2019_ANOVA,
+                               Carwarp_Amelioration_2020_ANOVA,
+
+                               Cummins_2019_ANOVA,
+                               Cummins_2020_ANOVA,
+                               Cummins_2021_ANOVA,
+
+                               Karkoo_2019_ANOVA,
+                               Karkoo_2020_ANOVA,
+                               Karkoo_2021_ANOVA,
+
+                               Karoonda_2014_ANOVA,
+                               Karoonda_2015_ANOVA,
+                               Karoonda_2016_ANOVA,
+                               Karoonda_2017_ANOVA,
+                               Karoonda_2018_ANOVA,
+
+                               Kooloonong_canola_2021_ANOVA,
+
+                               Kooloonong_chickpea_2019_ANOVA,
+                               Kooloonong_chickpea_2020_ANOVA,
+                               Kooloonong_chickpea_2021_ANOVA,
+
+                               Kooloonong_lentil_2019_ANOVA,
+                               Kooloonong_lentil_2020_ANOVA,
+                               Kooloonong_lentil_2021_ANOVA,
+
+                               Kooloonong_lupin_2019_ANOVA,
+                               Kooloonong_lupin_2020_ANOVA,
+                               Kooloonong_lupin_2021_ANOVA,
+
+                               Kybunga_2019_ANOVA,
+                               Kybunga_2020_ANOVA,
+                               Kybunga_2021_ANOVA,
+
+                               `Lowaldie_Crest_2019_ANOVA`,
+                               `Lowaldie_Crest_2020_ANOVA`,
+                               #`Lowaldie_Crest_2021_ANOVA`, # no data
+
+                               `Lowaldie_Deep sand_2019_ANOVA`,
+                               `Lowaldie_Deep sand_2020_ANOVA`,
+                               #`Lowaldie_Deep sand_2021_ANOVA`, # no data
+                                
+                               Malinong_2019_ANOVA,
+                               Malinong_2020_ANOVA,
+                               Malinong_2021_ANOVA,
+
+                               Monia_Gap_2019_ANOVA,
+                               Monia_Gap_2020_ANOVA,
+                               Monia_Gap_2021_ANOVA,
+
+                               `Mt Damper_2019_ANOVA`,
+                               `Mt Damper_2020_ANOVA`,
+                               `Mt Damper_2021_ANOVA`
                        )
 
 
@@ -438,17 +637,99 @@ ANOVA_sites_yr <- rbind(         Carwarp_Amelioration_2018_ANOVA,
 
 
 
-rm(Carwarp_Amelioration_2018_ANOVA,
-   Carwarp_Amelioration_2019_ANOVA,
-   Carwarp_Amelioration_2020_ANOVA,
-   `Brimpton Lake_2014_ANOVA`,
-   `Brimpton Lake_2015_ANOVA`,
-   `Brimpton Lake_2016_ANOVA`,
-   `Brimpton Lake_2017_ANOVA`,
-   `Brimpton Lake_2018_ANOVA`)
+rm( `Brimpton Lake_2014_ANOVA`,
+    `Brimpton Lake_2015_ANOVA`,
+    `Brimpton Lake_2016_ANOVA`,
+    `Brimpton Lake_2017_ANOVA`,
+    `Brimpton Lake_2018_ANOVA`,
+    
+    
+    Brooker_2019_ANOVA,
+    Brooker_2020_ANOVA,
+    Brooker_2021_ANOVA,
+
+    Buckleboo_2019_ANOVA,
+    Buckleboo_2020_ANOVA,
+    Buckleboo_2021_ANOVA,
+
+    Bute_CSIRO_2018_ANOVA,
+    Bute_CSIRO_2019_ANOVA,
+    Bute_CSIRO_2020_ANOVA,
+    Bute_CSIRO_2021_ANOVA,
+
+    Bute_Trengrove_2015_ANOVA,
+    Bute_Trengrove_2016_ANOVA,
+    Bute_Trengrove_2017_ANOVA,
+    Bute_Trengrove_2018_ANOVA,
+    Bute_Trengrove_2019_ANOVA,
+    Bute_Trengrove_2020_ANOVA,
+    Bute_Trengrove_2021_ANOVA,
+
+    Cadgee_2014_ANOVA,
+    Cadgee_2015_ANOVA,
+    #Cadgee_2016_ANOVA, #no yield data
+    Cadgee_2017_ANOVA,
+    Cadgee_2018_ANOVA,
+
+    Carwarp_Amelioration_2018_ANOVA,
+    Carwarp_Amelioration_2019_ANOVA,
+    Carwarp_Amelioration_2020_ANOVA,
+
+    Cummins_2019_ANOVA,
+    Cummins_2020_ANOVA,
+    Cummins_2021_ANOVA,
+
+    Karkoo_2019_ANOVA,
+    Karkoo_2020_ANOVA,
+    Karkoo_2021_ANOVA,
+
+    Karoonda_2014_ANOVA,
+    Karoonda_2015_ANOVA,
+    Karoonda_2016_ANOVA,
+    Karoonda_2017_ANOVA,
+    Karoonda_2018_ANOVA,
+
+    Kooloonong_canola_2021_ANOVA,
+
+    Kooloonong_chickpea_2019_ANOVA,
+    Kooloonong_chickpea_2020_ANOVA,
+    Kooloonong_chickpea_2021_ANOVA,
+
+    Kooloonong_lentil_2019_ANOVA,
+    Kooloonong_lentil_2020_ANOVA,
+    Kooloonong_lentil_2021_ANOVA,
+
+    Kooloonong_lupin_2019_ANOVA,
+    Kooloonong_lupin_2020_ANOVA,
+    Kooloonong_lupin_2021_ANOVA,
+
+    Kybunga_2019_ANOVA,
+    Kybunga_2020_ANOVA,
+    Kybunga_2021_ANOVA,
+
+    `Lowaldie_Crest_2019_ANOVA`,
+    `Lowaldie_Crest_2020_ANOVA`,
+    #`Lowaldie_Crest_2021_ANOVA`, # no data
+     
+    `Lowaldie_Deep sand_2019_ANOVA`,
+    `Lowaldie_Deep sand_2020_ANOVA`,
+    #`Lowaldie_Deep sand_2021_ANOVA`, # no data
+     
+    Malinong_2019_ANOVA,
+    Malinong_2020_ANOVA,
+    Malinong_2021_ANOVA,
+
+    Monia_Gap_2019_ANOVA,
+    Monia_Gap_2020_ANOVA,
+    Monia_Gap_2021_ANOVA,
+
+    `Mt Damper_2019_ANOVA`,
+    `Mt Damper_2020_ANOVA`,
+    `Mt Damper_2021_ANOVA`
+)
 
 
-str(Amelioration)
+
 
 write.csv(ANOVA_sites_yr,"X:/Therese_Jackie/Sandy_soils/Development_database/stats_batch_output/ANOVA_by_Yr_sites_merged.csv" ,
           row.names = FALSE)
@@ -459,33 +740,4 @@ write.csv(ANOVA_sites_yr,"X:/Therese_Jackie/Sandy_soils/Development_database/sta
 
 
 
-#######################################################################################################################################################
 
-### Code if you want to run it as a function
-### what sites do I have?
-# sites <- read_csv("X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/stats_working/sites_merged.csv", 
-#                              col_types = cols(rep_block = col_character()))
-# 
-# list_of_sites <- sites %>%  distinct(site) %>% dplyr::arrange(site)
-# list_of_sites
-# 
-# #### site to analyse
-# a = "Carwarp_Amelioration"
-# 
-# ## what years do I have?
-# sites_names <- sites %>%   filter(site == a) %>% distinct(year)
-# min(sites_names)
-# max(sites_names)
-# 
-# ### Run function
-# Carwarp_Amelioration_2018 <- function_anova(a, 2018)
-# Carwarp_Amelioration_2019 <- function_anova(a, 2019)
-# Carwarp_Amelioration_2020 <- function_anova(a, 2020)
-# 
-# ### Merge df
-# 
-# Carwarp_Amelioration_ANOVA <- rbind(Carwarp_Amelioration_2018,
-#                                     Carwarp_Amelioration_2019,
-#                                     Carwarp_Amelioration_2020)
-# 
-# rm(Carwarp_Amelioration_2018, Carwarp_Amelioration_2019, Carwarp_Amelioration_2020)
