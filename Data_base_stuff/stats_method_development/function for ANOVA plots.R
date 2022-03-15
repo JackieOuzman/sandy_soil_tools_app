@@ -99,7 +99,48 @@ site_yrs_list <- c("Brimpton LakeX2014",
                    
                    "Mt DamperX2019",
                    "Mt DamperX2020",
-                   "Mt DamperX2021"
+                   "Mt DamperX2021",
+                   
+                   "MurlongX2018",
+                   "MurlongX2019",
+                   "MurlongX2020",
+                   "MurlongX2021",
+                   
+                   "Ouyen_SpadeX2017",
+                   "Ouyen_SpadeX2018",
+                   "Ouyen_SpadeX2019",
+                   "Ouyen_SpadeX2020",
+                   
+                   "SherwoodX2019",
+                   "SherwoodX2020",
+                   "SherwoodX2021",
+                   
+                   "Telopea_DownsX2020",
+                   "Telopea_DownsX2021",
+                   
+                   "TempyX2019",
+                   "TempyX2020",
+                   #"TempyX2021", #no yield
+                   
+                   "WaikerieX2018",
+                   "WaikerieX2019",
+                   "WaikerieX2020",
+                   
+                   "WarnertownX2019",
+                   "WarnertownX2020",
+                   "WarnertownX2021",
+                   
+                   "WynarkaX2019",
+                   "WynarkaX2020",
+                   "WynarkaX2021",
+                   
+                   "YendaX2017",
+                   "YendaX2018",
+                   "YendaX2019",
+                   "YendaX2020",
+                   "YendaX2021",
+                   
+                   "YounghusbandX2020"
 )
 
 
