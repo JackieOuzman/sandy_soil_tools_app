@@ -3,8 +3,32 @@
 
 
 ### List of sites I want to run analysis for:
-site_yrs_list <- c("Carwarp_AmeliorationX2018to2020",
-                   "Brimpton LakeX2014to2018")
+site_yrs_list <- c(
+                   "Brimpton LakeX2014to2018",
+                   "BrookerX2019to2021",
+                   "BucklebooX2019to2021",
+                   "Bute_CSIROX2018to2021",
+                   "Bute_TrengroveX2015to2021",
+                   "CadgeeX2014to2018",
+                   #"CadgeeX2016", #no yield data
+                   "Carwarp_AmeliorationX2018to2020",
+                   "CumminsX2019to2021",
+                   "KarkooX2019to2021",
+                   "KaroondaX2014to2018",
+                   "Kooloonong_canolaX2021",
+                   "Kooloonong_chickpeaX2019to2021",
+                   "Kooloonong_lentilX2019to2021",
+                   "Kooloonong_lupinX2019to2021",
+                   "KybungaX2019to2021",
+                   "Lowaldie_CrestX2019to2020",
+                   #"Lowaldie_CrestX2021", #no data 
+                   "Lowaldie_Deep sandX2019to2020",
+                   #"Lowaldie_Deep sandX2021",#no data
+                   "MalinongX2019to2021",
+                   "Monia_GapX2019to2021",
+                   "Mt DamperX2019to2021"
+                   
+                   )
 
 
 
@@ -34,7 +58,20 @@ for (site_yrs_list in site_yrs_list){
 summary_data_all_1 <- read_csv("X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/stats_working/sites_merged.csv", 
                              col_types = cols(rep_block = col_character()))
 
-
+### brooker is a problem site I want to filter out these ones:
+  
+  summary_data_all_1 <- summary_data_all_1 %>%
+    filter(Descriptors  != "Spade.30_Lc@1.incorp_30") %>%
+    filter(Descriptors  != "Spade.30_Lc@1.incorp_30.K_added.surface") %>%
+    filter(Descriptors  != "Spade.30_Lc@2.incorp_30") %>%
+    filter(Descriptors  != "Spade.30_Lc@2.incorp_30.K_added.surface") %>%
+    filter(Descriptors  != "Spade.30_Lc@6.incorp_30") %>%
+    filter(Descriptors  != "Spade.30_Lc@6.incorp_30.K_added.surface") %>%
+    filter(Descriptors  != "Spade.30_Lc@10.incorp_30") %>%
+    filter(Descriptors  != "Spade.30_Lc@10.incorp_30.K_added.surface") %>%
+    filter(Descriptors  != "Spade.30_Lc@20.incorp_30") %>% 
+    filter(Descriptors  != "Spade.30_Lc@20.incorp_30.K_added.surface")
+  
 
 
 ##### order the Descriptors
@@ -152,20 +189,20 @@ order <- c(
   "Rip.50_Cl.surface",
   "Rip.50_Cl@2.5.surface_Yr18,19,20",
   "Rip.50_Cl@7.5.surface",
-  "Rip.50_Cl@5.incorp_50",
+  "Rip.50_Cl@5.incorp_20",#changed
   "Rip.50_Cl@7.5.band_50",
-  "Rip.50_Cl@20.incorp_50",
+  "Rip.50_Cl@20.incorp_20",#changed
   "Rip.50_Cl.deep",
   "Rip.50_Cl.band_50",
-  "Rip.50_Cl@5.incorp_50.Fert.surface",
-  "Rip.50_Cl@5.incorp_50.Clay.incorp_50",
-  "Rip.50_Cl@5.incorp_50.Fert.surface.Clay.incorp_50",
-  "Rip.50_Cl@20.incorp_50.Fert.surface",
-  "Rip.50_Cl@20.incorp_50.Clay.incorp_50",
-  "Rip.50_Cl@20.incorp_50.Fert.surface.Clay.incorp_50",
+  "Rip.50_Cl@5.incorp_20.Fert.surface", #changed
+  "Rip.50_Cl@5.incorp_20.Clay.incorp_20",#changed
+  "Rip.50_Cl@5.incorp_20.Fert.surface.Clay.incorp_20",#changed
+  "Rip.50_Cl@20.incorp_20.Fert.surface", #changed
+  "Rip.50_Cl@20.incorp_20.Clay.incorp_20",#changed
+  "Rip.50_Cl@20.incorp_20.Fert.surface.Clay.incorp_20",#changed
   "Rip.50_Fert.surface",
-  "Rip.50_Clay.incorp_50",
-  "Rip.50_Fert.surface.Clay.incorp_50",
+  "Rip.50_Clay.incorp_20",#changed
+  "Rip.50_Fert.surface.Clay.incorp_20",#changed
   "Rip.50Spade.30_none",
   "Inc.50_none",
   "Inc.50_Cl@7.5.incorp_50",
@@ -280,10 +317,24 @@ agricolae_LSD_output_sand_cum <- (LSD.test(model_cum_LSD, "Descriptors",   # out
 
 
 
-
 #Extract the LSD value from the anlsysis and add it to the summary data
-LSD_cum <- agricolae_LSD_output_sand_cum$statistics$LSD
 
+LSD_value_1 <- agricolae_LSD_output_sand_cum$statistics$LSD #this becomes NULL if there is not values
+
+
+#get the 'max value' aka make it a value and make a df 
+LSD_value_1 <- max(LSD_value_1)
+LSD_value_df <- data.frame(LSD_value_1)
+
+LSD_value_df <- LSD_value_df %>% 
+  dplyr::mutate(
+    LSD_max = case_when(
+      LSD_value_1 > 0 ~ as.character(LSD_value_1),
+      TRUE ~ "not reported"
+    ))
+
+
+LSD_cum <- LSD_value_df[1,2]
 
 #Extract the LSD letters from the anlsysis and add it to the summary data
 
@@ -396,13 +447,50 @@ rm(site_and_yrs,
 #### merge the files run
 
 
-Cum_ANOVA_sites_yr <- rbind(     Carwarp_Amelioration_2018to2020_Cum_ANOVA,
-                                 `Brimpton Lake_2014to2018_Cum_ANOVA`)
+Cum_ANOVA_sites_yr <- rbind(
+  `Brimpton Lake_2014to2018_Cum_ANOVA`,
+  Brooker_2019to2021_Cum_ANOVA,
+  Buckleboo_2019to2021_Cum_ANOVA,
+  Bute_CSIRO_2018to2021_Cum_ANOVA,
+  Bute_Trengrove_2015to2021_Cum_ANOVA,
+  Cadgee_2014to2018_Cum_ANOVA,
+  Carwarp_Amelioration_2018to2020_Cum_ANOVA,
+  Cummins_2019to2021_Cum_ANOVA,
+  Karkoo_2019to2021_Cum_ANOVA,
+  Karoonda_2014to2018_Cum_ANOVA,
+  Kooloonong_canola_2021_Cum_ANOVA,
+  Kooloonong_chickpea_2019to2021_Cum_ANOVA,
+  Kooloonong_lentil_2019to2021_Cum_ANOVA,
+  Kooloonong_lupin_2019to2021_Cum_ANOVA,
+  Kybunga_2019to2021_Cum_ANOVA,
+  Lowaldie_Crest_2019to2020_Cum_ANOVA,
+  `Lowaldie_Deep sand_2019to2020_Cum_ANOVA`,
+  Malinong_2019to2021_Cum_ANOVA,
+  Monia_Gap_2019to2021_Cum_ANOVA,
+  `Mt Damper_2019to2021_Cum_ANOVA`)
+  
+  
 
-
-
-rm(Carwarp_Amelioration_2018to2020_Cum_ANOVA,
-   `Brimpton Lake_2014to2018_Cum_ANOVA`)
+rm( `Brimpton Lake_2014to2018_Cum_ANOVA`,
+    Brooker_2019to2021_Cum_ANOVA,
+    Buckleboo_2019to2021_Cum_ANOVA,
+    Bute_CSIRO_2018to2021_Cum_ANOVA,
+    Bute_Trengrove_2015to2021_Cum_ANOVA,
+    Cadgee_2014to2018_Cum_ANOVA,
+    Carwarp_Amelioration_2018to2020_Cum_ANOVA,
+    Cummins_2019to2021_Cum_ANOVA,
+    Karkoo_2019to2021_Cum_ANOVA,
+    Karoonda_2014to2018_Cum_ANOVA,
+    Kooloonong_canola_2021_Cum_ANOVA,
+    Kooloonong_chickpea_2019to2021_Cum_ANOVA,
+    Kooloonong_lentil_2019to2021_Cum_ANOVA,
+    Kooloonong_lupin_2019to2021_Cum_ANOVA,
+    Kybunga_2019to2021_Cum_ANOVA,
+    Lowaldie_Crest_2019to2020_Cum_ANOVA,
+    `Lowaldie_Deep sand_2019to2020_Cum_ANOVA`,
+    Malinong_2019to2021_Cum_ANOVA,
+    Monia_Gap_2019to2021_Cum_ANOVA,
+    `Mt Damper_2019to2021_Cum_ANOVA`)
 
 
 
