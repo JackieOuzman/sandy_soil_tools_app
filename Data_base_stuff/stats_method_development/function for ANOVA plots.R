@@ -9,17 +9,98 @@ library(tidyverse)
 library(multcompView)
 library(scales)
 
-site_yrs_list <- "Carwarp_AmeliorationX2018"
+#site_yrs_list <- "Brimpton LakeX2014"
 
 ### List of sites I want to run analysis for:
-site_yrs_list <- c("Carwarp_AmeliorationX2018",
-                   "Carwarp_AmeliorationX2019",
-                   "Carwarp_AmeliorationX2020",
-                   "Brimpton LakeX2014",
+site_yrs_list <- c("Brimpton LakeX2014",
                    "Brimpton LakeX2015",
                    "Brimpton LakeX2016",
                    "Brimpton LakeX2017",
-                   "Brimpton LakeX2018")
+                   "Brimpton LakeX2018",
+                   
+                   "BrookerX2019",
+                   "BrookerX2020",
+                   "BrookerX2021",
+                   
+                   "BucklebooX2019",
+                   "BucklebooX2020",
+                   "BucklebooX2021",
+                   
+                   "Bute_CSIROX2018",
+                   "Bute_CSIROX2019",
+                   "Bute_CSIROX2020",
+                   "Bute_CSIROX2021",
+                   
+                   "Bute_TrengroveX2015",
+                   "Bute_TrengroveX2016",
+                   "Bute_TrengroveX2017",
+                   "Bute_TrengroveX2018",
+                   "Bute_TrengroveX2019",
+                   "Bute_TrengroveX2020",
+                   "Bute_TrengroveX2021",
+                   
+                   "CadgeeX2014",
+                   "CadgeeX2015",
+                   #"CadgeeX2016", #no yield data
+                   "CadgeeX2017",
+                   "CadgeeX2018",
+                   
+                   "Carwarp_AmeliorationX2018",
+                   "Carwarp_AmeliorationX2019",
+                   "Carwarp_AmeliorationX2020",
+                   
+                   "CumminsX2019",
+                   "CumminsX2020",
+                   "CumminsX2021",
+                   
+                   "KarkooX2019",
+                   "KarkooX2020",
+                   "KarkooX2021",
+                   
+                   "KaroondaX2014",
+                   "KaroondaX2015",
+                   "KaroondaX2016",
+                   "KaroondaX2017",
+                   "KaroondaX2018",
+                   
+                   "Kooloonong_canolaX2021",
+                   
+                   "Kooloonong_chickpeaX2019",
+                   "Kooloonong_chickpeaX2020",
+                   "Kooloonong_chickpeaX2021",
+                   
+                   "Kooloonong_lentilX2019",
+                   "Kooloonong_lentilX2020",
+                   "Kooloonong_lentilX2021",
+                   
+                   "Kooloonong_lupinX2019",
+                   "Kooloonong_lupinX2020",
+                   "Kooloonong_lupinX2021",
+                   
+                   "KybungaX2019",
+                   "KybungaX2020",
+                   "KybungaX2021",
+                   
+                   "Lowaldie_CrestX2019",
+                   "Lowaldie_CrestX2020",
+                   #"Lowaldie_CrestX2021", #no data 
+                   
+                   "Lowaldie_Deep sandX2019",
+                   "Lowaldie_Deep sandX2020",
+                   #"Lowaldie_Deep sandX2021",#no data
+                   
+                   "MalinongX2019",
+                   "MalinongX2020",
+                   "MalinongX2021",
+                   
+                   "Monia_GapX2019",
+                   "Monia_GapX2020",
+                   "Monia_GapX2021",
+                   
+                   "Mt DamperX2019",
+                   "Mt DamperX2020",
+                   "Mt DamperX2021"
+)
 
 
 
@@ -37,8 +118,8 @@ data_file <- "X:/Therese_Jackie/Sandy_soils/Development_database/stats_batch_out
 
 ## download the data using the specified file path above
 
-ANOVA_results <- read_csv(data_file, 
-                             col_types = cols(rep_block = col_character()))
+ANOVA_results <- read_csv(data_file) 
+                             
 
 
 ##########################################
@@ -222,7 +303,7 @@ max_yld <- max(ANOVA_results_site$mean, na.rm = TRUE)
 max_yld <- max_yld +0.5
 max_yld <- ceiling(max_yld)
 
-
+ANOVA_results$LSD <- as.double(ANOVA_results$LSD)
 LSD <- max(ANOVA_results$LSD)
 LSD <- signif(LSD, digits = 4)
 
