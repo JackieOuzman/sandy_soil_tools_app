@@ -28,7 +28,9 @@ library(DescTools)
 
  
  ## test 
-#site_yrs_list <-"Lowaldie_CrestX2021"
+# site_yrs_list <- c("BucklebooX2019",
+#                    "BucklebooX2020",
+#                    "BucklebooX2021")
  
 
 ### List of sites I want to run analysis for:
@@ -378,22 +380,31 @@ summary_data_site <- summary_data_all_1 %>%
   filter(site == a) %>% 
   filter(year == b)
 
+## count yld values
+count_missing_yld_values <- summary_data_site %>% 
+  dplyr::group_by(Descriptors) %>% 
+  dplyr::summarise(count = sum(!is.na(yield)))
 
+
+## summaries data
 data_summary_all_analysis <- summary_data_site %>% 
   dplyr::group_by(Descriptors) %>%
   dplyr::summarise(mean=mean(yield, na.rm = TRUE), 
                    sd=sd(yield, na.rm = TRUE),
-                   count = n(),
-                    std_error = sd/(sqrt(count)),
+                   #count = n(),
+                   #std_error = sd/(sqrt(count)),
                    
   ) %>%
   arrange(desc(mean))
-
+## add in the count values (not the number of rows)
+data_summary_all_analysis <- left_join(data_summary_all_analysis,count_missing_yld_values )
 
 
 data_summary_all_analysis <- data_summary_all_analysis %>% 
   mutate(site =  a,
-          year =  b)
+         year =  b,
+         std_error = sd/(sqrt(count)))
+
 
 
 
@@ -418,6 +429,17 @@ F_value_ANOVA <- anova_yld[1,3]
 data_summary_all_analysis <- data_summary_all_analysis %>% 
   mutate(p_value_ANOVA  = p_value_ANOVA,
          F_value_ANOVA  = F_value_ANOVA)
+
+#Add in the significance ***
+data_summary_all_analysis <- data_summary_all_analysis %>%
+  mutate(ANOVA_sign = case_when(
+    p_value_ANOVA < 0.001 ~ "***",
+    p_value_ANOVA <= 0.01 ~  "**",
+    p_value_ANOVA <= 0.05 ~  "*",
+    p_value_ANOVA >  0.05 ~  "ns",
+    TRUE ~ "check"
+    
+  ))
 
 
 ########################################################################################################################################################
@@ -568,7 +590,8 @@ rm(site_and_yr,
    p_value_ANOVA,
    model,
    LSD_value_1,
-   LSD_value_df
+   LSD_value_df,
+   count_missing_yld_values
    
    )
 
@@ -579,7 +602,9 @@ rm(site_and_yr,
 
 
 #### merge the files run
-
+# ANOVA_sites_yr <- rbind(Buckleboo_2019_ANOVA,
+#                         Buckleboo_2020_ANOVA,
+#                         Buckleboo_2021_ANOVA)
 
 ANOVA_sites_yr <- rbind(       
                                `Brimpton Lake_2014_ANOVA`,

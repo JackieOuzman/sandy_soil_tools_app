@@ -9,7 +9,9 @@ library(tidyverse)
 library(multcompView)
 library(scales)
 
-#site_yrs_list <- "Brimpton LakeX2014"
+site_yrs_list <- c("BucklebooX2019",
+                   "BucklebooX2020",
+                   "BucklebooX2021")
 
 ### List of sites I want to run analysis for:
 site_yrs_list <- c("Brimpton LakeX2014",
@@ -353,6 +355,19 @@ LSD <- signif(LSD, digits = 4)
 ANOVA_results <- ANOVA_results_site %>%
   filter(year == b)
 
+names(ANOVA_results)
+### make a new clm for plotting letters if the ANOVA is significant
+ANOVA_results <- ANOVA_results %>% 
+  dplyr::mutate(groups_LSD_display = case_when(
+    ANOVA_sign == "ns" ~ "",
+    TRUE ~ groups_LSD  ))
+  
+ANOVA_results <- ANOVA_results %>% 
+  dplyr::mutate(significance_control_display = case_when(
+    ANOVA_sign == "ns" ~ "",
+    TRUE ~ significance_control  ))
+
+
 
 # barplot with letters from LSD
 plot_LSD <- ANOVA_results %>%  
@@ -367,7 +382,7 @@ plot_LSD <- ANOVA_results %>%
   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank()) +
   theme(legend.position = c(0.1, 0.75)) +
   
-  geom_text(aes(label=groups_LSD), 
+  geom_text(aes(label=groups_LSD_display), 
             position = position_dodge(0.80), 
             size = 3,
             vjust=-0.5, hjust=-0.3, 
@@ -406,7 +421,7 @@ plot_dun <- ANOVA_results %>%
   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank()) +
   theme(legend.position = c(0.1, 0.75)) +
   
-  geom_text(aes(label=significance_control), 
+  geom_text(aes(label=significance_control_display), 
             position = position_dodge(0.80), 
             size = 3,
             vjust=-0.5, hjust=-0.3, 
