@@ -661,7 +661,7 @@ primary_metadata <- read_csv(input_data_file_metadata,
 
 
 primary_metadata <- primary_metadata %>% 
-  rename(site  = `Site Name`)
+  dplyr::rename(site  = `Site Name`)
 
 
 
@@ -675,7 +675,7 @@ unique(primary_metadata$site)
 
 
 primary_metadata <- primary_metadata %>%
-  mutate(
+  dplyr::mutate(
     Latitude = case_when(
       site == "Carwarp" ~        -34.3075,
       #Red Cliffs is the closest met station Carwarp Amelioration
@@ -717,7 +717,7 @@ primary_metadata <- primary_metadata %>%
   )
      
 primary_metadata <- primary_metadata %>%
-  mutate(
+  dplyr::mutate(
     Longitude = case_when(
       site == "Carwarp"          ~ 142.1882, #Red Cliffs is the closest met station
       site == "Waikerie"        ~ 140.1860,
@@ -797,7 +797,7 @@ unique(primary_join$yr_post_amelioration)
 
 ### get the sowing date
 primary_join <- primary_join %>%
-  mutate (sowing_date = case_when(
+  dplyr::mutate (sowing_date = case_when(
     yr_post_amelioration == 0 ~ SowingDate_01,
     yr_post_amelioration == 1 ~ SowingDate_02,
     yr_post_amelioration == 2 ~ SowingDate_03,
@@ -809,7 +809,7 @@ primary_join <- primary_join %>%
 
 ### get the harvest date
 primary_join <- primary_join %>%
-  mutate (harvest_date = case_when(
+  dplyr::mutate (harvest_date = case_when(
     yr_post_amelioration == 0 ~ Harvest_Date_01,
     yr_post_amelioration == 1 ~ Harvest_Date_02,
     yr_post_amelioration == 2 ~ Harvest_Date_03,
@@ -822,7 +822,7 @@ primary_join <- primary_join %>%
 ### get the previous crop
 
 primary_join <- primary_join %>%
-  mutate (previous_crop = case_when(
+  dplyr::mutate (previous_crop = case_when(
     yr_post_amelioration == 0 ~ CropType_Prior,
     yr_post_amelioration == 1 ~ CropType_Crop_01,
     yr_post_amelioration == 2 ~ CropType_Crop_02,
@@ -904,7 +904,7 @@ GS_rain_deciles <- dplyr::select(GS_rain_deciles, -'X1')
 
 
 GS_rain_deciles <- GS_rain_deciles %>% 
-  mutate(site = case_when(
+  dplyr::mutate(site = case_when(
     site == "Brimpton_Lake" ~ "Brimpton Lake",
     site == "Mt_Damper"     ~ "Mt Damper",
     TRUE ~ site
@@ -915,7 +915,7 @@ GS_rain_deciles <- GS_rain_deciles %>%
 
 
 GS_rain_deciles <- GS_rain_deciles %>% 
-  mutate(site_year =paste0(site,"_", year))
+  dplyr::mutate(site_year =paste0(site,"_", year))
 str(GS_rain_deciles)
 
 
@@ -924,7 +924,7 @@ str(primary_join_1)
 
 
 primary_join_1 <- primary_join_1 %>% 
-  mutate(site_year = paste0(site,"_", year)) 
+  dplyr::mutate(site_year = paste0(site,"_", year)) 
 
 primary_join_1 %>%  distinct(site_year)
 GS_rain_deciles %>%  distinct(site_year)
@@ -951,57 +951,57 @@ check <- anti_join(primary_join_1, GS_rain_deciles)#? not sure if I am expecting
 
 # Remove the spare at Karoonda
 primary_join_2 <- primary_join_2 %>%
-  filter(ID  != "Karoonda_2014_plot_6_rep_block_1") %>%
-  filter(ID  != "Karoonda_2014_plot_20_rep_block_2") %>%
-  filter(ID  != "Karoonda_2014_plot_37_rep_block_3") %>%
-  filter(ID  != "Karoonda_2014_plot_48_rep_block_4") %>%
-  filter(ID  != "Karoonda_2014_plot_64_rep_block_5") %>% 
+  dplyr::filter(ID  != "Karoonda_2014_plot_6_rep_block_1") %>%
+  dplyr::filter(ID  != "Karoonda_2014_plot_20_rep_block_2") %>%
+  dplyr::filter(ID  != "Karoonda_2014_plot_37_rep_block_3") %>%
+  dplyr::filter(ID  != "Karoonda_2014_plot_48_rep_block_4") %>%
+  dplyr::filter(ID  != "Karoonda_2014_plot_64_rep_block_5") %>% 
 
-filter(ID  != "Karoonda_2015_plot_6_rep_block_1") %>%
-  filter(ID  != "Karoonda_2015_plot_20_rep_block_2") %>%
-  filter(ID  != "Karoonda_2015_plot_37_rep_block_3") %>%
-  filter(ID  != "Karoonda_2015_plot_48_rep_block_4") %>%
-  filter(ID  != "Karoonda_2015_plot_64_rep_block_5") %>% 
+  dplyr::filter(ID  != "Karoonda_2015_plot_6_rep_block_1") %>%
+  dplyr::filter(ID  != "Karoonda_2015_plot_20_rep_block_2") %>%
+  dplyr::filter(ID  != "Karoonda_2015_plot_37_rep_block_3") %>%
+  dplyr::filter(ID  != "Karoonda_2015_plot_48_rep_block_4") %>%
+  dplyr::filter(ID  != "Karoonda_2015_plot_64_rep_block_5") %>% 
 
-filter(ID  != "Karoonda_2016_plot_6_rep_block_1") %>%
-  filter(ID  != "Karoonda_2016_plot_20_rep_block_2") %>%
-  filter(ID  != "Karoonda_2016_plot_37_rep_block_3") %>%
-  filter(ID  != "Karoonda_2016_plot_48_rep_block_4") %>%
-  filter(ID  != "Karoonda_2016_plot_64_rep_block_5") %>% 
+  dplyr::filter(ID  != "Karoonda_2016_plot_6_rep_block_1") %>%
+  dplyr::filter(ID  != "Karoonda_2016_plot_20_rep_block_2") %>%
+  dplyr::filter(ID  != "Karoonda_2016_plot_37_rep_block_3") %>%
+  dplyr::filter(ID  != "Karoonda_2016_plot_48_rep_block_4") %>%
+  dplyr::filter(ID  != "Karoonda_2016_plot_64_rep_block_5") %>% 
 
-filter(ID  != "Karoonda_2017_plot_6_rep_block_1") %>%
-  filter(ID  != "Karoonda_2017_plot_20_rep_block_2") %>%
-  filter(ID  != "Karoonda_2017_plot_37_rep_block_3") %>%
-  filter(ID  != "Karoonda_2017_plot_48_rep_block_4") %>%
-  filter(ID  != "Karoonda_2017_plot_64_rep_block_5") %>% 
+  dplyr::filter(ID  != "Karoonda_2017_plot_6_rep_block_1") %>%
+  dplyr::filter(ID  != "Karoonda_2017_plot_20_rep_block_2") %>%
+  dplyr::filter(ID  != "Karoonda_2017_plot_37_rep_block_3") %>%
+  dplyr::filter(ID  != "Karoonda_2017_plot_48_rep_block_4") %>%
+  dplyr::filter(ID  != "Karoonda_2017_plot_64_rep_block_5") %>% 
 
-filter(ID  != "Karoonda_2018_plot_6_rep_block_1") %>%
-  filter(ID  != "Karoonda_2018_plot_20_rep_block_2") %>%
-  filter(ID  != "Karoonda_2018_plot_37_rep_block_3") %>%
-  filter(ID  != "Karoonda_2018_plot_48_rep_block_4") %>%
-  filter(ID  != "Karoonda_2018_plot_64_rep_block_5")
+  dplyr::filter(ID  != "Karoonda_2018_plot_6_rep_block_1") %>%
+  dplyr::filter(ID  != "Karoonda_2018_plot_20_rep_block_2") %>%
+  dplyr::filter(ID  != "Karoonda_2018_plot_37_rep_block_3") %>%
+  dplyr::filter(ID  != "Karoonda_2018_plot_48_rep_block_4") %>%
+  dplyr::filter(ID  != "Karoonda_2018_plot_64_rep_block_5")
 
 # Remove the spare (control b) at Murlong
 primary_join_2 <- primary_join_2 %>%
-  filter(ID  != "Murlong_2018_plot_4_rep_block_1") %>%
-  filter(ID  != "Murlong_2018_plot_19_rep_block_2") %>%
-  filter(ID  != "Murlong_2018_plot_28_rep_block_3") %>%
-  filter(ID  != "Murlong_2018_plot_43_rep_block_4") %>% 
+  dplyr::filter(ID  != "Murlong_2018_plot_4_rep_block_1") %>%
+  dplyr::filter(ID  != "Murlong_2018_plot_19_rep_block_2") %>%
+  dplyr::filter(ID  != "Murlong_2018_plot_28_rep_block_3") %>%
+  dplyr::filter(ID  != "Murlong_2018_plot_43_rep_block_4") %>% 
 
-  filter(ID  != "Murlong_2019_plot_4_rep_block_1") %>%
-  filter(ID  != "Murlong_2019_plot_19_rep_block_2") %>%
-  filter(ID  != "Murlong_2019_plot_28_rep_block_3") %>%
-  filter(ID  != "Murlong_2019_plot_43_rep_block_4") %>% 
+  dplyr::filter(ID  != "Murlong_2019_plot_4_rep_block_1") %>%
+  dplyr::filter(ID  != "Murlong_2019_plot_19_rep_block_2") %>%
+  dplyr::filter(ID  != "Murlong_2019_plot_28_rep_block_3") %>%
+  dplyr::filter(ID  != "Murlong_2019_plot_43_rep_block_4") %>% 
   
-  filter(ID  != "Murlong_2020_plot_4_rep_block_1") %>%
-  filter(ID  != "Murlong_2020_plot_19_rep_block_2") %>%
-  filter(ID  != "Murlong_2020_plot_28_rep_block_3") %>%
-  filter(ID  != "Murlong_2020_plot_43_rep_block_4") %>% 
+  dplyr::filter(ID  != "Murlong_2020_plot_4_rep_block_1") %>%
+  dplyr::filter(ID  != "Murlong_2020_plot_19_rep_block_2") %>%
+  dplyr::filter(ID  != "Murlong_2020_plot_28_rep_block_3") %>%
+  dplyr::filter(ID  != "Murlong_2020_plot_43_rep_block_4") %>% 
 
-  filter(ID  != "Murlong_2021_plot_4_rep_block_1") %>%
-  filter(ID  != "Murlong_2021_plot_19_rep_block_2") %>%
-  filter(ID  != "Murlong_2021_plot_28_rep_block_3") %>%
-  filter(ID  != "Murlong_2021_plot_43_rep_block_4")  
+  dplyr::filter(ID  != "Murlong_2021_plot_4_rep_block_1") %>%
+  dplyr::filter(ID  != "Murlong_2021_plot_19_rep_block_2") %>%
+  dplyr::filter(ID  != "Murlong_2021_plot_28_rep_block_3") %>%
+  dplyr::filter(ID  != "Murlong_2021_plot_43_rep_block_4")  
 
 
 
@@ -1012,20 +1012,20 @@ primary_join_2 <- primary_join_2 %>%
 
 # Remove the spare (control b) at Waikerie
 primary_join_2 <- primary_join_2 %>%
-  filter(ID  != "Waikerie_2018_plot_1_rep_block_1") %>%
-  filter(ID  != "Waikerie_2018_plot_20_rep_block_2") %>%
-  filter(ID  != "Waikerie_2018_plot_41_rep_block_3") %>%
-  filter(ID  != "Waikerie_2018_plot_52_rep_block_4") %>%
+  dplyr::filter(ID  != "Waikerie_2018_plot_1_rep_block_1") %>%
+  dplyr::filter(ID  != "Waikerie_2018_plot_20_rep_block_2") %>%
+  dplyr::filter(ID  != "Waikerie_2018_plot_41_rep_block_3") %>%
+  dplyr::filter(ID  != "Waikerie_2018_plot_52_rep_block_4") %>%
 
-  filter(ID  != "Waikerie_2019_plot_1_rep_block_1") %>%
-  filter(ID  != "Waikerie_2019_plot_20_rep_block_2") %>%
-  filter(ID  != "Waikerie_2019_plot_41_rep_block_3") %>%
-  filter(ID  != "Waikerie_2019_plot_52_rep_block_4") %>%
+  dplyr::filter(ID  != "Waikerie_2019_plot_1_rep_block_1") %>%
+  dplyr::filter(ID  != "Waikerie_2019_plot_20_rep_block_2") %>%
+  dplyr::filter(ID  != "Waikerie_2019_plot_41_rep_block_3") %>%
+  dplyr::filter(ID  != "Waikerie_2019_plot_52_rep_block_4") %>%
   
-  filter(ID  != "Waikerie_2020_plot_1_rep_block_1") %>%
-  filter(ID  != "Waikerie_2020_plot_20_rep_block_2") %>%
-  filter(ID  != "Waikerie_2020_plot_41_rep_block_3") %>%
-  filter(ID  != "Waikerie_2020_plot_52_rep_block_4") 
+  dplyr::filter(ID  != "Waikerie_2020_plot_1_rep_block_1") %>%
+  dplyr::filter(ID  != "Waikerie_2020_plot_20_rep_block_2") %>%
+  dplyr::filter(ID  != "Waikerie_2020_plot_41_rep_block_3") %>%
+  dplyr::filter(ID  != "Waikerie_2020_plot_52_rep_block_4") 
 
 
 
@@ -1033,13 +1033,13 @@ primary_join_2 <- primary_join_2 %>%
 
 # New horizons Cadgee also has one to be excluded 2014 plot 10 rep 1
 primary <- primary %>% 
-  filter(Descriptors != "Unmodified_Clay.NA")
+  dplyr::filter(Descriptors != "Unmodified_Clay.NA")
 
 
 # Remove the extra control at Warnertown 
 
 primary_join_2 <- primary_join_2 %>%
-  filter(ID  != "Warnertown_2021_plot_19_rep_block_4")
+  dplyr::filter(ID  != "Warnertown_2021_plot_19_rep_block_4")
 
 site_name
 
@@ -1074,14 +1074,14 @@ primary_neat <- primary_join_2 %>%
 
 duplicated_ID <- primary_neat %>% 
   #group_by(ID, Descriptors) %>% 
-  group_by(ID) %>% 
-  summarise(count_ID = n()) %>% 
-  filter(count_ID >1)
+  dplyr::group_by(ID) %>% 
+  dplyr::summarise(count_ID = n()) %>% 
+  dplyr::filter(count_ID >1)
 
 duplicated_ID <- primary_neat %>% 
-  group_by(ID, Descriptors) %>% 
+  dplyr::group_by(ID, Descriptors) %>% 
   #group_by(ID) %>% 
-  summarise(count_ID = n()) %>% 
+  dplyr::summarise(count_ID = n()) %>% 
   filter(count_ID >1)
 ### Note at Younghusband the ID is not unique it only becomes unique when I add in descriptors I did this in raw data using Treatment clm for plot!
 
@@ -1112,7 +1112,7 @@ unique(primary_control$Descriptors)
 #we just want the control 
 
 primary_control <- primary_control %>% 
-  filter(Descriptors == "Control" )
+  dplyr::filter(Descriptors == "Control" )
 
 
 ## Looks like I want to match up the control with the site year and rep_block
@@ -1130,7 +1130,7 @@ primary_control <- primary_control %>%
     control_establishment = establishment,
     control_yield = yield ,
     control_dry_biomass = dry_biomass) %>% 
-  mutate(for_join = paste0(site_sub, "_", year,"_", rep_block))
+  dplyr::mutate(for_join = paste0(site_sub, "_", year,"_", rep_block))
 
 primary_control <- primary_control %>% 
   dplyr::select(for_join, control_establishment, control_yield, control_dry_biomass)
@@ -1138,7 +1138,7 @@ primary_control <- primary_control %>%
 #b) make a join clm 
 
 primary_neat <- primary_neat %>% 
-  mutate(for_join = paste0(site_sub, "_", year,"_", rep_block))
+  dplyr::mutate(for_join = paste0(site_sub, "_", year,"_", rep_block))
 
 
 ##############################################################################################################
