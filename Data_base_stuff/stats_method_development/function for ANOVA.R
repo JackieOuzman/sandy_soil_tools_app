@@ -522,7 +522,7 @@ data_summary_all_analysis <- dplyr::select(data_summary_all_analysis, -yield) %>
 
 
 ########################################################################################################################################################
-### Dunnet test
+### Dunnetts test
 str(summary_data_site)
 DunnettTest <- DunnettTest(yield ~ Descriptors,
                            data = summary_data_site,
