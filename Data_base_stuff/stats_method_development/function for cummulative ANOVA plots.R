@@ -328,13 +328,28 @@ Cum_ANOVA_results_site <- Cum_ANOVA_results_site %>%
 
 
 
+Cum_ANOVA_results_site <- Cum_ANOVA_results_site %>% 
+  dplyr::mutate(LSD_cum_display = case_when(
+    ANOVA_sign == "ns" ~ paste0("") ,
+    TRUE ~ paste0("LSD = ", signif(LSD_cum, digits = 4))))
+
+Cum_ANOVA_results_site <- Cum_ANOVA_results_site %>% 
+  dplyr::mutate(Dunnetts_display = case_when(
+    ANOVA_sign == "ns" ~ paste0("") ,
+    TRUE ~ paste0("Dunnetts test")))
+
+
+
+
+
+
 CumPlot_LSD <- site_year_yld_summary %>% 
   ggplot( aes(x = factor(Descriptors), y = mean, fill = year, colour = year)) + 
   geom_bar(stat = "identity",  alpha = 0.5)  +
   labs(x="", 
        y="Cumulative Yield (t/ha)", 
        title = paste0(a),
-       subtitle = paste0("ANOVA. LSD = " ,LSD_cum))+
+       subtitle = paste0("ANOVA " ,Cum_ANOVA_results_site$LSD_cum_display))+
   theme_bw() + 
   scale_y_continuous(breaks=seq(0,max_sum_cum,by=1.0), limits = c(0, max_sum_cum))+
   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank()) +
@@ -365,7 +380,7 @@ CumPlot_Dun <- site_year_yld_summary %>%
   labs(x="", 
        y="Cumulative Yield (t/ha)", 
        title = paste0(a),
-       subtitle = paste0("ANOVA. Dunnett's test" ))+
+       subtitle = paste0("ANOVA ", Cum_ANOVA_results_site$Dunnetts_display ))+
   theme_bw() + 
   scale_y_continuous(breaks=seq(0,max_sum_cum,by=1.0), limits = c(0, max_sum_cum))+
   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank()) +
