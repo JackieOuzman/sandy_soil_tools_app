@@ -9,9 +9,9 @@ library(tidyverse)
 library(multcompView)
 library(scales)
 
-site_yrs_list <- c("BucklebooX2019",
-                   "BucklebooX2020",
-                   "BucklebooX2021")
+# site_yrs_list <- c("BucklebooX2019",
+#                    "BucklebooX2020",
+#                    "BucklebooX2021")
 
 ### List of sites I want to run analysis for:
 site_yrs_list <- c("Brimpton LakeX2014",
@@ -350,7 +350,7 @@ ANOVA_results_site$LSD <- as.double(ANOVA_results_site$LSD)
 LSD <- max(ANOVA_results_site$LSD)
 LSD <- signif(LSD, digits = 4)
 
-
+LSD
 
 ANOVA_results <- ANOVA_results_site %>%
   filter(year == b)
@@ -368,6 +368,16 @@ ANOVA_results <- ANOVA_results %>%
   dplyr::mutate(significance_control_display = case_when(
     ANOVA_sign == "ns" ~ "",
     TRUE ~ significance_control  ))
+
+ANOVA_results <- ANOVA_results %>% 
+  dplyr::mutate(LSD_display = case_when(
+    ANOVA_sign == "ns" ~ paste0("") ,
+    TRUE ~ paste0("LSD = ", signif(LSD, digits = 4))))
+
+ANOVA_results <- ANOVA_results %>% 
+  dplyr::mutate(Dunnetts_display = case_when(
+    ANOVA_sign == "ns" ~ paste0("") ,
+    TRUE ~ paste0("Dunnetts test")))
 
 
 
@@ -393,7 +403,7 @@ plot_LSD <- ANOVA_results %>%
   theme(axis.text.x=element_text(angle=45,hjust=1))+
   labs(x="", 
        y="Yield t/ha", title = paste0(a,": ", b),
-       subtitle = paste0("ANOVA, LSD = ", LSD)) 
+       subtitle = ANOVA_results$LSD_display) 
 
 ### save the LSD
 ggsave(plot_LSD,
@@ -432,7 +442,7 @@ plot_dun <- ANOVA_results %>%
   theme(axis.text.x=element_text(angle=45,hjust=1))+
   labs(x="", 
        y="Yield t/ha", title = paste0(a,": ", b),
-       subtitle = paste0("ANOVA, Dunnetts")) 
+       subtitle = paste0("ANOVA, " , ANOVA_results$Dunnetts_display)) 
 
 ### save the plot
 ggsave(plot_dun,
