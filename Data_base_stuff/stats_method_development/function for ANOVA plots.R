@@ -355,7 +355,9 @@ LSD <- signif(LSD, digits = 4)
 ANOVA_results <- ANOVA_results_site %>%
   filter(year == b)
 
-names(ANOVA_results)
+
+
+
 ### make a new clm for plotting letters if the ANOVA is significant
 ANOVA_results <- ANOVA_results %>% 
   dplyr::mutate(groups_LSD_display = case_when(

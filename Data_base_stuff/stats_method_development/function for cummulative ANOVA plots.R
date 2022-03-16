@@ -8,7 +8,7 @@ library(tidyverse)
 library(multcompView)
 library(scales)
 
-#site_yrs_list <- "Brimpton LakeX2014to2018"
+#site_yrs_list = "BucklebooX2019to2021"
 
 ### List of sites I want to run analysis for:
 site_yrs_list <- c("Brimpton LakeX2014to2018",
@@ -315,7 +315,16 @@ Cum_ANOVA_results_site <- Cum_ANOVA_results_site %>%
 print(Cum_ANOVA_results_site$year)
 
 
+### make a new clm for plotting letters if the cum ANOVA is significant
+Cum_ANOVA_results_site <- Cum_ANOVA_results_site %>% 
+  dplyr::mutate(groups_LSD_cum_display = case_when(
+    ANOVA_sign == "ns" ~ "",
+    TRUE ~ groups_LSD_cum  ))
 
+Cum_ANOVA_results_site <- Cum_ANOVA_results_site %>% 
+  dplyr::mutate(significance_control_display = case_when(
+    ANOVA_sign == "ns" ~ "",
+    TRUE ~ significance_control  ))
 
 
 
@@ -331,7 +340,7 @@ CumPlot_LSD <- site_year_yld_summary %>%
   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank()) +
   theme(axis.text.x=element_text(angle=60,hjust=1))+
   geom_text(data = Cum_ANOVA_results_site,
-            aes(x = factor(Descriptors), y = mean_cum_yld,label=groups_LSD_cum), 
+            aes(x = factor(Descriptors), y = (mean_cum_yld +0.5), label=groups_LSD_cum_display), 
             position = position_dodge(0.80), 
             size = 3,
             vjust=-0.5, hjust=0.1, 
@@ -362,7 +371,7 @@ CumPlot_Dun <- site_year_yld_summary %>%
   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank()) +
   theme(axis.text.x=element_text(angle=60,hjust=1))+
   geom_text(data = Cum_ANOVA_results_site,
-            aes(x = factor(Descriptors), y = mean_cum_yld,label=significance_control), 
+            aes(x = factor(Descriptors), y = (mean_cum_yld +0.5),label=significance_control_display), 
             position = position_dodge(0.80), 
             size = 3,
             vjust=-0.5, hjust=0.1, 

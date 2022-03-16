@@ -1,4 +1,4 @@
-#site_yrs_list = "Carwarp_AmeliorationX2018to2020"
+#site_yrs_list = "BucklebooX2019to2021"
 
 
 
@@ -267,16 +267,29 @@ cumulative_yld <- summary_data_site %>%
 
 #This is for the summary table  (you should be checking the mean cum yield here make sure they are sesnisble)
 
-### this is to get the mean value of the cumlative yield
+## count yld values
+count_missing_yld_values <- cumulative_yld %>% 
+  dplyr::group_by(Descriptors) %>% 
+  dplyr::summarise(count = sum(!is.na(sum_yld)))
+
+
+## summaries data
 cumulative_yld_table <- cumulative_yld %>% 
   dplyr::group_by(Descriptors) %>%
-  dplyr::summarise(mean_cum_yld=mean(sum_yld, na.rm = TRUE), 
-            sd=sd(sum_yld, na.rm = TRUE),
-            count = n(),
-            std_error = sd/(sqrt(count))
-            
-  ) %>%
+  dplyr::summarise(mean_cum_yld = mean(sum_yld, na.rm = TRUE), 
+                   sd = sd(sum_yld, na.rm = TRUE)) %>%
   arrange(desc(mean_cum_yld))
+
+## add in the count values (not the number of rows)
+cumulative_yld_table <- left_join(cumulative_yld_table,count_missing_yld_values )
+
+
+cumulative_yld_table <- cumulative_yld_table %>% 
+  mutate(site =  a,
+         year =  b,
+         std_error = sd/(sqrt(count)))
+
+
 
 cumulative_yld_table <- as.data.frame(ungroup(cumulative_yld_table))
 
@@ -302,6 +315,19 @@ cumulative_yld_table <- cumulative_yld_table %>%
          site = a,
          p_value_ANOVA_cum  = p_value_ANOVA_cum,
          F_value_ANOVA_cum  = F_value_ANOVA_cum)
+
+
+#Add in the significance ***
+cumulative_yld_table <- cumulative_yld_table %>%
+  mutate(ANOVA_sign = case_when(
+    p_value_ANOVA_cum < 0.001 ~ "***",
+    p_value_ANOVA_cum <= 0.01 ~  "**",
+    p_value_ANOVA_cum <= 0.05 ~  "*",
+    p_value_ANOVA_cum >  0.05 ~  "ns",
+    TRUE ~ "check"
+    
+  ))
+
 
 ########################################################################################################################################################
 #####homoscedasticity vs equal variance test we can use Bartlett test
