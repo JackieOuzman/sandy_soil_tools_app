@@ -750,7 +750,8 @@ primary_metadata <- primary_metadata %>%
       site == "Malinong"         ~ 139.5133,
       site == "Monia_Gap"        ~ 145.5248,
       site == "Warnertown"       ~ 138.102,
-      site == "Kybunga"          ~ 138.6125
+      site == "Kybunga"          ~ 138.6125,
+      TRUE ~ as.numeric(Longitude)
     )
   )
 
