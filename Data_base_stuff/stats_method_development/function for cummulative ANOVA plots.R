@@ -33,7 +33,19 @@ site_yrs_list <- c("Brimpton LakeX2014to2018",
                    #"Lowaldie_Deep sandX2021",#no data
                    "MalinongX2019to2021",
                    "Monia_GapX2019to2021",
-                   "Mt DamperX2019to2021")
+                   "Mt DamperX2019to2021",
+                   
+                   "MurlongX2018to2021",
+                   "Ouyen_SpadeX2017to2020",
+                   "SherwoodX2019to2021",
+                   "Telopea_DownsX2020to2021",
+                   "TempyX2019to2020", #"TempyX2021", #no yield
+                   "WaikerieX2018to2020",
+                   "WarnertownX2019to2021",
+                   "WynarkaX2019to2021",
+                   "YendaX2017to2021",
+                   "YounghusbandX2020"
+                   )
 
 
 
