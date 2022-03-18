@@ -303,7 +303,7 @@ primary <- primary %>%
                                                                                "Karoonda", "Lowaldie_Crest","Lowaldie_Deep sand", "Murlong", "Ouyen_Spade",
                                                                                "Waikerie", "Younghusband", "Yenda","Bute_Trengrove", "Brimpton Lake")  #all the sites
                                                             & organic %in% c("vetch"),   
-                                                            paste0("vetch",".", placement_organic),   
+                                                            paste0("Vetch",".", placement_organic),   
                                                             
                                                             ## vetch - cereal with NO rate   
                                                             ifelse(site_sub    %in% c("Brooker","Bute_CSIRO","Cadgee","Ouyen_Spade", "Carwarp_Amelioration", 
