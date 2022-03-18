@@ -8,7 +8,7 @@ library(tidyverse)
 library(multcompView)
 library(scales)
 
-#site_yrs_list = "BucklebooX2019to2021"
+#site_yrs_list = "YounghusbandX2020"
 
 ### List of sites I want to run analysis for:
 site_yrs_list <- c("Brimpton LakeX2014to2018",
@@ -234,6 +234,7 @@ order <- c(
   #"Delving.18_SE14.band_8",
   "Unmodified+DeepTill.18_none",
   "Unmodified+DeepTill.18_SE14.band_8",
+  "DiscInv.30_none"
   
   
 )
@@ -272,6 +273,15 @@ LSD_cum
 #filter the TRIAL data on site 
 site_year_yld_summary_site <- summary_data_all %>%
   filter(site == a) 
+
+### make a dummy clm to filter out Younghusband 2021 data
+site_year_yld_summary_site <- site_year_yld_summary_site %>%
+  dplyr::mutate(site_yr_dummy = paste0(site, year))
+
+## filter out the 2021 Younghusband data
+site_year_yld_summary_site <- site_year_yld_summary_site %>%
+  filter(site_yr_dummy  != "Younghusband2021") 
+
 
 site_year_yld_summary <- site_year_yld_summary_site %>% 
   dplyr::group_by(Descriptors, year) %>%

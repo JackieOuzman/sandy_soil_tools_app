@@ -239,7 +239,7 @@ order <- c(
   "Unmodified+DeepTill.18_none",
   "Unmodified+DeepTill.18_SE14.band_8",
   
-  "DiscInv.30_none",
+  "DiscInv.30_none"
   
   
   
