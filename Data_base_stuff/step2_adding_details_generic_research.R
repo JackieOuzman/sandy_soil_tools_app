@@ -342,14 +342,20 @@ primary <- primary %>%
                     
                     ## annual
                     ifelse(
-                      site_sub                %in% c("Bute_CSIRO", "Yenda")   #site list 1
-                      &    timing  %in% c("annual","Yrs17,18,19"),    
+                      site_sub                %in% c("Bute_CSIRO")   #site list 1
+                      &    timing  %in% c("annual"),    
                       paste0(amendment_organic, "_Yr18,19,20"), 
+                      
+                      ## set years
+                      ifelse(
+                        site_sub                %in% c( "Yenda")   #site list 1
+                        &    timing  %in% c("Yrs17,18,19"),    
+                        paste0(amendment_organic, "_Yr17,18,19"), 
                       
                       
                       "check"
                       
-                    )))#bracket for the number of ifelse statements
+                    ))))#bracket for the number of ifelse statements
   )# bracket for mutate function
 
 
