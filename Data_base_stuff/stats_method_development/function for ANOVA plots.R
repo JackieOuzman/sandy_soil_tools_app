@@ -326,8 +326,12 @@ order <- c(
   "Rip.60IncRip_none",
   "Rip.60IncRip+Spade.30_none",
   
-  "Delving.18_none",
-  "Delving.18_SE14.band_8",
+  
+  #"Delving.18_none",
+  #"Delving.18_SE14.band_8",
+  "Unmodified+DeepTill.18_none",
+  "Unmodified+DeepTill.18_SE14.band_8",
+  
   "DiscInv.30_none"
   
 )

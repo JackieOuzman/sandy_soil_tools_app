@@ -174,7 +174,7 @@ order <- c(
   "Sweep.30_none",
   "Sweep.30_Lime.incorp_30",
   "Sweep.30_Cl@9.incorp_30",
-  "Sweep.30_Cl@6.incorp_30_Yr18,19,20",
+  "Sweep.30_Cl@9.incorp_30_Yr17,18,19",
   "Sweep.30_Cl@6.incorp_30",
   "Sweep.30_Cl@3.incorp_30.Lime.incorp_8",
   "Sweep.30_Cl@3.incorp_30",
@@ -234,9 +234,14 @@ order <- c(
   "Rip.60IncRip_none",
   "Rip.60IncRip+Spade.30_none",
   
-  "Delving.18_none",
-  "Delving.18_SE14.band_8",
-  "DiscInv.30_none"
+  #"Delving.18_none",
+  #"Delving.18_SE14.band_8",
+  "Unmodified+DeepTill.18_none",
+  "Unmodified+DeepTill.18_SE14.band_8",
+  
+  "DiscInv.30_none",
+  
+  
   
 )
 
