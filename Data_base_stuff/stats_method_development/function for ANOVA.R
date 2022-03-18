@@ -301,7 +301,7 @@ order <- c(
   "Sweep.30_none",
   "Sweep.30_Lime.incorp_30",
   "Sweep.30_Cl@9.incorp_30",
-  "Sweep.30_Cl@6.incorp_30_Yr18,19,20",
+  "Sweep.30_Cl@9.incorp_30_Yr17,18,19",
   "Sweep.30_Cl@6.incorp_30",
   "Sweep.30_Cl@3.incorp_30.Lime.incorp_8",
   "Sweep.30_Cl@3.incorp_30",
