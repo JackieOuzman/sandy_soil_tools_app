@@ -27,70 +27,6 @@ library(stringr)
 
 ## Control yields
 
-This is for a select number of sites:
-
-##### Site in merged control files
-•	Brimpton Lake
-
-•	Brooker
-
-•	Buckleboo
-
-•	Bute_CSIRO
-
-•	Bute_Trengrove
-
-•	Cadgee
-
-•	CarwarpAmelioration
-
-•	Cummins
-
-•	Karkoo
-
-•	Karoonda
-
-•	Kooloonong_canola
-
-•	Kooloonong_chickpea
-
-•	Kooloonong_lentil
-
-•	Kooloonong_lupin
-
-•	Lowaldie_Crest
-
-•	Lowaldie_Deep sand
-
-•	Mt_Damper
-
-•	Murlong
-
-•	Ouyen_spade
-
-•	Telopea_Downs
-
-•	Tempy
-
-•	Waikerie
-
-•	Wynarka
-
-•	Yenda
-
-•	Younghusband (only one year)
-
-##### Not ready
-•	Kybunga
-
-•	Malinong
-
-•	Monia_Gap
-
-•	Sherwood
-
-•	Warnertown
-
 
 
 
@@ -127,6 +63,27 @@ summary_data_all <- read_csv(data_file,
                              col_types = cols(rep_block = col_character()))
 summary_control_data_all <- read_csv(data_file_control, 
                             col_types = cols(rep_block = col_character()))
+
+
+
+### make a dummy clm to filter out Younghusband 2021 data
+summary_data_all <- summary_data_all %>%
+  dplyr::mutate(site_yr_dummy = paste0(site, year))
+
+## filter out the 2021 Younghusband data
+summary_data_all <- summary_data_all %>%
+  filter(site_yr_dummy  != "Younghusband2021") 
+
+
+
+### make a dummy clm to filter out Younghusband 2021 data
+summary_control_data_all <- summary_control_data_all %>%
+  dplyr::mutate(site_yr_dummy = paste0(site, year))
+
+## filter out the 2021 Younghusband data
+summary_control_data_all <- summary_control_data_all %>%
+  filter(site_yr_dummy  != "Younghusband2021") 
+
 
 
 unique(summary_control_data_all$site_sub)
@@ -188,9 +145,12 @@ list_sites_ready <- c("Brimpton Lake",
                       "Waikerie",
                       "Warnertown", #newly added
                       "Wynarka",
-                      "Yenda"
-                      #"Younghusband"
+                      "Yenda",
+                      "Younghusband"
                       )
+
+
+
 
 summary_control_data_all <- summary_control_data_all %>% 
   filter(site_sub %in% list_sites_ready  )
@@ -223,7 +183,7 @@ sites %>%
 ```
 
 
-How many desciptors?
+How many descriptors?
 
 ```{r how many desciptors all, echo=FALSE, message=FALSE, warning=FALSE}
 ## how many desciptors?
@@ -236,8 +196,9 @@ count()
 
 ```
 
-How many soil modification (including different depths)?
 
+How many soil modification (including different depths)?
+  
 ```{r working out how many modification all 1, message=FALSE, warning=FALSE, include=FALSE}
 #####################################################################################
 #####  soil modifications      #####
@@ -249,12 +210,20 @@ How many soil modification (including different depths)?
 summary_control_data_all <- summary_control_data_all %>% 
   mutate(soil_modification_depth =  str_extract(summary_control_data_all$Descriptors, "[^_]+"))#keep everything before the first_
 
+
+#1.1 Youndhusband has 'Unmodified+DeepTill.18' which needs to be recoded as "Unmodified"
+
+summary_control_data_all <- summary_control_data_all %>% 
+  mutate(soil_modification_depth = case_when(
+         soil_modification_depth == "Unmodified+DeepTill.18" ~ "Unmodified",
+         TRUE ~ soil_modification_depth))
+
 #how many modification_depth
 soil_modification_depth <- summary_control_data_all %>% 
   distinct(soil_modification_depth) %>% 
   arrange(soil_modification_depth) %>% 
   filter(soil_modification_depth != "Unmodified")
-  
+
 count(soil_modification_depth) #20 excluding the unmodified
 
 
@@ -266,17 +235,45 @@ summary_control_data_all <- summary_control_data_all %>%
 summary_control_data_all <- summary_control_data_all %>% 
   mutate(soil_modification_1 = str_extract(summary_control_data_all$soil_modification_1, "[^_]+")) #keep everything after the first _
 
+#1a.1 Youndhusband has 'Unmodified+DeepTill.18' which needs to be recoded as "Unmodified"
+
+summary_control_data_all <- summary_control_data_all %>% 
+  mutate(soil_modification_1 = case_when(
+    soil_modification_1 == "Unmodified+DeepTill" ~ "Unmodified",
+    TRUE ~ soil_modification_1))
+
+summary_control_data_all %>%  distinct(soil_modification_1) %>% arrange(soil_modification_1)
+
+
+
+
+
 #1a working clms - 2 soil modification without depth 2
+
+#temp <- summary_control_data_all %>%  distinct(soil_modification_depth) %>% arrange(soil_modification_depth)
+
 summary_control_data_all <- summary_control_data_all %>% 
   mutate(soil_modification_2 = case_when(
     soil_modification_depth == "Rip.50Spade.30" ~        "Rip+Spade",
     soil_modification_depth == "Rip.60Spade.30" ~        "Rip+Spade",
     soil_modification_depth == "Rip.45IncRip+Spade.30" ~ "IncRip+Spade",
     soil_modification_depth == "Rip.60IncRip+Spade.30" ~ "IncRip+Spade",
+    
+    soil_modification_depth == "Rip.30IncRip" ~           "IncRip",
+    soil_modification_depth == "Rip.40IncRip" ~           "IncRip",
+    soil_modification_depth == "Rip.45IncRip" ~           "IncRip",
+    soil_modification_depth == "Rip.50IncRip" ~           "IncRip",
+    soil_modification_depth == "Rip.60IncRip" ~           "IncRip",
+    
+    
     TRUE ~ "NA"
   ))
 
-	
+
+
+
+
+
 #2 all soil modification without depth (if 2 soil modification used keep this)	
 
 summary_control_data_all <- summary_control_data_all %>% 
@@ -284,8 +281,8 @@ summary_control_data_all <- summary_control_data_all %>%
     soil_modification_2 == "NA" ~ soil_modification_1,
     TRUE ~ soil_modification_2
   ))
-	
-	
+
+
 ### remove the working clms
 summary_control_data_all <- summary_control_data_all %>% 
   select(-soil_modification_1,
@@ -298,7 +295,7 @@ soil_modification_depth <- summary_control_data_all %>%
   arrange(soil_modification) %>% 
   filter(soil_modification != "Unmodified")
 
-count(soil_modification_depth) #7 excluding the unmodified 
+count(soil_modification_depth) #8 excluding the unmodified 
 
 
 
@@ -317,6 +314,8 @@ summary_control_data_all <- summary_control_data_all %>%
 summary_control_data_all <- summary_control_data_all %>% 
   mutate(amendment_1 = str_extract(summary_control_data_all$amendment_1, "[^@]+")) #keep everything before the first @
 
+#temp <- summary_control_data_all %>%  distinct(amendment_1) %>% arrange(amendment_1)
+
 
 #pull out the second amendment listed but has rates (_/.)
 summary_control_data_all <- summary_control_data_all %>% 
@@ -325,6 +324,10 @@ summary_control_data_all <- summary_control_data_all %>%
   mutate(amendment_2b = sub("^[^.]*.", "", summary_control_data_all$amendment_2a)) 
 summary_control_data_all <- summary_control_data_all %>% 
   mutate(amendment_2 = str_extract(summary_control_data_all$amendment_2b, "[^.]+"))
+
+#temp <- summary_control_data_all %>%  distinct(amendment_2) %>% arrange(amendment_2)
+
+
 
 ### not quite right remove some problems!
 unique(summary_control_data_all$amendment_2)
@@ -336,6 +339,7 @@ summary_control_data_all <- summary_control_data_all %>%
     amendment_2 ==  "band_30" ~ "",
     amendment_2 ==  "band_50" ~ "",
     amendment_2 ==  "surface" ~ "",
+    
     TRUE ~ amendment_2
   ))
 unique(summary_control_data_all$amendment_2)
@@ -351,7 +355,7 @@ summary_control_data_all <- summary_control_data_all %>%
   mutate(amendment_3 = str_extract(summary_control_data_all$amendment_3b, "[^.]+"))
 
 
-
+temp <- summary_control_data_all %>%  distinct(amendment_3) %>% arrange(amendment_3)
 
 
 ### bugger the timing year for amenedment 2 is stuffed up!
@@ -392,9 +396,7 @@ amendment_no_depth <- summary_control_data_all %>%
   arrange(amendment_123) %>%
   filter(amendment_123 != "none")
 
-count(amendment_no_depth) #26 excluding the none
-
-
+count(amendment_no_depth) #28 excluding the none
 ```
 
 ```{r working out how many modification all, echo=FALSE, message=FALSE, warning=FALSE}
@@ -409,7 +411,7 @@ soil_modification_depth <- summary_control_data_all %>%
   arrange(soil_modification_depth) %>% 
   filter(soil_modification_depth != "Unmodified")
   
-count(soil_modification_depth) #20 excluding the unmodified
+count(soil_modification_depth) #21 excluding the unmodified
 
 ```
 
@@ -423,7 +425,7 @@ amendment_depth <- summary_control_data_all %>%
   arrange(amendment_all) %>% 
   filter(amendment_all != "none")
   
-count(amendment_depth) #20 excluding the unmodified
+count(amendment_depth) #91 excluding the unmodified
 
 
 
@@ -533,7 +535,7 @@ soil_modification_NO_depth <- summary_control_data_all %>%
   arrange(soil_modification) %>% 
   filter(soil_modification != "Unmodified")
   
-count(soil_modification_NO_depth) #20 excluding the unmodified
+count(soil_modification_NO_depth) #8 excluding the unmodified
 
   
 ```  
@@ -683,7 +685,7 @@ ggplot(summary_control_data_all, aes(yield_gain)) +
   geom_vline(data = summary_control_data_all, aes(xintercept=mean(yield_gain,  na.rm = TRUE)), color="blue", linetype="dashed", size=1)+
   geom_vline(data = summary_control_data_all, aes(xintercept=0), color="black", linetype="dashed", size=1)+
   labs(title = "Yield gains - all data - no summary\nNote each site, treatment, year and rep is matched to control\nBlue line is mean yield gain",
-             x = "yield gain t/ha", y = "frequency of occurance")
+             x = "yield gain t/ha", y = "frequency of occurrence")
   
 ```
 
@@ -701,7 +703,7 @@ ggplot(summary_control_data_all, aes(x = yield_gain)) +
   facet_wrap(.~ soil_modification)+
   labs(title = "Yield gains - all data - no summary\nNote each site, treatment, year and rep is matched to control
          \nFacet wrap is modification\nBlue line is mean yield gain",
-       x = "yield gain t/ha", y = "frequency of occurance")
+       x = "yield gain t/ha", y = "frequency of occurrence")
 ```
 
 
@@ -730,7 +732,7 @@ ggplot(no_amendment, aes(yield_gain)) +
   geom_vline(data = no_amendment, aes(xintercept=0), color="black", linetype="dashed", size=1)+
   labs(title = "Yield gains - subset of data no amendment",
   subtitle = "Note each site, treatment, year and rep is matched to control\nBlue line is mean yield gain",
-       x = "yield gain t/ha", y = "frequency of occurance")
+       x = "yield gain t/ha", y = "frequency of occurrence")
 ```
 
 ## Histograms Plots with subset of data
@@ -747,22 +749,24 @@ ggplot(no_amendment, aes(yield_gain)) +
   geom_vline(data = no_amendment, aes(xintercept=0), color="black", linetype="dashed", size=1)+
   labs(title = "Yield gains - subset of data no amendment",
        subtitle = "Note each site, treatment, year and rep is matched to control\nBlue line is mean yield gain",
-       x = "yield gain t/ha", y = "frequency of occurance")+
+       x = "yield gain t/ha", y = "frequency of occurrence")+
   facet_wrap(.~ soil_modification)
 ```
 
 
-#  Cummulative yields   
+#  Cumulative yields   
 
 
 ```{r cum yld cals, message=FALSE, warning=FALSE, include=FALSE}
 
 #keep the rep but not the year
 cum_yld_control <- summary_control_data_all %>% 
-  group_by(site_sub, Descriptors,rep_block ) %>% 
-  summarise(sum_yld = sum(yield, na.rm = TRUE),
+  dplyr::group_by(site_sub, Descriptors,rep_block ) %>% 
+  dplyr::summarise(sum_yld = sum(yield, na.rm = TRUE),
             sum__control_yld = sum(control_yield, na.rm = TRUE),
-            max_yr_post_amelioration = max(yr_post_amelioration  , na.rm = TRUE))
+            max_yr_post_amelioration = max(yr_post_amelioration  , na.rm = TRUE),
+            check_yld_value = (sum_yld/max_yr_post_amelioration),
+            check_yld_control_value = (sum__control_yld/max_yr_post_amelioration))
 
 
 cum_yld_control <- cum_yld_control %>% 
@@ -770,6 +774,12 @@ cum_yld_control <- cum_yld_control %>%
 ```
 
 ### Scatter plots
+
+Note I have done a check on some of these high values.
+The high cumulative control is for Yenda and this averaged to approx. 5.6 t/ha
+The other high values are from Bute CSIRO with average per yr at 5 t/ha
+
+So this seems OK.
 
 ```{r cum yld scatter, echo=FALSE, message=FALSE, warning=FALSE}
 scatter_control_vs_trial_cum_yld <- 
@@ -784,7 +794,7 @@ scatter_control_vs_trial_cum_yld <-
 scatter_control_vs_trial_cum_yld
 ```
 
-### Scatter plots with trial lenghth
+### Scatter plots with trial length
 
 ```{r cum yld scatter with lenghth , echo=FALSE, message=FALSE, warning=FALSE}
 scatter_control_vs_trial_cum_yld_trial_lenghth <- 
@@ -800,7 +810,10 @@ scatter_control_vs_trial_cum_yld_trial_lenghth
 
 
 
-# Cummulative yields for yeild gains  
+
+
+
+# Cumulative yields for yield gains  
 
 ```{r cum yld gains cal, message=FALSE, warning=FALSE, include=FALSE}
 str(summary_control_data_all)
@@ -830,12 +843,22 @@ cum_yld_gains_control <- ungroup(cum_yld_gains_control)
 cum_yld_gains_control <- cum_yld_gains_control %>% 
   mutate(soil_modification_depth =  str_extract(cum_yld_gains_control$Descriptors, "[^_]+"))#keep everything before the first_
 
+#1.1 Youndhusband has 'Unmodified+DeepTill.18' which needs to be recoded as "Unmodified"
+
+cum_yld_gains_control <- cum_yld_gains_control %>% 
+  mutate(soil_modification_depth = case_when(
+    soil_modification_depth == "Unmodified+DeepTill.18" ~ "Unmodified",
+    TRUE ~ soil_modification_depth))
+
+
+
+
 #how many modification_depth
 soil_modification_depth <- cum_yld_gains_control %>% 
   distinct(soil_modification_depth) %>% 
   arrange(soil_modification_depth) %>% 
   filter(soil_modification_depth != "Unmodified")
-  
+
 count(soil_modification_depth) #20 excluding the unmodified
 
 
@@ -847,6 +870,17 @@ cum_yld_gains_control <- cum_yld_gains_control %>%
 cum_yld_gains_control <- cum_yld_gains_control %>% 
   mutate(soil_modification_1 = str_extract(cum_yld_gains_control$soil_modification_1, "[^_]+")) #keep everything after the first _
 
+#1a.1 Youndhusband has 'Unmodified+DeepTill.18' which needs to be recoded as "Unmodified"
+
+cum_yld_gains_control <- cum_yld_gains_control %>% 
+  mutate(soil_modification_1 = case_when(
+    soil_modification_1 == "Unmodified+DeepTill" ~ "Unmodified",
+    TRUE ~ soil_modification_1))
+
+cum_yld_gains_control %>%  distinct(soil_modification_1) %>% arrange(soil_modification_1)
+
+
+
 #1a working clms - 2 soil modification without depth 2
 cum_yld_gains_control <- cum_yld_gains_control %>% 
   mutate(soil_modification_2 = case_when(
@@ -854,10 +888,20 @@ cum_yld_gains_control <- cum_yld_gains_control %>%
     soil_modification_depth == "Rip.60Spade.30" ~        "Rip+Spade",
     soil_modification_depth == "Rip.45IncRip+Spade.30" ~ "IncRip+Spade",
     soil_modification_depth == "Rip.60IncRip+Spade.30" ~ "IncRip+Spade",
+    
+    soil_modification_depth == "Rip.30IncRip" ~           "IncRip",
+    soil_modification_depth == "Rip.40IncRip" ~           "IncRip",
+    soil_modification_depth == "Rip.45IncRip" ~           "IncRip",
+    soil_modification_depth == "Rip.50IncRip" ~           "IncRip",
+    soil_modification_depth == "Rip.60IncRip" ~           "IncRip",
+    
+    
     TRUE ~ "NA"
   ))
 
-	
+
+
+
 #2 all soil modification without depth (if 2 soil modification used keep this)	
 
 cum_yld_gains_control <- cum_yld_gains_control %>% 
@@ -865,8 +909,8 @@ cum_yld_gains_control <- cum_yld_gains_control %>%
     soil_modification_2 == "NA" ~ soil_modification_1,
     TRUE ~ soil_modification_2
   ))
-	
-	
+
+
 ### remove the working clms
 cum_yld_gains_control <- cum_yld_gains_control %>% 
   select(-soil_modification_1,
@@ -879,7 +923,7 @@ soil_modification_depth <- cum_yld_gains_control %>%
   arrange(soil_modification) %>% 
   filter(soil_modification != "Unmodified")
 
-count(soil_modification_depth) #7 excluding the unmodified 
+count(soil_modification_depth) #8 excluding the unmodified 
 
 
 
@@ -999,6 +1043,7 @@ mean_gains_values <- cum_yld_gains_control %>%
 cum_yld_gains_control <- cum_yld_gains_control %>% 
   mutate(`length of trial` = as.factor(max_yr_post_amelioration))
 ```
+```
 
 ### Histograms plot
 
@@ -1009,7 +1054,7 @@ ggplot(cum_yld_gains_control, aes(sum_yld_gains)) +
   geom_vline(data = cum_yld_gains_control, aes(xintercept=0), color="black", linetype="dashed", size=1)+
   labs(title = "Cumulative control yield - all data - no summary",
        subtitle ="note that for each site, treatment and rep yields are summed over multiple years\nand it is matched to summed control yield",
-       x = "cumulative yield gain t/ha", y = "frequency of occurance")
+       x = "cumulative yield gain t/ha", y = "frequency of occurrence")
 
 ```
 
@@ -1033,7 +1078,7 @@ cum_yld_gains_control %>%
   facet_wrap(.~ soil_modification)+
   labs(title = "Cumulative control yield",
        subtitle ="note that for each site, treatment and rep yields are summed over multiple years\nand it is matched to summed control yield",
-       x = "cumulative yield gain t/ha", y = "frequency of occurance")
+       x = "cumulative yield gain t/ha", y = "frequency of occurrence")
 
 
 ```
