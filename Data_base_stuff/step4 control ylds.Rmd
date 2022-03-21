@@ -22,6 +22,8 @@ library(hrbrthemes)
 library(stringr)
 #install.packages("hrbrthemes")
 
+library(ggpubr)
+
 
 ```
 
@@ -1239,11 +1241,11 @@ cum_yld_no_amendment <- cum_yld_no_amendment %>%
  
 mean_gains_values_no_amendment_Rip <- mean_gains_values_no_amendment %>% 
   dplyr::filter(soil_modification == "Rip")
-mean_gains_values_no_amendment_Rip <- mean_gains_values_no_amendment_Rip[1,2]
+mean_gains_values_no_amendment_Rip <- round(mean_gains_values_no_amendment_Rip[1,2],2)
 
 mean_gains_values_no_amendment_spade <- mean_gains_values_no_amendment %>% 
   dplyr::filter(soil_modification == "Spade")
-mean_gains_values_no_amendment_spade <- mean_gains_values_no_amendment_spade[1,2]
+mean_gains_values_no_amendment_spade <- round(mean_gains_values_no_amendment_spade[1,2],2)
 
 
 cum_yld_no_amendment %>% 
@@ -1290,19 +1292,25 @@ summary_control_data_amendment_code1$amendment_code1 <-
          levels = c("animal", "plant", "fertiliser"))
 
 
-  summary_control_data_amendment_code1 %>%  
-  ggplot( mapping = aes(control_yield, yield,)) +
+ summary_control_data_amendment_code1 %>%  
+  filter(!is.na(yield)) %>% 
+  filter(!is.na(control_yield)) %>% 
+  
+  ggplot( mapping = aes(control_yield, yield)) +
   geom_point(aes(colour= amendment_code1),alpha= 0.4) +
-  geom_smooth(method = lm, se = FALSE) +
+  geom_smooth(method = lm, se = FALSE, na.rm = TRUE) +
+  stat_regline_equation(
+    aes(label =  paste(..eq.label.., ..rr.label.., sep = "~~~~")),
+    formula = (y ~ x)
+  ) +
   geom_abline(intercept = 0, slope = 1, linetype="dashed")+
-  #scale_x_continuous(breaks=seq(0,10,by=0.5))+
-  #scale_y_continuous(breaks=seq(0,10,by=0.5))+
   theme_bw()+
   theme(legend.position = "none")+
   labs(title = "Control yield - all data - no summary\nnote each site, treatment, year and rep is matched to control
     \nFacet wrap is filtered data amendments",
-    x = "control yield t/ha", y = "trial yield t/ha")+
+       x = "control yield t/ha", y = "trial yield t/ha")+
   facet_wrap(.~ amendment_code1)
+
     
 
 
@@ -1315,40 +1323,80 @@ summary_control_data_amendment_code1$amendment_code1 <-
 what about when no soil modification was made?
 
 ```{r scatter amendment but no soil modification, echo=FALSE, message=FALSE, warning=FALSE}
- summary_control_data_amendment_code1 %>% 
-    filter(soil_modification == "Unmodified") %>% 
-    
-    ggplot( mapping = aes(control_yield, yield,)) +
-    geom_point(aes(colour= amendment_code1),alpha= 0.4) +
-    geom_smooth(method = lm, se = FALSE) +
-    geom_abline(intercept = 0, slope = 1, linetype="dashed")+
-    #scale_x_continuous(breaks=seq(0,10,by=0.5))+
-    #scale_y_continuous(breaks=seq(0,10,by=0.5))+
-    theme_bw()+
-    theme(legend.position = "none")+
-    labs(title = "Control yield - no summary. BUT no soil modification \nnote each site, treatment, year and rep is matched to control
+summary_control_data_amendment_code1 %>% 
+  filter(!is.na(yield)) %>% 
+  filter(!is.na(control_yield)) %>% 
+  filter(soil_modification == "Unmodified") %>% 
+  
+  ggplot( mapping = aes(control_yield, yield,)) +
+  geom_point(aes(colour= amendment_code1),alpha= 0.4) +
+  geom_smooth(method = lm, se = FALSE) +
+  geom_abline(intercept = 0, slope = 1, linetype="dashed")+
+  stat_regline_equation(
+    aes(label =  paste(..eq.label.., ..rr.label.., sep = "~~~~")),
+    formula = (y ~ x)
+  ) +
+  
+  theme_bw()+
+  theme(legend.position = "none")+
+  labs(title = "Control yield - no summary. BUT no soil modification \nnote each site, treatment, year and rep is matched to control
       \nFacet wrap is amendment",
-      x = "control yield t/ha", y = "trial yield t/ha")+
-    facet_wrap(.~ amendment_code1)
+       x = "control yield t/ha", y = "trial yield t/ha")+
+  facet_wrap(.~ amendment_code1)
 ```
 
 
 what about when ANY soil modification was made?
 
 ```{r scatter amendment but ANY soil modification, echo=FALSE, message=FALSE, warning=FALSE}
- summary_control_data_amendment_code1 %>% 
-    filter(soil_modification != "Unmodified") %>% 
-    
-    ggplot( mapping = aes(control_yield, yield,)) +
-    geom_point(aes(colour= amendment_code1),alpha= 0.4) +
-    geom_smooth(method = lm, se = FALSE) +
-    geom_abline(intercept = 0, slope = 1, linetype="dashed")+
-    #scale_x_continuous(breaks=seq(0,10,by=0.5))+
-    #scale_y_continuous(breaks=seq(0,10,by=0.5))+
-    theme_bw()+
-    theme(legend.position = "none")+
-    labs(title = "Control yield - no summary. ANY soil modification \nnote each site, treatment, year and rep is matched to control
+summary_control_data_amendment_code1 %>% 
+  filter(soil_modification != "Unmodified") %>% 
+  filter(!is.na(yield)) %>% 
+  filter(!is.na(control_yield)) %>% 
+  
+  ggplot( mapping = aes(control_yield, yield,)) +
+  geom_point(aes(colour= amendment_code1),alpha= 0.4) +
+  geom_smooth(method = lm, se = FALSE) +
+  stat_regline_equation(
+    aes(label =  paste(..eq.label.., ..rr.label.., sep = "~~~~")),
+    formula = (y ~ x)
+  ) +
+  geom_abline(intercept = 0, slope = 1, linetype="dashed")+
+  
+  theme_bw()+
+  theme(legend.position = "none")+
+  labs(title = "Control yield - no summary. ANY soil modification \nnote each site, treatment, year and rep is matched to control
       \nFacet wrap is amendment",
-      x = "control yield t/ha", y = "trial yield t/ha")+
-    facet_wrap(.~ amendment_code1)
+       x = "control yield t/ha", y = "trial yield t/ha")+
+  facet_wrap(.~ amendment_code1)
+
+
+```
+
+
+Just Ripping
+
+```{r scatter amendment but ripping only, echo=FALSE, message=FALSE, warning=FALSE}
+summary_control_data_amendment_code1 %>% 
+  filter(soil_modification == "Rip") %>% 
+  filter(!is.na(yield)) %>% 
+  filter(!is.na(control_yield)) %>% 
+  
+  ggplot( mapping = aes(control_yield, yield,)) +
+  geom_point(aes(colour= amendment_code1),alpha= 0.4) +
+  geom_smooth(method = lm, se = FALSE) +
+  stat_regline_equation(
+    aes(label =  paste(..eq.label.., ..rr.label.., sep = "~~~~")),
+    formula = (y ~ x)
+  ) +
+  geom_abline(intercept = 0, slope = 1, linetype="dashed")+
+  
+  theme_bw()+
+  theme(legend.position = "none")+
+  labs(title = "Control yield - no summary. Ripping only \nnote each site, treatment, year and rep is matched to control
+      \nFacet wrap is amendment",
+       x = "control yield t/ha", y = "trial yield t/ha")+
+  facet_wrap(.~ amendment_code1)
+
+
 ```
