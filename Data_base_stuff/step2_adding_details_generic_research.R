@@ -594,7 +594,7 @@ primary <- primary %>%
     rip  == "none"      &      mix == "sapde"          ~       paste0("Spade.30" ),
     rip  == "none"      &      mix == "Plozza"         ~       paste0("DiscInv.30" ),
     rip  == "none"      &      mix == "pre-drill"      ~       paste0("Pre_drill.", drill_depth ),
-    rip  == "none"      &      mix == "inclusion"      ~       paste0("Inc.50" ),#check that this is always 50cm
+    #rip  == "none"      &      mix == "inclusion"      ~       paste0("Inc.50" ),#check that this is always 50cm
     rip  == "none"      &      mix == "sweep"      ~           paste0("Sweep.30"),
     #rip  == "none"      &      mix == "delving"      ~         paste0("Delving.18"),#check that this is always 18cm it was supplied as a range I used the upper value
     rip  == "none"      &      mix == "deep furrow till"      ~ paste0("Unmodified+DeepTill.18"),#check that this is always 18cm it was supplied as a range I used the upper value
