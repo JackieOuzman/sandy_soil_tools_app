@@ -309,9 +309,12 @@ order <- c(
   "Rip.50Spade.30_none",
   "Inc.50_none",
   "Inc.50_Cl@7.5.incorp_50",
+  #"Inc.50_none",
+  #"Inc.50_Cl@7.5.incorp_50",
   "Rip.50IncRip_none",
   "Rip.50IncRip_Cl.incorp_50",
   "Rip.50IncRip_Cl.surface",
+  "Rip.50IncRip_Cl@7.5.incorp_50",
   
   "Rip.60_none",
   "Rip.60_Cl.surface",

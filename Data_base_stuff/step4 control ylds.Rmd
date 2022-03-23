@@ -512,19 +512,19 @@ ggplot(data = summary_control_data_all, mapping = aes(control_yield, yield,)) +
   scale_y_continuous(breaks=seq(0,10,by=0.5))+
   theme_bw()+
   labs(title = "Control yield - all data - no summary\nnote each site, treatment, year and rep is matched to control",
-       x = "control yield t/ha", y = "trial yield t/ha")
+       x = "control yield t/ha", y = "treatment yield t/ha")
 ```
 
 ```{r scatter plot all, eval=FALSE, message=TRUE, warning=FALSE, include=FALSE}
 
-# every trial yield point that has a matching control yld is displayed
+# every treatment yield point that has a matching control yld is displayed
 
 scatter_control_vs_trial <- ggplot(data = summary_control_data_all, mapping = aes(control_yield, yield,)) +
   geom_abline(intercept = 0, slope = 1, linetype="dashed")+
   geom_point(alpha= 0.4) +
   geom_smooth(method = lm, se = FALSE) +
   labs(title = "Control yield - all data - no summary\nnote each site, treatment, year and rep is matched to control",
-       x = "control yield t/ha", y = "trial yield t/ha")
+       x = "control yield t/ha", y = "treatment yield t/ha")
 
 scatter_control_vs_trial
 
@@ -554,7 +554,7 @@ ggplot(data = summary_control_data_all, mapping = aes(control_yield, yield,)) +
   theme_bw()+
   labs(title = "Control yield - all data - no summary\nnote each site, treatment, year and rep is matched to control
        \nFacet wrap is years post amelioration, the NA related to trial with no metdata",
-       x = "control yield t/ha", y = "trial yield t/ha")+
+       x = "control yield t/ha", y = "treatment yield t/ha")+
   facet_wrap(.~ yr_post_amelioration)
 
 
@@ -575,7 +575,7 @@ ggplot(data = summary_control_data_all, mapping = aes(control_yield, yield,)) +
   theme_bw()+
   labs(title = "Control yield - all data - no summary\nnote each site, treatment, year and rep is matched to control
        \nFacet wrap is sites",
-       x = "control yield t/ha", y = "trial yield t/ha")+
+       x = "control yield t/ha", y = "treatment yield t/ha")+
   facet_wrap(.~ site_sub)
 
 ```
@@ -622,7 +622,7 @@ ggplot( mapping = aes(control_yield, yield,)) +
   theme_bw()+
   labs(#title = "Control yield - all data - no summary\nnote each site, treatment, year and rep is matched to control
        #\nFacet wrap is modification",
-       x = "control yield t/ha", y = "trial yield t/ha")+
+       x = "control yield t/ha", y = "treatment yield t/ha")+
   facet_wrap(.~ soil_modification)
 
 
@@ -668,7 +668,7 @@ ggplot(data = no_amendment, mapping = aes(control_yield, yield)) +
   theme_bw()+
   labs(title = "Control yield - subset of data no amendment",
        subtitle = "note each site, treatment, year and rep is matched to control",
-       x = "control yield t/ha", y = "trial yield t/ha")
+       x = "control yield t/ha", y = "treatment yield t/ha")
 
 
 
@@ -686,7 +686,7 @@ ggplot(data = no_amendment, mapping = aes(control_yield, yield)) +
   #geom_smooth(data = no_amendment, method = lm, se = FALSE, colour = "black", size = 0.5) +
   labs(title = "Control yield - subset of data no amendment",
        subtitle = "note each site, treatment, year and rep is matched to control",
-       x = "control yield t/ha", y = "trial yield t/ha")+
+       x = "control yield t/ha", y = "treatment yield t/ha")+
   facet_wrap(.~ as.factor(yr_post_amelioration))
 
 ```
@@ -705,7 +705,7 @@ ggplot(data = no_amendment, mapping = aes(control_yield, yield)) +
   geom_smooth(data = no_amendment, method = lm, se = FALSE, colour = "black", size = 0.5) +
   labs(title = "Control yield - subset of data no amendment",
        subtitle = "note each site, treatment, year and rep is matched to control",
-       x = "control yield t/ha", y = "trial yield t/ha")+
+       x = "control yield t/ha", y = "treatment yield t/ha")+
   facet_wrap(.~ site_sub)
 ```
 
@@ -720,7 +720,7 @@ ggplot(data = no_amendment, mapping = aes(control_yield, yield)) +
   geom_smooth(data = no_amendment, method = lm, se = FALSE, colour = "black", size = 0.5) +
   labs(title = "Control yield - subset of data no amendment",
        subtitle = "note each site, treatment, year and rep is matched to control",
-       x = "control yield t/ha", y = "trial yield t/ha")+
+       x = "control yield t/ha", y = "treatment yield t/ha")+
   facet_wrap(.~ soil_modification)
 
 ### same as above but with unmodified removed and title removed for TB 
@@ -732,7 +732,7 @@ ggplot(data = no_amendment, mapping = aes(control_yield, yield)) +
 #               method = lm, se = FALSE, colour = "black", size = 0.5) +
 #   labs(#title = "Control yield - subset of data no amendment",
 #        #subtitle = "note each site, treatment, year and rep is matched to control",
-#        x = "control yield t/ha", y = "trial yield t/ha")+
+#        x = "control yield t/ha", y = "treatment yield t/ha")+
 #   facet_wrap(.~ soil_modification)
 
 
@@ -853,7 +853,7 @@ cum_yld_control <- summary_control_data_all %>%
   dplyr::group_by(site_sub, Descriptors,rep_block ) %>% 
   dplyr::summarise(sum_yld = sum(yield, na.rm = TRUE),
             sum__control_yld = sum(control_yield, na.rm = TRUE),
-            max_yr_post_amelioration = max(yr_post_amelioration  , na.rm = TRUE),
+            max_yr_post_amelioration = max(yr_post_amelioration  , na.rm = TRUE)+1,
             check_yld_value = (sum_yld/max_yr_post_amelioration),
             check_yld_control_value = (sum__control_yld/max_yr_post_amelioration))
 
@@ -877,7 +877,7 @@ scatter_control_vs_trial_cum_yld <-
   geom_smooth(method = lm, se = FALSE) +
   labs(title = "Cumulative control yield - all data - no summary\nnote that for each site, treatment and rep all yield is summed over all years\nand it is matched to summed control
       \nBlack line is 1:1, blue is regression line",
-       x = "cumulative control yield t/ha", y = "cumulative trial yield t/ha")+
+       x = "cumulative control yield t/ha", y = "cumulative treatment yield t/ha")+
   geom_abline(intercept = 0, slope = 1, linetype="dashed")
 
 scatter_control_vs_trial_cum_yld
@@ -892,7 +892,7 @@ scatter_control_vs_trial_cum_yld_trial_lenghth <-
   geom_abline(intercept = 0, slope = 1, linetype="dashed")+
   labs(title = "Cumulative control yield - all data - no summary",
        subtitle ="note that for each site, treatment and rep yields are summed over multiple years\nand it is matched to summed control yield",
-       x = "cumulative control yield t/ha", y = "cumulative trial yield t/ha")
+       x = "cumulative control yield t/ha", y = "cumulative treatment yield t/ha")
 scatter_control_vs_trial_cum_yld_trial_lenghth
 ```
 
@@ -1200,7 +1200,7 @@ cum_yld_no_amendment <- cum_yld_no_amendment %>%
       labs(title = "Cumulative control yield - subset of data no amendment",
          subtitle = "note that for each site, treatment and rep all yield is summed over all years\nand it is matched to summed control
          \nBlack dashed is 1:1, solid line is regression line",
-         x = "control yield t/ha", y = "trial yield t/ha")+
+         x = "control yield t/ha", y = "treatment yield t/ha")+
   geom_abline(intercept = 0, slope = 1, linetype="dashed")
 
 ```
@@ -1308,7 +1308,7 @@ summary_control_data_amendment_code1$amendment_code1 <-
   theme(legend.position = "none")+
   labs(title = "Control yield - all data - no summary\nnote each site, treatment, year and rep is matched to control
     \nFacet wrap is filtered data amendments",
-       x = "control yield t/ha", y = "trial yield t/ha")+
+       x = "control yield t/ha", y = "treatment yield t/ha")+
   facet_wrap(.~ amendment_code1)
 
     
@@ -1341,7 +1341,7 @@ summary_control_data_amendment_code1 %>%
   theme(legend.position = "none")+
   labs(title = "Control yield - no summary. BUT no soil modification \nnote each site, treatment, year and rep is matched to control
       \nFacet wrap is amendment",
-       x = "control yield t/ha", y = "trial yield t/ha")+
+       x = "control yield t/ha", y = "treatment yield t/ha")+
   facet_wrap(.~ amendment_code1)
 ```
 
@@ -1367,7 +1367,7 @@ summary_control_data_amendment_code1 %>%
   theme(legend.position = "none")+
   labs(title = "Control yield - no summary. ANY soil modification \nnote each site, treatment, year and rep is matched to control
       \nFacet wrap is amendment",
-       x = "control yield t/ha", y = "trial yield t/ha")+
+       x = "control yield t/ha", y = "treatment yield t/ha")+
   facet_wrap(.~ amendment_code1)
 
 
@@ -1395,7 +1395,7 @@ summary_control_data_amendment_code1 %>%
   theme(legend.position = "none")+
   labs(title = "Control yield - no summary. Ripping only \nnote each site, treatment, year and rep is matched to control
       \nFacet wrap is amendment",
-       x = "control yield t/ha", y = "trial yield t/ha")+
+       x = "control yield t/ha", y = "treatment yield t/ha")+
   facet_wrap(.~ amendment_code1)
 
 
