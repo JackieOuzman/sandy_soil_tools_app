@@ -1,6 +1,7 @@
 
 #### slide 1
 View(no_amendment)
+names(no_amendment)
 
 no_amendment %>%  filter(soil_modification != "Unmodified") %>%
   ggplot(mapping = aes(control_yield, yield)) +
@@ -12,7 +13,9 @@ no_amendment %>%  filter(soil_modification != "Unmodified") %>%
        x = "control yield t/ha", y = "treatment yield t/ha")+
   facet_wrap(.~ soil_modification)
 
-
+no_amendment %>%  filter(soil_modification != "Unmodified") %>%
+  dplyr::group_by(soil_modification) %>% 
+  dplyr::summarise(mean_yld_gain = mean(yield_gain, na.rm = TRUE))
 
 #### slide 2
 ### same as above but with unmodified removed and title removed for TB 
@@ -30,6 +33,12 @@ no_amendment %>%  filter(soil_modification != "Unmodified") %>%
        #subtitle = "note each site, treatment, year and rep is matched to control",
        x = "control yield t/ha", y = "treatment yield t/ha")+
   facet_wrap(.~ soil_modification)
+
+
+no_amendment %>%  filter(soil_modification != "Unmodified") %>%
+  filter(year == 2021) %>%
+  dplyr::group_by(soil_modification) %>% 
+  dplyr::summarise(mean_yld_gain = mean(yield_gain, na.rm = TRUE))
 
 
 
@@ -65,6 +74,12 @@ summary_control_data_all %>%
     x = "control yield t/ha", y = "treatment yield t/ha")+
   facet_wrap(.~ soil_modification)
 
+
+summary_control_data_all %>%  
+  filter(soil_modification != "Unmodified") %>% 
+  filter(year == 2021) %>%
+  dplyr::group_by(soil_modification) %>% 
+  dplyr::summarise(mean_yld_gain = mean(yield_gain, na.rm = TRUE))
 
 
 #### slide 4
@@ -107,7 +122,9 @@ ggplot(summary_control_data_all, aes(yield_gain)) +
        subtitle = paste0("Mean yield gain ", mean_value, "t/ha"),
        x = "yield gain t/ha", y = "frequency of occurrence")
 
-
+summary_control_data_all %>%  
+  dplyr::group_by(soil_modification) %>% 
+  dplyr::summarise(mean_yld_gain = mean(yield_gain, na.rm = TRUE))
 
 #### slide 6
 
@@ -261,3 +278,40 @@ cum_yld_control
 
 write.csv(cum_yld_control, "X:/Therese_Jackie/Sandy_soils/Development_database/for_presentations/cumlative_yld_temp.csv",
           row.names = FALSE )
+
+
+
+#########################################################################
+
+names(summary_control_data_all)
+
+mean_value <- mean(summary_control_data_all$yield_gain, na.rm = TRUE)
+mean_value <- round(mean_value, 2)
+
+ggplot(summary_control_data_all, aes(yield_gain)) + 
+  geom_histogram(aes(y = (..count..)/sum(..count..)), colour = 1, fill = "white") +
+  geom_vline(data = summary_control_data_all, aes(xintercept=mean(yield_gain,  na.rm = TRUE)), color="blue", linetype="dashed", size=1)+
+  geom_vline(data = summary_control_data_all, aes(xintercept=0), color="black", linetype="dashed", size=1)+
+  labs(title = "Yield gains - all data - no summary\nNote each site, treatment, year and rep is matched to control\nBlue line is mean yield gain",
+       subtitle = paste0("Mean yield gain ", mean_value, "t/ha"),
+       x = "yield gain t/ha", y = "frequency of occurrence")
+
+summary_control_data_all %>% 
+  dplyr::group_by(soil_modification) %>% 
+  dplyr::summarise(yield_gain_soil_modification = mean(yield_gain, na.rm = TRUE))
+
+
+
+#### need to make a yield gain clm first
+no_amendment <- no_amendment %>% 
+  mutate(yield_gain = yield-control_yield, na.rm = TRUE)
+
+## cal the mean yield gains for modification
+mean_values_no_amendment <- no_amendment %>% 
+  dplyr::group_by(soil_modification) %>% 
+  dplyr::summarise(mod_mean = mean(yield_gain,  na.rm = TRUE))
+
+
+
+
+

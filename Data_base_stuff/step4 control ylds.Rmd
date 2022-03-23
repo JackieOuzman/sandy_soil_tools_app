@@ -287,7 +287,7 @@ summary_control_data_all <- summary_control_data_all %>%
 
 ### remove the working clms
 summary_control_data_all <- summary_control_data_all %>% 
-  select(-soil_modification_1,
+  dplyr::select(-soil_modification_1,
          -soil_modification_2)
 
 
@@ -389,7 +389,7 @@ summary_control_data_all <-  summary_control_data_all %>%
 
 #tidy up working outs
 summary_control_data_all <- summary_control_data_all %>%
-  select(-amendment_2a, -amendment_2b, -amendment_3a, -amendment_3b)
+  dplyr::select(-amendment_2a, -amendment_2b, -amendment_3a, -amendment_3b)
 
 unique(summary_control_data_all$amendment_123)
 #how many amendment without depth
@@ -922,7 +922,7 @@ cum_yld_gains_control <- ungroup(cum_yld_gains_control)
 #####################################################################################
 # summary_control_data_all <- summary_control_data_all %>%
 #   distinct(site, Descriptors, .keep_all=TRUE) %>%
-#   select(site,
+#   dplyr::select(site,
 #          Descriptors )
 # summary_control_data_all <- summary_control_data_all %>% arrange(site,Descriptors )
 
@@ -930,12 +930,12 @@ cum_yld_gains_control <- ungroup(cum_yld_gains_control)
 
 #1 soil modification with depth
 cum_yld_gains_control <- cum_yld_gains_control %>% 
-  mutate(soil_modification_depth =  str_extract(cum_yld_gains_control$Descriptors, "[^_]+"))#keep everything before the first_
+ dplyr:: mutate(soil_modification_depth =  str_extract(cum_yld_gains_control$Descriptors,"[^_]+"))#keep everything before the first_
 
 #1.1 Youndhusband has 'Unmodified+DeepTill.18' which needs to be recoded as "Unmodified"
 
 cum_yld_gains_control <- cum_yld_gains_control %>% 
-  mutate(soil_modification_depth = case_when(
+  dplyr:: mutate(soil_modification_depth = case_when(
     soil_modification_depth == "Unmodified+DeepTill.18" ~ "Unmodified",
     TRUE ~ soil_modification_depth))
 
@@ -957,7 +957,7 @@ cum_yld_gains_control <- cum_yld_gains_control %>%
 
 #the Unmodified seems to have a problem this fixes it :)
 cum_yld_gains_control <- cum_yld_gains_control %>% 
-  mutate(soil_modification_1 = str_extract(cum_yld_gains_control$soil_modification_1, "[^_]+")) #keep everything after the first _
+  mutate(soil_modification_1 = str_extract(cum_yld_gains_control$soil_modification_1,"[^_]+")) #keep everything after the first _
 
 #1a.1 Youndhusband has 'Unmodified+DeepTill.18' which needs to be recoded as "Unmodified"
 
@@ -1002,7 +1002,7 @@ cum_yld_gains_control <- cum_yld_gains_control %>%
 
 ### remove the working clms
 cum_yld_gains_control <- cum_yld_gains_control %>% 
-  select(-soil_modification_1,
+  dplyr::select(-soil_modification_1,
          -soil_modification_2)
 
 
@@ -1097,7 +1097,7 @@ cum_yld_gains_control <-  cum_yld_gains_control %>%
 
 #tidy up working outs
 cum_yld_gains_control <- cum_yld_gains_control %>%
-  select(-amendment_2a, -amendment_2b, -amendment_3a, -amendment_3b)
+  dplyr::select(-amendment_2a, -amendment_2b, -amendment_3a, -amendment_3b)
 
 unique(cum_yld_gains_control$amendment_123)
 #how many amendment without depth
