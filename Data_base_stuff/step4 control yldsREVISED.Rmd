@@ -1340,7 +1340,7 @@ ggplot( aes(sum__yld_gain)) +
 # Histogram for each modification with mean yield gain plotted
 
 
-names(cum_yld_control)
+#names(cum_yld_control)
 
 mean_cum_yield_gain_soil_mod <- cum_yld_control %>% 
   dplyr::group_by(soil_modification) %>% 
