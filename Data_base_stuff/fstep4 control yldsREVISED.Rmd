@@ -493,23 +493,68 @@ summary_control_data_all <- summary_control_data_all %>%
 ```
 
 
+Some fast facts.
 
-How many sites, descriptors, soil modification (including different depths)?
-soil amendment (including different depths)
-How many soil modification (including different depths)?
 
-JAXS - make this into a table
+
+
+
 
 ```{r how many sites all, echo=FALSE, message=FALSE, warning=FALSE}
+
 #How many site?
+sites <- summary_control_data_all %>%
+  distinct(site)%>%
+  count()
 
-# sites <- summary_data_all %>% 
-#   distinct(site) 
-# sites %>% 
-#   count()
+#how many Descriptors?
+descriptors <- summary_control_data_all %>%
+  distinct(Descriptors)%>%
+  count()
+
+#how many soil_modification_ with all depth?
+soil_modification_depth <- summary_control_data_all %>%
+  distinct(soil_modification_depth)%>%
+  count()
+
+#how many soil_modification?
+soil_modification <- summary_control_data_all %>%
+  distinct(soil_modification)%>%
+  count()
+
+#how many amendment_all? the 123 has the application depth removed
+amendment_all <- summary_control_data_all %>%
+  distinct(amendment_123)%>%
+  count()
+
+
+#how many amendment coded into plant, animal, other etc?
+amendment_code <- summary_control_data_all %>%
+  distinct(amendment_code1)%>%
+  count()
+
+count = c(
+  sites[[1]],
+  descriptors[[1]],
+  soil_modification_depth[[1]],
+  soil_modification[[1]],
+  amendment_all[[1]],
+  amendment_code[[1]]
+)
+count_of = c(
+  "sites",
+  "descriptors",
+  "soil_modification_depth",
+  "soil_modification",
+  "amendment_all",
+  "amendment_code"
+) 
+ 
+       
+df = data.frame( count_of, count)      
+df
+
 ```
-
-
 
 
 
@@ -523,7 +568,7 @@ names(summary_control_data_all)
 
 #keep the rep but not the year
 cum_yld_control <- summary_control_data_all %>% 
-  dplyr::group_by(site, Descriptors,rep_block, crop, soil_modification, amendment_123, amendment_code1 ) %>% 
+  dplyr::group_by(site, Descriptors,rep_block, soil_modification, amendment_123, amendment_code1 ) %>% 
   
   
   dplyr::summarise(sum_yld =          sum(yield, na.rm = TRUE),
@@ -580,7 +625,7 @@ Drawing on the 2 DF created
 
 **Comment:** 
 
-The below graph shows that doing 'anything' is likely to lift you yield compaired to a control
+The below graph shows that doing 'anything' is likely to lift you yield compared to a control
 
 But this is not always the case
 
@@ -934,8 +979,13 @@ ggplot( aes(yield_gain)) +
 - The effects of soil modification without amendments are displayed here
 
 - Sweep is zero yield gains could this be correct? 
+  I have double checked this uisng the output file and checking it in excel.
+  20 values (4 for each year with sweep and no amendments)
+  we have dont have any missing data
+  the differences (between the treatment yield and control yield) is very small.
+  The avearge are 0
 
-- Is this saying that sweep only gives yield gains when used with amendments?
+- Sweep only gives yield gains when used with amendments?
 
 - Inclusion Rip with Spading provides the best yield gains
 
@@ -1189,21 +1239,13 @@ So this seems OK.
 - filtered out the trials that don't have length of trial in database
 
 - The length of the trial does not always reflect higher yield
-  for example trials that ran for 6 years had low cumulative yields
+  for example trials that ran for 4 years had low and high cumulative yields
 
 - But for trials only run for 1 or 2 years the cumulative yield was low
 
 - the higher cumulative yield can be reached in about 3 years
 
-JAX 
 
- - Heaps of zero values for treatment yield 
- - This should be checked Waik, Tempy, Cadgee and Buckleboo
- - higher values for treatment yields are at Brimpton lake and Bute Trengrove (these look OK)
- 
- - Heaps of zero values for control yield
- - The higher control yield tend to be lower than the treatment yield - which is good check
- - the high control yields occur at Karkoo and Bute CSIRO
  
 
 ```{r cum yld scatter with lenghth , echo=FALSE, message=FALSE, warning=FALSE}
@@ -1396,11 +1438,15 @@ ggplot(mapping = aes(sum__control_yld, sum_yld, )) +
 
 **Comment:** 
 
-- unmodified not displayed 
+- Unmodified not displayed 
 
-- JAX what would this be? should it mostly be the control?
+- At most sites the unmodified soil with no amendment should be the control
 
-- might be on row sowing ??
+- But at Younghusband we have a trial that falls into this category that is NOT a control
+
+- This is "Unmodified+DeepTill.18_none"
+
+
  
 ```{r cum yld gains no amedments hist, echo=FALSE, message=FALSE, warning=FALSE}
  
@@ -1523,5 +1569,37 @@ cum_yld_control %>%
 
 
 ```
+
+
+
+```{r tidy up3, message=FALSE, warning=FALSE, include=FALSE}
+
+
+rm(mean_cum_yield_gain,
+   mean_cum_yield_gain_soil_mod,
+   mean_cum_yield_gain_soil_mod_no_amed,
+   mean_cum_yield_gain_soil_mod_rip,
+   mean_cum_yield_gain_soil_mod_spade,
+   mean_gains_values_no_amendment_Rip,
+   mean_gains_values_no_amendment_spade)
+
+
+
+write.csv(summary_control_data_all, "X:Therese_Jackie/Sandy_soils/Development_database/for_presentations/temp_summary_control_data_all.csv",
+          row.names = FALSE)
+
+write.csv(cum_yld_control, "X:Therese_Jackie/Sandy_soils/Development_database/for_presentations/temp_cum_control_data_all.csv",
+          row.names = FALSE)
+
+```
+
+
+
+
+
+
+
+
+
 
 
