@@ -47,8 +47,10 @@ primary <- read_csv(input_data_file,
                     col_types = cols(drill_depth = col_character(), 
                                      rip_depth = col_character(), 
                                      sowing_strategy = col_character(), 
-                                     timing = col_character()))
-
+                                     timing = col_character(),
+                                     organic_rate = col_character()
+                                     ))
+str(primary)
 
 duplicated_ID <- primary %>% 
   group_by(ID) %>% 
@@ -933,6 +935,7 @@ GS_rain_deciles <- GS_rain_deciles %>%
   mutate(site = case_when(
     site == "Brimpton_Lake" ~ "Brimpton Lake",
     site == "Mt_Damper"     ~ "Mt Damper",
+    site == "Oyen_Spade"     ~ "Ouyen_Spade",
     TRUE ~ site
   ))
 
