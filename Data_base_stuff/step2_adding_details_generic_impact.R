@@ -34,7 +34,7 @@ site_name <- "impact"
 list.files("X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2022/", ".csv",full.names=T)
 
 #impact rainfall 
-input_data_file_rain <- "X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2022/GS_rain_deciles_impact_sites.csv"
+input_data_file_rain <- "X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2022/GS_rain_deciles_research_impact_sites.csv"
 
 
 
@@ -901,13 +901,15 @@ primary_join_1 <- primary_join %>%
 GS_rain_deciles <- read_csv(input_data_file_rain)
 GS_rain_deciles <- dplyr::select(GS_rain_deciles, -'X1')
 
-
+unique(GS_rain_deciles$site)
 
 
 GS_rain_deciles <- GS_rain_deciles %>% 
   dplyr::mutate(site = case_when(
     site == "Brimpton_Lake" ~ "Brimpton Lake",
     site == "Mt_Damper"     ~ "Mt Damper",
+    site == "Oyen_Spade"     ~ "Ouyen_Spade",
+    
     TRUE ~ site
   ))
 
