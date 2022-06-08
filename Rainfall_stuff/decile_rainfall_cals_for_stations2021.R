@@ -347,8 +347,10 @@ Kooloonong_lupin <- BALRANALD %>%
     mutate(site = "Kooloonong_lupin")
 Kooloonong_chickpea <- BALRANALD %>%
   mutate(site = "Kooloonong_chickpea")
+Kooloonong_canola <- BALRANALD %>%
+  mutate(site = "Kooloonong_canola")
 
-BALRANALD_sites <-  rbind(Kooloonong_lentil, Kooloonong_lupin, Kooloonong_chickpea)
+BALRANALD_sites <-  rbind(Kooloonong_lentil, Kooloonong_lupin, Kooloonong_chickpea, Kooloonong_canola)
 #remove "Kooloonong"
 GS_rain_deciles <- GS_rain_deciles %>%
   filter( site != "Kooloonong")
