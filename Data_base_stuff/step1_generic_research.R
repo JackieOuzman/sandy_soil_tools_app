@@ -140,6 +140,10 @@ Ouyen_Spade <- read_excel("X:/Therese_Jackie/Sandy_soils/Development_database/ot
                                                                          "date", "date", "date",
                                                                          "date"))
 
+
+ 
+ metadata_Ouyen_Spade <-metadata_Ouyen_Spade %>% filter(`Site Name` == "Ouyen spading")
+   
  Ouyen_Spade <- Ouyen_Spade %>%
    mutate(site = "Ouyen_Spade")
  
@@ -201,7 +205,7 @@ metadata_Brooker <- read_excel(paste0("X:/Therese_Jackie/Sandy_soils/Development
                                                               "date", "date", "date",
                                                               "date"))
 
-
+metadata_Brooker <- metadata_Brooker %>% filter(`Site Name` == "Brooker" )
 
 # # # YoungHusband 
 
@@ -318,6 +322,7 @@ metadata_Murlong <- read_excel(paste0("X:/Therese_Jackie/Sandy_soils/Development
                                                               "date", "date", "date",
                                                               "date"))
 
+metadata_Murlong <- metadata_Murlong %>% filter(`Site Name` == "Murlong" )
 #CarwarpAmelioration
 
 CarwarpAmelioration <- read_excel(paste0("X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/", "CarwarpAmelioration", ".xlsx"),
