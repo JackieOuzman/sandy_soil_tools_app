@@ -361,6 +361,49 @@ metadata_CarwarpAmelioration <- metadata_CarwarpAmelioration %>%
   mutate(`Site Name`  = "Carwarp_Amelioration") 
 
 
+# Ouyen_Placement
+
+
+
+Ouyen_Placement <- read_excel("X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/Ouyen.xlsm",
+                          sheet = "Database_format drill 17_21")
+names(Ouyen_Placement)
+Ouyen_Placement <- Ouyen_Placement %>% dplyr::select("ID":"comments"   )
+#
+### a metadata
+#
+metadata_Ouyen_Placement <- read_excel("X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/Ouyen.xlsm",
+                                   sheet = "Site_metadata", col_types = c("text",
+                                                                          "numeric", "numeric", "numeric",
+                                                                          "numeric", "numeric", "numeric",
+                                                                          "numeric", "numeric", "numeric",
+                                                                          "numeric", "numeric", "numeric",
+                                                                          "numeric", "numeric", "numeric",
+                                                                          "numeric", "numeric", "numeric",
+                                                                          "date", "numeric", "text", "text",
+                                                                          "text", "text", "text", "text", "text",
+                                                                          "text",
+                                                                          "date", "date", "date",
+                                                                          "date", "date", "date",
+                                                                          "date",
+                                                                          "date", "date", "date",
+                                                                          "date", "date", "date",
+                                                                          "date"))
+
+
+
+metadata_Ouyen_Placement <-metadata_Ouyen_Placement %>% filter(`Site Name` == "Ouyen placement")
+
+Ouyen_Placement <- Ouyen_Placement %>%
+  mutate(site = "Ouyen_Placement")
+
+metadata_Ouyen_Placement <- metadata_Ouyen_Placement %>%
+  mutate(`Site Name` = "Ouyen_Placement")
+
+
+
+
+
 #############################################################################################################################################
 ########################      Merge the results data   and the metadata                            ########################################
 ############################################################################################################################################
@@ -377,7 +420,9 @@ site <- rbind(
   Ouyen_Spade,
   Waikerie,
   Yenda,
-  YoungHusband
+  YoungHusband,
+  Ouyen_Placement
+  
 )
 
 site <- site %>% 
@@ -403,6 +448,7 @@ rm(Brooker,
  
 str(metadata_Brooker)
 str(metadata_Ouyen_Spade)
+str(metadata_Ouyen_Placement)
 
 metadata <- rbind(
   metadata_Brooker,
@@ -415,7 +461,9 @@ metadata <- rbind(
   metadata_Yenda,
   metadata_YoungHusband,
   Bute_CSIRO_metadata,
-  Bute_Sam_metadata
+  Bute_Sam_metadata,
+  metadata_Ouyen_Placement
+  
 )
 
 

@@ -94,6 +94,8 @@ unique(primary$Rip_depth_jax)
 
 unique(primary$drill_depth)
 
+primary$drill_depth <- as.double(primary$drill_depth)
+
 primary<- primary %>% 
   mutate(drill_depth = case_when(
     drill_depth == 75 ~ 7.5,
@@ -266,7 +268,7 @@ primary <- primary %>%
                   ## chicken litter with NO rate
                   ifelse(site_sub    %in% c("Brooker","Cadgee","Ouyen_Spade", "Carwarp_Amelioration", 
                                             "Karoonda", "Lowaldie_Crest","Lowaldie_Deep sand", "Murlong", "Ouyen_Spade",
-                                            "Waikerie", "Younghusband", "Brimpton Lake")  #site list 3
+                                            "Waikerie", "Younghusband", "Brimpton Lake", "Ouyen_Placement")  #site list 3
                          & organic          %in% c( "chicken_compost","chicken_manure","chicken litter","chicken liitter",
                                                     "chicken_litter","chicken litter"),  
                          paste0("Cl",".", placement_organic),
@@ -275,7 +277,7 @@ primary <- primary %>%
                          ## compost with NO rate    
                          ifelse(site_sub    %in% c("Brooker","Bute_CSIRO","Cadgee","Ouyen_Spade", "Carwarp_Amelioration", 
                                                    "Karoonda", "Lowaldie_Crest","Lowaldie_Deep sand", "Murlong", "Ouyen_Spade",
-                                                   "Waikerie", "Younghusband", "Yenda","Bute_Trengrove", "Brimpton Lake")  #all the sites
+                                                   "Waikerie", "Younghusband", "Yenda","Bute_Trengrove", "Brimpton Lake", "Ouyen_Placement")  #all the sites
                                 & organic          %in% c( "compost"),  
                                 paste0("Com",".", placement_organic),
                                 
@@ -283,7 +285,7 @@ primary <- primary %>%
                                 ## lucerne with NO rate    
                                 ifelse(site_sub    %in% c("Bute_CSIRO","Cadgee","Ouyen_Spade", "Carwarp_Amelioration", 
                                                           "Karoonda", "Lowaldie_Crest","Lowaldie_Deep sand", "Murlong", "Ouyen_Spade",
-                                                          "Waikerie", "Younghusband", "Yenda","Bute_Trengrove", "Brimpton Lake")  #set 1
+                                                          "Waikerie", "Younghusband", "Yenda","Bute_Trengrove", "Brimpton Lake", "Ouyen_Placement")  #set 1
                                        & organic          %in% c( "lucerne", "pelleted lucerne"),  
                                        paste0("Lc",".", placement_organic),  
                                        
@@ -296,28 +298,28 @@ primary <- primary %>%
                                               ## Cereal with NO rate   
                                               ifelse(site_sub    %in% c("Brooker","Bute_CSIRO","Cadgee","Ouyen_Spade", "Carwarp_Amelioration", 
                                                                         "Karoonda", "Lowaldie_Crest","Lowaldie_Deep sand", "Murlong", "Ouyen_Spade",
-                                                                        "Waikerie", "Younghusband", "Yenda","Bute_Trengrove", "Brimpton Lake")  #all the sites
+                                                                        "Waikerie", "Younghusband", "Yenda","Bute_Trengrove", "Brimpton Lake", "Ouyen_Placement")  #all the sites
                                                      & organic %in% c("cereal"),   
                                                      paste0("Cereal",".", placement_organic),
                                                      
                                                      ## vetch with NO rate   
                                                      ifelse(site_sub    %in% c("Brooker","Bute_CSIRO","Cadgee","Ouyen_Spade", "Carwarp_Amelioration", 
                                                                                "Karoonda", "Lowaldie_Crest","Lowaldie_Deep sand", "Murlong", "Ouyen_Spade",
-                                                                               "Waikerie", "Younghusband", "Yenda","Bute_Trengrove", "Brimpton Lake")  #all the sites
+                                                                               "Waikerie", "Younghusband", "Yenda","Bute_Trengrove", "Brimpton Lake", "Ouyen_Placement")  #all the sites
                                                             & organic %in% c("vetch"),   
                                                             paste0("Vetch",".", placement_organic),   
                                                             
                                                             ## vetch - cereal with NO rate   
                                                             ifelse(site_sub    %in% c("Brooker","Bute_CSIRO","Cadgee","Ouyen_Spade", "Carwarp_Amelioration", 
                                                                                       "Karoonda", "Lowaldie_Crest","Lowaldie_Deep sand", "Murlong", "Ouyen_Spade",
-                                                                                      "Waikerie", "Younghusband", "Yenda","Bute_Trengrove", "Brimpton Lake")  #all the sites
+                                                                                      "Waikerie", "Younghusband", "Yenda","Bute_Trengrove", "Brimpton Lake", "Ouyen_Placement")  #all the sites
                                                                    & organic %in% c("vetch - cereal"),   
                                                                    paste0("Vet_Cer",".", placement_organic),
                                                                    
                                                                    ## vetch - cereal with innoculant   
                                                                    ifelse(site_sub    %in% c("Brooker","Bute_CSIRO","Cadgee","Ouyen_Spade", "Carwarp_Amelioration", 
                                                                                              "Karoonda", "Lowaldie_Crest","Lowaldie_Deep sand", "Murlong", "Ouyen_Spade",
-                                                                                             "Waikerie", "Younghusband", "Yenda","Bute_Trengrove", "Brimpton Lake")  #all the sites
+                                                                                             "Waikerie", "Younghusband", "Yenda","Bute_Trengrove", "Brimpton Lake", "Ouyen_Placement")  #all the sites
                                                                           & organic %in% c("vetch - cereal - innoculant"),   
                                                                           paste0("Vet_Cer_In",".", placement_organic),
                                                                           
@@ -333,7 +335,7 @@ primary <- primary %>%
   mutate(amendment_organic = 
            ifelse(site_sub            %in% c("Brooker","Cadgee","Ouyen_Spade", "Carwarp_Amelioration",
                                              "Karoonda", "Lowaldie_Crest","Lowaldie_Deep sand", "Murlong", "Ouyen_Spade",
-                                             "Waikerie", "Younghusband","Bute_Trengrove", "Brimpton Lake")  #all the sites but not Bute CSIRO
+                                             "Waikerie", "Younghusband","Bute_Trengrove", "Brimpton Lake", "Ouyen_Placement")  #all the sites but not Bute CSIRO
                   &   is.na(timing) ,
                   paste0(amendment_organic),
                   
@@ -348,6 +350,11 @@ primary <- primary %>%
                       &    timing  %in% c("annual"),    
                       paste0(amendment_organic, "_Yr18,19,20"), 
                       
+                      ifelse(
+                        site_sub                %in% c("Ouyen_Placement")   #this is Ouyen placement
+                        &    timing  %in% c("annual"),    
+                        paste0("none", "_annual"), 
+                      
                       ## set years
                       ifelse(
                         site_sub                %in% c( "Yenda")   #site list 1
@@ -357,7 +364,7 @@ primary <- primary %>%
                       
                       "check"
                       
-                    ))))#bracket for the number of ifelse statements
+                    )))))#bracket for the number of ifelse statements
   )# bracket for mutate function
 
 
@@ -557,10 +564,9 @@ primary <- primary %>%
             & amendment_fert   == "other"    
             & amendment_other  != "other", 
             paste0(amendment_other ), 
-                                                            
-                                                            
-                                                            
-            ifelse(amendment_organic  == "other"   
+            
+                   
+                   ifelse(amendment_organic  == "other"   
             & amendment_fert   == "other"    
             & amendment_other  == "other",
             paste0("none"), 
@@ -568,8 +574,36 @@ primary <- primary %>%
 ))))))))#bracket for the number of ifelse statements
   )# bracket for mutate function
 
+unique(primary$amendment_organic)
+unique(primary$amendment_fert)
+unique(primary$amendment_other)
 
+### problem with Oyen placement
+primary <- primary %>% 
+  mutate(amendment = 
 
+       ifelse(site                   == "Ouyen_Placement"
+       & amendment_organic         == "none_annual"   #this is the ouyen placement - GSP was applied annually at depth
+       & amendment_fert              ==   "other"    
+       & amendment_other             ==   "other", 
+       paste0("none_annual" ),                                                 
+       
+       ifelse(site                   == "Ouyen_Placement"
+         & amendment_organic         == "none_annual"   #this is the ouyen placement - GSP was applied annually at depth but with fert
+         & amendment_fert            == "Fert.banded 20 cm"
+         & amendment_other           == "other",
+         paste0("Fert.banded_20_annual" ) ,
+         
+         ifelse(site                   == "Ouyen_Placement"
+                & amendment_organic         == "none_annual"   #this is the ouyen placement - GSP was applied annually at depth but with fert
+                & amendment_fert            == "Fert.banded 30 cm"
+                & amendment_other           == "other",
+                paste0("Fert.banded_30_annual" ) ,
+      
+       amendment
+
+       )))#bracket for the number of ifelse statements
+)# bracket for mutate function
 
 
 
@@ -595,7 +629,16 @@ primary <- primary %>%
     rip  == "none"      &      mix == "spade"          ~       paste0("Spade.30" ),
     rip  == "none"      &      mix == "sapde"          ~       paste0("Spade.30" ),
     rip  == "none"      &      mix == "Plozza"         ~       paste0("DiscInv.30" ),
+    
     rip  == "none"      &      mix == "pre-drill"      ~       paste0("Pre_drill.", drill_depth ),
+    rip  == "none"      &      mix == "pre_drill_20" & drill_depth ==  7.5  ~      paste0("Pre_drill_20+", drill_depth ),
+    rip  == "none"      &      mix == "pre_drill_20" & drill_depth ==  20  ~      paste0("Pre_drill_20+", drill_depth ),
+    
+    rip  == "rip"      &      mix == "none" & drill_depth ==  7.5  ~      paste0("Rip_30+", drill_depth ),
+    rip  == "rip"      &      mix == "none" & drill_depth ==  30  ~      paste0("Rip_30+", drill_depth ),
+    
+    
+    
     #rip  == "none"      &      mix == "inclusion"      ~       paste0("Inc.50" ),#check that this is always 50cm
     rip  == "none"      &      mix == "sweep"      ~           paste0("Sweep.30"),
     #rip  == "none"      &      mix == "delving"      ~         paste0("Delving.18"),#check that this is always 18cm it was supplied as a range I used the upper value
