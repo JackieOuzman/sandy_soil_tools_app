@@ -436,10 +436,24 @@ GS_rain_deciles <- rbind(GS_rain_deciles, LOWALDIE_sites)
 
 
 
+### Ouyen 
+
+Ouyen_Placement <- GS_rain_deciles %>%
+  filter(site == "Oyen_Spade")
+
+Ouyen_Placement <- Ouyen %>%
+  mutate(site = "Ouyen_Placement")
+
+
+
+#Add "Ouyen_placemnet x2
+GS_rain_deciles <- rbind(GS_rain_deciles, Ouyen_Placement)
+
+
 
 
 rm(Brimpton_Lake, Brooker, Ouyen, Karoonda, Kooloonong_chickpea, Kooloonong_lentil, Kooloonong_lupin, BALRANALD, BALRANALD_sites, 
-   BUTE,BUTE_sites, Bute_CSIRO, Bute_Trengrove)
+   BUTE,BUTE_sites, Bute_CSIRO, Bute_Trengrove, Ouyen_Placement)
 
 
 
