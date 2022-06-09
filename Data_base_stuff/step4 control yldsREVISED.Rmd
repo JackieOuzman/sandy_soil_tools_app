@@ -71,6 +71,12 @@ so for the control I have how have
 rep block called
 Bay 1 rep 1
 Bay 1 rep 2
+
+
+Another problem with Younghusband is that they moved the control from year to year.
+As a result I have only included treatments that run over the two years, this means no control for this Younghusband data in the DB.
+We do have controls for each year but they cannot be put togther in the DB for multiple years.
+
 ....
 
 
@@ -94,23 +100,9 @@ summary_control_data_all <- read_csv(data_file_control,
 
 
 
-# ### make a dummy clm to filter out Younghusband 2021 data
-# summary_data_all <- summary_data_all %>%
-#   dplyr::mutate(site_yr_dummy = paste0(site, year))
-# 
-# ## filter out the 2021 Younghusband data
-# summary_data_all <- summary_data_all %>%
-#   filter(site_yr_dummy  != "Younghusband2021") 
 
 
 
-### make a dummy clm to filter out Younghusband 2021 data
-summary_control_data_all <- summary_control_data_all %>%
-  dplyr::mutate(site_yr_dummy = paste0(site, year))
-
-## filter out the 2021 Younghusband data
-summary_control_data_all <- summary_control_data_all %>%
-  filter(site_yr_dummy  != "Younghusband2021") 
 
 
 
@@ -174,7 +166,8 @@ list_sites_ready <- c("Brimpton Lake",
                       "Warnertown", #newly added
                       "Wynarka",
                       "Yenda",
-                      "Younghusband"
+                      #"Younghusband",#it has no controls
+                      "Ouyen_Placement"
                       )
 
 
@@ -182,20 +175,7 @@ list_sites_ready <- c("Brimpton Lake",
 
 summary_control_data_all <- summary_control_data_all %>% 
   filter(site_sub %in% list_sites_ready  )
-# summary_data_all <- summary_data_all %>% 
-#   filter(site_sub %in% list_sites_ready  )
 
-
-
-
-
-# write.csv(summary_control_data_all, 
-# "X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/stats_working/sites_merged_CONTROL_incomplete.csv",
-# row.names = FALSE)
-# 
-# write.csv(summary_data_all, 
-# "X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/stats_working/sites_merged_incomplete.csv",
-# row.names = FALSE)
 
 ```
 
@@ -798,6 +778,45 @@ ggplot(mapping = aes(control_yield, yield)) +
 
 ```
 
+
+```{r scatter subset data facet yrs post Just Rip, echo=FALSE, message=FALSE, warning=FALSE}
+
+summary_control_data_all %>% 
+  filter(amendment_all ==  "none"  ) %>% 
+  filter(soil_modification == "Rip") %>% 
+  filter(yr_post_amelioration == c(0,1,2,3)) %>% 
+  
+ggplot(mapping = aes(control_yield, yield)) +
+  geom_point(alpha= 0.4) +
+  geom_abline(intercept = 0, slope = 1, linetype="dashed", size = 0.5)+
+  #geom_smooth(data = no_amendment, method = lm, se = FALSE, colour = "black", size = 0.5) +
+  labs(title = "Rip only - Control yield (subset of data with no amendment)",
+       subtitle = "note each site, treatment, year and rep is matched to control",
+       x = "control yield t/ha", y = "treatment yield t/ha")+
+  facet_wrap(.~ as.factor(yr_post_amelioration))+
+  theme(plot.background = element_rect(fill = "skyblue1"))
+
+```
+
+
+```{r scatter subset data facet yrs post Just spade, echo=FALSE, message=FALSE, warning=FALSE}
+
+summary_control_data_all %>% 
+  filter(amendment_all ==  "none"  ) %>% 
+  filter(soil_modification == "Spade") %>% 
+  filter(yr_post_amelioration == c(0,1,2,3)) %>% 
+  
+ggplot(mapping = aes(control_yield, yield)) +
+  geom_point(alpha= 0.4) +
+  geom_abline(intercept = 0, slope = 1, linetype="dashed", size = 0.5)+
+  #geom_smooth(data = no_amendment, method = lm, se = FALSE, colour = "black", size = 0.5) +
+  labs(title = "Spade only - Control yield (subset of data with no amendment)",
+       subtitle = "note each site, treatment, year and rep is matched to control",
+       x = "control yield t/ha", y = "treatment yield t/ha")+
+  facet_wrap(.~ as.factor(yr_post_amelioration))+
+  theme(plot.background = element_rect(fill = "skyblue2"))
+
+```
 
 
 ## Scatter Plots control vs treatments facet wrap is sites **no amendment**
