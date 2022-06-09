@@ -26,8 +26,10 @@ list.of.files
 
 #Impact_production_data_2021 and older years
 
+# site <- read_excel(paste0("X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/", "Impact_production_data_2019-2021", ".xlsx"),
+#                     sheet = "primary data 2019 2020 2021")
 site <- read_excel(paste0("X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/", "Impact_production_data_2019-2021", ".xlsx"),
-                    sheet = "primary data 2019 2020 2021")
+                   sheet = "primary_data_all")
 
 site <- site %>% relocate(ID, .before = site)
 names(site)
