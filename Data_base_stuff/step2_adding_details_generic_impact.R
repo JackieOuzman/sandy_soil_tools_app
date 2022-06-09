@@ -88,6 +88,7 @@ primary<- primary %>%
 unique(primary$Rip_depth_jax)
 
 unique(primary$drill_depth)
+primary$drill_depth <- as.double(primary$drill_depth)
 
 primary<- primary %>% 
   mutate(drill_depth = case_when(
@@ -249,7 +250,7 @@ primary <- primary %>%
                   ifelse(site_sub    %in% c("Kooloonong_chickpea","Kooloonong_lentil","Kooloonong_lupin", 
                                             "Tempy",  "Wynarka", "Monia_Gap","Malinong", "Sherwood", "Cummins",
                                              "Karkoo", "Buckleboo", "Mt_Damper", "Kybunga" , "Warnertown", 
-                                             "Telopea_Downs","Mt Damper", "Kooloonong_canola" )  #all of impact sites
+                                             "Telopea_Downs","Mt Damper", "Kooloonong_canola" , "Younghusband")  #all of impact sites
                   & organic          %in% c( "chicken_compost","chicken_manure","chicken litter","chicken liitter",
                                               "chicken_litter","chicken litter"),  
                  paste0("Cl",".", placement_organic),
@@ -259,7 +260,7 @@ primary <- primary %>%
                  ifelse(site_sub    %in% c("Kooloonong_chickpea","Kooloonong_lentil","Kooloonong_lupin", 
                                            "Tempy",  "Wynarka", "Monia_Gap","Malinong", "Sherwood", "Cummins",
                                            "Karkoo", "Buckleboo", "Mt_Damper", "Kybunga" , "Warnertown", 
-                                           "Telopea_Downs","Mt Damper", "Kooloonong_canola")  #all the sites
+                                           "Telopea_Downs","Mt Damper", "Kooloonong_canola", "Younghusband")  #all the sites
                         & organic          %in% c( "compost"),  
                         paste0("Com",".", placement_organic),
                         
@@ -282,7 +283,7 @@ primary <- primary %>%
                  ifelse(site_sub    %in% c("Kooloonong_chickpea","Kooloonong_lentil","Kooloonong_lupin", 
                                            "Tempy",  "Wynarka", "Monia_Gap","Malinong", "Sherwood", "Cummins",
                                            "Karkoo", "Buckleboo", "Mt_Damper", "Kybunga" , "Warnertown", 
-                                           "Telopea_Downs","Mt Damper", "Kooloonong_canola")  #all the sites
+                                           "Telopea_Downs","Mt Damper", "Kooloonong_canola", "Younghusband")  #all the sites
                                 & organic %in% c("cereal"),   
                    paste0("Cereal",".", placement_organic),
                                 
@@ -290,7 +291,7 @@ primary <- primary %>%
                    ifelse(site_sub    %in% c("Kooloonong_chickpea","Kooloonong_lentil","Kooloonong_lupin", 
                                              "Tempy",  "Wynarka", "Monia_Gap","Malinong", "Sherwood", "Cummins",
                                              "Karkoo", "Buckleboo", "Mt_Damper", "Kybunga" , "Warnertown", 
-                                             "Telopea_Downs","Mt Damper", "Kooloonong_canola")  #all the sites
+                                             "Telopea_Downs","Mt Damper", "Kooloonong_canola", "Younghusband")  #all the sites
                           & organic %in% c("vetch"),   
                           paste0("Vetch",".", placement_organic),   
                           
@@ -298,7 +299,7 @@ primary <- primary %>%
                           ifelse(site_sub    %in% c("Kooloonong_chickpea","Kooloonong_lentil","Kooloonong_lupin", 
                                                     "Tempy",  "Wynarka", "Monia_Gap","Malinong", "Sherwood", "Cummins",
                                                     "Karkoo", "Buckleboo", "Mt_Damper", "Kybunga" , "Warnertown", 
-                                                    "Telopea_Downs","Mt Damper", "Kooloonong_canola")  #all the sites
+                                                    "Telopea_Downs","Mt Damper", "Kooloonong_canola", "Younghusband")  #all the sites
                                  & organic %in% c("vetch - cereal"),   
                                  paste0("Vet_Cer",".", placement_organic),
                                  
@@ -306,7 +307,7 @@ primary <- primary %>%
                                  ifelse(site_sub    %in% c("Kooloonong_chickpea","Kooloonong_lentil","Kooloonong_lupin", 
                                                            "Tempy",  "Wynarka", "Monia_Gap","Malinong", "Sherwood", "Cummins",
                                                            "Karkoo", "Buckleboo", "Mt_Damper", "Kybunga" , "Warnertown", 
-                                                           "Telopea_Downs","Mt Damper", "Kooloonong_canola")  #all the sites
+                                                           "Telopea_Downs","Mt Damper", "Kooloonong_canola", "Younghusband")  #all the sites
                                         & organic %in% c("vetch - cereal - innoculant"),   
                                         paste0("Vet_Cer_In",".", placement_organic),
                                  
@@ -323,7 +324,7 @@ primary <- primary %>%
            ifelse(site_sub            %in% c("Kooloonong_chickpea","Kooloonong_lentil","Kooloonong_lupin", 
                                              "Tempy",  "Wynarka", "Monia_Gap","Malinong", "Sherwood", "Cummins",
                                              "Karkoo", "Buckleboo", "Mt_Damper", "Kybunga" , "Warnertown", 
-                                             "Telopea_Downs","Mt Damper", "Kooloonong_canola")  #all the sites but not Bute CSIRO
+                                             "Telopea_Downs","Mt Damper", "Kooloonong_canola", "Younghusband")  #all the sites but not Bute CSIRO
                  &   is.na(timing) ,
                 paste0(amendment_organic),
                 
@@ -379,7 +380,8 @@ primary <- primary %>%
                "Warnertown",
                "Telopea_Downs",
                "Mt Damper",
-               "Kooloonong_canola"
+               "Kooloonong_canola",
+                "Younghusband"
              )  #all the sites expect Buckleboo
              & fertiliser  %in% c(
                "MAP; Urea",
@@ -1086,7 +1088,7 @@ duplicated_ID <- primary_neat %>%
   #group_by(ID) %>% 
   dplyr::summarise(count_ID = n()) %>% 
   filter(count_ID >1)
-### Note at Younghusband the ID is not unique it only becomes unique when I add in descriptors I did this in raw data using Treatment clm for plot!
+
 
 
 write.csv(primary_neat,
