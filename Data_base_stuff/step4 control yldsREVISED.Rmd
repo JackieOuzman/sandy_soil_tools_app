@@ -930,7 +930,13 @@ ggplot(mapping = aes(control_yield, yield)) +
 
 ```
 
-
+```{r summary stats subset data facet modification, echo=FALSE, message=FALSE, warning=FALSE}
+summary_control_data_all %>% 
+  filter(amendment_all ==  "none"  ) %>% 
+  filter(soil_modification != "Unmodified") %>% 
+  group_by(soil_modification) %>% 
+  summarise(mean_yield_gain = round(mean(yield_gain, na.rm = TRUE),2))
+``` 
 
 
 ## Histograms Plots of yield gains
@@ -1120,7 +1126,8 @@ rm(
 
 summary_control_data_all$amendment_code1 <-
   factor(summary_control_data_all$amendment_code1,
-         levels = c("animal", "plant", "fertiliser"))
+         #levels = c("animal", "plant", "fertiliser"))
+         levels = c("animal", "plant", "fertiliser","non organic", "mixed"))
 
 
 summary_control_data_all %>%  
