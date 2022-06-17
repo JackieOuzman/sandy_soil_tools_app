@@ -54,15 +54,15 @@ site_yrs_list <- c(
 ##########                                                    As a loop                                                                       ##########
 #######################################################################################################################################################
 
-for (site_yrs_list in site_yrs_list){
+#for (site_yrs_list in site_yrs_list){
   
   
 #################################################################################################################
   
   
   
-#data_file_Cum_ANOVA <- "X:/Therese_Jackie/Sandy_soils/Development_database/stats_batch_output/Cum_ANOVA_sites_merged_90.csv"
-data_file_Cum_ANOVA <- "X:/Therese_Jackie/Sandy_soils/Development_database/stats_batch_output/Cum_ANOVA_sites_merged.csv"
+data_file_Cum_ANOVA <- "X:/Therese_Jackie/Sandy_soils/Development_database/stats_batch_output/Cum_ANOVA_sites_merged_90.csv"
+#data_file_Cum_ANOVA <- "X:/Therese_Jackie/Sandy_soils/Development_database/stats_batch_output/Cum_ANOVA_sites_merged.csv"
 data_file <- "X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/stats_working/sites_merged.csv"
   
 ## download the data using the specified file path above
@@ -312,14 +312,11 @@ site_year_yld_summary$Descriptors <- factor(site_year_yld_summary$Descriptors,
 
 
 order_yrs <- c(
-  # "2014",
-  # "2015",
-  # "2016",
-  "2017",
-  "2018",
+  
+  "2020",
   "2019",
-  "2020"#,
-  #"2021"
+  "2018",
+  "2017"
   )
 
 site_year_yld_summary$year <- factor(site_year_yld_summary$year,
@@ -340,72 +337,77 @@ names(Cum_ANOVA_results_site)
 ### make a new clm for plotting letters if the cum ANOVA is significant
 Cum_ANOVA_results_site <- Cum_ANOVA_results_site %>% 
   dplyr::mutate(groups_LSD_cum_display = case_when(
-    ANOVA_sign == "ns" ~ "",
-    #ANOVA_sign_0.1 == "ns" ~ "",
+    #ANOVA_sign == "ns" ~ "",
+    ANOVA_sign_0.1 == "ns" ~ "",
     TRUE ~ groups_LSD_cum  ))
 
 Cum_ANOVA_results_site <- Cum_ANOVA_results_site %>% 
   dplyr::mutate(significance_control_display = case_when(
-    #ANOVA_sign_0.1 == "ns" ~ "",
-    ANOVA_sign == "ns" ~ "",
-    #TRUE ~ significance_control_0.1  ))
-    TRUE ~ significance_control  ))
+    ANOVA_sign_0.1 == "ns" ~ "",
+    #ANOVA_sign == "ns" ~ "",
+    TRUE ~ significance_control_0.1  ))
+    #TRUE ~ significance_control  ))
 
 
 
 Cum_ANOVA_results_site <- Cum_ANOVA_results_site %>% 
   dplyr::mutate(LSD_cum_display = case_when(
-    #ANOVA_sign_0.1 == "ns" ~ paste0("") ,
-    ANOVA_sign == "ns" ~ paste0("") ,
+    ANOVA_sign_0.1 == "ns" ~ paste0("") ,
+    #ANOVA_sign == "ns" ~ paste0("") ,
     TRUE ~ paste0("LSD = ", signif(LSD_cum, digits = 4))))
 
 Cum_ANOVA_results_site <- Cum_ANOVA_results_site %>% 
   dplyr::mutate(Dunnetts_display = case_when(
-    #ANOVA_sign_0.1 == "ns" ~ paste0("") ,
-    ANOVA_sign == "ns" ~ paste0("") ,
+    ANOVA_sign_0.1 == "ns" ~ paste0("") ,
+    #ANOVA_sign == "ns" ~ paste0("") ,
     TRUE ~ paste0("Dunnetts test")))
 
 names(Cum_ANOVA_results_site)
 
 Cum_ANOVA_results_site <- Cum_ANOVA_results_site %>% 
   dplyr::mutate(groups_Tukey_cum_display = case_when(
-    #ANOVA_sign_0.1 == "ns" ~ "",
-    ANOVA_sign == "ns" ~ "",
+    ANOVA_sign_0.1 == "ns" ~ "",
+    #ANOVA_sign == "ns" ~ "",
     TRUE ~ groups_HSD_Tukey  ))
 
 
 
 
 
-# CumPlot_LSD <- site_year_yld_summary %>% 
-#   ggplot( aes(x = factor(Descriptors), y = mean, fill = year, colour = year)) + 
-#   geom_bar(stat = "identity",  alpha = 0.5)  +
-#   labs(x="", 
-#        y="Cumulative Yield (t/ha)", 
-#        title = paste0(a),
-#        subtitle = paste0("ANOVA " ,Cum_ANOVA_results_site$LSD_cum_display))+
-#   theme_bw() + 
-#   scale_y_continuous(breaks=seq(0,max_sum_cum,by=1.0), limits = c(0, max_sum_cum))+
-#   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank()) +
-#   theme(axis.text.x=element_text(angle=60,hjust=1))+
-#   geom_text(data = Cum_ANOVA_results_site,
-#             aes(x = factor(Descriptors), y = (mean_cum_yld +0.5), label=groups_LSD_cum_display), 
-#             position = position_dodge(0.80), 
-#             size = 3,
-#             vjust=-0.5, hjust=0.1, 
-#             colour = "gray25")
-# 
-# 
+CumPlot_LSD <- site_year_yld_summary %>%
+  ggplot( aes(x = factor(Descriptors), y = mean, fill = year, colour = year)) +
+  geom_bar(stat = "identity",  alpha = 0.5)  +
+  labs(x="",
+       y="Cumulative Yield (t/ha)",
+       title = paste0(a),
+       subtitle = paste0("ANOVA " ,Cum_ANOVA_results_site$LSD_cum_display))+
+  theme_bw() +
+  scale_y_continuous(breaks=seq(0,max_sum_cum,by=1.0), limits = c(0, max_sum_cum))+
+  theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank()) +
+  theme(axis.text.x=element_text(angle=60,hjust=1, size=12))+
+  theme(axis.text.y=element_text(size=12))+
+  theme(axis.title.y = element_text(size = 14))+
+        
+  geom_text(data = Cum_ANOVA_results_site,
+            aes(x = factor(Descriptors), y = (mean_cum_yld +0.5), label=groups_LSD_cum_display),
+            position = position_dodge(0.80),
+            size = 3,
+            vjust=-0.5, hjust=0.1,
+            colour = "gray25")
+
+CumPlot_LSD
+
+
 # ### save the plot
-# ggsave(CumPlot_LSD,
-#        device = "png",
-#        filename = paste0("Plot_yield_", 
-#                          a,"_", b, "_Cum_ANOVA_Plot_LSD_90", ".png"),
-#        path= "X:/Therese_Jackie/Sandy_soils/Development_database/stats_batch_output/Yield_Cumulative_LSD_Plots/",
-#        width=8.62,
-#        height = 6.28,
-#        dpi=600
-# )
+ggsave(CumPlot_LSD,
+       device = "png",
+       filename = paste0("Plot_yield_",
+                         a,"_", b, "_Cum_ANOVA_Plot_LSD_90", ".png"),
+       path= "X:/Therese_Jackie/Sandy_soils/Development_database/stats_batch_output/Yield_Cumulative_LSD_Plots/",
+       width=8.62,
+       height = 6.28,
+       dpi=600
+)
 
 CumPlot_Tukey <- site_year_yld_summary %>%
   ggplot( aes(x = factor(Descriptors), y = mean, fill = year, colour = year)) +
@@ -417,7 +419,10 @@ CumPlot_Tukey <- site_year_yld_summary %>%
   theme_bw() +
   scale_y_continuous(breaks=seq(0,max_sum_cum,by=1.0), limits = c(0, max_sum_cum))+
   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank()) +
-  theme(axis.text.x=element_text(angle=60,hjust=1))+
+  
+  theme(axis.text.x=element_text(angle=60,hjust=1, size=12))+
+  theme(axis.text.y=element_text(size=12))+
+  theme(axis.title.y = element_text(size = 14))+
 
   geom_text(data = Cum_ANOVA_results_site,
             aes(x = factor(Descriptors), y = (mean_cum_yld +0.5), label=groups_Tukey_cum_display),
@@ -426,17 +431,57 @@ CumPlot_Tukey <- site_year_yld_summary %>%
             vjust=-0.5, hjust=0.1,
             colour = "gray25")
 
-
+CumPlot_Tukey
 
 ggsave(CumPlot_Tukey,
        device = "png",
        filename = paste0("Plot_yield_",
-                         a,"_", b, "_Cum_ANOVA_Plot_Tukey", ".png"),
+                         a,"_", b, "_Cum_ANOVA_Plot_Tukey90", ".png"),
        path= "X:/Therese_Jackie/Sandy_soils/Development_database/stats_batch_output/Yield_Cumulative_Tukey_Plots",
        width=8.62,
        height = 6.28,
        dpi=600
 )
+
+
+CumPlot_Dun <- site_year_yld_summary %>% 
+  ggplot( aes(x = factor(Descriptors), y = mean, fill = year, colour = year)) + 
+  geom_bar(stat = "identity",  alpha = 0.5)  +
+  labs(x="", 
+       y="Cumulative Yield (t/ha)", 
+       title = paste0(a),
+       subtitle = paste0("ANOVA ", Cum_ANOVA_results_site$Dunnetts_display ))+
+  theme_bw() + 
+  scale_y_continuous(breaks=seq(0,max_sum_cum,by=1.0), limits = c(0, max_sum_cum))+
+  theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank()) +
+  
+  theme(axis.text.x=element_text(angle=60,hjust=1, size=12))+
+  theme(axis.text.y=element_text(size=12))+
+  theme(axis.title.y = element_text(size = 14))+
+  
+ 
+  geom_text(data = Cum_ANOVA_results_site,
+            aes(x = factor(Descriptors), y = (mean_cum_yld +0.5),label=significance_control_display), 
+            position = position_dodge(0.80), 
+            size = 3,
+            vjust=-0.5, hjust=0.1, 
+            colour = "gray25")
+CumPlot_Dun
+
+### save the plot
+ggsave(CumPlot_Dun,
+       device = "png",
+       filename = paste0("Plot_yield_", 
+                         a,"_", b, "_Cum_ANOVA_Plot_Dun90", ".png"),
+       path= "X:/Therese_Jackie/Sandy_soils/Development_database/stats_batch_output/Yield_Cumulative_Dunnetts_Plots/",
+       width=8.62,
+       height = 6.28,
+       dpi=600
+)
+
+
+
+
 
 rm(a,
    b,
@@ -458,7 +503,7 @@ rm(a,
    summary_data_all)
 
 
-}
+#}
 
 
 
