@@ -61,8 +61,8 @@ site_yrs_list <- c(
   
   
   
-data_file_Cum_ANOVA <- "X:/Therese_Jackie/Sandy_soils/Development_database/stats_batch_output/Cum_ANOVA_sites_merged_90.csv"
-#data_file_Cum_ANOVA <- "X:/Therese_Jackie/Sandy_soils/Development_database/stats_batch_output/Cum_ANOVA_sites_merged.csv"
+#data_file_Cum_ANOVA <- "X:/Therese_Jackie/Sandy_soils/Development_database/stats_batch_output/Cum_ANOVA_sites_merged_90.csv"
+data_file_Cum_ANOVA <- "X:/Therese_Jackie/Sandy_soils/Development_database/stats_batch_output/Cum_ANOVA_sites_merged.csv"
 data_file <- "X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/stats_working/sites_merged.csv"
   
 ## download the data using the specified file path above
@@ -337,37 +337,37 @@ names(Cum_ANOVA_results_site)
 ### make a new clm for plotting letters if the cum ANOVA is significant
 Cum_ANOVA_results_site <- Cum_ANOVA_results_site %>% 
   dplyr::mutate(groups_LSD_cum_display = case_when(
-    #ANOVA_sign == "ns" ~ "",
-    ANOVA_sign_0.1 == "ns" ~ "",
+    ANOVA_sign == "ns" ~ "",
+    #ANOVA_sign_0.1 == "ns" ~ "",
     TRUE ~ groups_LSD_cum  ))
 
 Cum_ANOVA_results_site <- Cum_ANOVA_results_site %>% 
   dplyr::mutate(significance_control_display = case_when(
-    ANOVA_sign_0.1 == "ns" ~ "",
-    #ANOVA_sign == "ns" ~ "",
-    TRUE ~ significance_control_0.1  ))
-    #TRUE ~ significance_control  ))
+    #ANOVA_sign_0.1 == "ns" ~ "",
+    ANOVA_sign == "ns" ~ "",
+    #TRUE ~ significance_control_0.1  ))
+    TRUE ~ significance_control  ))
 
 
 
 Cum_ANOVA_results_site <- Cum_ANOVA_results_site %>% 
   dplyr::mutate(LSD_cum_display = case_when(
-    ANOVA_sign_0.1 == "ns" ~ paste0("") ,
-    #ANOVA_sign == "ns" ~ paste0("") ,
+    #ANOVA_sign_0.1 == "ns" ~ paste0("") ,
+    ANOVA_sign == "ns" ~ paste0("") ,
     TRUE ~ paste0("LSD = ", signif(LSD_cum, digits = 4))))
 
 Cum_ANOVA_results_site <- Cum_ANOVA_results_site %>% 
   dplyr::mutate(Dunnetts_display = case_when(
-    ANOVA_sign_0.1 == "ns" ~ paste0("") ,
-    #ANOVA_sign == "ns" ~ paste0("") ,
+    #ANOVA_sign_0.1 == "ns" ~ paste0("") ,
+    ANOVA_sign == "ns" ~ paste0("") ,
     TRUE ~ paste0("Dunnetts test")))
 
 names(Cum_ANOVA_results_site)
 
 Cum_ANOVA_results_site <- Cum_ANOVA_results_site %>% 
   dplyr::mutate(groups_Tukey_cum_display = case_when(
-    ANOVA_sign_0.1 == "ns" ~ "",
-    #ANOVA_sign == "ns" ~ "",
+    #ANOVA_sign_0.1 == "ns" ~ "",
+    ANOVA_sign == "ns" ~ "",
     TRUE ~ groups_HSD_Tukey  ))
 
 
@@ -402,7 +402,7 @@ CumPlot_LSD
 ggsave(CumPlot_LSD,
        device = "png",
        filename = paste0("Plot_yield_",
-                         a,"_", b, "_Cum_ANOVA_Plot_LSD_90", ".png"),
+                         a,"_", b, "_Cum_ANOVA_Plot_LSD_95", ".png"),
        path= "X:/Therese_Jackie/Sandy_soils/Development_database/stats_batch_output/Yield_Cumulative_LSD_Plots/",
        width=8.62,
        height = 6.28,
@@ -436,7 +436,7 @@ CumPlot_Tukey
 ggsave(CumPlot_Tukey,
        device = "png",
        filename = paste0("Plot_yield_",
-                         a,"_", b, "_Cum_ANOVA_Plot_Tukey90", ".png"),
+                         a,"_", b, "_Cum_ANOVA_Plot_Tukey95", ".png"),
        path= "X:/Therese_Jackie/Sandy_soils/Development_database/stats_batch_output/Yield_Cumulative_Tukey_Plots",
        width=8.62,
        height = 6.28,
@@ -472,7 +472,7 @@ CumPlot_Dun
 ggsave(CumPlot_Dun,
        device = "png",
        filename = paste0("Plot_yield_", 
-                         a,"_", b, "_Cum_ANOVA_Plot_Dun90", ".png"),
+                         a,"_", b, "_Cum_ANOVA_Plot_Dun95", ".png"),
        path= "X:/Therese_Jackie/Sandy_soils/Development_database/stats_batch_output/Yield_Cumulative_Dunnetts_Plots/",
        width=8.62,
        height = 6.28,
