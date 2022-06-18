@@ -195,14 +195,28 @@ summary_control_data_all %>%
   #filter(yr_post_amelioration == c(0,1,2,3)) %>% 
   
 ggplot( mapping = aes(yr_post_amelioration, yield_gain, group = as.factor(yr_post_amelioration))) +
-  
-  geom_point(alpha = 0.1) +
-  geom_boxplot(alpha = 0.2,  )+
-  
+  #geom_point(alpha = 0.1) +
+  geom_boxplot(outlier.shape = NA,alpha = 0.2 )+
+  geom_hline(yintercept = 0, linetype = "dashed", colour = "red")+
   facet_wrap(.~soil_modification)+
   labs(
       x = "years post amelioration", y = "yield gain t/ha")
   
+
+# data_for_box_plots <- summary_control_data_all %>%
+#   filter(!is.na(yr_post_amelioration )) %>% 
+#   filter(amendment_all ==  "none"  ) %>% 
+#   filter(soil_modification != "Unmodified")
+# 
+# data_for_box_plots %>% 
+# ggplot( mapping = aes(yr_post_amelioration, yield_gain, group = as.factor(yr_post_amelioration))) +
+#   #geom_point(alpha = 0.1) +
+#   geom_boxplot(outlier.shape = NA,alpha = 0.2,  )+
+#   
+#   facet_wrap(.~soil_modification)+
+#   labs(
+#     x = "years post amelioration", y = "yield gain t/ha")
+
 #######################################################################################################################
 str(summary_control_data_all$yr_post_amelioration)
 
