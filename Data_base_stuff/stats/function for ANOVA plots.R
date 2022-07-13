@@ -10,8 +10,8 @@ library(multcompView)
 library(scales)
 
 # site_yrs_list <- c("BucklebooX2019",
-#                    "BucklebooX2020",
-#                    "BucklebooX2021")
+#                     "BucklebooX2020",
+#                     "BucklebooX2021")
 
 ### List of sites I want to run analysis for:
 site_yrs_list <- c("Brimpton LakeX2014",
@@ -157,8 +157,8 @@ for (site_yrs_list in site_yrs_list){
 ##################################################################################################################
 
 
-data_file <- "X:/Therese_Jackie/Sandy_soils/Development_database/stats_batch_output/ANOVA_by_Yr_sites_merged.csv"
-
+data_file <- "X:/Therese_Jackie/Sandy_soils/Development_database/stats_batch_output/final_method/ANOVA_by_Yr_sites_merged_90percent.csv"
+           
 ## download the data using the specified file path above
 
 ANOVA_results <- read_csv(data_file) 
@@ -363,27 +363,27 @@ ANOVA_results <- ANOVA_results_site %>%
   filter(year == b)
 
 
-
+#names(ANOVA_results)
 
 ### make a new clm for plotting letters if the ANOVA is significant
 ANOVA_results <- ANOVA_results %>% 
   dplyr::mutate(groups_LSD_display = case_when(
-    ANOVA_sign == "ns" ~ "",
+    ANOVA_sign_0.1 == "ns" ~ "",
     TRUE ~ groups_LSD  ))
   
 ANOVA_results <- ANOVA_results %>% 
   dplyr::mutate(significance_control_display = case_when(
-    ANOVA_sign == "ns" ~ "",
-    TRUE ~ significance_control  ))
+    ANOVA_sign_0.1 == "ns" ~ "",
+    TRUE ~ significance_control_0.1  ))
 
 ANOVA_results <- ANOVA_results %>% 
   dplyr::mutate(LSD_display = case_when(
-    ANOVA_sign == "ns" ~ paste0("") ,
+    ANOVA_sign_0.1 == "ns" ~ paste0("") ,
     TRUE ~ paste0("LSD = ", signif(LSD, digits = 4))))
 
 ANOVA_results <- ANOVA_results %>% 
   dplyr::mutate(Dunnetts_display = case_when(
-    ANOVA_sign == "ns" ~ paste0("") ,
+    ANOVA_sign_0.1 == "ns" ~ paste0("") ,
     TRUE ~ paste0("Dunnetts test")))
 
 
@@ -407,17 +407,22 @@ plot_LSD <- ANOVA_results %>%
             vjust=-0.5, hjust=-0.3, 
             colour = "gray25")+
   
-  theme(axis.text.x=element_text(angle=45,hjust=1))+
+  #theme(axis.text.x=element_text(angle=45,hjust=1))+
+  theme(
+    axis.text.x=element_text(angle=45,hjust=1, size = 14),
+    axis.text.y=element_text(size = 14),
+    plot.title = element_text(size = 20))+
   labs(x="", 
        y="Yield t/ha", title = paste0(a,": ", b),
        subtitle = ANOVA_results$LSD_display) 
+#plot_LSD
 
 ### save the LSD
 ggsave(plot_LSD,
        device = "png",
        filename = paste0("Plot_yield_", 
                          a,"_", b, "_ANOVA_Plot_LSD", ".png"),
-       path= "X:/Therese_Jackie/Sandy_soils/Development_database/stats_batch_output/Yield_Yrs_LSD_Plots/",
+       path= "X:/Therese_Jackie/Sandy_soils/Development_database/stats_batch_output/final_method/Yield_Yrs_LSD_Plots/",
        width=8.62,
        height = 6.28,
        dpi=600
@@ -442,11 +447,15 @@ plot_dun <- ANOVA_results %>%
   
   geom_text(aes(label=significance_control_display), 
             position = position_dodge(0.80), 
-            size = 3,
+                        size = 3,
             vjust=-0.5, hjust=-0.3, 
             colour = "gray25")+
   
-  theme(axis.text.x=element_text(angle=45,hjust=1))+
+  #theme(axis.text.x=element_text(angle=45,hjust=1))+
+  theme(
+    axis.text.x=element_text(angle=45,hjust=1, size = 14),
+    axis.text.y=element_text(size = 14),
+    plot.title = element_text(size = 20))+
   labs(x="", 
        y="Yield t/ha", title = paste0(a,": ", b),
        subtitle = paste0("ANOVA, " , ANOVA_results$Dunnetts_display)) 
@@ -456,7 +465,8 @@ ggsave(plot_dun,
        device = "png",
        filename = paste0("Plot_yield_", 
                          a,"_", b, "_ANOVA_Plot_dun", ".png"),
-       path= "X:/Therese_Jackie/Sandy_soils/Development_database/stats_batch_output/Yield_Yrs_Dunnetts_Plots/",
+       path= "X:/Therese_Jackie/Sandy_soils/Development_database/stats_batch_output/final_method/Yield_Yrs_Dunnetts_Plots/",
+       
        width=8.62,
        height = 6.28,
        dpi=600
