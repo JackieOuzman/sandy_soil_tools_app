@@ -8,7 +8,7 @@ library(tidyverse)
 library(multcompView)
 library(scales)
 
-#site_yrs_list = "YounghusbandX2020"
+site_yrs_list = "YounghusbandX2020to2021"
 
 ### List of sites I want to run analysis for:
 site_yrs_list <- c("Brimpton LakeX2014to2018",
@@ -44,7 +44,7 @@ site_yrs_list <- c("Brimpton LakeX2014to2018",
                    "WarnertownX2019to2021",
                    "WynarkaX2019to2021",
                    "YendaX2017to2021",
-                   "YounghusbandX2020"
+                   #"YounghusbandX2020"
                    )
 
 
@@ -59,9 +59,10 @@ for (site_yrs_list in site_yrs_list){
 #################################################################################################################
   
   
-data_file_Cum_ANOVA <- "X:/Therese_Jackie/Sandy_soils/Development_database/stats_batch_output/Cum_ANOVA_sites_merged.csv"
-data_file <- "X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/stats_working/sites_merged.csv"
-  
+data_file_Cum_ANOVA <- "X:/Therese_Jackie/Sandy_soils/Development_database/stats_batch_output/final_method/Cum_ANOVA_sites_merged_90.csv"
+                       
+data_file <- "X:/Therese_Jackie/Sandy_soils/Development_database/completeDB/sites_merged.csv"
+             
 ## download the data using the specified file path above
   
 Cum_ANOVA_results <- read_csv(data_file_Cum_ANOVA)
@@ -303,14 +304,15 @@ site_year_yld_summary$Descriptors <- factor(site_year_yld_summary$Descriptors,
 
 
 order_yrs <- c(
-  "2014",
-  "2015",
-  "2016",
-  "2017",
-  "2018",
-  "2019",
+  "2021",
   "2020",
-  "2021")
+  "2019",
+  "2018",
+  "2017",
+  "2016",
+  "2015",
+  "2014"
+  )
 
 site_year_yld_summary$year <- factor(site_year_yld_summary$year,
                                         levels = order_yrs)
@@ -326,28 +328,28 @@ Cum_ANOVA_results_site <- Cum_ANOVA_results_site %>%
   dplyr::mutate(year = as.factor(max_yr))
 print(Cum_ANOVA_results_site$year)
 
-
+names(Cum_ANOVA_results_site)
 ### make a new clm for plotting letters if the cum ANOVA is significant
 Cum_ANOVA_results_site <- Cum_ANOVA_results_site %>% 
   dplyr::mutate(groups_LSD_cum_display = case_when(
-    ANOVA_sign == "ns" ~ "",
+    ANOVA_sign_0.1 == "ns" ~ "",
     TRUE ~ groups_LSD_cum  ))
 
 Cum_ANOVA_results_site <- Cum_ANOVA_results_site %>% 
   dplyr::mutate(significance_control_display = case_when(
-    ANOVA_sign == "ns" ~ "",
-    TRUE ~ significance_control  ))
+    ANOVA_sign_0.1 == "ns" ~ "",
+    TRUE ~ significance_control_0.1  ))
 
 
 
 Cum_ANOVA_results_site <- Cum_ANOVA_results_site %>% 
   dplyr::mutate(LSD_cum_display = case_when(
-    ANOVA_sign == "ns" ~ paste0("") ,
+    ANOVA_sign_0.1 == "ns" ~ paste0("") ,
     TRUE ~ paste0("LSD = ", signif(LSD_cum, digits = 4))))
 
 Cum_ANOVA_results_site <- Cum_ANOVA_results_site %>% 
   dplyr::mutate(Dunnetts_display = case_when(
-    ANOVA_sign == "ns" ~ paste0("") ,
+    ANOVA_sign_0.1 == "ns" ~ paste0("") ,
     TRUE ~ paste0("Dunnetts test")))
 
 
@@ -365,21 +367,26 @@ CumPlot_LSD <- site_year_yld_summary %>%
   theme_bw() + 
   scale_y_continuous(breaks=seq(0,max_sum_cum,by=1.0), limits = c(0, max_sum_cum))+
   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank()) +
-  theme(axis.text.x=element_text(angle=60,hjust=1))+
+  
+  theme(
+    axis.text.x=element_text(angle=45,hjust=1, size = 10),
+    axis.text.y=element_text(size = 10),
+    plot.title = element_text(size = 20))+
+  
   geom_text(data = Cum_ANOVA_results_site,
             aes(x = factor(Descriptors), y = (mean_cum_yld +0.5), label=groups_LSD_cum_display), 
             position = position_dodge(0.80), 
             size = 3,
             vjust=-0.5, hjust=0.1, 
             colour = "gray25")
-
+CumPlot_LSD
 
 ### save the plot
 ggsave(CumPlot_LSD,
        device = "png",
        filename = paste0("Plot_yield_", 
                          a,"_", b, "_Cum_ANOVA_Plot_LSD", ".png"),
-       path= "X:/Therese_Jackie/Sandy_soils/Development_database/stats_batch_output/Yield_Cumulative_LSD_Plots/",
+       path= "X:/Therese_Jackie/Sandy_soils/Development_database/stats_batch_output/final_method/Yield_Cumulative_LSD_Plots/",
        width=8.62,
        height = 6.28,
        dpi=600
@@ -396,7 +403,12 @@ CumPlot_Dun <- site_year_yld_summary %>%
   theme_bw() + 
   scale_y_continuous(breaks=seq(0,max_sum_cum,by=1.0), limits = c(0, max_sum_cum))+
   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank()) +
-  theme(axis.text.x=element_text(angle=60,hjust=1))+
+  
+  theme(
+    axis.text.x=element_text(angle=45,hjust=1, size = 10),
+    axis.text.y=element_text(size = 10),
+    plot.title = element_text(size = 20))+
+  
   geom_text(data = Cum_ANOVA_results_site,
             aes(x = factor(Descriptors), y = (mean_cum_yld +0.5),label=significance_control_display), 
             position = position_dodge(0.80), 
@@ -410,7 +422,7 @@ ggsave(CumPlot_Dun,
        device = "png",
        filename = paste0("Plot_yield_", 
                          a,"_", b, "_Cum_ANOVA_Plot_Dun", ".png"),
-       path= "X:/Therese_Jackie/Sandy_soils/Development_database/stats_batch_output/Yield_Cumulative_Dunnetts_Plots/",
+       path= "X:/Therese_Jackie/Sandy_soils/Development_database/stats_batch_output/final_method/Yield_Cumulative_Dunnetts_Plots/",
        width=8.62,
        height = 6.28,
        dpi=600

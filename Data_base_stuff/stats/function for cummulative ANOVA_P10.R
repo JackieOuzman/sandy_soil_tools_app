@@ -14,7 +14,7 @@ library(car)
 library(DescTools)
 
 
-#site_yrs_list = "BucklebooX2019to2021"
+site_yrs_list = "YounghusbandX2020to2021"
 
 
 
@@ -53,7 +53,7 @@ site_yrs_list <- c(
                    "WarnertownX2019to2021",
                    "WynarkaX2019to2021",
                    "YendaX2017to2021",
-                   "YounghusbandX2020"
+                   "YounghusbandX2020to2021"
                    
                    )
 
@@ -234,9 +234,11 @@ order <- c(
   #"Inc.50_none",
   #"Inc.50_Cl@7.5.incorp_50",
   "Rip.50IncRip_none",
+  
   "Rip.50IncRip_Cl.incorp_50",
   "Rip.50IncRip_Cl.surface",
   "Rip.50IncRip_Cl@7.5.incorp_50",
+ 
   
   "Rip.60_none",
   "Rip.60_Cl.surface",
@@ -276,7 +278,9 @@ summary_data_all_1$Descriptors <- factor(summary_data_all_1$Descriptors,
 summary_data_site <- summary_data_all_1 %>%
   filter(site == a) 
 
-
+check<- summary_data_site %>% 
+  filter (is.na(Descriptors))
+  #filter(Descriptors == "NA") 
 ########################################################################################################################################
 
 #keep the rep but not the year and group the data This is for the ANOVA

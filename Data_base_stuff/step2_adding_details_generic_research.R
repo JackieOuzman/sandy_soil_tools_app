@@ -54,7 +54,7 @@ str(primary)
 
 duplicated_ID <- primary %>% 
   group_by(ID) %>% 
-  summarise(count_ID = n()) # I am aiming for a heap of one and nothing else!
+  dplyr::summarise(count_ID = n()) # I am aiming for a heap of one and nothing else!
   
 duplicated_ID <- duplicated_ID %>% 
   filter(count_ID < 1 )
@@ -728,7 +728,7 @@ primary_metadata <- read_csv(input_data_file_metadata,
 
 
 primary_metadata <- primary_metadata %>% 
-  rename(site  = `Site Name`)
+  dplyr::rename(site  = `Site Name`)
 # remove duplication that has crept in.
 primary_metadata <- primary_metadata %>% 
   distinct(site, .keep_all = TRUE)

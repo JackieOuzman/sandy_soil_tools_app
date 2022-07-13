@@ -21,7 +21,7 @@ list.of.files <- list.files(current.folder, full.names=T) #the trick is getting 
 list.of.files
 
 ### Sams 
-Bute_Sam <- read_excel("X:/Therese_Jackie/Sandy_soils/Development_database/Bute_Trengove_jax.xlsx",
+Bute_Sam <- read_excel("X:/Therese_Jackie/Sandy_soils/Development_database/Bute_Trengove_jaxs.xlsx",
                          sheet = "Database format 2015_2021", skip = 1)
 names(Bute_Sam)
 Bute_Sam <- Bute_Sam %>% dplyr::select("ID":"comments"   )
@@ -57,7 +57,7 @@ Bute_CSIRO <- read_excel("X:/Therese_Jackie/Sandy_soils/Development_database/But
                        sheet = "2018_2021", skip = 1)
 names(Bute_CSIRO)
 Bute_CSIRO <- Bute_CSIRO %>% 
-  rename("comments" ="...25")
+  dplyr::rename("comments" ="...25")
 Bute_CSIRO <- Bute_CSIRO %>% dplyr::select("ID":"comments"   )
 
 ### CSIRO metadata
