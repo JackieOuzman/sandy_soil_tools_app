@@ -5,7 +5,7 @@ library(dplyr)
 #################################################################################################################
 ####   Get the data #####
 
-current.folder <- "X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/step1_collating_files/"
+current.folder <- "X:/Therese_Jackie/Sandy_soils/Development_database/step1_collating_files/"
 
 # find the files that you want
 list.of.files <- list.files(current.folder, ".csv",full.names=T) #the trick is getting the full name - just the excel files
@@ -22,10 +22,10 @@ site_name <- "research_sites"
 
 # using site name
 
- input_data_file <- paste0("X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/step1_collating_files/",
+ input_data_file <- paste0("X:/Therese_Jackie/Sandy_soils/Development_database/step1_collating_files/",
  site_name, "_results.csv")
 
- input_data_file_metadata <- paste0("X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/step1_collating_files/",
+ input_data_file_metadata <- paste0("X:/Therese_Jackie/Sandy_soils/Development_database/step1_collating_files/",
  site_name, "_sites_metadata.csv")
 
 
@@ -56,7 +56,8 @@ duplicated_ID <- primary %>%
   group_by(ID) %>% 
   summarise(count_ID = n()) # I am aiming for a heap of one and nothing else!
   
-
+duplicated_ID <- duplicated_ID %>% 
+  filter(count_ID < 1 )
 
 #################################################################################################################
 ####   Create the descriptors #####
@@ -1208,7 +1209,7 @@ primary_join_2 <- primary_join_2 %>%
 
 
 write.csv(primary_join_2,
-          paste0("X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/step2/",site_name, "_sites_step1_2.csv") ,
+          paste0("X:/Therese_Jackie/Sandy_soils/Development_database/step2/",site_name, "_sites_step1_2.csv") ,
           row.names = FALSE)
 
 
@@ -1251,7 +1252,7 @@ duplicated_ID <- primary_neat %>%
 
 
 write.csv(primary_neat,
-          paste0("X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/step2/",site_name, "_sites_step1_2_neat.csv") ,
+          paste0("X:/Therese_Jackie/Sandy_soils/Development_database/step2/",site_name, "_sites_step1_2_neat.csv") ,
           row.names = FALSE)
 
 #############################################################################################
@@ -1318,6 +1319,6 @@ primary_with_control <- primary_with_control %>%
 
 
 write.csv(primary_with_control,
-          paste0("X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/step2/",site_name, "_sites_step1_2_control.csv") ,
+          paste0("X:/Therese_Jackie/Sandy_soils/Development_database/step2/",site_name, "_sites_step1_2_control.csv") ,
           row.names = FALSE)
 
