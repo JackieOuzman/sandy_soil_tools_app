@@ -189,7 +189,7 @@ for (site_yrs_list in site_yrs_list){
 
 ######################################
 # bring in the data
-data_file <- "X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/stats_working/sites_merged.csv"
+data_file <- "X:/Therese_Jackie/Sandy_soils/Development_database/completeDB/sites_merged.csv"
 summary_data_all_1 <- read_csv(data_file, 
                                col_types = cols(rep_block = col_character()))
 
@@ -889,7 +889,7 @@ rm( `Brimpton Lake_2014_ANOVA`,
 
 
 
-write.csv(ANOVA_sites_yr,"X:/Therese_Jackie/Sandy_soils/Development_database/stats_batch_output/ANOVA_by_Yr_sites_merged_90percent.csv" ,
+write.csv(ANOVA_sites_yr,"X:/Therese_Jackie/Sandy_soils/Development_database/stats_batch_output/final_method/ANOVA_by_Yr_sites_merged_90percent.csv" ,
           row.names = FALSE)
 
 
