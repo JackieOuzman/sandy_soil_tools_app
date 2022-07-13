@@ -7,17 +7,17 @@ library(tidyverse)
 #################################################################################################################
 ####   Get the data site trial data #####
 
-current.folder <- "X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/step2"
+current.folder <- "X:/Therese_Jackie/Sandy_soils/Development_database/step2"
 
 
 
 
 impact_sites_step1_2 <- 
-  read_csv("X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/step2/impact_sites_step1_2_neat.csv", 
+  read_csv("X:/Therese_Jackie/Sandy_soils/Development_database/step2/impact_sites_step1_2_neat.csv", 
            col_types = cols(yield = col_double()))
 
 research_sites_sites_step1_2 <-
-  read.csv("X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/step2/research_sites_sites_step1_2_neat.csv")
+  read.csv("X:/Therese_Jackie/Sandy_soils/Development_database/step2/research_sites_sites_step1_2_neat.csv")
 
 
 
@@ -26,7 +26,7 @@ sites_merged <- rbind(impact_sites_step1_2, research_sites_sites_step1_2)
   
 
                          
-output_folder <- "X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/stats_working/"
+output_folder <- "X:/Therese_Jackie/Sandy_soils/Development_database/completeDB/"
 
 write.csv(sites_merged, paste0(output_folder,"sites_merged",".csv"))                           
 
@@ -36,12 +36,12 @@ write.csv(sites_merged, paste0(output_folder,"sites_merged",".csv"))
 ####   Get the data site trial CONTROL data #####
 
 impact_sites_step1_2_control <- 
-  read_csv("X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/step2/impact_sites_step1_2_control.csv", 
+  read_csv("X:/Therese_Jackie/Sandy_soils/Development_database/step2/impact_sites_step1_2_control.csv", 
            col_types = cols(yield = col_double(),
                             control_yield = col_double()))
 
 research_sites_sites_step1_2_control <-
-  read.csv("X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/step2/research_sites_sites_step1_2_control.csv")
+  read.csv("X:/Therese_Jackie/Sandy_soils/Development_database/step2/research_sites_sites_step1_2_control.csv")
 
 str(impact_sites_step1_2_control)
 str(research_sites_sites_step1_2_control$yield)
@@ -53,7 +53,7 @@ sites_merged_control <- rbind(
 
 
 
-output_folder <- "X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/stats_working/"
+output_folder <- "X:/Therese_Jackie/Sandy_soils/Development_database/completeDB/"
 
 write.csv(sites_merged_control, paste0(output_folder,"sites_control_merged",".csv"))            
 
@@ -61,13 +61,13 @@ write.csv(sites_merged_control, paste0(output_folder,"sites_control_merged",".cs
 #################################################################################################################
 ####   Get the data site trial data all of the data not just the neat stuff #####
 
-current.folder <- "X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/step2"
+current.folder <- "X:/Therese_Jackie/Sandy_soils/Development_database/step2"
 
 
 
 
 impact_sites_step1_2_all <- 
-  read_csv("X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/step2/impact_sites_step1_2.csv", 
+  read_csv("X:/Therese_Jackie/Sandy_soils/Development_database/step2/impact_sites_step1_2.csv", 
            col_types = cols(
              ID =  col_character(),
              site = col_character(),
@@ -120,7 +120,7 @@ impact_sites_step1_2_all <-
 
 research_sites_sites_step1_2_all <-
   read_csv(
-    "X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/step2/research_sites_sites_step1_2.csv",
+    "X:/Therese_Jackie/Sandy_soils/Development_database/step2/research_sites_sites_step1_2.csv",
     col_types = cols(
       ID =  col_character(),
       site = col_character(),
@@ -175,7 +175,7 @@ impact_sites_step1_2_all <- impact_sites_step1_2_all %>%
 
 sites_merged_all <- rbind(impact_sites_step1_2_all, research_sites_sites_step1_2_all)
 
-output_folder <- "X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/stats_working/"
+output_folder <- "X:/Therese_Jackie/Sandy_soils/Development_database/completeDB/"
 
 write.csv(sites_merged_all, paste0(output_folder,"sites_merged_all_messy",".csv"))                           
 
