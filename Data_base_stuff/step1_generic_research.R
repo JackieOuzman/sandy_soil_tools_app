@@ -12,7 +12,8 @@ library(stringr)
 
 
 
-current.folder <- "X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/"
+#current.folder <- "X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/"
+current.folder <- "X:/Therese_Jackie/Sandy_soils/Development_database/"
 
 # find the files that you want
 list.of.files <- list.files(current.folder, ".xlsx",full.names=T) #the trick is getting the full name - just the excel files
@@ -20,17 +21,17 @@ list.of.files <- list.files(current.folder, full.names=T) #the trick is getting 
 list.of.files
 
 ### Sams 
-Bute_Sam <- read_excel("X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/Bute_Trengove_jax.xlsx",
+Bute_Sam <- read_excel("X:/Therese_Jackie/Sandy_soils/Development_database/Bute_Trengove_jax.xlsx",
                          sheet = "Database format 2015_2021", skip = 1)
 names(Bute_Sam)
 Bute_Sam <- Bute_Sam %>% dplyr::select("ID":"comments"   )
 
 ### Sams metadata
 
- Bute_Sam_metadata <- read_excel("X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/Bute_Trengove_jax.xlsx",
+ Bute_Sam_metadata <- read_excel("X:/Therese_Jackie/Sandy_soils/Development_database/Bute_Trengove_jaxs.xlsx",
                               sheet = "Site_metadata")
 
- Bute_Sam_metadata <- read_excel("X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/Bute_Trengove_jax.xlsx",
+ Bute_Sam_metadata <- read_excel("X:/Therese_Jackie/Sandy_soils/Development_database/Bute_Trengove_jaxs.xlsx",
                                  sheet = "Site_metadata", col_types = c("text",
                                                                         "numeric", "numeric", "numeric",
                                                                         "numeric", "numeric", "numeric",
@@ -52,7 +53,7 @@ Bute_Sam <- Bute_Sam %>% dplyr::select("ID":"comments"   )
 
 
 ### CSIRO
-Bute_CSIRO <- read_excel("X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/Bute_Trial_2018_2021.xlsx",
+Bute_CSIRO <- read_excel("X:/Therese_Jackie/Sandy_soils/Development_database/Bute_Trial_2018_2021_jaxs.xlsx",
                        sheet = "2018_2021", skip = 1)
 names(Bute_CSIRO)
 Bute_CSIRO <- Bute_CSIRO %>% 
@@ -61,7 +62,7 @@ Bute_CSIRO <- Bute_CSIRO %>% dplyr::select("ID":"comments"   )
 
 ### CSIRO metadata
 
-Bute_CSIRO_metadata <- read_excel("X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/Bute_Trial_2018_2021.xlsx",
+Bute_CSIRO_metadata <- read_excel("X:/Therese_Jackie/Sandy_soils/Development_database/Bute_Trial_2018_2021_jaxs.xlsx",
                                   sheet = "Site_metadata", col_types = c("text",
                                                                          "numeric", "numeric", "numeric",
                                                                          "numeric", "numeric", "numeric",
@@ -85,14 +86,14 @@ Bute_CSIRO_metadata <- read_excel("X:/Therese_Jackie/Sandy_soils/Development_dat
 
 
 
-Yenda <- read_excel("X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/SNSW Yenda Data Sheet 2021_jax.xlsx",
+Yenda <- read_excel("X:/Therese_Jackie/Sandy_soils/Development_database/SNSW Yenda Data Sheet 2021_jaxs.xlsx",
                           sheet = "Database format Yenda 2017-2021", skip = 0)
  names(Yenda)
  Yenda <- Yenda %>% dplyr::select("ID":"comments"   )
 
  ### Yenda metadata
 
- metadata_Yenda <- read_excel("X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/SNSW Yenda Data Sheet 2021_jax.xlsx",
+ metadata_Yenda <- read_excel("X:/Therese_Jackie/Sandy_soils/Development_database/SNSW Yenda Data Sheet 2021_jaxs.xlsx",
                                   sheet = "Site_metadata", col_types = c("text",
                                                                          "numeric", "numeric", "numeric",
                                                                          "numeric", "numeric", "numeric",
@@ -115,14 +116,14 @@ Yenda <- read_excel("X:/Therese_Jackie/Sandy_soils/Development_database/other_si
 
 
 
-Ouyen_Spade <- read_excel("X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/Ouyen.xlsm",
+Ouyen_Spade <- read_excel("X:/Therese_Jackie/Sandy_soils/Development_database/Ouyen_jaxs.xlsm",
                           sheet = "Database_format_spade", skip = 1)
  names(Ouyen_Spade)
  Ouyen_Spade <- Ouyen_Spade %>% dplyr::select("ID":"comments"   )
 #
 ### a metadata
 #
- metadata_Ouyen_Spade <- read_excel("X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/Ouyen.xlsm",
+ metadata_Ouyen_Spade <- read_excel("X:/Therese_Jackie/Sandy_soils/Development_database/Ouyen_jaxs.xlsm",
                                   sheet = "Site_metadata", col_types = c("text",
                                                                          "numeric", "numeric", "numeric",
                                                                          "numeric", "numeric", "numeric",
@@ -154,14 +155,14 @@ Ouyen_Spade <- read_excel("X:/Therese_Jackie/Sandy_soils/Development_database/ot
 
 
  
-Lowaldie <- read_excel(paste0("X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/", "Lowaldie", ".xlsx"),
+Lowaldie <- read_excel(paste0("X:/Therese_Jackie/Sandy_soils/Development_database/", "Lowaldie_jaxs", ".xlsx"),
                            sheet = "Database format", skip = 1)
 #  names(Lowaldie)
 Lowaldie <- Lowaldie %>% dplyr::select("ID":"comments"   )
 # #
 # ### a metadata
 # #
-metadata_Lowaldie <- read_excel(paste0("X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/", "Lowaldie", ".xlsx"),
+metadata_Lowaldie <- read_excel(paste0("X:/Therese_Jackie/Sandy_soils/Development_database/", "Lowaldie_jaxs", ".xlsx"),
                                   sheet = "Site_metadata", col_types = c("text",
                                                                          "numeric", "numeric", "numeric",
                                                                          "numeric", "numeric", "numeric",
@@ -180,14 +181,14 @@ metadata_Lowaldie <- read_excel(paste0("X:/Therese_Jackie/Sandy_soils/Developmen
                                                                          "date"))
 #Brooker
 
-Brooker <- read_excel(paste0("X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/", "Murlong_Brooker_v2", ".xlsx"),
+Brooker <- read_excel(paste0("X:/Therese_Jackie/Sandy_soils/Development_database/", "Murlong_Brooker_jaxs", ".xlsx"),
                    sheet = "Database format brooker", skip = 1)
 #  names(Brooker)
 Brooker <- Brooker %>% dplyr::select("ID":"comments"   )
 # #
 # ### a metadata
 # #
-metadata_Brooker <- read_excel(paste0("X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/", "Murlong_Brooker_v2", ".xlsx"),
+metadata_Brooker <- read_excel(paste0("X:/Therese_Jackie/Sandy_soils/Development_database/", "Murlong_Brooker_jaxs", ".xlsx"),
                        sheet = "Site_metadata", col_types = c("text",
                                                               "numeric", "numeric", "numeric",
                                                               "numeric", "numeric", "numeric",
@@ -209,14 +210,14 @@ metadata_Brooker <- metadata_Brooker %>% filter(`Site Name` == "Brooker" )
 
 # # # YoungHusband 
 
-YoungHusband <- read_excel(paste0("X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/Younghusband/", "Sandy Soils Younghusband Data jaxs2020_2021", ".xlsx"),
+YoungHusband <- read_excel(paste0("X:/Therese_Jackie/Sandy_soils/Development_database/", "Sandy Soils Younghusband Data jaxs2020_2021", ".xlsx"),
                     sheet = "Database format 2020_21", skip = 0)
   names(YoungHusband)
  YoungHusband <- YoungHusband %>% dplyr::select("ID":"comments"   )
 # #
 # ### a metadata
 # #
-metadata_YoungHusband <- read_excel(paste0("X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/Younghusband/", "Sandy Soils Younghusband Data jaxs2020_2021", ".xlsx"),
+metadata_YoungHusband <- read_excel(paste0("X:/Therese_Jackie/Sandy_soils/Development_database/", "Sandy Soils Younghusband Data jaxs2020_2021", ".xlsx"),
                        sheet = "Site_metadata", col_types = c("text",
                                                               "numeric", "numeric", "numeric",
                                                               "numeric", "numeric", "numeric",
@@ -237,7 +238,7 @@ metadata_YoungHusband <- read_excel(paste0("X:/Therese_Jackie/Sandy_soils/Develo
 
 # Waikerie
 # 
-Waikerie <- read_excel(paste0("X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/", "Waikerie", ".xlsx"),
+Waikerie <- read_excel(paste0("X:/Therese_Jackie/Sandy_soils/Development_database/", "Waikerie_jaxs", ".xlsx"),
                    sheet = "Database_format", skip = 1)
 names(Waikerie)
 Waikerie <- Waikerie %>% dplyr::select("ID":"comments"   )
@@ -248,7 +249,7 @@ Waikerie <- Waikerie %>% dplyr::select("ID":"comments"   )
 # #
 # ### a metadata
 # #
-metadata_Waikerie <- read_excel(paste0("X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/", "Waikerie", ".xlsx"),
+metadata_Waikerie <- read_excel(paste0("X:/Therese_Jackie/Sandy_soils/Development_database/", "Waikerie_jaxs", ".xlsx"),
                        sheet = "Site_metadata", col_types = c("text",
                                                               "numeric", "numeric", "numeric",
                                                               "numeric", "numeric", "numeric",
@@ -270,14 +271,14 @@ metadata_Waikerie <- read_excel(paste0("X:/Therese_Jackie/Sandy_soils/Developmen
 
 #PIRSA_New Horizons
 
-New_Horizons <- read_excel(paste0("X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/", "PIRSA_New Horizons_Fraser_2014-2018_jax", ".xlsx"),
+New_Horizons <- read_excel(paste0("X:/Therese_Jackie/Sandy_soils/Development_database/", "PIRSA_New Horizons_Fraser_2014-2018_jax", ".xlsx"),
                    sheet = "Database format", skip = 0)
 names(New_Horizons)
 New_Horizons <- New_Horizons %>% dplyr::select("ID":"comments"   )
 
 ### a metadata
 
-metadata_New_Horizons <- read_excel(paste0("X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/", "PIRSA_New Horizons_Fraser_2014-2018_jax", ".xlsx"),
+metadata_New_Horizons <- read_excel(paste0("X:/Therese_Jackie/Sandy_soils/Development_database/", "PIRSA_New Horizons_Fraser_2014-2018_jax", ".xlsx"),
                        sheet = "Site_metadata", col_types = c("text",
                                                               "numeric", "numeric", "numeric",
                                                               "numeric", "numeric", "numeric",
@@ -297,14 +298,14 @@ metadata_New_Horizons <- read_excel(paste0("X:/Therese_Jackie/Sandy_soils/Develo
 
 # Murlong
 
-Murlong <- read_excel(paste0("X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/", "Murlong_Brooker_v2", ".xlsx"),
+Murlong <- read_excel(paste0("X:/Therese_Jackie/Sandy_soils/Development_database/", "Murlong_Brooker_jaxs", ".xlsx"),
                    sheet = "Database format Murlong", skip = 1)
 #  names(Murlong)
 Murlong <- Murlong %>% dplyr::select("ID":"comments"   )
 # #
 # ### a metadata
 # #
-metadata_Murlong <- read_excel(paste0("X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/", "Murlong_Brooker_v2", ".xlsx"),
+metadata_Murlong <- read_excel(paste0("X:/Therese_Jackie/Sandy_soils/Development_database/", "Murlong_Brooker_jaxs", ".xlsx"),
                        sheet = "Site_metadata", col_types = c("text",
                                                               "numeric", "numeric", "numeric",
                                                               "numeric", "numeric", "numeric",
@@ -325,14 +326,14 @@ metadata_Murlong <- read_excel(paste0("X:/Therese_Jackie/Sandy_soils/Development
 metadata_Murlong <- metadata_Murlong %>% filter(`Site Name` == "Murlong" )
 #CarwarpAmelioration
 
-CarwarpAmelioration <- read_excel(paste0("X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/", "CarwarpAmelioration", ".xlsx"),
+CarwarpAmelioration <- read_excel(paste0("X:/Therese_Jackie/Sandy_soils/Development_database/", "CarwarpAmelioration_jaxs", ".xlsx"),
                    sheet = "Database_format", skip = 1)
 #  names(CarwarpAmelioration)
 CarwarpAmelioration <- CarwarpAmelioration %>% dplyr::select("ID":"comments"   )
 # #
 # ### a metadata
 # #
-metadata_CarwarpAmelioration <- read_excel(paste0("X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/", "CarwarpAmelioration", ".xlsx"),
+metadata_CarwarpAmelioration <- read_excel(paste0("X:/Therese_Jackie/Sandy_soils/Development_database/", "CarwarpAmelioration_jaxs", ".xlsx"),
                        sheet = "Site_metadata", col_types = c("text",
                                                               "numeric", "numeric", "numeric",
                                                               "numeric", "numeric", "numeric",
@@ -365,14 +366,14 @@ metadata_CarwarpAmelioration <- metadata_CarwarpAmelioration %>%
 
 
 
-Ouyen_Placement <- read_excel("X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/Ouyen.xlsm",
+Ouyen_Placement <- read_excel("X:/Therese_Jackie/Sandy_soils/Development_database/Ouyen_jaxs.xlsm",
                           sheet = "Database_format drill 17_21")
 names(Ouyen_Placement)
 Ouyen_Placement <- Ouyen_Placement %>% dplyr::select("ID":"comments"   )
 #
 ### a metadata
 #
-metadata_Ouyen_Placement <- read_excel("X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/Ouyen.xlsm",
+metadata_Ouyen_Placement <- read_excel("X:/Therese_Jackie/Sandy_soils/Development_database/Ouyen_jaxs.xlsm",
                                    sheet = "Site_metadata", col_types = c("text",
                                                                           "numeric", "numeric", "numeric",
                                                                           "numeric", "numeric", "numeric",
@@ -470,7 +471,7 @@ metadata <- rbind(
 
 
 write.csv(metadata,
-          paste0("X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/step1_collating_files/", "research_sites", "_sites_metadata.csv") ,row.names = FALSE)
+          paste0("X:/Therese_Jackie/Sandy_soils/Development_database/step1_collating_files/", "research_sites", "_sites_metadata.csv") ,row.names = FALSE)
 write.csv(site,
-          paste0("X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/step1_collating_files/", "research_sites", "_results.csv"),row.names = FALSE)
+          paste0("X:/Therese_Jackie/Sandy_soils/Development_database/step1_collating_files/", "research_sites", "_results.csv"),row.names = FALSE)
          
