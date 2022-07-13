@@ -82,7 +82,7 @@ for (site_yrs_list in site_yrs_list){
 
 
 
-summary_data_all_1 <- read_csv("X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/stats_working/sites_merged.csv", 
+summary_data_all_1 <- read_csv("X:/Therese_Jackie/Sandy_soils/Development_database/completeDB/sites_merged.csv", 
                              col_types = cols(rep_block = col_character()))
 
 ### brooker is a problem site I want to filter out these ones:
@@ -582,8 +582,8 @@ rm( `Brimpton Lake_2014to2018_Cum_ANOVA`,
 
 
 
-write.csv(Cum_ANOVA_sites_yr,"X:/Therese_Jackie/Sandy_soils/Development_database/stats_batch_output/Cum_ANOVA_sites_merged_90.csv" ,
-          row.names = FALSE)
+write.csv(Cum_ANOVA_sites_yr,"X:/Therese_Jackie/Sandy_soils/Development_database/stats_batch_output/final_method/Cum_ANOVA_sites_merged_90.csv" ,
+                             row.names = FALSE)
 
 
 
