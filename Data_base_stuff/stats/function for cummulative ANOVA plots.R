@@ -8,7 +8,7 @@ library(tidyverse)
 library(multcompView)
 library(scales)
 
-site_yrs_list = "YounghusbandX2020to2021"
+#site_yrs_list = "YounghusbandX2020to2021"
 
 ### List of sites I want to run analysis for:
 site_yrs_list <- c("Brimpton LakeX2014to2018",
@@ -37,6 +37,8 @@ site_yrs_list <- c("Brimpton LakeX2014to2018",
                    
                    "MurlongX2018to2021",
                    "Ouyen_SpadeX2017to2020",
+                   "Ouyen_PlacementX2017to2020",
+                   
                    "SherwoodX2019to2021",
                    "Telopea_DownsX2020to2021",
                    "TempyX2019to2020", #"TempyX2021", #no yield
@@ -44,7 +46,7 @@ site_yrs_list <- c("Brimpton LakeX2014to2018",
                    "WarnertownX2019to2021",
                    "WynarkaX2019to2021",
                    "YendaX2017to2021",
-                   #"YounghusbandX2020"
+                   "YounghusbandX2020to2021"
                    )
 
 
@@ -85,6 +87,7 @@ b
 ##### order the Descriptors
 order <- c(
   "Control",
+  "Unmodified+OnRow_none",
   "Unmodified_SE14.band_8",
   "Unmodified_Bi_Agra.surface+band_8",
   "Unmodified_Lc.surface",
@@ -275,14 +278,29 @@ LSD_cum
 #filter the TRIAL data on site 
 site_year_yld_summary_site <- summary_data_all %>%
   filter(site == a) 
+### brooker is a problem site I want to filter out these ones:
 
-### make a dummy clm to filter out Younghusband 2021 data
 site_year_yld_summary_site <- site_year_yld_summary_site %>%
-  dplyr::mutate(site_yr_dummy = paste0(site, year))
+  filter(Descriptors  != "Spade.30_Lc@1.incorp_30") %>%
+  filter(Descriptors  != "Spade.30_Lc@1.incorp_30.K_added.surface") %>%
+  filter(Descriptors  != "Spade.30_Lc@2.incorp_30") %>%
+  filter(Descriptors  != "Spade.30_Lc@2.incorp_30.K_added.surface") %>%
+  filter(Descriptors  != "Spade.30_Lc@6.incorp_30") %>%
+  filter(Descriptors  != "Spade.30_Lc@6.incorp_30.K_added.surface") %>%
+  filter(Descriptors  != "Spade.30_Lc@10.incorp_30") %>%
+  filter(Descriptors  != "Spade.30_Lc@10.incorp_30.K_added.surface") %>%
+  filter(Descriptors  != "Spade.30_Lc@20.incorp_30") %>% 
+  filter(Descriptors  != "Spade.30_Lc@20.incorp_30.K_added.surface")
 
-## filter out the 2021 Younghusband data
-site_year_yld_summary_site <- site_year_yld_summary_site %>%
-  filter(site_yr_dummy  != "Younghusband2021") 
+
+
+# ### make a dummy clm to filter out Younghusband 2021 data
+# site_year_yld_summary_site <- site_year_yld_summary_site %>%
+#   dplyr::mutate(site_yr_dummy = paste0(site, year))
+# 
+# ## filter out the 2021 Younghusband data
+# site_year_yld_summary_site <- site_year_yld_summary_site %>%
+#   filter(site_yr_dummy  != "Younghusband2021") 
 
 
 site_year_yld_summary <- site_year_yld_summary_site %>% 
@@ -369,7 +387,7 @@ CumPlot_LSD <- site_year_yld_summary %>%
   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank()) +
   
   theme(
-    axis.text.x=element_text(angle=45,hjust=1, size = 10),
+    axis.text.x=element_text(angle=50,hjust=1, size = 10),
     axis.text.y=element_text(size = 10),
     plot.title = element_text(size = 20))+
   
@@ -405,7 +423,7 @@ CumPlot_Dun <- site_year_yld_summary %>%
   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank()) +
   
   theme(
-    axis.text.x=element_text(angle=45,hjust=1, size = 10),
+    axis.text.x=element_text(angle=50,hjust=1, size = 10),
     axis.text.y=element_text(size = 10),
     plot.title = element_text(size = 20))+
   

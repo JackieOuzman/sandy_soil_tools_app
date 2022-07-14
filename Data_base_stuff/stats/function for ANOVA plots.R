@@ -112,6 +112,11 @@ site_yrs_list <- c("Brimpton LakeX2014",
                    "Ouyen_SpadeX2019",
                    "Ouyen_SpadeX2020",
                    
+                   "Ouyen_PlacementX2017",
+                   "Ouyen_PlacementX2018",
+                   "Ouyen_PlacementX2019",
+                   "Ouyen_PlacementX2020",
+                   
                    "SherwoodX2019",
                    "SherwoodX2020",
                    "SherwoodX2021",

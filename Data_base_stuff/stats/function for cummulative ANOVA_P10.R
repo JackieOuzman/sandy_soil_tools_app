@@ -14,7 +14,7 @@ library(car)
 library(DescTools)
 
 
-site_yrs_list = "YounghusbandX2020to2021"
+#site_yrs_list = "YounghusbandX2020to2021"
 
 
 
@@ -46,6 +46,7 @@ site_yrs_list <- c(
                    
                    "MurlongX2018to2021",
                    "Ouyen_SpadeX2017to2020",
+                   "Ouyen_PlacementX2017to2020",
                    "SherwoodX2019to2021",
                    "Telopea_DownsX2020to2021",
                    "TempyX2019to2020", #"TempyX2021", #no yield
@@ -104,6 +105,7 @@ summary_data_all_1 <- read_csv("X:/Therese_Jackie/Sandy_soils/Development_databa
 ##### order the Descriptors
 order <- c(
   "Control",
+  "Unmodified+OnRow_none",
   "Unmodified_SE14.band_8",
   "Unmodified_Bi_Agra.surface+band_8",
   "Unmodified_Lc.surface",
@@ -539,6 +541,7 @@ Cum_ANOVA_sites_yr <- rbind(
   
   Murlong_2018to2021_Cum_ANOVA,
   Ouyen_Spade_2017to2020_Cum_ANOVA,
+  Ouyen_Placement_2017to2020_Cum_ANOVA,
   Sherwood_2019to2021_Cum_ANOVA,
   Telopea_Downs_2020to2021_Cum_ANOVA,
   Tempy_2019to2020_Cum_ANOVA, #"TempyX2021", #no yield
@@ -546,7 +549,7 @@ Cum_ANOVA_sites_yr <- rbind(
   Warnertown_2019to2021_Cum_ANOVA,
   Wynarka_2019to2021_Cum_ANOVA,
   Yenda_2017to2021_Cum_ANOVA,
-  Younghusband_2020_Cum_ANOVA
+  Younghusband_2020to2021_Cum_ANOVA
   
   )
   
@@ -574,6 +577,7 @@ rm( `Brimpton Lake_2014to2018_Cum_ANOVA`,
     `Mt Damper_2019to2021_Cum_ANOVA`,
     Murlong_2018to2021_Cum_ANOVA,
     Ouyen_Spade_2017to2020_Cum_ANOVA,
+    Ouyen_Placement_2017to2020_Cum_ANOVA,
     Sherwood_2019to2021_Cum_ANOVA,
     Telopea_Downs_2020to2021_Cum_ANOVA,
     Tempy_2019to2020_Cum_ANOVA, #"TempyX2021", #no yield
@@ -581,7 +585,7 @@ rm( `Brimpton Lake_2014to2018_Cum_ANOVA`,
     Warnertown_2019to2021_Cum_ANOVA,
     Wynarka_2019to2021_Cum_ANOVA,
     Yenda_2017to2021_Cum_ANOVA,
-    Younghusband_2020_Cum_ANOVA)
+    Younghusband_2020to2021_Cum_ANOVA)
 
 
 

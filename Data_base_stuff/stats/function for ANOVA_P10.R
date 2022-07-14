@@ -132,6 +132,11 @@ site_yrs_list <- c(
                    "Ouyen_SpadeX2019",
                    "Ouyen_SpadeX2020",
                    
+                   "Ouyen_PlacementX2017",
+                   "Ouyen_PlacementX2018",
+                   "Ouyen_PlacementX2019",
+                   "Ouyen_PlacementX2020",
+                   
                    "SherwoodX2019",
                    "SherwoodX2020",
                    "SherwoodX2021",
@@ -717,6 +722,11 @@ ANOVA_sites_yr <- rbind(
                                Ouyen_Spade_2019_ANOVA,
                                Ouyen_Spade_2020_ANOVA,
                                
+                               Ouyen_Placement_2017_ANOVA,
+                               Ouyen_Placement_2018_ANOVA,
+                               Ouyen_Placement_2019_ANOVA,
+                               Ouyen_Placement_2020_ANOVA,
+                               
                                Sherwood_2019_ANOVA,
                                Sherwood_2020_ANOVA,
                                Sherwood_2021_ANOVA,
@@ -854,6 +864,11 @@ rm( `Brimpton Lake_2014_ANOVA`,
     Ouyen_Spade_2018_ANOVA,
     Ouyen_Spade_2019_ANOVA,
     Ouyen_Spade_2020_ANOVA,
+    
+    Ouyen_Placement_2017_ANOVA,
+    Ouyen_Placement_2018_ANOVA,
+    Ouyen_Placement_2019_ANOVA,
+    Ouyen_Placement_2020_ANOVA,
     
     Sherwood_2019_ANOVA,
     Sherwood_2020_ANOVA,
