@@ -9,9 +9,8 @@ library(tidyverse)
 library(multcompView)
 library(scales)
 
-# site_yrs_list <- c("BucklebooX2019",
-#                     "BucklebooX2020",
-#                     "BucklebooX2021")
+# site_yrs_list <- c("YounghusbandX2020",
+#                     "YounghusbandX2021")
 
 ### List of sites I want to run analysis for:
 site_yrs_list <- c("Brimpton LakeX2014",
@@ -142,7 +141,8 @@ site_yrs_list <- c("Brimpton LakeX2014",
                    "YendaX2020",
                    "YendaX2021",
                    
-                   "YounghusbandX2020"
+                   "YounghusbandX2020",
+                   "YounghusbandX2021"
 )
 
 
@@ -180,6 +180,7 @@ b <- as.double(b)
 ##### order the Descriptors
 order <- c(
   "Control",
+  "Unmodified+OnRow_none",
   "Unmodified_SE14.band_8",
   "Unmodified_Bi_Agra.surface+band_8",
   "Unmodified_Lc.surface",
@@ -332,6 +333,7 @@ order <- c(
   
   #"Delving.18_none",
   #"Delving.18_SE14.band_8",
+ 
   "Unmodified+DeepTill.18_none",
   "Unmodified+DeepTill.18_SE14.band_8",
   

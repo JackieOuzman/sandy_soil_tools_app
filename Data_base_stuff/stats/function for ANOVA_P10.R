@@ -28,9 +28,7 @@ library(DescTools)
 
  
  ## test 
-# site_yrs_list <- c("BucklebooX2019",
-#                    "BucklebooX2020",
-#                    "BucklebooX2021")
+#site_yrs_list <- c("YounghusbandX2020","YounghusbandX2021")
  
 
 ### List of sites I want to run analysis for:
@@ -163,7 +161,8 @@ site_yrs_list <- c(
                    "YendaX2020",
                    "YendaX2021",
                    
-                   "YounghusbandX2020"
+                   "YounghusbandX2020",
+                   "YounghusbandX2021"
                    )
 
 
@@ -215,6 +214,7 @@ summary_data_all_1 <- summary_data_all_1 %>%
 ##### order the Descriptors
 order <- c(
   "Control",
+  "Unmodified+OnRow_none",
   "Unmodified_SE14.band_8",
   "Unmodified_Bi_Agra.surface+band_8",
   "Unmodified_Lc.surface",
@@ -472,7 +472,7 @@ agricolae_LSD_output_sand <- (LSD.test(model_sand, "Descriptors",   # outer pare
 
 
 
-
+agricolae_LSD_output_sand
 #Extract the LSD value from the anlsysis and add it to the summary data
 
 LSD_value_1 <- agricolae_LSD_output_sand$statistics$LSD #this becomes NULL if there is not values
@@ -746,7 +746,8 @@ ANOVA_sites_yr <- rbind(
                                Yenda_2020_ANOVA,
                                Yenda_2021_ANOVA,
                                
-                               Younghusband_2020_ANOVA
+                               Younghusband_2020_ANOVA,
+                               Younghusband_2021_ANOVA
                        )
 
 
@@ -883,7 +884,8 @@ rm( `Brimpton Lake_2014_ANOVA`,
     Yenda_2020_ANOVA,
     Yenda_2021_ANOVA,
     
-    Younghusband_2020_ANOVA
+    Younghusband_2020_ANOVA,
+    Younghusband_2021_ANOVA
 )
 
 
