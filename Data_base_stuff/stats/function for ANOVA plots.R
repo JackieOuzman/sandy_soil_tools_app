@@ -213,6 +213,14 @@ order <- c(
   "Unmodified_Clay.incorp_8",
   "Unmodified_Clay.incorp_10",
   
+  "Pre_drill_20+7.5_none",
+  "Pre_drill_20+7.5_none_annual",
+  "Pre_drill_20+20_none",
+  "Pre_drill_20+20_none_annual",
+  "Pre_drill_20+20_Fert.banded_20_annual",
+  
+  
+  
   "Spade.30_none",
   "Spade.30_Lc@1.incorp_30",
   "Spade.30_Lc@2.incorp_30",
@@ -269,6 +277,13 @@ order <- c(
   "Rip.30IncRip_Gypsum.incorp_30",
   "Rip.30+60_Lc.band_30+60",
   
+  "Rip_30+7.5_none",
+  "Rip_30+7.5_none_annual",
+  "Rip_30+30_none",
+  "Rip_30+30_none_annual",
+  "Rip_30+30_Fert.banded 30 cm",
+  "Rip_30+30_Fert.banded_30_annual",
+  
   "Sweep.30_none",
   "Sweep.30_Lime.incorp_30",
   "Sweep.30_Cl@9.incorp_30",
@@ -313,8 +328,6 @@ order <- c(
   "Rip.50_Clay.incorp_20",#changed
   "Rip.50_Fert.surface.Clay.incorp_20",#changed
   "Rip.50Spade.30_none",
-  "Inc.50_none",
-  "Inc.50_Cl@7.5.incorp_50",
   #"Inc.50_none",
   #"Inc.50_Cl@7.5.incorp_50",
   "Rip.50IncRip_none",
@@ -338,12 +351,10 @@ order <- c(
   
   #"Delving.18_none",
   #"Delving.18_SE14.band_8",
- 
   "Unmodified+DeepTill.18_none",
   "Unmodified+DeepTill.18_SE14.band_8",
   
   "DiscInv.30_none"
-  
 )
 
 
