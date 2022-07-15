@@ -119,6 +119,7 @@ order <- c(
   "Pre_drill_20+7.5_none_annual",
   "Pre_drill_20+20_none",
   "Pre_drill_20+20_none_annual",
+  "Pre_drill_20+20_Fert.banded_20", #check this
   "Pre_drill_20+20_Fert.banded_20_annual",
   
   
