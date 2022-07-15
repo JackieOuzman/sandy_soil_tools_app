@@ -596,6 +596,12 @@ primary <- primary %>%
          paste0("Fert.banded_20_annual" ) ,
          
          ifelse(site                   == "Ouyen_Placement"
+                & amendment_organic         == "check"   #this is the ouyen placement - GSP was applied annually at depth but with fert
+                & amendment_fert            == "Fert.banded 20 cm"
+                & amendment_other           == "other",
+                paste0("Fert.banded_20_annual" ) ,
+         
+         ifelse(site                   == "Ouyen_Placement"
                 & amendment_organic         == "none_annual"   #this is the ouyen placement - GSP was applied annually at depth but with fert
                 & amendment_fert            == "Fert.banded 30 cm"
                 & amendment_other           == "other",
@@ -603,7 +609,7 @@ primary <- primary %>%
       
        amendment
 
-       )))#bracket for the number of ifelse statements
+       ))))#bracket for the number of ifelse statements
 )# bracket for mutate function
 
 
