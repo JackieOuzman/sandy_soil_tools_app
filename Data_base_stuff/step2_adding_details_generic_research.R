@@ -336,7 +336,7 @@ primary <- primary %>%
   mutate(amendment_organic = 
            ifelse(site_sub            %in% c("Brooker","Cadgee","Ouyen_Spade", "Carwarp_Amelioration",
                                              "Karoonda", "Lowaldie_Crest","Lowaldie_Deep sand", "Murlong", "Ouyen_Spade",
-                                             "Waikerie", "Younghusband","Bute_Trengrove", "Brimpton Lake", "Ouyen_Placement")  #all the sites but not Bute CSIRO
+                                             "Waikerie", "Younghusband","Bute_Trengrove", "Brimpton Lake")  #all the sites but not Bute CSIRO
                   &   is.na(timing) ,
                   paste0(amendment_organic),
                   
@@ -351,12 +351,25 @@ primary <- primary %>%
                       &    timing  %in% c("annual"),    
                       paste0(amendment_organic, "_Yr18,19,20"), 
                       
+                      
                       ifelse(
-                        site_sub                %in% c("Ouyen_Placement")   #this is Ouyen placement
+                        site_sub                %in% c("Ouyen_Placement")   #this is Ouyen placement this seems odd annual but none?
                         &    timing  %in% c("annual"),    
                         paste0("none", "_annual"), 
+                        
+                        ifelse(
+                          site_sub                %in% c("Ouyen_Placement")   #this is Ouyen placement
+                          &    timing  %in% c("once"),    
+                          paste0("none"), 
+                          
+                          ifelse(
+                            site_sub                %in% c("Ouyen_Placement")   #this is Ouyen placement
+                            &    is.na(timing),    
+                            paste0("none"), 
                       
-                      ## set years
+                     
+                            
+                           ## set years
                       ifelse(
                         site_sub                %in% c( "Yenda")   #site list 1
                         &    timing  %in% c("Yrs17,18,19"),    
@@ -365,7 +378,7 @@ primary <- primary %>%
                       
                       "check"
                       
-                    )))))#bracket for the number of ifelse statements
+                    )))))))#bracket for the number of ifelse statements
   )# bracket for mutate function
 
 
@@ -595,6 +608,12 @@ primary <- primary %>%
          & amendment_other           == "other",
          paste0("Fert.banded_20_annual" ) ,
          
+         ifelse(site                   == "Ouyen_Placement" ## this is the one
+                & amendment_organic         == "none"   #this is the ouyen placement - GSP was applied annually at depth but with fert once
+                & amendment_fert            == "Fert.banded 20 cm"
+                & amendment_other           == "other",
+                paste0("Fert.banded_20" ) ,
+         
          ifelse(site                   == "Ouyen_Placement"
                 & amendment_organic         == "check"   #this is the ouyen placement - GSP was applied annually at depth but with fert
                 & amendment_fert            == "Fert.banded 20 cm"
@@ -609,7 +628,7 @@ primary <- primary %>%
       
        amendment
 
-       ))))#bracket for the number of ifelse statements
+       )))))#bracket for the number of ifelse statements
 )# bracket for mutate function
 
 
@@ -637,9 +656,9 @@ primary <- primary %>%
     rip  == "none"      &      mix == "sapde"          ~       paste0("Spade.30" ),
     rip  == "none"      &      mix == "Plozza"         ~       paste0("DiscInv.30" ),
     
-    rip  == "none"      &      mix == "pre-drill"      ~       paste0("Pre_drill.", drill_depth ),
-    rip  == "none"      &      mix == "pre_drill_20" & drill_depth ==  7.5  ~      paste0("Pre_drill_20+", drill_depth ),
-    rip  == "none"      &      mix == "pre_drill_20" & drill_depth ==  20  ~      paste0("Pre_drill_20+", drill_depth ),
+    rip  == "none"      &      mix == "pre-drill"      ~                         paste0("Pre_drill.", drill_depth ),
+    rip  == "none"      &      mix == "pre_drill_20" & drill_depth ==  7.5  ~    paste0("Pre_drill_20+", drill_depth ),
+    rip  == "none"      &      mix == "pre_drill_20" & drill_depth ==  20  ~     paste0("Pre_drill_20+", drill_depth ),
     
     rip  == "rip"      &      mix == "none" & drill_depth ==  7.5  ~      paste0("Rip_30+", drill_depth ),
     rip  == "rip"      &      mix == "none" & drill_depth ==  30  ~      paste0("Rip_30+", drill_depth ),
