@@ -103,7 +103,6 @@ summary_data_all_1 <- read_csv("X:/Therese_Jackie/Sandy_soils/Development_databa
 
 
 ##### order the Descriptors
-  ##### order the Descriptors
   order <- c(
     "Control",
     "Unmodified+OnRow_none",
@@ -133,11 +132,14 @@ summary_data_all_1 <- read_csv("X:/Therese_Jackie/Sandy_soils/Development_databa
     "Unmodified_Clay.check",
     "Unmodified_Clay.incorp_8",
     "Unmodified_Clay.incorp_10",
+    "Unmodified_none.Fert.surface", #ouyen DD
     
-    "Pre_drill_20+7.5_none",
+    
+    "Pre_drill_20+7.5_none", #ouyen DD
     "Pre_drill_20+7.5_none_annual",
     "Pre_drill_20+20_none",
     "Pre_drill_20+20_none_annual",
+    "Pre_drill_20+20_Fert.banded_20",
     "Pre_drill_20+20_Fert.banded_20_annual",
     
     
@@ -198,11 +200,11 @@ summary_data_all_1 <- read_csv("X:/Therese_Jackie/Sandy_soils/Development_databa
     "Rip.30IncRip_Gypsum.incorp_30",
     "Rip.30+60_Lc.band_30+60",
     
-    "Rip_30+7.5_none",
+    "Rip_30+7.5_none", #ouyen DD
     "Rip_30+7.5_none_annual",
     "Rip_30+30_none",
     "Rip_30+30_none_annual",
-    "Rip_30+30_Fert.banded 30 cm",
+    "Rip_30+30_Fert.banded_30",
     "Rip_30+30_Fert.banded_30_annual",
     
     "Sweep.30_none",
@@ -277,6 +279,7 @@ summary_data_all_1 <- read_csv("X:/Therese_Jackie/Sandy_soils/Development_databa
     
     "DiscInv.30_none"
   )
+  
 
 
 
