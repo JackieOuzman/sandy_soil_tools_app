@@ -80,7 +80,17 @@ summary_data_all_1 <- summary_data_all_1 %>%
   filter(Descriptors  != "Spade.30_Lc@20.incorp_30.K_added.surface")
 
 
+### Younghusband is a problem site I want to filter out these ones there is not the same level of reps for treatments:
 
+summary_data_all_1 <- summary_data_all_1 %>%
+  
+  filter(Descriptors  != "Unmodified+DeepTill.18_SE14.band_8") %>%
+  filter(Descriptors  != "Unmodified+DeepTill.18_none") %>%
+  filter(Descriptors  != "Unmodified+DeepTill.18_none") %>%
+  filter(Descriptors  != "Unmodified+OnRow_none") 
+
+
+summary_data_all_1 <- summary_data_all_1[!( summary_data_all_1$site == "Younghusband" & ( summary_data_all_1$Descriptors == "Control" )),] 
 
 
 ##### order the Descriptors

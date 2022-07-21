@@ -20,40 +20,6 @@ library(DescTools)
 
 ### List of sites I want to run analysis for:
 site_yrs_list <- c(
-                   "Brimpton LakeX2014to2018",
-                   "BrookerX2019to2021",
-                   "BucklebooX2019to2021",
-                   "Bute_CSIROX2018to2021",
-                   "Bute_TrengroveX2015to2021",
-                   "CadgeeX2014to2018",
-                   #"CadgeeX2016", #no yield data
-                   "Carwarp_AmeliorationX2018to2020",
-                   "CumminsX2019to2021",
-                   "KarkooX2019to2021",
-                   "KaroondaX2014to2018",
-                   "Kooloonong_canolaX2021",
-                   "Kooloonong_chickpeaX2019to2021",
-                   "Kooloonong_lentilX2019to2021",
-                   "Kooloonong_lupinX2019to2021",
-                   "KybungaX2019to2021",
-                   "Lowaldie_CrestX2019to2020",
-                   #"Lowaldie_CrestX2021", #no data 
-                   "Lowaldie_Deep sandX2019to2020",
-                   #"Lowaldie_Deep sandX2021",#no data
-                   "MalinongX2019to2021",
-                   "Monia_GapX2019to2021",
-                   "Mt DamperX2019to2021",
-                   
-                   "MurlongX2018to2021",
-                   "Ouyen_SpadeX2017to2020",
-                   "Ouyen_PlacementX2017to2020",
-                   "SherwoodX2019to2021",
-                   "Telopea_DownsX2020to2021",
-                   "TempyX2019to2020", #"TempyX2021", #no yield
-                   "WaikerieX2018to2020",
-                   "WarnertownX2019to2021",
-                   "WynarkaX2019to2021",
-                   "YendaX2017to2021",
                    "YounghusbandX2020to2021"
                    
                    )
@@ -101,6 +67,18 @@ summary_data_all_1 <- read_csv("X:/Therese_Jackie/Sandy_soils/Development_databa
     filter(Descriptors  != "Spade.30_Lc@20.incorp_30.K_added.surface")
   
 
+  ### Younghusband is a problem site I want to filter out these ones there is not the same level of reps for treatments:
+  
+  summary_data_all_1 <- summary_data_all_1 %>%
+    
+    filter(Descriptors  != "Unmodified+DeepTill.18_SE14.band_8") %>%
+    filter(Descriptors  != "Unmodified+DeepTill.18_none") %>%
+    filter(Descriptors  != "Unmodified+DeepTill.18_none") %>%
+    filter(Descriptors  != "Unmodified+OnRow_none") 
+  
+  
+  summary_data_all_1 <- summary_data_all_1[!( summary_data_all_1$site == "Younghusband" & ( summary_data_all_1$Descriptors == "Control" )),] 
+  
 
 ##### order the Descriptors
   order <- c(
@@ -455,32 +433,38 @@ cumulative_yld_table <- dplyr::select(cumulative_yld_table, -sum_yld) %>%
 ########################################################################################################################################################
 ### Dunnet test
 
-DunnettTest_cum <- DunnettTest(sum_yld ~ Descriptors,
-                           data = cumulative_yld,
-                           conf.level = 0.90,
-                           control = "Control")
+# DunnettTest_cum <- DunnettTest(sum_yld ~ Descriptors,
+#                            data = cumulative_yld,
+#                            conf.level = 0.90,
+#                            control = "Control")
+# 
+# DunnettTest_df_cum <- as.data.frame(DunnettTest_cum[[1]]) #get the fith item in the list
+# DunnettTest_df_cum$Descriptors_control <- rownames(DunnettTest_df_cum) #move rwo names into a clm for joining
+# 
+# ## strip the control from the descriptor name
+# DunnettTest_df_cum <- DunnettTest_df_cum %>%
+#   mutate(Descriptors = str_replace(Descriptors_control, "(-Control)", ""))
+# 
+# 
+# #Add in the significance ***
+# 
+# DunnettTest_df_cum <- DunnettTest_df_cum %>%
+#   mutate(significance_control_0.1 = case_when(
+#     pval < 0.001 ~ "****",
+#     pval <= 0.01 ~  "***",
+#     pval <= 0.05 ~  "**",
+#     pval <= 0.1  ~  "*",
+#     pval >  0.1 ~  "ns",
+#     
+#   ))
+# DunnettTest_df_cum <- DunnettTest_df_cum %>%
+#   dplyr::select(Descriptors, pval, significance_control_0.1)
 
-DunnettTest_df_cum <- as.data.frame(DunnettTest_cum[[1]]) #get the fith item in the list
-DunnettTest_df_cum$Descriptors_control <- rownames(DunnettTest_df_cum) #move rwo names into a clm for joining
-
-## strip the control from the descriptor name
-DunnettTest_df_cum <- DunnettTest_df_cum %>%
-  mutate(Descriptors = str_replace(Descriptors_control, "(-Control)", ""))
-
-
-#Add in the significance ***
-
-DunnettTest_df_cum <- DunnettTest_df_cum %>%
-  mutate(significance_control_0.1 = case_when(
-    pval < 0.001 ~ "****",
-    pval <= 0.01 ~  "***",
-    pval <= 0.05 ~  "**",
-    pval <= 0.1  ~  "*",
-    pval >  0.1 ~  "ns",
-    
-  ))
-DunnettTest_df_cum <- DunnettTest_df_cum %>%
-  dplyr::select(Descriptors, pval, significance_control_0.1)
+#Create a dummy clms becasue we can't run Dunnets test
+DunnettTest_df_cum <- cumulative_yld_table %>% 
+  dplyr::select(Descriptors) %>% 
+  mutate(pval = "na",
+         significance_control_0.1 ="na")
 
 
 #join it the summary data
@@ -533,79 +517,13 @@ rm(site_and_yrs,
 
 
 Cum_ANOVA_sites_yr <- rbind(
-  `Brimpton Lake_2014to2018_Cum_ANOVA`,
-  Brooker_2019to2021_Cum_ANOVA,
-  Buckleboo_2019to2021_Cum_ANOVA,
-  Bute_CSIRO_2018to2021_Cum_ANOVA,
-  Bute_Trengrove_2015to2021_Cum_ANOVA,
-  Cadgee_2014to2018_Cum_ANOVA,
-  Carwarp_Amelioration_2018to2020_Cum_ANOVA,
-  Cummins_2019to2021_Cum_ANOVA,
-  Karkoo_2019to2021_Cum_ANOVA,
-  Karoonda_2014to2018_Cum_ANOVA,
-  Kooloonong_canola_2021_Cum_ANOVA,
-  Kooloonong_chickpea_2019to2021_Cum_ANOVA,
-  Kooloonong_lentil_2019to2021_Cum_ANOVA,
-  Kooloonong_lupin_2019to2021_Cum_ANOVA,
-  Kybunga_2019to2021_Cum_ANOVA,
-  Lowaldie_Crest_2019to2020_Cum_ANOVA,
-  `Lowaldie_Deep sand_2019to2020_Cum_ANOVA`,
-  Malinong_2019to2021_Cum_ANOVA,
-  Monia_Gap_2019to2021_Cum_ANOVA,
-  `Mt Damper_2019to2021_Cum_ANOVA`,
   
-  Murlong_2018to2021_Cum_ANOVA,
-  Ouyen_Spade_2017to2020_Cum_ANOVA,
-  Ouyen_Placement_2017to2020_Cum_ANOVA,
-  Sherwood_2019to2021_Cum_ANOVA,
-  Telopea_Downs_2020to2021_Cum_ANOVA,
-  Tempy_2019to2020_Cum_ANOVA, #"TempyX2021", #no yield
-  Waikerie_2018to2020_Cum_ANOVA,
-  Warnertown_2019to2021_Cum_ANOVA,
-  Wynarka_2019to2021_Cum_ANOVA,
-  Yenda_2017to2021_Cum_ANOVA,
-  Younghusband_2020to2021_Cum_ANOVA
-  
-  )
-  
-  
-
-rm( `Brimpton Lake_2014to2018_Cum_ANOVA`,
-    Brooker_2019to2021_Cum_ANOVA,
-    Buckleboo_2019to2021_Cum_ANOVA,
-    Bute_CSIRO_2018to2021_Cum_ANOVA,
-    Bute_Trengrove_2015to2021_Cum_ANOVA,
-    Cadgee_2014to2018_Cum_ANOVA,
-    Carwarp_Amelioration_2018to2020_Cum_ANOVA,
-    Cummins_2019to2021_Cum_ANOVA,
-    Karkoo_2019to2021_Cum_ANOVA,
-    Karoonda_2014to2018_Cum_ANOVA,
-    Kooloonong_canola_2021_Cum_ANOVA,
-    Kooloonong_chickpea_2019to2021_Cum_ANOVA,
-    Kooloonong_lentil_2019to2021_Cum_ANOVA,
-    Kooloonong_lupin_2019to2021_Cum_ANOVA,
-    Kybunga_2019to2021_Cum_ANOVA,
-    Lowaldie_Crest_2019to2020_Cum_ANOVA,
-    `Lowaldie_Deep sand_2019to2020_Cum_ANOVA`,
-    Malinong_2019to2021_Cum_ANOVA,
-    Monia_Gap_2019to2021_Cum_ANOVA,
-    `Mt Damper_2019to2021_Cum_ANOVA`,
-    Murlong_2018to2021_Cum_ANOVA,
-    Ouyen_Spade_2017to2020_Cum_ANOVA,
-    Ouyen_Placement_2017to2020_Cum_ANOVA,
-    Sherwood_2019to2021_Cum_ANOVA,
-    Telopea_Downs_2020to2021_Cum_ANOVA,
-    Tempy_2019to2020_Cum_ANOVA, #"TempyX2021", #no yield
-    Waikerie_2018to2020_Cum_ANOVA,
-    Warnertown_2019to2021_Cum_ANOVA,
-    Wynarka_2019to2021_Cum_ANOVA,
-    Yenda_2017to2021_Cum_ANOVA,
     Younghusband_2020to2021_Cum_ANOVA)
 
 
 
 
-write.csv(Cum_ANOVA_sites_yr,"X:/Therese_Jackie/Sandy_soils/Development_database/stats_batch_output/final_method/Cum_ANOVA_sites_merged_90.csv" ,
+write.csv(Cum_ANOVA_sites_yr,"X:/Therese_Jackie/Sandy_soils/Development_database/stats_batch_output/final_method/Cum_ANOVA_sites_merged_90 Younghusband.csv" ,
                              row.names = FALSE)
 
 

@@ -8,7 +8,7 @@ library(tidyverse)
 library(multcompView)
 library(scales)
 
-#site_yrs_list = "YounghusbandX2020to2021"
+site_yrs_list = "YounghusbandX2020to2021"
 
 ### List of sites I want to run analysis for:
 site_yrs_list <- c("Brimpton LakeX2014to2018",
@@ -310,6 +310,18 @@ site_year_yld_summary_site <- site_year_yld_summary_site %>%
   filter(Descriptors  != "Spade.30_Lc@10.incorp_30.K_added.surface") %>%
   filter(Descriptors  != "Spade.30_Lc@20.incorp_30") %>% 
   filter(Descriptors  != "Spade.30_Lc@20.incorp_30.K_added.surface")
+
+### Younghusband is a problem site I want to filter out these ones there is not the same level of reps for treatments:
+
+site_year_yld_summary_site <- site_year_yld_summary_site %>%
+  
+  filter(Descriptors  != "Unmodified+DeepTill.18_SE14.band_8") %>%
+  filter(Descriptors  != "Unmodified+DeepTill.18_none") %>%
+  filter(Descriptors  != "Unmodified+DeepTill.18_none") %>%
+  filter(Descriptors  != "Unmodified+OnRow_none") 
+
+
+site_year_yld_summary_site <- site_year_yld_summary_site[!( site_year_yld_summary_site$site == "Younghusband" & ( site_year_yld_summary_site$Descriptors == "Control" )),] 
 
 
 
