@@ -28,7 +28,7 @@ library(DescTools)
 
  
  ## test 
-#site_yrs_list <- c("YounghusbandX2020","YounghusbandX2021")
+#site_yrs_list <- c("YounghusbandX2020")#,"YounghusbandX2021")
  
 
 ### List of sites I want to run analysis for:
@@ -164,10 +164,10 @@ site_yrs_list <- c(
                    "YendaX2018",
                    "YendaX2019",
                    "YendaX2020",
-                   "YendaX2021",
+                   "YendaX2021"
                    
-                   "YounghusbandX2020",
-                   "YounghusbandX2021"
+                   #"YounghusbandX2020", THIS IS NOTHING BUT TROUBLE NEEDS ITS OWN SCRIPT
+                   #"YounghusbandX2021"
                    )
 
 
@@ -212,9 +212,21 @@ summary_data_all_1 <- summary_data_all_1 %>%
   filter(Descriptors  != "Spade.30_Lc@20.incorp_30") %>% 
   filter(Descriptors  != "Spade.30_Lc@20.incorp_30.K_added.surface")
 
+### Younghusband is a problem site I want to filter out these ones there is not the same level of reps for treatments:
+
+summary_data_all_1 <- summary_data_all_1 %>%
+  
+   filter(Descriptors  != "Unmodified+DeepTill.18_SE14.band_8") %>%
+   filter(Descriptors  != "Unmodified+DeepTill.18_none") %>%
+   filter(Descriptors  != "Unmodified+DeepTill.18_none") %>%
+   filter(Descriptors  != "Unmodified+OnRow_none") 
 
 
+summary_data_all_1 <- summary_data_all_1[!( summary_data_all_1$site == "Younghusband" & ( summary_data_all_1$Descriptors == "Control" )),] 
 
+
+  
+  
 
 ##### order the Descriptors
 order <- c(
@@ -645,7 +657,7 @@ ANOVA_sites_yr <- rbind(
                                `Brimpton Lake_2017_ANOVA`,
                                `Brimpton Lake_2018_ANOVA`,
                                
-                               
+                              
                                Brooker_2019_ANOVA,
                                Brooker_2020_ANOVA,
                                Brooker_2021_ANOVA ,
@@ -772,11 +784,11 @@ ANOVA_sites_yr <- rbind(
                                Yenda_2018_ANOVA,
                                Yenda_2019_ANOVA,
                                Yenda_2020_ANOVA,
-                               Yenda_2021_ANOVA,
+                               Yenda_2021_ANOVA)
                                
-                               Younghusband_2020_ANOVA,
-                               Younghusband_2021_ANOVA
-                       )
+                               #Younghusband_2020_ANOVA, #THIS IS TROUBLE IT NOW HAS ITS OWN SCRIPT
+                               #Younghusband_2021_ANOVA
+                       
 
 
 
@@ -915,16 +927,16 @@ rm( `Brimpton Lake_2014_ANOVA`,
     Yenda_2018_ANOVA,
     Yenda_2019_ANOVA,
     Yenda_2020_ANOVA,
-    Yenda_2021_ANOVA,
+    Yenda_2021_ANOVA)
     
-    Younghusband_2020_ANOVA,
-    Younghusband_2021_ANOVA
-)
+    #Younghusband_2020_ANOVA,
+    #Younghusband_2021_ANOVA
 
 
 
 
-write.csv(ANOVA_sites_yr,"X:/Therese_Jackie/Sandy_soils/Development_database/stats_batch_output/final_method/ANOVA_by_Yr_sites_merged_90percent.csv" ,
+
+write.csv(ANOVA_sites_yr,"X:/Therese_Jackie/Sandy_soils/Development_database/stats_batch_output/final_method/ANOVA_by_Yr_sites_merged_90percent_no_younghusband.csv" ,
           row.names = FALSE)
 
 
