@@ -35,7 +35,12 @@ site <- read_excel(paste0("X:/Therese_Jackie/Sandy_soils/Development_database/",
 
 site <- site %>% relocate(ID, .before = site)
 names(site)
+site %>%  distinct(site)
 site <- site %>% dplyr::select("ID":"comments"   )
+
+## Younghusband is actually a research site not impact. I will remove it here:
+site <- site %>% 
+  dplyr::filter(site != "Younghusband")
 
 #### a metadata
 # #
@@ -57,6 +62,13 @@ metadata <- read_excel(paste0("X:/Therese_Jackie/Sandy_soils/Development_databas
                                                               "date", "date", "date",
                                                               "date", "date", "date",
                                                               "date"))
+## Younghusband is actually a research site not impact. I will remove it here:
+names(metadata)
+metadata %>%  distinct(`Site Name`)
+
+metadata <- metadata %>% 
+  dplyr::filter(`Site Name` != "Younghusband")
+
 #############################################################################################################################################
 ########################      Merge the results data   and the metadata                            ########################################
 ############################################################################################################################################
