@@ -35,7 +35,7 @@ if(machineName=='soils-discovery'){
 
 
 
-site_info <- read.csv(file = "site_location_plus_info.csv")
+site_info <- read.csv(file = "site_location_plus_info_v2.csv")
 
 #remove sites with no coods
 site_info <-
@@ -90,7 +90,7 @@ site_info <- site_info %>%
 # ######################################################################################################
 # 
 # 
-trial_results <- read_csv("primary_data_all.csv")
+trial_results <- read_csv("primary_data_all_v2.csv")
 
 ### arrange the data so the order reflect level of intervension
 
