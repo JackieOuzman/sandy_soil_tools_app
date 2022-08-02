@@ -14,7 +14,7 @@ library(DT)
 
 
 machineName <- as.character(Sys.info()['nodename'])
-if(machineName=='soils-discovery'){
+if(machineName=='soils-discover2'){
   rootDir <- '/srv/shiny-server/jax'
   dataStoreDir <- '/srv/shiny-server/jax'
   #source(paste0( rootDir, '/appUtils.R'))
