@@ -25,15 +25,11 @@ if(machineName=='soils-discovery'){
   #source(paste0( rootDir, '/appUtils.R'))
 }
 
-
 ######################################################################################################
 #####                       bring in the data the app will use - for the map   #######################
 ######################################################################################################
 
 ## bring in the data and do formatting
-
-
-
 
 site_info <- read.csv(file = "site_location_plus_info_v2.csv")
 
@@ -43,7 +39,7 @@ site_info <-
 
 
 
-
+names(site_info)
 
 site_info <- site_info %>%
   mutate(
@@ -74,16 +70,26 @@ site_info <- site_info %>%
     ))
 
 site_info <- site_info %>%
+  mutate(
+    nutrientl_label =  case_when(
+      nutrient  == "green"   ~    "No issue",
+      nutrient  == "orange"  ~    "Moderate issue",
+      nutrient == "red"     ~    "Severe issue",
+      TRUE                      ~    "other"
+    ))
+
+site_info <- site_info %>%
   mutate( site_label = paste0("Site = ", site),
           non_wetting_label = paste0("non wetting score = ", non_wetting_label),
           acidic_label = paste0("acidic score = ", acidic_label),
-          physical_label = paste0("physical score = ", physical_label))
+          physical_label = paste0("physical score = ", physical_label),
+          nutrientl_label = paste0("nutrient score = ", nutrientl_label)
+  )
 
 site_info <- site_info %>%
-  mutate( label = paste(sep = "<br/>",site_label, non_wetting_label,acidic_label, physical_label ))
+  mutate( label = paste(sep = "<br/>",site_label, non_wetting_label,acidic_label, physical_label,nutrientl_label  ))
 # this label is what is displyed in the popup on the map br mean that there is a new line between each label.
 # this is a bit tricky so prior the the label on the popup is the label for each soil property (eg non_wetting_label)
-
 
 # ######################################################################################################
 # #####       bring in the data the app will use - for the trial results plots   #######################
