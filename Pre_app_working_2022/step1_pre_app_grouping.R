@@ -348,7 +348,7 @@ DB_df_soil_mod<- DB_df_soil_mod %>%
   ))
  
 DB_df_soil_mod<- DB_df_soil_mod %>% 
-  mutate(acid = case_when(
+  mutate(acidic = case_when(
     Acidity == 0 ~ "green",
     Acidity == 1 ~ "orange",
     Acidity == 2 ~ "red",
@@ -389,19 +389,24 @@ annual_rain$site <- as.character(annual_rain$site)
 DB_df_soil_mod$met_name_number <- as.character(DB_df_soil_mod$met_name_number)
 
 annual_rain <- annual_rain %>% 
-  rename(met_name_number = site)
+  rename(met_name_number = site,
+         rainfall_mean_annual = annual_rain ) %>% 
+  select(-X )
 
 
 
-str(annual_rain)
-str(DB_df_soil_mod)
-DB_df_soil_mod <- left_join(DB_df_soil_mod, annual_rain)
 
-#temp3 <-distinct(DB_df_soil_mod,  met_name_number, .keep_all = TRUE)
+
+
+DB_df_soil_mod <- left_join(DB_df_soil_mod, annual_rain, by = "met_name_number" )
+
+
 
 names(DB_df_soil_mod)
 DB_df_soil_mod <- DB_df_soil_mod %>% 
   select(- 'name-temp')
+
+
 
 #####################################################################################
 ##### I think this is good now :) 2. #####
