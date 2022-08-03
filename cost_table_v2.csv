@@ -1,0 +1,856 @@
+grouping,modification,site,activity,price,comments,data source
+Control,Unmodified,Brimpton Lake,additional options ($/ha),30,NA,guess
+Control,Unmodified,Brimpton Lake,amendment cost ($/ha),0,NA,guess
+Control,Unmodified,Brimpton Lake,labour ($/ha),16,NA,guess
+Control,Unmodified,Brimpton Lake,machinery($/ha),18,NA,guess
+Control,Unmodified,Brimpton Lake,operating ($/ha),100,NA,guess
+Spade fertiliser,Spade,Brimpton Lake,additional options ($/ha),30,NA,guess
+Spade fertiliser,Spade,Brimpton Lake,amendment cost ($/ha),0,NA,guess
+Spade fertiliser,Spade,Brimpton Lake,labour ($/ha),16,NA,guess
+Spade fertiliser,Spade,Brimpton Lake,machinery($/ha),18,NA,guess
+Spade fertiliser,Spade,Brimpton Lake,operating ($/ha),100,NA,guess
+Spade mixed,Spade,Brimpton Lake,additional options ($/ha),30,NA,guess
+Spade mixed,Spade,Brimpton Lake,amendment cost ($/ha),0,NA,guess
+Spade mixed,Spade,Brimpton Lake,labour ($/ha),16,NA,guess
+Spade mixed,Spade,Brimpton Lake,machinery($/ha),18,NA,guess
+Spade mixed,Spade,Brimpton Lake,operating ($/ha),100,NA,guess
+Spade non organic,Spade,Brimpton Lake,additional options ($/ha),30,NA,guess
+Spade non organic,Spade,Brimpton Lake,amendment cost ($/ha),0,NA,guess
+Spade non organic,Spade,Brimpton Lake,labour ($/ha),16,NA,guess
+Spade non organic,Spade,Brimpton Lake,machinery($/ha),18,NA,guess
+Spade non organic,Spade,Brimpton Lake,operating ($/ha),100,NA,guess
+Spade none,Spade,Brimpton Lake,additional options ($/ha),30,NA,guess
+Spade none,Spade,Brimpton Lake,amendment cost ($/ha),0,NA,guess
+Spade none,Spade,Brimpton Lake,labour ($/ha),16,NA,guess
+Spade none,Spade,Brimpton Lake,machinery($/ha),18,NA,guess
+Spade none,Spade,Brimpton Lake,operating ($/ha),100,NA,guess
+Spade plant,Spade,Brimpton Lake,additional options ($/ha),30,NA,guess
+Spade plant,Spade,Brimpton Lake,amendment cost ($/ha),0,NA,guess
+Spade plant,Spade,Brimpton Lake,labour ($/ha),16,NA,guess
+Spade plant,Spade,Brimpton Lake,machinery($/ha),18,NA,guess
+Spade plant,Spade,Brimpton Lake,operating ($/ha),100,NA,guess
+Unmodified fertiliser,Unmodified,Brimpton Lake,additional options ($/ha),30,NA,guess
+Unmodified fertiliser,Unmodified,Brimpton Lake,amendment cost ($/ha),0,NA,guess
+Unmodified fertiliser,Unmodified,Brimpton Lake,labour ($/ha),16,NA,guess
+Unmodified fertiliser,Unmodified,Brimpton Lake,machinery($/ha),18,NA,guess
+Unmodified fertiliser,Unmodified,Brimpton Lake,operating ($/ha),100,NA,guess
+Unmodified mixed,Unmodified,Brimpton Lake,additional options ($/ha),30,NA,guess
+Unmodified mixed,Unmodified,Brimpton Lake,amendment cost ($/ha),0,NA,guess
+Unmodified mixed,Unmodified,Brimpton Lake,labour ($/ha),16,NA,guess
+Unmodified mixed,Unmodified,Brimpton Lake,machinery($/ha),18,NA,guess
+Unmodified mixed,Unmodified,Brimpton Lake,operating ($/ha),100,NA,guess
+Unmodified non organic,Unmodified,Brimpton Lake,additional options ($/ha),30,NA,guess
+Unmodified non organic,Unmodified,Brimpton Lake,amendment cost ($/ha),0,NA,guess
+Unmodified non organic,Unmodified,Brimpton Lake,labour ($/ha),16,NA,guess
+Unmodified non organic,Unmodified,Brimpton Lake,machinery($/ha),18,NA,guess
+Unmodified non organic,Unmodified,Brimpton Lake,operating ($/ha),100,NA,guess
+Control,Unmodified,Brooker,additional options ($/ha),30,NA,guess
+Control,Unmodified,Brooker,amendment cost ($/ha),0,NA,guess
+Control,Unmodified,Brooker,labour ($/ha),16,NA,guess
+Control,Unmodified,Brooker,machinery($/ha),18,NA,guess
+Control,Unmodified,Brooker,operating ($/ha),100,NA,guess
+Spade fertiliser,Spade,Brooker,additional options ($/ha),30,NA,guess
+Spade fertiliser,Spade,Brooker,amendment cost ($/ha),0,NA,guess
+Spade fertiliser,Spade,Brooker,labour ($/ha),16,NA,guess
+Spade fertiliser,Spade,Brooker,machinery($/ha),18,NA,guess
+Spade fertiliser,Spade,Brooker,operating ($/ha),100,NA,guess
+Spade mixed,Spade,Brooker,additional options ($/ha),30,NA,guess
+Spade mixed,Spade,Brooker,amendment cost ($/ha),0,NA,guess
+Spade mixed,Spade,Brooker,labour ($/ha),16,NA,guess
+Spade mixed,Spade,Brooker,machinery($/ha),18,NA,guess
+Spade mixed,Spade,Brooker,operating ($/ha),100,NA,guess
+Spade none,Spade,Brooker,additional options ($/ha),30,NA,guess
+Spade none,Spade,Brooker,amendment cost ($/ha),0,NA,guess
+Spade none,Spade,Brooker,labour ($/ha),16,NA,guess
+Spade none,Spade,Brooker,machinery($/ha),18,NA,guess
+Spade none,Spade,Brooker,operating ($/ha),100,NA,guess
+Spade plant,Spade,Brooker,additional options ($/ha),30,NA,guess
+Spade plant,Spade,Brooker,amendment cost ($/ha),0,NA,guess
+Spade plant,Spade,Brooker,labour ($/ha),16,NA,guess
+Spade plant,Spade,Brooker,machinery($/ha),18,NA,guess
+Spade plant,Spade,Brooker,operating ($/ha),100,NA,guess
+Unmodified fertiliser,Unmodified,Brooker,additional options ($/ha),30,NA,guess
+Unmodified fertiliser,Unmodified,Brooker,amendment cost ($/ha),0,NA,guess
+Unmodified fertiliser,Unmodified,Brooker,labour ($/ha),16,NA,guess
+Unmodified fertiliser,Unmodified,Brooker,machinery($/ha),18,NA,guess
+Unmodified fertiliser,Unmodified,Brooker,operating ($/ha),100,NA,guess
+Control,Unmodified,Buckleboo,additional options ($/ha),30,NA,guess
+Control,Unmodified,Buckleboo,amendment cost ($/ha),0,NA,guess
+Control,Unmodified,Buckleboo,labour ($/ha),16,NA,guess
+Control,Unmodified,Buckleboo,machinery($/ha),18,NA,guess
+Control,Unmodified,Buckleboo,operating ($/ha),100,NA,guess
+IncRip fertiliser,IncRip,Buckleboo,additional options ($/ha),30,NA,guess
+IncRip fertiliser,IncRip,Buckleboo,amendment cost ($/ha),0,NA,guess
+IncRip fertiliser,IncRip,Buckleboo,labour ($/ha),16,NA,guess
+IncRip fertiliser,IncRip,Buckleboo,machinery($/ha),18,NA,guess
+IncRip fertiliser,IncRip,Buckleboo,operating ($/ha),100,NA,guess
+IncRip none,IncRip,Buckleboo,additional options ($/ha),30,NA,guess
+IncRip none,IncRip,Buckleboo,amendment cost ($/ha),0,NA,guess
+IncRip none,IncRip,Buckleboo,labour ($/ha),16,NA,guess
+IncRip none,IncRip,Buckleboo,machinery($/ha),18,NA,guess
+IncRip none,IncRip,Buckleboo,operating ($/ha),100,NA,guess
+Rip none,Rip,Buckleboo,additional options ($/ha),30,NA,guess
+Rip none,Rip,Buckleboo,amendment cost ($/ha),0,NA,guess
+Rip none,Rip,Buckleboo,labour ($/ha),16,NA,guess
+Rip none,Rip,Buckleboo,machinery($/ha),18,NA,guess
+Rip none,Rip,Buckleboo,operating ($/ha),100,NA,guess
+Control,Unmodified,Bute_CSIRO,additional options ($/ha),30,NA,guess
+Control,Unmodified,Bute_CSIRO,amendment cost ($/ha),0,NA,guess
+Control,Unmodified,Bute_CSIRO,labour ($/ha),16,NA,guess
+Control,Unmodified,Bute_CSIRO,machinery($/ha),18,NA,guess
+Control,Unmodified,Bute_CSIRO,operating ($/ha),100,NA,guess
+IncRip animal,IncRip,Bute_CSIRO,additional options ($/ha),30,NA,guess
+IncRip animal,IncRip,Bute_CSIRO,amendment cost ($/ha),0,NA,guess
+IncRip animal,IncRip,Bute_CSIRO,labour ($/ha),16,NA,guess
+IncRip animal,IncRip,Bute_CSIRO,machinery($/ha),18,NA,guess
+IncRip animal,IncRip,Bute_CSIRO,operating ($/ha),100,NA,guess
+IncRip none,IncRip,Bute_CSIRO,additional options ($/ha),30,NA,guess
+IncRip none,IncRip,Bute_CSIRO,amendment cost ($/ha),0,NA,guess
+IncRip none,IncRip,Bute_CSIRO,labour ($/ha),16,NA,guess
+IncRip none,IncRip,Bute_CSIRO,machinery($/ha),18,NA,guess
+IncRip none,IncRip,Bute_CSIRO,operating ($/ha),100,NA,guess
+Rip animal,Rip,Bute_CSIRO,additional options ($/ha),30,NA,guess
+Rip animal,Rip,Bute_CSIRO,amendment cost ($/ha),0,NA,guess
+Rip animal,Rip,Bute_CSIRO,labour ($/ha),16,NA,guess
+Rip animal,Rip,Bute_CSIRO,machinery($/ha),18,NA,guess
+Rip animal,Rip,Bute_CSIRO,operating ($/ha),100,NA,guess
+Rip none,Rip,Bute_CSIRO,additional options ($/ha),30,NA,guess
+Rip none,Rip,Bute_CSIRO,amendment cost ($/ha),0,NA,guess
+Rip none,Rip,Bute_CSIRO,labour ($/ha),16,NA,guess
+Rip none,Rip,Bute_CSIRO,machinery($/ha),18,NA,guess
+Rip none,Rip,Bute_CSIRO,operating ($/ha),100,NA,guess
+Unmodified animal,Unmodified,Bute_CSIRO,additional options ($/ha),30,NA,guess
+Unmodified animal,Unmodified,Bute_CSIRO,amendment cost ($/ha),0,NA,guess
+Unmodified animal,Unmodified,Bute_CSIRO,labour ($/ha),16,NA,guess
+Unmodified animal,Unmodified,Bute_CSIRO,machinery($/ha),18,NA,guess
+Unmodified animal,Unmodified,Bute_CSIRO,operating ($/ha),100,NA,guess
+Control,Unmodified,Bute_Trengrove,additional options ($/ha),30,NA,guess
+Control,Unmodified,Bute_Trengrove,amendment cost ($/ha),0,NA,guess
+Control,Unmodified,Bute_Trengrove,labour ($/ha),16,NA,guess
+Control,Unmodified,Bute_Trengrove,machinery($/ha),18,NA,guess
+Control,Unmodified,Bute_Trengrove,operating ($/ha),100,NA,guess
+Rip animal,Rip,Bute_Trengrove,additional options ($/ha),30,NA,guess
+Rip animal,Rip,Bute_Trengrove,amendment cost ($/ha),0,NA,guess
+Rip animal,Rip,Bute_Trengrove,labour ($/ha),16,NA,guess
+Rip animal,Rip,Bute_Trengrove,machinery($/ha),18,NA,guess
+Rip animal,Rip,Bute_Trengrove,operating ($/ha),100,NA,guess
+Rip fertiliser,Rip,Bute_Trengrove,additional options ($/ha),30,NA,guess
+Rip fertiliser,Rip,Bute_Trengrove,amendment cost ($/ha),0,NA,guess
+Rip fertiliser,Rip,Bute_Trengrove,labour ($/ha),16,NA,guess
+Rip fertiliser,Rip,Bute_Trengrove,machinery($/ha),18,NA,guess
+Rip fertiliser,Rip,Bute_Trengrove,operating ($/ha),100,NA,guess
+Rip mixed,Rip,Bute_Trengrove,additional options ($/ha),30,NA,guess
+Rip mixed,Rip,Bute_Trengrove,amendment cost ($/ha),0,NA,guess
+Rip mixed,Rip,Bute_Trengrove,labour ($/ha),16,NA,guess
+Rip mixed,Rip,Bute_Trengrove,machinery($/ha),18,NA,guess
+Rip mixed,Rip,Bute_Trengrove,operating ($/ha),100,NA,guess
+Rip non organic,Rip,Bute_Trengrove,additional options ($/ha),30,NA,guess
+Rip non organic,Rip,Bute_Trengrove,amendment cost ($/ha),0,NA,guess
+Rip non organic,Rip,Bute_Trengrove,labour ($/ha),16,NA,guess
+Rip non organic,Rip,Bute_Trengrove,machinery($/ha),18,NA,guess
+Rip non organic,Rip,Bute_Trengrove,operating ($/ha),100,NA,guess
+Rip none,Rip,Bute_Trengrove,additional options ($/ha),30,NA,guess
+Rip none,Rip,Bute_Trengrove,amendment cost ($/ha),0,NA,guess
+Rip none,Rip,Bute_Trengrove,labour ($/ha),16,NA,guess
+Rip none,Rip,Bute_Trengrove,machinery($/ha),18,NA,guess
+Rip none,Rip,Bute_Trengrove,operating ($/ha),100,NA,guess
+Unmodified animal,Unmodified,Bute_Trengrove,additional options ($/ha),30,NA,guess
+Unmodified animal,Unmodified,Bute_Trengrove,amendment cost ($/ha),0,NA,guess
+Unmodified animal,Unmodified,Bute_Trengrove,labour ($/ha),16,NA,guess
+Unmodified animal,Unmodified,Bute_Trengrove,machinery($/ha),18,NA,guess
+Unmodified animal,Unmodified,Bute_Trengrove,operating ($/ha),100,NA,guess
+Unmodified fertiliser,Unmodified,Bute_Trengrove,additional options ($/ha),30,NA,guess
+Unmodified fertiliser,Unmodified,Bute_Trengrove,amendment cost ($/ha),0,NA,guess
+Unmodified fertiliser,Unmodified,Bute_Trengrove,labour ($/ha),16,NA,guess
+Unmodified fertiliser,Unmodified,Bute_Trengrove,machinery($/ha),18,NA,guess
+Unmodified fertiliser,Unmodified,Bute_Trengrove,operating ($/ha),100,NA,guess
+Unmodified mixed,Unmodified,Bute_Trengrove,additional options ($/ha),30,NA,guess
+Unmodified mixed,Unmodified,Bute_Trengrove,amendment cost ($/ha),0,NA,guess
+Unmodified mixed,Unmodified,Bute_Trengrove,labour ($/ha),16,NA,guess
+Unmodified mixed,Unmodified,Bute_Trengrove,machinery($/ha),18,NA,guess
+Unmodified mixed,Unmodified,Bute_Trengrove,operating ($/ha),100,NA,guess
+Unmodified non organic,Unmodified,Bute_Trengrove,additional options ($/ha),30,NA,guess
+Unmodified non organic,Unmodified,Bute_Trengrove,amendment cost ($/ha),0,NA,guess
+Unmodified non organic,Unmodified,Bute_Trengrove,labour ($/ha),16,NA,guess
+Unmodified non organic,Unmodified,Bute_Trengrove,machinery($/ha),18,NA,guess
+Unmodified non organic,Unmodified,Bute_Trengrove,operating ($/ha),100,NA,guess
+Control,Unmodified,Cadgee,additional options ($/ha),30,NA,guess
+Control,Unmodified,Cadgee,amendment cost ($/ha),0,NA,guess
+Control,Unmodified,Cadgee,labour ($/ha),16,NA,guess
+Control,Unmodified,Cadgee,machinery($/ha),18,NA,guess
+Control,Unmodified,Cadgee,operating ($/ha),100,NA,guess
+Spade fertiliser,Spade,Cadgee,additional options ($/ha),30,NA,guess
+Spade fertiliser,Spade,Cadgee,amendment cost ($/ha),0,NA,guess
+Spade fertiliser,Spade,Cadgee,labour ($/ha),16,NA,guess
+Spade fertiliser,Spade,Cadgee,machinery($/ha),18,NA,guess
+Spade fertiliser,Spade,Cadgee,operating ($/ha),100,NA,guess
+Spade mixed,Spade,Cadgee,additional options ($/ha),30,NA,guess
+Spade mixed,Spade,Cadgee,amendment cost ($/ha),0,NA,guess
+Spade mixed,Spade,Cadgee,labour ($/ha),16,NA,guess
+Spade mixed,Spade,Cadgee,machinery($/ha),18,NA,guess
+Spade mixed,Spade,Cadgee,operating ($/ha),100,NA,guess
+Spade non organic,Spade,Cadgee,additional options ($/ha),30,NA,guess
+Spade non organic,Spade,Cadgee,amendment cost ($/ha),0,NA,guess
+Spade non organic,Spade,Cadgee,labour ($/ha),16,NA,guess
+Spade non organic,Spade,Cadgee,machinery($/ha),18,NA,guess
+Spade non organic,Spade,Cadgee,operating ($/ha),100,NA,guess
+Spade none,Spade,Cadgee,additional options ($/ha),30,NA,guess
+Spade none,Spade,Cadgee,amendment cost ($/ha),0,NA,guess
+Spade none,Spade,Cadgee,labour ($/ha),16,NA,guess
+Spade none,Spade,Cadgee,machinery($/ha),18,NA,guess
+Spade none,Spade,Cadgee,operating ($/ha),100,NA,guess
+Spade plant,Spade,Cadgee,additional options ($/ha),30,NA,guess
+Spade plant,Spade,Cadgee,amendment cost ($/ha),0,NA,guess
+Spade plant,Spade,Cadgee,labour ($/ha),16,NA,guess
+Spade plant,Spade,Cadgee,machinery($/ha),18,NA,guess
+Spade plant,Spade,Cadgee,operating ($/ha),100,NA,guess
+Unmodified fertiliser,Unmodified,Cadgee,additional options ($/ha),30,NA,guess
+Unmodified fertiliser,Unmodified,Cadgee,amendment cost ($/ha),0,NA,guess
+Unmodified fertiliser,Unmodified,Cadgee,labour ($/ha),16,NA,guess
+Unmodified fertiliser,Unmodified,Cadgee,machinery($/ha),18,NA,guess
+Unmodified fertiliser,Unmodified,Cadgee,operating ($/ha),100,NA,guess
+Unmodified mixed,Unmodified,Cadgee,additional options ($/ha),30,NA,guess
+Unmodified mixed,Unmodified,Cadgee,amendment cost ($/ha),0,NA,guess
+Unmodified mixed,Unmodified,Cadgee,labour ($/ha),16,NA,guess
+Unmodified mixed,Unmodified,Cadgee,machinery($/ha),18,NA,guess
+Unmodified mixed,Unmodified,Cadgee,operating ($/ha),100,NA,guess
+Unmodified non organic,Unmodified,Cadgee,additional options ($/ha),30,NA,guess
+Unmodified non organic,Unmodified,Cadgee,amendment cost ($/ha),0,NA,guess
+Unmodified non organic,Unmodified,Cadgee,labour ($/ha),16,NA,guess
+Unmodified non organic,Unmodified,Cadgee,machinery($/ha),18,NA,guess
+Unmodified non organic,Unmodified,Cadgee,operating ($/ha),100,NA,guess
+Control,Unmodified,Carwarp_Amelioration,additional options ($/ha),30,NA,guess
+Control,Unmodified,Carwarp_Amelioration,amendment cost ($/ha),0,NA,guess
+Control,Unmodified,Carwarp_Amelioration,labour ($/ha),16,NA,guess
+Control,Unmodified,Carwarp_Amelioration,machinery($/ha),18,NA,guess
+Control,Unmodified,Carwarp_Amelioration,operating ($/ha),100,NA,guess
+Rip none,Rip,Carwarp_Amelioration,additional options ($/ha),30,NA,guess
+Rip none,Rip,Carwarp_Amelioration,amendment cost ($/ha),0,NA,guess
+Rip none,Rip,Carwarp_Amelioration,labour ($/ha),16,NA,guess
+Rip none,Rip,Carwarp_Amelioration,machinery($/ha),18,NA,guess
+Rip none,Rip,Carwarp_Amelioration,operating ($/ha),100,NA,guess
+Rip plant,Rip,Carwarp_Amelioration,additional options ($/ha),30,NA,guess
+Rip plant,Rip,Carwarp_Amelioration,amendment cost ($/ha),0,NA,guess
+Rip plant,Rip,Carwarp_Amelioration,labour ($/ha),16,NA,guess
+Rip plant,Rip,Carwarp_Amelioration,machinery($/ha),18,NA,guess
+Rip plant,Rip,Carwarp_Amelioration,operating ($/ha),100,NA,guess
+Rip+Spade none,Rip+Spade,Carwarp_Amelioration,additional options ($/ha),30,NA,guess
+Rip+Spade none,Rip+Spade,Carwarp_Amelioration,amendment cost ($/ha),0,NA,guess
+Rip+Spade none,Rip+Spade,Carwarp_Amelioration,labour ($/ha),16,NA,guess
+Rip+Spade none,Rip+Spade,Carwarp_Amelioration,machinery($/ha),18,NA,guess
+Rip+Spade none,Rip+Spade,Carwarp_Amelioration,operating ($/ha),100,NA,guess
+Rip+Spade plant,Rip+Spade,Carwarp_Amelioration,additional options ($/ha),30,NA,guess
+Rip+Spade plant,Rip+Spade,Carwarp_Amelioration,amendment cost ($/ha),0,NA,guess
+Rip+Spade plant,Rip+Spade,Carwarp_Amelioration,labour ($/ha),16,NA,guess
+Rip+Spade plant,Rip+Spade,Carwarp_Amelioration,machinery($/ha),18,NA,guess
+Rip+Spade plant,Rip+Spade,Carwarp_Amelioration,operating ($/ha),100,NA,guess
+Spade none,Spade,Carwarp_Amelioration,additional options ($/ha),30,NA,guess
+Spade none,Spade,Carwarp_Amelioration,amendment cost ($/ha),0,NA,guess
+Spade none,Spade,Carwarp_Amelioration,labour ($/ha),16,NA,guess
+Spade none,Spade,Carwarp_Amelioration,machinery($/ha),18,NA,guess
+Spade none,Spade,Carwarp_Amelioration,operating ($/ha),100,NA,guess
+Spade plant,Spade,Carwarp_Amelioration,additional options ($/ha),30,NA,guess
+Spade plant,Spade,Carwarp_Amelioration,amendment cost ($/ha),0,NA,guess
+Spade plant,Spade,Carwarp_Amelioration,labour ($/ha),16,NA,guess
+Spade plant,Spade,Carwarp_Amelioration,machinery($/ha),18,NA,guess
+Spade plant,Spade,Carwarp_Amelioration,operating ($/ha),100,NA,guess
+Unmodified plant,Unmodified,Carwarp_Amelioration,additional options ($/ha),30,NA,guess
+Unmodified plant,Unmodified,Carwarp_Amelioration,amendment cost ($/ha),0,NA,guess
+Unmodified plant,Unmodified,Carwarp_Amelioration,labour ($/ha),16,NA,guess
+Unmodified plant,Unmodified,Carwarp_Amelioration,machinery($/ha),18,NA,guess
+Unmodified plant,Unmodified,Carwarp_Amelioration,operating ($/ha),100,NA,guess
+Control,Unmodified,Cummins,additional options ($/ha),30,NA,guess
+Control,Unmodified,Cummins,amendment cost ($/ha),0,NA,guess
+Control,Unmodified,Cummins,labour ($/ha),16,NA,guess
+Control,Unmodified,Cummins,machinery($/ha),18,NA,guess
+Control,Unmodified,Cummins,operating ($/ha),100,NA,guess
+IncRip non organic,IncRip,Cummins,additional options ($/ha),30,NA,guess
+IncRip non organic,IncRip,Cummins,amendment cost ($/ha),0,NA,guess
+IncRip non organic,IncRip,Cummins,labour ($/ha),16,NA,guess
+IncRip non organic,IncRip,Cummins,machinery($/ha),18,NA,guess
+IncRip non organic,IncRip,Cummins,operating ($/ha),100,NA,guess
+IncRip none,IncRip,Cummins,additional options ($/ha),30,NA,guess
+IncRip none,IncRip,Cummins,amendment cost ($/ha),0,NA,guess
+IncRip none,IncRip,Cummins,labour ($/ha),16,NA,guess
+IncRip none,IncRip,Cummins,machinery($/ha),18,NA,guess
+IncRip none,IncRip,Cummins,operating ($/ha),100,NA,guess
+Rip none,Rip,Cummins,additional options ($/ha),30,NA,guess
+Rip none,Rip,Cummins,amendment cost ($/ha),0,NA,guess
+Rip none,Rip,Cummins,labour ($/ha),16,NA,guess
+Rip none,Rip,Cummins,machinery($/ha),18,NA,guess
+Rip none,Rip,Cummins,operating ($/ha),100,NA,guess
+Control,Unmodified,Karkoo,additional options ($/ha),30,NA,guess
+Control,Unmodified,Karkoo,amendment cost ($/ha),0,NA,guess
+Control,Unmodified,Karkoo,labour ($/ha),16,NA,guess
+Control,Unmodified,Karkoo,machinery($/ha),18,NA,guess
+Control,Unmodified,Karkoo,operating ($/ha),100,NA,guess
+IncRip none,IncRip,Karkoo,additional options ($/ha),30,NA,guess
+IncRip none,IncRip,Karkoo,amendment cost ($/ha),0,NA,guess
+IncRip none,IncRip,Karkoo,labour ($/ha),16,NA,guess
+IncRip none,IncRip,Karkoo,machinery($/ha),18,NA,guess
+IncRip none,IncRip,Karkoo,operating ($/ha),100,NA,guess
+IncRip plant,IncRip,Karkoo,additional options ($/ha),30,NA,guess
+IncRip plant,IncRip,Karkoo,amendment cost ($/ha),0,NA,guess
+IncRip plant,IncRip,Karkoo,labour ($/ha),16,NA,guess
+IncRip plant,IncRip,Karkoo,machinery($/ha),18,NA,guess
+IncRip plant,IncRip,Karkoo,operating ($/ha),100,NA,guess
+Rip none,Rip,Karkoo,additional options ($/ha),30,NA,guess
+Rip none,Rip,Karkoo,amendment cost ($/ha),0,NA,guess
+Rip none,Rip,Karkoo,labour ($/ha),16,NA,guess
+Rip none,Rip,Karkoo,machinery($/ha),18,NA,guess
+Rip none,Rip,Karkoo,operating ($/ha),100,NA,guess
+Control,Unmodified,Karoonda,additional options ($/ha),30,NA,guess
+Control,Unmodified,Karoonda,amendment cost ($/ha),0,NA,guess
+Control,Unmodified,Karoonda,labour ($/ha),16,NA,guess
+Control,Unmodified,Karoonda,machinery($/ha),18,NA,guess
+Control,Unmodified,Karoonda,operating ($/ha),100,NA,guess
+Spade fertiliser,Spade,Karoonda,additional options ($/ha),30,NA,guess
+Spade fertiliser,Spade,Karoonda,amendment cost ($/ha),0,NA,guess
+Spade fertiliser,Spade,Karoonda,labour ($/ha),16,NA,guess
+Spade fertiliser,Spade,Karoonda,machinery($/ha),18,NA,guess
+Spade fertiliser,Spade,Karoonda,operating ($/ha),100,NA,guess
+Spade mixed,Spade,Karoonda,additional options ($/ha),30,NA,guess
+Spade mixed,Spade,Karoonda,amendment cost ($/ha),0,NA,guess
+Spade mixed,Spade,Karoonda,labour ($/ha),16,NA,guess
+Spade mixed,Spade,Karoonda,machinery($/ha),18,NA,guess
+Spade mixed,Spade,Karoonda,operating ($/ha),100,NA,guess
+Spade non organic,Spade,Karoonda,additional options ($/ha),30,NA,guess
+Spade non organic,Spade,Karoonda,amendment cost ($/ha),0,NA,guess
+Spade non organic,Spade,Karoonda,labour ($/ha),16,NA,guess
+Spade non organic,Spade,Karoonda,machinery($/ha),18,NA,guess
+Spade non organic,Spade,Karoonda,operating ($/ha),100,NA,guess
+Spade none,Spade,Karoonda,additional options ($/ha),30,NA,guess
+Spade none,Spade,Karoonda,amendment cost ($/ha),0,NA,guess
+Spade none,Spade,Karoonda,labour ($/ha),16,NA,guess
+Spade none,Spade,Karoonda,machinery($/ha),18,NA,guess
+Spade none,Spade,Karoonda,operating ($/ha),100,NA,guess
+Spade plant,Spade,Karoonda,additional options ($/ha),30,NA,guess
+Spade plant,Spade,Karoonda,amendment cost ($/ha),0,NA,guess
+Spade plant,Spade,Karoonda,labour ($/ha),16,NA,guess
+Spade plant,Spade,Karoonda,machinery($/ha),18,NA,guess
+Spade plant,Spade,Karoonda,operating ($/ha),100,NA,guess
+Unmodified fertiliser,Unmodified,Karoonda,additional options ($/ha),30,NA,guess
+Unmodified fertiliser,Unmodified,Karoonda,amendment cost ($/ha),0,NA,guess
+Unmodified fertiliser,Unmodified,Karoonda,labour ($/ha),16,NA,guess
+Unmodified fertiliser,Unmodified,Karoonda,machinery($/ha),18,NA,guess
+Unmodified fertiliser,Unmodified,Karoonda,operating ($/ha),100,NA,guess
+Unmodified mixed,Unmodified,Karoonda,additional options ($/ha),30,NA,guess
+Unmodified mixed,Unmodified,Karoonda,amendment cost ($/ha),0,NA,guess
+Unmodified mixed,Unmodified,Karoonda,labour ($/ha),16,NA,guess
+Unmodified mixed,Unmodified,Karoonda,machinery($/ha),18,NA,guess
+Unmodified mixed,Unmodified,Karoonda,operating ($/ha),100,NA,guess
+Unmodified non organic,Unmodified,Karoonda,additional options ($/ha),30,NA,guess
+Unmodified non organic,Unmodified,Karoonda,amendment cost ($/ha),0,NA,guess
+Unmodified non organic,Unmodified,Karoonda,labour ($/ha),16,NA,guess
+Unmodified non organic,Unmodified,Karoonda,machinery($/ha),18,NA,guess
+Unmodified non organic,Unmodified,Karoonda,operating ($/ha),100,NA,guess
+Control,Unmodified,Kooloonong_canola,additional options ($/ha),30,NA,guess
+Control,Unmodified,Kooloonong_canola,amendment cost ($/ha),0,NA,guess
+Control,Unmodified,Kooloonong_canola,labour ($/ha),16,NA,guess
+Control,Unmodified,Kooloonong_canola,machinery($/ha),18,NA,guess
+Control,Unmodified,Kooloonong_canola,operating ($/ha),100,NA,guess
+Rip animal,Rip,Kooloonong_canola,additional options ($/ha),30,NA,guess
+Rip animal,Rip,Kooloonong_canola,amendment cost ($/ha),0,NA,guess
+Rip animal,Rip,Kooloonong_canola,labour ($/ha),16,NA,guess
+Rip animal,Rip,Kooloonong_canola,machinery($/ha),18,NA,guess
+Rip animal,Rip,Kooloonong_canola,operating ($/ha),100,NA,guess
+Rip none,Rip,Kooloonong_canola,additional options ($/ha),30,NA,guess
+Rip none,Rip,Kooloonong_canola,amendment cost ($/ha),0,NA,guess
+Rip none,Rip,Kooloonong_canola,labour ($/ha),16,NA,guess
+Rip none,Rip,Kooloonong_canola,machinery($/ha),18,NA,guess
+Rip none,Rip,Kooloonong_canola,operating ($/ha),100,NA,guess
+Unmodified animal,Unmodified,Kooloonong_canola,additional options ($/ha),30,NA,guess
+Unmodified animal,Unmodified,Kooloonong_canola,amendment cost ($/ha),0,NA,guess
+Unmodified animal,Unmodified,Kooloonong_canola,labour ($/ha),16,NA,guess
+Unmodified animal,Unmodified,Kooloonong_canola,machinery($/ha),18,NA,guess
+Unmodified animal,Unmodified,Kooloonong_canola,operating ($/ha),100,NA,guess
+Control,Unmodified,Kooloonong_chickpea,additional options ($/ha),30,NA,guess
+Control,Unmodified,Kooloonong_chickpea,amendment cost ($/ha),0,NA,guess
+Control,Unmodified,Kooloonong_chickpea,labour ($/ha),16,NA,guess
+Control,Unmodified,Kooloonong_chickpea,machinery($/ha),18,NA,guess
+Control,Unmodified,Kooloonong_chickpea,operating ($/ha),100,NA,guess
+Rip animal,Rip,Kooloonong_chickpea,additional options ($/ha),30,NA,guess
+Rip animal,Rip,Kooloonong_chickpea,amendment cost ($/ha),0,NA,guess
+Rip animal,Rip,Kooloonong_chickpea,labour ($/ha),16,NA,guess
+Rip animal,Rip,Kooloonong_chickpea,machinery($/ha),18,NA,guess
+Rip animal,Rip,Kooloonong_chickpea,operating ($/ha),100,NA,guess
+Rip none,Rip,Kooloonong_chickpea,additional options ($/ha),30,NA,guess
+Rip none,Rip,Kooloonong_chickpea,amendment cost ($/ha),0,NA,guess
+Rip none,Rip,Kooloonong_chickpea,labour ($/ha),16,NA,guess
+Rip none,Rip,Kooloonong_chickpea,machinery($/ha),18,NA,guess
+Rip none,Rip,Kooloonong_chickpea,operating ($/ha),100,NA,guess
+Unmodified animal,Unmodified,Kooloonong_chickpea,additional options ($/ha),30,NA,guess
+Unmodified animal,Unmodified,Kooloonong_chickpea,amendment cost ($/ha),0,NA,guess
+Unmodified animal,Unmodified,Kooloonong_chickpea,labour ($/ha),16,NA,guess
+Unmodified animal,Unmodified,Kooloonong_chickpea,machinery($/ha),18,NA,guess
+Unmodified animal,Unmodified,Kooloonong_chickpea,operating ($/ha),100,NA,guess
+Control,Unmodified,Kooloonong_lentil,additional options ($/ha),30,NA,guess
+Control,Unmodified,Kooloonong_lentil,amendment cost ($/ha),0,NA,guess
+Control,Unmodified,Kooloonong_lentil,labour ($/ha),16,NA,guess
+Control,Unmodified,Kooloonong_lentil,machinery($/ha),18,NA,guess
+Control,Unmodified,Kooloonong_lentil,operating ($/ha),100,NA,guess
+Rip animal,Rip,Kooloonong_lentil,additional options ($/ha),30,NA,guess
+Rip animal,Rip,Kooloonong_lentil,amendment cost ($/ha),0,NA,guess
+Rip animal,Rip,Kooloonong_lentil,labour ($/ha),16,NA,guess
+Rip animal,Rip,Kooloonong_lentil,machinery($/ha),18,NA,guess
+Rip animal,Rip,Kooloonong_lentil,operating ($/ha),100,NA,guess
+Rip none,Rip,Kooloonong_lentil,additional options ($/ha),30,NA,guess
+Rip none,Rip,Kooloonong_lentil,amendment cost ($/ha),0,NA,guess
+Rip none,Rip,Kooloonong_lentil,labour ($/ha),16,NA,guess
+Rip none,Rip,Kooloonong_lentil,machinery($/ha),18,NA,guess
+Rip none,Rip,Kooloonong_lentil,operating ($/ha),100,NA,guess
+Unmodified animal,Unmodified,Kooloonong_lentil,additional options ($/ha),30,NA,guess
+Unmodified animal,Unmodified,Kooloonong_lentil,amendment cost ($/ha),0,NA,guess
+Unmodified animal,Unmodified,Kooloonong_lentil,labour ($/ha),16,NA,guess
+Unmodified animal,Unmodified,Kooloonong_lentil,machinery($/ha),18,NA,guess
+Unmodified animal,Unmodified,Kooloonong_lentil,operating ($/ha),100,NA,guess
+Control,Unmodified,Kooloonong_lupin,additional options ($/ha),30,NA,guess
+Control,Unmodified,Kooloonong_lupin,amendment cost ($/ha),0,NA,guess
+Control,Unmodified,Kooloonong_lupin,labour ($/ha),16,NA,guess
+Control,Unmodified,Kooloonong_lupin,machinery($/ha),18,NA,guess
+Control,Unmodified,Kooloonong_lupin,operating ($/ha),100,NA,guess
+Rip animal,Rip,Kooloonong_lupin,additional options ($/ha),30,NA,guess
+Rip animal,Rip,Kooloonong_lupin,amendment cost ($/ha),0,NA,guess
+Rip animal,Rip,Kooloonong_lupin,labour ($/ha),16,NA,guess
+Rip animal,Rip,Kooloonong_lupin,machinery($/ha),18,NA,guess
+Rip animal,Rip,Kooloonong_lupin,operating ($/ha),100,NA,guess
+Rip none,Rip,Kooloonong_lupin,additional options ($/ha),30,NA,guess
+Rip none,Rip,Kooloonong_lupin,amendment cost ($/ha),0,NA,guess
+Rip none,Rip,Kooloonong_lupin,labour ($/ha),16,NA,guess
+Rip none,Rip,Kooloonong_lupin,machinery($/ha),18,NA,guess
+Rip none,Rip,Kooloonong_lupin,operating ($/ha),100,NA,guess
+Unmodified animal,Unmodified,Kooloonong_lupin,additional options ($/ha),30,NA,guess
+Unmodified animal,Unmodified,Kooloonong_lupin,amendment cost ($/ha),0,NA,guess
+Unmodified animal,Unmodified,Kooloonong_lupin,labour ($/ha),16,NA,guess
+Unmodified animal,Unmodified,Kooloonong_lupin,machinery($/ha),18,NA,guess
+Unmodified animal,Unmodified,Kooloonong_lupin,operating ($/ha),100,NA,guess
+Control,Unmodified,Kybunga,additional options ($/ha),30,NA,guess
+Control,Unmodified,Kybunga,amendment cost ($/ha),0,NA,guess
+Control,Unmodified,Kybunga,labour ($/ha),16,NA,guess
+Control,Unmodified,Kybunga,machinery($/ha),18,NA,guess
+Control,Unmodified,Kybunga,operating ($/ha),100,NA,guess
+Rip animal,Rip,Kybunga,additional options ($/ha),30,NA,guess
+Rip animal,Rip,Kybunga,amendment cost ($/ha),0,NA,guess
+Rip animal,Rip,Kybunga,labour ($/ha),16,NA,guess
+Rip animal,Rip,Kybunga,machinery($/ha),18,NA,guess
+Rip animal,Rip,Kybunga,operating ($/ha),100,NA,guess
+Rip none,Rip,Kybunga,additional options ($/ha),30,NA,guess
+Rip none,Rip,Kybunga,amendment cost ($/ha),0,NA,guess
+Rip none,Rip,Kybunga,labour ($/ha),16,NA,guess
+Rip none,Rip,Kybunga,machinery($/ha),18,NA,guess
+Rip none,Rip,Kybunga,operating ($/ha),100,NA,guess
+Spade animal,Spade,Kybunga,additional options ($/ha),30,NA,guess
+Spade animal,Spade,Kybunga,amendment cost ($/ha),0,NA,guess
+Spade animal,Spade,Kybunga,labour ($/ha),16,NA,guess
+Spade animal,Spade,Kybunga,machinery($/ha),18,NA,guess
+Spade animal,Spade,Kybunga,operating ($/ha),100,NA,guess
+Spade none,Spade,Kybunga,additional options ($/ha),30,NA,guess
+Spade none,Spade,Kybunga,amendment cost ($/ha),0,NA,guess
+Spade none,Spade,Kybunga,labour ($/ha),16,NA,guess
+Spade none,Spade,Kybunga,machinery($/ha),18,NA,guess
+Spade none,Spade,Kybunga,operating ($/ha),100,NA,guess
+Control,Unmodified,Lowaldie_Crest,additional options ($/ha),30,NA,guess
+Control,Unmodified,Lowaldie_Crest,amendment cost ($/ha),0,NA,guess
+Control,Unmodified,Lowaldie_Crest,labour ($/ha),16,NA,guess
+Control,Unmodified,Lowaldie_Crest,machinery($/ha),18,NA,guess
+Control,Unmodified,Lowaldie_Crest,operating ($/ha),100,NA,guess
+Rip none,Rip,Lowaldie_Crest,additional options ($/ha),30,NA,guess
+Rip none,Rip,Lowaldie_Crest,amendment cost ($/ha),0,NA,guess
+Rip none,Rip,Lowaldie_Crest,labour ($/ha),16,NA,guess
+Rip none,Rip,Lowaldie_Crest,machinery($/ha),18,NA,guess
+Rip none,Rip,Lowaldie_Crest,operating ($/ha),100,NA,guess
+Control,Unmodified,Lowaldie_Deep sand,additional options ($/ha),30,NA,guess
+Control,Unmodified,Lowaldie_Deep sand,amendment cost ($/ha),0,NA,guess
+Control,Unmodified,Lowaldie_Deep sand,labour ($/ha),16,NA,guess
+Control,Unmodified,Lowaldie_Deep sand,machinery($/ha),18,NA,guess
+Control,Unmodified,Lowaldie_Deep sand,operating ($/ha),100,NA,guess
+Rip none,Rip,Lowaldie_Deep sand,additional options ($/ha),30,NA,guess
+Rip none,Rip,Lowaldie_Deep sand,amendment cost ($/ha),0,NA,guess
+Rip none,Rip,Lowaldie_Deep sand,labour ($/ha),16,NA,guess
+Rip none,Rip,Lowaldie_Deep sand,machinery($/ha),18,NA,guess
+Rip none,Rip,Lowaldie_Deep sand,operating ($/ha),100,NA,guess
+Control,Unmodified,Malinong,additional options ($/ha),30,NA,guess
+Control,Unmodified,Malinong,amendment cost ($/ha),0,NA,guess
+Control,Unmodified,Malinong,labour ($/ha),16,NA,guess
+Control,Unmodified,Malinong,machinery($/ha),18,NA,guess
+Control,Unmodified,Malinong,operating ($/ha),100,NA,guess
+DiscInv none,DiscInv,Malinong,additional options ($/ha),30,NA,guess
+DiscInv none,DiscInv,Malinong,amendment cost ($/ha),0,NA,guess
+DiscInv none,DiscInv,Malinong,labour ($/ha),16,NA,guess
+DiscInv none,DiscInv,Malinong,machinery($/ha),18,NA,guess
+DiscInv none,DiscInv,Malinong,operating ($/ha),100,NA,guess
+Rip none,Rip,Malinong,additional options ($/ha),30,NA,guess
+Rip none,Rip,Malinong,amendment cost ($/ha),0,NA,guess
+Rip none,Rip,Malinong,labour ($/ha),16,NA,guess
+Rip none,Rip,Malinong,machinery($/ha),18,NA,guess
+Rip none,Rip,Malinong,operating ($/ha),100,NA,guess
+Spade none,Spade,Malinong,additional options ($/ha),30,NA,guess
+Spade none,Spade,Malinong,amendment cost ($/ha),0,NA,guess
+Spade none,Spade,Malinong,labour ($/ha),16,NA,guess
+Spade none,Spade,Malinong,machinery($/ha),18,NA,guess
+Spade none,Spade,Malinong,operating ($/ha),100,NA,guess
+Control,Unmodified,Monia_Gap,additional options ($/ha),30,NA,guess
+Control,Unmodified,Monia_Gap,amendment cost ($/ha),0,NA,guess
+Control,Unmodified,Monia_Gap,labour ($/ha),16,NA,guess
+Control,Unmodified,Monia_Gap,machinery($/ha),18,NA,guess
+Control,Unmodified,Monia_Gap,operating ($/ha),100,NA,guess
+Rip+Spade none,Rip+Spade,Monia_Gap,additional options ($/ha),30,NA,guess
+Rip+Spade none,Rip+Spade,Monia_Gap,amendment cost ($/ha),0,NA,guess
+Rip+Spade none,Rip+Spade,Monia_Gap,labour ($/ha),16,NA,guess
+Rip+Spade none,Rip+Spade,Monia_Gap,machinery($/ha),18,NA,guess
+Rip+Spade none,Rip+Spade,Monia_Gap,operating ($/ha),100,NA,guess
+Spade animal,Spade,Monia_Gap,additional options ($/ha),30,NA,guess
+Spade animal,Spade,Monia_Gap,amendment cost ($/ha),0,NA,guess
+Spade animal,Spade,Monia_Gap,labour ($/ha),16,NA,guess
+Spade animal,Spade,Monia_Gap,machinery($/ha),18,NA,guess
+Spade animal,Spade,Monia_Gap,operating ($/ha),100,NA,guess
+Spade mixed,Spade,Monia_Gap,additional options ($/ha),30,NA,guess
+Spade mixed,Spade,Monia_Gap,amendment cost ($/ha),0,NA,guess
+Spade mixed,Spade,Monia_Gap,labour ($/ha),16,NA,guess
+Spade mixed,Spade,Monia_Gap,machinery($/ha),18,NA,guess
+Spade mixed,Spade,Monia_Gap,operating ($/ha),100,NA,guess
+Spade non organic,Spade,Monia_Gap,additional options ($/ha),30,NA,guess
+Spade non organic,Spade,Monia_Gap,amendment cost ($/ha),0,NA,guess
+Spade non organic,Spade,Monia_Gap,labour ($/ha),16,NA,guess
+Spade non organic,Spade,Monia_Gap,machinery($/ha),18,NA,guess
+Spade non organic,Spade,Monia_Gap,operating ($/ha),100,NA,guess
+Spade none,Spade,Monia_Gap,additional options ($/ha),30,NA,guess
+Spade none,Spade,Monia_Gap,amendment cost ($/ha),0,NA,guess
+Spade none,Spade,Monia_Gap,labour ($/ha),16,NA,guess
+Spade none,Spade,Monia_Gap,machinery($/ha),18,NA,guess
+Spade none,Spade,Monia_Gap,operating ($/ha),100,NA,guess
+Control,Unmodified,Mt Damper,additional options ($/ha),30,NA,guess
+Control,Unmodified,Mt Damper,amendment cost ($/ha),0,NA,guess
+Control,Unmodified,Mt Damper,labour ($/ha),16,NA,guess
+Control,Unmodified,Mt Damper,machinery($/ha),18,NA,guess
+Control,Unmodified,Mt Damper,operating ($/ha),100,NA,guess
+IncRip fertiliser,IncRip,Mt Damper,additional options ($/ha),30,NA,guess
+IncRip fertiliser,IncRip,Mt Damper,amendment cost ($/ha),0,NA,guess
+IncRip fertiliser,IncRip,Mt Damper,labour ($/ha),16,NA,guess
+IncRip fertiliser,IncRip,Mt Damper,machinery($/ha),18,NA,guess
+IncRip fertiliser,IncRip,Mt Damper,operating ($/ha),100,NA,guess
+IncRip none,IncRip,Mt Damper,additional options ($/ha),30,NA,guess
+IncRip none,IncRip,Mt Damper,amendment cost ($/ha),0,NA,guess
+IncRip none,IncRip,Mt Damper,labour ($/ha),16,NA,guess
+IncRip none,IncRip,Mt Damper,machinery($/ha),18,NA,guess
+IncRip none,IncRip,Mt Damper,operating ($/ha),100,NA,guess
+IncRip+Spade none,IncRip+Spade,Mt Damper,additional options ($/ha),30,NA,guess
+IncRip+Spade none,IncRip+Spade,Mt Damper,amendment cost ($/ha),0,NA,guess
+IncRip+Spade none,IncRip+Spade,Mt Damper,labour ($/ha),16,NA,guess
+IncRip+Spade none,IncRip+Spade,Mt Damper,machinery($/ha),18,NA,guess
+IncRip+Spade none,IncRip+Spade,Mt Damper,operating ($/ha),100,NA,guess
+Spade none,Spade,Mt Damper,additional options ($/ha),30,NA,guess
+Spade none,Spade,Mt Damper,amendment cost ($/ha),0,NA,guess
+Spade none,Spade,Mt Damper,labour ($/ha),16,NA,guess
+Spade none,Spade,Mt Damper,machinery($/ha),18,NA,guess
+Spade none,Spade,Mt Damper,operating ($/ha),100,NA,guess
+Control,Unmodified,Murlong,additional options ($/ha),30,NA,guess
+Control,Unmodified,Murlong,amendment cost ($/ha),0,NA,guess
+Control,Unmodified,Murlong,labour ($/ha),16,NA,guess
+Control,Unmodified,Murlong,machinery($/ha),18,NA,guess
+Control,Unmodified,Murlong,operating ($/ha),100,NA,guess
+Rip fertiliser,Rip,Murlong,additional options ($/ha),30,NA,guess
+Rip fertiliser,Rip,Murlong,amendment cost ($/ha),0,NA,guess
+Rip fertiliser,Rip,Murlong,labour ($/ha),16,NA,guess
+Rip fertiliser,Rip,Murlong,machinery($/ha),18,NA,guess
+Rip fertiliser,Rip,Murlong,operating ($/ha),100,NA,guess
+Rip none,Rip,Murlong,additional options ($/ha),30,NA,guess
+Rip none,Rip,Murlong,amendment cost ($/ha),0,NA,guess
+Rip none,Rip,Murlong,labour ($/ha),16,NA,guess
+Rip none,Rip,Murlong,machinery($/ha),18,NA,guess
+Rip none,Rip,Murlong,operating ($/ha),100,NA,guess
+Rip plant,Rip,Murlong,additional options ($/ha),30,NA,guess
+Rip plant,Rip,Murlong,amendment cost ($/ha),0,NA,guess
+Rip plant,Rip,Murlong,labour ($/ha),16,NA,guess
+Rip plant,Rip,Murlong,machinery($/ha),18,NA,guess
+Rip plant,Rip,Murlong,operating ($/ha),100,NA,guess
+Spade fertiliser,Spade,Murlong,additional options ($/ha),30,NA,guess
+Spade fertiliser,Spade,Murlong,amendment cost ($/ha),0,NA,guess
+Spade fertiliser,Spade,Murlong,labour ($/ha),16,NA,guess
+Spade fertiliser,Spade,Murlong,machinery($/ha),18,NA,guess
+Spade fertiliser,Spade,Murlong,operating ($/ha),100,NA,guess
+Spade none,Spade,Murlong,additional options ($/ha),30,NA,guess
+Spade none,Spade,Murlong,amendment cost ($/ha),0,NA,guess
+Spade none,Spade,Murlong,labour ($/ha),16,NA,guess
+Spade none,Spade,Murlong,machinery($/ha),18,NA,guess
+Spade none,Spade,Murlong,operating ($/ha),100,NA,guess
+Spade plant,Spade,Murlong,additional options ($/ha),30,NA,guess
+Spade plant,Spade,Murlong,amendment cost ($/ha),0,NA,guess
+Spade plant,Spade,Murlong,labour ($/ha),16,NA,guess
+Spade plant,Spade,Murlong,machinery($/ha),18,NA,guess
+Spade plant,Spade,Murlong,operating ($/ha),100,NA,guess
+Control,Unmodified,Ouyen_Placement,additional options ($/ha),30,NA,guess
+Control,Unmodified,Ouyen_Placement,amendment cost ($/ha),0,NA,guess
+Control,Unmodified,Ouyen_Placement,labour ($/ha),16,NA,guess
+Control,Unmodified,Ouyen_Placement,machinery($/ha),18,NA,guess
+Control,Unmodified,Ouyen_Placement,operating ($/ha),100,NA,guess
+PreDrill fertiliser,PreDrill,Ouyen_Placement,additional options ($/ha),30,NA,guess
+PreDrill fertiliser,PreDrill,Ouyen_Placement,amendment cost ($/ha),0,NA,guess
+PreDrill fertiliser,PreDrill,Ouyen_Placement,labour ($/ha),16,NA,guess
+PreDrill fertiliser,PreDrill,Ouyen_Placement,machinery($/ha),18,NA,guess
+PreDrill fertiliser,PreDrill,Ouyen_Placement,operating ($/ha),100,NA,guess
+PreDrill none,PreDrill,Ouyen_Placement,additional options ($/ha),30,NA,guess
+PreDrill none,PreDrill,Ouyen_Placement,amendment cost ($/ha),0,NA,guess
+PreDrill none,PreDrill,Ouyen_Placement,labour ($/ha),16,NA,guess
+PreDrill none,PreDrill,Ouyen_Placement,machinery($/ha),18,NA,guess
+PreDrill none,PreDrill,Ouyen_Placement,operating ($/ha),100,NA,guess
+Rip fertiliser,Rip,Ouyen_Placement,additional options ($/ha),30,NA,guess
+Rip fertiliser,Rip,Ouyen_Placement,amendment cost ($/ha),0,NA,guess
+Rip fertiliser,Rip,Ouyen_Placement,labour ($/ha),16,NA,guess
+Rip fertiliser,Rip,Ouyen_Placement,machinery($/ha),18,NA,guess
+Rip fertiliser,Rip,Ouyen_Placement,operating ($/ha),100,NA,guess
+Rip none,Rip,Ouyen_Placement,additional options ($/ha),30,NA,guess
+Rip none,Rip,Ouyen_Placement,amendment cost ($/ha),0,NA,guess
+Rip none,Rip,Ouyen_Placement,labour ($/ha),16,NA,guess
+Rip none,Rip,Ouyen_Placement,machinery($/ha),18,NA,guess
+Rip none,Rip,Ouyen_Placement,operating ($/ha),100,NA,guess
+Unmodified none,Unmodified,Ouyen_Placement,additional options ($/ha),30,NA,guess
+Unmodified none,Unmodified,Ouyen_Placement,amendment cost ($/ha),0,NA,guess
+Unmodified none,Unmodified,Ouyen_Placement,labour ($/ha),16,NA,guess
+Unmodified none,Unmodified,Ouyen_Placement,machinery($/ha),18,NA,guess
+Unmodified none,Unmodified,Ouyen_Placement,operating ($/ha),100,NA,guess
+Control,Unmodified,Ouyen_Spade,additional options ($/ha),30,NA,guess
+Control,Unmodified,Ouyen_Spade,amendment cost ($/ha),0,NA,guess
+Control,Unmodified,Ouyen_Spade,labour ($/ha),16,NA,guess
+Control,Unmodified,Ouyen_Spade,machinery($/ha),18,NA,guess
+Control,Unmodified,Ouyen_Spade,operating ($/ha),100,NA,guess
+Spade animal,Spade,Ouyen_Spade,additional options ($/ha),30,NA,guess
+Spade animal,Spade,Ouyen_Spade,amendment cost ($/ha),0,NA,guess
+Spade animal,Spade,Ouyen_Spade,labour ($/ha),16,NA,guess
+Spade animal,Spade,Ouyen_Spade,machinery($/ha),18,NA,guess
+Spade animal,Spade,Ouyen_Spade,operating ($/ha),100,NA,guess
+Spade fertiliser,Spade,Ouyen_Spade,additional options ($/ha),30,NA,guess
+Spade fertiliser,Spade,Ouyen_Spade,amendment cost ($/ha),0,NA,guess
+Spade fertiliser,Spade,Ouyen_Spade,labour ($/ha),16,NA,guess
+Spade fertiliser,Spade,Ouyen_Spade,machinery($/ha),18,NA,guess
+Spade fertiliser,Spade,Ouyen_Spade,operating ($/ha),100,NA,guess
+Spade none,Spade,Ouyen_Spade,additional options ($/ha),30,NA,guess
+Spade none,Spade,Ouyen_Spade,amendment cost ($/ha),0,NA,guess
+Spade none,Spade,Ouyen_Spade,labour ($/ha),16,NA,guess
+Spade none,Spade,Ouyen_Spade,machinery($/ha),18,NA,guess
+Spade none,Spade,Ouyen_Spade,operating ($/ha),100,NA,guess
+Spade plant,Spade,Ouyen_Spade,additional options ($/ha),30,NA,guess
+Spade plant,Spade,Ouyen_Spade,amendment cost ($/ha),0,NA,guess
+Spade plant,Spade,Ouyen_Spade,labour ($/ha),16,NA,guess
+Spade plant,Spade,Ouyen_Spade,machinery($/ha),18,NA,guess
+Spade plant,Spade,Ouyen_Spade,operating ($/ha),100,NA,guess
+Control,Unmodified,Sherwood,additional options ($/ha),30,NA,guess
+Control,Unmodified,Sherwood,amendment cost ($/ha),0,NA,guess
+Control,Unmodified,Sherwood,labour ($/ha),16,NA,guess
+Control,Unmodified,Sherwood,machinery($/ha),18,NA,guess
+Control,Unmodified,Sherwood,operating ($/ha),100,NA,guess
+Rip fertiliser,Rip,Sherwood,additional options ($/ha),30,NA,guess
+Rip fertiliser,Rip,Sherwood,amendment cost ($/ha),0,NA,guess
+Rip fertiliser,Rip,Sherwood,labour ($/ha),16,NA,guess
+Rip fertiliser,Rip,Sherwood,machinery($/ha),18,NA,guess
+Rip fertiliser,Rip,Sherwood,operating ($/ha),100,NA,guess
+Rip none,Rip,Sherwood,additional options ($/ha),30,NA,guess
+Rip none,Rip,Sherwood,amendment cost ($/ha),0,NA,guess
+Rip none,Rip,Sherwood,labour ($/ha),16,NA,guess
+Rip none,Rip,Sherwood,machinery($/ha),18,NA,guess
+Rip none,Rip,Sherwood,operating ($/ha),100,NA,guess
+Spade fertiliser,Spade,Sherwood,additional options ($/ha),30,NA,guess
+Spade fertiliser,Spade,Sherwood,amendment cost ($/ha),0,NA,guess
+Spade fertiliser,Spade,Sherwood,labour ($/ha),16,NA,guess
+Spade fertiliser,Spade,Sherwood,machinery($/ha),18,NA,guess
+Spade fertiliser,Spade,Sherwood,operating ($/ha),100,NA,guess
+Spade none,Spade,Sherwood,additional options ($/ha),30,NA,guess
+Spade none,Spade,Sherwood,amendment cost ($/ha),0,NA,guess
+Spade none,Spade,Sherwood,labour ($/ha),16,NA,guess
+Spade none,Spade,Sherwood,machinery($/ha),18,NA,guess
+Spade none,Spade,Sherwood,operating ($/ha),100,NA,guess
+Control,Unmodified,Telopea_Downs,additional options ($/ha),30,NA,guess
+Control,Unmodified,Telopea_Downs,amendment cost ($/ha),0,NA,guess
+Control,Unmodified,Telopea_Downs,labour ($/ha),16,NA,guess
+Control,Unmodified,Telopea_Downs,machinery($/ha),18,NA,guess
+Control,Unmodified,Telopea_Downs,operating ($/ha),100,NA,guess
+Spade non organic,Spade,Telopea_Downs,additional options ($/ha),30,NA,guess
+Spade non organic,Spade,Telopea_Downs,amendment cost ($/ha),0,NA,guess
+Spade non organic,Spade,Telopea_Downs,labour ($/ha),16,NA,guess
+Spade non organic,Spade,Telopea_Downs,machinery($/ha),18,NA,guess
+Spade non organic,Spade,Telopea_Downs,operating ($/ha),100,NA,guess
+Control,Unmodified,Tempy,additional options ($/ha),30,NA,guess
+Control,Unmodified,Tempy,amendment cost ($/ha),0,NA,guess
+Control,Unmodified,Tempy,labour ($/ha),16,NA,guess
+Control,Unmodified,Tempy,machinery($/ha),18,NA,guess
+Control,Unmodified,Tempy,operating ($/ha),100,NA,guess
+IncRip animal,IncRip,Tempy,additional options ($/ha),30,NA,guess
+IncRip animal,IncRip,Tempy,amendment cost ($/ha),0,NA,guess
+IncRip animal,IncRip,Tempy,labour ($/ha),16,NA,guess
+IncRip animal,IncRip,Tempy,machinery($/ha),18,NA,guess
+IncRip animal,IncRip,Tempy,operating ($/ha),100,NA,guess
+IncRip none,IncRip,Tempy,additional options ($/ha),30,NA,guess
+IncRip none,IncRip,Tempy,amendment cost ($/ha),0,NA,guess
+IncRip none,IncRip,Tempy,labour ($/ha),16,NA,guess
+IncRip none,IncRip,Tempy,machinery($/ha),18,NA,guess
+IncRip none,IncRip,Tempy,operating ($/ha),100,NA,guess
+Rip animal,Rip,Tempy,additional options ($/ha),30,NA,guess
+Rip animal,Rip,Tempy,amendment cost ($/ha),0,NA,guess
+Rip animal,Rip,Tempy,labour ($/ha),16,NA,guess
+Rip animal,Rip,Tempy,machinery($/ha),18,NA,guess
+Rip animal,Rip,Tempy,operating ($/ha),100,NA,guess
+Rip none,Rip,Tempy,additional options ($/ha),30,NA,guess
+Rip none,Rip,Tempy,amendment cost ($/ha),0,NA,guess
+Rip none,Rip,Tempy,labour ($/ha),16,NA,guess
+Rip none,Rip,Tempy,machinery($/ha),18,NA,guess
+Rip none,Rip,Tempy,operating ($/ha),100,NA,guess
+Control,Unmodified,Waikerie,additional options ($/ha),30,NA,guess
+Control,Unmodified,Waikerie,amendment cost ($/ha),0,NA,guess
+Control,Unmodified,Waikerie,labour ($/ha),16,NA,guess
+Control,Unmodified,Waikerie,machinery($/ha),18,NA,guess
+Control,Unmodified,Waikerie,operating ($/ha),100,NA,guess
+Rip animal,Rip,Waikerie,additional options ($/ha),30,NA,guess
+Rip animal,Rip,Waikerie,amendment cost ($/ha),0,NA,guess
+Rip animal,Rip,Waikerie,labour ($/ha),16,NA,guess
+Rip animal,Rip,Waikerie,machinery($/ha),18,NA,guess
+Rip animal,Rip,Waikerie,operating ($/ha),100,NA,guess
+Rip fertiliser,Rip,Waikerie,additional options ($/ha),30,NA,guess
+Rip fertiliser,Rip,Waikerie,amendment cost ($/ha),0,NA,guess
+Rip fertiliser,Rip,Waikerie,labour ($/ha),16,NA,guess
+Rip fertiliser,Rip,Waikerie,machinery($/ha),18,NA,guess
+Rip fertiliser,Rip,Waikerie,operating ($/ha),100,NA,guess
+Rip none,Rip,Waikerie,additional options ($/ha),30,NA,guess
+Rip none,Rip,Waikerie,amendment cost ($/ha),0,NA,guess
+Rip none,Rip,Waikerie,labour ($/ha),16,NA,guess
+Rip none,Rip,Waikerie,machinery($/ha),18,NA,guess
+Rip none,Rip,Waikerie,operating ($/ha),100,NA,guess
+Unmodified animal,Unmodified,Waikerie,additional options ($/ha),30,NA,guess
+Unmodified animal,Unmodified,Waikerie,amendment cost ($/ha),0,NA,guess
+Unmodified animal,Unmodified,Waikerie,labour ($/ha),16,NA,guess
+Unmodified animal,Unmodified,Waikerie,machinery($/ha),18,NA,guess
+Unmodified animal,Unmodified,Waikerie,operating ($/ha),100,NA,guess
+Unmodified fertiliser,Unmodified,Waikerie,additional options ($/ha),30,NA,guess
+Unmodified fertiliser,Unmodified,Waikerie,amendment cost ($/ha),0,NA,guess
+Unmodified fertiliser,Unmodified,Waikerie,labour ($/ha),16,NA,guess
+Unmodified fertiliser,Unmodified,Waikerie,machinery($/ha),18,NA,guess
+Unmodified fertiliser,Unmodified,Waikerie,operating ($/ha),100,NA,guess
+Control,Unmodified,Warnertown,additional options ($/ha),30,NA,guess
+Control,Unmodified,Warnertown,amendment cost ($/ha),0,NA,guess
+Control,Unmodified,Warnertown,labour ($/ha),16,NA,guess
+Control,Unmodified,Warnertown,machinery($/ha),18,NA,guess
+Control,Unmodified,Warnertown,operating ($/ha),100,NA,guess
+DiscInv none,DiscInv,Warnertown,additional options ($/ha),30,NA,guess
+DiscInv none,DiscInv,Warnertown,amendment cost ($/ha),0,NA,guess
+DiscInv none,DiscInv,Warnertown,labour ($/ha),16,NA,guess
+DiscInv none,DiscInv,Warnertown,machinery($/ha),18,NA,guess
+DiscInv none,DiscInv,Warnertown,operating ($/ha),100,NA,guess
+IncRip none,IncRip,Warnertown,additional options ($/ha),30,NA,guess
+IncRip none,IncRip,Warnertown,amendment cost ($/ha),0,NA,guess
+IncRip none,IncRip,Warnertown,labour ($/ha),16,NA,guess
+IncRip none,IncRip,Warnertown,machinery($/ha),18,NA,guess
+IncRip none,IncRip,Warnertown,operating ($/ha),100,NA,guess
+Rip none,Rip,Warnertown,additional options ($/ha),30,NA,guess
+Rip none,Rip,Warnertown,amendment cost ($/ha),0,NA,guess
+Rip none,Rip,Warnertown,labour ($/ha),16,NA,guess
+Rip none,Rip,Warnertown,machinery($/ha),18,NA,guess
+Rip none,Rip,Warnertown,operating ($/ha),100,NA,guess
+Spade none,Spade,Warnertown,additional options ($/ha),30,NA,guess
+Spade none,Spade,Warnertown,amendment cost ($/ha),0,NA,guess
+Spade none,Spade,Warnertown,labour ($/ha),16,NA,guess
+Spade none,Spade,Warnertown,machinery($/ha),18,NA,guess
+Spade none,Spade,Warnertown,operating ($/ha),100,NA,guess
+Control,Unmodified,Wynarka,additional options ($/ha),30,NA,guess
+Control,Unmodified,Wynarka,amendment cost ($/ha),0,NA,guess
+Control,Unmodified,Wynarka,labour ($/ha),16,NA,guess
+Control,Unmodified,Wynarka,machinery($/ha),18,NA,guess
+Control,Unmodified,Wynarka,operating ($/ha),100,NA,guess
+IncRip none,IncRip,Wynarka,additional options ($/ha),30,NA,guess
+IncRip none,IncRip,Wynarka,amendment cost ($/ha),0,NA,guess
+IncRip none,IncRip,Wynarka,labour ($/ha),16,NA,guess
+IncRip none,IncRip,Wynarka,machinery($/ha),18,NA,guess
+IncRip none,IncRip,Wynarka,operating ($/ha),100,NA,guess
+IncRip+Spade none,IncRip+Spade,Wynarka,additional options ($/ha),30,NA,guess
+IncRip+Spade none,IncRip+Spade,Wynarka,amendment cost ($/ha),0,NA,guess
+IncRip+Spade none,IncRip+Spade,Wynarka,labour ($/ha),16,NA,guess
+IncRip+Spade none,IncRip+Spade,Wynarka,machinery($/ha),18,NA,guess
+IncRip+Spade none,IncRip+Spade,Wynarka,operating ($/ha),100,NA,guess
+Rip none,Rip,Wynarka,additional options ($/ha),30,NA,guess
+Rip none,Rip,Wynarka,amendment cost ($/ha),0,NA,guess
+Rip none,Rip,Wynarka,labour ($/ha),16,NA,guess
+Rip none,Rip,Wynarka,machinery($/ha),18,NA,guess
+Rip none,Rip,Wynarka,operating ($/ha),100,NA,guess
+Rip+Spade none,Rip+Spade,Wynarka,additional options ($/ha),30,NA,guess
+Rip+Spade none,Rip+Spade,Wynarka,amendment cost ($/ha),0,NA,guess
+Rip+Spade none,Rip+Spade,Wynarka,labour ($/ha),16,NA,guess
+Rip+Spade none,Rip+Spade,Wynarka,machinery($/ha),18,NA,guess
+Rip+Spade none,Rip+Spade,Wynarka,operating ($/ha),100,NA,guess
+Spade none,Spade,Wynarka,additional options ($/ha),30,NA,guess
+Spade none,Spade,Wynarka,amendment cost ($/ha),0,NA,guess
+Spade none,Spade,Wynarka,labour ($/ha),16,NA,guess
+Spade none,Spade,Wynarka,machinery($/ha),18,NA,guess
+Spade none,Spade,Wynarka,operating ($/ha),100,NA,guess
+Control,Unmodified,Yenda,additional options ($/ha),30,NA,guess
+Control,Unmodified,Yenda,amendment cost ($/ha),0,NA,guess
+Control,Unmodified,Yenda,labour ($/ha),16,NA,guess
+Control,Unmodified,Yenda,machinery($/ha),18,NA,guess
+Control,Unmodified,Yenda,operating ($/ha),100,NA,guess
+Rip none,Rip,Yenda,additional options ($/ha),30,NA,guess
+Rip none,Rip,Yenda,amendment cost ($/ha),0,NA,guess
+Rip none,Rip,Yenda,labour ($/ha),16,NA,guess
+Rip none,Rip,Yenda,machinery($/ha),18,NA,guess
+Rip none,Rip,Yenda,operating ($/ha),100,NA,guess
+Sweep animal,Sweep,Yenda,additional options ($/ha),30,NA,guess
+Sweep animal,Sweep,Yenda,amendment cost ($/ha),0,NA,guess
+Sweep animal,Sweep,Yenda,labour ($/ha),16,NA,guess
+Sweep animal,Sweep,Yenda,machinery($/ha),18,NA,guess
+Sweep animal,Sweep,Yenda,operating ($/ha),100,NA,guess
+Sweep mixed,Sweep,Yenda,additional options ($/ha),30,NA,guess
+Sweep mixed,Sweep,Yenda,amendment cost ($/ha),0,NA,guess
+Sweep mixed,Sweep,Yenda,labour ($/ha),16,NA,guess
+Sweep mixed,Sweep,Yenda,machinery($/ha),18,NA,guess
+Sweep mixed,Sweep,Yenda,operating ($/ha),100,NA,guess
+Sweep non organic,Sweep,Yenda,additional options ($/ha),30,NA,guess
+Sweep non organic,Sweep,Yenda,amendment cost ($/ha),0,NA,guess
+Sweep non organic,Sweep,Yenda,labour ($/ha),16,NA,guess
+Sweep non organic,Sweep,Yenda,machinery($/ha),18,NA,guess
+Sweep non organic,Sweep,Yenda,operating ($/ha),100,NA,guess
+Sweep none,Sweep,Yenda,additional options ($/ha),30,NA,guess
+Sweep none,Sweep,Yenda,amendment cost ($/ha),0,NA,guess
+Sweep none,Sweep,Yenda,labour ($/ha),16,NA,guess
+Sweep none,Sweep,Yenda,machinery($/ha),18,NA,guess
+Sweep none,Sweep,Yenda,operating ($/ha),100,NA,guess
+Unmodified animal,Unmodified,Yenda,additional options ($/ha),30,NA,guess
+Unmodified animal,Unmodified,Yenda,amendment cost ($/ha),0,NA,guess
+Unmodified animal,Unmodified,Yenda,labour ($/ha),16,NA,guess
+Unmodified animal,Unmodified,Yenda,machinery($/ha),18,NA,guess
+Unmodified animal,Unmodified,Yenda,operating ($/ha),100,NA,guess
+Unmodified fertiliser,Unmodified,Yenda,additional options ($/ha),30,NA,guess
+Unmodified fertiliser,Unmodified,Yenda,amendment cost ($/ha),0,NA,guess
+Unmodified fertiliser,Unmodified,Yenda,labour ($/ha),16,NA,guess
+Unmodified fertiliser,Unmodified,Yenda,machinery($/ha),18,NA,guess
+Unmodified fertiliser,Unmodified,Yenda,operating ($/ha),100,NA,guess
+Control,Unmodified,Younghusband,additional options ($/ha),30,NA,guess
+Control,Unmodified,Younghusband,amendment cost ($/ha),0,NA,guess
+Control,Unmodified,Younghusband,labour ($/ha),16,NA,guess
+Control,Unmodified,Younghusband,machinery($/ha),18,NA,guess
+Control,Unmodified,Younghusband,operating ($/ha),100,NA,guess
+IncRip none,IncRip,Younghusband,additional options ($/ha),30,NA,guess
+IncRip none,IncRip,Younghusband,amendment cost ($/ha),0,NA,guess
+IncRip none,IncRip,Younghusband,labour ($/ha),16,NA,guess
+IncRip none,IncRip,Younghusband,machinery($/ha),18,NA,guess
+IncRip none,IncRip,Younghusband,operating ($/ha),100,NA,guess
+Rip none,Rip,Younghusband,additional options ($/ha),30,NA,guess
+Rip none,Rip,Younghusband,amendment cost ($/ha),0,NA,guess
+Rip none,Rip,Younghusband,labour ($/ha),16,NA,guess
+Rip none,Rip,Younghusband,machinery($/ha),18,NA,guess
+Rip none,Rip,Younghusband,operating ($/ha),100,NA,guess
+Spade none,Spade,Younghusband,additional options ($/ha),30,NA,guess
+Spade none,Spade,Younghusband,amendment cost ($/ha),0,NA,guess
+Spade none,Spade,Younghusband,labour ($/ha),16,NA,guess
+Spade none,Spade,Younghusband,machinery($/ha),18,NA,guess
+Spade none,Spade,Younghusband,operating ($/ha),100,NA,guess
+Unmodified non organic,Unmodified,Younghusband,additional options ($/ha),30,NA,guess
+Unmodified non organic,Unmodified,Younghusband,amendment cost ($/ha),0,NA,guess
+Unmodified non organic,Unmodified,Younghusband,labour ($/ha),16,NA,guess
+Unmodified non organic,Unmodified,Younghusband,machinery($/ha),18,NA,guess
+Unmodified non organic,Unmodified,Younghusband,operating ($/ha),100,NA,guess
+Unmodified none,Unmodified,Younghusband,additional options ($/ha),30,NA,guess
+Unmodified none,Unmodified,Younghusband,amendment cost ($/ha),0,NA,guess
+Unmodified none,Unmodified,Younghusband,labour ($/ha),16,NA,guess
+Unmodified none,Unmodified,Younghusband,machinery($/ha),18,NA,guess
+Unmodified none,Unmodified,Younghusband,operating ($/ha),100,NA,guess
+Unmodified+OnRow none,Unmodified+OnRow,Younghusband,additional options ($/ha),30,NA,guess
+Unmodified+OnRow none,Unmodified+OnRow,Younghusband,amendment cost ($/ha),0,NA,guess
+Unmodified+OnRow none,Unmodified+OnRow,Younghusband,labour ($/ha),16,NA,guess
+Unmodified+OnRow none,Unmodified+OnRow,Younghusband,machinery($/ha),18,NA,guess
+Unmodified+OnRow none,Unmodified+OnRow,Younghusband,operating ($/ha),100,NA,guess
