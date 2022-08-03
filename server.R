@@ -300,7 +300,7 @@ trial_results_table <- trial_results_table %>%
 #New working dataset 03/08/2022
 
 df <- read.csv(file = "primary_data_all_v2.csv")
-
+#names(df)
 df <- df %>%
   dplyr::select(grouping,
                 modification,
@@ -308,17 +308,22 @@ df <- df %>%
                 non_wetting,
                 acidic,
                 physical,
+                nutrient,
                 rainfall_mean_annual,
                 site_numb) %>%
-   distinct(site, grouping, .keep_all = TRUE)
+  distinct(site, grouping, .keep_all = TRUE)
+distinct(df,modification )
+
+
 df <- df %>%
-  filter(modification == "deep ripping")
+  filter(modification == "Rip")
 df$grouping <- as.character(df$grouping)
 df$modification <- as.character(df$modification)
 df$site <- as.character(df$site)
 df$non_wetting <- as.character(df$non_wetting)
 df$acidic <- as.character(df$acidic)
 df$physical <- as.character(df$physical)
+df$nutrient <- as.character(df$nutrient)
 
 df <- df %>%
   arrange(site)
@@ -326,7 +331,7 @@ df <- df %>%
 df_info <- df
 
 
-cost_table <- read.csv("cost_table.csv")
+cost_table <- read.csv("cost_table_v2.csv")
 
 cost_table <- cost_table %>% rename(`data source` = "data.source")
 cost_table$grouping <- as.character(cost_table$grouping)
@@ -338,7 +343,7 @@ cost_table$`data source` <- as.character(cost_table$`data source`)
 cost_table <- cost_table %>%
   dplyr::select(- comments)
 
-extra_table <- read.csv("extra_table.csv")
+extra_table <- read.csv("extra_table_v2.csv")
 
 #names(extra_table)
 extra_table <- extra_table %>% rename(`data source` = "data.source")
@@ -349,20 +354,21 @@ extra_table <- extra_table %>%
               values_from = value,
               values_fill = list(value = 0)) %>%
   relocate(c(comments,`data source`), .after = last_col())
-
+#names(extra_table)
 extra_table$grouping <- as.character(extra_table$grouping)
 extra_table$modification <- as.character(extra_table$modification)
 extra_table$site <- as.character(extra_table$site)
 extra_table$non_wetting <- as.character(extra_table$non_wetting)
 extra_table$acidic <- as.character(extra_table$acidic)
 extra_table$physical <- as.character(extra_table$physical)
+extra_table$nutrient <- as.character(extra_table$nutrient)
 extra_table$activity <- as.character(extra_table$activity)
 extra_table$comments <- as.character(extra_table$comments)
 extra_table$`data source` <- as.character(extra_table$`data source`)
 
 #yld_table
 
-yld_table <- read.csv("yield_table_av.csv")
+yld_table <- read.csv("yield_table_av_v2.csv")
 
 
 yld_table <- yld_table %>% rename(
@@ -383,21 +389,23 @@ yld_table <- yld_table %>%
 
 yld_table <- ungroup(yld_table)
 
-  yld_table <- yld_table %>%
+yld_table <- yld_table %>%
   mutate(year = year +1)
 
-  yld_table$grouping <- as.character(yld_table$grouping)
-  yld_table$modification <- as.character(yld_table$modification)
-  yld_table$site <- as.character(yld_table$site)
-  yld_table$crop  <- as.character(yld_table$crop )
-  yld_table$`data source` <- as.character(yld_table$`data source`)
+yld_table$grouping <- as.character(yld_table$grouping)
+yld_table$modification <- as.character(yld_table$modification)
+yld_table$site <- as.character(yld_table$site)
+yld_table$crop  <- as.character(yld_table$crop )
+yld_table$`data source` <- as.character(yld_table$`data source`)
 
-  #code no trial data as such
+#code no trial data as such
 yld_table <- yld_table %>%
-    dplyr::mutate(`data source` = case_when(
-      is.na(crop) ~ "no trial data",
-      TRUE   ~ `data source`
-    ))
+  dplyr::mutate(`data source` = case_when(
+    is.na(crop) ~ "no trial data",
+    TRUE   ~ `data source`
+  ))
+
+
 
 ####################################################################################################
 ######################         create some extra row for labels              ######################
