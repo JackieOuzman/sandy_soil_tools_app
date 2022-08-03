@@ -370,7 +370,7 @@ DB_df_soil_mod<- DB_df_soil_mod %>%
     TRUE ~ "NA"
   ))
 
-
+names(DB_df_soil_mod)
 what_check <- DB_df_soil_mod %>% 
    select(ID, site, year, Descriptors,Repellence, non_wetting,Acidity, acid, Physical, physical,Nutrient,  nutrient)
 
@@ -378,4 +378,35 @@ what_check <- DB_df_soil_mod %>%
 #####################################################################################
 #####  add 2 clms    site_numb ,	rainfall_mean_annual	site_numb #####
 #####################################################################################
+
+
+DB_df_soil_mod <-  separate(DB_df_soil_mod, col=met_name_number, into=c('name-temp', 'site_numb'), sep='_', remove = FALSE)
+
+annual_rain <- read.csv("X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2022/annual_rain_2022_research_impact_sites.csv")
+
+names(annual_rain)
+annual_rain$site <- as.character(annual_rain$site)
+DB_df_soil_mod$met_name_number <- as.character(DB_df_soil_mod$met_name_number)
+
+annual_rain <- annual_rain %>% 
+  rename(met_name_number = site)
+
+
+
+str(annual_rain)
+str(DB_df_soil_mod)
+DB_df_soil_mod <- left_join(DB_df_soil_mod, annual_rain)
+
+#temp3 <-distinct(DB_df_soil_mod,  met_name_number, .keep_all = TRUE)
+
+names(DB_df_soil_mod)
+DB_df_soil_mod <- DB_df_soil_mod %>% 
+  select(- 'name-temp')
+
+#####################################################################################
+##### I think this is good now :) 2. #####
+#####################################################################################
+
+write.csv(DB_df_soil_mod,
+          "X:/Therese_Jackie/Sandy_soils/App_development2021/sandy_soil_tools_app/sandy_soil_tools_app/primary_data_all_v2.csv", row.names = FALSE)
 
