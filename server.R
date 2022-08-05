@@ -517,8 +517,8 @@ server <- shinyServer(function(input, output, session) {
     ########################################################################################
     
     # set the site name this will be a filter with R shiny 'input$site_selection'
-    site_in_app <- "Brooker"
-    
+    #site_in_app <- "Brooker"
+    site_in_app == input$site_selection
     ### name of site selected
     
     a <-  site_in_app #name of the site

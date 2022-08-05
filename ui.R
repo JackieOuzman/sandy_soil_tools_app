@@ -115,8 +115,9 @@ library(vroom) #new install on land and water linex
                                    "Telopea_Downs",
                                    "Tempy"     ,
                                    "Warnertown"  ,
-                                   "Wynarka"   ),
-                                  selected = "Tempy"),
+                                   "Wynarka",
+                                   "Brooker"),
+                                  selected = "Brooker"),
                              ),#bracket for select input
                              ),#fluid row bracket #1
 
