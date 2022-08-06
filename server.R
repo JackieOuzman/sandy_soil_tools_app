@@ -379,6 +379,7 @@ yld_table <- yld_table %>%
   dplyr::select(grouping,
                 modification,
                 site,
+                Descriptors,
                 year = yr_post_amelioration,
                 crop,
                 "yield_unmodified",
@@ -453,70 +454,11 @@ server <- shinyServer(function(input, output, session) {
 ########    function for filtering the data - and creating a plot on the map page     ################
 ###################################################################################################### 
   output$trial_plot <- renderPlot({
-
-  #   ## text that appears on the plot
-  # ## what is the decile year for our trial results?
-  #  decile_year0_temp <-filter(trial_results,
-  #                             site == input$site_selection & yr_post_amelioration == 0 ) %>%
-  #    select(decile) %>%
-  #    distinct(decile)
-  #  decile_year1_temp <-filter(trial_results,
-  #                             site == input$site_selection & yr_post_amelioration == 1 ) %>%
-  #    select(decile) %>%
-  #    distinct(decile)
-  # 
-  #  decile_year0 = as.character(unique(decile_year0_temp$decile))
-  #  decile_year1 = as.character(unique(decile_year1_temp$decile))
-  # 
-  #  ## text that appears on the plot
-  #  ## what is the year of amerolaition for the site / trial ?
-  # 
-  #  year_amelioration <- trial_results %>%
-  #    filter(site == input$site_selection) %>%
-  #    dplyr::select(Amelioration_Year) %>%
-  #    distinct(Amelioration_Year)
-  # 
-  #  year_amelioration = as.character(unique(year_amelioration$Amelioration_Year))
-  # 
-  #  ## the plot
-  #  site_plot_descriptors <-
-  #    trial_results %>% filter(site == input$site_selection) %>%
-  #    dplyr::select(site, Descriptors, yr_post_amelioration, yield) %>%
-  #    ggplot ( aes(x = Descriptors)) +
-  #    geom_bar(
-  #      aes(y = yield, fill = as.factor(yr_post_amelioration)),
-  #      stat = "summary",
-  #      fun.y = "mean",
-  #      position = position_dodge(0.8),
-  #      width = 0.7,
-  #      show.legend = TRUE
-  #    ) +
-  # 
-  #    guides(fill = guide_legend(title = "Years post amelioration")) +
-  #    scale_fill_grey() +
-  #    theme_bw()+
-  #    theme(plot.title = element_text(size = 20),
-  #          plot.subtitle = element_text(size = 18),
-  # 
-  #          axis.title.y = element_text(size = 18),
-  #          axis.title.x = element_text(size = 18),
-  # 
-  #          axis.text.x = element_text(angle = 90, hjust=1,size = 14),
-  #          axis.text.y = element_text(size = 14))+
-  # 
-  #    labs(title= paste0("Site: ", input$site_selection, ", Year amelioration: ", year_amelioration),
-  #         subtitle = paste0("Deciles: year 0 = " , decile_year0, " , year 1 = ", decile_year1),
-  #         x ="Trial", y = "Yield t/ha")
-  # 
-  # 
-  #  site_plot_descriptors
+########################################################################################
+#### code from my cum ANOVA plots step 8 ################################################
+########################################################################################
     
-    
-    ########################################################################################
-    #### code from my cum ANOVA plots step 8 ################################################
-    ########################################################################################
-    
-    # set the site name this will be a filter with R shiny 'input$site_selection'
+    # set the site name call on the reactive function defined in te reactive secetion
     site_in_app <- c(reactive_site_selection())
     ### name of site selected
     
@@ -536,8 +478,7 @@ server <- shinyServer(function(input, output, session) {
     
     site_year_yld_summary_site <- trial_results_table %>%  filter(site == a) 
     
-    # site_year_yld_summary_site <- trial_results_table %>%
-    #   filter(site == a) 
+    
     ### brooker is a problem site I want to filter out these ones:
     
     site_year_yld_summary_site <- site_year_yld_summary_site %>%
@@ -566,7 +507,7 @@ server <- shinyServer(function(input, output, session) {
     
     site_year_yld_summary <- site_year_yld_summary_site 
     
-    
+    ## this is creating mean value for each year and treatment
     site_year_yld_summary <- site_year_yld_summary_site %>% 
       dplyr::group_by(Descriptors, year) %>%
       dplyr::summarise(mean=mean(yield, na.rm = TRUE), 
@@ -579,10 +520,7 @@ server <- shinyServer(function(input, output, session) {
     site_year_yld_summary$Descriptors <- factor(site_year_yld_summary$Descriptors,
                                                 levels = order)
     
-    #what is the max yield value on the y axis
-    
-    
-    
+    # the order of years 
     order_yrs <- c(
       "2021",
       "2020",
@@ -599,7 +537,7 @@ server <- shinyServer(function(input, output, session) {
     
     ### Plot
     
-    
+    #ensure year is defined a a factor for a nice plot
     site_year_yld_summary$year <- as.factor(site_year_yld_summary$year)
     
     CumPlot <- site_year_yld_summary %>% 
@@ -631,25 +569,57 @@ server <- shinyServer(function(input, output, session) {
 
 ########     function for filtering the data - and creating a table of grouped data on map page #####################
 
-  #table trial data
-    output$trial_table <- DT::renderDataTable({
-
-
-    trial_results_table_1 <-filter(trial_results_table,
-                                        site == input$site_selection ) %>%
-                                        dplyr::select(-price, -`data source`, -modification) %>%
-      dplyr::rename(`aggregated trial` = grouping,
-                    `yr post amelioration` = yr_post_amelioration) %>%
+  # #table trial data
+  #   output$trial_table <- DT::renderDataTable({
+  # 
+  # 
+  #   trial_results_table_1 <-filter(trial_results_table,
+  #                                       site == input$site_selection ) %>%
+  #                                       dplyr::select(-price, -`data source`, -modification) %>%
+  #     dplyr::rename(`aggregated trial` = grouping,
+  #                   `yr post amelioration` = yr_post_amelioration) %>%
+  #     dplyr::filter(!is.na(crop))%>%
+  #     dplyr::mutate(`yield gain` = `yield (modified)` - `yield  (un modified)`)
+  # 
+  # 
+  # 
+  #   DT::datatable(  trial_results_table_1,
+  #                   options = list(dom = 't'),#removes the search bar
+  #                   caption = 'Table 1: Yield response t/ha.') %>%
+  #     formatRound(c(6:8), 2)
+  # 
+  # })
+  output$trial_table <- DT::renderDataTable({
+    
+    
+    trial_results <-filter(yld_table,
+                                   site == c(reactive_site_selection()) ) %>%
+                                   
+      
+      dplyr::select(site,
+                    Descriptors,
+                    year,
+                    crop,
+                    yield_unmodified,
+                    yield_modified)%>%
+      dplyr::rename(Treatment = Descriptors,
+      ) %>%
       dplyr::filter(!is.na(crop))%>%
-      dplyr::mutate(`yield gain` = `yield (modified)` - `yield  (un modified)`)
+      dplyr::mutate(`yield gain` = yield_modified - yield_unmodified) %>% 
+     
+      dplyr::select(Treatment,
+                  year,
+                  crop,
+                  `yield gain`)
 
-
-
-    DT::datatable(  trial_results_table_1,
-                    options = list(dom = 't'),#removes the search bar
-                    caption = 'Table 1: Yield response t/ha.') %>%
-      formatRound(c(6:8), 2)
-
+    
+    
+    DT::datatable(  trial_results ,
+                  caption = 'Table 1: Yield response t/ha.')%>%
+       formatRound(4, 2)
+       
+       
+       
   })
 
 
