@@ -517,8 +517,7 @@ server <- shinyServer(function(input, output, session) {
     ########################################################################################
     
     # set the site name this will be a filter with R shiny 'input$site_selection'
-    #site_in_app <- "Brooker"
-    site_in_app == input$site_selection
+    site_in_app <- c(reactive_site_selection())
     ### name of site selected
     
     a <-  site_in_app #name of the site
@@ -533,8 +532,12 @@ server <- shinyServer(function(input, output, session) {
     ###############################################################################################################################################
     
     #filter the TRIAL data on site 
-    site_year_yld_summary_site <- trial_results_table %>%
-      filter(site == a) 
+    
+    
+    site_year_yld_summary_site <- trial_results_table %>%  filter(site == a) 
+    
+    # site_year_yld_summary_site <- trial_results_table %>%
+    #   filter(site == a) 
     ### brooker is a problem site I want to filter out these ones:
     
     site_year_yld_summary_site <- site_year_yld_summary_site %>%
@@ -596,7 +599,7 @@ server <- shinyServer(function(input, output, session) {
     
     ### Plot
     
-    names(site_year_yld_summary)
+    
     site_year_yld_summary$year <- as.factor(site_year_yld_summary$year)
     
     CumPlot <- site_year_yld_summary %>% 
@@ -618,6 +621,13 @@ server <- shinyServer(function(input, output, session) {
 
   })
 
+  # #### TEMP CODE ####
+  # output$site_selection <- renderPrint({
+  #   #"test"
+  #   paste0(reactive_site_selection())
+  #   
+  # })
+    
 
 ########     function for filtering the data - and creating a table of grouped data on map page #####################
 
@@ -707,6 +717,11 @@ server <- shinyServer(function(input, output, session) {
   ##################                     reactivity                              #######################
   ######################################################################################################
 
+ #site selection which is used in the plot of yields
+  
+  reactive_site_selection <- reactive({
+     input$site_selection 
+  })
 
   ## df for the info boxs about the site
   reactive_df_info <- reactive({

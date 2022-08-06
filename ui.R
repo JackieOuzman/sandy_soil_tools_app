@@ -135,8 +135,12 @@ library(vroom) #new install on land and water linex
                                column(width = 6,  plotOutput("trial_plot"))
 
                                 ),#fluid row bracket #3
-
-
+                      
+                      ###Temp code##
+                      # fluidRow(
+                      #   column(width=6,   verbatimTextOutput("site_selection"))
+                      # 
+                      # ),#fluid row bracket #4 Which is just temp
 
                              ), #tabPanel1 bracket
 
