@@ -567,28 +567,10 @@ server <- shinyServer(function(input, output, session) {
   # })
     
 
-########     function for filtering the data - and creating a table of grouped data on map page #####################
+########     function for filtering the data - and creating a table of yield gains data on map page #####################
 
   # #table trial data
-  #   output$trial_table <- DT::renderDataTable({
-  # 
-  # 
-  #   trial_results_table_1 <-filter(trial_results_table,
-  #                                       site == input$site_selection ) %>%
-  #                                       dplyr::select(-price, -`data source`, -modification) %>%
-  #     dplyr::rename(`aggregated trial` = grouping,
-  #                   `yr post amelioration` = yr_post_amelioration) %>%
-  #     dplyr::filter(!is.na(crop))%>%
-  #     dplyr::mutate(`yield gain` = `yield (modified)` - `yield  (un modified)`)
-  # 
-  # 
-  # 
-  #   DT::datatable(  trial_results_table_1,
-  #                   options = list(dom = 't'),#removes the search bar
-  #                   caption = 'Table 1: Yield response t/ha.') %>%
-  #     formatRound(c(6:8), 2)
-  # 
-  # })
+ 
   output$trial_table <- DT::renderDataTable({
     
     
@@ -614,11 +596,12 @@ server <- shinyServer(function(input, output, session) {
 
     
     
-    DT::datatable(  trial_results ,
-                  caption = 'Table 1: Yield response t/ha.')%>%
-       formatRound(4, 2)
-       
-       
+    DT::datatable(trial_results ,
+                  rownames = FALSE,
+                  caption = 'Table 1: Yield response t/ha.') %>%
+      formatRound(4, 2)
+    
+   
        
   })
 
