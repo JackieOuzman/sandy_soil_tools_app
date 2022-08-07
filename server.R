@@ -376,22 +376,29 @@ yld_table <- yld_table %>% rename(
   "yield_modified" =    'yield..modified.')
 
 yld_table <- yld_table %>%
-  dplyr::select(grouping,
-                modification,
-                site,
-                Descriptors,
-                year = yr_post_amelioration,
-                crop,
-                "yield_unmodified",
-                "yield_modified",
-                price,
-                "data source" = data.source,
+  dplyr::select(
+    site,
+    Descriptors,
+    grouping,
+    modification,
+    crop,
+    year,
+    yr_post_amelioration,
+    "yield_unmodified",
+    "yield_modified",
+    price,
+    "data source" = data.source,
+    decile,
+    rainfall_mean_annual
   )
+
+
+
 
 yld_table <- ungroup(yld_table)
 
 yld_table <- yld_table %>%
-  mutate(year = year +1)
+  mutate("yr post amelioration" = yr_post_amelioration +1)
 
 yld_table$grouping <- as.character(yld_table$grouping)
 yld_table$modification <- as.character(yld_table$modification)
@@ -578,12 +585,26 @@ server <- shinyServer(function(input, output, session) {
                                    site == c(reactive_site_selection()) ) %>%
                                    
       
-      dplyr::select(site,
-                    Descriptors,
-                    year,
-                    crop,
-                    yield_unmodified,
-                    yield_modified)%>%
+      dplyr::select(
+        # site,
+        # Descriptors,
+        # year,
+        # crop,
+        # yield_unmodified,
+        # yield_modified
+        
+        site,
+        Descriptors,
+        #grouping,
+        #modification,
+        year,
+        crop,
+        yr_post_amelioration,
+        "yield_unmodified",
+        "yield_modified",
+        decile,
+        rainfall_mean_annual
+                    )%>%
       dplyr::rename(Treatment = Descriptors,
       ) %>%
       dplyr::filter(!is.na(crop))%>%
@@ -592,14 +613,16 @@ server <- shinyServer(function(input, output, session) {
       dplyr::select(Treatment,
                   year,
                   crop,
-                  `yield gain`)
+                  `yield gain`,
+                  decile,
+                  rainfall_mean_annual)
 
     
     
     DT::datatable(trial_results ,
                   rownames = FALSE,
                   caption = 'Table 1: Yield response t/ha.') %>%
-      formatRound(4, 2)
+      formatRound(c(4,6), 2) #this round clm number 4 and 6 to 2 decimal places
     
    
        
