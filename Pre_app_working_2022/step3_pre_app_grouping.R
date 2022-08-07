@@ -96,3 +96,4 @@ write.csv(yld_ave_with_new_clm_for_yld,
           "X:/Therese_Jackie/Sandy_soils/App_development2021/sandy_soil_tools_app/sandy_soil_tools_app/yield_table_av_v2.csv",
           row.names = FALSE)
 
+
