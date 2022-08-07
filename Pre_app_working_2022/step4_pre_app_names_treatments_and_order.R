@@ -459,11 +459,20 @@ order <- c(
 
 order_df <- as.data.frame(order)
 
+## add a oder index to this order_df.
+
+order_df$order_rank <- 1:nrow(order_df)
+
+
+### add the two datasets togther
+
+str(order_df)
+str(list_of_Descriptors)
+
+
+list_of_Descriptors <- left_join(list_of_Descriptors,order_df, by = c("Descriptors" = "order"))
 
 write.csv(list_of_Descriptors,
-          "list_of_Descriptors.csv",
+          "list_of_Descriptors_with_order_rank.csv",
           row.names = FALSE)
 
-write.csv(order_df,
-          "order_df.csv",
-          row.names = FALSE)
