@@ -36,7 +36,7 @@ yld_ave <- yld_ave %>%
 df <- read.csv("X:/Therese_Jackie/Sandy_soils/App_development2021/sandy_soil_tools_app/sandy_soil_tools_app/primary_data_all_v2.csv")
 names(df)
 
-df_small <- df %>% select(site, year, Descriptors, grouping, modification, crop, yr_post_amelioration )
+df_small <- df %>% select(site, year, Descriptors, grouping, modification, crop, yr_post_amelioration, decile, rainfall_mean_annual )
 df_small <- df_small %>% 
   distinct(site, year, Descriptors, .keep_all = TRUE)
 
@@ -48,11 +48,13 @@ str(df_small)
 yld_ave <- yld_ave %>% 
   mutate(for_join = paste0(site, "_", year, "_", Descriptors)) %>% 
          mutate(for_join_control = paste0(site, "_", year))## make a new clm to join the control to non control file (it has site and year but no desciptors)
+
 df_small <- df_small %>% 
   mutate(for_join = paste0(site, "_", year, "_", Descriptors)) %>% 
-  select(for_join, grouping, modification, crop, yr_post_amelioration)
+  select(for_join, grouping, modification, crop, yr_post_amelioration, decile, rainfall_mean_annual)
 
 yld_ave <- left_join(yld_ave, df_small)
+names(yld_ave)
 
 
 ### make a df that just contains control ylds and one that doesnt contain controls
