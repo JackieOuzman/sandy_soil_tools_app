@@ -101,22 +101,40 @@ library(vroom) #new install on land and water linex
                                  "site_selection",
                                  label = h3("select site:"),
                                  choices = list(
-                                   "Buckleboo"   ,
-                                   "Cummins"  ,
-                                   "Karkoo" ,
+                                   "Brimpton Lake",
+                                   "Brooker",
+                                   "Buckleboo",
+                                   "Bute_CSIRO",
+                                   "Bute_Trengrove",
+                                   "Cadgee",
+                                   "Carwarp_Amelioration",
+                                   "Cummins",
+                                   "Karkoo",
+                                   "Karoonda",
+                                   "Kooloonong_canola",
                                    "Kooloonong_chickpea",
-                                   "Kooloonong_lentil" ,
-                                   "Kooloonong_lupin"  ,
-                                   "Kybunga"  ,
-                                   "Malinong" ,
-                                   "Monia_Gap"  ,
-                                   "Mt_Damper" ,
-                                   "Sherwood"  ,
+                                   "Kooloonong_lentil",
+                                   "Kooloonong_lupin",
+                                   "Kybunga",
+                                   "Lowaldie_Crest",
+                                   "Lowaldie_Deep sand",
+                                   "Malinong",
+                                   "Monia_Gap",
+                                   "Mt Damper",
+                                   "Murlong",
+                                   "Ouyen_Placement",
+                                   "Ouyen_Spade",
+                                   "Sherwood",
                                    "Telopea_Downs",
-                                   "Tempy"     ,
-                                   "Warnertown"  ,
-                                   "Wynarka"   ),
-                                  selected = "Tempy"),
+                                   "Tempy",
+                                   "Waikerie",
+                                   "Warnertown",
+                                   "Wynarka",
+                                   "Yenda",
+                                   "Younghusband"
+                                   
+                              ),
+                                  selected = "Brooker"),
                              ),#bracket for select input
                              ),#fluid row bracket #1
 
@@ -134,8 +152,12 @@ library(vroom) #new install on land and water linex
                                column(width = 6,  plotOutput("trial_plot"))
 
                                 ),#fluid row bracket #3
-
-
+                      
+                      ###Temp code##
+                      # fluidRow(
+                      #   column(width=6,   verbatimTextOutput("site_selection"))
+                      # 
+                      # ),#fluid row bracket #4 Which is just temp
 
                              ), #tabPanel1 bracket
 
