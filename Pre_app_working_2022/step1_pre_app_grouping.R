@@ -412,9 +412,12 @@ DB_df_soil_mod <- DB_df_soil_mod %>%
 ##### I think this is good now :) 2. #####
 #####################################################################################
 
-write.csv(DB_df_soil_mod,
-          "X:/Therese_Jackie/Sandy_soils/App_development2021/sandy_soil_tools_app/sandy_soil_tools_app/primary_data_all_v2.csv", row.names = FALSE)
 
+
+
+write.csv(DB_df_soil_mod,
+          "primary_data_all_v2.csv",
+          row.names = FALSE)
 ####################################################################################
  
 
