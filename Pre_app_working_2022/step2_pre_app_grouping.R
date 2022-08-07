@@ -27,11 +27,12 @@ df <- df %>%  distinct(site, .keep_all = TRUE)
 
 extra_table_v2 <- left_join(extra_table_v2, df, by = "site")
 
+
+
+
 write.csv(extra_table_v2,
-          "X:/Therese_Jackie/Sandy_soils/App_development2021/sandy_soil_tools_app/sandy_soil_tools_app/extra_table_v2.csv", row.names = FALSE)
-
-
-
+          "extra_table_v2.csv",
+          row.names = FALSE)
 
 
 
