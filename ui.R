@@ -143,6 +143,7 @@ library(vroom) #new install on land and water linex
                                       #align = "center",
                                       offset =.5,
                                       tags$a(href="shorthand trial name.pdf", ## this documnet need to sit inside the app directory in a folder called www
+                                      # tags$a(href="shorthand trial name.html", ## this documnet need to sit inside the app directory in a folder called www
                                     "click here for more info on trial names" )
                                )#clm bracket
                              ),#fluid row bracket #2

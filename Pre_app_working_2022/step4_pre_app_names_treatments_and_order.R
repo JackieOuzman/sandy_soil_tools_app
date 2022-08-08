@@ -481,7 +481,7 @@ write.csv(list_of_Descriptors,
 
 
 ########################################################################################################################
-
+### name of the treatments - I am having trouble saving it as a pdf but a html works but will it work with shiny?
 
 list_of_Descriptors_pdf <- list_of_Descriptors %>% 
   distinct(order_rank, .keep_all= TRUE) %>% 
@@ -495,38 +495,14 @@ names(list_of_Descriptors_pdf)
 
 
 
-#########
-library(grid)
-library(gridExtra)
-head(list_of_Descriptors_pdf)
+#what about just a table
+list_of_Descriptors_pdf %>% DT::datatable()
+names <- list_of_Descriptors_pdf %>% DT::datatable()
+htmlwidgets::saveWidget(names, "www/shorthand trial names.html")
 
-myTable <- head(list_of_Descriptors_pdf[,1:2])
-grid.table(myTable)
-grid.draw(tableGrob(myTable))
 
-d <- head(list_of_Descriptors_pdf[,1:2])
-grid.table(d)
-library(gridExtra)
-library(grid)
+########################################################################################################################
+### name of the treatments - I am having trouble saving it as a pdf - try again
+str(list_of_Descriptors_pdf)
 d <- head(iris[,1:3])
-grid.table(d)
-
-
-#Export to pdf
-pdf("www/test.pdf",width = 10) # this is where the file will sit (relative paths so it avaialble to other computers)
-grid.draw(tableGrob(myTable))
-dev.off()
-
-
-
-######
-
-myTable <- tableGrob(
-  S, 
-  rows = NULL, 
-  theme = ttheme_default(core = list(bg_params = list(fill = "grey99")))
-)
-#Export to pdf
-pdf('Example.pdf',width = 10)
-grid.draw(myTable)
-dev.off()
+print(grid.table(d))
