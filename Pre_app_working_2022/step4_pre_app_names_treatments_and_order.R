@@ -481,7 +481,7 @@ write.csv(list_of_Descriptors,
 
 
 ########################################################################################################################
-### name of the treatments - I am having trouble saving it as a pdf but a html works but will it work with shiny?
+### name of the treatments - I am having trouble saving it as a pdf - try again its working now but I cant get multiple pages
 
 list_of_Descriptors_pdf <- list_of_Descriptors %>% 
   distinct(order_rank, .keep_all= TRUE) %>% 
@@ -495,14 +495,31 @@ names(list_of_Descriptors_pdf)
 
 
 
-#what about just a table
-list_of_Descriptors_pdf %>% DT::datatable()
-names <- list_of_Descriptors_pdf %>% DT::datatable()
-htmlwidgets::saveWidget(names, "www/shorthand trial names.html")
-
-
 ########################################################################################################################
-### name of the treatments - I am having trouble saving it as a pdf - try again
+
+
+library(gridExtra)
+library(grid)
+
 str(list_of_Descriptors_pdf)
-d <- head(iris[,1:3])
-print(grid.table(d))
+
+d_1_40 <-     list_of_Descriptors_pdf[1:40,1:2]
+d_41_80 <-    list_of_Descriptors_pdf[41:80,1:2]
+d_81_120 <-   list_of_Descriptors_pdf[81:120,1:2]
+d_121_144 <-  list_of_Descriptors_pdf[121:144,1:2]
+dim(d_121_144)
+
+
+pdf(file = 'www/shorthand trial name_v2.pdf', height = 12, width = 26) #note I am not sure how to write over file so it might need a new name everytime!
+grid.newpage()
+grid.draw(tableGrob(d_1_40)[1:41, ]  )
+grid.newpage()
+grid.draw(tableGrob(d_41_80)[1:41, ]  )
+grid.newpage()
+grid.draw(tableGrob(d_81_120)[1:41, ] )
+grid.newpage()
+grid.draw(tableGrob(d_121_144)[1:25, ] )
+
+dev.off()
+
+
