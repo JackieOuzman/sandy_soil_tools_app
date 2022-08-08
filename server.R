@@ -417,12 +417,6 @@ server <- shinyServer(function(input, output, session) {
                                    
       
       dplyr::select(
-        # site,
-        # Descriptors,
-        # year,
-        # crop,
-        # yield_unmodified,
-        # yield_modified
         
         site,
         Descriptors,
@@ -439,14 +433,22 @@ server <- shinyServer(function(input, output, session) {
       dplyr::rename(Treatment = Descriptors,
       ) %>%
       dplyr::filter(!is.na(crop))%>%
-      dplyr::mutate(`yield gain` = yield_modified - yield_unmodified) %>% 
+      dplyr::mutate(`yield gain` = yield_modified - yield_unmodified)  
      
-      dplyr::select(Treatment,
-                  year,
-                  crop,
-                  `yield gain`,
-                  decile,
-                  rainfall_mean_annual)
+      trial_results <- left_join(trial_results,order_df, by = c("Treatment" =  "Descriptors") ) 
+      
+      trial_results <- trial_results %>% 
+        arrange(order_rank) %>% #arrange the data table using the ranking of treatments
+        dplyr::select(Treatment,
+                      year,
+                      crop,
+                      `yield gain`,
+                      decile,
+                      rainfall_mean_annual)#,
+      #order_rank)  
+      
+      
+      
 
     
     
