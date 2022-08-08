@@ -37,51 +37,51 @@ library(vroom) #new install on land and water linex
 #########################################################################################################
 ###############                       landing page                     #################################
 #########################################################################################################                 
-                     
-                     
-                     tabPanel("landing page", #tab title pageleafletOutput("map"),
-                              fluidPage( 
-                              fluidRow(
-                                box(
-                                  title = "Water repellence", width = 2, solidHeader = TRUE, status = "primary",
-                                  
-                                  tags$a(href="Water repellence.pdf", ## this documnet need to sit inside the app directory in a folder called www
-                                         "click here for more info on water repllency" )
-                                ), #box water repellency
-                                
-                                
-                                box(
-                                  title = "Waterlogging", width = 2, solidHeader = TRUE, status = "primary",
-                                  tags$a(href="Waterlogging.pdf", ## this documnet need to sit inside the app directory in a folder called www
-                                         "click here for more info on waterlogging" )
-                                ), #box Waterlogging
-                                box(
-                                  title = "Acid", width = 2, solidHeader = TRUE, status = "primary",
-                                  tags$a(href="acidity.pdf", ## this documnet need to sit inside the app directory in a folder called www
-                                         "click here for more info on acidity" )
-                                ), #box acid
-                                box(
-                                  title = "Hard setting", width = 2, solidHeader = TRUE, status = "primary",
-                                  tags$a(href="hard setting.pdf", ## this documnet need to sit inside the app directory in a folder called www
-                                         "click here for more info on hard setting" )
-                                ) #box acid
-                              
-                                ), #fluid row     
-                              
-                              hr(),
-                                
-                             
-                                
-                               tags$img(src = "flow_chart_soil_constraints.jpg") 
-                                        #height = 50, width =50
-                                        #) # this is old code with one image loaded
-                              
-                               
-                              
-                              
-                              
-                     ), #tabPanel landing page bracket
-                     ),  #fluid page
+                     # 
+                     # 
+                     # tabPanel("landing page", #tab title pageleafletOutput("map"),
+                     #          fluidPage( 
+                     #          fluidRow(
+                     #            box(
+                     #              title = "Water repellence", width = 2, solidHeader = TRUE, status = "primary",
+                     #              
+                     #              tags$a(href="Water repellence.pdf", ## this documnet need to sit inside the app directory in a folder called www
+                     #                     "click here for more info on water repllency" )
+                     #            ), #box water repellency
+                     #            
+                     #            
+                     #            box(
+                     #              title = "Waterlogging", width = 2, solidHeader = TRUE, status = "primary",
+                     #              tags$a(href="Waterlogging.pdf", ## this documnet need to sit inside the app directory in a folder called www
+                     #                     "click here for more info on waterlogging" )
+                     #            ), #box Waterlogging
+                     #            box(
+                     #              title = "Acid", width = 2, solidHeader = TRUE, status = "primary",
+                     #              tags$a(href="acidity.pdf", ## this documnet need to sit inside the app directory in a folder called www
+                     #                     "click here for more info on acidity" )
+                     #            ), #box acid
+                     #            box(
+                     #              title = "Hard setting", width = 2, solidHeader = TRUE, status = "primary",
+                     #              tags$a(href="hard setting.pdf", ## this documnet need to sit inside the app directory in a folder called www
+                     #                     "click here for more info on hard setting" )
+                     #            ) #box acid
+                     #          
+                     #            ), #fluid row     
+                     #          
+                     #          hr(),
+                     #            
+                     #         
+                     #            
+                     #           tags$img(src = "flow_chart_soil_constraints.jpg") 
+                     #                    #height = 50, width =50
+                     #                    #) # this is old code with one image loaded
+                     #          
+                     #           
+                     #          
+                     #          
+                     #          
+                     # ), #tabPanel landing page bracket
+                     # ),  #fluid page
                      
 #########################################################################################################
 #########################################################################################################
@@ -94,8 +94,12 @@ tabPanel("What is my constraint", #tab title pageleafletOutput("map"),
            fluidRow(
              box(
                title = "Water repellence", width = 6, solidHeader = TRUE, status = "primary",
-               
-               tags$a(href="Water repellence.pdf", ## this documnet need to sit inside the app directory in a folder called www
+               tags$b("Water repellence forms when waxes from decayed organic material (e.g. stubbles) coat grains of soil, making them repel water, which inhibits water entry into the soil profile. This leads to patchy crop establishment and a staggered germination of weeds, reducing yield potential at the start of the season."),  
+               tags$br(), #this is a break
+               #tags$img(src = "water drop.jpg"), #need to resize this image
+               tags$img(src = "wheat.jpg"),
+               tags$br(), #this is a break
+               tags$a(href="13 July 2022 - Water Repellence and pH in Sandy Soils.pdf", ## this documnet need to sit inside the app directory in a folder called www
                       "click here for more info on water repllency" )
              ), #box water repellency
              
@@ -112,13 +116,22 @@ tabPanel("What is my constraint", #tab title pageleafletOutput("map"),
              ), #box Nutrition
              box(
                title = "Acid", width = 6, solidHeader = TRUE, status = "primary",
-               tags$a(href="acidity.pdf", ## this documnet need to sit inside the app directory in a folder called www
+               tags$b("pH is a measure of the concentration of hydrogen (H+) and hydroxyl (OH-) ions in a soil solution and indicates that a soil is acidic (low pH), neutral or alkaline (high pH).  pH variation through the soil profile can occur. It’s important to understand this variation as nutrient availability and crop type tolerance can be affected, resulting in potential plant deficiencies or toxicities."),
+               tags$br(), #this is a break
+               #tags$img(src = "pH_chart.jpg"), #wrong size
+               tags$img(src = "wheat.jpg"),
+               tags$br(), #this is a break
+               tags$a(href="13 July 2022 - Water Repellence and pH in Sandy Soils.pdf", ## this documnet need to sit inside the app directory in a folder called www
                       "click here for more info on acidity" )
              ), #box acid
              box(
-               title = "High soil strenght", width = 6, solidHeader = TRUE, status = "primary",
-               tags$a(href="hard setting.pdf", ## this documnet need to sit inside the app directory in a folder called www
-                      "click here for more info on hard setting" )
+               title = "High soil strength", width = 6, solidHeader = TRUE, status = "primary",
+               tags$b("High soil strength can be caused by compaction and/or hard setting and can severely limit plant root penetration through the soil, preventing access to deep reserves of soil moisture and nutrients. A hydraulic cone penetrometer is the simplest tool to use to measure soil strength. It measures the force required to insert a standard cone into the soil, reported as either kiloPascals (kPa) or megaPascals (1 MPa = 1000 kPa)."),
+               tags$br(), #this is a break
+               tags$img(src = "wheat.jpg"), 
+               tags$br(), #this is a break
+               tags$a(href="13 July 2022_High Soil Strength in Sandy Soils .pdf", ## this documnet need to sit inside the app directory in a folder called www
+                      "click here for more info on high soil strength" )
              ) #box acid
              
            ), #fluid row     
