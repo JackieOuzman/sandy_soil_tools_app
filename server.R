@@ -505,20 +505,20 @@ server <- shinyServer(function(input, output, session) {
 
 
   shinyalert(
-    title = "This app is under development",
-    type = "input",
-    text = "What the name of your farm / analysis?",
+    title = "This app is under development"#,
+    #type = "input",
+    #text = "What the name of your farm / analysis?",
     #size = "s",
-    closeOnEsc = TRUE,
-    closeOnClickOutside = FALSE,
-    html = FALSE,
-    showConfirmButton = TRUE,
-    showCancelButton = FALSE,
-    confirmButtonText = "OK",
-    confirmButtonCol = "#AEDEF4",
-    timer = 0,
-    imageUrl = "",
-    animation = TRUE
+    # closeOnEsc = TRUE,
+    # closeOnClickOutside = FALSE,
+    # html = FALSE,
+    # showConfirmButton = TRUE,
+    # showCancelButton = FALSE,
+    # confirmButtonText = "OK",
+    # confirmButtonCol = "#AEDEF4",
+    # timer = 0,
+    # imageUrl = "",
+    # animation = TRUE
   )
 
 

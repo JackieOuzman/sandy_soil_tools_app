@@ -34,54 +34,7 @@ library(vroom) #new install on land and water linex
                       header = tagList(    
                         useShinydashboard()
                      ) ,   ## these two lines get the value box to display without using shinydashboards        
-#########################################################################################################
-###############                       landing page                     #################################
-#########################################################################################################                 
-                     # 
-                     # 
-                     # tabPanel("landing page", #tab title pageleafletOutput("map"),
-                     #          fluidPage( 
-                     #          fluidRow(
-                     #            box(
-                     #              title = "Water repellence", width = 2, solidHeader = TRUE, status = "primary",
-                     #              
-                     #              tags$a(href="Water repellence.pdf", ## this documnet need to sit inside the app directory in a folder called www
-                     #                     "click here for more info on water repllency" )
-                     #            ), #box water repellency
-                     #            
-                     #            
-                     #            box(
-                     #              title = "Waterlogging", width = 2, solidHeader = TRUE, status = "primary",
-                     #              tags$a(href="Waterlogging.pdf", ## this documnet need to sit inside the app directory in a folder called www
-                     #                     "click here for more info on waterlogging" )
-                     #            ), #box Waterlogging
-                     #            box(
-                     #              title = "Acid", width = 2, solidHeader = TRUE, status = "primary",
-                     #              tags$a(href="acidity.pdf", ## this documnet need to sit inside the app directory in a folder called www
-                     #                     "click here for more info on acidity" )
-                     #            ), #box acid
-                     #            box(
-                     #              title = "Hard setting", width = 2, solidHeader = TRUE, status = "primary",
-                     #              tags$a(href="hard setting.pdf", ## this documnet need to sit inside the app directory in a folder called www
-                     #                     "click here for more info on hard setting" )
-                     #            ) #box acid
-                     #          
-                     #            ), #fluid row     
-                     #          
-                     #          hr(),
-                     #            
-                     #         
-                     #            
-                     #           tags$img(src = "flow_chart_soil_constraints.jpg") 
-                     #                    #height = 50, width =50
-                     #                    #) # this is old code with one image loaded
-                     #          
-                     #           
-                     #          
-                     #          
-                     #          
-                     # ), #tabPanel landing page bracket
-                     # ),  #fluid page
+
                      
 #########################################################################################################
 #########################################################################################################
@@ -156,7 +109,7 @@ tabPanel("What is my constraint", #tab title pageleafletOutput("map"),
 #########################################################################################################                 
                     
 
-                     tabPanel("map of sites", #tab title pageleafletOutput("map"),
+                     tabPanel("Trial results", #tab title pageleafletOutput("map"),
                               leafletOutput("map"),
 
 
