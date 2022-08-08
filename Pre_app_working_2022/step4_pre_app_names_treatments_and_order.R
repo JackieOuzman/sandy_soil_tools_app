@@ -472,7 +472,61 @@ str(list_of_Descriptors)
 
 list_of_Descriptors <- left_join(list_of_Descriptors,order_df, by = c("Descriptors" = "order"))
 
+
+
+
 write.csv(list_of_Descriptors,
           "list_of_Descriptors_with_order_rank.csv",
           row.names = FALSE)
 
+
+########################################################################################################################
+
+
+list_of_Descriptors_pdf <- list_of_Descriptors %>% 
+  distinct(order_rank, .keep_all= TRUE) %>% 
+  arrange(order_rank) %>% 
+  select(-site, -order_rank)
+
+list_of_Descriptors_pdf <- list_of_Descriptors_pdf %>% 
+rename("treatment codes" = "Descriptors",
+       "treatment detailed name" = "detailed_name")
+names(list_of_Descriptors_pdf)
+
+
+
+#########
+library(grid)
+library(gridExtra)
+head(list_of_Descriptors_pdf)
+
+myTable <- head(list_of_Descriptors_pdf[,1:2])
+grid.table(myTable)
+grid.draw(tableGrob(myTable))
+
+d <- head(list_of_Descriptors_pdf[,1:2])
+grid.table(d)
+library(gridExtra)
+library(grid)
+d <- head(iris[,1:3])
+grid.table(d)
+
+
+#Export to pdf
+pdf("www/test.pdf",width = 10) # this is where the file will sit (relative paths so it avaialble to other computers)
+grid.draw(tableGrob(myTable))
+dev.off()
+
+
+
+######
+
+myTable <- tableGrob(
+  S, 
+  rows = NULL, 
+  theme = ttheme_default(core = list(bg_params = list(fill = "grey99")))
+)
+#Export to pdf
+pdf('Example.pdf',width = 10)
+grid.draw(myTable)
+dev.off()
