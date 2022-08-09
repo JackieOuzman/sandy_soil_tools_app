@@ -91,24 +91,31 @@ tabPanel("What is my constraint", #tab title pageleafletOutput("map"),
            
            
            hr(),
+           fluidRow(
+             #h1("My constraints"),
+             h1(HTML("My constraints</b>"), 
+                style="text-align:center"),
+           
+           ) , #fluid row     #2
+           
            
            fluidRow(column(width = 3,
            selectInput("select_constraints_water", 
-                       label = h3("Repellence"), 
+                       label = h4("Repellence"), 
                        choices = list("No issue" = 1, "Moderate issue" = 2, "Severe issue" = 3), 
                        selected = 1)
            ), #clm bracket
          
                    column(width = 3,
            selectInput("select_constraints_nutrition",
-                       label = h3("Nutrition"),
+                       label = h4("Nutrition"),
                        choices = list("No issue" = 1, "Moderate issue" = 2, "Severe issue" = 3),
                        selected = 1)
          ), #clm bracket
          
          column(width = 3,
                 selectInput("select_constraints_acid",
-                            label = h3("Acid"),
+                            label = h4("Acid"),
                             choices = list("No issue" = 1, "Moderate issue" = 2, "Severe issue" = 3),
                             selected = 1)
          ), #clm bracket
@@ -116,18 +123,18 @@ tabPanel("What is my constraint", #tab title pageleafletOutput("map"),
           
          column(width = 3,
                 selectInput("High_soil_strength",
-                            label = h3("Strength"),
+                            label = h4("Strength"),
                             choices = list("No issue" = 1, "Moderate issue" = 2, "Severe issue" = 3),
                             selected = 1)
          ), #clm bracket
          
-         ), #fluid bracket2
+         ), #fluid bracket3
            
             hr(),
            fluidRow(column(3, verbatimTextOutput("select_constraints_water"))
                     
            
-         ),#fluid row bracket #3
+         ),#fluid row bracket #4
            
            hr(),
            
@@ -135,7 +142,7 @@ tabPanel("What is my constraint", #tab title pageleafletOutput("map"),
              column(width=6,   DT::dataTableOutput("constraints_table")),
              
              
-           ),#fluid row bracket #4
+           ),#fluid row bracket #5
            
            
            
