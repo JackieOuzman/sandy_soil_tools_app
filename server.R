@@ -515,6 +515,11 @@ server <- shinyServer(function(input, output, session) {
                   caption = 'Constaints table') 
     
   })
+  
+  
+  
+  output$select_constraints_water <- renderPrint({paste0("Water repellence: ", input$select_constraints_water)  })
+  
 
   ######################################################################################################
   ##################         function for filtering the data - drop down economics     ##########################
