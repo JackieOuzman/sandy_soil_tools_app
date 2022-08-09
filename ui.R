@@ -87,11 +87,15 @@ tabPanel("What is my constraint", #tab title pageleafletOutput("map"),
                       "click here for more info on high soil strength" )
              ) #box acid
              
-           ), #fluid row     
+           ), #fluid row     #1
            
            hr(),
            
-           
+           fluidRow(
+             column(width=6,   DT::dataTableOutput("constraints_table")),
+             
+             
+           ),#fluid row bracket #2
            
            
            
@@ -105,7 +109,7 @@ tabPanel("What is my constraint", #tab title pageleafletOutput("map"),
 #########################################################################################################
                     
 #########################################################################################################
-###############                       tab 1                           #################################
+###############                       tab 1 Trial results               #################################
 #########################################################################################################                 
                     
 

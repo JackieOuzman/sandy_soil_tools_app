@@ -292,9 +292,7 @@ server <- shinyServer(function(input, output, session) {
 ########    function for filtering the data - and creating a plot on the map page     ################
 ###################################################################################################### 
   output$trial_plot <- renderPlot({
-########################################################################################
-#### code from my cum ANOVA plots step 8 ################################################
-########################################################################################
+
     
     # set the site name call on the reactive function defined in te reactive secetion
     site_in_app <- c(reactive_site_selection())
@@ -461,6 +459,62 @@ server <- shinyServer(function(input, output, session) {
        
   })
 
+  ################################################################################################################################
+  ############# Constriants tabel on the first tab ##############################################################################
+  ########     function for creating a table of conatraints at the sites                                    #####################
+  
+  output$constraints_table <- DT::renderDataTable({
+    
+    constraints_table <- site_info %>%
+      mutate(
+        Repellence =  case_when(
+          non_wetting  == "green"   ~    "No issue",
+          non_wetting  == "orange"  ~    "Moderate issue",
+          non_wetting  == "red"     ~    "Severe issue",
+          TRUE                      ~    "other"
+        ))
+    
+    
+    constraints_table <- constraints_table %>%
+      mutate(
+        Acidity =  case_when(
+          acidic  == "green"  ~    "No issue",
+          acidic  == "orange"  ~    "Moderate issue",
+          acidic  == "red"     ~    "Severe issue",
+          TRUE                      ~    "other"
+        ))
+    
+    constraints_table <- constraints_table %>%
+      mutate(
+        Physical =  case_when(
+          physical  == "green"   ~    "No issue",
+          physical  == "orange"  ~    "Moderate issue",
+          physical  == "red"     ~    "Severe issue",
+          TRUE                      ~    "other"
+        ))
+    
+    constraints_table <- constraints_table %>%
+      mutate(
+        Nutrient =  case_when(
+          nutrient  == "green"   ~    "No issue",
+          nutrient  == "orange"  ~    "Moderate issue",
+          nutrient == "red"     ~    "Severe issue",
+          TRUE                      ~    "other"
+        )) 
+    
+    constraints_table <- constraints_table %>%
+      dplyr::select(site,
+                    Repellence,
+                    Acidity,
+                    Physical,
+                    Nutrient)
+    
+    
+    DT::datatable(constraints_table ,
+                  rownames = FALSE,
+                  caption = 'Constaints table') 
+    
+  })
 
   ######################################################################################################
   ##################         function for filtering the data - drop down economics     ##########################
