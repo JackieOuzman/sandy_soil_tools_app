@@ -398,8 +398,8 @@ server <- shinyServer(function(input, output, session) {
   # #### TEMP CODE ####
   # output$site_selection <- renderPrint({
   #   #"test"
-  #   paste0(reactive_site_selection())
-  #   
+  #   paste0(input$select_constraints_water)
+  # 
   # })
     
 
@@ -518,8 +518,41 @@ server <- shinyServer(function(input, output, session) {
   
   
   
-  output$select_constraints_water <- renderPrint({paste0("Water repellence: ", input$select_constraints_water)  })
+ 
   
+  ## this is code to work out the matches betweeen my 
+  
+  my_contraints_table <- site_info %>%
+    filter(site == "Brooker") %>% #any site this is just to make one row
+    select(Repellence,
+           Acidity,
+           Physical,
+           Nutrient) %>%
+    mutate(
+      Repellence = as.double(0), #as.double(reactive_select_constraints_water()[1,1]), 
+      Acidity =    as.double(0), #reactive_select_constraints_acid() , #,
+      Physical =   as.double(1), # reactive_High_soil_strength(), #,
+      Nutrient =   as.double(1) #reactive_select_constraints_nutrition()  # #
+    ) %>% 
+    mutate(
+      merge_constriants = paste0(Repellence, "_", Acidity,  "_", Physical, "_", Nutrient))
+  
+  
+  
+  choice_of_sites <- site_info %>%select( site, Repellence,
+                                          Acidity,
+                                          Physical,
+                                          Nutrient) %>% 
+    mutate(
+      merge_constriants = paste0(Repellence, "_", Acidity,  "_", Physical, "_", Nutrient))
+  
+  
+  
+  
+  best_match_table <- left_join(my_contraints_table, choice_of_sites) %>%  select(site)
+  
+  
+  output$select_constraints <- renderPrint({paste0(best_match_table$site)})
 
   ######################################################################################################
   ##################         function for filtering the data - drop down economics     ##########################
@@ -585,6 +618,25 @@ server <- shinyServer(function(input, output, session) {
   ##################                     reactivity                              #######################
   ######################################################################################################
 
+  #constraints selection which ison first page
+  
+  # reactive_select_constraints_water <- reactive({
+  #   input$select_constraints_water 
+  # })
+  
+  # reactive_select_constraints_acid <- reactive({
+  #   input$select_constraints_acid 
+  # })
+  # reactive_High_soil_strength <- reactive({
+  #   input$High_soil_strength 
+  # })
+  # reactive_select_constraints_nutrition <- reactive({
+  #   input$select_constraints_nutrition 
+  # })
+  
+  
+  
+  
  #site selection which is used in the plot of yields
   
   reactive_site_selection <- reactive({
