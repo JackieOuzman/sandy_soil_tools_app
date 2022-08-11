@@ -124,7 +124,7 @@ tabPanel("What is my constraint", #tab title pageleafletOutput("map"),
                 selectInput("High_soil_strength",
                             label = h4("Strength"),
                             choices = list("No issue" = 1, "Moderate issue" = 2, "Severe issue" = 3),
-                            selected = 1)
+                            selected = 2)
          ), #clm bracket
          
          ), #fluid bracket3
@@ -136,8 +136,8 @@ tabPanel("What is my constraint", #tab title pageleafletOutput("map"),
          ) , #fluid row     #4
            
             hr(),
-           fluidRow(verbatimTextOutput("select_constraints")
-                    
+           fluidRow(DT::dataTableOutput("select_constraints")
+                 
            
          ),#fluid row bracket #5
          
@@ -145,8 +145,7 @@ tabPanel("What is my constraint", #tab title pageleafletOutput("map"),
            
            hr(),
            
-           fluidRow(
-             column(width=6,   DT::dataTableOutput("constraints_table")),
+           fluidRow(DT::dataTableOutput("constraints_table"),
              
              
            ),#fluid row bracket #6
