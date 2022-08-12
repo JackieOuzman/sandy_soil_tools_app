@@ -517,42 +517,26 @@ server <- shinyServer(function(input, output, session) {
   })
   
   
-  
- 
-  
-  ## this is code to work out the matches betweeen my 
-  
-  my_contraints_table <- site_info %>%
-    filter(site == "Brooker") %>% #any site this is just to make one row
-    select(Repellence,
-           Acidity,
-           Physical,
-           Nutrient) %>%
-    mutate(
-      Repellence = as.double(0), #as.double(reactive_select_constraints_water()[1,1]), 
-      Acidity =    as.double(0), #reactive_select_constraints_acid() , #,
-      Physical =   as.double(1), # reactive_High_soil_strength(), #,
-      Nutrient =   as.double(1) #reactive_select_constraints_nutrition()  # #
-    ) %>% 
-    mutate(
-      merge_constriants = paste0(Repellence, "_", Acidity,  "_", Physical, "_", Nutrient))
-  
-  
-  
-  choice_of_sites <- site_info %>%select( site, Repellence,
-                                          Acidity,
-                                          Physical,
-                                          Nutrient) %>% 
-    mutate(
-      merge_constriants = paste0(Repellence, "_", Acidity,  "_", Physical, "_", Nutrient))
-  
-  
-  
-  
-  best_match_table <- left_join(my_contraints_table, choice_of_sites) %>%  select(site)
-  
-  
-  output$select_constraints <- renderPrint({paste0(best_match_table$site)})
+  #output$select_constraints <- renderPrint({
+  output$select_constraints <- DT::renderDataTable({
+   
+    choice_of_sites <- site_info %>% select(site, Repellence,
+                                            Acidity,
+                                            Physical,
+                                            Nutrient) %>%
+      mutate(merge_constriants = paste0(Repellence, "_", Acidity,  "_", Physical, "_", Nutrient))
+      best_match_table <- left_join(reactive_select_constraints_df(), choice_of_sites) 
+      
+      best_match_table <- best_match_table %>%  dplyr::mutate(Note = "If blank no sites match")
+    
+      
+      DT::datatable(best_match_table[,c(6,7)], 
+                    options = list(dom = 't'),
+                    rownames = FALSE,)
+      #datatable(head(iris), options = list(dom = 't'))
+          
+    
+    })
 
   ######################################################################################################
   ##################         function for filtering the data - drop down economics     ##########################
@@ -618,22 +602,46 @@ server <- shinyServer(function(input, output, session) {
   ##################                     reactivity                              #######################
   ######################################################################################################
 
-  #constraints selection which ison first page
+  #constraints selection which is on first page
+  
+  reactive_select_constraints_df <- reactive({
+    
+    Repellence <- c(0)
+    Acidity <-   c(0)
+    Physical <-  c(0)
+    Nutrient <-  c(0)
+    # Join the variables to create a data frame
+    my_contraints_table <- data.frame(Repellence,Acidity, Physical, Nutrient ) 
+    
+    ## fill in the tabel with my selected data
+    
+    my_contraints_table_df <- my_contraints_table %>% 
+      mutate(Repellence = as.double(input$select_constraints_water),
+             Acidity =   as.double(input$select_constraints_acid),
+             Physical =  as.double(input$High_soil_strength),
+             Nutrient =  as.double(input$select_constraints_nutrition)
+             )#mutate bracket
+    
+    my_contraints_table_df <- my_contraints_table_df %>% 
+      mutate(
+      merge_constriants = paste0(Repellence, "_", Acidity,  "_", Physical, "_", Nutrient))
+    
+  }  )
   
   # reactive_select_constraints_water <- reactive({
-  #   input$select_constraints_water 
+  #   as.double(input$select_constraints_water)
   # })
   
   # reactive_select_constraints_acid <- reactive({
-  #   input$select_constraints_acid 
+  #   input$select_constraints_acid
   # })
   # reactive_High_soil_strength <- reactive({
-  #   input$High_soil_strength 
+  #   input$High_soil_strength
   # })
   # reactive_select_constraints_nutrition <- reactive({
-  #   input$select_constraints_nutrition 
+  #   input$select_constraints_nutrition
   # })
-  
+  # 
   
   
   
