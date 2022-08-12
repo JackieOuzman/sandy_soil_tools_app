@@ -144,7 +144,7 @@ tabPanel("What is my constraint", #tab title pageleafletOutput("map"),
              #DT::dataTableOutput("select_constraints")
             box( title = "Sites with same constraints", width = 8, solidHeader = TRUE, status = "primary",
                 #valueBoxOutput("select_constraints")      
-                infoBoxOutput("select_constraints")
+                infoBoxOutput("select_constraints") #struggling with the format here DT is the next best option
                     ) #box Constraint
                  
            
@@ -234,10 +234,19 @@ tabPanel("What is my constraint", #tab title pageleafletOutput("map"),
                              ),#fluid row bracket #2
 
                               fluidRow(
-                               column(width=6,   DT::dataTableOutput("trial_table")),
-                               column(width = 6,  plotOutput("trial_plot"))
+                                h1(HTML("Cummulative Yield Results</b>"), 
+                                   style="text-align:center"),
+                                
+                                plotOutput("trial_plot")
+                               
 
                                 ),#fluid row bracket #3
+                              fluidRow(
+                                h1(HTML("Yield Gains By Year </b>"), 
+                                   style="text-align:center"),
+                              DT::dataTableOutput("trial_table"),
+                              ),#fluid row bracket #4
+                      
                       
                       # ###Temp code##
                       # fluidRow(

@@ -449,12 +449,17 @@ server <- shinyServer(function(input, output, session) {
       
       
 
-    
+    colnames(trial_results) <- c("Treatment", "Year", "Crop","Yield Gaint/ha",  "Decile", "Mean Annual Rainfall")
+      
     
     DT::datatable(trial_results ,
-                  rownames = FALSE,
-                  caption = 'Table 1: Yield response t/ha.') %>%
-      formatRound(c(4,6), 2) #this round clm number 4 and 6 to 2 decimal places
+                  rownames = FALSE,  
+                  #caption = 'Table 1: Yield response t/ha.') %>%
+      options = list(columnDefs = 
+                       list(list(className = 'dt-center', 
+                                 targets = "_all")))) %>%
+      formatRound(c(4), 2) %>% #this round clm number 4  to 2 decimal places
+      formatRound(c(6), 0) #this round clm  6 to 0 decimal places
     
    
        
