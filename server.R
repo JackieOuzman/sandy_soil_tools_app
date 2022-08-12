@@ -5,6 +5,7 @@ require(htmltools)
 require(leaflet)
 require(slickR)
 library(DT)
+library(data.table)
 
 
 
@@ -463,51 +464,59 @@ server <- shinyServer(function(input, output, session) {
   ############# Constriants tabel on the first tab ##############################################################################
   ########     function for creating a table of conatraints at the sites                                    #####################
   
+  
+  constraints_table <- site_info %>%
+    mutate(
+      Repellence =  case_when(
+        non_wetting  == "green"   ~    "No issue",
+        non_wetting  == "orange"  ~    "Moderate issue",
+        non_wetting  == "red"     ~    "Severe issue",
+        TRUE                      ~    "other"
+      ))
+  
+  
+  constraints_table <- constraints_table %>%
+    mutate(
+      Acid =  case_when(
+        acidic  == "green"  ~    "No issue",
+        acidic  == "orange"  ~    "Moderate issue",
+        acidic  == "red"     ~    "Severe issue",
+        TRUE                      ~    "other"
+      ))
+  
+  constraints_table <- constraints_table %>%
+    mutate(
+      Strength =  case_when(
+        physical  == "green"   ~    "No issue",
+        physical  == "orange"  ~    "Moderate issue",
+        physical  == "red"     ~    "Severe issue",
+        TRUE                      ~    "other"
+      ))
+  
+  constraints_table <- constraints_table %>%
+    mutate(
+      Nutrition =  case_when(
+        nutrient  == "green"   ~    "No issue",
+        nutrient  == "orange"  ~    "Moderate issue",
+        nutrient == "red"     ~    "Severe issue",
+        TRUE                      ~    "other"
+      )) 
+  
+  
+  
+  
   output$constraints_table <- DT::renderDataTable({
+  
     
-    constraints_table <- site_info %>%
-      mutate(
-        Repellence =  case_when(
-          non_wetting  == "green"   ~    "No issue",
-          non_wetting  == "orange"  ~    "Moderate issue",
-          non_wetting  == "red"     ~    "Severe issue",
-          TRUE                      ~    "other"
-        ))
-    
-    
-    constraints_table <- constraints_table %>%
-      mutate(
-        Acidity =  case_when(
-          acidic  == "green"  ~    "No issue",
-          acidic  == "orange"  ~    "Moderate issue",
-          acidic  == "red"     ~    "Severe issue",
-          TRUE                      ~    "other"
-        ))
-    
-    constraints_table <- constraints_table %>%
-      mutate(
-        Physical =  case_when(
-          physical  == "green"   ~    "No issue",
-          physical  == "orange"  ~    "Moderate issue",
-          physical  == "red"     ~    "Severe issue",
-          TRUE                      ~    "other"
-        ))
-    
-    constraints_table <- constraints_table %>%
-      mutate(
-        Nutrient =  case_when(
-          nutrient  == "green"   ~    "No issue",
-          nutrient  == "orange"  ~    "Moderate issue",
-          nutrient == "red"     ~    "Severe issue",
-          TRUE                      ~    "other"
-        )) 
     
     constraints_table <- constraints_table %>%
       dplyr::select(site,
                     Repellence,
-                    Acidity,
-                    Physical,
-                    Nutrient)
+                    Nutrition,
+                    Acid,
+                    Strength
+                    )
+    
     
     
     DT::datatable(constraints_table ,
@@ -516,26 +525,30 @@ server <- shinyServer(function(input, output, session) {
     
   })
   
-  
-  #output$select_constraints <- renderPrint({
-  output$select_constraints <- DT::renderDataTable({
+  #output$select_constraints <- renderValueBox({
+  output$select_constraints <- renderPrint({
+  #output$constraints_table <- renderTable({
+  #output$select_constraints <- DT::renderDataTable({
    
-    choice_of_sites <- site_info %>% select(site, Repellence,
-                                            Acidity,
-                                            Physical,
-                                            Nutrient) %>%
-      mutate(merge_constriants = paste0(Repellence, "_", Acidity,  "_", Physical, "_", Nutrient))
-      best_match_table <- left_join(reactive_select_constraints_df(), choice_of_sites) 
+    choice_of_sites <- constraints_table %>% select(site, 
+                                            Repellence,
+                                            Nutrition,
+                                            Acid,
+                                            Strength
+                                            ) %>%
+      mutate(merge_constriants = paste0(Repellence, "_", Nutrition,  "_", Acid, "_", Strength))
       
-      best_match_table <- best_match_table %>%  dplyr::mutate(Note = "If blank no sites match")
+    best_match_table <- left_join(reactive_select_constraints_df(), choice_of_sites) 
+      
+      best_match_table <- best_match_table %>%  dplyr::mutate(Note = "If blank no sites match") %>% select(site)
     
       
-      DT::datatable(best_match_table[,c(6,7)], 
-                    options = list(dom = 't'),
-                    rownames = FALSE,)
-      #datatable(head(iris), options = list(dom = 't'))
-          
-    
+      # DT::datatable(best_match_table[,c(6,7)], 
+      #               options = list(dom = 't'),
+      #               rownames = FALSE,)
+      
+      best_match_table
+      
     })
 
   ######################################################################################################
@@ -607,42 +620,29 @@ server <- shinyServer(function(input, output, session) {
   reactive_select_constraints_df <- reactive({
     
     Repellence <- c(0)
-    Acidity <-   c(0)
-    Physical <-  c(0)
-    Nutrient <-  c(0)
+    Nutrition <-   c(0)
+    Acid <-  c(0)
+    Strength <-  c(0)
     # Join the variables to create a data frame
-    my_contraints_table <- data.frame(Repellence,Acidity, Physical, Nutrient ) 
+    my_contraints_table <- data.frame(Repellence,Nutrition, Acid, Strength ) 
     
     ## fill in the tabel with my selected data
     
     my_contraints_table_df <- my_contraints_table %>% 
-      mutate(Repellence = as.double(input$select_constraints_water),
-             Acidity =   as.double(input$select_constraints_acid),
-             Physical =  as.double(input$High_soil_strength),
-             Nutrient =  as.double(input$select_constraints_nutrition)
+      mutate(Repellence =  as.character(input$select_constraints_water),
+             Nutrition =   as.character(input$select_constraints_nutrition),
+             Acid =        as.character(input$select_constraints_acid),
+             Strength =    as.character(input$High_soil_strength)
+             
              )#mutate bracket
     
     my_contraints_table_df <- my_contraints_table_df %>% 
       mutate(
-      merge_constriants = paste0(Repellence, "_", Acidity,  "_", Physical, "_", Nutrient))
+      merge_constriants = paste0(Repellence, "_", Nutrition,  "_", Acid, "_", Strength))
     
   }  )
   
-  # reactive_select_constraints_water <- reactive({
-  #   as.double(input$select_constraints_water)
-  # })
-  
-  # reactive_select_constraints_acid <- reactive({
-  #   input$select_constraints_acid
-  # })
-  # reactive_High_soil_strength <- reactive({
-  #   input$High_soil_strength
-  # })
-  # reactive_select_constraints_nutrition <- reactive({
-  #   input$select_constraints_nutrition
-  # })
-  # 
-  
+ 
   
   
  #site selection which is used in the plot of yields
