@@ -80,7 +80,7 @@ tabPanel("What is my constraint", #tab title pageleafletOutput("map"),
                title = "High soil strength", width = 6, solidHeader = TRUE, status = "primary",
                tags$b("High soil strength can be caused by compaction and/or hard setting and can severely limit plant root penetration through the soil, preventing access to deep reserves of soil moisture and nutrients. A hydraulic cone penetrometer is the simplest tool to use to measure soil strength. It measures the force required to insert a standard cone into the soil, reported as either kiloPascals (kPa) or megaPascals (1 MPa = 1000 kPa)."),
                tags$br(), #this is a break
-               tags$img(src = "wheat.jpg", height = 185), 
+               tags$img(src = "soil_strength.jpg", height = 185), 
                tags$br(), #this is a break
                tags$a(href="13 July 2022_High Soil Strength in Sandy Soils .pdf", ## this documnet need to sit inside the app directory in a folder called www
                       "click here for more info on high soil strength" )
