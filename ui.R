@@ -251,14 +251,25 @@ tabPanel("What is my constraint", #tab title pageleafletOutput("map"),
                                 )#clm bracket
 
                                 ),#fluid row bracket #3
-                              fluidRow(
-                                h1(HTML("Yield Gains By Year </b>"), 
+                              
+                      
+                      fluidRow(
+                                h1(HTML("ANOVA Results </b>"), 
                                    style="text-align:center"),
                                 column(1,), #this is just forcing my plot to appear in the middle
                                 column(10,
-                              DT::dataTableOutput("trial_table"),
+                              DT::dataTableOutput("ANOVA"),
                                 )#clm bracket
                               ),#fluid row bracket #4
+                      
+                      fluidRow(
+                        h1(HTML("Yield Gains By Year </b>"), 
+                           style="text-align:center"),
+                        column(1,), #this is just forcing my plot to appear in the middle
+                        column(10,
+                               DT::dataTableOutput("trial_table"),
+                        )#clm bracket
+                      ),#fluid row bracket #5
                       
                       
                       # ###Temp code##

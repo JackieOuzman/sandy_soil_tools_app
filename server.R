@@ -283,12 +283,51 @@ df_info <- df_info %>%
 df_info <- df_info %>%
   arrange(site)
 
+######################################################################################################
+####################                   anova data      ##############################################
+######################################################################################################
+
+ANOVA_Cum_Yld <- read.csv(file = "ANOVA_Cum_Yld_df_v2.csv")
 
 ######################################################################################################
 #########################                       server               #################################
 ######################################################################################################
 server <- shinyServer(function(input, output, session) {
 
+  
+  
+######################################################################################################
+########    function for filtering the data - and creating a table on the map page     ################
+###################################################################################################### 
+ 
+  output$ANOVA <- DT::renderDataTable({
+    ### name of site selected
+    a <- c(reactive_site_selection())
+   
+    ANOVA_Cum_Yld_site <- ANOVA_Cum_Yld %>%  filter(site == a) 
+    order_df <- order_df %>% 
+      dplyr::select(Descriptors, order_rank)
+    
+    ANOVA_Cum_Yld_site <- left_join(ANOVA_Cum_Yld_site,order_df, by = c("Descriptors" =  "Descriptors") ) 
+  
+    ANOVA_Cum_Yld_site <- ANOVA_Cum_Yld_site %>%
+      arrange(order_rank) %>% #arrange the data table using the ranking of treatments
+      dplyr::select("Descriptors", "Yield", "Standard.error", "count", "p.value","Significance","start","end")
+      
+      
+    colnames(ANOVA_Cum_Yld_site) <- c("Treatment", "Yield", "Standard.error","count", "p.value","Significance","start","end")
+    DT::datatable(ANOVA_Cum_Yld_site ,
+                  rownames = FALSE,  
+                  options = list(columnDefs =
+                                   list(list(className = 'dt-center',
+                                             targets = "_all")))) %>%
+      formatRound(c(2), 2) %>%
+      formatRound(c(3), 2) %>%#this round clm number  to 2 decimal places
+      formatRound(c(4), 0) %>% 
+      formatRound(c(5), 4)#this round 
+    
+})
+  
 ######################################################################################################
 ########    function for filtering the data - and creating a plot on the map page     ################
 ###################################################################################################### 
@@ -457,7 +496,7 @@ server <- shinyServer(function(input, output, session) {
       
       
 
-    colnames(trial_results) <- c("Treatment", "Year", "Crop","Yield Gaint/ha",  "Decile", "Mean Annual Rainfall")
+    colnames(trial_results) <- c("Treatment", "Year", "Crop","Yield Gains/ha",  "Decile", "Mean Annual Rainfall")
       
     
     DT::datatable(trial_results ,
