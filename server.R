@@ -312,10 +312,10 @@ server <- shinyServer(function(input, output, session) {
   
     ANOVA_Cum_Yld_site <- ANOVA_Cum_Yld_site %>%
       arrange(order_rank) %>% #arrange the data table using the ranking of treatments
-      dplyr::select("Descriptors", "Yield", "Standard.error", "count", "p.value","Significance","start","end")
+      dplyr::select("Descriptors", "Yield", "Standard.error", "count","Significance", "groups")
       
       
-    colnames(ANOVA_Cum_Yld_site) <- c("Treatment", "Yield", "Standard.error","count", "p.value","Significance","start","end")
+    colnames(ANOVA_Cum_Yld_site) <- c("Treatment", "Yield", "Standard.error", "count","Significance", "groups")
     DT::datatable(ANOVA_Cum_Yld_site ,
                   rownames = FALSE,  
                   options = list(columnDefs =
@@ -323,8 +323,7 @@ server <- shinyServer(function(input, output, session) {
                                              targets = "_all")))) %>%
       formatRound(c(2), 2) %>%
       formatRound(c(3), 2) %>%#this round clm number  to 2 decimal places
-      formatRound(c(4), 0) %>% 
-      formatRound(c(5), 4)#this round 
+      formatRound(c(4), 0)  
     
 })
   
