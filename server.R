@@ -430,7 +430,7 @@ server <- shinyServer(function(input, output, session) {
            title = paste0(a))+
       theme_bw() + 
       theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank()) +
-      scale_y_continuous(breaks=seq(0,max_sum_cum,by=1.0), limits = c(0, max_sum_cum))+
+      #scale_y_continuous(breaks=seq(0,max_sum_cum,by=1.0), limits = c(0, max_sum_cum))+
       theme(
         axis.text.x=element_text(angle=50,hjust=1, size = 16),
         axis.text.y=element_text(size = 16),
