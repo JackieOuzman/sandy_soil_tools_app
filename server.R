@@ -306,6 +306,8 @@ server <- shinyServer(function(input, output, session) {
     b <- paste0(min(b$year), "to", max(b$year)) #the years of the trial
     
     
+   
+    
     ##############################################################################################################################################
     ################                 TRIAL DATA                    ################
     ###############################################################################################################################################
@@ -376,20 +378,25 @@ server <- shinyServer(function(input, output, session) {
     
     #ensure year is defined a a factor for a nice plot
     site_year_yld_summary$year <- as.factor(site_year_yld_summary$year)
+    max_sum_cum <- max(site_year_yld_summary$mean, na.rm = TRUE) 
+    max_sum_cum <- max_sum_cum +0.5
+    max_sum_cum <- ceiling(max_sum_cum)
+    
+    
     
     CumPlot <- site_year_yld_summary %>% 
       ggplot( aes(x = factor(Descriptors), y = mean, fill = year, colour = year)) + 
       geom_bar(stat = "identity",  alpha = 0.5)  +
       labs(x="", 
-           y="Cumulative Yield (t/ha)", 
+           y="t/ha", 
            title = paste0(a))+
       theme_bw() + 
       theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank()) +
-      #scale_y_continuous(breaks = 1) +
-      #ylim(0, NA, )+
+      scale_y_continuous(breaks=seq(0,max_sum_cum,by=1.0), limits = c(0, max_sum_cum))+
       theme(
-        axis.text.x=element_text(angle=50,hjust=1, size = 10),
-        axis.text.y=element_text(size = 10),
+        axis.text.x=element_text(angle=50,hjust=1, size = 16),
+        axis.text.y=element_text(size = 16),
+        axis.title.y.left = element_text(size = 18),
         plot.title = element_text(size = 20)) 
     
     
