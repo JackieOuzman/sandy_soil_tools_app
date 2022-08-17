@@ -333,7 +333,7 @@ tabPanel("What to do now", #tab title pageleafletOutput("map"),
                tags$b("High soil strength can be caused by compaction and/or hard setting and can severely limit plant root penetration through the soil, preventing access to deep reserves of soil moisture and nutrients. A hydraulic cone penetrometer is the simplest tool to use to measure soil strength. It measures the force required to insert a standard cone into the soil, reported as either kiloPascals (kPa) or megaPascals (1 MPa = 1000 kPa)."),
                tags$br(), #this is a break
                tags$br(), #this is a 2 break
-               tags$img(src = "soil_strength.jpg", height = 185, style="display: block; margin-left: auto; margin-right: auto;"), 
+               tags$img(src = "soil_strength1.jpg", height = 185, style="display: block; margin-left: auto; margin-right: auto;"), 
                tags$br(), #this is a break
                tags$a(href="https://grdc.com.au/resources-and-publications/all-publications/factsheets/2022/ripping-technology-national-fact-sheet",
                "click here for more info on ripping" ),
