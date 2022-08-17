@@ -26,14 +26,16 @@ ANOVA_Cum_Yld_df <- ANOVA_Cum_Yld_df %>%
                 #std_error,
                 p_value_ANOVA_cum,
                 #F_value_ANOVA_cum,
-                ANOVA_sign_0.1)
+                ANOVA_sign_0.1,
+                groups_LSD_cum)
 
 #make names user freindly
 ANOVA_Cum_Yld_df <- ANOVA_Cum_Yld_df %>% 
   rename(Yield = mean_cum_yld,
          "p value" = p_value_ANOVA_cum,
          Significance = ANOVA_sign_0.1,
-         "Standard error" = sd)
+         "Standard error" = sd,
+         "groups" = groups_LSD_cum)
 #split year into start and end year
 ANOVA_Cum_Yld_df <- ANOVA_Cum_Yld_df %>% separate(year, c("start","end"), "to", remove = FALSE)
 
