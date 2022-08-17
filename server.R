@@ -416,7 +416,12 @@ server <- shinyServer(function(input, output, session) {
     
     #ensure year is defined a a factor for a nice plot
     site_year_yld_summary$year <- as.factor(site_year_yld_summary$year)
-    max_sum_cum <- max(site_year_yld_summary$mean, na.rm = TRUE) 
+    sum_cum_yld <- site_year_yld_summary %>% 
+      group_by(Descriptors) %>% 
+      dplyr::summarise(sum_yld =sum(mean, na.rm = TRUE) )
+    
+    #sum_cum_yld
+    max_sum_cum <- max(sum_cum_yld$sum_yld, na.rm = TRUE)
     max_sum_cum <- max_sum_cum +0.5
     max_sum_cum <- ceiling(max_sum_cum)
     
@@ -430,7 +435,7 @@ server <- shinyServer(function(input, output, session) {
            title = paste0(a))+
       theme_bw() + 
       theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank()) +
-      #scale_y_continuous(breaks=seq(0,max_sum_cum,by=1.0), limits = c(0, max_sum_cum))+
+      scale_y_continuous(breaks=seq(0,max_sum_cum,by=1.0), limits = c(0, max_sum_cum))+
       theme(
         axis.text.x=element_text(angle=50,hjust=1, size = 16),
         axis.text.y=element_text(size = 16),
