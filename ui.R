@@ -53,8 +53,10 @@ tabPanel("What is my constraint", #tab title pageleafletOutput("map"),
                tags$img(src = "water drop.jpg",height = 185, style="display: block; margin-left: auto; margin-right: auto;"), #need to resize this image
                #tags$img(src = "wheat.jpg"),
                tags$br(), #this is a break
+               #tags$a(href="https://www.smithsonianmag.com/history/history-felines-narrated-and-illustrated-cat-180976368/", 
+               #tags$a(href=" https://grdc.com.au/resources-and-publications/all-publications/factsheets/2022/diagnosing-sandy-soil-constraints-water-repellence-and-ph-south-west",      
                tags$a(href="13 July 2022 - Water Repellence and pH in Sandy Soils.pdf", ## this documnet need to sit inside the app directory in a folder called www
-                      "click here for more info on water repllency")
+                     "click here for more info on water repllency")
              ), #box water repellency
              
              
@@ -65,6 +67,7 @@ tabPanel("What is my constraint", #tab title pageleafletOutput("map"),
                tags$br(), #this is a 2 break
                tags$img(src = "wheat.jpg", height = 185, style="display: block; margin-left: auto; margin-right: auto;"), 
                tags$br(), #this is a break
+               #tags$a(href="https://grdc.com.au/resources-and-publications/all-publications/factsheets/2022/diagnosing-sandy-soil-constraints-nutrition-south-west",
                tags$a(href="13 July 2022 - Diagnosing nutritional constraints in sandy soils.pdf", ## this documnet need to sit inside the app directory in a folder called www
                       "click here for more info on nutritional constraints" ),
                
@@ -76,6 +79,7 @@ tabPanel("What is my constraint", #tab title pageleafletOutput("map"),
                tags$br(), #this is a 2 break
                tags$img(src = "pH_chart.jpg", height = 185, style="display: block; margin-left: auto; margin-right: auto;"), #wrong size
                tags$br(), #this is a break
+               #tags$a(href="https://grdc.com.au/resources-and-publications/all-publications/factsheets/2022/diagnosing-sandy-soil-constraints-water-repellence-and-ph-south-west",
                tags$a(href="13 July 2022 - Water Repellence and pH in Sandy Soils.pdf", ## this documnet need to sit inside the app directory in a folder called www
                       "click here for more info on acidity" )
              ), #box acid
@@ -86,6 +90,7 @@ tabPanel("What is my constraint", #tab title pageleafletOutput("map"),
                tags$br(), #this is a 2 break
                tags$img(src = "soil_strength.jpg", height = 185, style="display: block; margin-left: auto; margin-right: auto;"), 
                tags$br(), #this is a break
+               #tags$a(href="https://grdc.com.au/resources-and-publications/all-publications/factsheets/2022/diagnosing-sandy-soil-constraints-high-soil-strength-south-west",
                tags$a(href="13 July 2022_High Soil Strength in Sandy Soils .pdf", ## this documnet need to sit inside the app directory in a folder called www
                       "click here for more info on high soil strength" )
              ) #box acid
