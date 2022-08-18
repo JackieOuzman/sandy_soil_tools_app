@@ -290,7 +290,7 @@ tabPanel("What is my constraint", #tab title pageleafletOutput("map"),
 #########################################################################################################                 
 
 
-tabPanel("What to do now", #tab title pageleafletOutput("map"),
+tabPanel("Management Options", #tab title pageleafletOutput("map"),
          fluidPage( 
            fluidRow(
              box(
@@ -361,7 +361,7 @@ tabPanel("What to do now", #tab title pageleafletOutput("map"),
 #########################################################################################################
 ###############                       tab 2                           #################################
 #########################################################################################################                 
-tabPanel("comparision with trial", #tab title page
+tabPanel("To be removed", #tab title page
              
          
   
