@@ -593,35 +593,35 @@ server <- shinyServer(function(input, output, session) {
     
     DT::datatable(constraints_table ,
                   rownames = FALSE,
-                  caption = 'Constaints table') 
+                  caption = 'Constaints table', 
+                  filter = 'top', options = list(pageLength = 5))
     
   })
   
-  #output$select_constraints <- renderValueBox({
-  output$select_constraints <- renderPrint({
-  #output$constraints_table <- renderTable({
-  #output$select_constraints <- DT::renderDataTable({
-   
-    choice_of_sites <- constraints_table %>% select(site, 
-                                            Repellence,
-                                            Nutrition,
-                                            Acid,
-                                            Strength
-                                            ) %>%
-      mutate(merge_constriants = paste0(Repellence, "_", Nutrition,  "_", Acid, "_", Strength))
-      
-    best_match_table <- left_join(reactive_select_constraints_df(), choice_of_sites) 
-      
-      best_match_table <- best_match_table %>%  dplyr::mutate(Note = "If blank no sites match") %>% select(site)
-    
-      
-      # DT::datatable(best_match_table[,c(6,7)], 
-      #               options = list(dom = 't'),
-      #               rownames = FALSE,)
-      
-      best_match_table
-      
-    })
+ 
+  # output$select_constraints <- renderPrint({
+  # 
+  #  
+  #   choice_of_sites <- constraints_table %>% select(site, 
+  #                                           Repellence,
+  #                                           Nutrition,
+  #                                           Acid,
+  #                                           Strength
+  #                                           ) %>%
+  #     mutate(merge_constriants = paste0(Repellence, "_", Nutrition,  "_", Acid, "_", Strength))
+  #     
+  #   best_match_table <- left_join(reactive_select_constraints_df(), choice_of_sites) 
+  #     
+  #     best_match_table <- best_match_table %>%  dplyr::mutate(Note = "If blank no sites match") %>% select(site)
+  #   
+  #     
+  #     # DT::datatable(best_match_table[,c(6,7)], 
+  #     #               options = list(dom = 't'),
+  #     #               rownames = FALSE,)
+  #     
+  #     best_match_table
+  #     
+  #   })
 
   ######################################################################################################
   ##################         function for filtering the data - drop down economics     ##########################
@@ -689,30 +689,30 @@ server <- shinyServer(function(input, output, session) {
 
   #constraints selection which is on first page
   
-  reactive_select_constraints_df <- reactive({
-    
-    Repellence <- c(0)
-    Nutrition <-   c(0)
-    Acid <-  c(0)
-    Strength <-  c(0)
-    # Join the variables to create a data frame
-    my_contraints_table <- data.frame(Repellence,Nutrition, Acid, Strength ) 
-    
-    ## fill in the tabel with my selected data
-    
-    my_contraints_table_df <- my_contraints_table %>% 
-      mutate(Repellence =  as.character(input$select_constraints_water),
-             Nutrition =   as.character(input$select_constraints_nutrition),
-             Acid =        as.character(input$select_constraints_acid),
-             Strength =    as.character(input$High_soil_strength)
-             
-             )#mutate bracket
-    
-    my_contraints_table_df <- my_contraints_table_df %>% 
-      mutate(
-      merge_constriants = paste0(Repellence, "_", Nutrition,  "_", Acid, "_", Strength))
-    
-  }  )
+  # reactive_select_constraints_df <- reactive({
+  #   
+  #   Repellence <- c(0)
+  #   Nutrition <-   c(0)
+  #   Acid <-  c(0)
+  #   Strength <-  c(0)
+  #   # Join the variables to create a data frame
+  #   my_contraints_table <- data.frame(Repellence,Nutrition, Acid, Strength ) 
+  #   
+  #   ## fill in the tabel with my selected data
+  #   
+  #   my_contraints_table_df <- my_contraints_table %>% 
+  #     mutate(Repellence =  as.character(input$select_constraints_water),
+  #            Nutrition =   as.character(input$select_constraints_nutrition),
+  #            Acid =        as.character(input$select_constraints_acid),
+  #            Strength =    as.character(input$High_soil_strength)
+  #            
+  #            )#mutate bracket
+  #   
+  #   my_contraints_table_df <- my_contraints_table_df %>% 
+  #     mutate(
+  #     merge_constriants = paste0(Repellence, "_", Nutrition,  "_", Acid, "_", Strength))
+  #   
+  # }  )
   
  
   
