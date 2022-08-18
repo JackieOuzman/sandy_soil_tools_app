@@ -247,7 +247,8 @@ tabPanel("What is my constraint", #tab title pageleafletOutput("map"),
                                 h1(HTML("Cummulative Yield Results</b>"), 
                                    style="text-align:center"),
                                 
-                                plotOutput("trial_plot")
+                                plotlyOutput('trial_plot')
+                                #plotOutput("trial_plot")
                                 )#clm bracket
 
                                 ),#fluid row bracket #3

@@ -7,6 +7,8 @@ require(slickR)
 library(DT)
 library(data.table)
 library("stringr")   
+library("stringi")
+library("plotly")
 
 
 
@@ -331,8 +333,8 @@ server <- shinyServer(function(input, output, session) {
 ######################################################################################################
 ########    function for filtering the data - and creating a plot on the map page     ################
 ###################################################################################################### 
-  output$trial_plot <- renderPlot({
-
+  #output$trial_plot <- renderPlot({
+  output$trial_plot <- renderPlotly({
     
     # set the site name call on the reactive function defined in te reactive secetion
     site_in_app <- c(reactive_site_selection())
@@ -426,10 +428,13 @@ server <- shinyServer(function(input, output, session) {
     max_sum_cum <- max_sum_cum +0.5
     max_sum_cum <- ceiling(max_sum_cum)
     
-    
+    #format the Descriptors so the axis will wrap - if I use plotly I dont need to wrap text?
+    #site_year_yld_summary$Descriptors <- stri_replace_all_fixed(site_year_yld_summary$Descriptors, "_", "_\U200B") # this adds a space where ever there is a underscore
     
     CumPlot <- site_year_yld_summary %>% 
-      ggplot( aes(x = factor(Descriptors), y = mean, fill = year, colour = year)) + 
+      ggplot( aes(x = Descriptors, y = mean, 
+                  fill = year, 
+                  colour = year)) + 
       geom_bar(stat = "identity",  alpha = 0.5)  +
       labs(x="", 
            y="t/ha", 
@@ -437,15 +442,17 @@ server <- shinyServer(function(input, output, session) {
       theme_bw() + 
       theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank()) +
       scale_y_continuous(breaks=seq(0,max_sum_cum,by=1.0), limits = c(0, max_sum_cum))+
-      scale_x_discrete(labels = function(Descriptors) str_wrap(Descriptors, width = 5))+
+      scale_x_discrete(labels = 
+                         function(Descriptors) str_wrap(Descriptors, 
+                                                        width = 5))+ #if I use plotly I dont need to wrap text?
       theme(
-        axis.text.x=element_text(angle=50,hjust=1, size = 16),
-        axis.text.y=element_text(size = 16),
-        axis.title.y.left = element_text(size = 18),
+        #axis.text.x=element_text(angle=50,hjust=1, size = 12),
+        axis.text.y=element_text(size = 12),
+        axis.title.y.left = element_text(size = 16),
         plot.title = element_text(size = 20)) 
     
     
-    CumPlot
+    ggplotly(CumPlot)
 
   })
 
