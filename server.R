@@ -6,9 +6,9 @@ require(leaflet)
 require(slickR)
 library(DT)
 library(data.table)
-library("stringr")   
-library("stringi")
-library("plotly")
+library(string)   
+library(string)
+library(plotly)
 
 
 
