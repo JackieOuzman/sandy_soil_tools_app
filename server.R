@@ -6,6 +6,7 @@ require(leaflet)
 require(slickR)
 library(DT)
 library(data.table)
+library("stringr")   
 
 
 
@@ -436,6 +437,7 @@ server <- shinyServer(function(input, output, session) {
       theme_bw() + 
       theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank()) +
       scale_y_continuous(breaks=seq(0,max_sum_cum,by=1.0), limits = c(0, max_sum_cum))+
+      scale_x_discrete(labels = function(Descriptors) str_wrap(Descriptors, width = 5))+
       theme(
         axis.text.x=element_text(angle=50,hjust=1, size = 16),
         axis.text.y=element_text(size = 16),
