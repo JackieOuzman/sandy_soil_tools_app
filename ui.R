@@ -14,8 +14,8 @@ library(shiny)
 library(shinyWidgets)
 
 library(vroom) #new install on land and water linex
-#library(string)
 
+library(stringi)
 library(plotly)
 
 
@@ -246,7 +246,7 @@ tabPanel("What is my constraint", #tab title pageleafletOutput("map"),
                               fluidRow(
                                 column(1,), #this is just forcing my plot to appear in the middle
                                 column(10,
-                                h1(HTML("Cummulative Yield Results</b>"), 
+                                h1(HTML("Cumulative Yields</b>"), 
                                    style="text-align:center"),
                                 
                                 plotlyOutput('trial_plot')
@@ -257,7 +257,7 @@ tabPanel("What is my constraint", #tab title pageleafletOutput("map"),
                               
                       
                       fluidRow(
-                                h1(HTML("ANOVA Results </b>"),
+                                h1(HTML("ANOVA Results of Cumulative Yields</b>"),
                                    style="text-align:center"),
                                 column(1,), #this is just forcing my plot to appear in the middle
                                 column(10,
