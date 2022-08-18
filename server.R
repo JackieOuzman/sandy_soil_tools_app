@@ -593,8 +593,12 @@ server <- shinyServer(function(input, output, session) {
     
     DT::datatable(constraints_table ,
                   rownames = FALSE,
-                  caption = 'Constaints table', 
-                  filter = 'top', options = list(pageLength = 5))
+                  #caption = 'Constaints table', 
+                  filter = 'top',
+                  options = list(pageLength = 40, dom = 't') #'t' displays only the table and removes the search 
+                  
+                
+                  )
     
   })
   
