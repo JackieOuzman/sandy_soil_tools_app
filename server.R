@@ -452,7 +452,7 @@ server <- shinyServer(function(input, output, session) {
       
       theme(
         #axis.text.x=element_text(angle=50,hjust=1, size = 12),
-        axis.text.y=element_text(size = 12),
+        axis.text.y=element_text(size = 10),
         axis.title.y.left = element_text(size = 16),
         plot.title = element_text(size = 20)) 
     
