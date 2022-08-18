@@ -437,7 +437,7 @@ server <- shinyServer(function(input, output, session) {
       ggplot( aes(x = Treatment, y = Yield, 
                   fill = year, 
                   colour = year,
-                  text = paste0(site_year_yld_summary$Treatment, '\n', "Yield",Yield)
+                  text = paste0(Treatment, '\n', " Yield ",Yield)
                   )) + 
       geom_bar(stat = "identity",  alpha = 0.5)  +
       labs(x="", 
@@ -446,7 +446,7 @@ server <- shinyServer(function(input, output, session) {
       theme_bw() + 
       theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank()) +
       scale_y_continuous(breaks=seq(0,max_sum_cum,by=2.0), limits = c(0, max_sum_cum))+
-      #scale_x_discrete(labels = function(Treatment) str_wrap(stri_replace_all_fixed(site_year_yld_summary$Treatment, c(".","_"), c(".\U200B", "_\U200B"),vectorize_all=FALSE), width = 5)) +
+      scale_x_discrete(labels = function(Treatment) str_wrap(stri_replace_all_fixed(Treatment, c(".","_"), c(".\U200B", "_\U200B"),vectorize_all=FALSE), width = 5)) +
       
       theme(
         #axis.text.x=element_text(angle=50,hjust=1, size = 12),
@@ -457,7 +457,7 @@ server <- shinyServer(function(input, output, session) {
     
     #ggplotly(CumPlot)
     ggplotly(CumPlot, tooltip = "text")
-    #ggplotly(CumPlot, tooltip = c("Treatment", "Yield", "year"))
+    
     
     #https://plotly-r.com/controlling-tooltips.html
 
