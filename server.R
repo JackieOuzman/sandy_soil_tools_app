@@ -428,11 +428,13 @@ server <- shinyServer(function(input, output, session) {
     max_sum_cum <- max_sum_cum +0.5
     max_sum_cum <- ceiling(max_sum_cum)
     
-    #format the Descriptors so the axis will wrap - if I use plotly I dont need to wrap text?
-    #site_year_yld_summary$Descriptors <- stri_replace_all_fixed(site_year_yld_summary$Descriptors, "_", "_\U200B") # this adds a space where ever there is a underscore
+    site_year_yld_summary <- site_year_yld_summary %>% 
+      rename(Treatment = Descriptors,
+             Yield = mean)
+    site_year_yld_summary$Yield <- round(site_year_yld_summary$Yield, digits = 2)
     
     CumPlot <- site_year_yld_summary %>% 
-      ggplot( aes(x = Descriptors, y = mean, 
+      ggplot( aes(x = Treatment, y = Yield, 
                   fill = year, 
                   colour = year)) + 
       geom_bar(stat = "identity",  alpha = 0.5)  +
@@ -441,14 +443,8 @@ server <- shinyServer(function(input, output, session) {
            title = paste0(a))+
       theme_bw() + 
       theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank()) +
-      scale_y_continuous(breaks=seq(0,max_sum_cum,by=1.0), limits = c(0, max_sum_cum))+
-      # scale_x_discrete(labels = 
-      #                    function(Descriptors) str_wrap(Descriptors, 
-      #                                                   width = 5))+ #if I use plotly I dont need to wrap text?
-      
-      scale_x_discrete(labels = 
-                         function(Descriptors) str_wrap(stri_replace_all_fixed(site_year_yld_summary$Descriptors, "_", "_\U200B"), 
-                                                        width = 5))+ #if I use plotly I dont need to wrap text?
+      scale_y_continuous(breaks=seq(0,max_sum_cum,by=2.0), limits = c(0, max_sum_cum))+
+      scale_x_discrete(labels = function(Treatment) str_wrap(stri_replace_all_fixed(site_year_yld_summary$Treatment, c(".","_"), c(".\U200B", "_\U200B"),vectorize_all=FALSE), width = 5)) +
       
       theme(
         #axis.text.x=element_text(angle=50,hjust=1, size = 12),
