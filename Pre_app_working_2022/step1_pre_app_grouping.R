@@ -378,11 +378,14 @@ what_check <- DB_df_soil_mod %>%
 #####################################################################################
 #####  add 2 clms    site_numb ,	rainfall_mean_annual	site_numb #####
 #####################################################################################
-
+# Note that there is a mismatch (but close) between how I have cal annula rain and what is published here: http://www.bom.gov.au/climate/data/index.shtml
+# I have used the published annual rainfall
 
 DB_df_soil_mod <-  separate(DB_df_soil_mod, col=met_name_number, into=c('name-temp', 'site_numb'), sep='_', remove = FALSE)
 
-annual_rain <- read.csv("X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2022/annual_rain_2022_research_impact_sites.csv")
+annual_rain <- read.csv("X:/Therese_Jackie/Sandy_soils/Sands weather/met_file2022/annual_rain_2022_research_impact_sites_from_Climate Data Online.csv")
+annual_rain <-annual_rain %>% 
+  dplyr::select(-annual_rain_script_jaxs)
 
 names(annual_rain)
 annual_rain$site <- as.character(annual_rain$site)
