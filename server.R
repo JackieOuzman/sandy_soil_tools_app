@@ -670,13 +670,28 @@ server <- shinyServer(function(input, output, session) {
 
 
   shinyalert(
-    title = "This app is under development"#,
+    title = "This app is under development",
     #type = "input",
-    #text = "What the name of your farm / analysis?",
+    text =  
+      tagList(
+        h3("Acknowledgements"),
+        h6("This research has been enriched by preceding research trials, the significant contributions of growers and consultants across the Southern region, 
+           # and the support of the GRDC. CSP00203 research and validation activities are a collaboration between the CSIRO, the University of South Australia, the SA state government through Primary Industries and Regions SA, Mallee Sustainable Farming Inc., Frontier Farming Systems, Trengove Consulting, AgGrow Agronomy, AirEP, and MacKillop Farm Management Group."),
+        tags$br(),
+        h3("Disclaimer"),
+        h6("This content has been prepared in good faith by CSIRO based on the information available at the date of publication, without any independent verification. 
+           Neither CSIRO, its editors nor any contributor to this website content represent, warrant or guarantee that the contents of this website are accurate or complete; nor does CSIRO, its editors nor any contributor to this website content accept any responsibility or liability for any errors or omissions in its contents, however they may arise. 
+           Readers who act on any information provided on this website do so at their own risk. 
+           CSIRO and contributors to this website may identify products by proprietary or trade names to help readers identify particular types of products. 
+           CSIRO do not endorse or recommend the products of any manufacturer referred to. 
+          Other products may perform as well as or better than those specifically referred to.")
+      ),
+    
+                    
     #size = "s",
     # closeOnEsc = TRUE,
     # closeOnClickOutside = FALSE,
-    # html = FALSE,
+     html = TRUE,
     # showConfirmButton = TRUE,
     # showCancelButton = FALSE,
     # confirmButtonText = "OK",
