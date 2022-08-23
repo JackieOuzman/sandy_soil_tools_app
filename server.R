@@ -84,10 +84,10 @@ site_info <- site_info %>%
 
 site_info <- site_info %>%
   mutate( site_label = paste0("Site = ", site),
-          non_wetting_label = paste0("non wetting score = ", non_wetting_label),
-          acidic_label = paste0("acidic score = ", acidic_label),
-          physical_label = paste0("physical score = ", physical_label),
-          nutrientl_label = paste0("nutrient score = ", nutrientl_label)
+          non_wetting_label = paste0("water repellence = ", non_wetting_label),
+          acidic_label = paste0("acid = ", acidic_label),
+          physical_label = paste0("soil strength = ", physical_label),
+          nutrientl_label = paste0("nutrition = ", nutrientl_label)
   )
 
 site_info <- site_info %>%
