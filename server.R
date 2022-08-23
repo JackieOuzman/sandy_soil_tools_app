@@ -309,24 +309,28 @@ server <- shinyServer(function(input, output, session) {
    
     ANOVA_Cum_Yld_site <- ANOVA_Cum_Yld %>%  filter(site == a) 
     order_df <- order_df %>% 
-      dplyr::select(Descriptors, order_rank)
+      dplyr::select(Descriptors, order_rank, "detailed_name")
     
     ANOVA_Cum_Yld_site <- left_join(ANOVA_Cum_Yld_site,order_df, by = c("Descriptors" =  "Descriptors") ) 
   
     ANOVA_Cum_Yld_site <- ANOVA_Cum_Yld_site %>%
       arrange(order_rank) %>% #arrange the data table using the ranking of treatments
-      dplyr::select("Descriptors", "Yield", "Standard.error", "count","Significance", "groups")
+      dplyr::select("Descriptors", "detailed_name", 
+                    "Yield", 
+                    #"Standard.error", 
+                    #"count",
+                    "Significance", "groups", )
       
       
-    colnames(ANOVA_Cum_Yld_site) <- c("Treatment", "Yield", "Standard.error", "count","Significance", "groups")
+    colnames(ANOVA_Cum_Yld_site) <- c("Treatment", "Detailed Treatment Name", "Yield", "Significance", "Groups")
     DT::datatable(ANOVA_Cum_Yld_site ,
                   rownames = FALSE,  
                   options = list(columnDefs =
                                    list(list(className = 'dt-center',
                                              targets = "_all")))) %>%
-      formatRound(c(2), 2) %>%
-      formatRound(c(3), 2) %>%#this round clm number  to 2 decimal places
-      formatRound(c(4), 0)  
+      #formatRound(c(4), 0) %>%
+      #formatRound(c(3), 2) %>%#this round clm number  to 2 decimal places
+      formatRound(c(3), 2)  
     
 })
   
