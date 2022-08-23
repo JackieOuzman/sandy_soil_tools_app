@@ -682,7 +682,7 @@ server <- shinyServer(function(input, output, session) {
         h6("This research has been enriched by preceding research trials, the significant contributions of growers and consultants across the Southern region, 
            # and the support of the GRDC. CSP00203 research and validation activities are a collaboration between the CSIRO, the University of South Australia, the SA state government through Primary Industries and Regions SA, Mallee Sustainable Farming Inc., Frontier Farming Systems, Trengove Consulting, AgGrow Agronomy, AirEP, and MacKillop Farm Management Group."),
         tags$br(),
-        tags$img(src = "logos.jpg",
+        tags$img(src = "logos_large.jpg",
                  #height = 185, 
                  width = 250), 
         h3("Disclaimer"),
