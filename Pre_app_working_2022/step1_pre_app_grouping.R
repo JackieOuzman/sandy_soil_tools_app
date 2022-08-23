@@ -372,7 +372,7 @@ DB_df_soil_mod<- DB_df_soil_mod %>%
 
 names(DB_df_soil_mod)
 what_check <- DB_df_soil_mod %>% 
-   select(ID, site, year, Descriptors,Repellence, non_wetting,Acidity, acid, Physical, physical,Nutrient,  nutrient)
+   select(ID, site, year, Descriptors,Repellence, non_wetting,Acidity, acidic, Physical, physical,Nutrient,  nutrient)
 
 
 #####################################################################################
