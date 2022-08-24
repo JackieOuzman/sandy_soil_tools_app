@@ -350,7 +350,7 @@ tabPanel("Management Options", #tab title pageleafletOutput("map"),
                       "Information on spading"),
                tags$br(), #this is a break
                
-               tags$img(src = "ripping.jpg",height = 185, style="display: block; margin-left: auto; margin-right: auto;"), #need to resize this image
+               tags$img(src = "ripping1.jpg",height = 185, style="display: block; margin-left: auto; margin-right: auto;"), #need to resize this image
                tags$br(), #this is a break
                
                tags$a(href="https://grdc.com.au/resources-and-publications/all-publications/factsheets/2022/ripping-technology-national-fact-sheet", 
@@ -392,7 +392,7 @@ tabPanel("Management Options", #tab title pageleafletOutput("map"),
                tags$p("Spading and inclusion ripping will also reduce soil strength to the depth of tillage."),
                
                tags$br(), #this is a break
-               tags$img(src = "ripping.jpg", height = 185, style="display: block; margin-left: auto; margin-right: auto;"),       
+               tags$img(src = "ripping1.jpg", height = 185, style="display: block; margin-left: auto; margin-right: auto;"),       
                tags$br(), #this is a break
                
                tags$a(href="https://grdc.com.au/resources-and-publications/all-publications/factsheets/2022/ripping-technology-national-fact-sheet", 
