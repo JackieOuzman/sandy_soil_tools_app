@@ -337,16 +337,24 @@ tabPanel("Management Options", #tab title pageleafletOutput("map"),
                tags$br(), #this is a break
                
                tags$a(href="https://grdc.com.au/resources-and-publications/all-publications/factsheets/2022/seeding-sandy-soils-national",
-                      "Info on seeder set up "),
+                      "Information on seeder set up "),
                tags$br(), #this is a break
                tags$a(href="https://grdc.com.au/resources-and-publications/all-publications/factsheets/2022/soil-wetter-national",
-                      "Info on soil wetters"),
+                      "Information on soil wetters"),
                tags$br(), #this is a break
+               
+               tags$img(src = "Farmax Spader Wynarka.jpg",height = 185, style="display: block; margin-left: auto; margin-right: auto;"), #need to resize this image
+               tags$br(), #this is a break
+               
                tags$a(href="https://grdc.com.au/resources-and-publications/all-publications/factsheets/2022/soil-mixing-by-spading-national", 
-                      "Info on spading"),
+                      "Information on spading"),
                tags$br(), #this is a break
+               
+               tags$img(src = "ripping.jpg",height = 185, style="display: block; margin-left: auto; margin-right: auto;"), #need to resize this image
+               tags$br(), #this is a break
+               
                tags$a(href="https://grdc.com.au/resources-and-publications/all-publications/factsheets/2022/ripping-technology-national-fact-sheet", 
-                      "Info on ripping"),
+                      "Information on ripping"),
                
                
                
@@ -365,10 +373,13 @@ tabPanel("Management Options", #tab title pageleafletOutput("map"),
                tags$br(), #this is a break
                
                tags$a(href="https://grdc.com.au/resources-and-publications/all-publications/factsheets/2022/soil-mixing-by-spading-national", 
-                      "Info on spading"),
+                      "Information on spading"),
                tags$br(), 
+               tags$img(src = "ripper_inc.jpg", height = 185, style="display: block; margin-left: auto; margin-right: auto;"),       
+               tags$br(), #this is a break
+               
                tags$a(href="https://grdc.com.au/resources-and-publications/all-publications/factsheets/2022/inclusion-ripping-technology-national",
-                      "Info on inclusion ripping" ),
+                      "Information on inclusion ripping" ),
                
                
              ), #box acid
@@ -385,11 +396,14 @@ tabPanel("Management Options", #tab title pageleafletOutput("map"),
                tags$br(), #this is a break
                
                tags$a(href="https://grdc.com.au/resources-and-publications/all-publications/factsheets/2022/ripping-technology-national-fact-sheet", 
-                      "Info on ripping"),
+                      "Information on ripping"),
                tags$br(), 
+               tags$img(src = "Farmax Spader Wynarka.jpg", height = 185, style="display: block; margin-left: auto; margin-right: auto;"),       
+               tags$br(), #this is a break
+               
                tags$a(href="https://grdc.com.au/resources-and-publications/all-publications/factsheets/2022/soil-mixing-by-spading-national", 
-                      "Info on spading"),
-               tags$br(), 
+                      "Information on spading"),
+               
                
                
                
