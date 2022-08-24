@@ -322,7 +322,7 @@ server <- shinyServer(function(input, output, session) {
                     "Significance", "groups", )
       
       
-    colnames(ANOVA_Cum_Yld_site) <- c("Treatment", "Detailed Treatment Name", "Yield", "Significance", "Groups")
+    colnames(ANOVA_Cum_Yld_site) <- c("Treatment", "Detailed Treatment Name", "Yield", "Significance of ANOVA", "Groups")
     DT::datatable(ANOVA_Cum_Yld_site ,
                   rownames = FALSE,  
                   options = list(columnDefs =

@@ -307,7 +307,7 @@ tabPanel("Management Options", #tab title pageleafletOutput("map"),
            fluidRow(
              
              box(
-               title = "Martix", width = 10, solidHeader = TRUE, status = "primary",
+               title = "Matix", width = 10, solidHeader = TRUE, status = "primary",
                
                
                tags$br(), #this is a break
@@ -332,7 +332,7 @@ tabPanel("Management Options", #tab title pageleafletOutput("map"),
                
                tags$br(), #this is a break
                
-               tags$img(src = "ripper.jpg",height = 185, style="display: block; margin-left: auto; margin-right: auto;"), #need to resize this image
+               tags$img(src = "seeding with wetter.jpg",height = 185, style="display: block; margin-left: auto; margin-right: auto;"), #need to resize this image
                
                tags$br(), #this is a break
                
@@ -361,7 +361,7 @@ tabPanel("Management Options", #tab title pageleafletOutput("map"),
                tags$p("Spading and inclusion ripping are the key management options covered here."),
                
                tags$br(), #this is a break
-               tags$img(src = "pH_chart.jpg", height = 185, style="display: block; margin-left: auto; margin-right: auto;"),       
+               tags$img(src = "Farmax Spader Wynarka.jpg", height = 185, style="display: block; margin-left: auto; margin-right: auto;"),       
                tags$br(), #this is a break
                
                tags$a(href="https://grdc.com.au/resources-and-publications/all-publications/factsheets/2022/soil-mixing-by-spading-national", 
@@ -381,7 +381,7 @@ tabPanel("Management Options", #tab title pageleafletOutput("map"),
                tags$p("Spading and inclusion ripping will also reduce soil strength to the depth of tillage."),
                
                tags$br(), #this is a break
-               tags$img(src = "soil_strength.jpg", height = 185, style="display: block; margin-left: auto; margin-right: auto;"),       
+               tags$img(src = "ripping.jpg", height = 185, style="display: block; margin-left: auto; margin-right: auto;"),       
                tags$br(), #this is a break
                
                tags$a(href="https://grdc.com.au/resources-and-publications/all-publications/factsheets/2022/ripping-technology-national-fact-sheet", 
@@ -403,114 +403,114 @@ tabPanel("Management Options", #tab title pageleafletOutput("map"),
            
            
                 ), #tabPanel what to do now
-),  #fluid page
+)  #fluid page
 
 #########################################################################################################
 ###############                       tab 2                           #################################
 #########################################################################################################                 
-tabPanel("To be removed", #tab title page
-             
-         
-  
+#tabPanel("To be removed", #tab title page
+
+
+
 ############################################################################################################
 #################                  options to filter the data       ########################################
 ############################################################################################################
-  
-    
-    fluidRow(
-      box(
-        title = "Site", width = 4, solidHeader = TRUE, status = "primary",
-
-        uiOutput("data2"),
-
-        useShinyalert(),actionButton("use_page", "How to use this page"),
-        tags$a(href="Undiscounted cash flow.pdf", "More information on model"),
-      ), #box sites
 
 
-      box(
-        title = "Constraint", width = 8, solidHeader = TRUE, status = "primary",
-
-        infoBoxOutput("non_wetting"),
-        infoBoxOutput("acidic"),
-        infoBoxOutput("physical"),
-        valueBoxOutput("rainfall")
-
-      ) #box Constraint
-    ),#fluid row 1
-
-
-
-
-    fluidRow(
-      column(width=6, uiOutput("data1_scen1")),   ## uiOutput - gets the UI from the server
-      column(width=6, uiOutput("data1_scen2"))   #remove on of this one?
-    ),#fluid row bracket 2
+    # fluidRow(
+    #   box(
+    #     title = "Site", width = 4, solidHeader = TRUE, status = "primary",
+    # 
+    #     uiOutput("data2"),
+    # 
+    #     useShinyalert(),actionButton("use_page", "How to use this page"),
+    #     tags$a(href="Undiscounted cash flow.pdf", "More information on model"),
+    #   ), #box sites
+    # 
+    # 
+    #   box(
+    #     title = "Constraint", width = 8, solidHeader = TRUE, status = "primary",
+    # 
+    #     infoBoxOutput("non_wetting"),
+    #     infoBoxOutput("acidic"),
+    #     infoBoxOutput("physical"),
+    #     valueBoxOutput("rainfall")
+    # 
+    #   ) #box Constraint
+    # ),#fluid row 1
+    # 
+    # 
+    # 
+    # 
+    # fluidRow(
+    #   column(width=6, uiOutput("data1_scen1")),   ## uiOutput - gets the UI from the server
+    #   column(width=6, uiOutput("data1_scen2"))   #remove on of this one?
+    # ),#fluid row bracket 2
 
     ############################################################################################################
     ##############################            the tables         ###############################################
     ############################################################################################################
     ## Cost table
-    fluidRow(
-      column(width=6,h2("Cost of modification Scenario 1")),
-
-      column(width=6,h2("Cost of modification Scenario 2"))
-    ),#fluid row bracket 2
-    fluidRow(
-      column(width=6,rHandsontableOutput("cost_sc1")),
-      column(width=6,rHandsontableOutput("cost_sc2"))
-    ),#fluid row bracket 3
-
-    ## Yield table
-    fluidRow(
-      column(width=6,h2("Yield t/ha Scenario 1")),
-      column(width=6,h2("Yield t/ha Scenario 2"))
-    ),#fluid row bracket 4
-    fluidRow(
-      column(width=6,rHandsontableOutput("yld_sc1")),
-      column(width=6,rHandsontableOutput("yld_sc2"))
-    ),#fluid row bracket 5
-
-    ## Extra table
-    fluidRow(
-      column(width=6,h2("Extra cost or benefits Scenario 1")),
-      column(width=6,h2("Extra cost or benefits Scenario 2"))
-    ),#fluid row bracket 6
-    fluidRow(
-      column(width=6,rHandsontableOutput("extra_sc1")),
-      column(width=6,rHandsontableOutput("extra_sc2"))
-    ),#fluid row bracket 7
+    # fluidRow(
+    #   column(width=6,h2("Cost of modification Scenario 1")),
+    # 
+    #   column(width=6,h2("Cost of modification Scenario 2"))
+    # ),#fluid row bracket 2
+    # fluidRow(
+    #   column(width=6,rHandsontableOutput("cost_sc1")),
+    #   column(width=6,rHandsontableOutput("cost_sc2"))
+    # ),#fluid row bracket 3
+    # 
+    # ## Yield table
+    # fluidRow(
+    #   column(width=6,h2("Yield t/ha Scenario 1")),
+    #   column(width=6,h2("Yield t/ha Scenario 2"))
+    # ),#fluid row bracket 4
+    # fluidRow(
+    #   column(width=6,rHandsontableOutput("yld_sc1")),
+    #   column(width=6,rHandsontableOutput("yld_sc2"))
+    # ),#fluid row bracket 5
+    # 
+    # ## Extra table
+    # fluidRow(
+    #   column(width=6,h2("Extra cost or benefits Scenario 1")),
+    #   column(width=6,h2("Extra cost or benefits Scenario 2"))
+    # ),#fluid row bracket 6
+    # fluidRow(
+    #   column(width=6,rHandsontableOutput("extra_sc1")),
+    #   column(width=6,rHandsontableOutput("extra_sc2"))
+    # ),#fluid row bracket 7
 
     ############################################################################################################
     ##############################            results         ###############################################
     ############################################################################################################
 
     #select number of years
-    fluidRow(
-      column(width=6,selectInput("years", label = h3("years for analysis"),
-                                 choices = list("1 Year" = 1, "2 Year" = 2, "3 Year" = 3,
-                                                "4 Year" = 4, "5 Year" = 5),
-                                 selected = 3))
-    ),#fluid bracket 8
-
-    #heading for results
-    fluidRow(
-      column(width=12,h2("Results Scenario 1 and 2"))
-    ),#fluid row bracket 9
-
-    fluidRow(
-      column(width=6,plotOutput("plot1"))
-    ),#fluid row bracket 10
-
-    fluidRow(
-      column(width=6,DT::dataTableOutput("economic_tb1")) #this is just a check
-    ),#fluid row bracket 11
+    # fluidRow(
+    #   column(width=6,selectInput("years", label = h3("years for analysis"),
+    #                              choices = list("1 Year" = 1, "2 Year" = 2, "3 Year" = 3,
+    #                                             "4 Year" = 4, "5 Year" = 5),
+    #                              selected = 3))
+    # ),#fluid bracket 8
+    # 
+    # #heading for results
+    # fluidRow(
+    #   column(width=12,h2("Results Scenario 1 and 2"))
+    # ),#fluid row bracket 9
+    # 
+    # fluidRow(
+    #   column(width=6,plotOutput("plot1"))
+    # ),#fluid row bracket 10
+    # 
+    # fluidRow(
+    #   column(width=6,DT::dataTableOutput("economic_tb1")) #this is just a check
+    # ),#fluid row bracket 11
 
     ############################################################################################################
     ##############################            save data buttons         ###########################################
     ############################################################################################################
-      fluidRow(downloadButton("download",
-                        label = "Download data table"))#fluid row bracket 12
+      # fluidRow(downloadButton("download",
+      #                   label = "Download data table"))#fluid row bracket 12
 
     ############################################################################################################
     ##############################            end of UI              ###########################################
@@ -518,7 +518,7 @@ tabPanel("To be removed", #tab title page
 #####################       end of UI for the comparision        ###########################################
 ############################################################################################################
 
-) #tabPanel2 bracket
+#) #tabPanel2 bracket
 
    ) #navbar bracket
    ) # ui bracket
