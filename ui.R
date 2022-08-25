@@ -316,7 +316,7 @@ tabPanel("Management Options", #tab title pageleafletOutput("map"),
                
                tags$br(), #this is a break
                
-               tags$img(src = "Mel_Matrix.jpg",
+               tags$img(src = "Mel_Matrix1.png",
                         height = 300, 
                         style="display: block; margin-left: auto; margin-right: auto;"), 
                
@@ -327,7 +327,7 @@ tabPanel("Management Options", #tab title pageleafletOutput("map"),
                
              ), #box for matrix
              
-             
+             #### JACKS Water repellence  #### 
              
              box(
                title = "Water repellence", width = 10, solidHeader = TRUE, status = "primary",
@@ -336,26 +336,41 @@ tabPanel("Management Options", #tab title pageleafletOutput("map"),
                
                tags$br(), #this is a break
                
+               ## PICTURE FOR SEEDER WITH WETTERES ###
+               
                tags$img(src = "seeding with wetter.jpg",height = 185, style="display: block; margin-left: auto; margin-right: auto;"), #need to resize this image
                
                tags$br(), #this is a break
                
+               ## URL FOR SEEDER SET UP  ###
+               
                tags$a(href="https://grdc.com.au/resources-and-publications/all-publications/factsheets/2022/seeding-sandy-soils-national",
                       "Information on seeder set up "),
                tags$br(), #this is a break
+               
+               ## URL FOR SOIL WETTERS ###
+               
                tags$a(href="https://grdc.com.au/resources-and-publications/all-publications/factsheets/2022/soil-wetter-national",
                       "Information on soil wetters"),
                tags$br(), #this is a break
                
+               ## PICTURE FOR SPADER ###
+               
                tags$img(src = "Farmax Spader Wynarka.jpg",height = 185, style="display: block; margin-left: auto; margin-right: auto;"), #need to resize this image
                tags$br(), #this is a break
+               
+               ## URL FOR SPADING  ###
                
                tags$a(href="https://grdc.com.au/resources-and-publications/all-publications/factsheets/2022/soil-mixing-by-spading-national", 
                       "Information on spading"),
                tags$br(), #this is a break
                
+               ## PICTURE FOR RIPPER ###
+               
                tags$img(src = "ripping1.jpg",height = 185, style="display: block; margin-left: auto; margin-right: auto;"), #need to resize this image
                tags$br(), #this is a break
+               
+               ## URL FOR RIPPER ###
                
                tags$a(href="https://grdc.com.au/resources-and-publications/all-publications/factsheets/2022/ripping-technology-national-fact-sheet", 
                       "Information on ripping"),
@@ -365,22 +380,31 @@ tabPanel("Management Options", #tab title pageleafletOutput("map"),
              ), #box water repellency
              
              
-            
+             #### JACKS Acid  #### 
              
              box(
                title = "Acid", width = 10, solidHeader = TRUE, status = "primary",
                tags$p("Management options that mix or redistribute soil layers will have an effect on pH and also provide a means to incorporate amendments like lime to improve pH."), 
                tags$p("Spading and inclusion ripping are the key management options covered here."),
                
+               ## PICTURE FOR Spading ###
+               
                tags$br(), #this is a break
                tags$img(src = "Farmax Spader Wynarka.jpg", height = 185, style="display: block; margin-left: auto; margin-right: auto;"),       
                tags$br(), #this is a break
                
+               ## URL FOR Spading ###
+               
                tags$a(href="https://grdc.com.au/resources-and-publications/all-publications/factsheets/2022/soil-mixing-by-spading-national", 
                       "Information on spading"),
                tags$br(), 
+               
+               ## PICTURE FOR Rripping with Incl ###
+               
                tags$img(src = "ripper_inc.jpg", height = 185, style="display: block; margin-left: auto; margin-right: auto;"),       
                tags$br(), #this is a break
+               
+               ## URL FOR Rripping with Incl ###
                
                tags$a(href="https://grdc.com.au/resources-and-publications/all-publications/factsheets/2022/inclusion-ripping-technology-national",
                       "Information on inclusion ripping" ),
@@ -388,22 +412,31 @@ tabPanel("Management Options", #tab title pageleafletOutput("map"),
                
              ), #box acid
             
-             
+             #### JACKS High soil strength  #### 
               box(
                title = "High soil strength", width = 10, solidHeader = TRUE, status = "primary",
                
                tags$p("The management option that most targets high soil strength is ripping."), 
                tags$p("Spading and inclusion ripping will also reduce soil strength to the depth of tillage."),
                
+               ## PICTURE FOR RIPPING ###
+               
                tags$br(), #this is a break
                tags$img(src = "ripping1.jpg", height = 185, style="display: block; margin-left: auto; margin-right: auto;"),       
                tags$br(), #this is a break
                
+               ## URL FOR RIPPING ###
+               
                tags$a(href="https://grdc.com.au/resources-and-publications/all-publications/factsheets/2022/ripping-technology-national-fact-sheet", 
                       "Information on ripping"),
                tags$br(), 
+               
+               ## PICTURE FOR SPADING ###
+               
                tags$img(src = "Farmax Spader Wynarka.jpg", height = 185, style="display: block; margin-left: auto; margin-right: auto;"),       
                tags$br(), #this is a break
+               
+               ## URL FOR SPADING ###
                
                tags$a(href="https://grdc.com.au/resources-and-publications/all-publications/factsheets/2022/soil-mixing-by-spading-national", 
                       "Information on spading"),
@@ -414,7 +447,7 @@ tabPanel("Management Options", #tab title pageleafletOutput("map"),
                
                
                
-             ) #box acid
+             ) #High soil strength
              
            ), #fluid row     #1
            
