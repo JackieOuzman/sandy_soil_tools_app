@@ -38,6 +38,10 @@ library(plotly)
                      ) ,   ## these two lines get the value box to display without using shinydashboards        
 
                      
+                     
+
+                     
+                     
 #########################################################################################################
 #########################################################################################################
 ###############                       what is my constraint page                     #################################
@@ -417,7 +421,19 @@ tabPanel("Management Options", #tab title pageleafletOutput("map"),
            
            
                 ), #tabPanel what to do now
-)  #fluid page
+),  #fluid page
+
+
+#########################################################################################################
+useShinyalert()                  
+#########################################################################################################
+
+
+
+
+
+
+
 
 #########################################################################################################
 ###############                       tab 2                           #################################
@@ -431,17 +447,17 @@ tabPanel("Management Options", #tab title pageleafletOutput("map"),
 ############################################################################################################
 
 
-    # fluidRow(
+     #fluidRow(
     #   box(
     #     title = "Site", width = 4, solidHeader = TRUE, status = "primary",
     # 
     #     uiOutput("data2"),
-    # 
-    #     useShinyalert(),actionButton("use_page", "How to use this page"),
-    #     tags$a(href="Undiscounted cash flow.pdf", "More information on model"),
-    #   ), #box sites
-    # 
-    # 
+
+        # useShinyalert(),actionButton("use_page", "How to use this page"),
+        # tags$a(href="Undiscounted cash flow.pdf", "More information on model"),
+     # ), #box sites
+
+
     #   box(
     #     title = "Constraint", width = 8, solidHeader = TRUE, status = "primary",
     # 
@@ -499,7 +515,7 @@ tabPanel("Management Options", #tab title pageleafletOutput("map"),
     ##############################            results         ###############################################
     ############################################################################################################
 
-    #select number of years
+   # select number of years
     # fluidRow(
     #   column(width=6,selectInput("years", label = h3("years for analysis"),
     #                              choices = list("1 Year" = 1, "2 Year" = 2, "3 Year" = 3,
@@ -523,8 +539,8 @@ tabPanel("Management Options", #tab title pageleafletOutput("map"),
     ############################################################################################################
     ##############################            save data buttons         ###########################################
     ############################################################################################################
-      # fluidRow(downloadButton("download",
-      #                   label = "Download data table"))#fluid row bracket 12
+       # fluidRow(downloadButton("download",
+       #                   label = "Download data table"))#fluid row bracket 12
 
     ############################################################################################################
     ##############################            end of UI              ###########################################
