@@ -373,7 +373,8 @@ tabPanel("Management Options", #tab title pageleafletOutput("map"),
                
                ## URL FOR SPADING  ###
                
-               tags$a(href="https://grdc.com.au/resources-and-publications/all-publications/factsheets/2022/soil-mixing-by-spading-national", 
+               tags$a(href="GRDC_Soil mixing by spading factsheet-Updated 28Aug22.pdf",
+               #tags$a(href="https://grdc.com.au/resources-and-publications/all-publications/factsheets/2022/soil-mixing-by-spading-national", 
                       "Information on spading"),
                tags$br(), #this is a break
                
@@ -407,9 +408,10 @@ tabPanel("Management Options", #tab title pageleafletOutput("map"),
                
                ## URL FOR Spading ###
                
-               tags$a(href="https://grdc.com.au/resources-and-publications/all-publications/factsheets/2022/soil-mixing-by-spading-national", 
+               tags$a(href="GRDC_Soil mixing by spading factsheet-Updated 28Aug22.pdf",
+                      #tags$a(href="https://grdc.com.au/resources-and-publications/all-publications/factsheets/2022/soil-mixing-by-spading-national", 
                       "Information on spading"),
-               tags$br(), 
+               tags$br(), #this is a break
                
                ## PICTURE FOR Rripping with Incl ###
                
@@ -418,7 +420,8 @@ tabPanel("Management Options", #tab title pageleafletOutput("map"),
                
                ## URL FOR Rripping with Incl ###
                
-               tags$a(href="https://grdc.com.au/resources-and-publications/all-publications/factsheets/2022/inclusion-ripping-technology-national",
+               tags$a(href="GRDC_FS2022_IncRippTech_v04.pdf",
+               #tags$a(href="https://grdc.com.au/resources-and-publications/all-publications/factsheets/2022/inclusion-ripping-technology-national",
                       "Information on inclusion ripping" ),
                
                
