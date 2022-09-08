@@ -1,32 +1,32 @@
-site,latitude,longitude,Repellence,Acidity,Physical,Nutrient,met_station_number,Amelioration_Year,Amelioration_Date,non_wetting,acidic,physical,nutrient
-Brimpton Lake,-34.0586,135.5038,1,1,2,1,YEELANNA_018099,2014,22/04/2014,orange,orange,red,orange
-Brooker,-34.1317,135.7301,2,0,1,2,YEELANNA_018099,2019,11/05/2019,red,green,orange,red
-Buckleboo,-33.1416,136.4126,0,0,2,1,KIMBA_018040,2019,14/03/2019,green,green,red,orange
-Bute_CSIRO,-33.8612,138.0114,0,0,1,2,BUTE_021012,2018,15/05/2018,green,green,orange,red
-Bute_Trengrove,-33.8612,138.0114,1,0,2,2,BUTE_021012,2015,8/04/2015,orange,green,red,red
-Cadgee,-36.8297,140.5328,2,2,0,2,NARACOORTE (LOCHABER)_026015,2014,2/05/2014,red,red,green,red
-Carwarp_Amelioration,-34.3075,142.1882,0,0,2,2,RED CLIFFS (POST OFFICE)_076052,2017,,green,green,red,red
-Cummins,-34.2644,135.7266,0,1,2,1,CUMMINS_018023,2019,21/03/2019,green,orange,red,orange
-Karkoo,-34.1317,135.7301,0,0,1,1,YEELANNA_018099,2019,20/03/2019,green,green,orange,orange
-Karoonda,-35.09,139.8972,1,0,2,1,KAROONDA_025006,2014,1/04/2014,orange,green,red,orange
-Kooloonong_canola,-34.900253,143.150446,0,0,1,1,BALRANALD (RSL)_049002,2019,,green,green,orange,orange
-Kooloonong_chickpea,-34.6398,143.561,0,0,1,1,BALRANALD (RSL)_049002,2019,,green,green,orange,orange
-Kooloonong_lentil,-34.6398,143.561,0,0,1,1,BALRANALD (RSL)_049002,2019,,green,green,orange,orange
-Kooloonong_lupin,-34.6398,143.561,0,0,1,1,BALRANALD (RSL)_049002,2019,,green,green,orange,orange
-Kybunga,-33.8364,138.6125,1,0,1,0,CLARE POST OFFICE_021014,2019,,orange,green,orange,green
-Lowaldie_Crest,-35.0459,139.9791,1,0,2,2,LOWALDIE_025039,2019,1/05/2019,orange,green,red,red
-Lowaldie_Deep sand,-35.0459,139.9791,1,0,2,2,LOWALDIE_025039,2019,1/05/2019,orange,green,red,red
-Malinong,-35.5217,139.5133,1,1,1,0,COOMANDOOK (MALINONG)_025508,2019,,orange,orange,orange,green
-Monia_Gap,-33.4915,145.5248,0,0,1,1,HILLSTON AIRPORT_075032,2019,,green,green,orange,orange
-Mt Damper,-33.138989,135.04068,1,0,1,1,MINNIPA AGRICULTURAL CENTRE_018052,2019,,orange,green,orange,orange
-Murlong,-33.6993,135.9238,2,0,2,2,MURDINGA (MUNGALA)_018164,2018,19/04/2018,red,green,red,red
-Ouyen_Placement,-34.48,142.22,0,0,0,0,OUYEN (POST OFFICE)_076047,,,green,green,green,green
-Ouyen_Spade,-34.48,142.22,0,0,2,2,OUYEN (POST OFFICE)_076047,2017,,green,green,red,red
-Sherwood,-36.098,140.3556,0,0,1,1,KEITH_025507,2019,,green,green,orange,orange
-Telopea_Downs,-36.3667,140.9833,0,0,1,0,SERVICETON_078034,2020,2/04/2020,green,green,orange,green
-Tempy,-35.0681,142.3125,1,0,1,1,OUYEN (POST OFFICE)_076047,2019,,orange,green,orange,orange
-Waikerie,-34.2159,140.186,0,0,2,1,WAIKERIE (EREMOPHILA PARK)_024029,2018,29/05/2018,green,green,red,orange
-Warnertown,-33.35,138.102,1,0,1,0,NUROM (RIVERSIDE FARM)_021102,2019,,orange,green,orange,green
-Wynarka,-35.09,139.8972,1,0,1,1,KAROONDA_025006,2019,,orange,green,orange,orange
-Yenda,-34.2502,146.1897,0,2,2,2,YENDA (HENRY STREET)_075079,2017,4/04/2017,green,red,red,red
-Younghusband,-34.9145,139.301,2,0,2,2,MANNUM COUNCIL DEPOT_024517,2020,21/05/2020,red,green,red,red
+"site","latitude","longitude","Repellence","Acidity","Physical","Nutrient","met_name_number","Amelioration_Year","Amelioration_Date","non_wetting","acidic","physical","nutrient"
+"Kooloonong_chickpea",-34.6398,143.561,0,0,1,1,"BALRANALD (RSL)_049002",2019,NA,"green","green","orange","orange"
+"Kooloonong_lentil",-34.6398,143.561,0,0,1,1,"BALRANALD (RSL)_049002",2019,NA,"green","green","orange","orange"
+"Kooloonong_lupin",-34.6398,143.561,0,0,1,1,"BALRANALD (RSL)_049002",2019,NA,"green","green","orange","orange"
+"Tempy",-35.0681,142.3125,1,0,1,1,"OUYEN (POST OFFICE)_076047",2019,NA,"orange","green","orange","orange"
+"Wynarka",-35.09,139.8972,1,0,1,1,"KAROONDA_025006",2019,NA,"orange","green","orange","orange"
+"Monia_Gap",-33.4915,145.5248,0,0,1,1,"HILLSTON AIRPORT_075032",2019,"2019-04-08","green","green","orange","orange"
+"Malinong",-35.5217,139.5133,1,1,1,0,"COOMANDOOK (MALINONG)_025508",2019,"2019-05-02","orange","orange","orange","green"
+"Sherwood",-36.098,140.3556,0,0,1,1,"KEITH_025507",2019,"2019-05-07","green","green","orange","orange"
+"Cummins",-34.2644,135.7266,0,1,2,1,"CUMMINS_018023",2019,"2019-03-21","green","orange","red","orange"
+"Karkoo",-34.1317,135.7301,0,0,1,1,"YEELANNA_018099",2019,"2019-03-20","green","green","orange","orange"
+"Buckleboo",-33.1416,136.4126,0,0,2,1,"KIMBA_018040",2019,"2019-03-14","green","green","red","orange"
+"Mt Damper",-33.138989,135.04068,1,0,1,1,"MINNIPA AGRICULTURAL CENTRE_018052",2019,"2019-03-17","orange","green","orange","orange"
+"Kybunga",-33.8364,138.6125,1,0,1,0,"CLARE POST OFFICE_021014",2019,"2019-05-13","orange","green","orange","green"
+"Warnertown",-33.35,138.102,1,0,1,0,"NUROM (RIVERSIDE FARM)_021102",2019,"2019-04-11","orange","green","orange","green"
+"Telopea_Downs",-36.3667,140.9833,0,0,1,0,"SERVICETON_078034",2020,"2020-04-02","green","green","orange","green"
+"Kooloonong_canola",-34.900253,143.150446,0,0,1,1,"BALRANALD (RSL)_049002",2019,NA,"green","green","orange","orange"
+"Brooker",-34.1317,135.7301,2,0,1,2,"YEELANNA_018099",2019,"2019-05-11","red","green","orange","red"
+"Bute_CSIRO",-33.8612,138.0114,0,0,1,2,"BUTE_021012",2018,"2018-05-15","green","green","orange","red"
+"Bute_Trengrove",-33.8612,138.0114,1,0,2,2,"BUTE_021012",2015,"2015-04-08","orange","green","red","red"
+"Carwarp_Amelioration",-34.3075,142.1882,0,0,2,2,"RED CLIFFS (POST OFFICE)_076052",2017,NA,"green","green","red","red"
+"Lowaldie_Crest",-35.0459,139.9791,1,0,2,2,"LOWALDIE_025039",2019,"2019-05-01","orange","green","red","red"
+"Lowaldie_Deep sand",-35.0459,139.9791,1,0,2,2,"LOWALDIE_025039",2019,"2019-05-01","orange","green","red","red"
+"Murlong",-33.6993,135.9238,2,0,2,2,"MURDINGA (MUNGALA)_018164",2018,"2018-04-19","red","green","red","red"
+"Brimpton Lake",-34.0586,135.5038,1,1,2,1,"YEELANNA_018099",2014,"2014-04-22","orange","orange","red","orange"
+"Cadgee",-36.8297,140.5328,2,2,0,2,"NARACOORTE (LOCHABER)_026015",2014,"2014-05-02","red","red","green","red"
+"Karoonda",-35.09,139.8972,1,0,2,1,"KAROONDA_025006",2014,"2014-04-01","orange","green","red","orange"
+"Ouyen_Spade",-34.48,142.22,0,0,2,2,"OUYEN (POST OFFICE)_076047",2017,NA,"green","green","red","red"
+"Waikerie",-34.2159,140.186,0,0,2,1,"WAIKERIE (EREMOPHILA PARK)_024029",2018,"2018-05-29","green","green","red","orange"
+"Yenda",-34.2502,146.1897,0,2,2,2,"YENDA (HENRY STREET)_075079",2017,"2017-04-04","green","red","red","red"
+"Younghusband",-34.9145,139.301,2,0,2,2,"MANNUM COUNCIL DEPOT_024517",2020,"2020-05-20","red","green","red","red"
+"Ouyen_Placement",-34.48,142.22,NA,NA,NA,NA,"OUYEN (POST OFFICE)_076047",NA,NA,"NA","NA","NA","NA"

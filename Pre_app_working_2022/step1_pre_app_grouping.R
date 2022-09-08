@@ -5,7 +5,7 @@ library(readxl)
 library(tidyverse)
 library(dplyr)
 
-### step 1 geeting the DB files into a format that the app will like:)
+### step 1 getting the DB files into a format that the app will like:)
 
 # These are the output files I am wanting to create
 #1.  \\FSSA2-ADL\clw-share1\mallee_mod\Therese_Jackie\Sandy_soils\App_development2021\sandy_soil_tools_app\sandy_soil_tools_app\site_location_plus_info_v2.csv
@@ -422,5 +422,37 @@ write.csv(DB_df_soil_mod,
           "primary_data_all_v2.csv",
           row.names = FALSE)
 ####################################################################################
+
+
+
+#####################################################################################
+##### This is a smaller file that will just report on the metadta for the sites #####
+#####################################################################################
+
+site_metdata <- DB_df_soil_mod
+names(site_metdata)
+site_metdata <- site_metdata %>% 
+  dplyr::select(site,
+                "Latitude",
+                "Longitude",
+                "Repellence" : "Nutrient",
+                "met_name_number",
+                "Amelioration_Year",
+                "Amelioration_Date" ,
+                "non_wetting":"nutrient")
+
+site_metdata <- site_metdata %>% 
+  dplyr::rename("latitude" ="Latitude",
+                "longitude"= "Longitude")
+
+site_metdata <- site_metdata %>% 
+  dplyr::distinct(site, .keep_all = TRUE)
+  
+  
+write.csv(site_metdata,
+          "site_location_plus_info_v2.csv",
+          row.names = FALSE)
+####################################################################################
+
  
 

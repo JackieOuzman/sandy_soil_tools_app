@@ -135,55 +135,6 @@ tabPanel("What is my constraint", #tab title pageleafletOutput("map"),
            ) , #fluid row     #2
            
           
-         #   
-         #   
-         #   fluidRow(column(width = 3,
-         #   selectInput("select_constraints_water", 
-         #               label = h4("Repellence"), 
-         #               choices = list("No issue" = "No issue", "Moderate issue" = "Moderate issue", "Severe issue" = "Severe issue"), 
-         #               selected = "No issue")
-         #   ), #clm bracket
-         # 
-         #           column(width = 3,
-         #   selectInput("select_constraints_nutrition",
-         #               label = h4("Nutrition"),
-         #               choices = list("No issue" = "No issue", "Moderate issue" = "Moderate issue", "Severe issue" = "Severe issue"),
-         #               selected = "No issue")
-         # ), #clm bracket
-         # 
-         # column(width = 3,
-         #        selectInput("select_constraints_acid",
-         #                    label = h4("Acid"),
-         #                    choices = list("No issue" = "No issue", "Moderate issue" = "Moderate issue", "Severe issue" = "Severe issue"),
-         #                    selected = "No issue")
-         # ), #clm bracket
-         # 
-         #  
-         # column(width = 3,
-         #        selectInput("High_soil_strength",
-         #                    label = h4("Strength"),
-         #                    choices = list("No issue" = "No issue", "Moderate issue" = "Moderate issue", "Severe issue" = "Severe issue"),
-         #                    selected = "Moderate issue")
-         # ), #clm bracket
-         # 
-         # ), #fluid bracket3
-         
-         # fluidRow(
-         #   h2(HTML("Sites with same constraints</b>"), 
-         #      style="text-align:center"),
-         #   
-         # ) , #fluid row     #4
-         #   
-            hr(),
-         #   fluidRow(
-         #     #DT::dataTableOutput("select_constraints")
-         #    box( title = "Sites with same constraints", width = 8, solidHeader = TRUE, status = "primary",
-         #        #valueBoxOutput("select_constraints")      
-         #        infoBoxOutput("select_constraints") #struggling with the format here DT is the next best option
-         #            ) #box Constraint
-         #         
-         #   
-         # ),#fluid row bracket #5
          
          
            
