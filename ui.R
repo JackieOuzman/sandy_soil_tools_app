@@ -229,7 +229,7 @@ tabPanel("What is my constraint", #tab title pageleafletOutput("map"),
                                    style="text-align:center"),
                                 
                                 plotlyOutput('trial_plot')
-                                #plotOutput("trial_plot")
+                                
                                 )#clm bracket
 
                                 ),#fluid row bracket #3

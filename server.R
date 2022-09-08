@@ -96,10 +96,10 @@ site_info <- site_info %>%
 # this is a bit tricky so prior the the label on the popup is the label for each soil property (eg non_wetting_label)
 
 # ######################################################################################################
-# #####       bring in the data the app will use - for the trial results plots   #######################
+# #####       bring in the data the app will use - for the trial results plots and table  #######################
 # ######################################################################################################
 # 
-# 
+#This trial_results is used in the table 
 trial_results <- read_csv("primary_data_all_v2.csv")
 names(trial_results)
 
@@ -118,10 +118,10 @@ trial_results$Descriptors <- factor(trial_results$Descriptors,
 trial_results <- trial_results %>%
   arrange(site)
 
-######## trial data ##### I am not sure what this step does?
+######## trial data ##### #This trial_results is used in the plot 
 
-file =
-  trial_results_table <- read_csv("primary_data_all_v2.csv")
+
+trial_results_table <- read_csv("primary_data_all_v2.csv")
 trial_results_table <- trial_results_table %>%
   arrange(site)
 
@@ -337,18 +337,15 @@ server <- shinyServer(function(input, output, session) {
 ######################################################################################################
 ########    function for filtering the data - and creating a plot on the map page     ################
 ###################################################################################################### 
-  #output$trial_plot <- renderPlot({
+  
   output$trial_plot <- renderPlotly({
     
     # set the site name call on the reactive function defined in te reactive secetion
     site_in_app <- c(reactive_site_selection())
-    ### name of site selected
     
+    ### name of site selected
     a <-  site_in_app #name of the site
-    b <-  trial_results %>% 
-      filter(site == a) %>% 
-      distinct(year)
-    b <- paste0(min(b$year), "to", max(b$year)) #the years of the trial
+    
     
     
    
@@ -467,12 +464,7 @@ server <- shinyServer(function(input, output, session) {
 
   })
 
-  # #### TEMP CODE ####
-  # output$site_selection <- renderPrint({
-  #   #"test"
-  #   paste0(input$select_constraints_water)
-  # 
-  # })
+ 
     
 
 ########     function for filtering the data - and creating a table of yield gains data on map page #####################
