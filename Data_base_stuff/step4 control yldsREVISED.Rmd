@@ -728,6 +728,267 @@ ggplot( mapping = aes(control_yield, yield,)) +
 
 ```
 
+
+## Therese wanted some graphs / plots for the agronomy confernece talk 16/9/2022
+## Scatter Plots control vs treatments and yield gain over years -  just ripping
+
+
+```{r scatter ripping only Agro Conf talk, echo=FALSE, message=FALSE, warning=FALSE}
+
+## change the order of the modification
+order_modification <- c("Rip",
+                        "Rip+Spade", 
+                        "Spade", 
+                        "Sweep" , 
+                        "IncRip" ,
+                        "IncRip+Spade",
+                        "DiscInv",
+                        "Unmodified" )
+summary_control_data_all$soil_modification <- factor(summary_control_data_all$soil_modification,
+                                         levels = order_modification)
+
+rip <- summary_control_data_all %>%  
+  #filter(soil_modification != "Unmodified") %>% 
+  filter(soil_modification == "Rip") %>% 
+ggplot( mapping = aes(control_yield, yield,)) +
+  geom_point() +
+  geom_smooth(method = lm, se = FALSE, na.rm = TRUE) +
+  stat_regline_equation(
+    aes(label =  paste(..eq.label.., ..rr.label.., sep = "~~~~")),
+    formula = (y ~ x)
+  ) +
+  geom_abline(intercept = 0, slope = 1, linetype="dashed")+
+  theme_bw()+
+  theme (axis.title.y = element_text(size = 20), 
+        axis.title.x = element_text(size = 20),
+        axis.text=element_text(size=12))+
+  labs(title = "All treatments that involves ripping\n Control yield - all data - no summary\nnote each site, treatment, year and rep is matched to control",
+       x = "Control yield t/ha", y = "Treatment yield t/ha")
+
+
+
+rip
+rip_no_title <- summary_control_data_all %>%  
+  #filter(soil_modification != "Unmodified") %>% 
+  filter(soil_modification == "Rip") %>% 
+ggplot( mapping = aes(control_yield, yield,)) +
+  geom_point() +
+  geom_smooth(method = lm, se = FALSE, na.rm = TRUE) +
+  stat_regline_equation(
+    aes(label =  paste(..eq.label.., ..rr.label.., sep = "~~~~")),
+    formula = (y ~ x)
+  ) +
+  geom_abline(intercept = 0, slope = 1, linetype="dashed")+
+  theme_bw()+
+  theme (axis.title.y = element_text(size = 20), 
+        axis.title.x = element_text(size = 20),
+        axis.text=element_text(size=12))+
+  labs(x = "Control yield t/ha", y = "Treatment yield t/ha")
+
+
+ggsave(rip_no_title,
+       device = "png",
+       filename = "Yield response _All treatments that involves ripping_.png",
+       path= "X:/Therese_Jackie/Sandy_soils/Development_database/for_presentations/agronomy_conf/",
+       width=8.62,
+       height = 6.28,
+       dpi=600
+) 
+
+rip_yld_reponse_vs_control <- summary_control_data_all %>%  
+    filter(soil_modification == "Rip")
+
+write.csv(rip_yld_reponse_vs_control,
+"X:/Therese_Jackie/Sandy_soils/Development_database/for_presentations/agronomy_conf/rip_yld_reponse_vs_control.csv",
+row.names = FALSE)
+
+```
+
+```{r box ripping only Agro Conf talk, echo=FALSE, message=FALSE, warning=FALSE}
+
+rip_box <- summary_control_data_all %>% 
+  filter(!is.na(yr_post_amelioration )) %>% 
+  filter(soil_modification == "Rip") %>% 
+ggplot( mapping = aes(yr_post_amelioration, yield_gain, group = as.factor(yr_post_amelioration))) +
+  theme_bw()+
+  geom_boxplot(outlier.shape = NA,
+               #alpha = 0.2
+               )+
+  geom_hline(yintercept = 0, linetype = "dashed", colour = "red")+
+  theme (axis.title.y = element_text(size = 20), 
+        axis.title.x = element_text(size = 20),
+        axis.text=element_text(size=12))+
+  labs(title = "All treatments that involves ripping\n Control yield - all data = yield gain- no summary\nnote each site, treatment, year and rep is matched to control",
+      x = "Years post ripping", y = "Yield gain t/ha")
+
+rip_box
+#################### SAME AS ABOVE BUT DIFFERENT FORMATS #############################################
+rip_box_no_title <- summary_control_data_all %>% 
+  filter(!is.na(yr_post_amelioration )) %>% 
+  filter(soil_modification == "Rip") %>% 
+ggplot( mapping = aes(yr_post_amelioration, yield_gain, group = as.factor(yr_post_amelioration))) +
+  theme_bw()+
+  geom_boxplot(outlier.shape = NA,
+               #alpha = 0.2
+               )+
+  geom_hline(yintercept = 0, linetype = "dashed", colour = "red")+
+  theme (axis.title.y = element_text(size = 20), 
+        axis.title.x = element_text(size = 20),
+        axis.text=element_text(size=12))+
+  labs(x = "Years post ripping", y = "Yield gain t/ha")
+
+ggsave(rip_box_no_title,
+       device = "png",
+       filename = "Yield gain over years _All treatments that involves ripping_.png",
+       path= "X:/Therese_Jackie/Sandy_soils/Development_database/for_presentations/agronomy_conf/",
+       width=8.62,
+       height = 6.28,
+       dpi=600
+) 
+
+
+```
+
+
+
+## Therese wanted some graphs / plots for the agronomy confernece talk 16/9/2022
+## Scatter Plots control vs treatments and yield gain over years - just ripping and spading
+
+
+
+```{r scatter rip and spade only Agro Conf talk, echo=FALSE, message=FALSE, warning=FALSE}
+
+## change the order of the modification
+order_modification <- c("Rip", ##this one
+                        "Rip+Spade",  ##this one
+                        "Spade",  ##this one
+                        "Sweep" , 
+                        "IncRip" ,##this one
+                        "IncRip+Spade",##this one
+                        "DiscInv",
+                        "Unmodified" )
+summary_control_data_all$soil_modification <- factor(summary_control_data_all$soil_modification,
+                                         levels = order_modification)
+
+rip_spade <- summary_control_data_all %>%  
+  filter(soil_modification != "Unmodified") %>% 
+  filter(soil_modification != "Sweep") %>% 
+  filter(soil_modification != "DiscInv") %>% 
+ggplot( mapping = aes(control_yield, yield,)) +
+  geom_point() +
+  geom_smooth(method = lm, se = FALSE, na.rm = TRUE) +
+  # stat_regline_equation(
+  #   aes(label =  paste(..eq.label.., ..rr.label.., sep = "~~~~")),
+  #   formula = (y ~ x)
+  # ) +
+  geom_abline(intercept = 0, slope = 1, linetype="dashed")+
+  theme_bw()+
+  theme (axis.title.y = element_text(size = 20), 
+        axis.title.x = element_text(size = 20),
+        axis.text=element_text(size=12))+
+  labs(title = "All treatments that involves ripping and spading\n Control yield - all data - no summary\nnote each site, treatment, year and rep is matched to control",
+       x = "Control yield t/ha", y = "Treatment yield t/ha")+
+  facet_wrap(.~ soil_modification)
+
+
+
+rip_spade
+
+
+rip_spade_no_title <- summary_control_data_all %>%  
+  filter(soil_modification != "Unmodified") %>% 
+  filter(soil_modification != "Sweep") %>% 
+  filter(soil_modification != "DiscInv") %>% 
+ggplot( mapping = aes(control_yield, yield,)) +
+  geom_point() +
+  geom_smooth(method = lm, se = FALSE, na.rm = TRUE) +
+  # stat_regline_equation(
+  #   aes(label =  paste(..eq.label.., ..rr.label.., sep = "~~~~")),
+  #   formula = (y ~ x)
+  # ) +
+  geom_abline(intercept = 0, slope = 1, linetype="dashed")+
+  theme_bw()+
+  theme (axis.title.y = element_text(size = 20), 
+        axis.title.x = element_text(size = 20),
+        axis.text=element_text(size=12))+
+  labs(x = "Control yield t/ha", y = "Treatment yield t/ha")+
+  facet_wrap(.~ soil_modification)
+
+
+
+ggsave(rip_spade_no_title,
+       device = "png",
+       filename = "Yield response _All treatments that involves ripping and spading.png",
+       path= "X:/Therese_Jackie/Sandy_soils/Development_database/for_presentations/agronomy_conf/",
+       width=8.62,
+       height = 6.28,
+       dpi=600
+) 
+
+rip_spading_yld_reponse_vs_control <- summary_control_data_all %>%  
+  filter(soil_modification != "Unmodified") %>% 
+  filter(soil_modification != "Sweep") %>% 
+  filter(soil_modification != "DiscInv")
+
+write.csv(rip_yld_reponse_vs_control,
+"X:/Therese_Jackie/Sandy_soils/Development_database/for_presentations/agronomy_conf/rip_and_spading_yld_reponse_vs_control.csv",
+row.names = FALSE)
+
+```
+
+
+```{r box and spading ripping only Agro Conf talk, echo=FALSE, message=FALSE, warning=FALSE}
+
+rip_spade_box <- summary_control_data_all %>%  
+  filter(soil_modification != "Unmodified") %>% 
+  filter(soil_modification != "Sweep") %>% 
+  filter(soil_modification != "DiscInv") %>% 
+  filter(!is.na(yr_post_amelioration )) %>% 
+  ggplot( mapping = aes(yr_post_amelioration, yield_gain, group = as.factor(yr_post_amelioration))) +
+  theme_bw()+
+  geom_boxplot(outlier.shape = NA,
+               #alpha = 0.2
+               )+
+  geom_hline(yintercept = 0, linetype = "dashed", colour = "red")+
+  theme (axis.title.y = element_text(size = 20), 
+        axis.title.x = element_text(size = 20),
+        axis.text=element_text(size=12))+
+  labs(title = "All treatments that involves ripping\n Control yield - all data = yield gain- no summary\nnote each site, treatment, year and rep is matched to control",
+      x = "Years post ripping", y = "Yield gain t/ha")+
+  facet_wrap(.~ soil_modification)
+
+
+rip_spade_box
+#################### SAME AS ABOVE BUT DIFFERENT FORMATS #############################################
+rip_spade_box_no_title <- summary_control_data_all %>%  
+  filter(soil_modification != "Unmodified") %>% 
+  filter(soil_modification != "Sweep") %>% 
+  filter(soil_modification != "DiscInv") %>% 
+  filter(!is.na(yr_post_amelioration )) %>% 
+ggplot( mapping = aes(yr_post_amelioration, yield_gain, group = as.factor(yr_post_amelioration))) +
+  theme_bw()+
+  geom_boxplot(outlier.shape = NA,
+               #alpha = 0.2
+               )+
+  geom_hline(yintercept = 0, linetype = "dashed", colour = "red")+
+  theme (axis.title.y = element_text(size = 20), 
+        axis.title.x = element_text(size = 20),
+        axis.text=element_text(size=12))+
+  labs(x = "Years post treatment", y = "Yield gain t/ha")+
+  facet_wrap(.~ soil_modification)
+
+ggsave(rip_spade_box_no_title,
+       device = "png",
+       filename = "Yield gain over years _All treatments that involves ripping and spading.png",
+       path= "X:/Therese_Jackie/Sandy_soils/Development_database/for_presentations/agronomy_conf/",
+       width=8.62,
+       height = 6.28,
+       dpi=600
+) 
+
+
+```
+
 ## Scatter Plots control vs treatments **no amendment** 
 
 
