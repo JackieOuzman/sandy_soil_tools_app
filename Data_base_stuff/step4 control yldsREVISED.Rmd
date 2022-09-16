@@ -88,8 +88,11 @@ We do have controls for each year but they cannot be put togther in the DB for m
 
 #####################################################################################################################
 
-#data_file <- "X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/stats_working/sites_merged.csv"
-data_file_control <- "X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/stats_working/sites_control_merged.csv"
+
+# data_file_control <- "X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/stats_working/sites_control_merged.csv"
+
+data_file_control <- "X:/Therese_Jackie/Sandy_soils/Development_database/completeDB/sites_control_merged.csv"
+
 
 ## download the data using the specified file path above
 
