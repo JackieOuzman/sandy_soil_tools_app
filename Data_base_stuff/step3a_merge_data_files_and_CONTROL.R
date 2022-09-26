@@ -167,10 +167,20 @@ research_sites_sites_step1_2_all <-
       met_name_number = col_character(),
       rain = col_double(),
       decile = col_character()))
-      
+
+
+research_sites_sites_step1_2_all <- research_sites_sites_step1_2_all %>% 
+  dplyr::select(-`...43`
+                )
     
 impact_sites_step1_2_all <- impact_sites_step1_2_all %>% 
   dplyr::rename(  fertiliser_content = fertiliser_rate)
+
+names(impact_sites_step1_2_all)
+names(research_sites_sites_step1_2_all)
+
+dim(impact_sites_step1_2_all)
+dim(research_sites_sites_step1_2_all)
 
 
 sites_merged_all <- rbind(impact_sites_step1_2_all, research_sites_sites_step1_2_all)
