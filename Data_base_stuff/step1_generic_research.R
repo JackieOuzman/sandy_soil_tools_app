@@ -179,6 +179,13 @@ metadata_Lowaldie <- read_excel(paste0("X:/Therese_Jackie/Sandy_soils/Developmen
                                                                          "date", "date", "date",
                                                                          "date", "date", "date",
                                                                          "date"))
+
+
+Lowaldie_2021 <- read_excel(paste0("X:/Therese_Jackie/Sandy_soils/Development_database/", "Lowaldie Ripping_ 2021_jaxs", ".xlsx"),
+                       sheet = "Database format", skip = 1)
+#  names(Lowaldie)
+Lowaldie_2021 <- Lowaldie_2021 %>% dplyr::select("ID":"comments"   )
+
 #Brooker
 
 Brooker <- read_excel(paste0("X:/Therese_Jackie/Sandy_soils/Development_database/", "Murlong_Brooker_jaxs", ".xlsx"),
@@ -242,6 +249,12 @@ Waikerie <- read_excel(paste0("X:/Therese_Jackie/Sandy_soils/Development_databas
                    sheet = "Database_format", skip = 1)
 names(Waikerie)
 Waikerie <- Waikerie %>% dplyr::select("ID":"comments"   )
+
+
+Waikerie_2021 <- read_excel(paste0("X:/Therese_Jackie/Sandy_soils/Development_database/", "Waikerie Trial 2021_jaxs", ".xlsx"),
+                       sheet = "Database_format", skip = 1)
+names(Waikerie)
+Waikerie_2021 <- Waikerie_2021 %>% dplyr::select("ID":"comments"   )
 
 
 
@@ -416,10 +429,12 @@ site <- rbind(
   Bute_Sam,
   CarwarpAmelioration,
   Lowaldie,
+  Lowaldie_2021,
   Murlong,
   New_Horizons,
   Ouyen_Spade,
   Waikerie,
+  Waikerie_2021,
   Yenda,
   YoungHusband,
   Ouyen_Placement
@@ -439,10 +454,12 @@ rm(Brooker,
    Bute_Sam,
    CarwarpAmelioration,
    Lowaldie,
+   Lowaldie_2021,
    Murlong,
    New_Horizons,
    Ouyen_Spade,
    Waikerie,
+   Waikerie_2021,
    Yenda,
    YoungHusband)
 #-----Research sites bind the metadata df ------#
