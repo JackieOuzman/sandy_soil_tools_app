@@ -84,11 +84,11 @@ site_yrs_list <- c("Brimpton LakeX2014",
                    
                    "Lowaldie_CrestX2019",
                    "Lowaldie_CrestX2020",
-                   #"Lowaldie_CrestX2021", #no data 
+                   "Lowaldie_CrestX2021", #
                    
                    "Lowaldie_Deep sandX2019",
                    "Lowaldie_Deep sandX2020",
-                   #"Lowaldie_Deep sandX2021",#no data
+                   "Lowaldie_Deep sandX2021",#
                    
                    "MalinongX2019",
                    "MalinongX2020",
@@ -131,6 +131,7 @@ site_yrs_list <- c("Brimpton LakeX2014",
                    "WaikerieX2018",
                    "WaikerieX2019",
                    "WaikerieX2020",
+                   #"WaikerieX2021",
                    
                    "WarnertownX2019",
                    "WarnertownX2020",
