@@ -11,7 +11,7 @@ library(lsmeans)
 library(Rmisc)
 library(car)
 library(DescTools)
-
+library(stringi)
 
 # am not running this as a function but as a four loop that runs through the list
 
@@ -104,11 +104,11 @@ site_yrs_list <- c(
 
                    "Lowaldie_CrestX2019",
                    "Lowaldie_CrestX2020",
-                   #"Lowaldie_CrestX2021", #no data 
+                   "Lowaldie_CrestX2021", #no data 
 
                    "Lowaldie_Deep sandX2019",
                    "Lowaldie_Deep sandX2020",
-                   #"Lowaldie_Deep sandX2021",#no data
+                   "Lowaldie_Deep sandX2021",
 
                    "MalinongX2019",
                    "MalinongX2020",
@@ -151,6 +151,7 @@ site_yrs_list <- c(
                    "WaikerieX2018",
                    "WaikerieX2019",
                    "WaikerieX2020",
+                   #"WaikerieX2021",#no yield
                    
                    "WarnertownX2019",
                    "WarnertownX2020",
@@ -723,11 +724,11 @@ ANOVA_sites_yr <- rbind(
 
                                `Lowaldie_Crest_2019_ANOVA`,
                                `Lowaldie_Crest_2020_ANOVA`,
-                               #`Lowaldie_Crest_2021_ANOVA`, # no data
+                               `Lowaldie_Crest_2021_ANOVA`, 
 
                                `Lowaldie_Deep sand_2019_ANOVA`,
                                `Lowaldie_Deep sand_2020_ANOVA`,
-                               #`Lowaldie_Deep sand_2021_ANOVA`, # no data
+                               `Lowaldie_Deep sand_2021_ANOVA`, 
                                 
                                Malinong_2019_ANOVA,
                                Malinong_2020_ANOVA,
@@ -771,6 +772,7 @@ ANOVA_sites_yr <- rbind(
                                Waikerie_2018_ANOVA,
                                Waikerie_2019_ANOVA,
                                Waikerie_2020_ANOVA,
+                              # Waikerie_2021_ANOVA,
                                
                                Warnertown_2019_ANOVA,
                                Warnertown_2020_ANOVA,
@@ -867,11 +869,11 @@ rm( `Brimpton Lake_2014_ANOVA`,
 
     `Lowaldie_Crest_2019_ANOVA`,
     `Lowaldie_Crest_2020_ANOVA`,
-    #`Lowaldie_Crest_2021_ANOVA`, # no data
+    `Lowaldie_Crest_2021_ANOVA`, # no data
      
     `Lowaldie_Deep sand_2019_ANOVA`,
     `Lowaldie_Deep sand_2020_ANOVA`,
-    #`Lowaldie_Deep sand_2021_ANOVA`, # no data
+    `Lowaldie_Deep sand_2021_ANOVA`, # no data
      
     Malinong_2019_ANOVA,
     Malinong_2020_ANOVA,
@@ -914,6 +916,7 @@ rm( `Brimpton Lake_2014_ANOVA`,
     Waikerie_2018_ANOVA,
     Waikerie_2019_ANOVA,
     Waikerie_2020_ANOVA,
+  #  Waikerie_2021_ANOVA,
     
     Warnertown_2019_ANOVA,
     Warnertown_2020_ANOVA,
