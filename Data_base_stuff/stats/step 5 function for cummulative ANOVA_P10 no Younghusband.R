@@ -299,6 +299,41 @@ summary_data_all_1 <- read_csv("X:/Therese_Jackie/Sandy_soils/Development_databa
 summary_data_all_1$Descriptors <- factor(summary_data_all_1$Descriptors,
                                          levels = order)
 
+### some sites are missing reps - I am going to average the reps we do have a create dummy rows
+
+
+dummy_df_Lowaldie_Crest_dummy <- summary_data_all_1 %>%  filter(site == "Lowaldie_Crest" & Descriptors== "Rip.60_none" & year== "2019")
+
+names(dummy_df_Lowaldie_Crest_dummy)
+dummy_df_Lowaldie_Crest_dummy$ID
+
+
+## what is the average for yld and establishment?
+
+dummy_df_Lowaldie_Crest_dummy_av <- dummy_df_Lowaldie_Crest_dummy %>% 
+  group_by() %>% 
+  summarise(mean_yld = mean(yield, na.rm = TRUE),
+            mean_est = mean(as.double(establishment), na.rm = TRUE))
+dummy_df_Lowaldie_Crest_dummy_av
+
+dummy_df_Lowaldie_Crest_dummy <- dummy_df_Lowaldie_Crest_dummy %>% 
+  mutate(
+    ID = case_when(
+      ID == "Lowaldie_Crest_2019_plot_7_rep_block_Soil_Crest_Rep1" ~ "Lowaldie_Crest_2019_plot_12_rep_block_Soil_Crest_Rep2",
+      ID == "Lowaldie_Crest_2019_plot_23_rep_block_Soil_Crest_Rep3" ~ "Lowaldie_Crest_2019_plot_30_rep_block_Soil_Crest_Rep4"))
+
+dummy_df_Lowaldie_Crest_dummy <- dummy_df_Lowaldie_Crest_dummy %>% 
+  mutate(yield = dummy_df_Lowaldie_Crest_dummy_av$mean_yld) %>% 
+  mutate(establishment = dummy_df_Lowaldie_Crest_dummy_av$mean_est) %>% 
+  mutate(comments = "average of plots 7 and 12")
+
+
+### add 2 new rows for missing data into the orginal data
+
+summary_data_all_1 <- rbind(summary_data_all_1, dummy_df_Lowaldie_Crest_dummy)
+
+
+
 
 #filter the data
 summary_data_site <- summary_data_all_1 %>%
