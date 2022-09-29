@@ -332,6 +332,58 @@ dummy_df_Lowaldie_Crest_dummy <- dummy_df_Lowaldie_Crest_dummy %>%
 
 summary_data_all_1 <- rbind(summary_data_all_1, dummy_df_Lowaldie_Crest_dummy)
 
+### some sites are missing reps Bute Sam - I am going to average the reps we do have a create dummy rows It looks a bit different to Lowadile the rows exist but no yield data
+
+# 2015	Rip.50_Cl@5.incorp_20.Fert.surface	
+# 2017	Rip.50_Fert.surface.Clay.incorp_20	 # Bute_Trengrove_2017_plot_Column!3Row!1Rep!1Treatment!8_rep_block_1
+# 2018	Unmodified_Cl@20.incorp_8	           # Bute_Trengrove_2017_plot_Column!1Row!1Rep!1Treatment!17_rep_block_1
+# 2019	Rip.50_Cl@20.incorp_20.Fert.surface.Clay.incorp_20	
+# 2019	Rip.50_Cl@5.incorp_20.Fert.surface.Clay.incorp_20	
+# 2019	Unmodified_Cl@5.incorp_8	
+
+
+## the av yield for "Bute_Trengrove_2015_plot_Column!3Row!22Rep!3Treatment!14_rep_block_3"
+names(summary_data_all_1) 
+#problem 1
+sam_2015_rip.50_yld <- summary_data_all_1 %>% 
+  filter(site == "Bute_Trengrove" & Descriptors == "Rip.50_Cl@5.incorp_20.Fert.surface" & year == "2015") %>% 
+  group_by() %>% 
+  summarise(mean_yld = mean(yield, na.rm = TRUE),
+            mean_est = mean(as.double(establishment), na.rm = TRUE))
+
+
+summary_data_all_1 <- summary_data_all_1 %>% 
+  mutate(yield = case_when(
+    ID == "Bute_Trengrove_2015_plot_Column!3Row!22Rep!3Treatment!14_rep_block_3" ~ sam_2015_rip.50_yld$mean_yld,
+    TRUE ~ yield))
+#problem 2 Bute_Trengrove_2017_plot_Column!3Row!1Rep!1Treatment!8_rep_block_1
+
+sam_2017_Rip.50_Fert.surface.Clay.incorp_20 <- summary_data_all_1 %>% 
+  filter(site == "Bute_Trengrove" & Descriptors == "Rip.50_Fert.surface.Clay.incorp_20" & year == "2017") %>% 
+  group_by() %>% 
+  summarise(mean_yld = mean(yield, na.rm = TRUE),
+            mean_est = mean(as.double(establishment), na.rm = TRUE))
+
+
+summary_data_all_1 <- summary_data_all_1 %>% 
+  mutate(yield = case_when(
+    ID == "Bute_Trengrove_2017_plot_Column!3Row!1Rep!1Treatment!8_rep_block_1" ~ sam_2017_Rip.50_Fert.surface.Clay.incorp_20$mean_yld,
+    TRUE ~ yield))
+
+
+
+# problem 3 2018	Unmodified_Cl@20.incorp_8 / Bute_Trengrove_2017_plot_Column!1Row!1Rep!1Treatment!17_rep_block_1
+sam_2017_Unmodified_Clat20.incorp_8 <- summary_data_all_1 %>% 
+  filter(site == "Bute_Trengrove" & Descriptors == "Unmodified_Cl@20.incorp_8" & year == "2017") %>% 
+  group_by() %>% 
+  summarise(mean_yld = mean(yield, na.rm = TRUE),
+            mean_est = mean(as.double(establishment), na.rm = TRUE))
+
+
+summary_data_all_1 <- summary_data_all_1 %>% 
+  mutate(yield = case_when(
+    ID == "Bute_Trengrove_2017_plot_Column!1Row!1Rep!1Treatment!17_rep_block_1" ~ sam_2017_Unmodified_Clat20.incorp_8$mean_yld,
+    TRUE ~ yield))
 
 
 
