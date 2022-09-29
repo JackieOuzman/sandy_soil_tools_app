@@ -27,10 +27,10 @@ site_yrs_list <- c("Brimpton LakeX2014to2018",
                    "Kooloonong_lentilX2019to2021",
                    "Kooloonong_lupinX2019to2021",
                    "KybungaX2019to2021",
-                   "Lowaldie_CrestX2019to2020",
-                   #"Lowaldie_CrestX2021", #no data 
-                   "Lowaldie_Deep sandX2019to2020",
-                   #"Lowaldie_Deep sandX2021",#no data
+                   "Lowaldie_CrestX2019to2021",
+                    
+                   "Lowaldie_Deep sandX2019to2021",
+                   
                    "MalinongX2019to2021",
                    "Monia_GapX2019to2021",
                    "Mt DamperX2019to2021",
@@ -401,7 +401,18 @@ Cum_ANOVA_results_site <- Cum_ANOVA_results_site %>%
     ANOVA_sign_0.1 == "ns" ~ paste0("") ,
     TRUE ~ paste0("Dunnetts test")))
 
+### some sites have average yld that is different to cum yield this sorts it out
+max_sum_cum_1 <-site_year_yld_summary %>% 
+  dplyr::group_by(Descriptors) %>%
+  dplyr::summarise(yld=sum(mean, na.rm = TRUE))
+max_sum_cum_1 <- max(max_sum_cum_1$yld, na.rm = TRUE) 
 
+max_max <- data.frame(name = c("max_cum_sum" , "max_av" ),
+                      value = c(max_sum_cum, max_sum_cum_1))
+
+max_sum_cum <- max(max_max$value, na.rm = TRUE) 
+max_sum_cum <- max_sum_cum +0.5
+max_sum_cum <- ceiling(max_sum_cum)
 
 
 
