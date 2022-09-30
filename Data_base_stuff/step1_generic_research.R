@@ -256,7 +256,13 @@ Waikerie_2021 <- read_excel(paste0("X:/Therese_Jackie/Sandy_soils/Development_da
 names(Waikerie)
 Waikerie_2021 <- Waikerie_2021 %>% dplyr::select("ID":"comments"   )
 
+## remove some rip 60 reps I think we have too many remove plots 1,20, 41, 52
 
+Waikerie_2021 <- Waikerie_2021 %>% 
+  filter(plot != 1) %>% 
+  filter(plot != 20) %>%
+  filter(plot != 41) %>% 
+  filter(plot != 52)
 
 
 # #
@@ -484,6 +490,12 @@ metadata <- rbind(
   
 )
 
+
+### I think we have too many reps for Waikerie 2021
+#remove plots 1,20,41 and 52
+
+site <- site %>% 
+  filter()
 
 
 
