@@ -1,0 +1,511 @@
+library(ggplot2)
+library(readxl)
+library(tidyverse)
+library(multcompView)
+library(scales)
+library(dplyr)
+library(FSA) 
+library(agricolae)
+library(multcomp)
+library(lsmeans)
+library(Rmisc)
+library(car)
+library(DescTools)
+library(stringi)
+
+# am not running this as a function but as a four loop that runs through the list
+
+#sites <- read_csv("X:/Therese_Jackie/Sandy_soils/Development_database/other_sites_working/stats_working/sites_merged.csv",
+#                               col_types = cols(rep_block = col_character()))
+# #
+# list_of_sites <- sites %>%  distinct(site) %>% dplyr::arrange(site)
+# tail(list_of_sites,15)
+# # ## what years do I have?
+# a <-  "Younghusband"
+#  sites_names <- sites %>%   filter(site == a) %>% distinct(year)
+#  min(sites_names)
+#  max(sites_names)
+
+
+## test 
+#site_yrs_list <- c("YounghusbandX2020")#,"YounghusbandX2021")
+
+
+### List of sites I want to run analysis for:
+site_yrs_list <- c(
+  "Lowaldie_CrestX2019",
+  "Lowaldie_CrestX2020",
+  "Lowaldie_CrestX2021"  
+  
+  
+)
+
+
+
+#######################################################################################################################################################
+##########                                                    As a loop                                                                     ##########
+#######################################################################################################################################################
+
+
+
+#for (site_yrs_list in site_yrs_list){
+  
+  
+  ##########################################
+  site_and_yr <- as.data.frame(str_split(site_yrs_list, "X"),
+                               col.names = "site_and_yr" )
+  
+  site_and_yr$site_and_yr <- as.character(site_and_yr$site_and_yr)
+  site_and_yr
+  a <- site_and_yr[1,1]
+  b <- site_and_yr[2,1]
+  b <- as.double(b)
+  
+  ######################################
+  # bring in the data
+  data_file <- "X:/Therese_Jackie/Sandy_soils/Development_database/completeDB/sites_merged.csv"
+  summary_data_all_1 <- read_csv(data_file, 
+                                 col_types = cols(rep_block = col_character()))
+  
+  
+  ### brooker is a problem site I want to filter out these ones:
+  
+  summary_data_all_1 <- summary_data_all_1 %>%
+    filter(Descriptors  != "Spade.30_Lc@1.incorp_30") %>%
+    filter(Descriptors  != "Spade.30_Lc@1.incorp_30.K_added.surface") %>%
+    filter(Descriptors  != "Spade.30_Lc@2.incorp_30") %>%
+    filter(Descriptors  != "Spade.30_Lc@2.incorp_30.K_added.surface") %>%
+    filter(Descriptors  != "Spade.30_Lc@6.incorp_30") %>%
+    filter(Descriptors  != "Spade.30_Lc@6.incorp_30.K_added.surface") %>%
+    filter(Descriptors  != "Spade.30_Lc@10.incorp_30") %>%
+    filter(Descriptors  != "Spade.30_Lc@10.incorp_30.K_added.surface") %>%
+    filter(Descriptors  != "Spade.30_Lc@20.incorp_30") %>% 
+    filter(Descriptors  != "Spade.30_Lc@20.incorp_30.K_added.surface")
+  
+  ### Younghusband is a problem site I want to filter out these ones there is not the same level of reps for treatments:
+  
+  summary_data_all_1 <- summary_data_all_1 %>%
+    
+    filter(Descriptors  != "Unmodified+DeepTill.18_SE14.band_8") %>%
+    filter(Descriptors  != "Unmodified+DeepTill.18_none") %>%
+    filter(Descriptors  != "Unmodified+DeepTill.18_none") %>%
+    filter(Descriptors  != "Unmodified+OnRow_none") 
+  
+  
+  summary_data_all_1 <- summary_data_all_1[!( summary_data_all_1$site == "Younghusband" & ( summary_data_all_1$Descriptors == "Control" )),] 
+  
+  
+  
+  
+  
+  ##### order the Descriptors
+  order <- c(
+    "Control",
+    "Unmodified+OnRow_none",
+    "Unmodified_SE14.band_8",
+    "Unmodified_Bi_Agra.surface+band_8",
+    "Unmodified_Lc.surface",
+    "Unmodified_Cl.surface",
+    "Unmodified_Cl@2.5.surface_Yr18,19,20",
+    "Unmodified_Cl@3.incorp_8",
+    "Unmodified_Cl@5.incorp_8",
+    "Unmodified_Cl@5.incorp_8.Fert.surface",
+    "Unmodified_Cl@5.incorp_8.Clay.incorp_8",
+    "Unmodified_Cl@5.incorp_8.Fert.surface.Clay.incorp_8",
+    "Unmodified_Cl@7.5.surface",
+    "Unmodified_Cl@20.incorp_8",
+    "Unmodified_Cl@20.incorp_8.Fert.surface",
+    "Unmodified_Cl@20.incorp_8.Clay.incorp_8",
+    "Unmodified_Cl@20.incorp_8.Fert.surface.Clay.incorp_8",
+    "Unmodified_Fert.foliar",
+    "Unmodified_Fert.surface",
+    "Unmodified_Fert.incorp_8",
+    "Unmodified_Fert.band_8",
+    "Unmodified_K_added.surface",
+    "Unmodified_Fert.band_30",
+    "Unmodified_Fert.surface.Clay.incorp_8",
+    "Unmodified_Fert.band_30.Clay.incorp_10",
+    "Unmodified_Clay.check",
+    "Unmodified_Clay.incorp_8",
+    "Unmodified_Clay.incorp_10",
+    "Unmodified_none.Fert.surface", #ouyen DD
+    
+    
+    "Pre_drill_20+7.5_none", #ouyen DD
+    "Pre_drill_20+7.5_none_annual",
+    "Pre_drill_20+20_none",
+    "Pre_drill_20+20_none_annual",
+    "Pre_drill_20+20_Fert.banded_20",
+    "Pre_drill_20+20_Fert.banded_20_annual",
+    
+    
+    
+    "Spade.30_none",
+    "Spade.30_Lc@1.incorp_30",
+    "Spade.30_Lc@2.incorp_30",
+    "Spade.30_Lc@4.incorp_30",
+    "Spade.30_Lc@6.incorp_30",
+    "Spade.30_Lc@8.incorp_30",
+    "Spade.30_Lc@15.incorp_30",
+    "Spade.30_Lc@10.incorp_30",
+    "Spade.30_Lc@20.incorp_30",
+    "Spade.30_Lc@1.incorp_30.K_added.surface",
+    "Spade.30_Lc@2.incorp_30.K_added.surface",
+    "Spade.30_Lc@4.incorp_30.K_added.surface",
+    "Spade.30_Lc@6.incorp_30.K_added.surface",
+    "Spade.30_Lc@8.incorp_30.K_added.surface",
+    "Spade.30_Lc@10.incorp_30.K_added.surface",
+    "Spade.30_Lc@15.incorp_30.K_added.surface",
+    "Spade.30_Lc@20.incorp_30.K_added.surface",
+    "Spade.30_Lc.incorp_30",
+    "Spade.30_Lc.incorp_30.Fert.incorp_30",
+    "Spade.30_Lc.incorp_30.Clay.incorp_30",
+    "Spade.30_Lc.incorp_30.Fert.incorp_30.Clay.incorp_30",
+    "Spade.30_Cl.incorp_30",
+    "Spade.30_Cl.incorp_30.Gypsum.incorp_30",
+    "Spade.30_Fert.incorp_30.Clay.incorp_30",
+    "Spade.30_Com.incorp_30",
+    "Spade.30_Cereal.incorp_30",
+    "Spade.30_Vetch.incorp_30",
+    "Spade.30_Vet_Cer.incorp_30",
+    "Spade.30_Vet_Cer_In.incorp_30",
+    "Spade.30_K_added.surface",
+    "Spade.30_Fert.incorp_30",
+    "Spade.30_Fert.incorp_30.K_added.incorp_30",
+    
+    "Spade.30_Clay@250.incorp_30",
+    "Spade.30_Clay@500.incorp_30_Yr07,20",
+    "Spade.30_Clay.check",
+    "Spade.30_Clay.incorp_30",
+    "Spade.30_Gypsum.incorp_30",
+    
+    "Rip.30_none",
+    "Rip.35_none",
+    "Rip.30_Cl.surface",
+    "Rip.30_Cl@7.5.surface",
+    "Rip.30_Cl.band_30",
+    "Rip.30_Cl@7.5.band_30",
+    "Rip.30_Lc.incorp_30",
+    "Rip.30_Lc.band_30",
+    "Rip.30_Fert.surface",
+    "Rip.30_Fert.incorp_30",
+    "Rip.30_Fert.band_8",
+    "Rip.30_Fert.band_30",
+    "Rip.30IncRip_none",
+    "Rip.30+60_none",
+    "Rip.30IncRip_Gypsum.incorp_30",
+    "Rip.30+60_Lc.band_30+60",
+    
+    "Rip_30+7.5_none", #ouyen DD
+    "Rip_30+7.5_none_annual",
+    "Rip_30+30_none",
+    "Rip_30+30_none_annual",
+    "Rip_30+30_Fert.banded_30",
+    "Rip_30+30_Fert.banded_30_annual",
+    
+    "Sweep.30_none",
+    "Sweep.30_Lime.incorp_30",
+    "Sweep.30_Cl@9.incorp_30",
+    "Sweep.30_Cl@9.incorp_30_Yr17,18,19",
+    "Sweep.30_Cl@6.incorp_30",
+    "Sweep.30_Cl@3.incorp_30.Lime.incorp_8",
+    "Sweep.30_Cl@3.incorp_30",
+    
+    "Rip.40_none",
+    "Rip.40IncRip_none",
+    "Rip.40IncRip_Lc.incorp_30",
+    "Rip.40IncRip_Lc.incorp_40",
+    
+    
+    "Rip.40_Lc.incorp_40",
+    "Rip.40_Fert.incorp_40",
+    
+    "Rip.45_none",
+    "Rip.45IncRip_none",
+    "Rip.45IncRip+Spade.30_none",
+    "Rip.45IncRip_Fert.incorp_45",
+    "Rip.45IncRip_Fert_Low.band_45",
+    "Rip.45IncRip_Fert_High.band_45",
+    "Rip.45IncRip_Fert_APP.band_45",
+    
+    "Rip.50_none",
+    "Rip.50_Cl.surface",
+    "Rip.50_Cl@2.5.surface_Yr18,19,20",
+    "Rip.50_Cl@7.5.surface",
+    "Rip.50_Cl@5.incorp_20",#changed
+    "Rip.50_Cl@7.5.band_50",
+    "Rip.50_Cl@20.incorp_20",#changed
+    "Rip.50_Cl.deep",
+    "Rip.50_Cl.band_50",
+    "Rip.50_Cl@5.incorp_20.Fert.surface", #changed
+    "Rip.50_Cl@5.incorp_20.Clay.incorp_20",#changed
+    "Rip.50_Cl@5.incorp_20.Fert.surface.Clay.incorp_20",#changed
+    "Rip.50_Cl@20.incorp_20.Fert.surface", #changed
+    "Rip.50_Cl@20.incorp_20.Clay.incorp_20",#changed
+    "Rip.50_Cl@20.incorp_20.Fert.surface.Clay.incorp_20",#changed
+    "Rip.50_Fert.surface",
+    "Rip.50_Clay.incorp_20",#changed
+    "Rip.50_Fert.surface.Clay.incorp_20",#changed
+    "Rip.50Spade.30_none",
+    #"Inc.50_none",
+    #"Inc.50_Cl@7.5.incorp_50",
+    "Rip.50IncRip_none",
+    "Rip.50IncRip_Cl.incorp_50",
+    "Rip.50IncRip_Cl.surface",
+    "Rip.50IncRip_Cl@7.5.incorp_50",
+    
+    "Rip.60_none",
+    "Rip.60_Cl.surface",
+    "Rip.60_Cl.band_60",
+    "Rip.60_Lc.incorp_60",
+    "Rip.60_Lc.band_60",
+    "Rip.60_Fert.band_8",
+    "Rip.60_Fert.band_60",
+    "Rip.60Spade.30_none",
+    "Rip.60Spade.30_Lc.band_30+60",
+    "Rip.60Spade.30_Lc.incorp_30+band_60",
+    "Rip.60IncRip_none",
+    "Rip.60IncRip+Spade.30_none",
+    
+    
+    #"Delving.18_none",
+    #"Delving.18_SE14.band_8",
+    "Unmodified+DeepTill.18_none",
+    "Unmodified+DeepTill.18_SE14.band_8",
+    
+    "DiscInv.30_none"
+  )
+  
+  
+  
+  
+  
+  
+  
+  summary_data_all_1$Descriptors <- factor(summary_data_all_1$Descriptors,
+                                           levels = order)
+  
+  #filter the data
+  summary_data_site <- summary_data_all_1 %>%
+    filter(site == a) %>% 
+    filter(year == b)
+  
+  ## count yld values
+  count_missing_yld_values <- summary_data_site %>% 
+    dplyr::group_by(Descriptors) %>% 
+    dplyr::summarise(count = sum(!is.na(yield)))
+  
+  
+  ## summaries data
+  data_summary_all_analysis <- summary_data_site %>% 
+    dplyr::group_by(Descriptors) %>%
+    dplyr::summarise(mean=mean(yield, na.rm = TRUE), 
+                     sd=sd(yield, na.rm = TRUE),
+                     #count = n(),
+                     #std_error = sd/(sqrt(count)),
+                     
+    ) %>%
+    arrange(desc(mean))
+  ## add in the count values (not the number of rows)
+  data_summary_all_analysis <- left_join(data_summary_all_analysis,count_missing_yld_values )
+  
+  
+  data_summary_all_analysis <- data_summary_all_analysis %>% 
+    mutate(site =  a,
+           year =  b,
+           std_error = sd/(sqrt(count)))
+  
+  
+  
+  
+  data_summary_all_analysis <- as.data.frame(ungroup(data_summary_all_analysis))
+  
+  
+  
+  
+  ########################################################################################################################################################
+  #### ANOVA #####
+  
+  model = lm( yield ~ Descriptors,
+              data=summary_data_site)
+  
+  anova_yld <- Anova(model, type="II") # Can use type="III"
+  
+  p_value_ANOVA <- anova_yld[1,4]
+  F_value_ANOVA <- anova_yld[1,3]
+  
+  ### add these values into the summary data
+  
+  data_summary_all_analysis <- data_summary_all_analysis %>% 
+    mutate(p_value_ANOVA  = p_value_ANOVA,
+           F_value_ANOVA  = F_value_ANOVA)
+  
+  #Add in the significance ***
+  data_summary_all_analysis <- data_summary_all_analysis %>%
+    mutate(ANOVA_sign_0.1 = case_when(
+      p_value_ANOVA < 0.001 ~ "****",
+      p_value_ANOVA <= 0.01 ~  "***",
+      p_value_ANOVA <= 0.05 ~  "**",
+      p_value_ANOVA <= 0.1 ~  "*",
+      p_value_ANOVA >  0.1 ~  "ns",
+      TRUE ~ "check"
+      
+    ))
+  
+  
+  ########################################################################################################################################################
+  #####homoscedasticity vs equal variance test we can use Bartlett test
+  
+  bartlett.test <- bartlett.test(yield ~ Descriptors,
+                                 data = summary_data_site) 
+  
+  p_value_barlett <- bartlett.test[[3]]
+  
+  ### add these values into the summary data
+  data_summary_all_analysis <- data_summary_all_analysis %>% 
+    mutate(p_value_barlett  = p_value_barlett)
+  
+  
+  ########################################################################################################################################################
+  #### agricolae_LSD
+  model_sand = lm( yield ~ Descriptors,
+                   data=summary_data_site)
+  
+  agricolae_LSD_output_sand <- (LSD.test(model_sand, "Descriptors",   # outer parentheses print result
+                                         alpha = 0.1,      
+                                         p.adj="none"))      # see ?p.adjust for options"none" is t-student.
+  
+  
+  
+  agricolae_LSD_output_sand
+  #Extract the LSD value from the anlsysis and add it to the summary data
+  
+  LSD_value_1 <- agricolae_LSD_output_sand$statistics$LSD #this becomes NULL if there is not values
+  
+  
+  #get the 'max value' aka make it a value and make a df 
+  LSD_value_1 <- max(LSD_value_1)
+  LSD_value_df <- data.frame(LSD_value_1)
+  
+  LSD_value_df <- LSD_value_df %>% 
+    dplyr::mutate(
+      LSD_max = case_when(
+        LSD_value_1 > 0 ~ as.character(LSD_value_1),
+        TRUE ~ "not reported"
+      ))
+  
+  
+  LSD <- LSD_value_df[1,2]
+  LSD
+  #Extract the LSD letters from the anlsysis and add it to the summary data
+  
+  agricolae_LSD_output_sand_df <- as.data.frame(agricolae_LSD_output_sand[[5]]) #get the fith item in the list
+  agricolae_LSD_output_sand_df$Descriptors <- rownames(agricolae_LSD_output_sand_df) #move rwo names into a clm for joining
+  
+  agricolae_LSD_output_sand_df <- agricolae_LSD_output_sand_df %>% 
+    mutate(LSD = LSD)
+  
+  data_summary_all_analysis <- left_join(data_summary_all_analysis,agricolae_LSD_output_sand_df)
+  
+  data_summary_all_analysis <- dplyr::select(data_summary_all_analysis, -yield) %>% 
+    dplyr::rename(groups_LSD = groups)
+  
+  
+  ########################################################################################################################################################
+  #### agricolae_HSD.test
+  
+  tukey_agricolae <- (HSD.test(model_sand, "Descriptors", alpha = 0.1))
+  
+  # I want to access the groups but its part of a list
+  
+  
+  tukey_agricolae_df <- as.data.frame(tukey_agricolae[[5]]) #get the fith item in the list
+  tukey_agricolae_df$Descriptors <- rownames(tukey_agricolae_df) #move row names into a clm for joining
+  
+  data_summary_all_analysis <- left_join(data_summary_all_analysis,tukey_agricolae_df)
+  data_summary_all_analysis <- dplyr::select(data_summary_all_analysis, -yield) %>% 
+    dplyr::rename(groups_HSD_Tukey = groups)
+  
+  
+  
+  
+  
+  
+  
+  ########################################################################################################################################################
+  ### Dunnetts test
+  str(summary_data_site)
+  DunnettTest <- DunnettTest(yield ~ Descriptors,
+                             data = summary_data_site,
+                             control = "Control",
+                             conf.level = 0.90)
+  
+  DunnettTest_df <- as.data.frame(DunnettTest[[1]]) #get the fith item in the list
+  DunnettTest_df$Descriptors_control <- rownames(DunnettTest_df) #move rwo names into a clm for joining
+  
+  ## strip the control from the descriptor name
+  DunnettTest_df <- DunnettTest_df %>%
+    mutate(Descriptors = str_replace(Descriptors_control, "(-Control)", ""))
+  
+  
+  #Add in the significance ***
+  
+  DunnettTest_df <- DunnettTest_df %>%
+    mutate(significance_control_0.1 = case_when(
+      pval < 0.001 ~ "****",
+      pval <= 0.01 ~  "***",
+      pval <= 0.05 ~  "**",
+      pval <= 0.1  ~  "*",
+      pval >  0.1 ~  "ns",
+      
+      TRUE ~ "check"
+      
+    ))
+  DunnettTest_df <- DunnettTest_df %>%
+    dplyr::select(Descriptors, pval, significance_control_0.1)
+  
+  
+  #join it the summary data
+  
+  data_summary_all_analysis <- left_join(data_summary_all_analysis, DunnettTest_df)
+  
+  
+  #rename the clms so they are more reflect the test
+  data_summary_all_analysis <- data_summary_all_analysis %>%
+    dplyr::rename("pval_Dunnets" = "pval")
+  
+  
+  
+  name <- paste0(a,"_", b, "_ANOVA")
+  assign(name,data_summary_all_analysis)
+  
+  rm(site_and_yr,
+     summary_data_all_1,
+     summary_data_site,
+     model_sand,
+     agricolae_LSD_output_sand,
+     agricolae_LSD_output_sand_df,
+     tukey_agricolae,
+     tukey_agricolae_df,
+     data_summary_all_analysis,
+     DunnettTest_df,
+     DunnettTest,
+     a,
+     b,
+     data_file,
+     LSD,
+     name,
+     order,
+     site_yrs_list,
+     anova_yld,
+     bartlett.test,
+     p_value_barlett,
+     F_value_ANOVA,
+     p_value_ANOVA,
+     model,
+     LSD_value_1,
+     LSD_value_df,
+     count_missing_yld_values
+     
+  )
+  
