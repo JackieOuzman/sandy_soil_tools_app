@@ -372,7 +372,7 @@ summary_data_all_1 <- summary_data_all_1 %>%
 
 
 
-# problem 3 2018	Unmodified_Cl@20.incorp_8 / Bute_Trengrove_2017_plot_Column!1Row!1Rep!1Treatment!17_rep_block_1
+# problem 3 2017	Unmodified_Cl@20.incorp_8 / Bute_Trengrove_2017_plot_Column!1Row!1Rep!1Treatment!17_rep_block_1
 sam_2017_Unmodified_Clat20.incorp_8 <- summary_data_all_1 %>% 
   filter(site == "Bute_Trengrove" & Descriptors == "Unmodified_Cl@20.incorp_8" & year == "2017") %>% 
   group_by() %>% 
@@ -384,6 +384,91 @@ summary_data_all_1 <- summary_data_all_1 %>%
   mutate(yield = case_when(
     ID == "Bute_Trengrove_2017_plot_Column!1Row!1Rep!1Treatment!17_rep_block_1" ~ sam_2017_Unmodified_Clat20.incorp_8$mean_yld,
     TRUE ~ yield))
+
+# problem 4 2019	Rip.50_Cl@5.incorp_20 / Bute_Trengrove_2019_plot_Column1Row21Rep3Treatment13_rep_block_3
+sam_2019_Rip.50_Cl_5.incorp_20 <- summary_data_all_1 %>%
+  filter(site == "Bute_Trengrove" & Descriptors == "Rip.50_Cl@5.incorp_20" & year == "2019") %>%
+  group_by() %>%
+  summarise(mean_yld = mean(yield, na.rm = TRUE),
+            mean_est = mean(as.double(establishment), na.rm = TRUE))
+
+
+summary_data_all_1 <- summary_data_all_1 %>%
+  mutate(yield = case_when(
+    ID == "Bute_Trengrove_2019_plot_Column1Row21Rep3Treatment13_rep_block_3" ~ sam_2019_Rip.50_Cl_5.incorp_20$mean_yld,
+    TRUE ~ yield))
+
+# problem 5 2019	Rip.50_Cl@20.incorp_20.Fert.surface.Clay.incorp_20 / Bute_Trengrove_2019_plot_Column2Row5Rep1Treatment24_rep_block_1
+sam_2019_Rip.50_Cl_20.incorp_20.Fert.surface.Clay.incorp_20 <- summary_data_all_1 %>%
+  filter(site == "Bute_Trengrove" & Descriptors == "Rip.50_Cl@20.incorp_20.Fert.surface.Clay.incorp_20" & year == "2019") %>%
+  group_by() %>%
+  summarise(mean_yld = mean(yield, na.rm = TRUE),
+            mean_est = mean(as.double(establishment), na.rm = TRUE))
+
+
+summary_data_all_1 <- summary_data_all_1 %>%
+  mutate(yield = case_when(
+    ID == "Bute_Trengrove_2019_plot_Column2Row5Rep1Treatment24_rep_block_1" ~ sam_2019_Rip.50_Cl_20.incorp_20.Fert.surface.Clay.incorp_20$mean_yld,
+    TRUE ~ yield))
+
+
+# problem 6 2019	Unmodified_Cl@5.incorp_8 / Bute_Trengrove_2019_plot_Column3Row21Rep3Treatment9_rep_block_3
+sam_2019_Unmodified_Cl_5.incorp_8 <- summary_data_all_1 %>%
+  filter(site == "Bute_Trengrove" & Descriptors == "Unmodified_Cl@5.incorp_8" & year == "2019") %>%
+  group_by() %>%
+  summarise(mean_yld = mean(yield, na.rm = TRUE),
+            mean_est = mean(as.double(establishment), na.rm = TRUE))
+
+
+summary_data_all_1 <- summary_data_all_1 %>%
+  mutate(yield = case_when(
+    ID == "Bute_Trengrove_2019_plot_Column3Row21Rep3Treatment9_rep_block_3" ~ sam_2019_Unmodified_Cl_5.incorp_8$mean_yld,
+    TRUE ~ yield))
+
+
+# problem 7 2019	Rip.50_Cl@5.incorp_20.Fert.surface.Clay.incorp_20 / Bute_Trengrove_2019_plot_Column3Row5Rep1Treatment16_rep_block_1
+sam_2019_Rip.50_Cl_5.incorp_20.Fert.surface.Clay.incorp_20 <- summary_data_all_1 %>%
+  filter(site == "Bute_Trengrove" & Descriptors == "Rip.50_Cl@5.incorp_20.Fert.surface.Clay.incorp_20" & year == "2019") %>%
+  group_by() %>%
+  summarise(mean_yld = mean(yield, na.rm = TRUE),
+            mean_est = mean(as.double(establishment), na.rm = TRUE))
+
+
+summary_data_all_1 <- summary_data_all_1 %>%
+  mutate(yield = case_when(
+    ID == "Bute_Trengrove_2019_plot_Column3Row5Rep1Treatment16_rep_block_1" ~ sam_2019_Rip.50_Cl_5.incorp_20.Fert.surface.Clay.incorp_20$mean_yld,
+    TRUE ~ yield))
+
+
+
+
+#problem 8 2017 Pre_drill_20+7.5_none / Ouyen_2017_plot_39_rep_block_2
+
+dummy_df_Ouyen_Placement <- summary_data_all_1 %>%  filter(site == "Ouyen_Placement" & Descriptors== "Pre_drill_20+7.5_none" & year== "2017")
+
+
+## what is the average for yld and establishment?
+
+dummy_df_Ouyen_Placement_av <- dummy_df_Ouyen_Placement %>% 
+  group_by() %>% 
+  summarise(mean_yld = mean(yield, na.rm = TRUE),
+            mean_est = mean(as.double(establishment), na.rm = TRUE))
+
+
+dummy_df_Ouyen_Placement <- dummy_df_Ouyen_Placement %>% 
+  mutate(
+    ID = case_when(
+      ID == "Ouyen_2017_plot_39_rep_block_3" ~ "Ouyen_2017_plot_39_rep_block_2"))
+
+dummy_df_Ouyen_Placement <- dummy_df_Ouyen_Placement %>% 
+  mutate(yield = dummy_df_Ouyen_Placement_av$mean_yld) %>% 
+  mutate(establishment = dummy_df_Ouyen_Placement_av$mean_est) %>% 
+  mutate(comments = "average of plots 29, 39 and 54")
+
+
+
+
+
 
 
 
