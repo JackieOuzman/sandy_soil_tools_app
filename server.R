@@ -413,7 +413,8 @@ server <- shinyServer(function(input, output, session) {
       "2014"
     )
     
-    
+    site_year_yld_summary$year <- factor(site_year_yld_summary$year,
+                                         levels = order_yrs)
     
     
     ### Plot
