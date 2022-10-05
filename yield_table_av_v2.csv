@@ -25,7 +25,7 @@
 "Brimpton Lake",2015,"Spade.30_Lc.incorp_30.Clay.incorp_30",3.4195842888371,"Brimpton Lake_2015","Spade mixed","Spade","Wheat",1,"decile_4",409,1.89411169239811,"trial",0
 "Brimpton Lake",2015,"Spade.30_Lc.incorp_30.Fert.incorp_30.Clay.incorp_30",3.37551784873724,"Brimpton Lake_2015","Spade mixed","Spade","Wheat",1,"decile_4",409,1.89411169239811,"trial",0
 "Brimpton Lake",2015,"Spade.30_Clay.incorp_30",2.84566552952755,"Brimpton Lake_2015","Spade non organic","Spade","Wheat",1,"decile_4",409,1.89411169239811,"trial",0
-"Brimpton Lake",2015,"Unmodified_Clay.incorp_10",2.74590051472561,"Brimpton Lake_2015","Unmodified non organic","Unmodified","Wheat",1,"decile_4",409,1.89411169239811,"trial",0
+"Brimpton Lake",2015,"Unmodified_Clay.incorp_10",2.7459005147256,"Brimpton Lake_2015","Unmodified non organic","Unmodified","Wheat",1,"decile_4",409,1.89411169239811,"trial",0
 "Brimpton Lake",2015,"Spade.30_none",2.7109201845026,"Brimpton Lake_2015","Spade none","Spade","Wheat",1,"decile_4",409,1.89411169239811,"trial",0
 "Brimpton Lake",2015,"Spade.30_Fert.incorp_30",2.68293248399711,"Brimpton Lake_2015","Spade fertiliser","Spade","Wheat",1,"decile_4",409,1.89411169239811,"trial",0
 "Brimpton Lake",2015,"Spade.30_Fert.incorp_30.Clay.incorp_30",2.47738191166269,"Brimpton Lake_2015","Spade mixed","Spade","Wheat",1,"decile_4",409,1.89411169239811,"trial",0
@@ -522,12 +522,16 @@
 "Lowaldie_Crest",2019,"Rip.40_none",2.00838601952863,"Lowaldie_Crest_2019","Rip none","Rip","wheat",0,"decile_2",310,1.38544913162157,"trial",0
 "Lowaldie_Crest",2020,"Rip.60_none",3.59829691430663,"Lowaldie_Crest_2020","Rip none","Rip","wheat",1,"decile_7",310,2.29830296149453,"trial",0
 "Lowaldie_Crest",2020,"Rip.40_none",3.07427623636754,"Lowaldie_Crest_2020","Rip none","Rip","wheat",1,"decile_7",310,2.29830296149453,"trial",0
+"Lowaldie_Crest",2021,"Rip.60_none",1.44496569814367,"Lowaldie_Crest_2021",NA,NA,NA,NA,NA,NA,0.753379741727199,"trial",0
+"Lowaldie_Crest",2021,"Rip.40_none",1.25277441485068,"Lowaldie_Crest_2021",NA,NA,NA,NA,NA,NA,0.753379741727199,"trial",0
 "Lowaldie_Deep sand",2019,"Rip.60_none",2.34937223594756,"Lowaldie_Deep sand_2019","Rip none","Rip","wheat",0,"decile_2",310,1.16245801081047,"trial",0
 "Lowaldie_Deep sand",2019,"Rip.40_none",1.8978780004294,"Lowaldie_Deep sand_2019","Rip none","Rip","wheat",0,"decile_2",310,1.16245801081047,"trial",0
 "Lowaldie_Deep sand",2020,"Rip.60_none",3.82343972178291,"Lowaldie_Deep sand_2020","Rip none","Rip","wheat",1,"decile_7",310,2.71443744282997,"trial",0
 "Lowaldie_Deep sand",2020,"Rip.40_none",3.61588675518751,"Lowaldie_Deep sand_2020","Rip none","Rip","wheat",1,"decile_7",310,2.71443744282997,"trial",0
+"Lowaldie_Deep sand",2021,"Rip.60_none",1.94984243697479,"Lowaldie_Deep sand_2021",NA,NA,NA,NA,NA,NA,0.870535714285714,"trial",0
+"Lowaldie_Deep sand",2021,"Rip.40_none",1.57475490196078,"Lowaldie_Deep sand_2021",NA,NA,NA,NA,NA,NA,0.870535714285714,"trial",0
 "Malinong",2019,"Spade.30_none",3.97376543209877,"Malinong_2019","Spade none","Spade","barley",0,"decile_4",458,3.39506172839506,"trial",0
-"Malinong",2019,"DiscInv.30_none",3.49151234567901,"Malinong_2019","DiscInv none","DiscInv","barley",0,"decile_4",458,3.39506172839506,"trial",0
+"Malinong",2019,"DiscInv.30_none",3.49151234567902,"Malinong_2019","DiscInv none","DiscInv","barley",0,"decile_4",458,3.39506172839506,"trial",0
 "Malinong",2019,"Rip.30_none",3.22145061728395,"Malinong_2019","Rip none","Rip","barley",0,"decile_4",458,3.39506172839506,"trial",0
 "Malinong",2019,"Rip.40_none",3.02854938271605,"Malinong_2019","Rip none","Rip","barley",0,"decile_4",458,3.39506172839506,"trial",0
 "Malinong",2020,"Spade.30_none",2.66333333333333,"Malinong_2020","Spade none","Spade","canola",1,"decile_7",458,2.42333333333333,"trial",0
@@ -726,7 +730,7 @@
 "Waikerie",2019,"Rip.30_Fert.band_30",0.608571428571429,"Waikerie_2019","Rip fertiliser","Rip","Barley",1,"decile_1",276,0.725,"trial",0
 "Waikerie",2019,"Rip.30_none",0.604761904761905,"Waikerie_2019","Rip none","Rip","Barley",1,"decile_1",276,0.725,"trial",0
 "Waikerie",2019,"Rip.30_Fert.band_8",0.60202380952381,"Waikerie_2019","Rip fertiliser","Rip","Barley",1,"decile_1",276,0.725,"trial",0
-"Waikerie",2019,"Rip.30_Cl.band_30",0.575833333333334,"Waikerie_2019","Rip animal","Rip","Barley",1,"decile_1",276,0.725,"trial",0
+"Waikerie",2019,"Rip.30_Cl.band_30",0.575833333333333,"Waikerie_2019","Rip animal","Rip","Barley",1,"decile_1",276,0.725,"trial",0
 "Waikerie",2019,"Rip.30_Cl.surface",0.54952380952381,"Waikerie_2019","Rip animal","Rip","Barley",1,"decile_1",276,0.725,"trial",0
 "Waikerie",2019,"Rip.60_none",0.292380952380952,"Waikerie_2019","Rip none","Rip","Barley",1,"decile_1",276,0.725,"trial",0
 "Waikerie",2019,"Rip.60_Fert.band_60",0.251547619047619,"Waikerie_2019","Rip fertiliser","Rip","Barley",1,"decile_1",276,0.725,"trial",0
