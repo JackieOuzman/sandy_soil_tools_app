@@ -19,7 +19,7 @@ merge_Cum_ANOVA_sites_yr <- merge_Cum_ANOVA_sites_yr %>%
   mutate(
     groups_LSD_cum = case_when(
       ANOVA_sign_0.1 == "ns"   ~ "ns",
-      TRUE                      ~ "other"
+      TRUE                      ~ "ns"
     )
   )
 
