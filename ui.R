@@ -39,10 +39,17 @@ library(plotly)
   
    ui <- (navbarPage(title = '', collapsible = TRUE,
                     
-                     
-                      header = tagList(    
-                        useShinydashboard()
+                     header = tagList(    
+                       useShinydashboard(),
+                       tags$head(
+                         # Script for CSIRO branding tab ----
+                         tags$script(type="text/javascript", src="https://www.csiro.au/themes/default/js/csirotab.min.js"),
+                       )
                      ) ,   ## these two lines get the value box to display without using shinydashboards        
+                     # 
+                     #  header = tagList(    
+                     #    useShinydashboard()
+                     # ) ,   ## these two lines get the value box to display without using shinydashboards        
 
                      
                    
