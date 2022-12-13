@@ -23,12 +23,19 @@ library(plotly)
 
 # Define UI 
 
-
+# shinyUI(
+#   fluidPage(title="Application Title",
+#             tags$head(
+#               # Script for CSIRO branding tab ----
+#               tags$script(type="text/javascript", src="https://www.csiro.au/themes/default/js/csirotab.min.js"),
+#             )
+#   )
+# )
   
 #########################################################################################################
 ###############                       navbartitle                          #################################
 #########################################################################################################
- 
+
   
    ui <- (navbarPage(title = '', collapsible = TRUE,
                     
@@ -38,10 +45,13 @@ library(plotly)
                      ) ,   ## these two lines get the value box to display without using shinydashboards        
 
                      
-                     
+                   
+  
 
                      
                      
+
+                   
 #########################################################################################################
 #########################################################################################################
 ###############                       what is my constraint page                     #################################
@@ -550,6 +560,9 @@ useShinyalert()
 #) #tabPanel2 bracket
 
    ) #navbar bracket
+
+
+
    ) # ui bracket
    
 
