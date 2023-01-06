@@ -232,7 +232,7 @@ tabPanel("What is my constraint", #tab title pageleafletOutput("map"),
                                column(8,
                                       #align = "center",
                                       offset =.5,
-                                      tags$a(href="shorthand trial name_v2.pdf", ## this documnet need to sit inside the app directory in a folder called www
+                                      tags$a(href="shorthand trial name_v2.pdf", ## this document need to sit inside the app directory in a folder called www
                                       
                                     h5("click here for more info on trial names" )
                                     )

@@ -333,8 +333,8 @@ server <- shinyServer(function(input, output, session) {
     ANOVA_Cum_Yld_site <- left_join(ANOVA_Cum_Yld_site,order_df, by = c("Descriptors_new" =  "Descriptors_new") ) 
   
     ANOVA_Cum_Yld_site <- ANOVA_Cum_Yld_site %>%
-      arrange(order_rank) %>% #arrange the data table using the ranking of treatments
-      dplyr::select("Descriptors_new", "detailed_name", 
+      arrange(order_rank.x) %>% #arrange the data table using the ranking of treatments
+      dplyr::select("Descriptors_new", "detailed_name.x", 
                     "Yield", 
                     #"Standard.error", 
                     #"count",
