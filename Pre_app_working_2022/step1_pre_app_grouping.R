@@ -19,8 +19,18 @@ library(dplyr)
 
 #2
 DB_df <- read.csv("X:/Therese_Jackie/Sandy_soils/Development_database/completeDB/sites_merged_all_messy.csv")
+
+#-- new Descriptors --#
+new_Descriptors_names <- read.csv("C:/Users/ouz001/working_from_home_post_Sep2022/sandy_soil_tools_app/list_of_Descriptors_with_new_Desciptors_name.csv")
+#--- join the new descriptors to the DB_df --##
+
+DB_df <- left_join(DB_df, new_Descriptors_names)
+
+
 names(DB_df)
-list_of_Descriptors <- distinct(DB_df, Descriptors)
+list_of_Descriptors <- distinct(DB_df, New.names.of.Descriptors)
+
+
 
 
 #####################################################################################################################
@@ -31,7 +41,7 @@ list_of_Descriptors <- distinct(DB_df, Descriptors)
 
 #1 soil modification with depth
 DB_df_soil_mod <- DB_df %>% 
-  mutate(soil_modification_depth =  str_extract(DB_df$Descriptors, "[^_]+"))#keep everything before the first_
+  mutate(soil_modification_depth =  str_extract(DB_df$New.names.of.Descriptors, "[^_]+"))#keep everything before the first_
 
 
 #1.1 Youndhusband has 'Unmodified+DeepTill.18' which needs to be recoded as "Unmodified"
@@ -47,12 +57,12 @@ soil_modification_depth <- DB_df_soil_mod %>%
   arrange(soil_modification_depth) %>% 
   filter(soil_modification_depth != "Unmodified")
 
-count(soil_modification_depth) #23 excluding the unmodified
+count(soil_modification_depth) #41 excluding the unmodified - 
 
 
 #1a working clms - soil modification without depth 1 only
 DB_df_soil_mod <- DB_df_soil_mod %>% 
-  mutate(soil_modification_1 =  str_extract(DB_df_soil_mod$Descriptors, "[^.]+"))#keep everything before the first .
+  mutate(soil_modification_1 =  str_extract(DB_df_soil_mod$New.names.of.Descriptors, "[^.]+"))#keep everything before the first .
 
 #the Unmodified seems to have a problem this fixes it :)
 DB_df_soil_mod <- DB_df_soil_mod %>% 
@@ -142,7 +152,7 @@ DB_df_soil_mod %>%
 ### get the soil Amendment from the Descriptors
 # gets all the amendments
 DB_df_soil_mod <- DB_df_soil_mod %>% 
-  mutate(amendment_all = sub("^[^_]*_", "", DB_df_soil_mod$Descriptors)) #keep everything after the first _
+  mutate(amendment_all = sub("^[^_]*_", "", DB_df_soil_mod$New.names.of.Descriptors)) #keep everything after the first _
 #pull out the first amendment listed but has rates
 DB_df_soil_mod <- DB_df_soil_mod %>% 
   mutate(amendment_1 = str_extract(DB_df_soil_mod$amendment_all, "[^.]+"))#keep everything before the first 
