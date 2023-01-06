@@ -101,19 +101,27 @@ site_info <- site_info %>%
 # 
 #This trial_results is used in the table 
 trial_results <- read_csv("primary_data_all_v2.csv")
-names(trial_results)
+#names(trial_results)
 
 ### arrange the data / Descriptor so the order reflect level of intervension
-list_of_Descriptors_with_order_rank <- read_csv("list_of_Descriptors_with_order_rank.csv")
+#list_of_Descriptors_with_order_rank <- read_csv("list_of_Descriptors_with_order_rank.csv")
+list_of_Descriptors_with_order_rank <- read_csv("list_of_Descriptors_with_new_Desciptors_name.csv")
+#str(list_of_Descriptors_with_order_rank)
+list_of_Descriptors_with_order_rank <- list_of_Descriptors_with_order_rank %>% 
+  dplyr::rename(Descriptors_new = 'New names of Descriptors')
 
 order_df <- list_of_Descriptors_with_order_rank %>% 
   distinct(order_rank, .keep_all= TRUE) %>% 
   arrange(order_rank)
 
-order <- as.list(order_df$Descriptors) 
+#order <- as.list(order_df$Descriptors) 
+order <- as.list(order_df$Descriptors_new)
+names(trial_results)
+trial_results <- trial_results %>% 
+  dplyr::rename(Descriptors_new = New.names.of.Descriptors)
 
 
-trial_results$Descriptors <- factor(trial_results$Descriptors,
+trial_results$Descriptors_new <- factor(trial_results$Descriptors_new,
                                     levels = order)
 trial_results <- trial_results %>%
   arrange(site)
@@ -125,6 +133,10 @@ trial_results_table <- read_csv("primary_data_all_v2.csv")
 trial_results_table <- trial_results_table %>%
   arrange(site)
 
+names(trial_results_table)
+
+trial_results_table <- trial_results_table %>% 
+  dplyr::rename(Descriptors_new = New.names.of.Descriptors)
 
 
 ######################################################################################################
@@ -204,6 +216,9 @@ extra_table$`data source` <- as.character(extra_table$`data source`)
 #yld_table
 
 yld_table <- read.csv("yield_table_av_v2.csv")
+#names(yld_table)
+yld_table <- yld_table %>% 
+  dplyr::rename(Descriptors_new = New.names.of.Descriptors)
 
 
 yld_table <- yld_table %>% rename(
@@ -213,7 +228,7 @@ yld_table <- yld_table %>% rename(
 yld_table <- yld_table %>%
   dplyr::select(
     site,
-    Descriptors,
+    Descriptors_new,
     grouping,
     modification,
     crop,
@@ -292,6 +307,10 @@ df_info <- df_info %>%
 
 ANOVA_Cum_Yld <- read.csv(file = "ANOVA_Cum_Yld_df_v2.csv")
 
+#names(ANOVA_Cum_Yld)
+ANOVA_Cum_Yld <- ANOVA_Cum_Yld %>% 
+  dplyr::rename(Descriptors_new = New.names.of.Descriptors)
+
 ######################################################################################################
 #########################                       server               #################################
 ######################################################################################################
@@ -309,13 +328,13 @@ server <- shinyServer(function(input, output, session) {
    
     ANOVA_Cum_Yld_site <- ANOVA_Cum_Yld %>%  filter(site == a) 
     order_df <- order_df %>% 
-      dplyr::select(Descriptors, order_rank, "detailed_name")
+      dplyr::select(Descriptors_new, order_rank, "detailed_name")
     
-    ANOVA_Cum_Yld_site <- left_join(ANOVA_Cum_Yld_site,order_df, by = c("Descriptors" =  "Descriptors") ) 
+    ANOVA_Cum_Yld_site <- left_join(ANOVA_Cum_Yld_site,order_df, by = c("Descriptors_new" =  "Descriptors_new") ) 
   
     ANOVA_Cum_Yld_site <- ANOVA_Cum_Yld_site %>%
       arrange(order_rank) %>% #arrange the data table using the ranking of treatments
-      dplyr::select("Descriptors", "detailed_name", 
+      dplyr::select("Descriptors_new", "detailed_name", 
                     "Yield", 
                     #"Standard.error", 
                     #"count",
@@ -384,13 +403,14 @@ server <- shinyServer(function(input, output, session) {
       filter(Descriptors  != "Unmodified+OnRow_none") 
     
     
-    site_year_yld_summary_site <- site_year_yld_summary_site[!( site_year_yld_summary_site$site == "Younghusband" & ( site_year_yld_summary_site$Descriptors == "Control" )),] 
+    site_year_yld_summary_site <- site_year_yld_summary_site[!( site_year_yld_summary_site$site == "Younghusband" & 
+                                                                  ( site_year_yld_summary_site$Descriptors == "Control" )),] 
     
     site_year_yld_summary <- site_year_yld_summary_site 
     
     ## this is creating mean value for each year and treatment
     site_year_yld_summary <- site_year_yld_summary_site %>% 
-      dplyr::group_by(Descriptors, year) %>%
+      dplyr::group_by(Descriptors_new, year) %>%
       dplyr::summarise(mean=mean(yield, na.rm = TRUE), 
                        sd=sd(yield, na.rm = TRUE),
                        count = n(),
@@ -398,7 +418,7 @@ server <- shinyServer(function(input, output, session) {
       ) %>%
       arrange(desc(mean))
     
-    site_year_yld_summary$Descriptors <- factor(site_year_yld_summary$Descriptors,
+    site_year_yld_summary$Descriptors_new <- factor(site_year_yld_summary$Descriptors_new,
                                                 levels = order)
     
     # the order of years 
@@ -422,7 +442,7 @@ server <- shinyServer(function(input, output, session) {
     #ensure year is defined a a factor for a nice plot
     site_year_yld_summary$year <- as.factor(site_year_yld_summary$year)
     sum_cum_yld <- site_year_yld_summary %>% 
-      group_by(Descriptors) %>% 
+      group_by(Descriptors_new) %>% 
       dplyr::summarise(sum_yld =sum(mean, na.rm = TRUE) )
     
     #sum_cum_yld
@@ -431,7 +451,7 @@ server <- shinyServer(function(input, output, session) {
     max_sum_cum <- ceiling(max_sum_cum)
     
     site_year_yld_summary <- site_year_yld_summary %>% 
-      rename(Treatment = Descriptors,
+      rename(Treatment = Descriptors_new,
              Yield = mean)
     site_year_yld_summary$Yield <- round(site_year_yld_summary$Yield, digits = 2)
     
@@ -482,7 +502,7 @@ server <- shinyServer(function(input, output, session) {
       dplyr::select(
         
         site,
-        Descriptors,
+        Descriptors_new,
         #grouping,
         #modification,
         year,
@@ -493,12 +513,12 @@ server <- shinyServer(function(input, output, session) {
         decile,
         rainfall_mean_annual
                     )%>%
-      dplyr::rename(Treatment = Descriptors,
+      dplyr::rename(Treatment = Descriptors_new,
       ) %>%
       dplyr::filter(!is.na(crop))%>%
       dplyr::mutate(`yield gain` = yield_modified - yield_unmodified)  
      
-      trial_results <- left_join(trial_results,order_df, by = c("Treatment" =  "Descriptors") ) 
+      trial_results <- left_join(trial_results,order_df, by = c("Treatment" =  "Descriptors_new") ) 
       
       trial_results <- trial_results %>% 
         arrange(order_rank) %>% #arrange the data table using the ranking of treatments
