@@ -94,6 +94,15 @@ yld_ave_with_new_clm_for_yld <- yld_ave_with_new_clm_for_yld %>%
 
 
 
+## -- Add in the new descriptors names -- ##
+
+
+new_Descriptors_names <- read.csv("C:/Users/ouz001/working_from_home_post_Sep2022/sandy_soil_tools_app/list_of_Descriptors_with_new_Desciptors_name.csv")
+#--- join the new descriptors to the DB_df --##
+
+yld_ave_with_new_clm_for_yld <- left_join(yld_ave_with_new_clm_for_yld, new_Descriptors_names)
+
+
 write.csv(yld_ave_with_new_clm_for_yld,
           "yield_table_av_v2.csv",
           row.names = FALSE)
