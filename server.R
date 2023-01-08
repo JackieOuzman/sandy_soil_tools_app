@@ -101,10 +101,10 @@ site_info <- site_info %>%
 # 
 #This trial_results is used in the table 
 trial_results <- read_csv("primary_data_all_v2.csv")
-#names(trial_results)
+
 
 ### arrange the data / Descriptor so the order reflect level of intervension
-#list_of_Descriptors_with_order_rank <- read_csv("list_of_Descriptors_with_order_rank.csv")
+
 list_of_Descriptors_with_order_rank <- read_csv("list_of_Descriptors_with_order_rank_v2.csv")
 
 str(list_of_Descriptors_with_order_rank)
@@ -115,9 +115,9 @@ order_df <- list_of_Descriptors_with_order_rank %>%
   distinct(order_rank, .keep_all= TRUE) %>% 
   arrange(order_rank)
 
-#order <- as.list(order_df$Descriptors) 
+
 order <- as.list(order_df$Descriptors_new)
-names(trial_results)
+
 trial_results <- trial_results %>% 
    dplyr::rename(Descriptors_new = New.names.of.Descriptors)
 
@@ -334,7 +334,7 @@ server <- shinyServer(function(input, output, session) {
     ANOVA_Cum_Yld_site <- left_join(ANOVA_Cum_Yld_site,order_df, by = c("Descriptors_new" =  "Descriptors_new") ) 
   
     ANOVA_Cum_Yld_site <- ANOVA_Cum_Yld_site %>%
-      arrange(order_rank.x) %>% #arrange the data table using the ranking of treatments
+      arrange(order_rank) %>% #arrange the data table using the ranking of treatments
       dplyr::select("Descriptors_new", "detailed_name.x", 
                     "Yield", 
                     #"Standard.error", 
