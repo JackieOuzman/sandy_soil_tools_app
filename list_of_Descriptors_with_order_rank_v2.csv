@@ -1,260 +1,260 @@
-"site","Descriptors","detailed_name","order_rank","New.names.of.Descriptors"
-"Kooloonong_chickpea","Unmodified_Cl.surface","chicken litter applied surface",6,"ChickL.surface"
-"Kooloonong_chickpea","Control","Control",1,"Control"
-"Kooloonong_chickpea","Rip.50_none","Ripping to 50cm with no amendments",113,"Rip.50"
-"Kooloonong_chickpea","Rip.50_Cl.surface","Ripping to 50cm with chicken litter applied surface",114,"Rip.50_ChickL.surface"
-"Kooloonong_lentil","Control","Control",1,"Control"
-"Kooloonong_lentil","Unmodified_Cl.surface","chicken litter applied surface",6,"ChickL.surface"
-"Kooloonong_lentil","Rip.50_Cl.surface","Ripping to 50cm with chicken litter applied surface",114,"Rip.50_ChickL.surface"
-"Kooloonong_lentil","Rip.50_none","Ripping to 50cm with no amendments",113,"Rip.50"
-"Kooloonong_lupin","Control","Control",1,"Control"
-"Kooloonong_lupin","Unmodified_Cl.surface","chicken litter applied surface",6,"ChickL.surface"
-"Kooloonong_lupin","Rip.50_Cl.surface","Ripping to 50cm with chicken litter applied surface",114,"Rip.50_ChickL.surface"
-"Kooloonong_lupin","Rip.50_none","Ripping to 50cm with no amendments",113,"Rip.50"
-"Tempy","Control","Control",1,"Control"
-"Tempy","Rip.50_none","Ripping to 50cm with no amendments",113,"Rip.50"
-"Tempy","Rip.50IncRip_none","Ripping to 50cm and inclusion with no amendments",130,"Rip.50IncRip"
-"Tempy","Rip.50IncRip_Cl.surface","Ripping to 50cm and inclusion with chicken litter applied surface",132,"Rip.50IncRip_ChickL.surface"
-"Tempy","Rip.50_Cl.surface","Ripping to 50cm with chicken litter applied surface",114,"Rip.50_ChickL.surface"
-"Wynarka","Control","Control",1,"Control"
-"Wynarka","Rip.60IncRip_none","Ripping to 60cm and inclusion with no amendments",144,"Rip.60IncRip"
-"Wynarka","Rip.60IncRip+Spade.30_none","Ripping to 60cm and inclusion and spading 30cm with no amendments",145,"Rip.60IncRip+Spade.30"
-"Wynarka","Rip.30_none","Ripping to 30cm with no amendments",71,"Rip.30"
-"Wynarka","Rip.60_none","Ripping to 60cm with no amendments",134,"Rip.60"
-"Wynarka","Rip.60Spade.30_none","Ripping to 30cm and spading 30cm with no amendments",141,"Rip.60Spade.30"
-"Wynarka","Spade.30_none","spade 30cm with no amendments",35,"Spade.30"
-"Monia_Gap","Spade.30_Gypsum.incorp_30","spade 30cm with gypsum incorporated 30cm",70,"Spade.30_Gypsum.incorp_30"
-"Monia_Gap","Spade.30_Cl.incorp_30","spade 30cm with chicken litter incorporated 30cm",56,"Spade.30_ChickL.incorp_30"
-"Monia_Gap","Rip.60Spade.30_none","Ripping to 30cm and spading 30cm with no amendments",141,"Rip.60Spade.30"
-"Monia_Gap","Spade.30_Cl.incorp_30.Gypsum.incorp_30","spade 30cm with chicken litter and gypsum incorporated 30cm",57,"Spade.30_ChickL.incorp_30.Gypsum.incorp_30"
-"Monia_Gap","Spade.30_none","spade 30cm with no amendments",35,"Spade.30"
-"Monia_Gap","Control","Control",1,"Control"
-"Malinong","Control","Control",1,"Control"
-"Malinong","Spade.30_none","spade 30cm with no amendments",35,"Spade.30"
-"Malinong","DiscInv.30_none","Disc inversion to 30cm with no amendments",148,"Ploughing.30"
-"Malinong","Rip.30_none","Ripping to 30cm with no amendments",71,"Rip.30"
-"Malinong","Rip.40_none","Ripping to 40cm with no amendments",100,"Rip.40"
-"Sherwood","Control","Control",1,"Control"
-"Sherwood","Rip.30_none","Ripping to 30cm with no amendments",71,"Rip.30"
-"Sherwood","Spade.30_none","spade 30cm with no amendments",35,"Spade.30"
-"Sherwood","Rip.30_Fert.surface","Ripping to 30cm with fertiliser applied at surface",79,"Rip.30_Fert.surface"
-"Sherwood","Spade.30_Fert.incorp_30","spade 30cm with fertiliser incorporated 30cm",65,"Spade.30_Fert.incorp_30"
-"Cummins","Control","Control",1,"Control"
-"Cummins","Rip.30_none","Ripping to 30cm with no amendments",71,"Rip.30"
-"Cummins","Rip.30IncRip_none","Ripping to 30cm and inclusion with no amendments",83,"Rip.30IncRip"
-"Cummins","Rip.30IncRip_Gypsum.incorp_30","Ripping to 30cm and inclusion with Gypsum incorporated 30cm",85,"Rip.30IncRip_Gypsum.incorp_30"
-"Karkoo","Control","Control",1,"Control"
-"Karkoo","Rip.40_none","Ripping to 40cm with no amendments",100,"Rip.40"
-"Karkoo","Rip.40IncRip_none","Ripping to 40cm and inclusion with no amendments",101,"Rip.40IncRip"
-"Karkoo","Rip.40IncRip_Lc.incorp_40","Ripping to 40cm and inclusion with chicken litter incorporated 40cm",103,"Rip.40IncRip_Luc.incorp_40"
-"Buckleboo","Rip.35_none","Ripping to 35cm with no amendments",72,"Rip.35"
-"Buckleboo","Rip.45_none","Ripping to 45cm with no amendments",106,"Rip.45"
-"Buckleboo","Rip.45IncRip_none","Ripping to 45cm and inclusion with no amendments",107,"Rip.45IncRip"
-"Buckleboo","Rip.45IncRip_Fert_High.band_45","Ripping to 45cm and inclusion with fertiliser (high rate) banded 45cm",111,"Rip.45IncRip_Fert_High.band_45"
-"Buckleboo","Rip.45IncRip_Fert_Low.band_45","Ripping to 45cm and inclusion with fertiliser (low rate) banded 45cm",110,"Rip.45IncRip_Fert_Low.band_45"
-"Buckleboo","Rip.45IncRip_Fert_APP.band_45","Ripping to 45cm and inclusion with fertiliser (app) banded 45cm",112,"Rip.45IncRip_Fert_APP.band_45"
-"Buckleboo","Control","Control",1,"Control"
-"Mt Damper","Control","Control",1,"Control"
-"Mt Damper","Spade.30_none","spade 30cm with no amendments",35,"Spade.30"
-"Mt Damper","Rip.45IncRip_none","Ripping to 45cm and inclusion with no amendments",107,"Rip.45IncRip"
-"Mt Damper","Rip.45IncRip+Spade.30_none","Ripping to 45cm and inclusion and spading 30cm with no amendments",108,"Rip.45IncRip+Spade.30"
-"Mt Damper","Rip.45IncRip_Fert.incorp_45","Ripping to 45cm and inclusion with fertiliser banded 45cm",109,"Rip.45IncRip_Fert.incorp_45"
-"Kybunga","Control","Control",1,"Control"
-"Kybunga","Rip.30_none","Ripping to 30cm with no amendments",71,"Rip.30"
-"Kybunga","Rip.50_none","Ripping to 50cm with no amendments",113,"Rip.50"
-"Kybunga","Spade.30_none","spade 30cm with no amendments",35,"Spade.30"
-"Kybunga","Rip.50Spade.30_none","Ripping to 50cm and spading 30cm with no amendments",129,"Rip.50Spade.30"
-"Kybunga","Rip.50_Cl.surface","Ripping to 50cm with chicken litter applied surface",114,"Rip.50_ChickL.surface"
-"Kybunga","Spade.30_Cl.incorp_30","spade 30cm with chicken litter incorporated 30cm",56,"Spade.30_ChickL.incorp_30"
-"Warnertown","DiscInv.30_none","Disc inversion to 30cm with no amendments",148,"Ploughing.30"
-"Warnertown","Rip.50_none","Ripping to 50cm with no amendments",113,"Rip.50"
-"Warnertown","Rip.50IncRip_none","Ripping to 50cm and inclusion with no amendments",130,"Rip.50IncRip"
-"Warnertown","Spade.30_none","spade 30cm with no amendments",35,"Spade.30"
-"Warnertown","Rip.30_none","Ripping to 30cm with no amendments",71,"Rip.30"
-"Warnertown","Control","Control",1,"Control"
-"Telopea_Downs","Spade.30_Clay@250.incorp_30","spade 30cm with clay at 250t/ha",67,"Spade.30_Clay@250.incorp_30"
-"Telopea_Downs","Spade.30_Clay@500.incorp_30_Yr07,20","spade 30cm with clay at 250t/ha in years 2007 and 2020",68,"Spade.30_Clay@500.incorp_30_Yr07,20"
-"Telopea_Downs","Control","Control",1,"Control"
-"Kooloonong_canola","Unmodified_Cl.surface","chicken litter applied surface",6,"ChickL.surface"
-"Kooloonong_canola","Rip.50_none","Ripping to 50cm with no amendments",113,"Rip.50"
-"Kooloonong_canola","Control","Control",1,"Control"
-"Kooloonong_canola","Rip.50_Cl.surface","Ripping to 50cm with chicken litter applied surface",114,"Rip.50_ChickL.surface"
-"Brooker","Spade.30_Lc@8.incorp_30.K_added.surface","spade 30cm with lucerne at 8t/ha incorporated 30cm and potassium applied at surface",48,"Spade.30_Luc@8.incorp_30.K_added.surface"
-"Brooker","Spade.30_Lc@8.incorp_30","spade 30cm with lucerne at 8t/ha incorporated 30cm",40,"Spade.30_Luc@8.incorp_30"
-"Brooker","Spade.30_none","spade 30cm with no amendments",35,"Spade.30"
-"Brooker","Spade.30_K_added.surface","spade 30cm with potassium applied at surface",64,"Spade.30_K_added.surface"
-"Brooker","Unmodified_K_added.surface","potassium applied surface",22,"K_added.surface"
-"Brooker","Control","Control",1,"Control"
-"Brooker","Spade.30_Fert.incorp_30","spade 30cm with fertiliser incorporated 30cm",65,"Spade.30_Fert.incorp_30"
-"Brooker","Spade.30_Fert.incorp_30.K_added.incorp_30","spade 30cm with fertiliser and potassium incorporated 30cm",66,"Spade.30_Fert.incorp_30.K_added.incorp_30"
-"Brooker","Spade.30_Lc@15.incorp_30.K_added.surface","spade 30cm with lucerne at 15t/ha incorporated 30cm and potassium applied at surface",50,"Spade.30_Luc@15.incorp_30.K_added.surface"
-"Brooker","Spade.30_Lc@15.incorp_30","spade 30cm with lucerne at 15t/ha incorporated 30cm",42,"Spade.30_Luc@15.incorp_30"
-"Brooker","Spade.30_Lc@4.incorp_30","spade 30cm with lucerne at 4t/ha incorporated 30cm",38,"Spade.30_Luc@4.incorp_30"
-"Brooker","Spade.30_Lc@4.incorp_30.K_added.surface","spade 30cm with lucerne at 4t/ha incorporated 30cm and potassium applied at surface",46,"Spade.30_Luc@4.incorp_30.K_added.surface"
-"Brooker","Spade.30_Lc@1.incorp_30.K_added.surface","spade 30cm with lucerne at 1t/ha incorporated 30cm and potassium applied at surface",44,"Spade.30_Luc@1.incorp_30.K_added.surface"
-"Brooker","Spade.30_Lc@1.incorp_30","spade 30cm with lucerne at 1t/ha incorporated 30cm",36,"Spade.30_Luc@1.incorp_30"
-"Brooker","Spade.30_Lc@10.incorp_30.K_added.surface","spade 30cm with lucerne at 10t/ha incorporated 30cm and potassium applied at surface",49,"Spade.30_Luc@10.incorp_30.K_added.surface"
-"Brooker","Spade.30_Lc@10.incorp_30","spade 30cm with lucerne at 10t/ha incorporated 30cm",41,"Spade.30_Luc@10.incorp_30"
-"Brooker","Spade.30_Lc@6.incorp_30","spade 30cm with lucerne at 6t/ha incorporated 30cm",39,"Spade.30_Luc@6.incorp_30"
-"Brooker","Spade.30_Lc@6.incorp_30.K_added.surface","spade 30cm with lucerne at 6t/ha incorporated 30cm and potassium applied at surface",47,"Spade.30_Luc@6.incorp_30.K_added.surface"
-"Brooker","Spade.30_Lc@2.incorp_30","spade 30cm with lucerne at 2t/ha incorporated 30cm",37,"Spade.30_Luc@2.incorp_30"
-"Brooker","Spade.30_Lc@2.incorp_30.K_added.surface","spade 30cm with lucerne at 2t/ha incorporated 30cm and potassium applied at surface",45,"Spade.30_Luc@2.incorp_30.K_added.surface"
-"Brooker","Spade.30_Lc@20.incorp_30.K_added.surface","spade 30cm with lucerne at 20t/ha incorporated 30cm and potassium applied at surface",51,"Spade.30_Luc@20.incorp_30.K_added.surface"
-"Brooker","Spade.30_Lc@20.incorp_30","spade 30cm with lucerne at 20t/ha incorporated 30cm",43,"Spade.30_Luc@20.incorp_30"
-"Bute_CSIRO","Rip.30_none","Ripping to 30cm with no amendments",71,"Rip.30"
-"Bute_CSIRO","Rip.50_Cl@7.5.band_50","Ripping to 50cm with chicken litter at 7.5t/ha banded 50cm",118,"Rip.50_ChickL@7.5.band_50"
-"Bute_CSIRO","Unmodified_Cl@2.5.surface_Yr18,19,20","chicken litter at 2.5t/ha applied surface in years 2018, 2019, 2020",7,"ChickL@2.5.surface_Yr18,19,20 "
-"Bute_CSIRO","Rip.50IncRip_none","Ripping to 50cm and inclusion with no amendments",130,"Rip.50IncRip"
-"Bute_CSIRO","Rip.50_Cl@2.5.surface_Yr18,19,20","Ripping to 50cm with chicken litter at 2.5t/ha applied at surface in years 2018, 2019, 2020",115,"Rip.50_ChickL@2.5.surface_Yr18,19,20"
-"Bute_CSIRO","Rip.50_none","Ripping to 50cm with no amendments",113,"Rip.50"
-"Bute_CSIRO","Rip.50IncRip_Cl@7.5.incorp_50","Ripping to 50cm and inclusion with chicken litter incorporated 50cm",133,"Rip.50IncRip_ChickL@7.5.incorp_50"
-"Bute_CSIRO","Rip.30_Cl@7.5.surface","Ripping to 30cm with chicken litter @ 7.5t/ha applied at surface",74,"Rip.30_ChickL@7.5.surface"
-"Bute_CSIRO","Rip.50_Cl@7.5.surface","Ripping to 50cm with chicken litter at 7.5t/ha applied at surface",116,"Rip.50_ChickL@7.5.surface"
-"Bute_CSIRO","Rip.30_Cl@7.5.band_30","Ripping to 30cm with chicken litter @ 7.5t/ha banded at 30cm",76,"Rip.30_ChickL@7.5.band_30"
-"Bute_CSIRO","Control","Control",1,"Control"
-"Bute_CSIRO","Unmodified_Cl@7.5.surface","chicken litter at 7.5t/ha applied surface",13,"ChickL@7.5.surface"
-"Bute_Trengrove","Unmodified_Cl@20.incorp_8","chicken litter at 20t/ha incorporated 8cm",14,"ChickL@20.incorp_8"
-"Bute_Trengrove","Rip.50_Cl@20.incorp_20.Fert.surface","Ripping to 50cm with chicken litter at 20t/ha incorporated 20 cm and fertiliser applied at surface",123,"Rip.50_ChickL@20.incorp_20.Fert.surface"
-"Bute_Trengrove","Unmodified_Clay.incorp_8","clay incorporated 8cm",26,"Clay.incorp_8"
-"Bute_Trengrove","Control","Control",1,"Control"
-"Bute_Trengrove","Rip.50_Cl@5.incorp_20.Clay.incorp_20","Ripping to 50cm with chicken litter at 5t/ha incorporated 20 cm and clay incorporated 20cm",121,"Rip.50_ChickL@5.incorp_20.Clay.incorp_20"
-"Bute_Trengrove","Rip.50_Cl@5.incorp_20.Fert.surface","Ripping to 50cm with chicken litter at 5t/ha incorporated 20 cm and fertiliser applied at surface",120,"Rip.50_ChickL@5.incorp_20.Fert.surface"
-"Bute_Trengrove","Unmodified_Cl@5.incorp_8","chicken litter at 5t/ha incorporated 8cm",9,"ChickL@5.incorp_8"
-"Bute_Trengrove","Unmodified_Cl@20.incorp_8.Fert.surface.Clay.incorp_8","chicken litter at 20t/ha and fertiliser and clay incorporated 8cm",17,"ChickL@20.incorp_8.Fert.surface.Clay.incorp_8"
-"Bute_Trengrove","Rip.50_Fert.surface","Ripping to 50cm with fertiliser applied at surface",126,"Rip.50_Fert.surface"
-"Bute_Trengrove","Unmodified_Cl@5.incorp_8.Fert.surface","chicken litter at 5t/ha incorporated 8cm and fertiliser applied at surface",10,"ChickL@5.incorp_8.Fert.surface"
-"Bute_Trengrove","Unmodified_Cl@5.incorp_8.Fert.surface.Clay.incorp_8","chicken litter at 5t/ha and fertiliser and clay incorporated 8cm",12,"ChickL@5.incorp_8.Fert.surface.Clay.incorp_8"
-"Bute_Trengrove","Unmodified_Fert.surface","fertiliser applied surface",19,"Fert.surface"
-"Bute_Trengrove","Unmodified_Fert.surface.Clay.incorp_8","fertiliser and clay incorporated 8cm",24,"Fert.surface.Clay.incorp_8"
-"Bute_Trengrove","Rip.50_none","Ripping to 50cm with no amendments",113,"Rip.50"
-"Bute_Trengrove","Unmodified_Cl@5.incorp_8.Clay.incorp_8","chicken litter at 5t/ha and clay incorporated 8cm",11,"ChickL@5.incorp_8.Clay.incorp_8"
-"Bute_Trengrove","Rip.50_Cl@20.incorp_20.Fert.surface.Clay.incorp_20","Ripping to 50cm with chicken litter at 20t/ha incorporated 20 cm and fertiliser applied at surface and clay incorporated 20cm",125,"Rip.50_ChickL@20.incorp_20.Fert.surface.Clay.incorp_20"
-"Bute_Trengrove","Unmodified_Cl@20.incorp_8.Clay.incorp_8","chicken litter at 20t/ha and clay incorporated 8cm",16,"ChickL@20.incorp_8.Clay.incorp_8"
-"Bute_Trengrove","Rip.50_Fert.surface.Clay.incorp_20","Ripping to 50cm with fertiliser applied at surface and clay incorporated 20cm",128,"Rip.50_Fert.surface.Clay.incorp_20"
-"Bute_Trengrove","Unmodified_Cl@20.incorp_8.Fert.surface","chicken litter at 20t/ha and fertiliser applied at surface",15,"ChickL@20.incorp_8.Fert.surface"
-"Bute_Trengrove","Rip.50_Cl@20.incorp_20.Clay.incorp_20","Ripping to 50cm with chicken litter at 20t/ha incorporated 20 cm and clay incorporated 20cm",124,"Rip.50_ChickL@20.incorp_20.Clay.incorp_20"
-"Bute_Trengrove","Rip.50_Cl@5.incorp_20","Ripping to 50cm with chicken litter at 5t/ha incorporated 20 cm",117,"Rip.50_ChickL@5.incorp_20"
-"Bute_Trengrove","Rip.50_Cl@5.incorp_20.Fert.surface.Clay.incorp_20","Ripping to 50cm with chicken litter at 5t/ha incorporated 20 cm and fertiliser applied at surface and clay incorporated 20cm",122,"Rip.50_ChickL@5.incorp_20.Fert.surface.Clay.incorp_20"
-"Bute_Trengrove","Rip.50_Clay.incorp_20","Ripping to 50cm with clay incorporated 20cm",127,"Rip.50_Clay.incorp_20"
-"Bute_Trengrove","Rip.50_Cl@20.incorp_20","Ripping to 50cm with chicken litter at 20t/ha incorporated 20 cm",119,"Rip.50_ChickL@20.incorp_20"
-"Carwarp_Amelioration","Spade.30_Lc.incorp_30","spade 30cm with lucerne incorporated 30cm",52,"Spade.30_Luc.incorp_30"
-"Carwarp_Amelioration","Spade.30_none","spade 30cm with no amendments",35,"Spade.30"
-"Carwarp_Amelioration","Rip.60Spade.30_Lc.incorp_30+band_60","Ripping to 60cm and spading 30cm with lucerne incorporated 30cm and banded 60cm",143,"Rip.60Spade.30_Luc.incorp_30+band_60"
-"Carwarp_Amelioration","Rip.60Spade.30_none","Ripping to 60cm and spading 30cm with no amendments",141,"Rip.60Spade.30"
-"Carwarp_Amelioration","Rip.30+60_none","Ripping to 30cm and 60cm with no amendments",84,"Rip.30+60"
-"Carwarp_Amelioration","Rip.30+60_Lc.band_30+60","Ripping to 30cm and 60cm with lucerne banded 30cm and 60cm",86,"Rip.30+60_Luc.band_30+60"
-"Carwarp_Amelioration","Rip.60_Lc.band_60","Ripping to 60cm with lucerne banded 60cm",138,"Rip.60_Luc.band_60"
-"Carwarp_Amelioration","Rip.60_none","Ripping to 60cm with no amendments",134,"Rip.60"
-"Carwarp_Amelioration","Rip.30_none","Ripping to 30cm with no amendments",71,"Rip.30"
-"Carwarp_Amelioration","Rip.30_Lc.band_30","Ripping to 30cm with lucerne banded 30cm",78,"Rip.30_Luc.band_30"
-"Carwarp_Amelioration","Control","Control",1,"Control"
-"Carwarp_Amelioration","Unmodified_Lc.surface","lucerne applied surface",5,"Luc.surface"
-"Lowaldie_Crest","Control","Control",1,"Control"
-"Lowaldie_Crest","Rip.40_none","Ripping to 40cm with no amendments",100,"Rip.40"
-"Lowaldie_Crest","Rip.60_none","Ripping to 60cm with no amendments",134,"Rip.60"
-"Lowaldie_Deep sand","Control","Control",1,"Control"
-"Lowaldie_Deep sand","Rip.40_none","Ripping to 40cm with no amendments",100,"Rip.40"
-"Lowaldie_Deep sand","Rip.60_none","Ripping to 60cm with no amendments",134,"Rip.60"
-"Murlong","Rip.40_none","Ripping to 40cm with no amendments",100,"Rip.40"
-"Murlong","Rip.30_Lc.incorp_30","Ripping to 30cm with lucerne incorporated 30cm",77,"Rip.30_Luc.incorp_30"
-"Murlong","Rip.30_Fert.incorp_30","Ripping to 30cm with fertiliser incorporated 30cm",80,"Rip.30_Fert.incorp_30"
-"Murlong","Spade.30_Lc.incorp_30","spade 30cm with lucerne incorporated 30cm",52,"Spade.30_Luc.incorp_30"
-"Murlong","Rip.40_Lc.incorp_40","Ripping to 40cm with lucerne incorporated 40cm",104,"Rip.40_Luc.incorp_40"
-"Murlong","Control","Control",1,"Control"
-"Murlong","Rip.40_Fert.incorp_40","Ripping to 40cm with fertiliser incorporated 40cm",105,"Rip.40_Fert.incorp_40"
-"Murlong","Spade.30_none","spade 30cm with no amendments",35,"Spade.30"
-"Murlong","Spade.30_Fert.incorp_30","spade 30cm with fertiliser incorporated 30cm",65,"Spade.30_Fert.incorp_30"
-"Murlong","Rip.30_none","Ripping to 30cm with no amendments",71,"Rip.30"
-"Brimpton Lake","Control","Control",1,"Control"
-"Brimpton Lake","Spade.30_Lc.incorp_30","spade 30cm with lucerne incorporated 30cm",52,"Spade.30_Luc.incorp_30"
-"Brimpton Lake","Spade.30_none","spade 30cm with no amendments",35,"Spade.30"
-"Brimpton Lake","Spade.30_Fert.incorp_30","spade 30cm with fertiliser incorporated 30cm",65,"Spade.30_Fert.incorp_30"
-"Brimpton Lake","Spade.30_Lc.incorp_30.Fert.incorp_30","spade 30cm with lucerne and fertiliser incorporated 30cm",53,"Spade.30_Luc.incorp_30.Fert.incorp_30"
-"Brimpton Lake","Unmodified_Fert.band_30","fertiliser banded 30cm",23,"Fert.band_30"
-"Brimpton Lake","Spade.30_Fert.incorp_30.Clay.incorp_30","spade 30cm with fertiliser and clay incorporated 30cm",58,"Spade.30_Fert.incorp_30.Clay.incorp_30"
-"Brimpton Lake","Spade.30_Clay.incorp_30","spade 30cm with clay incorporated 30cm",69,"Spade.30_Clay.incorp_30"
-"Brimpton Lake","Unmodified_Fert.band_30.Clay.incorp_10","fertiliser banded 30cm and clay incorporated 10cm",25,"Fert.band_30.Clay.incorp_10"
-"Brimpton Lake","Spade.30_Lc.incorp_30.Clay.incorp_30","spade 30cm with lucerne and clay incorporated 30cm",54,"Spade.30_Luc.incorp_30.Clay.incorp_30"
-"Brimpton Lake","Unmodified_Clay.incorp_10","clay incorporated 10cm",27,"Clay.incorp_10"
-"Brimpton Lake","Spade.30_Lc.incorp_30.Fert.incorp_30.Clay.incorp_30","spade 30cm with ulcerous and fertiliser and clay incorporated 30cm",55,"Spade.30_Luc.incorp_30.Fert.incorp_30.Clay.incorp_30"
-"Cadgee","Unmodified_Fert.band_30.Clay.incorp_10","fertiliser banded 30cm and clay incorporated 10cm",25,"Fert.band_30.Clay.incorp_10"
-"Cadgee","Spade.30_Lc.incorp_30.Fert.incorp_30.Clay.incorp_30","spade 30cm with ulcerous and fertiliser and clay incorporated 30cm",55,NA
-"Cadgee","Spade.30_Lc.incorp_30","spade 30cm with lucerne incorporated 30cm",52,"Spade.30_Luc.incorp_30"
-"Cadgee","Spade.30_Fert.incorp_30","spade 30cm with fertiliser incorporated 30cm",65,"Spade.30_Fert.incorp_30"
-"Cadgee","Spade.30_none","spade 30cm with no amendments",35,"Spade.30"
-"Cadgee","Control","Control",1,"Control"
-"Cadgee","Spade.30_Fert.incorp_30.Clay.incorp_30","spade 30cm with fertiliser and clay incorporated 30cm",58,"Spade.30_Fert.incorp_30.Clay.incorp_30"
-"Cadgee","Spade.30_Clay.incorp_30","spade 30cm with clay incorporated 30cm",69,"Spade.30_Clay.incorp_30"
-"Cadgee","Spade.30_Lc.incorp_30.Fert.incorp_30","spade 30cm with ulcerous and fertiliser incorporated 30cm",53,NA
-"Cadgee","Unmodified_Clay.incorp_10","clay incorporated 10cm",27,"Clay.incorp_10"
-"Cadgee","Unmodified_Fert.band_30","fertiliser banded 30cm",23,"Fert.band_30"
-"Cadgee","Spade.30_Lc.incorp_30.Clay.incorp_30","spade 30cm with lucerne and clay incorporated 30cm",54,"Spade.30_Luc.incorp_30.Clay.incorp_30"
-"Karoonda","Spade.30_Fert.incorp_30.Clay.incorp_30","spade 30cm with fertiliser and clay incorporated 30cm",58,"Spade.30_Fert.incorp_30.Clay.incorp_30"
-"Karoonda","Unmodified_Fert.band_30.Clay.incorp_10","fertiliser banded 30cm and clay incorporated 10cm",25,"Fert.band_30.Clay.incorp_10"
-"Karoonda","Spade.30_Lc.incorp_30","spade 30cm with lucerne incorporated 30cm",52,"Spade.30_Luc.incorp_30"
-"Karoonda","Spade.30_Fert.incorp_30","spade 30cm with fertiliser incorporated 30cm",65,"Spade.30_Fert.incorp_30"
-"Karoonda","Spade.30_none","spade 30cm with no amendments",35,"Spade.30"
-"Karoonda","Control","Control",1,"Control"
-"Karoonda","Unmodified_Clay.incorp_10","clay incorporated 10cm",27,"Clay.incorp_10"
-"Karoonda","Spade.30_Lc.incorp_30.Fert.incorp_30.Clay.incorp_30","spade 30cm with ulcerous and fertiliser and clay incorporated 30cm",55,"Spade.30_Luc.incorp_30.Fert.incorp_30.Clay.incorp_30"
-"Karoonda","Spade.30_Lc.incorp_30.Fert.incorp_30","spade 30cm with ulcerous and fertiliser incorporated 30cm",53,"Spade.30_Luc.incorp_30.Fert.incorp_30"
-"Karoonda","Spade.30_Clay.incorp_30","spade 30cm with clay incorporated 30cm",69,"Spade.30_Clay.incorp_30"
-"Karoonda","Unmodified_Fert.band_30","fertiliser banded 30cm",23,"Fert.band_30"
-"Karoonda","Spade.30_Lc.incorp_30.Clay.incorp_30","spade 30cm with lucerne and clay incorporated 30cm",54,"Spade.30_Luc.incorp_30.Clay.incorp_30"
-"Ouyen_Spade","Control","Control",1,"Control"
-"Ouyen_Spade","Spade.30_none","spade 30cm with no amendments",35,"Spade.30"
-"Ouyen_Spade","Spade.30_Cereal.incorp_30","spade 30cm with cereal incorporated 30cm",60,"Spade.30_Cereal.incorp_30"
-"Ouyen_Spade","Spade.30_Vetch.incorp_30","spade 30cm with vetch incorporated 30cm",61,"Spade.30_Vetch.incorp_30"
-"Ouyen_Spade","Spade.30_Fert.incorp_30","spade 30cm with fertiliser incorporated 30cm",65,"Spade.30_Fert.incorp_30"
-"Ouyen_Spade","Spade.30_Vet_Cer.incorp_30","spade 30cm with vetch and cereal incorporated 30cm",62,"Spade.30_Vet_Cer.incorp_30"
-"Ouyen_Spade","Spade.30_Vet_Cer_In.incorp_30","spade 30cm with vetch and cereal and inoculant incorporated 30cm",63,"Spade.30_Vet_Cer_In.incorp_30"
-"Ouyen_Spade","Spade.30_Com.incorp_30","spade 30cm with compost incorporated 30cm",59,"Spade.30_Com.incorp_30"
-"Ouyen_Spade","Spade.30_Cl.incorp_30","spade 30cm with chicken litter incorporated 30cm",56,"Spade.30_ChickL.incorp_30"
-"Waikerie","Control","Control",1,"Control"
-"Waikerie","Unmodified_Cl.surface","chicken litter applied at surface",6,"ChickL.surface"
-"Waikerie","Unmodified_Fert.band_8","fertiliser banded 8cm",21,"Fert.band_8"
-"Waikerie","Rip.30_none","Ripping to 30cm with no amendments",71,"Rip.30"
-"Waikerie","Rip.30_Cl.surface","Ripping to 30cm with chicken litter applied at surface",73,"Rip.30_ChickL.surface"
-"Waikerie","Rip.30_Fert.band_8","Ripping to 30cm with fertiliser banded at 8cm",81,"Rip.30_Fert.band_8"
-"Waikerie","Rip.30_Cl.band_30","Ripping to 30cm with chicken litter banded at 30cm",75,"Rip.30_ChickL.band_30"
-"Waikerie","Rip.30_Fert.band_30","Ripping to 30cm with fertiliser banded at 30cm",82,"Rip.30_Fert.band_30"
-"Waikerie","Rip.60_Cl.surface","Ripping to 60cm with chicken litter applied at surface",135,"Rip.60_ChickL.surface"
-"Waikerie","Rip.60_Fert.band_8","Ripping to 60cm with fertiliser banded 8cm",139,"Rip.60_Fert.band_8"
-"Waikerie","Rip.60_Cl.band_60","Ripping to 60cm with chicken litter banded 60cm",136,"Rip.60_ChickL.band_60"
-"Waikerie","Rip.60_Fert.band_60","Ripping to 60cm with fertiliser banded 60cm",140,"Rip.60_Fert.band_60"
-"Waikerie","Rip.60_none","Ripping to 60cm with no amendments",134,"Rip.60"
-"Yenda","Sweep.30_Lime.incorp_30","sweep 30cm with lime incorporated 30cm",98,"Sweep.30_Lime.incorp_30"
-"Yenda","Sweep.30_Cl@9.incorp_30","sweep 30cm with chicken litter at 9t/ha incorporated 30cm",96,"Sweep.30_ChickL@9.incorp_30"
-"Yenda","Sweep.30_Cl@9.incorp_30_Yr17,18,19","sweep 30cm with chicken litter at 9t/ha incorporated 30cm applied 2017, 2018, 2019",97,"Sweep.30_ChickL@9.incorp_30_Yr17,18,19"
-"Yenda","Sweep.30_Cl@3.incorp_30","sweep 30cm with chicken litter at 3t/ha incorporated 30cm",94,"Sweep.30_ChickL@3.incorp_30"
-"Yenda","Unmodified_Cl@3.incorp_8","chicken litter at 3t/ha incorporated 8cm",8,"ChickL@3.incorp_8"
-"Yenda","Rip.60_none","Ripping to 60cm with no amendments",134,"Rip.60"
-"Yenda","Sweep.30_none","sweep 30cm with no amendments",93,"Sweep.30"
-"Yenda","Unmodified_Fert.foliar","fertiliser applied to foliar",18,"Fert.foliar"
-"Yenda","Control","Control",1,"Control"
-"Yenda","Sweep.30_Cl@6.incorp_30","sweep 30cm with chicken litter at 6t/ha incorporated 30cm",95,"Sweep.30_ChickL@6.incorp_30"
-"Yenda","Sweep.30_Cl@3.incorp_30.Lime.incorp_8","sweep 30cm with chicken litter at 3t/ha incorporated 30cm and lime incorporated 8cm",99,"Sweep.30_ChickL@3.incorp_30.Lime.incorp_8"
-"Yenda","Unmodified_Fert.incorp_8","fertiliser incorporated 8cm",20,"Fert.incorp_8"
-"Younghusband","Unmodified+DeepTill.18_SE14.band_8","deep tillage 18cm with SE14 (wetter) banded 8cm",147,"DeepTill.18_SE14.band_8"
-"Younghusband","Unmodified+DeepTill.18_none","deep tillage 18cm with no amendments",146,"DeepTill.18"
-"Younghusband","Rip.50_none","Ripping to 50cm with no amendments",113,"Rip.50"
-"Younghusband","Spade.30_none","spade 30cm with no amendments",35,"Spade.30"
-"Younghusband","Rip.50IncRip_none","Ripping to 50cm and inclusion with no amendments",130,"Rip.50IncRip"
-"Younghusband","Unmodified_SE14.band_8","SE14 (wetter) banded 8cm",3,"SE14.band_8"
-"Younghusband","Control","Control",1,"Control"
-"Younghusband","Unmodified_Bi_Agra.surface+band_8","Bi Agra (wetter) surface and banded 8cm",4,"Bi_Agra.surface+band_8"
-"Younghusband","Unmodified+OnRow_none","on row sowing with no amendments",2,"OnRow"
-"Ouyen_Placement","Pre_drill_20+7.5_none","Pre drill to depth 20cm with growers standard fertiliser to 7.5cm with no additional amendments",29,"Pre_drill_20+7.5"
-"Ouyen_Placement","Unmodified_none.Fert.surface","growers standard fertiliser to surface with no additional amendments",28,"Fert.surface"
-"Ouyen_Placement","Rip_30+30_none_annual","Ripping to 30cm with growers standard fertiliser to 30cm with no amendments annually",90,"Rip_30+30_annual"
-"Ouyen_Placement","Pre_drill_20+20_none","Pre drill to depth 20cm with growers standard fertiliser to 20cm with no additional amendments",31,"Pre_drill_20+20"
-"Ouyen_Placement","Rip_30+30_Fert.banded_30_annual","Ripping to 30cm with growers standard fertiliser to 30cm with fertiliser banded 30cm annually",92,"Rip_30+30_Fert.banded_30_annual"
-"Ouyen_Placement","Pre_drill_20+20_none_annual","Pre drill to depth 20cm with growers standard fertiliser to 20cm with no additional amendments performed annually",32,"Pre_drill_20+20_annual"
-"Ouyen_Placement","Rip_30+30_Fert.banded_30","Ripping to 30cm with growers standard fertiliser to 30cm with fertiliser banded 30cm",91,"Rip_30+30_Fert.banded_30"
-"Ouyen_Placement","Control","Control",1,"Control"
-"Ouyen_Placement","Rip_30+7.5_none","Ripping to 30cm with growers standard fertiliser to 7.5cm with no amendments ",87,"Rip_30+7.5"
-"Ouyen_Placement","Rip_30+7.5_none_annual","Ripping to 30cm with growers standard fertiliser to 7.5cm with no amendments annually",88,"Rip_30+7.5_annual"
-"Ouyen_Placement","Pre_drill_20+20_Fert.banded_20","Pre drill to depth 20cm with growers standard fertiliser to 20cm with fertiliser banded at 20cm",33,"Pre_drill_20+20_Fert.banded_20"
-"Ouyen_Placement","Pre_drill_20+20_Fert.banded_20_annual","Pre drill to depth 20cm with growers standard fertiliser to 20cm with fertiliser banded at 20cm annually ",34,"Pre_drill_20+20_Fert.banded_20_annual"
-"Ouyen_Placement","Pre_drill_20+7.5_none_annual","Pre drill to depth 20cm with growers standard fertiliser to 7.5cm with no additional amendments annually",30,"Pre_drill_20+7.5_annual"
-"Ouyen_Placement","Rip_30+30_none","Ripping to 30cm and 30cm with no amendments annually",89,"Rip_30+30"
+"site","Descriptors","detailed_name","order_rank","order_rank_1"
+"Kooloonong_chickpea","Unmodified_Cl.surface","chicken litter applied surface",6,6
+"Kooloonong_chickpea","Control","Control",1,1
+"Kooloonong_chickpea","Rip.50_none","Ripping to 50cm with no amendments",113,113
+"Kooloonong_chickpea","Rip.50_Cl.surface","Ripping to 50cm with chicken litter applied surface",114,114
+"Kooloonong_lentil","Control","Control",1,1
+"Kooloonong_lentil","Unmodified_Cl.surface","chicken litter applied surface",6,6
+"Kooloonong_lentil","Rip.50_Cl.surface","Ripping to 50cm with chicken litter applied surface",114,114
+"Kooloonong_lentil","Rip.50_none","Ripping to 50cm with no amendments",113,113
+"Kooloonong_lupin","Control","Control",1,1
+"Kooloonong_lupin","Unmodified_Cl.surface","chicken litter applied surface",6,6
+"Kooloonong_lupin","Rip.50_Cl.surface","Ripping to 50cm with chicken litter applied surface",114,114
+"Kooloonong_lupin","Rip.50_none","Ripping to 50cm with no amendments",113,113
+"Tempy","Control","Control",1,1
+"Tempy","Rip.50_none","Ripping to 50cm with no amendments",113,113
+"Tempy","Rip.50IncRip_none","Ripping to 50cm and inclusion with no amendments",130,130
+"Tempy","Rip.50IncRip_Cl.surface","Ripping to 50cm and inclusion with chicken litter applied surface",132,132
+"Tempy","Rip.50_Cl.surface","Ripping to 50cm with chicken litter applied surface",114,114
+"Wynarka","Control","Control",1,1
+"Wynarka","Rip.60IncRip_none","Ripping to 60cm and inclusion with no amendments",144,144
+"Wynarka","Rip.60IncRip+Spade.30_none","Ripping to 60cm and inclusion and spading 30cm with no amendments",145,145
+"Wynarka","Rip.30_none","Ripping to 30cm with no amendments",71,71
+"Wynarka","Rip.60_none","Ripping to 60cm with no amendments",134,134
+"Wynarka","Rip.60Spade.30_none","Ripping to 30cm and spading 30cm with no amendments",141,141
+"Wynarka","Spade.30_none","spade 30cm with no amendments",35,35
+"Monia_Gap","Spade.30_Gypsum.incorp_30","spade 30cm with gypsum incorporated 30cm",70,70
+"Monia_Gap","Spade.30_Cl.incorp_30","spade 30cm with chicken litter incorporated 30cm",56,56
+"Monia_Gap","Rip.60Spade.30_none","Ripping to 30cm and spading 30cm with no amendments",141,141
+"Monia_Gap","Spade.30_Cl.incorp_30.Gypsum.incorp_30","spade 30cm with chicken litter and gypsum incorporated 30cm",57,57
+"Monia_Gap","Spade.30_none","spade 30cm with no amendments",35,35
+"Monia_Gap","Control","Control",1,1
+"Malinong","Control","Control",1,1
+"Malinong","Spade.30_none","spade 30cm with no amendments",35,35
+"Malinong","DiscInv.30_none","Disc inversion to 30cm with no amendments",148,148
+"Malinong","Rip.30_none","Ripping to 30cm with no amendments",71,71
+"Malinong","Rip.40_none","Ripping to 40cm with no amendments",100,100
+"Sherwood","Control","Control",1,1
+"Sherwood","Rip.30_none","Ripping to 30cm with no amendments",71,71
+"Sherwood","Spade.30_none","spade 30cm with no amendments",35,35
+"Sherwood","Rip.30_Fert.surface","Ripping to 30cm with fertiliser applied at surface",79,79
+"Sherwood","Spade.30_Fert.incorp_30","spade 30cm with fertiliser incorporated 30cm",65,65
+"Cummins","Control","Control",1,1
+"Cummins","Rip.30_none","Ripping to 30cm with no amendments",71,71
+"Cummins","Rip.30IncRip_none","Ripping to 30cm and inclusion with no amendments",83,83
+"Cummins","Rip.30IncRip_Gypsum.incorp_30","Ripping to 30cm and inclusion with Gypsum incorporated 30cm",85,85
+"Karkoo","Control","Control",1,1
+"Karkoo","Rip.40_none","Ripping to 40cm with no amendments",100,100
+"Karkoo","Rip.40IncRip_none","Ripping to 40cm and inclusion with no amendments",101,101
+"Karkoo","Rip.40IncRip_Lc.incorp_40","Ripping to 40cm and inclusion with chicken litter incorporated 40cm",103,103
+"Buckleboo","Rip.35_none","Ripping to 35cm with no amendments",72,72
+"Buckleboo","Rip.45_none","Ripping to 45cm with no amendments",106,106
+"Buckleboo","Rip.45IncRip_none","Ripping to 45cm and inclusion with no amendments",107,107
+"Buckleboo","Rip.45IncRip_Fert_High.band_45","Ripping to 45cm and inclusion with fertiliser (high rate) banded 45cm",111,111
+"Buckleboo","Rip.45IncRip_Fert_Low.band_45","Ripping to 45cm and inclusion with fertiliser (low rate) banded 45cm",110,110
+"Buckleboo","Rip.45IncRip_Fert_APP.band_45","Ripping to 45cm and inclusion with fertiliser (app) banded 45cm",112,112
+"Buckleboo","Control","Control",1,1
+"Mt Damper","Control","Control",1,1
+"Mt Damper","Spade.30_none","spade 30cm with no amendments",35,35
+"Mt Damper","Rip.45IncRip_none","Ripping to 45cm and inclusion with no amendments",107,107
+"Mt Damper","Rip.45IncRip+Spade.30_none","Ripping to 45cm and inclusion and spading 30cm with no amendments",108,108
+"Mt Damper","Rip.45IncRip_Fert.incorp_45","Ripping to 45cm and inclusion with fertiliser banded 45cm",109,109
+"Kybunga","Control","Control",1,1
+"Kybunga","Rip.30_none","Ripping to 30cm with no amendments",71,71
+"Kybunga","Rip.50_none","Ripping to 50cm with no amendments",113,113
+"Kybunga","Spade.30_none","spade 30cm with no amendments",35,35
+"Kybunga","Rip.50Spade.30_none","Ripping to 50cm and spading 30cm with no amendments",129,129
+"Kybunga","Rip.50_Cl.surface","Ripping to 50cm with chicken litter applied surface",114,114
+"Kybunga","Spade.30_Cl.incorp_30","spade 30cm with chicken litter incorporated 30cm",56,56
+"Warnertown","DiscInv.30_none","Disc inversion to 30cm with no amendments",148,148
+"Warnertown","Rip.50_none","Ripping to 50cm with no amendments",113,113
+"Warnertown","Rip.50IncRip_none","Ripping to 50cm and inclusion with no amendments",130,130
+"Warnertown","Spade.30_none","spade 30cm with no amendments",35,35
+"Warnertown","Rip.30_none","Ripping to 30cm with no amendments",71,71
+"Warnertown","Control","Control",1,1
+"Telopea_Downs","Spade.30_Clay@250.incorp_30","spade 30cm with clay at 250t/ha",67,67
+"Telopea_Downs","Spade.30_Clay@500.incorp_30_Yr07,20","spade 30cm with clay at 250t/ha in years 2007 and 2020",68,68
+"Telopea_Downs","Control","Control",1,1
+"Kooloonong_canola","Unmodified_Cl.surface","chicken litter applied surface",6,6
+"Kooloonong_canola","Rip.50_none","Ripping to 50cm with no amendments",113,113
+"Kooloonong_canola","Control","Control",1,1
+"Kooloonong_canola","Rip.50_Cl.surface","Ripping to 50cm with chicken litter applied surface",114,114
+"Brooker","Spade.30_Lc@8.incorp_30.K_added.surface","spade 30cm with lucerne at 8t/ha incorporated 30cm and potassium applied at surface",48,48
+"Brooker","Spade.30_Lc@8.incorp_30","spade 30cm with lucerne at 8t/ha incorporated 30cm",40,40
+"Brooker","Spade.30_none","spade 30cm with no amendments",35,35
+"Brooker","Spade.30_K_added.surface","spade 30cm with potassium applied at surface",64,64
+"Brooker","Unmodified_K_added.surface","potassium applied surface",23,23
+"Brooker","Control","Control",1,1
+"Brooker","Spade.30_Fert.incorp_30","spade 30cm with fertiliser incorporated 30cm",65,65
+"Brooker","Spade.30_Fert.incorp_30.K_added.incorp_30","spade 30cm with fertiliser and potassium incorporated 30cm",66,66
+"Brooker","Spade.30_Lc@15.incorp_30.K_added.surface","spade 30cm with lucerne at 15t/ha incorporated 30cm and potassium applied at surface",50,50
+"Brooker","Spade.30_Lc@15.incorp_30","spade 30cm with lucerne at 15t/ha incorporated 30cm",42,42
+"Brooker","Spade.30_Lc@4.incorp_30","spade 30cm with lucerne at 4t/ha incorporated 30cm",38,38
+"Brooker","Spade.30_Lc@4.incorp_30.K_added.surface","spade 30cm with lucerne at 4t/ha incorporated 30cm and potassium applied at surface",46,46
+"Brooker","Spade.30_Lc@1.incorp_30.K_added.surface","spade 30cm with lucerne at 1t/ha incorporated 30cm and potassium applied at surface",44,44
+"Brooker","Spade.30_Lc@1.incorp_30","spade 30cm with lucerne at 1t/ha incorporated 30cm",36,36
+"Brooker","Spade.30_Lc@10.incorp_30.K_added.surface","spade 30cm with lucerne at 10t/ha incorporated 30cm and potassium applied at surface",49,49
+"Brooker","Spade.30_Lc@10.incorp_30","spade 30cm with lucerne at 10t/ha incorporated 30cm",41,41
+"Brooker","Spade.30_Lc@6.incorp_30","spade 30cm with lucerne at 6t/ha incorporated 30cm",39,39
+"Brooker","Spade.30_Lc@6.incorp_30.K_added.surface","spade 30cm with lucerne at 6t/ha incorporated 30cm and potassium applied at surface",47,47
+"Brooker","Spade.30_Lc@2.incorp_30","spade 30cm with lucerne at 2t/ha incorporated 30cm",37,37
+"Brooker","Spade.30_Lc@2.incorp_30.K_added.surface","spade 30cm with lucerne at 2t/ha incorporated 30cm and potassium applied at surface",45,45
+"Brooker","Spade.30_Lc@20.incorp_30.K_added.surface","spade 30cm with lucerne at 20t/ha incorporated 30cm and potassium applied at surface",51,51
+"Brooker","Spade.30_Lc@20.incorp_30","spade 30cm with lucerne at 20t/ha incorporated 30cm",43,43
+"Bute_CSIRO","Rip.30_none","Ripping to 30cm with no amendments",71,71
+"Bute_CSIRO","Rip.50_Cl@7.5.band_50","Ripping to 50cm with chicken litter at 7.5t/ha banded 50cm",118,118
+"Bute_CSIRO","Unmodified_Cl@2.5.surface_Yr18,19,20","chicken litter at 2.5t/ha applied surface in years 2018, 2019, 2020",7,7
+"Bute_CSIRO","Rip.50IncRip_none","Ripping to 50cm and inclusion with no amendments",130,130
+"Bute_CSIRO","Rip.50_Cl@2.5.surface_Yr18,19,20","Ripping to 50cm with chicken litter at 2.5t/ha applied at surface in years 2018, 2019, 2020",115,115
+"Bute_CSIRO","Rip.50_none","Ripping to 50cm with no amendments",113,113
+"Bute_CSIRO","Rip.50IncRip_Cl@7.5.incorp_50","Ripping to 50cm and inclusion with chicken litter incorporated 50cm",133,133
+"Bute_CSIRO","Rip.30_Cl@7.5.surface","Ripping to 30cm with chicken litter @ 7.5t/ha applied at surface",74,74
+"Bute_CSIRO","Rip.50_Cl@7.5.surface","Ripping to 50cm with chicken litter at 7.5t/ha applied at surface",116,116
+"Bute_CSIRO","Rip.30_Cl@7.5.band_30","Ripping to 30cm with chicken litter @ 7.5t/ha banded at 30cm",76,76
+"Bute_CSIRO","Control","Control",1,1
+"Bute_CSIRO","Unmodified_Cl@7.5.surface","chicken litter at 7.5t/ha applied surface",13,13
+"Bute_Trengrove","Unmodified_Cl@20.incorp_8","chicken litter at 20t/ha incorporated 8cm",14,14
+"Bute_Trengrove","Rip.50_Cl@20.incorp_20.Fert.surface","Ripping to 50cm with chicken litter at 20t/ha incorporated 20 cm and fertiliser applied at surface",123,123
+"Bute_Trengrove","Unmodified_Clay.incorp_8","clay incorporated 8cm",27,27
+"Bute_Trengrove","Control","Control",1,1
+"Bute_Trengrove","Rip.50_Cl@5.incorp_20.Clay.incorp_20","Ripping to 50cm with chicken litter at 5t/ha incorporated 20 cm and clay incorporated 20cm",121,121
+"Bute_Trengrove","Rip.50_Cl@5.incorp_20.Fert.surface","Ripping to 50cm with chicken litter at 5t/ha incorporated 20 cm and fertiliser applied at surface",120,120
+"Bute_Trengrove","Unmodified_Cl@5.incorp_8","chicken litter at 5t/ha incorporated 8cm",9,9
+"Bute_Trengrove","Unmodified_Cl@20.incorp_8.Fert.surface.Clay.incorp_8","chicken litter at 20t/ha and fertiliser and clay incorporated 8cm",17,17
+"Bute_Trengrove","Rip.50_Fert.surface","Ripping to 50cm with fertiliser applied at surface",126,126
+"Bute_Trengrove","Unmodified_Cl@5.incorp_8.Fert.surface","chicken litter at 5t/ha incorporated 8cm and fertiliser applied at surface",10,10
+"Bute_Trengrove","Unmodified_Cl@5.incorp_8.Fert.surface.Clay.incorp_8","chicken litter at 5t/ha and fertiliser and clay incorporated 8cm",12,12
+"Bute_Trengrove","Unmodified_Fert.surface","fertiliser applied surface",19,19
+"Bute_Trengrove","Unmodified_Fert.surface.Clay.incorp_8","fertiliser and clay incorporated 8cm",25,25
+"Bute_Trengrove","Rip.50_none","Ripping to 50cm with no amendments",113,113
+"Bute_Trengrove","Unmodified_Cl@5.incorp_8.Clay.incorp_8","chicken litter at 5t/ha and clay incorporated 8cm",11,11
+"Bute_Trengrove","Rip.50_Cl@20.incorp_20.Fert.surface.Clay.incorp_20","Ripping to 50cm with chicken litter at 20t/ha incorporated 20 cm and fertiliser applied at surface and clay incorporated 20cm",125,125
+"Bute_Trengrove","Unmodified_Cl@20.incorp_8.Clay.incorp_8","chicken litter at 20t/ha and clay incorporated 8cm",16,16
+"Bute_Trengrove","Rip.50_Fert.surface.Clay.incorp_20","Ripping to 50cm with fertiliser applied at surface and clay incorporated 20cm",128,128
+"Bute_Trengrove","Unmodified_Cl@20.incorp_8.Fert.surface","chicken litter at 20t/ha and fertiliser applied at surface",15,15
+"Bute_Trengrove","Rip.50_Cl@20.incorp_20.Clay.incorp_20","Ripping to 50cm with chicken litter at 20t/ha incorporated 20 cm and clay incorporated 20cm",124,124
+"Bute_Trengrove","Rip.50_Cl@5.incorp_20","Ripping to 50cm with chicken litter at 5t/ha incorporated 20 cm",117,117
+"Bute_Trengrove","Rip.50_Cl@5.incorp_20.Fert.surface.Clay.incorp_20","Ripping to 50cm with chicken litter at 5t/ha incorporated 20 cm and fertiliser applied at surface and clay incorporated 20cm",122,122
+"Bute_Trengrove","Rip.50_Clay.incorp_20","Ripping to 50cm with clay incorporated 20cm",127,127
+"Bute_Trengrove","Rip.50_Cl@20.incorp_20","Ripping to 50cm with chicken litter at 20t/ha incorporated 20 cm",119,119
+"Carwarp_Amelioration","Spade.30_Lc.incorp_30","spade 30cm with lucerne incorporated 30cm",52,52
+"Carwarp_Amelioration","Spade.30_none","spade 30cm with no amendments",35,35
+"Carwarp_Amelioration","Rip.60Spade.30_Lc.incorp_30+band_60","Ripping to 60cm and spading 30cm with lucerne incorporated 30cm and banded 60cm",143,143
+"Carwarp_Amelioration","Rip.60Spade.30_none","Ripping to 60cm and spading 30cm with no amendments",141,141
+"Carwarp_Amelioration","Rip.30+60_none","Ripping to 30cm and 60cm with no amendments",84,84
+"Carwarp_Amelioration","Rip.30+60_Lc.band_30+60","Ripping to 30cm and 60cm with lucerne banded 30cm and 60cm",86,86
+"Carwarp_Amelioration","Rip.60_Lc.band_60","Ripping to 60cm with lucerne banded 60cm",138,138
+"Carwarp_Amelioration","Rip.60_none","Ripping to 60cm with no amendments",134,134
+"Carwarp_Amelioration","Rip.30_none","Ripping to 30cm with no amendments",71,71
+"Carwarp_Amelioration","Rip.30_Lc.band_30","Ripping to 30cm with lucerne banded 30cm",78,78
+"Carwarp_Amelioration","Control","Control",1,1
+"Carwarp_Amelioration","Unmodified_Lc.surface","lucerne applied surface",5,5
+"Lowaldie_Crest","Control","Control",1,1
+"Lowaldie_Crest","Rip.40_none","Ripping to 40cm with no amendments",100,100
+"Lowaldie_Crest","Rip.60_none","Ripping to 60cm with no amendments",134,134
+"Lowaldie_Deep sand","Control","Control",1,1
+"Lowaldie_Deep sand","Rip.40_none","Ripping to 40cm with no amendments",100,100
+"Lowaldie_Deep sand","Rip.60_none","Ripping to 60cm with no amendments",134,134
+"Murlong","Rip.40_none","Ripping to 40cm with no amendments",100,100
+"Murlong","Rip.30_Lc.incorp_30","Ripping to 30cm with lucerne incorporated 30cm",77,77
+"Murlong","Rip.30_Fert.incorp_30","Ripping to 30cm with fertiliser incorporated 30cm",80,80
+"Murlong","Spade.30_Lc.incorp_30","spade 30cm with lucerne incorporated 30cm",52,52
+"Murlong","Rip.40_Lc.incorp_40","Ripping to 40cm with lucerne incorporated 40cm",104,104
+"Murlong","Control","Control",1,1
+"Murlong","Rip.40_Fert.incorp_40","Ripping to 40cm with fertiliser incorporated 40cm",105,105
+"Murlong","Spade.30_none","spade 30cm with no amendments",35,35
+"Murlong","Spade.30_Fert.incorp_30","spade 30cm with fertiliser incorporated 30cm",65,65
+"Murlong","Rip.30_none","Ripping to 30cm with no amendments",71,71
+"Brimpton Lake","Control","Control",1,1
+"Brimpton Lake","Spade.30_Lc.incorp_30","spade 30cm with lucerne incorporated 30cm",52,52
+"Brimpton Lake","Spade.30_none","spade 30cm with no amendments",35,35
+"Brimpton Lake","Spade.30_Fert.incorp_30","spade 30cm with fertiliser incorporated 30cm",65,65
+"Brimpton Lake","Spade.30_Lc.incorp_30.Fert.incorp_30","spade 30cm with lucerne and fertiliser incorporated 30cm",53,53
+"Brimpton Lake","Unmodified_Fert.band_30","fertiliser banded 30cm",24,24
+"Brimpton Lake","Spade.30_Fert.incorp_30.Clay.incorp_30","spade 30cm with fertiliser and clay incorporated 30cm",58,58
+"Brimpton Lake","Spade.30_Clay.incorp_30","spade 30cm with clay incorporated 30cm",69,69
+"Brimpton Lake","Unmodified_Fert.band_30.Clay.incorp_10","fertiliser banded 30cm and clay incorporated 10cm",26,26
+"Brimpton Lake","Spade.30_Lc.incorp_30.Clay.incorp_30","spade 30cm with lucerne and clay incorporated 30cm",54,54
+"Brimpton Lake","Unmodified_Clay.incorp_10","clay incorporated 10cm",28,28
+"Brimpton Lake","Spade.30_Lc.incorp_30.Fert.incorp_30.Clay.incorp_30","spade 30cm with ulcerous and fertiliser and clay incorporated 30cm",55,55
+"Cadgee","Unmodified_Fert.band_30.Clay.incorp_10","fertiliser banded 30cm and clay incorporated 10cm",26,26
+"Cadgee","Spade.30_Lc.incorp_30.Fert.incorp_30.Clay.incorp_30","spade 30cm with ulcerous and fertiliser and clay incorporated 30cm",55,55
+"Cadgee","Spade.30_Lc.incorp_30","spade 30cm with lucerne incorporated 30cm",52,52
+"Cadgee","Spade.30_Fert.incorp_30","spade 30cm with fertiliser incorporated 30cm",65,65
+"Cadgee","Spade.30_none","spade 30cm with no amendments",35,35
+"Cadgee","Control","Control",1,1
+"Cadgee","Spade.30_Fert.incorp_30.Clay.incorp_30","spade 30cm with fertiliser and clay incorporated 30cm",58,58
+"Cadgee","Spade.30_Clay.incorp_30","spade 30cm with clay incorporated 30cm",69,69
+"Cadgee","Spade.30_Lc.incorp_30.Fert.incorp_30","spade 30cm with ulcerous and fertiliser incorporated 30cm",53,53
+"Cadgee","Unmodified_Clay.incorp_10","clay incorporated 10cm",28,28
+"Cadgee","Unmodified_Fert.band_30","fertiliser banded 30cm",24,24
+"Cadgee","Spade.30_Lc.incorp_30.Clay.incorp_30","spade 30cm with lucerne and clay incorporated 30cm",54,54
+"Karoonda","Spade.30_Fert.incorp_30.Clay.incorp_30","spade 30cm with fertiliser and clay incorporated 30cm",58,58
+"Karoonda","Unmodified_Fert.band_30.Clay.incorp_10","fertiliser banded 30cm and clay incorporated 10cm",26,26
+"Karoonda","Spade.30_Lc.incorp_30","spade 30cm with lucerne incorporated 30cm",52,52
+"Karoonda","Spade.30_Fert.incorp_30","spade 30cm with fertiliser incorporated 30cm",65,65
+"Karoonda","Spade.30_none","spade 30cm with no amendments",35,35
+"Karoonda","Control","Control",1,1
+"Karoonda","Unmodified_Clay.incorp_10","clay incorporated 10cm",28,28
+"Karoonda","Spade.30_Lc.incorp_30.Fert.incorp_30.Clay.incorp_30","spade 30cm with ulcerous and fertiliser and clay incorporated 30cm",55,55
+"Karoonda","Spade.30_Lc.incorp_30.Fert.incorp_30","spade 30cm with ulcerous and fertiliser incorporated 30cm",53,53
+"Karoonda","Spade.30_Clay.incorp_30","spade 30cm with clay incorporated 30cm",69,69
+"Karoonda","Unmodified_Fert.band_30","fertiliser banded 30cm",24,24
+"Karoonda","Spade.30_Lc.incorp_30.Clay.incorp_30","spade 30cm with lucerne and clay incorporated 30cm",54,54
+"Ouyen_Spade","Control","Control",1,1
+"Ouyen_Spade","Spade.30_none","spade 30cm with no amendments",35,35
+"Ouyen_Spade","Spade.30_Cereal.incorp_30","spade 30cm with cereal incorporated 30cm",60,60
+"Ouyen_Spade","Spade.30_Vetch.incorp_30","spade 30cm with vetch incorporated 30cm",61,61
+"Ouyen_Spade","Spade.30_Fert.incorp_30","spade 30cm with fertiliser incorporated 30cm",65,65
+"Ouyen_Spade","Spade.30_Vet_Cer.incorp_30","spade 30cm with vetch and cereal incorporated 30cm",62,62
+"Ouyen_Spade","Spade.30_Vet_Cer_In.incorp_30","spade 30cm with vetch and cereal and inoculant incorporated 30cm",63,63
+"Ouyen_Spade","Spade.30_Com.incorp_30","spade 30cm with compost incorporated 30cm",59,59
+"Ouyen_Spade","Spade.30_Cl.incorp_30","spade 30cm with chicken litter incorporated 30cm",56,56
+"Waikerie","Control","Control",1,1
+"Waikerie","Unmodified_Cl.surface","chicken litter applied at surface",6,6
+"Waikerie","Unmodified_Fert.band_8","fertiliser banded 8cm",22,22
+"Waikerie","Rip.30_none","Ripping to 30cm with no amendments",71,71
+"Waikerie","Rip.30_Cl.surface","Ripping to 30cm with chicken litter applied at surface",73,73
+"Waikerie","Rip.30_Fert.band_8","Ripping to 30cm with fertiliser banded at 8cm",81,81
+"Waikerie","Rip.30_Cl.band_30","Ripping to 30cm with chicken litter banded at 30cm",75,75
+"Waikerie","Rip.30_Fert.band_30","Ripping to 30cm with fertiliser banded at 30cm",82,82
+"Waikerie","Rip.60_Cl.surface","Ripping to 60cm with chicken litter applied at surface",135,135
+"Waikerie","Rip.60_Fert.band_8","Ripping to 60cm with fertiliser banded 8cm",139,139
+"Waikerie","Rip.60_Cl.band_60","Ripping to 60cm with chicken litter banded 60cm",136,136
+"Waikerie","Rip.60_Fert.band_60","Ripping to 60cm with fertiliser banded 60cm",140,140
+"Waikerie","Rip.60_none","Ripping to 60cm with no amendments",134,134
+"Yenda","Sweep.30_Lime.incorp_30","sweep 30cm with lime incorporated 30cm",98,98
+"Yenda","Sweep.30_Cl@9.incorp_30","sweep 30cm with chicken litter at 9t/ha incorporated 30cm",96,96
+"Yenda","Sweep.30_Cl@9.incorp_30_Yr17,18,19","sweep 30cm with chicken litter at 9t/ha incorporated 30cm applied 2017, 2018, 2019",97,97
+"Yenda","Sweep.30_Cl@3.incorp_30","sweep 30cm with chicken litter at 3t/ha incorporated 30cm",94,94
+"Yenda","Unmodified_Cl@3.incorp_8","chicken litter at 3t/ha incorporated 8cm",8,8
+"Yenda","Rip.60_none","Ripping to 60cm with no amendments",134,134
+"Yenda","Sweep.30_none","sweep 30cm with no amendments",93,93
+"Yenda","Unmodified_Fert.foliar","fertiliser applied to foliar",18,18
+"Yenda","Control","Control",1,1
+"Yenda","Sweep.30_Cl@6.incorp_30","sweep 30cm with chicken litter at 6t/ha incorporated 30cm",95,95
+"Yenda","Sweep.30_Cl@3.incorp_30.Lime.incorp_8","sweep 30cm with chicken litter at 3t/ha incorporated 30cm and lime incorporated 8cm",99,99
+"Yenda","Unmodified_Fert.incorp_8","fertiliser incorporated 8cm",21,21
+"Younghusband","Unmodified+DeepTill.18_SE14.band_8","deep tillage 18cm with SE14 (wetter) banded 8cm",147,147
+"Younghusband","Unmodified+DeepTill.18_none","deep tillage 18cm with no amendments",146,146
+"Younghusband","Rip.50_none","Ripping to 50cm with no amendments",113,113
+"Younghusband","Spade.30_none","spade 30cm with no amendments",35,35
+"Younghusband","Rip.50IncRip_none","Ripping to 50cm and inclusion with no amendments",130,130
+"Younghusband","Unmodified_SE14.band_8","SE14 (wetter) banded 8cm",3,3
+"Younghusband","Control","Control",1,1
+"Younghusband","Unmodified_Bi_Agra.surface+band_8","Bi Agra (wetter) surface and banded 8cm",4,4
+"Younghusband","Unmodified+OnRow_none","on row sowing with no amendments",2,2
+"Ouyen_Placement","Pre_drill_20+7.5_none","Pre drill to depth 20cm with growers standard fertiliser to 7.5cm with no additional amendments",29,29
+"Ouyen_Placement","Unmodified_none.Fert.surface","growers standard fertiliser to surface with no additional amendments",20,19
+"Ouyen_Placement","Rip_30+30_none_annual","Ripping to 30cm with growers standard fertiliser to 30cm with no amendments annually",90,90
+"Ouyen_Placement","Pre_drill_20+20_none","Pre drill to depth 20cm with growers standard fertiliser to 20cm with no additional amendments",31,31
+"Ouyen_Placement","Rip_30+30_Fert.banded_30_annual","Ripping to 30cm with growers standard fertiliser to 30cm with fertiliser banded 30cm annually",92,92
+"Ouyen_Placement","Pre_drill_20+20_none_annual","Pre drill to depth 20cm with growers standard fertiliser to 20cm with no additional amendments performed annually",32,32
+"Ouyen_Placement","Rip_30+30_Fert.banded_30","Ripping to 30cm with growers standard fertiliser to 30cm with fertiliser banded 30cm",91,91
+"Ouyen_Placement","Control","Control",1,1
+"Ouyen_Placement","Rip_30+7.5_none","Ripping to 30cm with growers standard fertiliser to 7.5cm with no amendments ",87,87
+"Ouyen_Placement","Rip_30+7.5_none_annual","Ripping to 30cm with growers standard fertiliser to 7.5cm with no amendments annually",88,88
+"Ouyen_Placement","Pre_drill_20+20_Fert.banded_20","Pre drill to depth 20cm with growers standard fertiliser to 20cm with fertiliser banded at 20cm",33,33
+"Ouyen_Placement","Pre_drill_20+20_Fert.banded_20_annual","Pre drill to depth 20cm with growers standard fertiliser to 20cm with fertiliser banded at 20cm annually ",34,34
+"Ouyen_Placement","Pre_drill_20+7.5_none_annual","Pre drill to depth 20cm with growers standard fertiliser to 7.5cm with no additional amendments annually",30,30
+"Ouyen_Placement","Rip_30+30_none","Ripping to 30cm and 30cm with no amendments annually",89,89

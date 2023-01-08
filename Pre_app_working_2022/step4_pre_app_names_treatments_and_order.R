@@ -301,6 +301,9 @@ order <- c(
   "Unmodified_Cl@20.incorp_8.Fert.surface.Clay.incorp_8",
   "Unmodified_Fert.foliar",
   "Unmodified_Fert.surface",
+  
+  "Unmodified_none.Fert.surface", #ouyen DD
+  
   "Unmodified_Fert.incorp_8",
   "Unmodified_Fert.band_8",
   "Unmodified_K_added.surface",
@@ -310,7 +313,7 @@ order <- c(
   
   "Unmodified_Clay.incorp_8",
   "Unmodified_Clay.incorp_10",
-  "Unmodified_none.Fert.surface", #ouyen DD
+  
   
   "Pre_drill_20+7.5_none", #ouyen DD
   "Pre_drill_20+7.5_none_annual",
@@ -459,6 +462,7 @@ order <- c(
 
 order_df <- as.data.frame(order)
 
+order_df <- order_df %>%  dplyr::rename(Descriptors = order)
 ## add a oder index to this order_df.
 
 order_df$order_rank <- 1:nrow(order_df)
@@ -470,13 +474,25 @@ str(order_df)
 str(list_of_Descriptors)
 
 
-list_of_Descriptors <- left_join(list_of_Descriptors,order_df, by = c("Descriptors" = "order"))
+list_of_Descriptors <- left_join(list_of_Descriptors,order_df )
 
 #-- new Descriptors --#
 new_Descriptors_names <- read.csv("C:/Users/ouz001/working_from_home_post_Sep2022/sandy_soil_tools_app/list_of_Descriptors_with_new_Desciptors_name.csv")
 #--- join the new descriptors to the DB_df --##
 
-list_of_Descriptors <- left_join(list_of_Descriptors, new_Descriptors_names)
+list_of_Descriptors_test <- left_join(list_of_Descriptors, new_Descriptors_names)
+
+### There is a problem with Ouyen Placement it was non.Fert.surface and I have changed it to Fert.surface (which already exists order 19)
+### recode order 20 to 19
+
+list_of_Descriptors$order_rank <- as.double(list_of_Descriptors$order_rank)
+
+list_of_Descriptors <-list_of_Descriptors %>% 
+  mutate(order_rank_1 =  case_when(
+    order_rank == 20 ~ 19   ,
+     TRUE             ~ order_rank
+   ))
+
 
 
 

@@ -118,7 +118,7 @@ order_df <- list_of_Descriptors_with_order_rank %>%
 order <- as.list(order_df$Descriptors_new)
 names(trial_results)
 trial_results <- trial_results %>% 
-  dplyr::rename(Descriptors_new = New.names.of.Descriptors)
+   dplyr::rename(Descriptors_new = New.names.of.Descriptors)
 
 
 trial_results$Descriptors_new <- factor(trial_results$Descriptors_new,
