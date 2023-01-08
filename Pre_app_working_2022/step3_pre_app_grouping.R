@@ -106,3 +106,4 @@ yld_ave_with_new_clm_for_yld <- left_join(yld_ave_with_new_clm_for_yld, new_Desc
 write.csv(yld_ave_with_new_clm_for_yld,
           "yield_table_av_v2.csv",
           row.names = FALSE)
+
