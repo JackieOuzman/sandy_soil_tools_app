@@ -105,10 +105,11 @@ trial_results <- read_csv("primary_data_all_v2.csv")
 
 ### arrange the data / Descriptor so the order reflect level of intervension
 #list_of_Descriptors_with_order_rank <- read_csv("list_of_Descriptors_with_order_rank.csv")
-list_of_Descriptors_with_order_rank <- read_csv("list_of_Descriptors_with_new_Desciptors_name.csv")
-#str(list_of_Descriptors_with_order_rank)
+list_of_Descriptors_with_order_rank <- read_csv("list_of_Descriptors_with_order_rank_v2.csv")
+
+str(list_of_Descriptors_with_order_rank)
 list_of_Descriptors_with_order_rank <- list_of_Descriptors_with_order_rank %>% 
-  dplyr::rename(Descriptors_new = 'New names of Descriptors')
+  dplyr::rename(Descriptors_new = 'New.names.of.Descriptors')
 
 order_df <- list_of_Descriptors_with_order_rank %>% 
   distinct(order_rank, .keep_all= TRUE) %>% 

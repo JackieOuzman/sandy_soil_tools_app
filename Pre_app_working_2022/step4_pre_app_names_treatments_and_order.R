@@ -480,7 +480,7 @@ list_of_Descriptors <- left_join(list_of_Descriptors,order_df )
 new_Descriptors_names <- read.csv("C:/Users/ouz001/working_from_home_post_Sep2022/sandy_soil_tools_app/list_of_Descriptors_with_new_Desciptors_name.csv")
 #--- join the new descriptors to the DB_df --##
 
-list_of_Descriptors_test <- left_join(list_of_Descriptors, new_Descriptors_names)
+list_of_Descriptors <- left_join(list_of_Descriptors, new_Descriptors_names)
 
 ### There is a problem with Ouyen Placement it was non.Fert.surface and I have changed it to Fert.surface (which already exists order 19)
 ### recode order 20 to 19
@@ -488,7 +488,7 @@ list_of_Descriptors_test <- left_join(list_of_Descriptors, new_Descriptors_names
 list_of_Descriptors$order_rank <- as.double(list_of_Descriptors$order_rank)
 
 list_of_Descriptors <-list_of_Descriptors %>% 
-  mutate(order_rank_1 =  case_when(
+  mutate(order_rank =  case_when(
     order_rank == 20 ~ 19   ,
      TRUE             ~ order_rank
    ))
