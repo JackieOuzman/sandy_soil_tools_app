@@ -472,24 +472,31 @@ str(list_of_Descriptors)
 
 list_of_Descriptors <- left_join(list_of_Descriptors,order_df, by = c("Descriptors" = "order"))
 
+#-- new Descriptors --#
+new_Descriptors_names <- read.csv("C:/Users/ouz001/working_from_home_post_Sep2022/sandy_soil_tools_app/list_of_Descriptors_with_new_Desciptors_name.csv")
+#--- join the new descriptors to the DB_df --##
+
+list_of_Descriptors <- left_join(list_of_Descriptors, new_Descriptors_names)
 
 
 
 write.csv(list_of_Descriptors,
-          "list_of_Descriptors_with_order_rank.csv",
+          "list_of_Descriptors_with_order_rank_v2.csv",
           row.names = FALSE)
 
 
 ########################################################################################################################
 ### name of the treatments - I am having trouble saving it as a pdf - try again its working now but I cant get multiple pages
 
+str(list_of_Descriptors)
+
 list_of_Descriptors_pdf <- list_of_Descriptors %>% 
   distinct(order_rank, .keep_all= TRUE) %>% 
   arrange(order_rank) %>% 
-  select(-site, -order_rank)
+  select(-site, -order_rank, -Descriptors)
 
 list_of_Descriptors_pdf <- list_of_Descriptors_pdf %>% 
-rename("treatment codes" = "Descriptors",
+rename("treatment codes" = "New.names.of.Descriptors",
        "treatment detailed name" = "detailed_name")
 names(list_of_Descriptors_pdf)
 
@@ -522,4 +529,6 @@ grid.draw(tableGrob(d_121_144)[1:25, ] )
 
 dev.off()
 
+
+getwd()
 
