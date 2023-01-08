@@ -511,6 +511,8 @@ list_of_Descriptors_pdf <- list_of_Descriptors %>%
   arrange(order_rank) %>% 
   select(-site, -order_rank, -Descriptors)
 
+str(list_of_Descriptors_pdf)
+
 list_of_Descriptors_pdf <- list_of_Descriptors_pdf %>% 
 rename("treatment codes" = "New.names.of.Descriptors",
        "treatment detailed name" = "detailed_name")
