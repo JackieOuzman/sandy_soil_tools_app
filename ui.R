@@ -53,7 +53,63 @@ library(plotly)
 
                      
                    
-  
+#########################################################################################################
+#########################################################################################################
+###############                      Introduction tab                     #################################
+#########################################################################################################                 
+                     
+                     
+                     tabPanel("Introduction", 
+                              fluidPage( 
+                                
+                                fluidRow(
+                                  box(
+                                    title = "Welcome to Sandy soil App - Sandbox", width = 12, solidHeader = TRUE, status = "primary",
+                                    tags$h2("Contributors:"),
+                                      tags$i("Therese McBeath, Melissa Fraser, Jackie Ouzman, Masood Azeem, 
+                                      Rodrigo Da Silva, Jack Desbiolles, Chris Saunders, Mustafa Ucgul, 
+                                      Nigel Wilhelm, Michael Moodie, Tanja Morgan, Sam Trengove, 
+                                      Stuart Sherriff, Rachael Whitworth, Murray Unkovich, Rick Llewellyn, Lynne Macdonald."),
+                                    
+                                    tags$h2("Acknowledgements:"),
+                                    tags$p("This research has been enriched by preceding research trials, 
+                                    the significant contributions of growers and consultants across the Southern region, 
+                                    and the support of the GRDC. CSP00203 research and validation activities are a collaboration between the CSIRO, the University of South Australia, the SA state government through Primary Industries and Regions SA, Mallee Sustainable Farming Inc., Frontier Farming Systems, Trengove Consulting, AgGrow Agronomy, AirEP, and MacKillop Farm Management Group."),
+                                    
+                                    tags$h2("Licence:"),
+                                    tags$a(href="https://creativecommons.org/licenses/by/4.0/", 
+                                           "Creative Commons Attribution 4.0 International Licence"),
+                                    
+                                    tags$h2("Overview:"),
+                                    tags$p("The App is an interactive web application that allows the user interrogate and visualise trial results alongside site climate and soil constraint information. 
+                                    This helps grain growers evaluate the outcomes of various amelioration options in the context of their own soils and climate. 
+                                    A series of fact sheets and flow charts relating to soil constraint identification and machinery selection and optimisation support the user to view the most useful results and to identify the most suitable management options for testing."),
+                                    
+                                    tags$h2("About the app:"),
+                                    tags$p("The App is..."),
+                                    
+                                    tags$h2("About the trial:"),
+                                    tags$p("The trial include..."),
+                                    
+                                    tags$h2("Acessing the database:"),
+                                    tags$p("The database can be accessed..."),
+                                    
+                                    tags$h2("References:"),
+                                    tags$p("List..."),
+                                    
+                                    tags$br(), #this is a 2 break
+                                  ), #box Citation and Licence
+                                  
+                                ), #fluid row     #1
+                                
+                                
+                               
+                                
+                                
+                                
+                              ), #tabPanel landing page bracket
+                     ),  #fluid page
+                     
 
                      
                      
