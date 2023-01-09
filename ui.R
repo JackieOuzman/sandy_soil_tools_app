@@ -77,7 +77,17 @@ library(plotly)
                                     and the support of the GRDC. CSP00203 research and validation activities are a collaboration between the CSIRO, the University of South Australia, the SA state government through Primary Industries and Regions SA, Mallee Sustainable Farming Inc., Frontier Farming Systems, Trengove Consulting, AgGrow Agronomy, AirEP, and MacKillop Farm Management Group."),
                                     
                                     tags$h2("Licence:"),
-                                    tags$a(href="https://creativecommons.org/licenses/by/4.0/", 
+                                    
+                                    tags$p("Creative Commons Attribution-ShareAlike 4.0 International Licence.
+                                    This license lets others remix, tweak, and build upon your work even for commercial purposes, 
+                                    as long as they credit you and license their new creations under the identical terms. 
+                                    This license is often compared to “copyleft” free and open source software licenses. 
+                                    All new works based on yours will carry the same license, 
+                                    so any derivatives will also allow commercial use. 
+                                    This is the license used by Wikipedia, 
+                                    and is recommended for materials that would benefit from incorporating content from Wikipedia and similarly licensed projects."),
+                                    
+                                    tags$a(href="https://creativecommons.org/licenses/by-sa/4.0/", 
                                            "Creative Commons Attribution 4.0 International Licence"),
                                     
                                     tags$h2("Overview:"),
@@ -86,13 +96,20 @@ library(plotly)
                                     A series of fact sheets and flow charts relating to soil constraint identification and machinery selection and optimisation support the user to view the most useful results and to identify the most suitable management options for testing."),
                                     
                                     tags$h2("About the app:"),
-                                    tags$p("The App is..."),
+                                    tags$p("The App draws upon a database of trials results from the Grains Research & Development Corporation (GRDC) CSP00203 project"),
                                     
                                     tags$h2("About the trial:"),
-                                    tags$p("The trial include..."),
+                                    tags$p("The trial program consisted of 24 amelioration trials and 3 seeder-strategy trials across Southern Region between 2016 - 2022.
+                                           The trail results are collated in a database, and focus on yield resposne, and contains plant responses, such as plant establishment and biomass.
+                                           Additional site metadata includes soil constraints and climate data. 
+                                           The database provides statistical  analysis of the yield results, using ANOVA analysis with a P value of 0.1.
+                                           The analysis undertaken on a site by year basis and site by cumulative year"),
                                     
                                     tags$h2("Acessing the database:"),
-                                    tags$p("The database can be accessed..."),
+                                    tags$p("The database can be accessed via the Data access portal"),
+                                    tags$a(href="https://data.csiro.au/", 
+                                           "CSIRO data access portal"),
+                                    
                                     
                                     tags$h2("References:"),
                                     tags$p("List..."),
